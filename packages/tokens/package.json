@@ -1,0 +1,24 @@
+{
+  "name": "@winplaybox/spectra-tokens",
+  "version": "0.1.0",
+  "description": "Design tokens for Spectra UI (WinPlayBox Design System)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "style-dictionary build",
+    "validate": "node scripts/validate-tokens.js"
+  },
+  "keywords": [
+    "design-tokens",
+    "style-dictionary",
+    "spectra",
+    "winplaybox"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "style-dictionary": "^3.8.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "color": {
+    "semantic": {
+      "surface": { "value": "#0F172A" },
+      "surface-raised": { "value": "#1E293B" },
+      "surface-overlay": { "value": "rgba(0, 0, 0, 0.85)" },
+      "border": {
+        "default": { "value": "#334155" },
+        "subtle": { "value": "#1E293B" },
+        "strong": { "value": "#475569" }
+      },
+      "text": {
+        "primary": { "value": "#F1F5F9" },
+        "secondary": { "value": "#CBD5E1" },
+        "muted": { "value": "#94A3B8" },
+        "inverse": { "value": "#111827" }
+      },
+      "action": {
+        "primary": { "value": "#3B82F6" },
+        "primary-hover": { "value": "#60A5FA" },
+        "primary-active": { "value": "#93C5FD" },
+        "secondary": { "value": "#A0AEC0" },
+        "disabled": { "value": "#475569" }
+      },
+      "feedback": {
+        "error": { "value": "#F87171" },
+        "error-light": { "value": "#7F1D1D" },
+        "success": { "value": "#4ADE80" },
+        "success-light": { "value": "#145231" },
+        "warning": { "value": "#FBBF24" },
+        "warning-light": { "value": "#78350F" },
+        "info": { "value": "#3B82F6" },
+        "info-light": { "value": "#1E3A8A" }
+      }
+    }
+  },
+  "space": {
+    "semantic": {
+      "component": {
+        "padding": {
+          "xs": { "value": "0.25rem" },
+          "sm": { "value": "0.5rem" },
+          "md": { "value": "1rem" },
+          "lg": { "value": "1.5rem" },
+          "xl": { "value": "2rem" }
+        },
+        "gap": {
+          "xs": { "value": "0.25rem" },
+          "sm": { "value": "0.5rem" },
+          "md": { "value": "0.75rem" },
+          "lg": { "value": "1rem" },
+          "xl": { "value": "1.5rem" }
+        }
+      },
+      "layout": {
+        "gutter": { "value": "1.5rem" },
+        "margin": {
+          "xs": { "value": "0.5rem" },
+          "sm": { "value": "1rem" },
+          "md": { "value": "1.5rem" },
+          "lg": { "value": "2rem" }
+        }
+      }
+    }
+  },
+  "radius": {
+    "semantic": {
+      "component": {
+        "none": { "value": "0" },
+        "sm": { "value": "0.375rem" },
+        "md": { "value": "0.5rem" },
+        "lg": { "value": "0.75rem" }
+      },
+      "control": {
+        "default": { "value": "0.5rem" },
+        "full": { "value": "9999px" }
+      }
+    }
+  },
+  "fontSize": {
+    "semantic": {
+      "body": {
+        "xs": { "value": "0.75rem" },
+        "sm": { "value": "0.875rem" },
+        "md": { "value": "1rem" },
+        "lg": { "value": "1.125rem" }
+      },
+      "label": {
+        "xs": { "value": "0.75rem" },
+        "sm": { "value": "0.875rem" },
+        "md": { "value": "1rem" }
+      },
+      "heading": {
+        "sm": { "value": "1.125rem" },
+        "md": { "value": "1.25rem" },
+        "lg": { "value": "1.5rem" },
+        "xl": { "value": "1.875rem" }
+      }
+    }
+  },
+  "motion": {
+    "semantic": {
+      "instant": { "value": "0ms" },
+      "subtle": { "value": "120ms" },
+      "emphasis": { "value": "200ms" }
+    }
+  },
+  "elevation": {
+    "semantic": {
+      "none": { "value": "none" },
+      "raised": { "value": "0 1px 2px 0 rgba(0, 0, 0, 0.3)" },
+      "overlay": { "value": "0 20px 25px -5px rgba(0, 0, 0, 0.5)" }
+    }
+  }
+}
