@@ -2,8 +2,8 @@
 import { forwardRef, ReactNode } from 'react';
 import * as styles from './Button.css';
 
-type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'danger';
-type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'danger';
+export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   children?: ReactNode;
@@ -18,14 +18,6 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
 
 /**
  * Button - Primary action component with multiple variants and sizes
- * @example
- * <Button variant="primary" size="md">
- *   Click me
- * </Button>
- * @example
- * <Button variant="secondary" disabled>
- *   Disabled
- * </Button>
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -44,8 +36,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const buttonClass = `${styles.button} ${styles[variant]} ${styles[size]} ${
-      fullWidth ? styles.fullWidth : ''
+    const buttonClass = `${styles.button} ${styles[variant]} ${styles[size]} ${variant} ${size} ${
+      fullWidth ? `${styles.fullWidth} fullWidth` : ''
     } ${className || ''}`;
 
     return (

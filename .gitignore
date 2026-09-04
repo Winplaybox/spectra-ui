@@ -1,0 +1,13 @@
+node_modules
+.turbo
+.DS_Store
+*.log
+coverage
+.next
+.nuxt
+build
+out
+dist
+storybook-static
+.vite
+

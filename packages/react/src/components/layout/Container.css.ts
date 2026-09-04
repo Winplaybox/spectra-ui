@@ -1,10 +1,13 @@
 // packages/react/src/components/layout/Container.css.ts
-import { style, styleVariants } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 
 export const container = style({
   width: '100%',
-  marginLeft: 'auto',
-  marginRight: 'auto',
+  boxSizing: 'border-box',
+});
+
+export const centered = style({
+  marginInline: 'auto',
 });
 
 export const sm = style({
@@ -27,19 +30,7 @@ export const full = style({
   maxWidth: '100%',
 });
 
-export const centered = style({
-  marginLeft: 'auto',
-  marginRight: 'auto',
-});
-
-const paddingNone = { padding: 0 };
-const paddingSm = { padding: 'var(--space-component-padding-sm)' };
-const paddingMd = { padding: 'var(--space-component-padding-md)' };
-const paddingLg = { padding: 'var(--space-component-padding-lg)' };
-
-export const paddingVariants = styleVariants({
-  'padding-none': paddingNone,
-  'padding-sm': paddingSm,
-  'padding-md': paddingMd,
-  'padding-lg': paddingLg,
-});
+export const paddingNone = style({ padding: '0' });
+export const paddingSm = style({ padding: 'var(--space-component-padding-sm)' });
+export const paddingMd = style({ padding: 'var(--space-component-padding-md)' });
+export const paddingLg = style({ padding: 'var(--space-component-padding-lg)' });

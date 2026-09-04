@@ -5,13 +5,16 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
+    "build": "pnpm run build:tokens && turbo build",
+    "build:tokens": "pnpm --filter @spectra/tokens run build",
+    "check:tokens": "pnpm --filter @spectra/tokens run test:contract",
+    "check:lint": "node packages/config/src/check-no-hardcoded-values.mjs",
+    "lint": "pnpm run check:lint",
     "type-check": "turbo type-check",
     "test": "turbo test",
-    "test:a11y": "turbo test:a11y",
-    "clean": "turbo clean && rm -rf node_modules",
+    "test:a11y": "pnpm --filter @spectra/react run test:a11y",
+    "sandbox": "pnpm --filter sandbox dev",
+    "storybook": "pnpm --filter storybook storybook",
     "generate:component": "bash scripts/generate-component.sh"
   },
   "keywords": [
@@ -22,16 +25,8 @@
   ],
   "author": "WinPlayBox",
   "license": "MIT",
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "eslint": "^8.0.0",
-    "eslint-plugin-react": "^7.32.0",
     "prettier": "^3.0.0",
     "turbo": "^1.10.0",
     "typescript": "^5.0.0",

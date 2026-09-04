@@ -3,34 +3,34 @@
     "semantic": {
       "surface": { "value": "#000000" },
       "surface-raised": { "value": "#0A0A0A" },
-      "surface-overlay": { "value": "rgba(0, 0, 0, 0.95)" },
+      "surface-overlay": { "value": "rgba(0, 0, 0, 0.98)" },
       "border": {
-        "default": { "value": "#1F2937" },
-        "subtle": { "value": "#0A0A0A" },
-        "strong": { "value": "#374151" }
+        "default": { "value": "#262626" },
+        "subtle": { "value": "#181818" },
+        "strong": { "value": "#333333" }
       },
       "text": {
-        "primary": { "value": "#F8FAFC" },
-        "secondary": { "value": "#CBD5E1" },
-        "muted": { "value": "#78716F" },
+        "primary": { "value": "#F4F4F5" },
+        "secondary": { "value": "#D4D4D8" },
+        "muted": { "value": "#A1A1AA" },
         "inverse": { "value": "#000000" }
       },
       "action": {
         "primary": { "value": "#3B82F6" },
         "primary-hover": { "value": "#60A5FA" },
         "primary-active": { "value": "#93C5FD" },
-        "secondary": { "value": "#9CA3AF" },
-        "disabled": { "value": "#374151" }
+        "secondary": { "value": "#181818" },
+        "disabled": { "value": "#27272A" }
       },
       "feedback": {
         "error": { "value": "#F87171" },
-        "error-light": { "value": "#5A1A1A" },
+        "error-light": { "value": "#330000" },
         "success": { "value": "#4ADE80" },
-        "success-light": { "value": "#0D3B1F" },
+        "success-light": { "value": "#002400" },
         "warning": { "value": "#FBBF24" },
-        "warning-light": { "value": "#4A2B0A" },
+        "warning-light": { "value": "#331E00" },
         "info": { "value": "#3B82F6" },
-        "info-light": { "value": "#0D2847" }
+        "info-light": { "value": "#001B40" }
       }
     }
   },
@@ -67,12 +67,12 @@
     "semantic": {
       "component": {
         "none": { "value": "0" },
-        "sm": { "value": "0.375rem" },
-        "md": { "value": "0.5rem" },
-        "lg": { "value": "0.75rem" }
+        "sm": { "value": "4px" },
+        "md": { "value": "8px" },
+        "lg": { "value": "12px" }
       },
       "control": {
-        "default": { "value": "0.5rem" },
+        "default": { "value": "8px" },
         "full": { "value": "9999px" }
       }
     }
@@ -101,15 +101,15 @@
   "motion": {
     "semantic": {
       "instant": { "value": "0ms" },
-      "subtle": { "value": "120ms" },
-      "emphasis": { "value": "200ms" }
+      "subtle": { "value": "120ms ease-out" },
+      "emphasis": { "value": "200ms ease-out" }
     }
   },
   "elevation": {
     "semantic": {
       "none": { "value": "none" },
-      "raised": { "value": "0 1px 2px 0 rgba(255, 255, 255, 0.1)" },
-      "overlay": { "value": "0 20px 25px -5px rgba(0, 0, 0, 0.8)" }
+      "raised": { "value": "none" },
+      "overlay": { "value": "0 20px 25px -5px rgba(0, 0, 0, 0.7)" }
     }
   }
 }

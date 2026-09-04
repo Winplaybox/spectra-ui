@@ -3,34 +3,22 @@ import { forwardRef } from 'react';
 import { useFormField } from '@spectra/primitives';
 import * as styles from './TextInput.css';
 
-export interface TextInputProps
-  extends React.ComponentPropsWithoutRef<'input'> {
+export interface TextInputProps extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size'> {
   label?: string;
   description?: string;
   error?: string;
   required?: boolean;
   size?: 'sm' | 'md' | 'lg';
-  variant?: 'default' | 'filled' | 'flushed';
+  variant?: 'default' | 'filled' | 'outlined';
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  icon?: React.ReactNode;
+  iconPosition?: 'left' | 'right';
   fullWidth?: boolean;
 }
 
 /**
- * TextInput - Text input field with label, error, and description
- * @example
- * <TextInput
- *   label="Email"
- *   type="email"
- *   placeholder="user@example.com"
- *   required
- * />
- * @example
- * <TextInput
- *   label="Password"
- *   type="password"
- *   error="Password is required"
- * />
+ * TextInput - Accessible text input field with label, error, and description wiring
  */
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
@@ -38,60 +26,92 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       label,
       description,
       error,
-      required,
+      required = false,
       size = 'md',
       variant = 'default',
       leftIcon,
       rightIcon,
+      icon,
+      iconPosition = 'left',
       fullWidth = false,
       disabled = false,
       className,
+      id: idProp,
       ...rest
     },
     ref
   ) => {
-    const { labelId, descriptionId, errorId, ariaDescribedBy } =
-      useFormField({ label, description, error, required });
+    const effectiveLeftIcon = leftIcon || (icon && iconPosition === 'left' ? icon : null);
+    const effectiveRightIcon = rightIcon || (icon && iconPosition === 'right' ? icon : null);
 
-    const inputClass = `${styles.input} ${styles[size]} ${styles[variant]} ${
-      error ? styles.error : ''
-    } ${leftIcon ? styles.withLeftIcon : ''} ${rightIcon ? styles.withRightIcon : ''} ${
-      fullWidth ? styles.fullWidth : ''
-    } ${className || ''}`;
+    const {
+      labelId,
+      errorId,
+      descriptionId,
+      hasError,
+      errorText,
+      labelProps,
+      inputProps,
+      errorProps,
+      descriptionProps,
+    } = useFormField({
+      id: idProp,
+      label,
+      error,
+      description,
+      required,
+      disabled,
+    });
+
+    const variantStyle =
+      variant === 'filled' ? styles.filled : variant === 'outlined' ? styles.outlined : styles.defaultVariant;
+
+    const inputClass = [
+      styles.input,
+      styles[size],
+      variantStyle,
+      variant,
+      size,
+      hasError ? styles.errorInput : '',
+      effectiveLeftIcon ? styles.hasIconLeft : '',
+      effectiveRightIcon ? styles.hasIconRight : '',
+      className || '',
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     return (
-      <div className={`${styles.wrapper} ${fullWidth ? styles.fullWidth : ''}`}>
+      <div className={`${styles.wrapper} ${fullWidth ? `${styles.fullWidth} fullWidth` : ''}`}>
         {label && (
-          <label htmlFor={rest.id} className={styles.label}>
+          <label {...labelProps} className={styles.label}>
             {label}
             {required && <span className={styles.required}>*</span>}
           </label>
         )}
 
         <div className={styles.inputWrapper}>
-          {leftIcon && <span className={styles.leftIcon}>{leftIcon}</span>}
+          {effectiveLeftIcon && <span className={`${styles.icon} ${styles.iconLeft}`}>{effectiveLeftIcon}</span>}
           <input
             ref={ref}
-            className={inputClass}
-            aria-invalid={!!error}
-            aria-describedby={ariaDescribedBy}
-            aria-required={required}
+            {...inputProps}
+            required={required}
             disabled={disabled}
+            className={inputClass}
             {...rest}
           />
-          {rightIcon && <span className={styles.rightIcon}>{rightIcon}</span>}
+          {effectiveRightIcon && <span className={`${styles.icon} ${styles.iconRight}`}>{effectiveRightIcon}</span>}
         </div>
 
-        {description && !error && (
-          <div id={descriptionId} className={styles.description}>
+        {description && !hasError && (
+          <span {...descriptionProps} className={styles.description}>
             {description}
-          </div>
+          </span>
         )}
 
-        {error && (
-          <div id={errorId} className={styles.errorText}>
-            {error}
-          </div>
+        {hasError && errorText && (
+          <span {...errorProps} className={styles.error}>
+            {errorText}
+          </span>
         )}
       </div>
     );

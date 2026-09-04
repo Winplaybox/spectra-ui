@@ -7,14 +7,26 @@ export interface ContainerProps extends React.ComponentPropsWithoutRef<'div'> {
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
   padding?: 'none' | 'sm' | 'md' | 'lg';
   centered?: boolean;
+  fullHeight?: boolean;
 }
 
+const paddingMap = {
+  none: styles.paddingNone,
+  sm: styles.paddingSm,
+  md: styles.paddingMd,
+  lg: styles.paddingLg,
+};
+
+const sizeMap = {
+  sm: styles.sm,
+  md: styles.md,
+  lg: styles.lg,
+  xl: styles.xl,
+  full: styles.full,
+};
+
 /**
- * Container - Base layout component for page/section containers
- * @example
- * <Container size="lg" centered>
- *   <h1>Main Content</h1>
- * </Container>
+ * Container - Base layout container component
  */
 export const Container = forwardRef<HTMLDivElement, ContainerProps>(
   (
@@ -23,19 +35,27 @@ export const Container = forwardRef<HTMLDivElement, ContainerProps>(
       size = 'lg',
       padding = 'md',
       centered = true,
+      fullHeight = false,
       className,
       ...rest
     },
     ref
   ) => {
+    const containerClass = [
+      styles.container,
+      sizeMap[size],
+      paddingMap[padding],
+      size,
+      padding,
+      centered ? `${styles.centered} centered` : '',
+      fullHeight ? 'fullHeight' : '',
+      className || '',
+    ]
+      .filter(Boolean)
+      .join(' ');
+
     return (
-      <div
-        ref={ref}
-        className={`${styles.container} ${styles[size]} ${styles[`padding-${padding}`]} ${
-          centered ? styles.centered : ''
-        } ${className || ''}`}
-        {...rest}
-      >
+      <div ref={ref} className={containerClass} {...rest}>
         {children}
       </div>
     );

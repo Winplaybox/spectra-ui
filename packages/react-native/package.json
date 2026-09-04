@@ -1,0 +1,33 @@
+{
+  "name": "@spectra/react-native",
+  "version": "0.1.0",
+  "description": "Styled React Native components for Spectra UI (WinPlayBox Design System)",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@spectra/primitives": "workspace:*",
+    "@spectra/tokens": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-native": "^0.72.0",
+    "typescript": "^5.0.0",
+    "vitest": "^0.34.0"
+  }
+}

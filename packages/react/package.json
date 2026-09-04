@@ -1,0 +1,45 @@
+{
+  "name": "@spectra/react",
+  "version": "0.1.0",
+  "description": "Styled web components for Spectra UI (WinPlayBox Design System)",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:a11y": "vitest run src/tests/a11y.test.tsx",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@spectra/icons": "workspace:*",
+    "@spectra/primitives": "workspace:*",
+    "@spectra/tokens": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vanilla-extract/css": "^1.15.0",
+    "@vanilla-extract/vite-plugin": "^4.0.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "axe-core": "^4.8.0",
+    "jsdom": "^23.0.0",
+    "typescript": "^5.0.0",
+    "vite": "^5.0.0",
+    "vitest": "^0.34.0"
+  }
+}

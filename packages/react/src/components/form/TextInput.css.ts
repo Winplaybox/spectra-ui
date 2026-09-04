@@ -1,10 +1,10 @@
 // packages/react/src/components/form/TextInput.css.ts
-import { style, styleVariants } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 
 export const wrapper = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '0.375rem',
+  gap: 'var(--space-component-gap-xs)',
   width: '100%',
 });
 
@@ -13,12 +13,12 @@ export const fullWidth = style({
 });
 
 export const label = style({
-  fontSize: 'var(--font-size-label-sm)',
-  fontWeight: 'var(--font-weight-medium)',
+  fontSize: 'var(--fontSize-semantic-label-sm, var(--font-size-label-sm))',
+  fontWeight: 'var(--font-primitive-weight-medium, var(--font-weight-medium))',
   color: 'var(--color-text-primary)',
   display: 'flex',
   alignItems: 'center',
-  gap: '0.25rem',
+  gap: 'var(--space-component-gap-xs)',
 });
 
 export const required = style({
@@ -34,19 +34,21 @@ export const inputWrapper = style({
 
 export const input = style({
   width: '100%',
-  fontFamily: 'var(--font-family-sans)',
+  fontFamily: 'var(--font-primitive-family-sans, var(--font-family-sans))',
   border: '1px solid var(--color-border-default)',
   borderRadius: 'var(--radius-component-md)',
   backgroundColor: 'var(--color-surface)',
   color: 'var(--color-text-primary)',
   transition: 'all var(--motion-subtle)',
   outline: 'none',
-  ':hover:not(:disabled)': {
-    borderColor: 'var(--color-border-strong)',
+  selectors: {
+    '&:hover:not(:disabled)': {
+      borderColor: 'var(--color-border-strong)',
+    },
   },
   ':focus': {
     borderColor: 'var(--color-action-primary)',
-    boxShadow: '0 0 0 3px rgba(37, 99, 235, 0.1)',
+    boxShadow: '0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-action-primary)',
   },
   ':disabled': {
     backgroundColor: 'var(--color-surface-raised)',
@@ -58,102 +60,83 @@ export const input = style({
   },
 });
 
-export const sm = style({
-  padding: '0.375rem 0.75rem',
-  fontSize: 'var(--font-size-body-sm)',
-  minHeight: '2rem',
+export const defaultVariant = style({
+  border: '1px solid var(--color-border-default)',
 });
-
-export const md = style({
-  padding: '0.5rem 1rem',
-  fontSize: 'var(--font-size-body-md)',
-  minHeight: '2.5rem',
-});
-
-export const lg = style({
-  padding: '0.75rem 1.25rem',
-  fontSize: 'var(--font-size-body-lg)',
-  minHeight: '3rem',
-});
-
-export const default_ = style({});
 
 export const filled = style({
   backgroundColor: 'var(--color-surface-raised)',
-  borderColor: 'transparent',
-  ':hover:not(:disabled)': {
-    backgroundColor: 'var(--color-surface-raised)',
+  border: '1px solid transparent',
+  ':focus': {
+    backgroundColor: 'var(--color-surface)',
+    borderColor: 'var(--color-action-primary)',
   },
 });
 
-export const flushed = style({
-  border: 'none',
-  borderBottom: '2px solid var(--color-border-default)',
-  borderRadius: 0,
-  backgroundColor: 'transparent',
-  paddingLeft: 0,
-  paddingRight: 0,
+export const outlined = style({
+  border: '2px solid var(--color-border-default)',
   ':focus': {
-    borderBottomColor: 'var(--color-action-primary)',
-    boxShadow: 'none',
+    borderColor: 'var(--color-action-primary)',
+  },
+});
+
+export const sm = style({
+  paddingBlock: 'var(--space-component-padding-xs)',
+  paddingInline: 'var(--space-component-padding-sm)',
+  fontSize: 'var(--fontSize-semantic-body-xs, var(--font-size-body-xs))',
+});
+
+export const md = style({
+  paddingBlock: 'var(--space-component-padding-xs)',
+  paddingInline: 'var(--space-component-padding-md)',
+  fontSize: 'var(--fontSize-semantic-body-sm, var(--font-size-body-sm))',
+});
+
+export const lg = style({
+  paddingBlock: 'var(--space-component-padding-sm)',
+  paddingInline: 'var(--space-component-padding-lg)',
+  fontSize: 'var(--fontSize-semantic-body-md, var(--font-size-body-md))',
+});
+
+export const hasIconLeft = style({
+  paddingInlineStart: 'var(--space-component-padding-xl)',
+});
+
+export const hasIconRight = style({
+  paddingInlineEnd: 'var(--space-component-padding-xl)',
+});
+
+export const icon = style({
+  position: 'absolute',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: 'var(--color-text-muted)',
+  pointerEvents: 'none',
+});
+
+export const iconLeft = style({
+  insetInlineStart: 'var(--space-component-padding-sm)',
+});
+
+export const iconRight = style({
+  insetInlineEnd: 'var(--space-component-padding-sm)',
+});
+
+export const errorInput = style({
+  borderColor: 'var(--color-feedback-error)',
+  ':focus': {
+    borderColor: 'var(--color-feedback-error)',
+    boxShadow: '0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-feedback-error)',
   },
 });
 
 export const error = style({
-  borderColor: 'var(--color-feedback-error)',
-  ':focus': {
-    borderColor: 'var(--color-feedback-error)',
-    boxShadow: '0 0 0 3px var(--color-feedback-error-light)',
-  },
-});
-
-export const withLeftIcon = style({
-  paddingLeft: '2.5rem',
-});
-
-export const withRightIcon = style({
-  paddingRight: '2.5rem',
-});
-
-export const leftIcon = style({
-  position: 'absolute',
-  left: '0.75rem',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '1.5rem',
-  height: '1.5rem',
-  color: 'var(--color-text-muted)',
-  pointerEvents: 'none',
-});
-
-export const rightIcon = style({
-  position: 'absolute',
-  right: '0.75rem',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '1.5rem',
-  height: '1.5rem',
-  color: 'var(--color-text-muted)',
-  pointerEvents: 'none',
+  fontSize: 'var(--fontSize-semantic-body-xs, var(--font-size-body-xs))',
+  color: 'var(--color-feedback-error)',
 });
 
 export const description = style({
-  fontSize: 'var(--font-size-body-xs)',
+  fontSize: 'var(--fontSize-semantic-body-xs, var(--font-size-body-xs))',
   color: 'var(--color-text-muted)',
-  marginTop: '-0.25rem',
-});
-
-export const errorText = style({
-  fontSize: 'var(--font-size-body-xs)',
-  color: 'var(--color-feedback-error)',
-  marginTop: '-0.25rem',
-});
-
-// Re-export with underscore removed for variant usage
-export const variant = styleVariants({
-  default: default_,
-  filled,
-  flushed,
 });

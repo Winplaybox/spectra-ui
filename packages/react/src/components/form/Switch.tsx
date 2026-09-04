@@ -1,9 +1,9 @@
 // packages/react/src/components/form/Switch.tsx
 import { forwardRef } from 'react';
-import { useControllableState, useId, useFormField } from '@spectra/primitives';
+import { useControllableState, useId } from '@spectra/primitives';
 import * as styles from './Switch.css';
 
-export interface SwitchProps extends Omit<React.ComponentPropsWithoutRef<'input'>, 'type'> {
+export interface SwitchProps extends Omit<React.ComponentPropsWithoutRef<'input'>, 'type' | 'size' | 'onChange'> {
   label?: string;
   description?: string;
   checked?: boolean;
@@ -11,75 +11,98 @@ export interface SwitchProps extends Omit<React.ComponentPropsWithoutRef<'input'
   onChange?: (checked: boolean) => void;
   required?: boolean;
   size?: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
 }
 
 /**
- * Switch - Toggle control for on/off states
- * @example
- * <Switch label="Enable notifications" defaultChecked />
- * @example
- * const [enabled, setEnabled] = useState(false);
- * <Switch checked={enabled} onChange={setEnabled} />
+ * Switch - Accessible toggle control component with native checkbox accessibility
  */
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
   (
     {
       label,
       description,
-      checked,
+      checked: checkedProp,
       defaultChecked = false,
       onChange,
-      required,
+      required = false,
       size = 'md',
       disabled = false,
-      id,
+      id: idProp,
+      className,
       ...rest
     },
     ref
   ) => {
-    const switchId = useId(id || 'switch');
-    const [isChecked, setIsChecked] = useControllableState({
-      controlled: checked,
+    const generatedId = useId('switch');
+    const id = idProp || generatedId;
+    const labelId = `${id}-label`;
+    const descriptionId = `${id}-desc`;
+
+    const [checked, setChecked] = useControllableState<boolean>({
+      value: checkedProp,
       defaultValue: defaultChecked,
       onChange,
     });
 
-    const { descriptionId } = useFormField({ description, required });
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setIsChecked(e.target.checked);
+      if (disabled) return;
+      setChecked(e.target.checked);
     };
 
+    const sizeControlStyle =
+      size === 'sm' ? styles.smControl : size === 'lg' ? styles.lgControl : styles.mdControl;
+    const sizeThumbStyle =
+      size === 'sm' ? styles.smThumb : size === 'lg' ? styles.lgThumb : styles.mdThumb;
+    const sizeThumbCheckedStyle =
+      size === 'sm' ? styles.smThumbChecked : size === 'lg' ? styles.lgThumbChecked : styles.mdThumbChecked;
+
     return (
-      <div className={styles.wrapper}>
-        <div className={styles.control}>
+      <div className={`${styles.wrapper} ${className || ''}`}>
+        <div
+          className={`${styles.control} ${sizeControlStyle} ${checked ? styles.controlChecked : ''} ${
+            disabled ? styles.controlDisabled : ''
+          }`}
+        >
           <input
             ref={ref}
-            id={switchId}
+            id={id}
             type="checkbox"
-            className={styles.input}
-            checked={isChecked}
+            checked={checked}
             onChange={handleChange}
             disabled={disabled}
             aria-describedby={description ? descriptionId : undefined}
-            aria-required={required}
+            aria-required={required ? true : undefined}
+            className={`${size} ${checked ? 'checked' : ''}`}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              margin: 0,
+              opacity: 0,
+              cursor: disabled ? 'not-allowed' : 'pointer',
+              zIndex: 1,
+            }}
             {...rest}
           />
-          <div className={`${styles.thumb} ${styles[size]}`} />
+          <span
+            className={`${styles.thumb} ${sizeThumbStyle} ${checked ? sizeThumbCheckedStyle : ''}`}
+          />
         </div>
 
         {(label || description) && (
           <div className={styles.content}>
             {label && (
-              <label htmlFor={switchId} className={styles.label}>
+              <label htmlFor={id} id={labelId} className={styles.label}>
                 {label}
                 {required && <span className={styles.required}>*</span>}
               </label>
             )}
             {description && (
-              <div id={descriptionId} className={styles.description}>
+              <span id={descriptionId} className={styles.description}>
                 {description}
-              </div>
+              </span>
             )}
           </div>
         )}

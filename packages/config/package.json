@@ -1,0 +1,18 @@
+{
+  "name": "@spectra/config",
+  "version": "0.1.0",
+  "description": "Shared configuration and lint rules for Spectra UI",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./eslint": "./src/eslint/index.js",
+    "./tsconfig": "./tsconfig.json"
+  },
+  "scripts": {
+    "test": "node src/check-no-hardcoded-values.mjs"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  }
+}

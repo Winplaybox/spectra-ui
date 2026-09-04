@@ -1,5 +1,5 @@
 // packages/react/src/components/surfaces/Card.css.ts
-import { style, styleVariants } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 
 export const card = style({
   backgroundColor: 'var(--color-surface-raised)',
@@ -7,19 +7,23 @@ export const card = style({
   transition: 'all var(--motion-subtle)',
 });
 
-const paddingNone = { padding: 0 };
-const paddingSm = { padding: 'var(--space-component-padding-sm)' };
-const paddingMd = { padding: 'var(--space-component-padding-md)' };
-const paddingLg = { padding: 'var(--space-component-padding-lg)' };
-
-export const paddingVariants = styleVariants({
-  none: paddingNone,
-  sm: paddingSm,
-  md: paddingMd,
-  lg: paddingLg,
+export const paddingNone = style({
+  padding: '0',
 });
 
-export const default = style({
+export const paddingSm = style({
+  padding: 'var(--space-component-padding-sm)',
+});
+
+export const paddingMd = style({
+  padding: 'var(--space-component-padding-md)',
+});
+
+export const paddingLg = style({
+  padding: 'var(--space-component-padding-lg)',
+});
+
+export const defaultVariant = style({
   border: '1px solid var(--color-border-subtle)',
 });
 
@@ -28,17 +32,47 @@ export const bordered = style({
 });
 
 export const elevated = style({
-  border: 'none',
+  border: '1px solid var(--color-border-default)',
   boxShadow: 'var(--elevation-raised)',
 });
 
 export const interactive = style({
   cursor: 'pointer',
   ':hover': {
-    boxShadow: 'var(--elevation-overlay)',
+    borderColor: 'var(--color-border-strong)',
   },
   ':focus-visible': {
     outline: '2px solid var(--color-action-primary)',
     outlineOffset: '2px',
   },
+});
+
+export const header = style({
+  paddingBottom: 'var(--space-component-gap-xs)',
+});
+
+export const title = style({
+  fontSize: 'var(--fontSize-semantic-heading-md, var(--font-size-heading-md))',
+  fontWeight: 'var(--font-primitive-weight-semibold, var(--font-weight-semibold))',
+  color: 'var(--color-text-primary)',
+  margin: '0',
+});
+
+export const description = style({
+  fontSize: 'var(--fontSize-semantic-body-xs, var(--font-size-body-xs))',
+  color: 'var(--color-text-muted)',
+  margin: '0',
+});
+
+export const body = style({
+  fontSize: 'var(--fontSize-semantic-body-sm, var(--font-size-body-sm))',
+  color: 'var(--color-text-primary)',
+});
+
+export const footer = style({
+  paddingTop: 'var(--space-component-gap-sm)',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  gap: 'var(--space-component-gap-xs)',
 });
