@@ -4,7 +4,7 @@ import path from 'path';
 
 const config: StorybookConfig = {
   stories: [
-    '../../packages/react/src/**/*.stories.@(js|jsx|ts|tsx)',
+    '../../../packages/react/src/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: [
     '@storybook/addon-essentials',
@@ -21,7 +21,8 @@ const config: StorybookConfig = {
     config.resolve = config.resolve || {};
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
-      '@spectra/tokens': path.resolve(__dirname, '../../../packages/tokens/src'),
+      '@spectra/tokens/css': path.resolve(__dirname, '../../../packages/tokens/dist/css/tokens.css'),
+      '@spectra/tokens': path.resolve(__dirname, '../../../packages/tokens/dist/ts/index.js'),
       '@spectra/primitives': path.resolve(__dirname, '../../../packages/primitives/src'),
       '@spectra/icons': path.resolve(__dirname, '../../../packages/icons/src'),
       '@spectra/react': path.resolve(__dirname, '../../../packages/react/src'),

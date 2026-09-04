@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/react';
 import React, { useEffect } from 'react';
 import { SpectraProvider } from '@spectra/react';
-import '../../../packages/tokens/dist/css/tokens.css';
+import '@spectra/tokens/css';
 
 export const globalTypes = {
   pack: {
