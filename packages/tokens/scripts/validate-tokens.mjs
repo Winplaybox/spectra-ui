@@ -15,7 +15,6 @@ const semantic = readJson('semantic/semantic.tokens.json');
 const minimalPack = readJson('packs/minimal.pack.json');
 const lightMode = readJson('modes/light.mode.json');
 const darkMode = readJson('modes/dark.mode.json');
-const amoledMode = readJson('modes/amoled.mode.json');
 
 function extractKeys(obj, prefix = '') {
   let keys = [];
@@ -34,7 +33,6 @@ const semanticKeys = extractKeys(semantic);
 const minimalKeys = new Set(extractKeys(minimalPack));
 const lightKeys = new Set(extractKeys(lightMode));
 const darkKeys = new Set(extractKeys(darkMode));
-const amoledKeys = new Set(extractKeys(amoledMode));
 
 console.log(`🔍 Validating Token Contract: checking ${semanticKeys.length} semantic tokens...`);
 
@@ -50,9 +48,6 @@ for (const key of semanticKeys) {
   if (!darkKeys.has(key)) {
     errors.push(`[Dark Mode] Missing token: ${key}`);
   }
-  if (!amoledKeys.has(key)) {
-    errors.push(`[AMOLED Mode] Missing token: ${key}`);
-  }
 }
 
 if (errors.length > 0) {
@@ -61,4 +56,4 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log(`✅ Token contract PASSED: 100% 1:1 match across semantic schema, minimal pack, and all 3 modes.`);
+console.log(`✅ Token contract PASSED: 100% 1:1 match across semantic schema, minimal pack, and light/dark modes.`);

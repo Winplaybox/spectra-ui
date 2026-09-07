@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-export type ColorScheme = 'light' | 'dark' | 'amoled';
+export type ColorScheme = 'light' | 'dark';
 export type StylePack = 'minimal';
 
 export interface ThemeContextValue {
@@ -34,7 +34,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     if (typeof window !== 'undefined') {
       try {
         const saved = window.localStorage?.getItem('spectra-color-scheme') as ColorScheme;
-        if (saved && ['light', 'dark', 'amoled'].includes(saved)) return saved;
+        if (saved && ['light', 'dark'].includes(saved)) return saved;
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
       } catch {
         // Ignore storage/matchMedia errors in restricted test environments
@@ -74,7 +74,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     root?.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
   }, [pack, colorScheme, isRTL]);
 
-  const isDark = colorScheme === 'dark' || colorScheme === 'amoled';
+  const isDark = colorScheme === 'dark';
 
   const value: ThemeContextValue = {
     pack,

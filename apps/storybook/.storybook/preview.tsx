@@ -25,7 +25,6 @@ export const globalTypes = {
       items: [
         { value: 'light', title: 'Light Mode' },
         { value: 'dark', title: 'Dark Mode' },
-        { value: 'amoled', title: 'AMOLED Mode' },
       ],
       showName: true,
     },

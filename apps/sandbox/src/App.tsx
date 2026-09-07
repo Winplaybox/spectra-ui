@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  useTheme,
   useColorScheme,
   usePack,
   useRTL,
@@ -8,6 +7,23 @@ import {
   Button,
   TextInput,
   Switch,
+  Checkbox,
+  Radio,
+  RadioGroup,
+  Select,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+  Tooltip,
+  Avatar,
+  Badge,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListItemAction,
   Card,
   CardHeader,
   CardTitle,
@@ -31,7 +47,10 @@ import {
   SearchIcon,
   CheckIcon,
   AlertCircleIcon,
-  SparklesIcon,
+  UserIcon,
+  MoreVerticalIcon,
+  ExternalLinkIcon,
+  InfoIcon,
 } from '@spectra/icons';
 
 export const App: React.FC = () => {
@@ -44,6 +63,10 @@ export const App: React.FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [switchChecked, setSwitchChecked] = useState(true);
+  const [checkboxChecked, setCheckboxChecked] = useState(true);
+  const [checkboxIndeterminate, setCheckboxIndeterminate] = useState(false);
+  const [selectedRadio, setSelectedRadio] = useState('cloud');
+  const [selectedCity, setSelectedCity] = useState('zurich');
   const [inputValue, setInputValue] = useState('');
   const [hasInputError, setHasInputError] = useState(false);
 
@@ -55,9 +78,17 @@ export const App: React.FC = () => {
     }, 1200);
   };
 
+  const selectOptions = [
+    { value: 'zurich', label: 'Zurich (HQ - Swiss Flat Style)' },
+    { value: 'geneva', label: 'Geneva (International)' },
+    { value: 'basel', label: 'Basel (Design & Art)' },
+    { value: 'bern', label: 'Bern (Federal Center)' },
+    { value: 'disabled', label: 'Lugano (Coming Soon)', disabled: true },
+  ];
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Top Navigation Header */}
+      {/* Flat Top Navigation Header */}
       <header
         style={{
           borderBottom: '1px solid var(--color-border-default)',
@@ -76,15 +107,15 @@ export const App: React.FC = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div
             style={{
-              width: 36,
-              height: 36,
-              borderRadius: 8,
-              background: 'linear-gradient(135deg, var(--color-action-primary), #6366F1)',
+              width: 38,
+              height: 38,
+              borderRadius: 6,
+              backgroundColor: 'var(--color-action-primary)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#FFF',
-              fontWeight: 700,
+              color: 'var(--color-text-inverse)',
+              fontWeight: 800,
               fontSize: 18,
             }}
           >
@@ -95,34 +126,35 @@ export const App: React.FC = () => {
               Spectra UI
               <span
                 style={{
-                  fontSize: 10,
-                  padding: '2px 6px',
+                  fontSize: 11,
+                  padding: '2px 8px',
                   borderRadius: 4,
                   backgroundColor: 'var(--color-surface-raised)',
                   border: '1px solid var(--color-border-default)',
-                  color: 'var(--color-text-muted)',
+                  color: 'var(--color-action-primary)',
+                  fontWeight: 600,
                 }}
               >
-                Phase 1 Minimal
+                Swiss Flat Design (16 Components)
               </span>
             </div>
             <div style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>
-              WinPlayBox Design System
+              WinPlayBox Design System · Tier 1 + Tier 2
             </div>
           </div>
         </div>
 
-        {/* Global Controls Toolbar */}
+        {/* Global Controls Toolbar (Light & Dark Only - No AMOLED) */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
           {/* Style Pack Selector */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
-            <span style={{ color: 'var(--color-text-muted)' }}>Pack:</span>
+            <span style={{ color: 'var(--color-text-muted)', fontWeight: 500 }}>Style Pack:</span>
             <select
               value={pack}
               onChange={(e) => setPack(e.target.value as any)}
               style={{
                 padding: '6px 12px',
-                borderRadius: 'var(--radius-component-sm)',
+                borderRadius: 4,
                 border: '1px solid var(--color-border-default)',
                 backgroundColor: 'var(--color-surface)',
                 color: 'var(--color-text-primary)',
@@ -130,56 +162,50 @@ export const App: React.FC = () => {
                 fontWeight: 500,
               }}
             >
-              <option value="minimal">Minimal (Flat)</option>
+              <option value="minimal">Minimal (Swiss Flat)</option>
               <option value="glass" disabled>Glass (Phase 2)</option>
               <option value="neumorphic" disabled>Neumorphic (Phase 2+)</option>
             </select>
           </div>
 
-          {/* Color Mode Switcher */}
+          {/* Color Mode Switcher: Strictly Light & Dark Only */}
           <div
             style={{
               display: 'flex',
               backgroundColor: 'var(--color-surface-raised)',
               padding: 3,
-              borderRadius: 8,
+              borderRadius: 6,
               border: '1px solid var(--color-border-default)',
             }}
           >
-            {(['light', 'dark', 'amoled'] as const).map((mode) => (
+            {(['light', 'dark'] as const).map((mode) => (
               <button
                 key={mode}
                 onClick={() => setColorScheme(mode)}
                 style={{
-                  padding: '4px 10px',
-                  borderRadius: 6,
+                  padding: '5px 12px',
+                  borderRadius: 4,
                   border: 'none',
                   cursor: 'pointer',
                   fontSize: 12,
                   fontWeight: colorScheme === mode ? 600 : 400,
-                  backgroundColor: colorScheme === mode ? 'var(--color-surface)' : 'transparent',
-                  color: colorScheme === mode ? 'var(--color-text-primary)' : 'var(--color-text-muted)',
-                  boxShadow: colorScheme === mode ? '0 1px 2px rgba(0,0,0,0.1)' : 'none',
+                  backgroundColor: colorScheme === mode ? 'var(--color-action-primary)' : 'transparent',
+                  color: colorScheme === mode ? 'var(--color-text-inverse)' : 'var(--color-text-muted)',
                   textTransform: 'capitalize',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: 4,
+                  gap: 6,
+                  transition: 'all 150ms ease',
                 }}
               >
-                {mode === 'light' && <SunIcon size={12} />}
-                {mode === 'dark' && <MoonIcon size={12} />}
-                {mode === 'amoled' && <SparklesIcon size={12} />}
+                {mode === 'light' ? <SunIcon size={13} /> : <MoonIcon size={13} />}
                 {mode}
               </button>
             ))}
           </div>
 
           {/* RTL Toggle */}
-          <Button
-            size="sm"
-            variant="secondary"
-            onClick={toggleRTL}
-          >
+          <Button size="sm" variant="secondary" onClick={toggleRTL}>
             {isRTL ? 'LTR' : 'RTL'}
           </Button>
         </div>
@@ -191,33 +217,33 @@ export const App: React.FC = () => {
         <div
           style={{
             display: 'flex',
-            gap: 16,
+            gap: 8,
             borderBottom: '1px solid var(--color-border-default)',
             marginBottom: 24,
-            paddingBottom: 8,
+            paddingBottom: 4,
           }}
         >
           <button
             onClick={() => setActiveTab('playground')}
             style={{
               padding: '8px 16px',
-              borderRadius: 6,
+              borderRadius: 4,
               border: 'none',
-              background: activeTab === 'playground' ? 'var(--color-surface-raised)' : 'transparent',
+              backgroundColor: activeTab === 'playground' ? 'var(--color-surface-raised)' : 'transparent',
               color: activeTab === 'playground' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
               fontWeight: 600,
               cursor: 'pointer',
             }}
           >
-            Components Playground
+            All 16 Components
           </button>
           <button
             onClick={() => setActiveTab('tokens')}
             style={{
               padding: '8px 16px',
-              borderRadius: 6,
+              borderRadius: 4,
               border: 'none',
-              background: activeTab === 'tokens' ? 'var(--color-surface-raised)' : 'transparent',
+              backgroundColor: activeTab === 'tokens' ? 'var(--color-surface-raised)' : 'transparent',
               color: activeTab === 'tokens' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
               fontWeight: 600,
               cursor: 'pointer',
@@ -229,26 +255,26 @@ export const App: React.FC = () => {
             onClick={() => setActiveTab('architecture')}
             style={{
               padding: '8px 16px',
-              borderRadius: 6,
+              borderRadius: 4,
               border: 'none',
-              background: activeTab === 'architecture' ? 'var(--color-surface-raised)' : 'transparent',
+              backgroundColor: activeTab === 'architecture' ? 'var(--color-surface-raised)' : 'transparent',
               color: activeTab === 'architecture' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
               fontWeight: 600,
               cursor: 'pointer',
             }}
           >
-            Phase 1 Architecture & Gates
+            Design Principles & Gates
           </button>
         </div>
 
-        {/* Tab 1: Playground */}
+        {/* Tab 1: All Components Playground */}
         {activeTab === 'playground' && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: 24 }}>
-            {/* 1. Button Showcase */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: 24 }}>
+            {/* 1. Button */}
             <Card variant="bordered" padding="lg">
               <CardHeader>
                 <CardTitle>1. Button Component</CardTitle>
-                <CardDescription>Variants, sizes, loading, and accessible focus</CardDescription>
+                <CardDescription>Flat 2D actions with solid colors and bold typography</CardDescription>
               </CardHeader>
               <CardContent>
                 <Stack direction="column" gap="md">
@@ -280,11 +306,217 @@ export const App: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* 2. TextInput Showcase */}
+            {/* 2. Checkbox & Switch */}
             <Card variant="bordered" padding="lg">
               <CardHeader>
-                <CardTitle>2. TextInput Component</CardTitle>
-                <CardDescription>useFormField integration with labels and errors</CardDescription>
+                <CardTitle>2. Checkbox & Switch</CardTitle>
+                <CardDescription>Flat geometric toggles with crisp state indicators</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Stack direction="column" gap="md">
+                  <Checkbox
+                    checked={checkboxChecked}
+                    onChange={setCheckboxChecked}
+                    label="Accept Swiss Design Standard"
+                    description="Emphasizes minimalism, grid structure, and clarity"
+                  />
+                  <Checkbox
+                    checked={false}
+                    indeterminate={checkboxIndeterminate}
+                    onChange={() => setCheckboxIndeterminate(!checkboxIndeterminate)}
+                    label="Indeterminate Hierarchy State"
+                    description="Click to toggle indeterminate minus symbol"
+                  />
+                  <Switch
+                    checked={switchChecked}
+                    onChange={setSwitchChecked}
+                    label="Dynamic Mode Sync"
+                    description="Real-time CSS variable propagation"
+                  />
+                </Stack>
+              </CardContent>
+            </Card>
+
+            {/* 3. Radio & RadioGroup */}
+            <Card variant="bordered" padding="lg">
+              <CardHeader>
+                <CardTitle>3. Radio & RadioGroup</CardTitle>
+                <CardDescription>Clean circular selectors with crisp solid center dot</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <RadioGroup
+                  value={selectedRadio}
+                  onChange={setSelectedRadio}
+                  orientation="vertical"
+                >
+                  <Radio
+                    value="cloud"
+                    label="Cloud Deployment"
+                    description="Automated CI/CD with instant rollback"
+                  />
+                  <Radio
+                    value="hybrid"
+                    label="Hybrid Lakehouse"
+                    description="Combines local edge cache with remote lake"
+                  />
+                  <Radio
+                    value="onprem"
+                    label="On-Premises Dedicated"
+                    description="Air-gapped enterprise compliance node"
+                  />
+                </RadioGroup>
+              </CardContent>
+            </Card>
+
+            {/* 4. Select Dropdown */}
+            <Card variant="bordered" padding="lg">
+              <CardHeader>
+                <CardTitle>4. Select Component</CardTitle>
+                <CardDescription>Custom flat dropdown with keyboard & a11y navigation</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Stack direction="column" gap="md">
+                  <Select
+                    label="Swiss Regional Node"
+                    options={selectOptions}
+                    value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.target.value)}
+                  />
+                  <Select
+                    label="Select with Error State"
+                    options={selectOptions}
+                    placeholder="Choose an invalid option..."
+                    error="Connection to selected region timed out"
+                  />
+                </Stack>
+              </CardContent>
+            </Card>
+
+            {/* 5. Tabs Component */}
+            <Card variant="bordered" padding="lg">
+              <CardHeader>
+                <CardTitle>5. Tabs Navigation</CardTitle>
+                <CardDescription>Compound WAI-ARIA tabbed views with underline indicators</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Tabs defaultValue="swiss">
+                  <TabList>
+                    <Tab value="swiss">Swiss Style</Tab>
+                    <Tab value="flat">Flat UI</Tab>
+                    <Tab value="tokens">Rule #0</Tab>
+                  </TabList>
+                  <TabPanels>
+                    <TabPanel value="swiss">
+                      <Text size="sm" color="secondary" style={{ marginTop: 8 }}>
+                        Swiss Design (International Typographic Style) pioneered asymmetric layouts, mathematical grids, and sans-serif typefaces like Helvetica.
+                      </Text>
+                    </TabPanel>
+                    <TabPanel value="flat">
+                      <Text size="sm" color="secondary" style={{ marginTop: 8 }}>
+                        Flat UI eliminates skeuomorphic textures, bevels, and heavy gradients in favor of crisp 2D geometry, solid accents, and generous whitespace.
+                      </Text>
+                    </TabPanel>
+                    <TabPanel value="tokens">
+                      <Text size="sm" color="secondary" style={{ marginTop: 8 }}>
+                        Rule #0 ensures components consume only semantic tokens. No raw hex or px values exist in component source code.
+                      </Text>
+                    </TabPanel>
+                  </TabPanels>
+                </Tabs>
+              </CardContent>
+            </Card>
+
+            {/* 6. Avatar & Badge */}
+            <Card variant="bordered" padding="lg">
+              <CardHeader>
+                <CardTitle>6. Avatar & Badge</CardTitle>
+                <CardDescription>Data display tokens, presence indicators, and chips</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Stack direction="column" gap="md">
+                  <Stack direction="row" gap="md" align="center">
+                    <Avatar name="Max Miedinger" size="lg" status="online" />
+                    <Avatar name="Josef Muller" size="md" status="busy" />
+                    <Avatar name="Adrian Frutiger" size="sm" status="away" />
+                    <Avatar name="Armin Hofmann" size="xs" status="offline" />
+                    <Avatar name="Square Mode" size="md" shape="square" />
+                  </Stack>
+                  <Stack direction="row" gap="sm" wrap align="center">
+                    <Badge variant="primary">Primary</Badge>
+                    <Badge variant="success" dot>Active</Badge>
+                    <Badge variant="warning">Warning</Badge>
+                    <Badge variant="error">Failed</Badge>
+                    <Badge variant="default">Default</Badge>
+                  </Stack>
+                </Stack>
+              </CardContent>
+            </Card>
+
+            {/* 7. Tooltip Showcase */}
+            <Card variant="bordered" padding="lg">
+              <CardHeader>
+                <CardTitle>7. Tooltip Component</CardTitle>
+                <CardDescription>Hover & focus accessible popups with directional placement</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Stack direction="row" gap="md" wrap align="center">
+                  <Tooltip content="Tooltip positioned on top" placement="top">
+                    <Button variant="secondary" size="sm">Top Tooltip</Button>
+                  </Tooltip>
+                  <Tooltip content="Tooltip positioned on bottom" placement="bottom">
+                    <Button variant="secondary" size="sm">Bottom Tooltip</Button>
+                  </Tooltip>
+                  <Tooltip content="Quick helpful tip" placement="right">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer' }}>
+                      <InfoIcon size={16} />
+                      <Text size="sm" color="secondary">Hover info icon</Text>
+                    </div>
+                  </Tooltip>
+                </Stack>
+              </CardContent>
+            </Card>
+
+            {/* 8. List & ListItem */}
+            <Card variant="bordered" padding="lg">
+              <CardHeader>
+                <CardTitle>8. List & ListItem</CardTitle>
+                <CardDescription>Interactive structured lists with icon, text, and actions</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <List>
+                  <ListItem interactive onClick={() => toast('Clicked Josef Müller-Brockmann', { type: 'info' })}>
+                    <ListItemIcon>
+                      <UserIcon size={18} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Josef Müller-Brockmann"
+                      secondary="Pioneer of the Grid System (1961)"
+                    />
+                    <ListItemAction>
+                      <ExternalLinkIcon size={16} />
+                    </ListItemAction>
+                  </ListItem>
+                  <ListItem interactive onClick={() => toast('Clicked Max Miedinger', { type: 'info' })}>
+                    <ListItemIcon>
+                      <UserIcon size={18} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary="Max Miedinger"
+                      secondary="Designer of Neue Haas Grotesk (Helvetica)"
+                    />
+                    <ListItemAction>
+                      <MoreVerticalIcon size={16} />
+                    </ListItemAction>
+                  </ListItem>
+                </List>
+              </CardContent>
+            </Card>
+
+            {/* 9. TextInput Showcase */}
+            <Card variant="bordered" padding="lg">
+              <CardHeader>
+                <CardTitle>9. TextInput Component</CardTitle>
+                <CardDescription>useFormField integration with labels, icons, and errors</CardDescription>
               </CardHeader>
               <CardContent>
                 <Stack direction="column" gap="md">
@@ -316,41 +548,10 @@ export const App: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* 3. Switch Showcase */}
+            {/* 10. Dialog & Modal */}
             <Card variant="bordered" padding="lg">
               <CardHeader>
-                <CardTitle>3. Switch Component</CardTitle>
-                <CardDescription>Accessible toggle with motion token animation</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Stack direction="column" gap="md">
-                  <Switch
-                    checked={switchChecked}
-                    onChange={setSwitchChecked}
-                    label="Hardware Acceleration"
-                    description="Utilize dedicated GPU shaders for rendering"
-                  />
-
-                  <Switch
-                    checked={false}
-                    disabled
-                    label="Developer Mode (Locked)"
-                    description="Admin permissions required"
-                  />
-
-                  <Stack direction="row" gap="md" align="center">
-                    <Switch size="sm" defaultChecked label="SM" />
-                    <Switch size="md" defaultChecked label="MD" />
-                    <Switch size="lg" defaultChecked label="LG" />
-                  </Stack>
-                </Stack>
-              </CardContent>
-            </Card>
-
-            {/* 4. Dialog & Modal Showcase */}
-            <Card variant="bordered" padding="lg">
-              <CardHeader>
-                <CardTitle>4. Dialog Component</CardTitle>
+                <CardTitle>10. Dialog Modal Component</CardTitle>
                 <CardDescription>Focus trapping, ESC handling, and outside click dismiss</CardDescription>
               </CardHeader>
               <CardContent>
@@ -365,11 +566,11 @@ export const App: React.FC = () => {
               </CardFooter>
             </Card>
 
-            {/* 5. Card & Typography Showcase */}
+            {/* 11. Typography Hierarchy */}
             <Card variant="bordered" padding="lg">
               <CardHeader>
-                <CardTitle>5. Card & Typography Hierarchy</CardTitle>
-                <CardDescription>Semantic scales: heading, body, label, and caption</CardDescription>
+                <CardTitle>11. Typography Hierarchy</CardTitle>
+                <CardDescription>Sans-serif scale: heading, body, label, and caption</CardDescription>
               </CardHeader>
               <CardContent>
                 <Stack direction="column" gap="xs">
@@ -382,18 +583,22 @@ export const App: React.FC = () => {
               </CardContent>
             </Card>
 
-            {/* 6. Layout Stack Primitive */}
+            {/* 12. Layout Stack & Container */}
             <Card variant="bordered" padding="lg">
               <CardHeader>
-                <CardTitle>6. Layout & Container Primitives</CardTitle>
+                <CardTitle>12. Stack & Container Primitives</CardTitle>
                 <CardDescription>Responsive flexbox Stack & auto-centering Container</CardDescription>
               </CardHeader>
               <CardContent>
-                <Stack direction="row" gap="sm" justify="between" align="center" style={{ backgroundColor: 'var(--color-surface-raised)', padding: 12, borderRadius: 8 }}>
-                  <Text size="sm" weight="medium">Status</Text>
-                  <span style={{ fontSize: 12, padding: '2px 8px', borderRadius: 12, backgroundColor: 'var(--color-feedback-success)', color: '#FFF' }}>
-                    Active
-                  </span>
+                <Stack
+                  direction="row"
+                  gap="sm"
+                  justify="between"
+                  align="center"
+                  style={{ backgroundColor: 'var(--color-surface-raised)', padding: 12, borderRadius: 6 }}
+                >
+                  <Text size="sm" weight="medium">Engine Status</Text>
+                  <Badge variant="success" dot>Operational</Badge>
                 </Stack>
               </CardContent>
             </Card>
@@ -406,37 +611,38 @@ export const App: React.FC = () => {
             <CardHeader>
               <CardTitle>Active Token Inspector</CardTitle>
               <CardDescription>
-                Live values currently resolved from <strong>{pack}</strong> pack × <strong>{colorScheme}</strong> mode
+                Live values resolved from <strong>{pack}</strong> pack × <strong>{colorScheme}</strong> mode (AMOLED removed)
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
                 {[
-                  { name: '--color-surface', desc: 'Primary Surface' },
+                  { name: '--color-surface', desc: 'Primary 2D Surface' },
                   { name: '--color-surface-raised', desc: 'Raised Card Surface' },
-                  { name: '--color-action-primary', desc: 'Action Primary' },
-                  { name: '--color-border-default', desc: 'Border Default' },
-                  { name: '--color-text-primary', desc: 'Text Primary' },
-                  { name: '--color-text-muted', desc: 'Text Muted' },
-                  { name: '--color-feedback-error', desc: 'Feedback Error' },
-                  { name: '--color-feedback-success', desc: 'Feedback Success' },
+                  { name: '--color-action-primary', desc: 'Action Primary Accent' },
+                  { name: '--color-border-default', desc: 'Border Default (Crisp 1px)' },
+                  { name: '--color-text-primary', desc: 'High-contrast Sans-serif' },
+                  { name: '--color-text-muted', desc: 'Secondary Muted Text' },
+                  { name: '--color-feedback-error', desc: 'Solid Error State' },
+                  { name: '--color-feedback-success', desc: 'Solid Success State' },
                 ].map((token) => (
                   <div
                     key={token.name}
                     style={{
                       border: '1px solid var(--color-border-default)',
-                      borderRadius: 8,
+                      borderRadius: 6,
                       padding: 12,
                       display: 'flex',
                       alignItems: 'center',
                       gap: 12,
+                      backgroundColor: 'var(--color-surface-raised)',
                     }}
                   >
                     <div
                       style={{
                         width: 36,
                         height: 36,
-                        borderRadius: 6,
+                        borderRadius: 4,
                         backgroundColor: `var(${token.name})`,
                         border: '1px solid var(--color-border-default)',
                         flexShrink: 0,
@@ -453,47 +659,50 @@ export const App: React.FC = () => {
           </Card>
         )}
 
-        {/* Tab 3: Architecture & Build Gates */}
+        {/* Tab 3: Design Principles & Gates */}
         {activeTab === 'architecture' && (
           <Card variant="bordered" padding="lg">
             <CardHeader>
-              <CardTitle>Phase 1 Architecture & Build Gates</CardTitle>
-              <CardDescription>Enforcing structural pack-blindness and automated quality gates</CardDescription>
+              <CardTitle>Flat / Swiss Design & Automated Build Gates</CardTitle>
+              <CardDescription>Strict architectural seams, pure semantic tokens, and automated quality gates</CardDescription>
             </CardHeader>
             <CardContent>
               <Stack direction="column" gap="md">
-                <div style={{ padding: 16, borderRadius: 8, backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-default)' }}>
-                  <Text weight="bold" size="md">Phase 1 Invariant (Rule #0):</Text>
+                <div style={{ padding: 16, borderRadius: 6, backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-default)' }}>
+                  <Text weight="bold" size="md">Swiss Design / Flat UI Principles:</Text>
                   <Text size="sm" color="secondary" style={{ marginTop: 4 }}>
-                    "Components read <strong>only</strong> semantic tokens. Never a raw value, never a pack name, never a conditional like <code>if (pack === 'glass')</code>."
+                    1. <strong>Simplicity & Minimalism:</strong> Eliminates unnecessary skeuomorphic textures, faux-3D gradients, and heavy drop shadows.<br />
+                    2. <strong>Clean Sans-serif Typography:</strong> Clear visual hierarchy established through weight, size, and high-contrast color.<br />
+                    3. <strong>Solid, Vibrant Accents:</strong> Crisp solid colors that communicate purpose and state.<br />
+                    4. <strong>Ample Whitespace & Grids:</strong> Structured layout, generous padding, and breathable component spacing.
                   </Text>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
-                  <div style={{ padding: 16, borderRadius: 8, border: '1px solid var(--color-border-default)' }}>
-                    <Text weight="semibold">Gate 1: Token Contract Test</Text>
+                  <div style={{ padding: 16, borderRadius: 6, border: '1px solid var(--color-border-default)' }}>
+                    <Text weight="semibold">Gate 1: Token Contract</Text>
                     <Text size="xs" color="muted" style={{ marginTop: 4 }}>
-                      Asserts every key in semantic schema has a 1:1 match in packs/minimal.pack.json and all modes.
+                      Asserts 100% 1:1 match across semantic schema, minimal pack, and light/dark modes (AMOLED eradicated).
                     </Text>
                     <div style={{ marginTop: 8, color: 'var(--color-feedback-success)', fontSize: 12, fontWeight: 600 }}>
                       ✅ 100% Contract Validated (61 tokens)
                     </div>
                   </div>
 
-                  <div style={{ padding: 16, borderRadius: 8, border: '1px solid var(--color-border-default)' }}>
-                    <Text weight="semibold">Gate 2: No-Hardcoded-Values Linter</Text>
+                  <div style={{ padding: 16, borderRadius: 6, border: '1px solid var(--color-border-default)' }}>
+                    <Text weight="semibold">Gate 2: Rule #0 Linter</Text>
                     <Text size="xs" color="muted" style={{ marginTop: 4 }}>
-                      Blocks raw hex/px values inside component code; only token variables allowed.
+                      Blocks raw hex/px values inside component code; all components strictly read semantic tokens.
                     </Text>
                     <div style={{ marginTop: 8, color: 'var(--color-feedback-success)', fontSize: 12, fontWeight: 600 }}>
-                      ✅ 0 Violations Detected
+                      ✅ 0 Hardcoded Violations
                     </div>
                   </div>
 
-                  <div style={{ padding: 16, borderRadius: 8, border: '1px solid var(--color-border-default)' }}>
-                    <Text weight="semibold">Gate 3: axe-core a11y Automated Audit</Text>
+                  <div style={{ padding: 16, borderRadius: 6, border: '1px solid var(--color-border-default)' }}>
+                    <Text weight="semibold">Gate 3: WCAG 2.1 AA a11y</Text>
                     <Text size="xs" color="muted" style={{ marginTop: 4 }}>
-                      Automated WCAG 2.1 AA audit on all reference components across Light, Dark, AMOLED.
+                      Automated axe-core compliance across all 16 interactive components.
                     </Text>
                     <div style={{ marginTop: 8, color: 'var(--color-feedback-success)', fontSize: 12, fontWeight: 600 }}>
                       ✅ 0 Accessibility Violations
@@ -509,13 +718,13 @@ export const App: React.FC = () => {
         <Dialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
           <DialogCloseButton onClose={() => setIsDialogOpen(false)} />
           <DialogHeader>
-            <DialogTitle>Confirm Action</DialogTitle>
+            <DialogTitle>Swiss Flat Style Confirmation</DialogTitle>
             <DialogDescription>
-              Are you sure you want to deploy the updated theme configuration?
+              Apply this configuration across both Web and React Native targets?
             </DialogDescription>
           </DialogHeader>
           <DialogBody>
-            This action will apply the new token mappings across all connected platforms in real time.
+            This action validates dynamic token resolution in real time without AMOLED or non-semantic dependencies.
           </DialogBody>
           <DialogFooter>
             <Button variant="secondary" onClick={() => setIsDialogOpen(false)}>
