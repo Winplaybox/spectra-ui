@@ -1,0 +1,25 @@
+import React from 'react';
+import { IconProps } from '../types';
+
+export const MediaPauseLinesIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M16.5 20C16.22 20 16 19.78 16 19.5V4.5C16 4.22 16.22 4 16.5 4C16.78 4 17 4.22 17 4.5V19.5C17 19.78 16.78 20 16.5 20Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M7.5 20C7.22 20 7 19.78 7 19.5V4.5C7 4.22 7.22 4 7.5 4C7.78 4 8 4.22 8 4.5V19.5C8 19.78 7.78 20 7.5 20Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+MediaPauseLinesIcon.displayName = 'MediaPauseLinesIcon';

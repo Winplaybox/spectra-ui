@@ -1,0 +1,24 @@
+import React from 'react';
+import { IconProps } from '../types';
+
+export const PhoneUpIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M12 16C6.48 16 2 13.76 2 11V8H8V11H16V8H22V11C22 13.76 17.52 16 12 16Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+PhoneUpIcon.displayName = 'PhoneUpIcon';

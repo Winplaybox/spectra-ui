@@ -1,0 +1,28 @@
+import React from 'react';
+import { IconProps } from '../types';
+
+export const EarphoneIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M3 19L2 12.1685V12C2 6.47716 6.47715 2 12 2C17.5228 2 22 6.47715 22 12V12.1373L21 19" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M16.5 15.5V21.5" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M7.5 15.5V21.5" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path fillRule="evenodd" clipRule="evenodd" d="M17.85 15H17.5V22H17.85C19.5897 22 21 20.433 21 18.5C21 16.567 19.5897 15 17.85 15Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+<path fillRule="evenodd" clipRule="evenodd" d="M6.15 15H6.5V22H6.15C4.4103 22 3 20.433 3 18.5C3 16.567 4.4103 15 6.15 15Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+  </svg>
+);
+
+EarphoneIcon.displayName = 'EarphoneIcon';

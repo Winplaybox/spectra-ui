@@ -1,0 +1,27 @@
+import React from 'react';
+import { IconProps } from '../types';
+
+export const ChatSquareDoubleTextIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M7 7C7 6.45 7.45 6 8 6H17V3C17 2.45 16.55 2 16 2H3C2.45 2 2 2.45 2 3V12C2 12.55 2.45 13 3 13H7V7Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M7 7V16C7 16.55 7.45 17 8 17H18L22 21V7C22 6.45 21.55 6 21 6H8C7.45 6 7 6.45 7 7Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M13 10H18" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M11 13H18" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+ChatSquareDoubleTextIcon.displayName = 'ChatSquareDoubleTextIcon';

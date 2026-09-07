@@ -1,0 +1,26 @@
+import React from 'react';
+import { IconProps } from '../types';
+
+export const CameraSurveillance4Icon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M2 4H22V7C22 7.55228 21.5523 8 21 8H3C2.44772 8 2 7.55228 2 7V4Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+<path d="M3 8H21V11C21 15.9706 16.9706 20 12 20C7.02944 20 3 15.9706 3 11V8Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+<circle cx="15" cy="13" r="3" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+  </svg>
+);
+
+CameraSurveillance4Icon.displayName = 'CameraSurveillance4Icon';

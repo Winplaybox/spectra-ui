@@ -1,10 +1,11 @@
 import React from 'react';
+import { IconProps } from './types';
 
-export interface IconProps extends React.SVGProps<SVGSVGElement> {
-  size?: number | string;
-  color?: string;
-  className?: string;
-}
+export * from './types';
+export * from './generated/index';
+import manifest from './manifest.json';
+export const iconManifest = manifest;
+
 
 export const CheckIcon: React.FC<IconProps> = ({
   size = 16,

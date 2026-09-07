@@ -1,0 +1,32 @@
+import React from 'react';
+import { IconProps } from '../types';
+
+export const CreditCardNFC2Icon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M3.5 5C2.67 5 2 5.67 2 6.5V17.5C2 18.33 2.67 19 3.5 19H20.5C21.33 19 22 18.33 22 17.5V6.5C22 5.67 21.33 5 20.5 5H3.5Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M5 16H6.5" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M9 16H10.5" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M13 16H14.5" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M5 8H10" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M6 12.5V11.5C6 11.2239 6.22386 11 6.5 11H8.5C8.77614 11 9 11.2239 9 11.5V12.5C9 12.7761 8.77614 13 8.5 13H6.5C6.22386 13 6 12.7761 6 12.5Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M16.5 12.7815C16.7746 12.3941 16.9373 11.9126 16.9373 11.3908C16.9373 10.8689 16.7746 10.3874 16.5 10" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M18.1875 13.9062C18.7321 13.2525 19.0625 12.3937 19.0625 11.4531C19.0625 10.5126 18.7321 9.65378 18.1875 9.00001" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M14.5 11C14.5 11 14.5 11 14.5 11.5" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+  </svg>
+);
+
+CreditCardNFC2Icon.displayName = 'CreditCardNFC2Icon';

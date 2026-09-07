@@ -1,0 +1,25 @@
+import React from 'react';
+import { IconProps } from '../types';
+
+export const PenLineIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M2 18.0012H7" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M19.586 6.29119L11.0707 14.8012L10 18.0012L13.192 16.9412L21.7073 8.43119C22.0976 8.04119 22.0976 7.40119 21.7073 7.01119L21.0069 6.29119C20.6066 5.90119 19.9762 5.90119 19.586 6.29119Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+PenLineIcon.displayName = 'PenLineIcon';

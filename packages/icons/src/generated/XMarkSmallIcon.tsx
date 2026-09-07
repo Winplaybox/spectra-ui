@@ -1,0 +1,25 @@
+import React from 'react';
+import { IconProps } from '../types';
+
+export const XMarkSmallIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M6.33994 17.6499C6.13994 17.4499 6.13994 17.1399 6.33994 16.9399L16.9399 6.33994C17.1399 6.13994 17.4499 6.13994 17.6499 6.33994C17.8499 6.53994 17.8499 6.84994 17.6499 7.04994L7.03994 17.6499C6.84994 17.8499 6.52994 17.8499 6.33994 17.6499Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M6.33994 6.33994C6.53994 6.13994 6.84994 6.13994 7.04994 6.33994L17.6599 16.9499C17.8599 17.1499 17.8599 17.4599 17.6599 17.6599C17.4599 17.8599 17.1499 17.8599 16.9499 17.6599L6.33994 7.03994C6.13994 6.84994 6.13994 6.52994 6.33994 6.33994Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+XMarkSmallIcon.displayName = 'XMarkSmallIcon';

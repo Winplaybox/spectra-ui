@@ -1,0 +1,26 @@
+import React from 'react';
+import { IconProps } from '../types';
+
+export const CameraWebcam2Icon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M12 20C16.9706 20 21 15.9706 21 11C21 6.02944 16.9706 2 12 2C7.02944 2 3 6.02944 3 11C3 15.9706 7.02944 20 12 20Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+<path d="M6 20H18L19 22H5L6 20Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinejoin="round"/>
+<path d="M12 14C13.6569 14 15 12.6569 15 11C15 9.34315 13.6569 8 12 8C10.3431 8 9 9.34315 9 11C9 12.6569 10.3431 14 12 14Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+  </svg>
+);
+
+CameraWebcam2Icon.displayName = 'CameraWebcam2Icon';

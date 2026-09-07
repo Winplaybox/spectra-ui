@@ -1,0 +1,28 @@
+import React from 'react';
+import { IconProps } from '../types';
+
+export const MediaGoBackward90Icon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M3 13C3 18 7 22 12 22C17 22 21 18 21 13C21 8 17 4 12 4H11" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M11 4L13 2.75V5.25L11 4Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+<path d="M15.1 16H14.9C13.8 16 13 15.1 13 14.1V10.9C13 9.80003 13.9 9.00003 14.9 9.00003H15.1C16.2 9.00003 17 9.90003 17 10.9V14.1C17 15.1 16.1 16 15.1 16Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M10.5024 10.9997C10.5025 12.1146 10.5025 12.8124 10.5024 13.8545C10.5025 14.9052 9.70701 16.0221 8.58316 15.9997C8.02508 15.9886 7.67407 15.7739 7.27003 15.4352" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M8.60244 12.9998C9.60244 12.9998 10.5024 12.2417 10.5024 10.9998C10.5023 9.99978 9.6795 8.99979 8.6022 8.99979C7.52489 8.99979 6.64723 9.92389 6.70244 10.9998C6.70244 12.2417 7.60244 12.9998 8.60244 12.9998Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+MediaGoBackward90Icon.displayName = 'MediaGoBackward90Icon';

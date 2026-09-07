@@ -1,0 +1,30 @@
+import React from 'react';
+import { IconProps } from '../types';
+
+export const MediaStopCircleDashedIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M21.8 10C21.36 7.84002 20.22 5.93002 18.63 4.52002" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M5.37001 4.52002C3.78001 5.93002 2.64001 7.84002 2.20001 10" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M8.83002 21.48C9.83002 21.82 10.89 22 12 22C13.11 22 14.17 21.82 15.17 21.48" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M21.8 14C21.36 16.16 20.22 18.07 18.63 19.48" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M5.37001 19.48C3.78001 18.07 2.64001 16.16 2.20001 14" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M8.83002 2.52C9.83002 2.18 10.89 2 12 2C13.11 2 14.17 2.18 15.17 2.52" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M15.5 16H8.5C8.22 16 8 15.78 8 15.5V8.5C8 8.22 8.22 8 8.5 8H15.5C15.78 8 16 8.22 16 8.5V15.5C16 15.78 15.78 16 15.5 16Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+MediaStopCircleDashedIcon.displayName = 'MediaStopCircleDashedIcon';

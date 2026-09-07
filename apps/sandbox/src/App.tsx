@@ -41,7 +41,9 @@ import {
   Text,
   Container,
 } from '@spectra/react';
+import * as AllIcons from '@spectra/icons';
 import {
+  iconManifest,
   SunIcon,
   MoonIcon,
   SearchIcon,
@@ -59,7 +61,10 @@ export const App: React.FC = () => {
   const { isRTL, toggleRTL } = useRTL();
   const { toast } = useToast();
 
-  const [activeTab, setActiveTab] = useState<'playground' | 'tokens' | 'architecture'>('playground');
+  const [activeTab, setActiveTab] = useState<'playground' | 'icons' | 'tokens' | 'architecture'>('playground');
+  const [iconSearch, setIconSearch] = useState('');
+  const [iconCategory, setIconCategory] = useState('All');
+  const [iconLimit, setIconLimit] = useState(72);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [switchChecked, setSwitchChecked] = useState(true);
@@ -236,6 +241,20 @@ export const App: React.FC = () => {
             }}
           >
             All 16 Components
+          </button>
+          <button
+            onClick={() => setActiveTab('icons')}
+            style={{
+              padding: '8px 16px',
+              borderRadius: 4,
+              border: 'none',
+              backgroundColor: activeTab === 'icons' ? 'var(--color-surface-raised)' : 'transparent',
+              color: activeTab === 'icons' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
+              fontWeight: 600,
+              cursor: 'pointer',
+            }}
+          >
+            Icon Explorer (1,258 Icons)
           </button>
           <button
             onClick={() => setActiveTab('tokens')}
@@ -603,6 +622,155 @@ export const App: React.FC = () => {
               </CardContent>
             </Card>
           </div>
+        )}
+
+        {/* Tab: Icon Explorer */}
+        {activeTab === 'icons' && (
+          <Card variant="bordered" padding="lg">
+            <CardHeader>
+              <CardTitle>DesignCode UI Vector Icon Explorer ({iconManifest.length} Icons)</CardTitle>
+              <CardDescription>
+                Searchable, flat 2D vector icons adapting dynamically to currentColor and theme modes
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {/* Search and Category Filters */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 20 }}>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                  <input
+                    type="text"
+                    placeholder="Search icons (e.g. arrow, chat, card, battery, archive)..."
+                    value={iconSearch}
+                    onChange={(e) => {
+                      setIconSearch(e.target.value);
+                      setIconLimit(72);
+                    }}
+                    style={{
+                      flex: '1 1 300px',
+                      padding: '10px 14px',
+                      borderRadius: 6,
+                      border: '1px solid var(--color-border-default)',
+                      backgroundColor: 'var(--color-surface)',
+                      color: 'var(--color-text-primary)',
+                      fontSize: 14,
+                    }}
+                  />
+                </div>
+
+                {/* Category Pills */}
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  {['All', 'Action', 'Arrow', 'Communication', 'Device', 'Document', 'Finance', 'Interface', 'Media', 'Security', 'System', 'Weather'].map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => {
+                        setIconCategory(cat);
+                        setIconLimit(72);
+                      }}
+                      style={{
+                        padding: '5px 12px',
+                        borderRadius: 16,
+                        border: '1px solid var(--color-border-default)',
+                        backgroundColor: iconCategory === cat ? 'var(--color-action-primary)' : 'transparent',
+                        color: iconCategory === cat ? 'var(--color-text-inverse)' : 'var(--color-text-secondary)',
+                        fontSize: 12,
+                        fontWeight: iconCategory === cat ? 600 : 400,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Icon Grid */}
+              {(() => {
+                const query = iconSearch.trim().toLowerCase();
+                const filtered = iconManifest.filter((item) => {
+                  if (iconCategory !== 'All' && item.category !== iconCategory) return false;
+                  if (!query) return true;
+                  return (
+                    item.name.toLowerCase().includes(query) ||
+                    item.componentName.toLowerCase().includes(query) ||
+                    item.tags.some((t) => t.includes(query))
+                  );
+                });
+
+                return (
+                  <div>
+                    <div style={{ fontSize: 13, color: 'var(--color-text-muted)', marginBottom: 16 }}>
+                      Showing {Math.min(filtered.length, iconLimit)} of {filtered.length} icons
+                    </div>
+
+                    <div
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))',
+                        gap: 12,
+                      }}
+                    >
+                      {filtered.slice(0, iconLimit).map((item) => {
+                        const IconComponent = (AllIcons as any)[item.componentName];
+                        if (!IconComponent) return null;
+
+                        return (
+                          <div
+                            key={item.id}
+                            onClick={() => {
+                              if (navigator.clipboard) {
+                                navigator.clipboard.writeText(`import { ${item.componentName} } from '@spectra/icons';`);
+                              }
+                              toast(`Copied <${item.componentName} /> import!`, { type: 'success' });
+                            }}
+                            title={`Click to copy import: ${item.componentName}`}
+                            style={{
+                              display: 'flex',
+                              flexDirection: 'column',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              padding: '16px 8px',
+                              borderRadius: 6,
+                              border: '1px solid var(--color-border-default)',
+                              backgroundColor: 'var(--color-surface)',
+                              cursor: 'pointer',
+                              textAlign: 'center',
+                              transition: 'all 120ms ease',
+                            }}
+                          >
+                            <div style={{ marginBottom: 8, color: 'var(--color-text-primary)' }}>
+                              <IconComponent size={24} />
+                            </div>
+                            <div
+                              style={{
+                                fontSize: 10,
+                                fontWeight: 500,
+                                color: 'var(--color-text-muted)',
+                                wordBreak: 'break-word',
+                                lineHeight: 1.2,
+                              }}
+                            >
+                              {item.name}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {iconLimit < filtered.length && (
+                      <div style={{ textAlign: 'center', marginTop: 24 }}>
+                        <Button
+                          variant="secondary"
+                          onClick={() => setIconLimit((prev) => prev + 72)}
+                        >
+                          Load More ({filtered.length - iconLimit} remaining)
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
+            </CardContent>
+          </Card>
         )}
 
         {/* Tab 2: Token Inspector */}

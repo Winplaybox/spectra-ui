@@ -1,0 +1,25 @@
+import React from 'react';
+import { IconProps } from '../types';
+
+export const ImagePaintBrushIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path fillRule="evenodd" clipRule="evenodd" d="M21.42 5.4L11.54 15.29C11.34 14.64 10.99 14.02 10.49 13.51C9.98002 13.01 9.36002 12.66 8.71002 12.46L18.6 2.58C19.38 1.8 20.64 1.8 21.42 2.58C22.19 3.36 22.19 4.63 21.42 5.4Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path fillRule="evenodd" clipRule="evenodd" d="M3.59 15.67L2 22L8.33 20.41C8.63 20.33 8.92 20.23 9.2 20.09L9.29 20.04C11 19.18 12.06 17.26 11.57 15.41C11.39 14.71 11.03 14.05 10.48 13.51C9.93 12.96 9.28 12.6 8.58 12.42C6.73 11.94 4.81 13 3.96 14.71L3.91 14.8C3.77 15.08 3.66 15.37 3.59 15.67Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+ImagePaintBrushIcon.displayName = 'ImagePaintBrushIcon';
