@@ -1,0 +1,34 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const CreditCardNFCDouble8Icon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M7.2 12C6.536 12 6 12.4786 6 13.0714L6 20.9286C6 21.5214 6.536 22 7.2 22L20.8 22C21.464 22 22 21.5214 22 20.9286L22 16.3686L22 13.0714C22 12.4786 21.464 12 20.8 12L7.2 12Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M11 19.5L9.00001 19.5C8.72386 19.5 8.5 19.2762 8.5 19V18C8.5 17.7239 8.72385 17.5 9 17.5L11 17.5C11.2761 17.5 11.5 17.7239 11.5 18V19C11.5 19.2761 11.2761 19.5 11 19.5Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M14 14.5H13.5" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M9 14.5H11" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M16.5627 18.3908C16.8373 18.0034 17 17.5218 17 17C17 16.4782 16.8373 15.9966 16.5627 15.6092" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M14.5 17L14.5 16.5" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M18.625 19.4531C19.1696 18.7993 19.5 17.9406 19.5 17C19.5 16.0594 19.1696 15.2007 18.625 14.5469" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path fillRule="evenodd" clipRule="evenodd" d="M18 6.5H2V3.97222C2 3.43426 2.536 3 3.2 3H16.8C17.464 3 18 3.43426 18 3.97222V6.5Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M7.2 12C6.536 12 6 12.4786 6 13.0714V13.3571H3.2C2.536 13.3571 2 12.8508 2 12.2234V6.5H18V12H7.2Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M18 6.14282H2V6.85711H18V6.14282Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round"/>
+<path d="M4 10V9H16V10H4Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+  </svg>
+);
+
+CreditCardNFCDouble8Icon.displayName = 'CreditCardNFCDouble8Icon';

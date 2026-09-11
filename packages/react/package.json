@@ -1,10 +1,20 @@
 {
   "name": "@spectra/react",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Styled web components for Spectra UI (WinPlayBox Design System)",
   "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "WinPlayBox",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spectra-ui/spectra-ui.git",
+    "directory": "packages/react"
+  },
   "exports": {
     ".": {
       "types": "./src/index.ts",

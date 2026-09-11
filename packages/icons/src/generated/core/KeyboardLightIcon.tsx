@@ -1,0 +1,29 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const KeyboardLightIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M16 18H8" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M22 18C22 18 21.5523 18 21 18C20.4477 18 20 18 20 18C20 18 20.4477 18 21 18C21.5523 18 22 18 22 18Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinejoin="round"/>
+<path d="M4 18C4 18 3.55228 18 3 18C2.44772 18 2 18 2 18C2 18 2.44772 18 3 18C3.55228 18 4 18 4 18Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinejoin="round"/>
+<path d="M12 7C12 7.55228 12 8 12 8C12 8 12 7.55228 12 7ZM12 7C12 6.44772 12 6 12 6C12 6 12 6.44772 12 7Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinejoin="round"/>
+<path d="M4.19086 10.2218C4.58139 10.6123 4.89796 10.9289 4.89796 10.9289C4.89796 10.9289 4.58139 10.6123 4.19086 10.2218ZM4.19086 10.2218C3.80034 9.83129 3.48376 9.51471 3.48376 9.51471C3.48376 9.51471 3.80034 9.83129 4.19086 10.2218Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.49999} strokeMiterlimit="10" strokeLinejoin="round"/>
+<path d="M20.4851 9.48393C20.4851 9.48393 20.1685 9.80051 19.778 10.191C19.3875 10.5816 19.0709 10.8981 19.0709 10.8981C19.0709 10.8981 19.3875 10.5816 19.778 10.191C20.1685 9.80051 20.4851 9.48393 20.4851 9.48393Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.49999} strokeMiterlimit="10" strokeLinejoin="round"/>
+  </svg>
+);
+
+KeyboardLightIcon.displayName = 'KeyboardLightIcon';

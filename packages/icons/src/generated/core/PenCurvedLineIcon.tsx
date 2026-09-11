@@ -1,0 +1,26 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const PenCurvedLineIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M2 21C2.5 19.1 3.97 19.49 4.47 17.59C4.97 15.69 3.5 15.3 4 13.41C4.5 11.51 5.97 11.89 6.47 10C6.97 8.09 5.5 7.71 6 5.8C6.44 4.14 7.62 4.23 8.24 3" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M21.71 7.35L20.65 6.29C20.26 5.9 19.63 5.9 19.24 6.29L8.24 17.29L7 21L10.71 19.76L21.71 8.76C22.1 8.37 22.1 7.74 21.71 7.35Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M19.94 10.53L17.47 8.06001L19.23 6.30001C19.62 5.91001 20.25 5.91001 20.64 6.30001L21.7 7.36001C22.09 7.75001 22.09 8.38001 21.7 8.77001L19.94 10.53Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+PenCurvedLineIcon.displayName = 'PenCurvedLineIcon';

@@ -13,6 +13,10 @@
         "value": "{color.primitive.gray.950}",
         "description": "Overlay background (modals, dropdowns)"
       },
+      "surface-sunken": {
+        "value": "{color.primitive.gray.100}",
+        "description": "Sunken recessed surface (code blocks, wells)"
+      },
       "border": {
         "default": {
           "value": "{color.primitive.gray.200}",

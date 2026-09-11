@@ -1,10 +1,21 @@
 {
   "name": "@spectra/tokens",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Design tokens for Spectra UI (WinPlayBox Design System)",
   "type": "module",
   "main": "./dist/ts/index.js",
   "types": "./dist/ts/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spectra-ui/spectra-ui.git",
+    "directory": "packages/tokens"
+  },
   "exports": {
     ".": {
       "types": "./dist/ts/index.d.ts",

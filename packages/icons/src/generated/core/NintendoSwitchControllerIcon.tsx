@@ -1,0 +1,27 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const NintendoSwitchControllerIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M2 6C2 3.79086 3.79086 2 6 2H10V22H6C3.79086 22 2 20.2091 2 18V6Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+<path d="M14 2H18C20.2091 2 22 3.79086 22 6V18C22 20.2091 20.2091 22 18 22H14V2Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+<path d="M5.99998 10.4C6.77317 10.4 7.39998 9.77317 7.39998 8.99998C7.39998 8.22678 6.77317 7.59998 5.99998 7.59998C5.22678 7.59998 4.59998 8.22678 4.59998 8.99998C4.59998 9.77317 5.22678 10.4 5.99998 10.4Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+<path d="M18 17.4C18.7732 17.4 19.4 16.7732 19.4 16C19.4 15.2268 18.7732 14.6 18 14.6C17.2268 14.6 16.6 15.2268 16.6 16C16.6 16.7732 17.2268 17.4 18 17.4Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+  </svg>
+);
+
+NintendoSwitchControllerIcon.displayName = 'NintendoSwitchControllerIcon';

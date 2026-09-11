@@ -21,5 +21,14 @@ export * from './components/overlay/Tooltip';
 export * from './components/data-display/Avatar';
 export * from './components/feedback/Badge';
 export * from './components/data-display/List';
+export * from './components/data-display/Accordion';
+
+// Tier 3 Components
+export * from './components/feedback/Alert';
+export * from './components/feedback/Spinner';
+export * from './components/feedback/Skeleton';
+export * from './components/layout/Divider';
+export * from './components/data-display/Chip';
+export * from './components/navigation/Breadcrumbs';
 
 export * from '@spectra/primitives';

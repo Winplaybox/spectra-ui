@@ -1,0 +1,29 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const SwipeDoubleFingerUpIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M21 15.36C21.62 16.07 22 16.99 22 18C22 20.21 20.21 22 18 22C15.79 22 14 20.21 14 18C14 16.99 14.38 16.07 15 15.36" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M18 2V18" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M14.5 5.5L18 2L21.5 5.5" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M9 15.36C9.62 16.07 10 16.99 10 18C10 20.21 8.21 22 6 22C3.79 22 2 20.21 2 18C2 16.99 2.38 16.07 3 15.36" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M6 2V18" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M2.5 5.5L6 2L9.5 5.5" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+SwipeDoubleFingerUpIcon.displayName = 'SwipeDoubleFingerUpIcon';

@@ -1,0 +1,32 @@
+{
+  "name": "@spectra/mcp",
+  "version": "0.2.0",
+  "description": "Spectra UI Design System Model Context Protocol (MCP) Server for Cursor, Claude Desktop, and Antigravity IDE",
+  "main": "./src/index.js",
+  "bin": {
+    "spectra-mcp": "./src/index.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spectra-ui/spectra-ui.git",
+    "directory": "packages/mcp"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node scripts/test-mcp.js"
+  },
+  "keywords": [
+    "spectra-ui",
+    "mcp",
+    "model-context-protocol",
+    "design-system",
+    "cursor",
+    "claude-desktop"
+  ],
+  "author": "WinPlayBox",
+  "license": "MIT"
+}

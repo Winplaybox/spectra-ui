@@ -1,21 +1,26 @@
 {
   "name": "spectra-ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Spectra UI - WinPlayBox Design System",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "pnpm run build:tokens && turbo build",
     "build:tokens": "pnpm --filter @spectra/tokens run build",
+    "build:packages": "pnpm run build:tokens",
+    "release:check": "node scripts/release-check.mjs",
     "check:tokens": "pnpm --filter @spectra/tokens run test:contract",
     "check:lint": "node packages/config/src/check-no-hardcoded-values.mjs",
     "lint": "pnpm run check:lint",
     "type-check": "turbo type-check",
     "test": "turbo test",
     "test:a11y": "pnpm --filter @spectra/react run test:a11y",
+    "dev": "pnpm --filter sandbox dev",
+    "dashboard": "pnpm --filter sandbox dev",
     "sandbox": "pnpm --filter sandbox dev",
     "storybook": "pnpm --filter storybook storybook",
-    "generate:component": "bash scripts/generate-component.sh"
+    "generate:component": "bash scripts/generate-component.sh",
+    "index:algolia": "node scripts/index-to-algolia.mjs"
   },
   "keywords": [
     "design-system",

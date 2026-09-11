@@ -1,0 +1,26 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const MinusDoubleUpIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M5 6H6V15C6 16.66 7.34 18 9 18H18V19C18 20.66 16.66 22 15 22H5C3.34 22 2 20.66 2 19V9C2 7.34 3.34 6 5 6Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M22 5V15C22 16.66 20.66 18 19 18H9C7.34 18 6 16.66 6 15V5C6 3.34 7.34 2 9 2H19C20.66 2 22 3.34 22 5Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M9 10H19" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinejoin="round"/>
+  </svg>
+);
+
+MinusDoubleUpIcon.displayName = 'MinusDoubleUpIcon';

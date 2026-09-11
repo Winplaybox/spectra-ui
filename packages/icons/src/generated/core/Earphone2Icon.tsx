@@ -1,0 +1,33 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const Earphone2Icon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M7 16.5V21" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M17 16.5V21" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path fillRule="evenodd" clipRule="evenodd" d="M17.5 10H16.5V17H17.5V10Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+<path fillRule="evenodd" clipRule="evenodd" d="M6.5 10H7.5V17H6.5V10Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+<path fillRule="evenodd" clipRule="evenodd" d="M16.9078 10C15.0257 10 13.5 8.433 13.5 6.5C13.5 4.567 15.0257 3 16.9078 3C18.7899 3 21.5 3.89061 21.5 6.5C21.5 9.10939 18.7899 10 16.9078 10Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+<path fillRule="evenodd" clipRule="evenodd" d="M7.09221 10C8.97428 10 10.5 8.433 10.5 6.5C10.5 4.567 8.97428 3 7.09221 3C5.21014 3 2.5 3.89061 2.5 6.5C2.5 9.10939 5.21014 10 7.09221 10Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+<path d="M17 6.5H16" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M22 5.5V7.5" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M7 6.5H8" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M2 5.5V7.5" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+  </svg>
+);
+
+Earphone2Icon.displayName = 'Earphone2Icon';

@@ -1,0 +1,25 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const ToggleDownInnerIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M18 8L18 16C18 19.31 15.31 22 12 22C8.69 22 6 19.31 6 16L6 8C6 4.69 8.69 2 12 2C15.31 2 18 4.69 18 8Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M14.5 16C14.5 14.6193 13.3807 13.5 12 13.5C10.6193 13.5 9.5 14.6193 9.5 16C9.5 17.3807 10.6193 18.5 12 18.5C13.3807 18.5 14.5 17.3807 14.5 16Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+ToggleDownInnerIcon.displayName = 'ToggleDownInnerIcon';

@@ -1,0 +1,30 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const CreditCardCheckIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M3.5 5C2.67 5 2 5.67 2 6.5V17.5C2 18.33 2.67 19 3.5 19H20.5C21.33 19 22 18.33 22 17.5V6.5C22 5.67 21.33 5 20.5 5H3.5Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M18.5 15H17.5C17.2239 15 17 15.2239 17 15.5C17 15.7761 17.2239 16 17.5 16H18.5C18.7761 16 19 15.7761 19 15.5C19 15.2239 18.7761 15 18.5 15Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M12.5 15H11.5C11.2239 15 11 15.2239 11 15.5C11 15.7761 11.2239 16 11.5 16H12.5C12.7761 16 13 15.7761 13 15.5C13 15.2239 12.7761 15 12.5 15Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M6.5 15H5.5C5.22386 15 5 15.2239 5 15.5C5 15.7761 5.22386 16 5.5 16H6.5C6.77614 16 7 15.7761 7 15.5C7 15.2239 6.77614 15 6.5 15Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M5 8H10" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M5 11H10" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M15.5 9L16.8 10.5L19 8" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+CreditCardCheckIcon.displayName = 'CreditCardCheckIcon';

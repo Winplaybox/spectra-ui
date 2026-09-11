@@ -1,0 +1,31 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const NetworkRadioWavesConnectIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M8.99963 6.82117C8.37194 7.70665 8 8.80731 8 10C8 11.1927 8.37194 12.2934 8.99963 13.1789" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M15.0004 13.1788C15.6281 12.2934 16 11.1927 16 9.99997C16 8.80726 15.6281 7.7066 15.0004 6.82111" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M7 4.39288C5.75527 5.88723 5 7.85016 5 10C5 12.1499 5.75527 14.1128 7 15.6072" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M17 15.6071C18.2447 14.1128 19 12.1498 19 9.99998C19 7.85012 18.2447 5.88719 17 4.39284" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M5 2C3.14015 4.08747 2 6.90265 2 10C2 13.0973 3.14015 15.9125 5 18" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M19 18C20.8598 15.9125 22 13.0974 22 10C22 6.90265 20.8598 4.08748 19 2" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M12 11L12 22" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<circle cx="12" cy="10" r="1" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+  </svg>
+);
+
+NetworkRadioWavesConnectIcon.displayName = 'NetworkRadioWavesConnectIcon';

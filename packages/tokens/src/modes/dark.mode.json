@@ -4,6 +4,7 @@
       "surface": { "value": "#1A1A1A" },
       "surface-raised": { "value": "#242424" },
       "surface-overlay": { "value": "rgba(26, 26, 26, 0.95)" },
+      "surface-sunken": { "value": "#0F172A" },
       "border": {
         "default": { "value": "#333333" },
         "subtle": { "value": "#262626" },

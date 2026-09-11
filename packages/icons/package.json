@@ -1,19 +1,80 @@
 {
   "name": "@spectra/icons",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Accessible icon set for Spectra UI",
   "type": "module",
+  "sideEffects": false,
   "main": "./src/index.tsx",
   "types": "./src/index.tsx",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "WinPlayBox",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spectra-ui/spectra-ui.git",
+    "directory": "packages/icons"
+  },
   "exports": {
     ".": {
       "types": "./src/index.tsx",
       "import": "./src/index.tsx",
       "default": "./src/index.tsx"
+    },
+    "./core": {
+      "types": "./src/generated/core/index.ts",
+      "import": "./src/generated/core/index.ts",
+      "default": "./src/generated/core/index.ts"
+    },
+    "./social": {
+      "types": "./src/generated/social/index.tsx",
+      "import": "./src/generated/social/index.tsx",
+      "default": "./src/generated/social/index.tsx"
+    },
+    "./filled": {
+      "types": "./src/generated/filled/index.ts",
+      "import": "./src/generated/filled/index.ts",
+      "default": "./src/generated/filled/index.ts"
+    },
+    "./outlined": {
+      "types": "./src/generated/outlined/index.ts",
+      "import": "./src/generated/outlined/index.ts",
+      "default": "./src/generated/outlined/index.ts"
+    },
+    "./rounded": {
+      "types": "./src/generated/rounded/index.ts",
+      "import": "./src/generated/rounded/index.ts",
+      "default": "./src/generated/rounded/index.ts"
+    },
+    "./sharp": {
+      "types": "./src/generated/sharp/index.ts",
+      "import": "./src/generated/sharp/index.ts",
+      "default": "./src/generated/sharp/index.ts"
+    },
+    "./twotone": {
+      "types": "./src/generated/twotone/index.ts",
+      "import": "./src/generated/twotone/index.ts",
+      "default": "./src/generated/twotone/index.ts"
+    },
+    "./manifest": {
+      "types": "./src/manifest.json",
+      "import": "./src/manifest.json",
+      "default": "./src/manifest.json"
+    },
+    "./dynamic": {
+      "types": "./src/DynamicIcon.tsx",
+      "import": "./src/DynamicIcon.tsx",
+      "default": "./src/DynamicIcon.tsx"
+    },
+    "./all": {
+      "types": "./src/all.ts",
+      "import": "./src/all.ts",
+      "default": "./src/all.ts"
     }
   },
   "scripts": {
-    "build": "node scripts/build-icons.mjs",
+    "build": "node scripts/build-all-icons.mjs",
     "type-check": "tsc --noEmit",
     "test": "vitest run"
   },
@@ -21,6 +82,7 @@
     "react": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
+    "@material-icons/svg": "^1.0.33",
     "@types/react": "^18.2.0",
     "typescript": "^5.0.0",
     "vitest": "^0.34.0"

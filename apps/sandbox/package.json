@@ -9,12 +9,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@codesandbox/sdk": "^2.4.2",
     "@spectra/icons": "workspace:*",
     "@spectra/primitives": "workspace:*",
     "@spectra/react": "workspace:*",
     "@spectra/tokens": "workspace:*",
+    "@types/lz-string": "^1.5.0",
+    "lz-string": "^1.5.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sucrase": "^3.35.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

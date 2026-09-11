@@ -1,0 +1,29 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const ImageSunBrightnessMaximumIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M18.5 10.5C18.7761 10.5 19 10.2761 19 10C19 9.72386 18.7761 9.5 18.5 9.5C18.2239 9.5 18 9.72386 18 10C18 10.2761 18.2239 10.5 18.5 10.5Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10"/>
+<path d="M12 8C12.2761 8 12.5 7.77614 12.5 7.5C12.5 7.22386 12.2761 7 12 7C11.7239 7 11.5 7.22386 11.5 7.5C11.5 7.77614 11.7239 8 12 8Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10"/>
+<path d="M5.5 10.5C5.77614 10.5 6 10.2761 6 10C6 9.72386 5.77614 9.5 5.5 9.5C5.22386 9.5 5 9.72386 5 10C5 10.2761 5.22386 10.5 5.5 10.5Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10"/>
+<path d="M2.5 17C2.77614 17 3 16.7761 3 16.5C3 16.2239 2.77614 16 2.5 16C2.22386 16 2 16.2239 2 16.5C2 16.7761 2.22386 17 2.5 17Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10"/>
+<path d="M21.5 17C21.7761 17 22 16.7761 22 16.5C22 16.2239 21.7761 16 21.5 16C21.2239 16 21 16.2239 21 16.5C21 16.7761 21.2239 17 21.5 17Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10"/>
+<path d="M12 11.99C9.24 11.99 7 14.23 7 16.99H17C17 14.23 14.77 11.99 12 11.99Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+ImageSunBrightnessMaximumIcon.displayName = 'ImageSunBrightnessMaximumIcon';

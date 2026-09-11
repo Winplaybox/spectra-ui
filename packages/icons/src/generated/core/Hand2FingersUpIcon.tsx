@@ -1,0 +1,24 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const Hand2FingersUpIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M17.7178 12V11.52C17.7178 10.68 17.0373 10 16.1967 10C15.4962 10 14.8958 10.47 14.7257 11.15L14.5156 12L16.1467 3.91C16.3468 2.92 15.5863 2 14.5856 2C13.8251 2 13.1646 2.54 13.0145 3.28L11.2733 12L8.65149 4.58C8.42133 3.93 7.8109 3.5 7.12042 3.5C6.04968 3.5 5.27914 4.51 5.55934 5.54L8.00103 14.5L5.76948 12.53C5.11903 11.92 4.13835 11.79 3.4879 12.4C2.83745 13.01 2.83745 14.06 3.4879 14.67L10.1725 20.85C11.1532 21.54 12.3741 22 13.755 22H15.136C18.3983 22 21.0001 19.56 21.0001 16.5C21.0001 16.5 21.0001 13.34 21.0001 12.5C21.0001 11.66 20.2195 11.03 19.3489 11C18.5984 10.97 17.9579 11.34 17.7078 12" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+Hand2FingersUpIcon.displayName = 'Hand2FingersUpIcon';

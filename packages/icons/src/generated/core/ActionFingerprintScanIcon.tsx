@@ -1,0 +1,36 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const ActionFingerprintScanIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M2 6.97C2.93 5.66 4.13 4.56 5.51 3.73C6 3.42 6.52 3.16 7.06 2.94C7.42 2.78 7.79 2.65 8.17 2.54C8.55 2.42 8.93 2.32 9.32 2.24C9.52 2.2 9.71 2.16 9.91 2.14C10.1 2.11 10.29 2.08 10.48 2.06C10.5 2.06 10.52 2.06 10.54 2.06C10.73 2.04 10.92 2.02 11.12 2.02C11.32 2.01 11.52 2 11.72 2H11.74C12.04 2 12.35 2.01 12.65 2.04C12.95 2.06 13.24 2.09 13.53 2.13C13.58 2.14 13.63 2.15 13.68 2.16C13.99 2.21 14.3 2.27 14.61 2.35C14.68 2.36 14.74 2.38 14.81 2.4" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M18.47 4.06982C18.78 4.27982 19.08 4.50982 19.38 4.73982C19.39 4.73982 19.4 4.74982 19.41 4.76982C20.16 5.39982 20.83 6.11982 21.42 6.92982C21.63 7.20982 21.82 7.50982 22 7.80982" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M10.94 5.04C11.19 5.01 11.45 5 11.71 5C12.18 5 12.64 5.04 13.11 5.11C15.48 5.48 17.57 6.76 18.99 8.7C20.14 10.28 20.73 12.14 20.72 14.06" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M19.95 18.0601C19.57 19.2201 18.99 20.6001 18.12 22.0001" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M2.85001 12.43C3.32001 9.76 4.91001 7.54 7.12001 6.25" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M16.78 18C16.3 19.23 15.57 20.64 14.45 22" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M17.67 13.28C17.74 13.82 17.73 14.38 17.64 14.93C17.64 14.95 17.63 14.98 17.63 15" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M15.83 9.64C14.96 8.81 13.86 8.26 12.64 8.07C12.34 8.02 12.02 8 11.71 8C9.01001 8 6.71001 9.76 5.97001 12.28C5.89001 12.53 5.83001 12.79 5.79001 13.06C5.79001 13.08 5.57001 14.29 4.64001 14.85" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M13.51 18C12.82 19.34 11.76 20.81 10.11 22" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M8.29001 14.9999C8.62001 14.2699 8.73001 13.6599 8.75001 13.5399C9.01001 11.8999 10.54 10.7799 12.18 11.0399C13.81 11.2899 14.93 12.8299 14.68 14.4699C14.66 14.6099 14.62 14.7899 14.58 14.9999" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M9.94999 18C9.39999 18.72 8.66999 19.43 7.70999 20" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M11.71 14C11.69 14.14 11.63 14.5 11.48 15" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M22 15H17.63H14.58H11.48H8.29H2" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+ActionFingerprintScanIcon.displayName = 'ActionFingerprintScanIcon';

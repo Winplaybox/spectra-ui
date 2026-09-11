@@ -1,0 +1,24 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const MouseCursorIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path fillRule="evenodd" clipRule="evenodd" d="M17.0601 12.23L5.46006 3.03003L5.06006 17.83L8.84006 14.85L11.4501 20.46C11.6801 20.96 12.2801 21.18 12.7801 20.94L14.4701 20.15C14.9701 19.92 15.1901 19.32 14.9501 18.82L12.3401 13.21L17.0601 12.23Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round"/>
+  </svg>
+);
+
+MouseCursorIcon.displayName = 'MouseCursorIcon';

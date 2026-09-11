@@ -1,0 +1,25 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const MediaStepForwardIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path fillRule="evenodd" clipRule="evenodd" d="M14 12L6 6V18L14 12Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M16 18C14.9 18 14 17.1 14 16V8C14 6.9 14.9 6 16 6C17.1 6 18 6.9 18 8V16C18 17.1 17.1 18 16 18Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+MediaStepForwardIcon.displayName = 'MediaStepForwardIcon';

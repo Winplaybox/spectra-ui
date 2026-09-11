@@ -1,0 +1,31 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const CreditCardLinesMiddleIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path fillRule="evenodd" clipRule="evenodd" d="M22 9H2V6.5C2 5.67 2.67 5 3.5 5H20.5C21.33 5 22 5.67 22 6.5V9Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path fillRule="evenodd" clipRule="evenodd" d="M20.5 19H3.5C2.67 19 2 18.33 2 17.5V9H22V17.5C22 18.33 21.33 19 20.5 19Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M22 8H2V9H22V8Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round"/>
+<path d="M16.5 16V15C16.5 14.7239 16.7239 14.5 17 14.5H19C19.2761 14.5 19.5 14.7239 19.5 15V16C19.5 16.2761 19.2761 16.5 19 16.5H17C16.7239 16.5 16.5 16.2761 16.5 16Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+<path d="M5 12.3V11.7C5 11.5895 5.08954 11.5 5.2 11.5H6.3C6.41046 11.5 6.5 11.5895 6.5 11.7V12.3C6.5 12.4105 6.41046 12.5 6.3 12.5H5.2C5.08954 12.5 5 12.4105 5 12.3Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+<path d="M9 12.3V11.7C9 11.5895 9.08954 11.5 9.2 11.5H10.3C10.4105 11.5 10.5 11.5895 10.5 11.7V12.3C10.5 12.4105 10.4105 12.5 10.3 12.5H9.2C9.08954 12.5 9 12.4105 9 12.3Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+<path d="M13 12.3V11.7C13 11.5895 13.0895 11.5 13.2 11.5H14.3C14.4105 11.5 14.5 11.5895 14.5 11.7V12.3C14.5 12.4105 14.4105 12.5 14.3 12.5H13.2C13.0895 12.5 13 12.4105 13 12.3Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5}/>
+<path d="M5 15.5H10" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round"/>
+  </svg>
+);
+
+CreditCardLinesMiddleIcon.displayName = 'CreditCardLinesMiddleIcon';

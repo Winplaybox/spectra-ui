@@ -1,0 +1,26 @@
+import React from 'react';
+import { IconProps } from '../../types';
+
+export const MailInboxNotificationIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={className}
+    {...props}
+  >
+    <path d="M14.5 4C14 4.9 13.8 6 14.1 7.1C14.5 8.4 15.5 9.4 16.8 9.8C18 10.2 19.1 10 20 9.5V14H14.5C14.5 15.9 12.9 17.5 11 17.5C9.1 17.5 7.5 15.9 7.5 14H2V6.7C2 5.2 3.2 4 4.7 4H14.5Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M7.5 14H2V19.3C2 20.8 3.2 22 4.7 22H17.3C18.8 22 20 20.8 20 19.3V14H14.5C14.5 15.9 12.9 17.5 11 17.5C9.1 17.5 7.5 15.9 7.5 14Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M18 10C20.2091 10 22 8.20914 22 6C22 3.79086 20.2091 2 18 2C15.7909 2 14 3.79086 14 6C14 8.20914 15.7909 10 18 10Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+MailInboxNotificationIcon.displayName = 'MailInboxNotificationIcon';

@@ -1,10 +1,20 @@
 {
   "name": "@spectra/primitives",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Headless hooks and state primitives for Spectra UI",
   "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "WinPlayBox",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/spectra-ui/spectra-ui.git",
+    "directory": "packages/primitives"
+  },
   "exports": {
     ".": {
       "types": "./src/index.ts",
