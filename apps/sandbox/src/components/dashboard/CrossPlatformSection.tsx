@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Badge, Button } from '@spectra/react';
+import { Badge, Button, Tabs, TabList, Tab } from '@spectra/react';
 import { CheckIcon, PaletteIcon, SparklesIcon, SmartphoneIcon } from '@spectra/icons';
 
 export const CrossPlatformSection: React.FC = () => {
@@ -145,38 +145,16 @@ export const LoginScreen = () => {
           <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0 }}>
             Unified Component Code Comparison
           </h2>
-          <div style={{ display: 'flex', gap: 6, backgroundColor: 'var(--color-surface-raised)', padding: 3, borderRadius: 6 }}>
-            <button
-              onClick={() => setPlatformTab('web')}
-              style={{
-                padding: '6px 14px',
-                borderRadius: 4,
-                border: 'none',
-                backgroundColor: platformTab === 'web' ? 'var(--color-surface)' : 'transparent',
-                color: platformTab === 'web' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
-                fontWeight: 600,
-                fontSize: 13,
-                cursor: 'pointer',
-              }}
-            >
-              Web (React)
-            </button>
-            <button
-              onClick={() => setPlatformTab('native')}
-              style={{
-                padding: '6px 14px',
-                borderRadius: 4,
-                border: 'none',
-                backgroundColor: platformTab === 'native' ? 'var(--color-surface)' : 'transparent',
-                color: platformTab === 'native' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
-                fontWeight: 600,
-                fontSize: 13,
-                cursor: 'pointer',
-              }}
-            >
-              Mobile Native (React Native)
-            </button>
-          </div>
+          <Tabs variant="pills" size="sm" value={platformTab} onChange={(val) => setPlatformTab(val as 'web' | 'native')}>
+            <TabList style={{ gap: 4 }}>
+              <Tab value="web" style={{ fontSize: 13, fontWeight: 600 }}>
+                Web (React)
+              </Tab>
+              <Tab value="native" style={{ fontSize: 13, fontWeight: 600 }}>
+                Mobile Native (React Native)
+              </Tab>
+            </TabList>
+          </Tabs>
         </div>
 
         <div

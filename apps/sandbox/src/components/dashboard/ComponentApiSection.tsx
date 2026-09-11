@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card } from '@spectra/react';
+import { Card, Tabs, TabList, Tab } from '@spectra/react';
 import { CopyIcon, CheckIcon, CodeIcon, PaletteIcon, CubeIcon, SmartphoneIcon } from '@spectra/icons';
 import { COMPONENT_API_DATA, ComponentApiReference } from '../../data/apiReferenceData';
 
@@ -166,142 +166,79 @@ export const ComponentApiSection: React.FC<ComponentApiSectionProps> = ({ compon
         {/* Tab Buttons Toolbar */}
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8,
             padding: '10px 16px',
             backgroundColor: 'var(--color-surface-raised)',
             borderBottom: '1px solid var(--color-border-default)',
             overflowX: 'auto',
           }}
         >
-          <button
-            onClick={() => setActiveTab('props')}
-            style={{
-              padding: '6px 14px',
-              borderRadius: 6,
-              border: activeTab === 'props' ? '1px solid var(--color-border-subtle)' : '1px solid transparent',
-              backgroundColor: activeTab === 'props' ? 'var(--color-surface)' : 'transparent',
-              color: activeTab === 'props' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-              fontWeight: activeTab === 'props' ? 700 : 500,
-              fontSize: 13,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 6,
-              transition: 'all 0.15s ease',
-            }}
-          >
-            <CodeIcon size={14} />
-            <span>Props</span>
-            <span
-              style={{
-                fontSize: 11,
-                padding: '1px 6px',
-                borderRadius: 10,
-                backgroundColor: activeTab === 'props' ? 'rgba(56, 189, 248, 0.15)' : 'var(--color-surface-sunken)',
-                color: activeTab === 'props' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
-              }}
-            >
-              {apiData.props.length}
-            </span>
-          </button>
+          <Tabs variant="pills" size="sm" value={activeTab} onChange={(val) => setActiveTab(val as 'props' | 'css' | 'tokens' | 'native')}>
+            <TabList style={{ gap: 6 }}>
+              <Tab value="props" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                <CodeIcon size={14} />
+                <span>Props</span>
+                <span
+                  style={{
+                    fontSize: 11,
+                    padding: '1px 6px',
+                    borderRadius: 10,
+                    backgroundColor: activeTab === 'props' ? 'rgba(56, 189, 248, 0.15)' : 'var(--color-surface-sunken)',
+                    color: activeTab === 'props' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
+                  }}
+                >
+                  {apiData.props.length}
+                </span>
+              </Tab>
 
-          <button
-            onClick={() => setActiveTab('css')}
-            style={{
-              padding: '6px 14px',
-              borderRadius: 6,
-              border: activeTab === 'css' ? '1px solid var(--color-border-subtle)' : '1px solid transparent',
-              backgroundColor: activeTab === 'css' ? 'var(--color-surface)' : 'transparent',
-              color: activeTab === 'css' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-              fontWeight: activeTab === 'css' ? 700 : 500,
-              fontSize: 13,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 6,
-              transition: 'all 0.15s ease',
-            }}
-          >
-            <PaletteIcon size={14} />
-            <span>CSS Classes</span>
-            <span
-              style={{
-                fontSize: 11,
-                padding: '1px 6px',
-                borderRadius: 10,
-                backgroundColor: activeTab === 'css' ? 'rgba(56, 189, 248, 0.15)' : 'var(--color-surface-sunken)',
-                color: activeTab === 'css' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
-              }}
-            >
-              {apiData.cssClasses.length}
-            </span>
-          </button>
+              <Tab value="css" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                <PaletteIcon size={14} />
+                <span>CSS Classes</span>
+                <span
+                  style={{
+                    fontSize: 11,
+                    padding: '1px 6px',
+                    borderRadius: 10,
+                    backgroundColor: activeTab === 'css' ? 'rgba(56, 189, 248, 0.15)' : 'var(--color-surface-sunken)',
+                    color: activeTab === 'css' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
+                  }}
+                >
+                  {apiData.cssClasses.length}
+                </span>
+              </Tab>
 
-          <button
-            onClick={() => setActiveTab('tokens')}
-            style={{
-              padding: '6px 14px',
-              borderRadius: 6,
-              border: activeTab === 'tokens' ? '1px solid var(--color-border-subtle)' : '1px solid transparent',
-              backgroundColor: activeTab === 'tokens' ? 'var(--color-surface)' : 'transparent',
-              color: activeTab === 'tokens' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-              fontWeight: activeTab === 'tokens' ? 700 : 500,
-              fontSize: 13,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 6,
-              transition: 'all 0.15s ease',
-            }}
-          >
-            <CubeIcon size={14} />
-            <span>Design Tokens</span>
-            <span
-              style={{
-                fontSize: 11,
-                padding: '1px 6px',
-                borderRadius: 10,
-                backgroundColor: activeTab === 'tokens' ? 'rgba(56, 189, 248, 0.15)' : 'var(--color-surface-sunken)',
-                color: activeTab === 'tokens' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
-              }}
-            >
-              {apiData.cssVariables.length}
-            </span>
-          </button>
+              <Tab value="tokens" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                <CubeIcon size={14} />
+                <span>Design Tokens</span>
+                <span
+                  style={{
+                    fontSize: 11,
+                    padding: '1px 6px',
+                    borderRadius: 10,
+                    backgroundColor: activeTab === 'tokens' ? 'rgba(56, 189, 248, 0.15)' : 'var(--color-surface-sunken)',
+                    color: activeTab === 'tokens' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
+                  }}
+                >
+                  {apiData.cssVariables.length}
+                </span>
+              </Tab>
 
-          <button
-            onClick={() => setActiveTab('native')}
-            style={{
-              padding: '6px 14px',
-              borderRadius: 6,
-              border: activeTab === 'native' ? '1px solid var(--color-border-subtle)' : '1px solid transparent',
-              backgroundColor: activeTab === 'native' ? 'var(--color-surface)' : 'transparent',
-              color: activeTab === 'native' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-              fontWeight: activeTab === 'native' ? 700 : 500,
-              fontSize: 13,
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 6,
-              transition: 'all 0.15s ease',
-            }}
-          >
-            <SmartphoneIcon size={14} />
-            <span>Mobile Native Props</span>
-            <span
-              style={{
-                fontSize: 11,
-                padding: '1px 6px',
-                borderRadius: 10,
-                backgroundColor: activeTab === 'native' ? 'rgba(56, 189, 248, 0.15)' : 'var(--color-surface-sunken)',
-                color: activeTab === 'native' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
-              }}
-            >
-              {apiData.nativeProps.length}
-            </span>
-          </button>
+              <Tab value="native" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                <SmartphoneIcon size={14} />
+                <span>Mobile Native Props</span>
+                <span
+                  style={{
+                    fontSize: 11,
+                    padding: '1px 6px',
+                    borderRadius: 10,
+                    backgroundColor: activeTab === 'native' ? 'rgba(56, 189, 248, 0.15)' : 'var(--color-surface-sunken)',
+                    color: activeTab === 'native' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
+                  }}
+                >
+                  {apiData.nativeProps.length}
+                </span>
+              </Tab>
+            </TabList>
+          </Tabs>
         </div>
 
         {/* TAB 1: Props Table */}

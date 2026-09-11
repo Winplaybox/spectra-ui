@@ -1483,7 +1483,7 @@ export const Native${meta.name}Demo = () => {
                     letterSpacing: '0.02em',
                   }}
                 >
-                  New in v0.2.0
+                  v0.1.0 (New)
                 </span>
               ) : (
                 <span
@@ -1540,72 +1540,23 @@ export const Native${meta.name}Demo = () => {
           </p>
 
           {/* 2. Platform Selector Tabs (Web vs Mobile Native vs Headless Primitives) */}
-          <div
-            style={{
-              display: 'flex',
-              borderBottom: '1px solid var(--color-border-default)',
-              gap: 24,
-            }}
-          >
-            <button
-              onClick={() => setPlatformMode('web')}
-              style={{
-                padding: '12px 4px',
-                border: 'none',
-                borderBottom: platformMode === 'web' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
-                backgroundColor: 'transparent',
-                color: platformMode === 'web' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-                fontWeight: platformMode === 'web' ? 700 : 500,
-                fontSize: 14,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-              }}
-            >
-              <GlobeIcon size={16} />
-              <span>Web (React DOM)</span>
-            </button>
-
-            <button
-              onClick={() => setPlatformMode('native')}
-              style={{
-                padding: '12px 4px',
-                border: 'none',
-                borderBottom: platformMode === 'native' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
-                backgroundColor: 'transparent',
-                color: platformMode === 'native' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-                fontWeight: platformMode === 'native' ? 700 : 500,
-                fontSize: 14,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-              }}
-            >
-              <SmartphoneIcon size={16} />
-              <span>Mobile Native (iOS & Android)</span>
-            </button>
-
-            <button
-              onClick={() => setPlatformMode('headless')}
-              style={{
-                padding: '12px 4px',
-                border: 'none',
-                borderBottom: platformMode === 'headless' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
-                backgroundColor: 'transparent',
-                color: platformMode === 'headless' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-                fontWeight: platformMode === 'headless' ? 700 : 500,
-                fontSize: 14,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-              }}
-            >
-              <ComponentIcon size={16} />
-              <span>Headless Primitives</span>
-            </button>
+          <div style={{ marginTop: 8 }}>
+            <Tabs variant="underline" value={platformMode} onChange={(val) => setPlatformMode(val as 'web' | 'native' | 'headless')}>
+              <TabList>
+                <Tab value="web" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 14 }}>
+                  <GlobeIcon size={16} />
+                  <span>Web (React DOM)</span>
+                </Tab>
+                <Tab value="native" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 14 }}>
+                  <SmartphoneIcon size={16} />
+                  <span>Mobile Native (iOS & Android)</span>
+                </Tab>
+                <Tab value="headless" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 14 }}>
+                  <ComponentIcon size={16} />
+                  <span>Headless Primitives</span>
+                </Tab>
+              </TabList>
+            </Tabs>
           </div>
         </Card>
 
@@ -1771,50 +1722,17 @@ export const Native${meta.name}Demo = () => {
               </button>
 
               {showCode && (
-                <div
-                  style={{
-                    display: 'inline-flex',
-                    backgroundColor: 'var(--color-surface)',
-                    borderRadius: 6,
-                    padding: 2,
-                    border: '1px solid var(--color-border-subtle)',
-                    marginLeft: 4,
-                  }}
-                >
-                  <button
-                    onClick={() => setPlaygroundLang('js')}
-                    style={{
-                      padding: '2px 9px',
-                      border: 'none',
-                      borderRadius: 4,
-                      backgroundColor: playgroundLang === 'js' ? 'var(--color-action-primary)' : 'transparent',
-                      color: playgroundLang === 'js' ? '#FFFFFF' : 'var(--color-text-secondary)',
-                      fontSize: 11,
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease',
-                    }}
-                    title="View JavaScript code"
-                  >
-                    JS
-                  </button>
-                  <button
-                    onClick={() => setPlaygroundLang('ts')}
-                    style={{
-                      padding: '2px 9px',
-                      border: 'none',
-                      borderRadius: 4,
-                      backgroundColor: playgroundLang === 'ts' ? 'var(--color-action-primary)' : 'transparent',
-                      color: playgroundLang === 'ts' ? '#FFFFFF' : 'var(--color-text-secondary)',
-                      fontSize: 11,
-                      fontWeight: 700,
-                      cursor: 'pointer',
-                      transition: 'all 0.15s ease',
-                    }}
-                    title="View TypeScript code"
-                  >
-                    TS
-                  </button>
+                <div style={{ marginLeft: 6 }}>
+                  <Tabs variant="pills" size="sm" value={playgroundLang} onChange={(val) => setPlaygroundLang(val as 'ts' | 'js')}>
+                    <TabList style={{ padding: '2px 4px' }}>
+                      <Tab value="js" style={{ padding: '2px 8px', fontSize: 11, fontWeight: 700 }}>
+                        JS
+                      </Tab>
+                      <Tab value="ts" style={{ padding: '2px 8px', fontSize: 11, fontWeight: 700 }}>
+                        TS
+                      </Tab>
+                    </TabList>
+                  </Tabs>
                 </div>
               )}
             </div>

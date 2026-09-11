@@ -29,8 +29,8 @@ for (const pkgRel of PACKAGES) {
   console.log(`📦 ${pkgJson.name}@${pkgJson.version}`);
 
   // Validate version format
-  if (!pkgJson.version || !pkgJson.version.startsWith('0.2.0')) {
-    console.warn(`  ⚠️ Version is ${pkgJson.version}, expected 0.2.0`);
+  if (!pkgJson.version || !pkgJson.version.startsWith('0.1.0')) {
+    console.warn(`  ⚠️ Version is ${pkgJson.version}, expected 0.1.0`);
   }
 
   // Validate publishConfig

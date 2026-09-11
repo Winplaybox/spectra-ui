@@ -177,7 +177,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               color: 'var(--color-text-secondary)',
             }}
           >
-            v0.2.0
+            v0.1.0
           </span>
         </div>
 

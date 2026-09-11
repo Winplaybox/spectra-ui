@@ -1,6 +1,6 @@
 {
   "name": "@spectra/react-native",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "Styled React Native components for Spectra UI (WinPlayBox Design System)",
   "type": "module",
   "main": "./src/index.ts",

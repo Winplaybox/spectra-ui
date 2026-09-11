@@ -1,6 +1,6 @@
 {
   "name": "@spectra/primitives",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "Headless hooks and state primitives for Spectra UI",
   "type": "module",
   "main": "./src/index.ts",

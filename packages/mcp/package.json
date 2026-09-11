@@ -1,6 +1,6 @@
 {
   "name": "@spectra/mcp",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "Spectra UI Design System Model Context Protocol (MCP) Server for Cursor, Claude Desktop, and Antigravity IDE",
   "main": "./src/index.js",
   "bin": {

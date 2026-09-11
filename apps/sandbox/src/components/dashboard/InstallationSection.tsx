@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Badge, Card } from '@spectra/react';
+import { Badge, Card, Tabs, TabList, Tab } from '@spectra/react';
 import {
   CheckIcon,
   CopyIcon,
@@ -148,71 +148,23 @@ const styles = StyleSheet.create({
         <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)' }}>
           Choose Your Target Platform:
         </span>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-          <button
-            onClick={() => setPlatformTarget('web')}
-            style={{
-              padding: '8px 16px',
-              borderRadius: 8,
-              border: platformTarget === 'web' ? '2px solid var(--color-action-primary)' : '1px solid var(--color-border-default)',
-              backgroundColor: platformTarget === 'web' ? 'var(--color-surface-raised)' : 'var(--color-surface)',
-              color: platformTarget === 'web' ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-              fontWeight: platformTarget === 'web' ? 700 : 500,
-              fontSize: 13,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              transition: 'all 0.15s ease',
-            }}
-          >
-            <GlobeIcon size={16} />
-            <span>Web (@spectra/react)</span>
-          </button>
-
-          <button
-            onClick={() => setPlatformTarget('native')}
-            style={{
-              padding: '8px 16px',
-              borderRadius: 8,
-              border: platformTarget === 'native' ? '2px solid var(--color-action-primary)' : '1px solid var(--color-border-default)',
-              backgroundColor: platformTarget === 'native' ? 'var(--color-surface-raised)' : 'var(--color-surface)',
-              color: platformTarget === 'native' ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-              fontWeight: platformTarget === 'native' ? 700 : 500,
-              fontSize: 13,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              transition: 'all 0.15s ease',
-            }}
-          >
-            <SmartphoneIcon size={16} />
-            <span>Mobile Native (Expo / iOS / Android)</span>
-          </button>
-
-          <button
-            onClick={() => setPlatformTarget('all')}
-            style={{
-              padding: '8px 16px',
-              borderRadius: 8,
-              border: platformTarget === 'all' ? '2px solid var(--color-action-primary)' : '1px solid var(--color-border-default)',
-              backgroundColor: platformTarget === 'all' ? 'var(--color-surface-raised)' : 'var(--color-surface)',
-              color: platformTarget === 'all' ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-              fontWeight: platformTarget === 'all' ? 700 : 500,
-              fontSize: 13,
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              transition: 'all 0.15s ease',
-            }}
-          >
-            <GlobeIcon size={14} />
-            <SmartphoneIcon size={14} />
-            <span>Universal Monorepo (Web + Native)</span>
-          </button>
-        </div>
+        <Tabs variant="pills" value={platformTarget} onChange={(val) => setPlatformTarget(val as PlatformTarget)}>
+          <TabList style={{ flexWrap: 'wrap', gap: 8 }}>
+            <Tab value="web" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              <GlobeIcon size={16} />
+              <span>Web (@spectra/react)</span>
+            </Tab>
+            <Tab value="native" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              <SmartphoneIcon size={16} />
+              <span>Mobile Native (Expo / iOS / Android)</span>
+            </Tab>
+            <Tab value="all" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              <GlobeIcon size={14} />
+              <SmartphoneIcon size={14} />
+              <span>Universal Monorepo (Web + Native)</span>
+            </Tab>
+          </TabList>
+        </Tabs>
       </div>
 
       {/* Step 1: Package Manager Selector & Install */}
@@ -239,29 +191,25 @@ const styles = StyleSheet.create({
               backgroundColor: '#0B1120',
             }}
           >
-            <div style={{ display: 'flex', gap: 6 }}>
-              {(['pnpm', 'npm', 'yarn', 'expo'] as PackageManager[]).map((mgr) => (
-                <button
-                  key={mgr}
-                  onClick={() => setPkgManager(mgr)}
-                  style={{
-                    padding: '4px 10px',
-                    borderRadius: 4,
-                    border: 'none',
-                    backgroundColor: pkgManager === mgr ? 'rgba(255, 255, 255, 0.15)' : 'transparent',
-                    color: pkgManager === mgr ? '#FFFFFF' : '#94A3B8',
-                    fontSize: 12,
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.04em',
-                    transition: 'all 0.15s ease',
-                  }}
-                >
-                  {mgr}
-                </button>
-              ))}
-            </div>
+            <Tabs variant="pills" size="sm" value={pkgManager} onChange={(val) => setPkgManager(val as PackageManager)}>
+              <TabList style={{ backgroundColor: 'transparent', border: 'none', padding: 0, gap: 4 }}>
+                {(['pnpm', 'npm', 'yarn', 'expo'] as PackageManager[]).map((mgr) => (
+                  <Tab
+                    key={mgr}
+                    value={mgr}
+                    style={{
+                      padding: '4px 10px',
+                      fontSize: 12,
+                      fontWeight: 600,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    {mgr}
+                  </Tab>
+                ))}
+              </TabList>
+            </Tabs>
 
             <button
               onClick={() => copy(installCmd, 1)}

@@ -213,7 +213,7 @@ export const Header: React.FC<HeaderProps> = ({
                           </span>
                         </div>
                         <span style={{ fontSize: 11, color: 'var(--color-text-muted)' }}>
-                          Released {rel.releaseDate}
+                          {rel.releaseDate}
                         </span>
                       </div>
 
@@ -225,7 +225,7 @@ export const Header: React.FC<HeaderProps> = ({
 
               <div style={{ borderTop: '1px solid var(--color-border-subtle)', padding: '6px 6px' }}>
                 <a
-                  href="https://github.com/spectra-ui/spectra-ui/blob/main/CHANGELOG.md"
+                  href="https://github.com/Winplaybox/spectra-ui/blob/main/CHANGELOG.md"
                   target="_blank"
                   rel="noreferrer"
                   style={{
