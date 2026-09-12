@@ -3,6 +3,7 @@ import { useColorScheme } from '@spectra/react';
 import { SearchIcon, ExternalLinkIcon, ChevronDownIcon, ComponentIcon } from '@spectra/icons';
 import { navigate, RouteState } from '../../utils/router';
 import { useVersion } from '../../context/VersionContext';
+import { usePlatform } from '../../context/PlatformContext';
 import { V010_NEW_COMPONENTS } from '../../data/versionReleaseData';
 import { COMPONENT_VARIANTS_MAP } from './ComponentVariantsShowcase';
 import { NativeSponsorAd } from './NativeSponsorAd';
@@ -106,6 +107,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const { colorScheme } = useColorScheme();
   const { currentVersion } = useVersion();
+  const { metadata: platformMeta } = usePlatform();
   const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
 
   // Track open/closed state for category folders (all open by default)
@@ -281,19 +283,39 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </div>
           </a>
 
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 600,
-              padding: '2px 6px',
-              backgroundColor: 'var(--color-surface-raised)',
-              border: '1px solid var(--color-border-subtle)',
-              borderRadius: 4,
-              color: 'var(--color-text-secondary)',
-            }}
-          >
-            {currentVersion}
-          </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span
+              title={`Active Platform Architecture: ${platformMeta.name}`}
+              style={{
+                fontSize: 11,
+                fontWeight: 700,
+                padding: '2px 6px',
+                backgroundColor: 'rgba(99, 102, 241, 0.15)',
+                border: '1px solid rgba(99, 102, 241, 0.3)',
+                borderRadius: 4,
+                color: '#6366F1',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 3,
+              }}
+            >
+              <span>{platformMeta.icon}</span>
+              <span>{platformMeta.shortName}</span>
+            </span>
+            <span
+              style={{
+                fontSize: 11,
+                fontWeight: 600,
+                padding: '2px 6px',
+                backgroundColor: 'var(--color-surface-raised)',
+                border: '1px solid var(--color-border-subtle)',
+                borderRadius: 4,
+                color: 'var(--color-text-secondary)',
+              }}
+            >
+              {currentVersion}
+            </span>
+          </div>
         </div>
 
         {/* Wikipedia / MUI Style Fast Search Bar */}

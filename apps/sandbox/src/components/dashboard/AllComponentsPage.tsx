@@ -36,6 +36,8 @@ import { COMPONENT_CATEGORIES } from './Sidebar';
 import { V010_NEW_COMPONENTS } from '../../data/versionReleaseData';
 import { COMPONENTS_DATA } from '../../data/componentsData';
 import { useVersion } from '../../context/VersionContext';
+import { usePlatform } from '../../context/PlatformContext';
+import { PLATFORMS, Platform } from '../../data/platformData';
 
 // Mini visual preview component for each Spectra UI component
 const MiniComponentPreview: React.FC<{ componentId: string }> = ({ componentId }) => {
@@ -297,9 +299,10 @@ const MiniComponentPreview: React.FC<{ componentId: string }> = ({ componentId }
 
 export const AllComponentsPage: React.FC = () => {
   const { currentVersion } = useVersion();
+  const { currentPlatform, setPlatform } = usePlatform();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [selectedPlatform, setSelectedPlatform] = useState<'all' | 'web' | 'native' | 'headless'>('all');
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform | 'all'>('all');
   const [selectedTag, setSelectedTag] = useState<'all' | 'new' | 'form' | 'feedback'>('all');
   const [sortBy, setSortBy] = useState<'category' | 'name-asc' | 'name-desc' | 'newest'>('category');
 
@@ -639,6 +642,70 @@ export const AllComponentsPage: React.FC = () => {
           })}
         </div>
 
+        {/* Universal Platform Filter Pills (Fluent 2 Benchmark) */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            flexWrap: 'wrap',
+            marginTop: 12,
+          }}
+        >
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.04em',
+              color: 'var(--color-text-muted)',
+              marginRight: 6,
+            }}
+          >
+            Platform:
+          </span>
+
+          {[
+            { id: 'all', label: 'All Platforms (5)', icon: '⚡' },
+            { id: 'web', label: 'Web (React 19)', icon: '🌐' },
+            { id: 'ios', label: 'iOS (Swift/RN)', icon: '🍎' },
+            { id: 'android', label: 'Android (Compose/RN)', icon: '🤖' },
+            { id: 'windows', label: 'Windows (WinUI 3)', icon: '🪟' },
+            { id: 'macos', label: 'macOS (Sequoia)', icon: '🖥️' },
+          ].map((p) => {
+            const isSelected = selectedPlatform === p.id;
+            return (
+              <button
+                key={p.id}
+                onClick={() => {
+                  setSelectedPlatform(p.id as any);
+                  if (p.id !== 'all') {
+                    setPlatform(p.id as any);
+                  }
+                }}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 5,
+                  padding: '4px 10px',
+                  borderRadius: 6,
+                  border: '1px solid',
+                  borderColor: isSelected ? 'var(--color-action-primary)' : 'var(--color-border-default)',
+                  backgroundColor: isSelected ? 'rgba(99, 102, 241, 0.15)' : 'var(--color-surface-raised)',
+                  color: isSelected ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontSize: 12,
+                  fontWeight: isSelected ? 700 : 500,
+                  cursor: 'pointer',
+                  transition: 'all 0.12s ease',
+                }}
+              >
+                <span>{p.icon}</span>
+                <span>{p.label}</span>
+              </button>
+            );
+          })}
+        </div>
+
         {/* Category Jump Pills */}
         <div
           style={{
@@ -919,12 +986,12 @@ export const AllComponentsPage: React.FC = () => {
                         {data ? data.description : `Cross-platform ${comp.name} component with full token styling.`}
                       </p>
 
-                      {/* Platform Tags Footer */}
+                      {/* Universal Platform Parity Badges Footer */}
                       <div
                         style={{
                           display: 'flex',
                           alignItems: 'center',
-                          gap: 6,
+                          justifyContent: 'space-between',
                           marginTop: 6,
                           paddingTop: 8,
                           borderTop: '1px solid var(--color-border-subtle)',
@@ -932,11 +999,26 @@ export const AllComponentsPage: React.FC = () => {
                           color: 'var(--color-text-muted)',
                         }}
                       >
-                        <span>Web</span>
-                        <span>•</span>
-                        <span>Mobile Native</span>
-                        <span>•</span>
-                        <span>Headless</span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                          <span title="Web (React DOM)">🌐</span>
+                          <span title="Apple iOS (Swift / RN)">🍎</span>
+                          <span title="Google Android (Compose / RN)">🤖</span>
+                          <span title="Microsoft Windows (WinUI 3 / RNW)">🪟</span>
+                          <span title="Apple macOS (AppKit / RN)">🖥️</span>
+                        </div>
+                        <span
+                          style={{
+                            fontSize: 10,
+                            fontWeight: 600,
+                            color: '#10B981',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 3,
+                          }}
+                        >
+                          <CheckIcon size={12} />
+                          5 Platforms
+                        </span>
                       </div>
                     </div>
                   </div>

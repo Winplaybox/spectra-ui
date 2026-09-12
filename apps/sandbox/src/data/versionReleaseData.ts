@@ -69,16 +69,20 @@ const COMPONENT_FOLDER_MAP: Record<string, string> = {
 
 export function getComponentGitHubUrl(
   componentId: string,
-  platformOrVersion: 'web' | 'native' | 'headless' | string = 'web',
+  platformOrVersion: 'web' | 'ios' | 'android' | 'windows' | 'macos' | 'headless' | 'native' | string = 'web',
   version: string = CURRENT_VERSION
 ): string {
-  let platform: 'web' | 'native' | 'headless' = 'web';
+  let platform = 'web';
   let targetVersion = version;
 
   if (
     platformOrVersion === 'web' ||
-    platformOrVersion === 'native' ||
-    platformOrVersion === 'headless'
+    platformOrVersion === 'ios' ||
+    platformOrVersion === 'android' ||
+    platformOrVersion === 'windows' ||
+    platformOrVersion === 'macos' ||
+    platformOrVersion === 'headless' ||
+    platformOrVersion === 'native'
   ) {
     platform = platformOrVersion;
   } else if (typeof platformOrVersion === 'string') {
@@ -90,7 +94,15 @@ export function getComponentGitHubUrl(
     return `https://github.com/Winplaybox/spectra-ui/blob/${targetVersion}/packages/primitives/src/index.ts`;
   }
 
-  const pkg = platform === 'native' ? 'react-native' : 'react';
+  let pkg = 'react';
+  if (platform === 'ios' || platform === 'android' || platform === 'native') {
+    pkg = 'react-native';
+  } else if (platform === 'windows') {
+    pkg = 'react-native-windows';
+  } else if (platform === 'macos') {
+    pkg = 'react-native-macos';
+  }
+
   const subpath = COMPONENT_FOLDER_MAP[componentId] || `components/${componentId}.tsx`;
   return `https://github.com/Winplaybox/spectra-ui/blob/${targetVersion}/packages/${pkg}/src/components/${subpath}`;
 }

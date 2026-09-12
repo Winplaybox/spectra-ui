@@ -53,6 +53,10 @@ import { openInCodeSandbox, openInStackBlitz, openInNewTab, toJavaScript } from 
 import { compileAndRender } from '../../utils/liveCompiler';
 import { EditableCodeBlock } from './EditableCodeBlock';
 import { MobileSimulator } from './MobileSimulator';
+import { PlatformChassisViewer } from './PlatformChassisViewer';
+import { PlatformCompatibilityMatrix } from './PlatformCompatibilityMatrix';
+import { usePlatform } from '../../context/PlatformContext';
+import { Platform } from '../../data/platformData';
 import { ComponentMetadata, COMPONENTS_DATA } from '../../data/componentsData';
 import { ComponentVariantsShowcase, COMPONENT_VARIANTS_MAP } from './ComponentVariantsShowcase';
 import { ComponentApiSection } from './ComponentApiSection';
@@ -66,9 +70,22 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
   const meta = COMPONENTS_DATA[componentId] || COMPONENTS_DATA['button'];
   const releaseInfo = getComponentReleaseVersion(meta.id);
   const { currentVersion, getGitHubUrl } = useVersion();
+  const { currentPlatform, setPlatform } = usePlatform();
 
-  // View modes: Web vs Mobile Native vs Headless Primitives
-  const [platformMode, setPlatformMode] = useState<'web' | 'native' | 'headless'>('web');
+  // View modes: 5 Universal Platforms + Headless Primitives
+  const [platformMode, setPlatformMode] = useState<Platform | 'headless'>(currentPlatform);
+
+  useEffect(() => {
+    setPlatformMode(currentPlatform);
+  }, [currentPlatform]);
+
+  const handlePlatformChange = (val: string) => {
+    const mode = val as Platform | 'headless';
+    setPlatformMode(mode);
+    if (mode !== 'headless') {
+      setPlatform(mode);
+    }
+  };
   const [previewTheme, setPreviewTheme] = useState<'light' | 'dark'>('light');
   const [showCode, setShowCode] = useState(false);
   const [playgroundLang, setPlaygroundLang] = useState<'ts' | 'js'>('ts');
@@ -818,7 +835,7 @@ export const Native${meta.name}Demo = () => {
   const { Component: DynamicPlaygroundComp } = React.useMemo(() => {
     if (customPlaygroundCode === null) return { Component: null };
     return compileAndRender(activePlaygroundSnippet, {
-      platform: platformMode === 'native' ? 'native' : 'web',
+      platform: (platformMode === 'ios' || platformMode === 'android') ? 'native' : 'web',
     });
   }, [activePlaygroundSnippet, customPlaygroundCode, platformMode]);
 
@@ -1526,26 +1543,47 @@ export const Native${meta.name}Demo = () => {
             {meta.description}
           </p>
 
-          {/* 2. Platform Selector Tabs (Web vs Mobile Native vs Headless Primitives) */}
+          {/* 2. Universal Platform Selector Tabs (Web, iOS, Android, Windows, macOS, Headless) */}
           <div style={{ marginTop: 8 }}>
-            <Tabs variant="underline" value={platformMode} onChange={(val) => setPlatformMode(val as 'web' | 'native' | 'headless')}>
+            <Tabs variant="underline" value={platformMode} onChange={handlePlatformChange}>
               <TabList>
-                <Tab value="web" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 14 }}>
-                  <GlobeIcon size={16} />
+                <Tab value="web" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
+                  <span>🌐</span>
                   <span>Web (React DOM)</span>
                 </Tab>
-                <Tab value="native" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 14 }}>
-                  <SmartphoneIcon size={16} />
-                  <span>Mobile Native (iOS & Android)</span>
+                <Tab value="ios" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
+                  <span>🍎</span>
+                  <span>iOS (Swift / RN)</span>
                 </Tab>
-                <Tab value="headless" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, fontSize: 14 }}>
-                  <ComponentIcon size={16} />
+                <Tab value="android" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
+                  <span>🤖</span>
+                  <span>Android (Compose / RN)</span>
+                </Tab>
+                <Tab value="windows" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
+                  <span>🪟</span>
+                  <span>Windows (WinUI 3 / RNW)</span>
+                </Tab>
+                <Tab value="macos" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
+                  <span>🖥️</span>
+                  <span>macOS (AppKit / RN)</span>
+                </Tab>
+                <Tab value="headless" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
+                  <ComponentIcon size={14} />
                   <span>Headless Primitives</span>
                 </Tab>
               </TabList>
             </Tabs>
           </div>
         </Card>
+
+      {/* Real-Time Platform Compatibility Matrix Card */}
+      <div id="compatibility-matrix" style={{ marginBottom: 28, scrollMarginTop: 80 }}>
+        <PlatformCompatibilityMatrix
+          componentName={meta.name}
+          componentId={meta.id}
+          onSelectPlatform={(p) => handlePlatformChange(p)}
+        />
+      </div>
 
       {/* 3. PLATFORM VIEW: Web Mode */}
       {platformMode === 'web' && (
@@ -2113,17 +2151,17 @@ export const Native${meta.name}Demo = () => {
         </>
       )}
 
-      {/* 4. PLATFORM VIEW: Mobile Native Mode */}
-      {platformMode === 'native' && (
+      {/* 4. PLATFORM VIEW: Apple iOS */}
+      {platformMode === 'ios' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
-          <MobileSimulator
+          <PlatformChassisViewer
+            platform="ios"
             componentId={meta.id}
             componentName={meta.name}
-            nativeCodeSnippet={getNativeCodeSnippet()}
             nativeProps={meta.nativeProps}
           >
             {renderNativePreview()}
-          </MobileSimulator>
+          </PlatformChassisViewer>
 
           <div id="usage-variants" style={{ display: 'flex', flexDirection: 'column', gap: 16, scrollMarginTop: 80 }}>
             <Card
@@ -2137,10 +2175,118 @@ export const Native${meta.name}Demo = () => {
             >
               <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
                 <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                  Native Mobile Usage Recipes & Variants
+                  Apple iOS Usage Recipes & Variations
                 </h2>
                 <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>
-                  {variants.length} variations available
+                  Apple HIG 44pt Touch Targets · Swift & React Native
+                </span>
+              </div>
+            </Card>
+            <ComponentVariantsShowcase componentId={meta.id} />
+          </div>
+        </div>
+      )}
+
+      {/* 5. PLATFORM VIEW: Google Android */}
+      {platformMode === 'android' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
+          <PlatformChassisViewer
+            platform="android"
+            componentId={meta.id}
+            componentName={meta.name}
+            nativeProps={meta.nativeProps}
+          >
+            {renderNativePreview()}
+          </PlatformChassisViewer>
+
+          <div id="usage-variants" style={{ display: 'flex', flexDirection: 'column', gap: 16, scrollMarginTop: 80 }}>
+            <Card
+              variant="bordered"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                padding: '20px 24px',
+                borderRadius: 12,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                  Google Android Usage Recipes & Variations
+                </h2>
+                <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>
+                  Material 3 48dp Touch Targets · Kotlin & React Native
+                </span>
+              </div>
+            </Card>
+            <ComponentVariantsShowcase componentId={meta.id} />
+          </div>
+        </div>
+      )}
+
+      {/* 6. PLATFORM VIEW: Microsoft Windows */}
+      {platformMode === 'windows' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
+          <PlatformChassisViewer
+            platform="windows"
+            componentId={meta.id}
+            componentName={meta.name}
+            nativeProps={meta.nativeProps}
+          >
+            {renderNativePreview()}
+          </PlatformChassisViewer>
+
+          <div id="usage-variants" style={{ display: 'flex', flexDirection: 'column', gap: 16, scrollMarginTop: 80 }}>
+            <Card
+              variant="bordered"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                padding: '20px 24px',
+                borderRadius: 12,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                  Microsoft Windows Usage Recipes & Variations
+                </h2>
+                <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>
+                  WinUI 3 · Acrylic/Mica · C# XAML & React Native for Windows
+                </span>
+              </div>
+            </Card>
+            <ComponentVariantsShowcase componentId={meta.id} />
+          </div>
+        </div>
+      )}
+
+      {/* 7. PLATFORM VIEW: Apple macOS */}
+      {platformMode === 'macos' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
+          <PlatformChassisViewer
+            platform="macos"
+            componentId={meta.id}
+            componentName={meta.name}
+            nativeProps={meta.nativeProps}
+          >
+            {renderNativePreview()}
+          </PlatformChassisViewer>
+
+          <div id="usage-variants" style={{ display: 'flex', flexDirection: 'column', gap: 16, scrollMarginTop: 80 }}>
+            <Card
+              variant="bordered"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                padding: '20px 24px',
+                borderRadius: 12,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                  Apple macOS Usage Recipes & Variations
+                </h2>
+                <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>
+                  macOS Sequoia · AppKit / SwiftUI · React Native for macOS
                 </span>
               </div>
             </Card>

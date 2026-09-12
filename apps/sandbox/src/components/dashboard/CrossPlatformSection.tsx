@@ -2,46 +2,147 @@ import React, { useState } from 'react';
 import { Badge, Button, Tabs, TabList, Tab, Card } from '@spectra/react';
 import { CheckIcon, PaletteIcon, SparklesIcon, SmartphoneIcon } from '@spectra/icons';
 import { CircuitAnimation } from './CircuitAnimation';
+import { PlatformCompatibilityMatrix } from './PlatformCompatibilityMatrix';
+import { usePlatform } from '../../context/PlatformContext';
+import { Platform } from '../../data/platformData';
 
 export const CrossPlatformSection: React.FC = () => {
-  const [platformTab, setPlatformTab] = useState<'web' | 'native'>('web');
+  const { currentPlatform, setPlatform } = usePlatform();
+  const [platformTab, setPlatformTab] = useState<Platform>(currentPlatform);
   const [copied, setCopied] = useState(false);
 
-  const webCode = `// Web Implementation (React 18/19)
+  const snippets: Record<Platform, { title: string; pkg: string; code: string }> = {
+    web: {
+      title: 'Web Implementation (React DOM 18/19)',
+      pkg: '@spectra/react',
+      code: `// Web Implementation (React DOM 18/19)
 import '@spectra/tokens/css';
 import { Button, TextInput, Stack, Card } from '@spectra/react';
 import { CheckIcon } from '@spectra/icons';
 
-export const LoginScreen = () => {
+export const WebLoginScreen = () => {
   return (
     <Card variant="bordered">
       <Stack direction="column" gap="md">
         <TextInput label="Email Address" placeholder="alex@company.com" />
-        <Button variant="primary" icon={<CheckIcon size={16} />}>
+        <Button variant="primary" icon={<CheckIcon size={16} />} onClick={() => console.log('Web login')}>
           Sign In
         </Button>
       </Stack>
     </Card>
   );
-};`;
-
-  const nativeCode = `// Mobile Native Implementation (React Native / iOS & Android)
+};`,
+    },
+    ios: {
+      title: 'Apple iOS Implementation (Swift & React Native)',
+      pkg: '@spectra/react-native',
+      code: `// Apple iOS React Native Implementation (Apple HIG 44pt Target)
 import React from 'react';
 import { Button, TextInput, Stack, Card } from '@spectra/react-native';
 import { CheckIcon } from '@spectra/icons';
 
-export const LoginScreen = () => {
+export const IOSLoginScreen = () => {
   return (
     <Card variant="bordered">
       <Stack direction="column" gap="md">
         <TextInput label="Email Address" placeholder="alex@company.com" />
-        <Button variant="primary" icon={<CheckIcon size={16} />}>
+        <Button
+          variant="primary"
+          icon={<CheckIcon size={16} />}
+          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+          hapticFeedback={true}
+          onPress={() => console.log('iOS tap triggered')}
+        >
           Sign In
         </Button>
       </Stack>
     </Card>
   );
-};`;
+};`,
+    },
+    android: {
+      title: 'Google Android Implementation (Material 3 & React Native)',
+      pkg: '@spectra/react-native',
+      code: `// Google Android React Native Implementation (Material 48dp Target)
+import React from 'react';
+import { Button, TextInput, Stack, Card } from '@spectra/react-native';
+import { CheckIcon } from '@spectra/icons';
+
+export const AndroidLoginScreen = () => {
+  return (
+    <Card variant="bordered">
+      <Stack direction="column" gap="md">
+        <TextInput label="Email Address" placeholder="alex@company.com" />
+        <Button
+          variant="primary"
+          icon={<CheckIcon size={16} />}
+          android_ripple={{ color: 'rgba(255, 255, 255, 0.24)' }}
+          elevation={2}
+          onPress={() => console.log('Android tap triggered')}
+        >
+          Sign In
+        </Button>
+      </Stack>
+    </Card>
+  );
+};`,
+    },
+    windows: {
+      title: 'Microsoft Windows Implementation (WinUI 3 / RNW)',
+      pkg: '@spectra/react-native-windows',
+      code: `// Microsoft Windows RNW Implementation (WinUI 3 / Acrylic Surface)
+import React from 'react';
+import { Button, TextInput, Stack, Card } from '@spectra/react-native-windows';
+import { CheckIcon } from '@spectra/icons';
+
+export const WindowsLoginScreen = () => {
+  return (
+    <Card variant="bordered" highContrastSupport={true}>
+      <Stack direction="column" gap="md">
+        <TextInput label="Email Address" placeholder="alex@company.com" />
+        <Button
+          variant="primary"
+          icon={<CheckIcon size={16} />}
+          acceleratorKey="Enter"
+          tooltip="Sign In (Press Enter)"
+          onPress={() => console.log('Windows accelerator triggered')}
+        >
+          Sign In
+        </Button>
+      </Stack>
+    </Card>
+  );
+};`,
+    },
+    macos: {
+      title: 'Apple macOS Implementation (AppKit / SwiftUI / RN macOS)',
+      pkg: '@spectra/react-native-macos',
+      code: `// Apple macOS RN Implementation (macOS Sequoia / Vibrancy Material)
+import React from 'react';
+import { Button, TextInput, Stack, Card } from '@spectra/react-native-macos';
+import { CheckIcon } from '@spectra/icons';
+
+export const MacOSLoginScreen = () => {
+  return (
+    <Card variant="bordered" enableVibrancy={true}>
+      <Stack direction="column" gap="md">
+        <TextInput label="Email Address" placeholder="alex@company.com" />
+        <Button
+          variant="primary"
+          icon={<CheckIcon size={16} />}
+          keyboardShortcut={{ key: 'return', modifiers: ['cmd'] }}
+          enableHoverVisuals={true}
+          tooltip="Sign In (⌘Enter)"
+          onPress={() => console.log('macOS action triggered')}
+        >
+          Sign In
+        </Button>
+      </Stack>
+    </Card>
+  );
+};`,
+    },
+  };
 
   const copy = (code: string) => {
     navigator.clipboard.writeText(code);
@@ -228,13 +329,26 @@ export const LoginScreen = () => {
               Zero mental tax: import identically across web and mobile native targets
             </span>
           </div>
-          <Tabs variant="pills" size="sm" value={platformTab} onChange={(val) => setPlatformTab(val as 'web' | 'native')}>
+          <Tabs variant="pills" size="sm" value={platformTab} onChange={(val) => {
+            const p = val as Platform;
+            setPlatformTab(p);
+            setPlatform(p);
+          }}>
             <TabList style={{ gap: 4 }}>
               <Tab value="web" style={{ fontSize: 13, fontWeight: 600 }}>
-                Web (React)
+                🌐 Web (React)
               </Tab>
-              <Tab value="native" style={{ fontSize: 13, fontWeight: 600 }}>
-                Mobile Native (React Native)
+              <Tab value="ios" style={{ fontSize: 13, fontWeight: 600 }}>
+                🍎 iOS (Swift/RN)
+              </Tab>
+              <Tab value="android" style={{ fontSize: 13, fontWeight: 600 }}>
+                🤖 Android (Compose)
+              </Tab>
+              <Tab value="windows" style={{ fontSize: 13, fontWeight: 600 }}>
+                🪟 Windows (WinUI 3)
+              </Tab>
+              <Tab value="macos" style={{ fontSize: 13, fontWeight: 600 }}>
+                🖥️ macOS (Sequoia)
               </Tab>
             </TabList>
           </Tabs>
@@ -258,9 +372,9 @@ export const LoginScreen = () => {
               fontSize: 12,
             }}
           >
-            <span>{platformTab === 'web' ? '@spectra/react (Web App)' : '@spectra/react-native (iOS & Android)'}</span>
+            <span>{snippets[platformTab].pkg} · {snippets[platformTab].title}</span>
             <button
-              onClick={() => copy(platformTab === 'web' ? webCode : nativeCode)}
+              onClick={() => copy(snippets[platformTab].code)}
               style={{
                 background: 'rgba(255, 255, 255, 0.1)',
                 border: 'none',
@@ -289,10 +403,20 @@ export const LoginScreen = () => {
               overflowX: 'auto',
             }}
           >
-            <code>{platformTab === 'web' ? webCode : nativeCode}</code>
+            <code>{snippets[platformTab].code}</code>
           </pre>
         </div>
       </Card>
+
+      {/* 5. Real-Time Multi-Platform Compatibility Matrix */}
+      <PlatformCompatibilityMatrix
+        componentName="Universal Design System"
+        componentId="button"
+        onSelectPlatform={(p) => {
+          setPlatformTab(p);
+          setPlatform(p);
+        }}
+      />
     </div>
   );
 };

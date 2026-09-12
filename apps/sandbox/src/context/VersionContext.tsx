@@ -5,7 +5,10 @@ export interface VersionContextType {
   currentVersion: string;
   setCurrentVersion: (version: string) => void;
   releases: VersionRelease[];
-  getGitHubUrl: (componentId: string, platform?: 'web' | 'native' | 'headless') => string;
+  getGitHubUrl: (
+    componentId: string,
+    platform?: 'web' | 'ios' | 'android' | 'windows' | 'macos' | 'headless' | 'native'
+  ) => string;
 }
 
 const VersionContext = createContext<VersionContextType | undefined>(undefined);
@@ -15,7 +18,7 @@ export const VersionProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const getGitHubUrl = (
     componentId: string,
-    platform: 'web' | 'native' | 'headless' = 'web'
+    platform: 'web' | 'ios' | 'android' | 'windows' | 'macos' | 'headless' | 'native' = 'web'
   ): string => {
     return getComponentGitHubUrl(componentId, platform, currentVersion);
   };
@@ -41,8 +44,10 @@ export const useVersion = (): VersionContextType => {
       currentVersion: CURRENT_VERSION,
       setCurrentVersion: () => {},
       releases: RELEASES_DATA,
-      getGitHubUrl: (componentId: string, platform: 'web' | 'native' | 'headless' = 'web') =>
-        getComponentGitHubUrl(componentId, platform, CURRENT_VERSION),
+      getGitHubUrl: (
+        componentId: string,
+        platform: 'web' | 'ios' | 'android' | 'windows' | 'macos' | 'headless' | 'native' = 'web'
+      ) => getComponentGitHubUrl(componentId, platform, CURRENT_VERSION),
     };
   }
   return ctx;
