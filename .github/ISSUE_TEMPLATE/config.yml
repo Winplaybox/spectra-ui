@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Spectra UI Discussions
+    url: https://github.com/Winplaybox/spectra-ui/discussions
+    about: Ask questions, share ideas, and connect with other Spectra UI developers.

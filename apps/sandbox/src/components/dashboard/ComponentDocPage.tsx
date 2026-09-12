@@ -180,6 +180,106 @@ const COMPONENT_WAI_ARIA: Record<string, string> = {
   list: 'https://www.w3.org/WAI/ARIA/apg/patterns/listbox/',
 };
 
+const getSectionAnchor = (sectionName: string): string => {
+  const s = sectionName.toLowerCase();
+  if (s.includes('anatomy') || s.includes('slot')) return 'anatomy';
+  if (s.includes('motion') || s.includes('timing') || s.includes('transition')) return 'motion';
+  if (s.includes('guideline') || s.includes('dos')) return 'guidelines';
+  if (s.includes('keyboard') || s.includes('aria')) return 'keyboard';
+  if (s.includes('resource')) return 'resources';
+  if (s.includes('api') || s.includes('prop')) return 'api';
+  if (s.includes('variant')) return 'usage-variants';
+  return 'playground';
+};
+
+const getComponentFullMarkdown = (meta: ComponentMetadata): string => {
+  const dosList = meta.dos.map((d) => `- ${d}`).join('\n');
+  const dontsList = meta.donts.map((d) => `- ${d}`).join('\n');
+
+  const anatomyRows = meta.anatomy
+    .map((a) => `| \`${a.name}\` | ${a.role} |`)
+    .join('\n');
+
+  const keyboardRows = meta.keyboard
+    .map((k) => `| \`${k.key}\` | ${k.description} |`)
+    .join('\n');
+
+  const propRows = meta.props
+    .map((p) => `| \`${p.name}\` | \`${p.type.replace(/\|/g, '\\|')}\` | \`${p.defaultValue}\` | ${p.description} |`)
+    .join('\n');
+
+  return `# ${meta.name}
+
+${meta.description}
+
+\`\`\`bash
+npm install @spectra/react @spectra/icons
+\`\`\`
+
+## Basic Usage
+
+\`\`\`tsx
+import React from 'react';
+import { ${meta.name} } from '@spectra/react';
+
+export default function Basic${meta.name.replace(/\s+/g, '')}Example() {
+  return (
+    <${meta.name}>
+      ${meta.name} Example
+    </${meta.name}>
+  );
+}
+\`\`\`
+
+## Guidelines
+
+${meta.guidelines}
+
+### Recommended (Dos)
+
+${dosList}
+
+### Avoid (Don'ts)
+
+${dontsList}
+
+## Anatomy & Slots
+
+| Slot / Part | Semantic Role & Behavior |
+| :--- | :--- |
+${anatomyRows}
+
+## Motion & Transitions
+
+- **Duration**: \`${meta.motion.duration}\`
+- **Easing Curve**: \`${meta.motion.easing}\`
+- **Specification**: ${meta.motion.description}
+
+## Keyboard Navigation & ARIA
+
+Official pattern: [${meta.waiPattern}](${meta.waiUrl})
+
+| Key | Action & Focus Behavior |
+| :--- | :--- |
+${keyboardRows}
+
+## API Reference (Props)
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+${propRows}
+
+## Headless Primitive (\`@spectra/primitives\`)
+
+Hook: \`${meta.headlessHook.name}\`
+Description: ${meta.headlessHook.description}
+
+\`\`\`tsx
+${meta.headlessHook.code}
+\`\`\`
+`;
+};
+
 interface ComponentDocPageProps {
   componentId: string;
 }
@@ -209,6 +309,22 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
   const [feedbackText, setFeedbackText] = useState('');
   const [feedbackRating, setFeedbackRating] = useState<'positive' | 'negative' | null>(null);
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+
+  const sectionAnchor = getSectionAnchor(feedbackSection);
+  const currentOrigin = typeof window !== 'undefined' ? window.location.origin : 'https://spectra-ui.dev';
+  const pageUrlWithAnchor = `${currentOrigin}/components/${meta.id}#${sectionAnchor}`;
+  const issueTitle = `[docs] ${meta.name}: Feedback on "${feedbackSection}" section`;
+  const issueBody = `### Documentation Page\n${pageUrlWithAnchor}\n\n### Section\n${feedbackSection}\n\n### How can we improve this section?\n${
+    feedbackText.trim() ? feedbackText.trim() : '<!-- Please describe what was confusing, missing, or could be improved -->'
+  }\n`;
+
+  const githubIssueUrl = `https://github.com/Winplaybox/spectra-ui/issues/new?template=docs-feedback.yml&title=${encodeURIComponent(
+    issueTitle
+  )}&labels=documentation&page-url=${encodeURIComponent(pageUrlWithAnchor)}&section=${encodeURIComponent(
+    feedbackSection
+  )}&body=${encodeURIComponent(issueBody)}`;
+
+  const githubDocEditUrl = `https://github.com/Winplaybox/spectra-ui/edit/main/docs/components/${meta.id}.md`;
 
   const openFeedbackForSection = (sectionName: string) => {
     setFeedbackSection(sectionName);
@@ -2851,39 +2967,7 @@ export const Native${meta.name}Demo = () => {
                 variant="secondary"
                 size="sm"
                 onClick={() => {
-                  const mdContent = `# @spectra/react: ${meta.name}
-
-${meta.description}
-
-## Installation
-
-\`\`\`bash
-npm install @spectra/react @spectra/icons
-\`\`\`
-
-## Basic Usage
-
-\`\`\`tsx
-import { ${meta.name} } from '@spectra/react';
-
-export default function Example() {
-  return (
-    <${meta.name}>
-      ${meta.name} Component
-    </${meta.name}>
-  );
-}
-\`\`\`
-
-## Active Platform Environment
-- Target: ${platformMeta.name}
-- Package: ${platformMeta.package}
-- Release: ${currentVersion}
-
-## Accessibility (WAI-ARIA)
-- Built with accessible keyboard patterns and ARIA roles.
-- Supports light, dark, and system color mode preferences.
-`;
+                  const mdContent = getComponentFullMarkdown(meta);
                   navigator.clipboard.writeText(mdContent);
                   setMarkdownCopied(true);
                   setTimeout(() => setMarkdownCopied(false), 2000);
@@ -2910,38 +2994,7 @@ export default function Example() {
                 fontFamily: 'monospace',
               }}
             >
-{`# @spectra/react: ${meta.name}
-
-${meta.description}
-
-## Installation
-
-\`\`\`bash
-npm install @spectra/react @spectra/icons
-\`\`\`
-
-## Basic Usage
-
-\`\`\`tsx
-import { ${meta.name} } from '@spectra/react';
-
-export default function Example() {
-  return (
-    <${meta.name}>
-      ${meta.name} Component
-    </${meta.name}>
-  );
-}
-\`\`\`
-
-## Active Platform Environment
-- Target: ${platformMeta.name}
-- Package: ${platformMeta.package}
-- Release: ${currentVersion}
-
-## Accessibility (WAI-ARIA)
-- Built with accessible keyboard patterns and ARIA roles.
-- Supports light, dark, and system color mode preferences.`}
+              {getComponentFullMarkdown(meta)}
             </pre>
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 10 }}>
               <Button variant="primary" onClick={() => setIsMarkdownModalOpen(false)}>
@@ -2975,11 +3028,12 @@ export default function Example() {
             gap: 16,
           }}
         >
-          {/* Edit this page link */}
+          {/* Edit this page link (MUI Benchmark: opens component markdown documentation on GitHub) */}
           <a
-            href={getGitHubUrl(meta.id, platformMode).replace('/blob/', '/edit/')}
+            href={githubDocEditUrl}
             target="_blank"
             rel="noopener noreferrer"
+            title={`Edit ${meta.name} documentation on GitHub`}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -3193,9 +3247,10 @@ export default function Example() {
                   <span>
                     Looking for help or troubleshooting an issue? Please{' '}
                     <a
-                      href="https://github.com/sagarkm/spectra-ui/issues/new/choose"
+                      href={githubIssueUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      title="Open a pre-filled documentation feedback issue on GitHub"
                       style={{
                         color: 'var(--color-action-primary)',
                         fontWeight: 600,

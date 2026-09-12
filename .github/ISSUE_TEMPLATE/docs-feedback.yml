@@ -1,0 +1,27 @@
+name: Documentation feedback
+description: Report an issue or provide feedback on Spectra UI documentation
+title: "[docs] "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to give feedback on Spectra UI documentation!
+  - type: input
+    id: page-url
+    attributes:
+      label: Page URL
+      description: The page URL you are giving feedback on.
+    validations:
+      required: true
+  - type: input
+    id: section
+    attributes:
+      label: Section
+      description: The specific section of the page (e.g. Keyboard Navigation & ARIA, Anatomy, etc.)
+  - type: textarea
+    id: feedback
+    attributes:
+      label: How can we improve this page?
+      description: Please describe what is missing, unclear, or could be improved.
+    validations:
+      required: true
