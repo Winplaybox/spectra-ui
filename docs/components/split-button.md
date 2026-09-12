@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { Split Button } from '@spectra/react';
+import { SplitButton } from '@spectra/react';
 
 export default function BasicSplitButtonExample() {
   return (
-    <Split Button>
+    <SplitButton>
       Split Button Example
-    </Split Button>
+    </SplitButton>
   );
 }
 ```

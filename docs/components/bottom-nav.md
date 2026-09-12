@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { Bottom Navigation } from '@spectra/react';
+import { BottomNavigation } from '@spectra/react';
 
 export default function BasicBottomNavigationExample() {
   return (
-    <Bottom Navigation>
+    <BottomNavigation>
       Bottom Navigation Example
-    </Bottom Navigation>
+    </BottomNavigation>
   );
 }
 ```

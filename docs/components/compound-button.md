@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { Compound Button } from '@spectra/react';
+import { CompoundButton } from '@spectra/react';
 
 export default function BasicCompoundButtonExample() {
   return (
-    <Compound Button>
+    <CompoundButton>
       Compound Button Example
-    </Compound Button>
+    </CompoundButton>
   );
 }
 ```

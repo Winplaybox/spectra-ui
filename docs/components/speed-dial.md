@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { Speed Dial } from '@spectra/react';
+import { SpeedDial } from '@spectra/react';
 
 export default function BasicSpeedDialExample() {
   return (
-    <Speed Dial>
+    <SpeedDial>
       Speed Dial Example
-    </Speed Dial>
+    </SpeedDial>
   );
 }
 ```

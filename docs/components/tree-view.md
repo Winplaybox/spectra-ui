@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { Tree View } from '@spectra/react';
+import { TreeView } from '@spectra/react';
 
 export default function BasicTreeViewExample() {
   return (
-    <Tree View>
+    <TreeView>
       Tree View Example
-    </Tree View>
+    </TreeView>
   );
 }
 ```

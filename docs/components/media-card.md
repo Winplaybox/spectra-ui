@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { Media Card } from '@spectra/react';
+import { MediaCard } from '@spectra/react';
 
 export default function BasicMediaCardExample() {
   return (
-    <Media Card>
+    <MediaCard>
       Media Card Example
-    </Media Card>
+    </MediaCard>
   );
 }
 ```

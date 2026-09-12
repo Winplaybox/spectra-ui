@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { Radio Group } from '@spectra/react';
+import { RadioGroup } from '@spectra/react';
 
 export default function BasicRadioGroupExample() {
   return (
-    <Radio Group>
+    <RadioGroup>
       Radio Group Example
-    </Radio Group>
+    </RadioGroup>
   );
 }
 ```

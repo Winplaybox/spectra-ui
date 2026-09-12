@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { Platform Chassis } from '@spectra/react';
+import { PlatformChassis } from '@spectra/react';
 
 export default function BasicPlatformChassisExample() {
   return (
-    <Platform Chassis>
+    <PlatformChassis>
       Platform Chassis Example
-    </Platform Chassis>
+    </PlatformChassis>
   );
 }
 ```

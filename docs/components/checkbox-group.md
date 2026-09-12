@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { Checkbox Group } from '@spectra/react';
+import { CheckboxGroup } from '@spectra/react';
 
 export default function BasicCheckboxGroupExample() {
   return (
-    <Checkbox Group>
+    <CheckboxGroup>
       Checkbox Group Example
-    </Checkbox Group>
+    </CheckboxGroup>
   );
 }
 ```

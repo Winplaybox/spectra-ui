@@ -1,14 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import {
   Button,
+  SplitButton,
+  CompoundButton,
+  ButtonGroup,
+  IconButton,
   TextInput,
+  Textarea,
   Select,
   Checkbox,
+  CheckboxGroup,
   Radio,
   RadioGroup,
   Switch,
+  Slider,
+  Rating,
+  Autocomplete,
+  Combobox,
   Badge,
+  Tag,
   Card,
+  MediaCard,
+  Paper,
   Tabs,
   TabList,
   Tab,
@@ -16,21 +29,48 @@ import {
   TabPanel,
   Dialog,
   Tooltip,
+  Popover,
   Avatar,
+  AvatarGroup,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  TableHeaderCell,
+  DataGrid,
+  TreeView,
+  Statistic,
+  Timeline,
+  TimelineItem,
+  Calendar,
   Accordion,
   AccordionItem,
   AccordionHeader,
   AccordionPanel,
   Alert,
+  Toast,
+  Drawer,
+  ProgressBar,
   Spinner,
   Skeleton,
   Divider,
   Chip,
   Breadcrumbs,
+  Pagination,
+  Stepper,
+  Menu,
+  MenuItem,
+  AppBar,
+  BottomNav,
+  Link,
+  SpeedDial,
+  Box,
+  Grid,
   useColorScheme,
 } from '@spectra/react';
 import { getComponentReleaseVersion } from '../../data/versionReleaseData';
@@ -50,6 +90,7 @@ import {
   GlobeIcon,
   SmartphoneIcon,
   ComponentIcon,
+  SparklesIcon,
 } from '@spectra/icons';
 import { openInCodeSandbox, openInStackBlitz, openInNewTab, toJavaScript } from '../../utils/sandbox';
 import { compileAndRender } from '../../utils/liveCompiler';
@@ -429,6 +470,21 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [tabsVariant, setTabsVariant] = useState<'underline' | 'pills'>('underline');
   const [activeTab, setActiveTab] = useState('tab-1');
+
+  // Enterprise Interactive States
+  const [splitSelected, setSplitSelected] = useState('Create a merge commit');
+  const [splitToast, setSplitToast] = useState<string | null>(null);
+  const [sliderVal, setSliderVal] = useState(64);
+  const [ratingVal, setRatingVal] = useState(4);
+  const [textareaVal, setTextareaVal] = useState('');
+  const [demoDrawerOpen, setDemoDrawerOpen] = useState(false);
+  const [demoPage, setDemoPage] = useState(1);
+  const [demoStep, setDemoStep] = useState(1);
+  const [calendarDate, setCalendarDate] = useState(new Date());
+  const [autoQuery, setAutoQuery] = useState('');
+  const [groupVal, setGroupVal] = useState<'day' | 'week' | 'month'>('week');
+  const [progressVal, setProgressVal] = useState(72);
+  const [toastVisible, setToastVisible] = useState(true);
 
   // Generate clean JSX snippet according to active demo
   const getRawSnippet = (): string => {
@@ -838,18 +894,563 @@ export default function BreadcrumbsDemo(): JSX.Element {
     />
   );
 }`;
-      default:
+      case 'split-button':
         return `import React from 'react';
-import { ${meta.name} } from '@spectra/react';
-import type { ${meta.name}Props } from '@spectra/react';
+import { SplitButton } from '@spectra/react';
 
-export default function ${meta.name}Demo(): JSX.Element {
+export default function SplitButtonDemo(): JSX.Element {
+  const options = [
+    { label: 'Create a merge commit', onClick: () => console.log('Merge commit') },
+    { label: 'Squash and merge', onClick: () => console.log('Squash merge') },
+    { label: 'Rebase and merge', onClick: () => console.log('Rebase merge') },
+  ];
+
   return (
-    <${meta.name}>
-      {/* Component content */}
-    </${meta.name}>
+    <SplitButton
+      variant="primary"
+      options={options}
+      onClick={() => console.log('Primary merge triggered')}
+    >
+      Merge Pull Request
+    </SplitButton>
   );
 }`;
+
+      case 'compound-button':
+        return `import React from 'react';
+import { CompoundButton } from '@spectra/react';
+import { SparklesIcon } from '@spectra/icons';
+
+export default function CompoundButtonDemo(): JSX.Element {
+  return (
+    <CompoundButton
+      variant="primary"
+      subtitle="Deploy continuous integration pipeline"
+      icon={<SparklesIcon size={20} />}
+      onClick={() => console.log('Deploy triggered')}
+    >
+      Deploy Production Release
+    </CompoundButton>
+  );
+}`;
+
+      case 'button-group':
+        return `import React, { useState } from 'react';
+import { ButtonGroup, Button } from '@spectra/react';
+
+export default function ButtonGroupDemo(): JSX.Element {
+  const [active, setActive] = useState<'day' | 'week' | 'month'>('week');
+
+  return (
+    <ButtonGroup variant="secondary">
+      <Button variant={active === 'day' ? 'primary' : 'secondary'} onClick={() => setActive('day')}>Day</Button>
+      <Button variant={active === 'week' ? 'primary' : 'secondary'} onClick={() => setActive('week')}>Week</Button>
+      <Button variant={active === 'month' ? 'primary' : 'secondary'} onClick={() => setActive('month')}>Month</Button>
+    </ButtonGroup>
+  );
+}`;
+
+      case 'icon-button':
+        return `import React from 'react';
+import { IconButton } from '@spectra/react';
+import { SearchIcon } from '@spectra/icons';
+
+export default function IconButtonDemo(): JSX.Element {
+  return (
+    <IconButton
+      icon={<SearchIcon size={18} />}
+      aria-label="Search design system"
+      variant="secondary"
+      shape="rounded"
+    />
+  );
+}`;
+
+      case 'slider':
+        return `import React, { useState } from 'react';
+import { Slider } from '@spectra/react';
+
+export default function SliderDemo(): JSX.Element {
+  const [val, setVal] = useState(64);
+
+  return (
+    <div style={{ maxWidth: 360, width: '100%' }}>
+      <Slider
+        label="Volume Level"
+        value={val}
+        min={0}
+        max={100}
+        onChange={setVal}
+        valueFormatter={(v) => \`\${v}%\`}
+      />
+    </div>
+  );
+}`;
+
+      case 'rating':
+        return `import React, { useState } from 'react';
+import { Rating } from '@spectra/react';
+
+export default function RatingDemo(): JSX.Element {
+  const [rating, setRating] = useState(4);
+
+  return (
+    <Rating
+      value={rating}
+      max={5}
+      onChange={setRating}
+    />
+  );
+}`;
+
+      case 'textarea':
+        return `import React, { useState } from 'react';
+import { Textarea } from '@spectra/react';
+
+export default function TextareaDemo(): JSX.Element {
+  const [text, setText] = useState('');
+
+  return (
+    <div style={{ maxWidth: 440, width: '100%' }}>
+      <Textarea
+        label="Feedback Notes"
+        placeholder="Type observations here..."
+        description="Provide feedback on token accessibility."
+        showCount
+        maxLength={200}
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+    </div>
+  );
+}`;
+
+      case 'checkbox-group':
+        return `import React, { useState } from 'react';
+import { CheckboxGroup, Checkbox } from '@spectra/react';
+
+export default function CheckboxGroupDemo(): JSX.Element {
+  const [security, setSecurity] = useState(true);
+  const [updates, setUpdates] = useState(false);
+
+  return (
+    <CheckboxGroup label="Notification Channels" description="Configure delivery destinations">
+      <Checkbox label="Security Alerts (Immediate)" checked={security} onChange={setSecurity} />
+      <Checkbox label="Weekly Summary Digest" checked={updates} onChange={setUpdates} />
+    </CheckboxGroup>
+  );
+}`;
+
+      case 'autocomplete':
+      case 'combobox':
+        return `import React, { useState } from 'react';
+import { Autocomplete } from '@spectra/react';
+
+const TECHNOLOGIES = [
+  { value: 'react', label: 'React.js', description: 'Declarative UI library' },
+  { value: 'vue', label: 'Vue.js', description: 'Progressive Framework' },
+  { value: 'next', label: 'Next.js', description: 'Full-stack React platform' },
+  { value: 'react-native', label: 'React Native', description: 'Native mobile platform' },
+];
+
+export default function AutocompleteDemo(): JSX.Element {
+  const [val, setVal] = useState('');
+
+  return (
+    <div style={{ maxWidth: 360, width: '100%' }}>
+      <Autocomplete
+        label="Select Platform"
+        placeholder="Search frameworks..."
+        options={TECHNOLOGIES}
+        value={val}
+        onChange={setVal}
+      />
+    </div>
+  );
+}`;
+
+      case 'avatar-group':
+        return `import React from 'react';
+import { AvatarGroup, Avatar } from '@spectra/react';
+
+export default function AvatarGroupDemo(): JSX.Element {
+  return (
+    <AvatarGroup max={3} size="md">
+      <Avatar name="Sarah Connor" status="online" />
+      <Avatar name="John Doe" status="busy" />
+      <Avatar name="Alex Mercer" status="away" />
+      <Avatar name="Elena Fisher" />
+      <Avatar name="Marcus Fenix" />
+    </AvatarGroup>
+  );
+}`;
+
+      case 'tag':
+        return `import React from 'react';
+import { Tag } from '@spectra/react';
+
+export default function TagDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+      <Tag variant="primary">v1.0.0</Tag>
+      <Tag variant="success" closable onClose={() => console.log('Closed')}>Active Node</Tag>
+      <Tag variant="warning">High Memory</Tag>
+      <Tag variant="danger">Critical</Tag>
+    </div>
+  );
+}`;
+
+      case 'media-card':
+        return `import React from 'react';
+import { MediaCard, Badge, Button } from '@spectra/react';
+
+export default function MediaCardDemo(): JSX.Element {
+  return (
+    <div style={{ maxWidth: 360, width: '100%' }}>
+      <MediaCard
+        media={<div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #1e293b, #0f172a)' }} />}
+        title="Spectra UI v1.0"
+        subtitle="Universal Design System"
+        badge={<Badge variant="info">Production</Badge>}
+        actions={<><Button variant="primary" size="sm">Explore Tokens</Button><Button variant="secondary" size="sm">Changelog</Button></>}
+      >
+        Enterprise-grade multi-platform token architecture with WAI-ARIA AA compliance.
+      </MediaCard>
+    </div>
+  );
+}`;
+
+      case 'table':
+      case 'data-grid':
+        return `import React from 'react';
+import { Table, TableHead, TableBody, TableRow, TableCell, TableHeaderCell, Badge } from '@spectra/react';
+
+export default function TableDemo(): JSX.Element {
+  return (
+    <Table bordered striped>
+      <TableHead>
+        <TableRow>
+          <TableHeaderCell>Service</TableHeaderCell>
+          <TableHeaderCell>Region</TableHeaderCell>
+          <TableHeaderCell>Status</TableHeaderCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>API Gateway</TableCell>
+          <TableCell>us-east-1</TableCell>
+          <TableCell><Badge variant="success">Operational</Badge></TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Auth Broker</TableCell>
+          <TableCell>eu-west-1</TableCell>
+          <TableCell><Badge variant="success">Operational</Badge></TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Cache Redis</TableCell>
+          <TableCell>ap-south-1</TableCell>
+          <TableCell><Badge variant="warning">Degraded</Badge></TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+}`;
+
+      case 'tree-view':
+        return `import React from 'react';
+import { TreeView } from '@spectra/react';
+
+const TREE_DATA = [
+  {
+    id: 'src',
+    label: 'src',
+    children: [
+      {
+        id: 'components',
+        label: 'components',
+        children: [
+          { id: 'button', label: 'Button.tsx' },
+          { id: 'split-button', label: 'SplitButton.tsx' },
+        ],
+      },
+      { id: 'index', label: 'index.ts' },
+    ],
+  },
+];
+
+export default function TreeViewDemo(): JSX.Element {
+  return (
+    <div style={{ maxWidth: 300, width: '100%' }}>
+      <TreeView items={TREE_DATA} defaultExpandedIds={['src', 'components']} />
+    </div>
+  );
+}`;
+
+      case 'statistic':
+        return `import React from 'react';
+import { Statistic } from '@spectra/react';
+
+export default function StatisticDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, width: '100%' }}>
+      <Statistic
+        title="Monthly Active Users"
+        value="128,450"
+        trend={{ value: '14.2%', direction: 'up', label: 'vs last month' }}
+      />
+      <Statistic
+        title="Avg API Latency"
+        value="18"
+        suffix="ms"
+        trend={{ value: '2.4ms', direction: 'down', label: 'improved' }}
+      />
+    </div>
+  );
+}`;
+
+      case 'timeline':
+        return `import React from 'react';
+import { Timeline, TimelineItem } from '@spectra/react';
+
+export default function TimelineDemo(): JSX.Element {
+  return (
+    <div style={{ maxWidth: 440, width: '100%' }}>
+      <Timeline>
+        <TimelineItem
+          title="Deployment v1.2.0"
+          description="Deployed 58 components to production CDN nodes."
+          timestamp="10:45 AM"
+        />
+        <TimelineItem
+          title="Automated Test Suite Passed"
+          description="1,240 integration tests completed in 42 seconds."
+          timestamp="10:30 AM"
+        />
+      </Timeline>
+    </div>
+  );
+}`;
+
+      case 'calendar':
+        return `import React, { useState } from 'react';
+import { Calendar } from '@spectra/react';
+
+export default function CalendarDemo(): JSX.Element {
+  const [date, setDate] = useState(new Date());
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Calendar value={date} onChange={setDate} />
+    </div>
+  );
+}`;
+
+      case 'progress-bar':
+        return `import React from 'react';
+import { ProgressBar } from '@spectra/react';
+
+export default function ProgressBarDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 380, width: '100%' }}>
+      <ProgressBar value={72} label="Asset Migration" showValue variant="primary" />
+      <ProgressBar value={100} label="Build Verified" showValue variant="success" />
+      <ProgressBar indeterminate label="Compiling TypeScript Tokens..." variant="info" />
+    </div>
+  );
+}`;
+
+      case 'toast':
+        return `import React from 'react';
+import { Toast, Button } from '@spectra/react';
+
+export default function ToastDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 380, width: '100%' }}>
+      <Toast variant="success" title="Changes Saved" onClose={() => console.log('Closed')}>
+        Your design token preferences were synchronized.
+      </Toast>
+      <Toast
+        variant="warning"
+        title="Cache Warning"
+        action={<Button variant="secondary" size="sm">Purge Cache</Button>}
+      >
+        CDN cache is at 94% storage capacity.
+      </Toast>
+    </div>
+  );
+}`;
+
+      case 'drawer':
+        return `import React, { useState } from 'react';
+import { Drawer, Button } from '@spectra/react';
+
+export default function DrawerDemo(): JSX.Element {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <Button variant="primary" onClick={() => setOpen(true)}>Open Settings Drawer</Button>
+      <Drawer
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        title="System Preferences"
+        footer={<Button variant="primary" onClick={() => setOpen(false)}>Save Changes</Button>}
+      >
+        <p>Configure cross-platform layout tokens, reading direction, and ambient canvas theme.</p>
+      </Drawer>
+    </div>
+  );
+}`;
+
+      case 'paper':
+        return `import React from 'react';
+import { Paper } from '@spectra/react';
+
+export default function PaperDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
+      <Paper elevation={1}>Elevation 1</Paper>
+      <Paper elevation={2}>Elevation 2</Paper>
+      <Paper elevation={3}>Elevation 3</Paper>
+    </div>
+  );
+}`;
+
+      case 'pagination':
+        return `import React, { useState } from 'react';
+import { Pagination } from '@spectra/react';
+
+export default function PaginationDemo(): JSX.Element {
+  const [page, setPage] = useState(1);
+
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Pagination count={10} page={page} onChange={setPage} />
+    </div>
+  );
+}`;
+
+      case 'stepper':
+        return `import React, { useState } from 'react';
+import { Stepper, Button } from '@spectra/react';
+
+const STEPS = [
+  { title: 'Project Scope', description: 'Define tokens and platforms' },
+  { title: 'Component Review', description: 'Accessibility and variant checks' },
+  { title: 'Publish', description: 'Deploy to npm registry' },
+];
+
+export default function StepperDemo(): JSX.Element {
+  const [step, setStep] = useState(1);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 600, width: '100%' }}>
+      <Stepper steps={STEPS} activeStep={step} />
+      <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
+        <Button variant="secondary" size="sm" disabled={step <= 0} onClick={() => setStep(step - 1)}>Previous</Button>
+        <Button variant="primary" size="sm" disabled={step >= STEPS.length - 1} onClick={() => setStep(step + 1)}>Next Step</Button>
+      </div>
+    </div>
+  );
+}`;
+
+      case 'menu':
+        return `import React from 'react';
+import { Menu, MenuItem } from '@spectra/react';
+import { CopyIcon, CloseIcon } from '@spectra/icons';
+
+export default function MenuDemo(): JSX.Element {
+  return (
+    <div style={{ maxWidth: 220, width: '100%' }}>
+      <Menu>
+        <MenuItem icon={<CopyIcon size={16} />} shortcut="Ctrl+C">Duplicate Node</MenuItem>
+        <MenuItem danger icon={<CloseIcon size={16} />}>Delete Component</MenuItem>
+      </Menu>
+    </div>
+  );
+}`;
+
+      case 'app-bar':
+        return `import React from 'react';
+import { AppBar, Button } from '@spectra/react';
+
+export default function AppBarDemo(): JSX.Element {
+  return (
+    <div style={{ width: '100%' }}>
+      <AppBar
+        brand={<span style={{ fontWeight: 700, fontSize: 16 }}>Spectra UI</span>}
+        actions={<Button variant="primary" size="sm">Sign In</Button>}
+      >
+        <span>Docs</span>
+        <span>Tokens</span>
+        <span>Showcase</span>
+      </AppBar>
+    </div>
+  );
+}`;
+
+      case 'link':
+        return `import React from 'react';
+import { Link } from '@spectra/react';
+
+export default function LinkDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
+      <Link href="https://github.com/Winplaybox/spectra-ui" external>GitHub Repository</Link>
+      <Link href="/tokens/colors">Color Tokens</Link>
+    </div>
+  );
+}`;
+
+      case 'speed-dial':
+        return `import React from 'react';
+import { SpeedDial } from '@spectra/react';
+import { SearchIcon, CopyIcon } from '@spectra/icons';
+
+export default function SpeedDialDemo(): JSX.Element {
+  const actions = [
+    { icon: <SearchIcon size={16} />, name: 'Search', onClick: () => console.log('Search') },
+    { icon: <CopyIcon size={16} />, name: 'Copy', onClick: () => console.log('Copy') },
+  ];
+
+  return (
+    <div style={{ padding: 40, display: 'flex', justifyContent: 'center' }}>
+      <SpeedDial actions={actions} />
+    </div>
+  );
+}`;
+
+      case 'popover':
+        return `import React from 'react';
+import { Popover, Button } from '@spectra/react';
+
+export default function PopoverDemo(): JSX.Element {
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <Popover
+        title="Token Architecture"
+        trigger={<Button variant="secondary">View Token Info</Button>}
+      >
+        Spectra UI synchronizes 175 design tokens across Web and React Native Hermes runtimes.
+      </Popover>
+    </div>
+  );
+}`;
+
+      default: {
+        const safeName = meta.name.replace(/[\s-]+/g, '');
+        return `import React from 'react';
+import { ${safeName} } from '@spectra/react';
+
+export default function ${safeName}Demo(): JSX.Element {
+  return (
+    <div style={{ padding: 24, textAlign: 'center' }}>
+      <h3>${meta.name}</h3>
+      <p>${meta.description}</p>
+    </div>
+  );
+}`;
+      }
     }
   };
 
@@ -1538,6 +2139,549 @@ export const Native${meta.name}Demo = () => {
               { label: 'Breadcrumbs', isCurrent: true },
             ]}
           />
+        );
+
+      case 'split-button':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16, width: '100%', maxWidth: 420 }}>
+            <SplitButton
+              variant={btnVariant}
+              size={btnSize}
+              options={[
+                {
+                  label: 'Create a merge commit',
+                  onClick: () => {
+                    setSplitSelected('Create a merge commit');
+                    setSplitToast('Option selected: Create a merge commit');
+                  },
+                },
+                {
+                  label: 'Squash and merge',
+                  onClick: () => {
+                    setSplitSelected('Squash and merge');
+                    setSplitToast('Option selected: Squash and merge');
+                  },
+                },
+                {
+                  label: 'Rebase and merge',
+                  onClick: () => {
+                    setSplitSelected('Rebase and merge');
+                    setSplitToast('Option selected: Rebase and merge');
+                  },
+                },
+              ]}
+              onClick={() => setSplitToast(`Executed primary action: ${splitSelected}`)}
+            >
+              {splitSelected}
+            </SplitButton>
+
+            {splitToast && (
+              <div
+                style={{
+                  fontSize: 12,
+                  color: 'var(--color-feedback-success, #22c55e)',
+                  backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                  border: '1px solid rgba(34, 197, 94, 0.3)',
+                  padding: '6px 14px',
+                  borderRadius: 6,
+                }}
+              >
+                {splitToast}
+              </div>
+            )}
+
+            {/* Quick interactive props pill controls */}
+            <div
+              style={{
+                display: 'flex',
+                gap: 8,
+                flexWrap: 'wrap',
+                padding: '8px 12px',
+                borderRadius: 'var(--radius-component-md)',
+                backgroundColor: 'var(--color-surface-raised)',
+                border: '1px solid var(--color-border-subtle)',
+                fontSize: 12,
+              }}
+            >
+              <span style={{ fontWeight: 600, color: 'var(--color-text-muted)', alignSelf: 'center' }}>Variant:</span>
+              {(['primary', 'secondary', 'danger'] as const).map((v) => (
+                <button
+                  key={v}
+                  onClick={() => setBtnVariant(v)}
+                  style={{
+                    padding: '4px 8px',
+                    border: '1px solid',
+                    borderColor: btnVariant === v ? 'var(--color-action-primary)' : 'var(--color-border-subtle)',
+                    borderRadius: 4,
+                    backgroundColor: btnVariant === v ? 'var(--color-action-primary)' : 'transparent',
+                    color: btnVariant === v ? 'var(--color-text-inverse)' : 'var(--color-text-primary)',
+                    cursor: 'pointer',
+                    fontSize: 11,
+                  }}
+                >
+                  {v}
+                </button>
+              ))}
+              <span style={{ width: 1, backgroundColor: 'var(--color-border-subtle)', margin: '0 4px' }} />
+              <span style={{ fontWeight: 600, color: 'var(--color-text-muted)', alignSelf: 'center' }}>Size:</span>
+              {(['sm', 'md', 'lg'] as const).map((s) => (
+                <button
+                  key={s}
+                  onClick={() => setBtnSize(s)}
+                  style={{
+                    padding: '4px 8px',
+                    border: '1px solid',
+                    borderColor: btnSize === s ? 'var(--color-action-primary)' : 'var(--color-border-subtle)',
+                    borderRadius: 4,
+                    backgroundColor: btnSize === s ? 'var(--color-action-primary)' : 'transparent',
+                    color: btnSize === s ? 'var(--color-text-inverse)' : 'var(--color-text-primary)',
+                    cursor: 'pointer',
+                    fontSize: 11,
+                  }}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          </div>
+        );
+
+      case 'compound-button':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
+            <CompoundButton
+              variant={btnVariant}
+              size={btnSize}
+              subtitle="Deploy continuous integration pipeline to AWS"
+              icon={<SparklesIcon size={22} />}
+              onClick={() => setSplitToast('Deployment pipeline initiated!')}
+            >
+              Deploy Production Release
+            </CompoundButton>
+            {splitToast && (
+              <span style={{ fontSize: 12, color: 'var(--color-feedback-success, #22c55e)' }}>
+                {splitToast}
+              </span>
+            )}
+          </div>
+        );
+
+      case 'button-group':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
+            <ButtonGroup variant="secondary">
+              <Button
+                variant={groupVal === 'day' ? 'primary' : 'secondary'}
+                onClick={() => setGroupVal('day')}
+              >
+                Day
+              </Button>
+              <Button
+                variant={groupVal === 'week' ? 'primary' : 'secondary'}
+                onClick={() => setGroupVal('week')}
+              >
+                Week
+              </Button>
+              <Button
+                variant={groupVal === 'month' ? 'primary' : 'secondary'}
+                onClick={() => setGroupVal('month')}
+              >
+                Month
+              </Button>
+            </ButtonGroup>
+            <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>
+              Active interval: <strong>{groupVal.toUpperCase()}</strong>
+            </span>
+          </div>
+        );
+
+      case 'icon-button':
+        return (
+          <div style={{ display: 'flex', gap: 16, alignItems: 'center', justifyContent: 'center' }}>
+            <IconButton icon={<SearchIcon size={18} />} aria-label="Search" variant="primary" shape="circle" />
+            <IconButton icon={<CheckIcon size={18} />} aria-label="Confirm" variant="secondary" shape="rounded" />
+            <IconButton icon={<CloseIcon size={18} />} aria-label="Dismiss" variant="danger" shape="square" />
+          </div>
+        );
+
+      case 'slider':
+        return (
+          <div style={{ maxWidth: 380, width: '100%', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <Slider
+              label="Memory Allocation"
+              value={sliderVal}
+              min={0}
+              max={128}
+              onChange={setSliderVal}
+              valueFormatter={(v) => `${v} GB`}
+            />
+            <span style={{ fontSize: 12, color: 'var(--color-text-muted)', textAlign: 'center' }}>
+              Drag thumb or click anywhere on the rail
+            </span>
+          </div>
+        );
+
+      case 'rating':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+            <Rating value={ratingVal} max={5} size="lg" onChange={setRatingVal} />
+            <span style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>
+              Customer Satisfaction Score: <strong>{ratingVal} / 5 stars</strong>
+            </span>
+          </div>
+        );
+
+      case 'textarea':
+        return (
+          <div style={{ maxWidth: 440, width: '100%', margin: '0 auto' }}>
+            <Textarea
+              label="Release Notes"
+              placeholder="Describe enhancements in this build..."
+              description="Max 250 characters."
+              showCount
+              maxLength={250}
+              value={textareaVal}
+              onChange={(e) => setTextareaVal(e.target.value)}
+            />
+          </div>
+        );
+
+      case 'checkbox-group':
+        return (
+          <div style={{ maxWidth: 360, width: '100%', margin: '0 auto' }}>
+            <CheckboxGroup label="Organization Access" description="Choose tenant isolation levels">
+              <Checkbox label="Read-only audit reports" defaultChecked />
+              <Checkbox label="Token modification rights" />
+              <Checkbox label="Billing management" defaultChecked />
+            </CheckboxGroup>
+          </div>
+        );
+
+      case 'autocomplete':
+      case 'combobox':
+        return (
+          <div style={{ maxWidth: 380, width: '100%', margin: '0 auto' }}>
+            <Autocomplete
+              label="Select Target Architecture"
+              placeholder="Search platforms..."
+              options={[
+                { value: 'web', label: 'React Web (Vite / Next.js)', description: 'Vanilla Extract + Tokens' },
+                { value: 'native', label: 'React Native (Hermes)', description: 'iOS & Android runtime' },
+                { value: 'figma', label: 'Figma Tokens Plugin', description: 'Design sync engine' },
+                { value: 'mcp', label: 'Model Context Protocol', description: 'Agentic AI toolchain' },
+              ]}
+              value={autoQuery}
+              onChange={setAutoQuery}
+            />
+          </div>
+        );
+
+      case 'avatar-group':
+        return (
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <AvatarGroup max={4} size="md">
+              <Avatar name="Sarah Connor" status="online" />
+              <Avatar name="John Doe" status="busy" />
+              <Avatar name="Alex Mercer" status="away" />
+              <Avatar name="Elena Fisher" />
+              <Avatar name="Marcus Fenix" />
+              <Avatar name="Ada Lovelace" />
+            </AvatarGroup>
+          </div>
+        );
+
+      case 'tag':
+        return (
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
+            <Tag variant="primary">v1.2.0</Tag>
+            <Tag variant="success" closable onClose={() => console.log('Closed')}>Production</Tag>
+            <Tag variant="warning">High Memory</Tag>
+            <Tag variant="danger">Offline</Tag>
+            <Tag variant="info">Zero Emojis</Tag>
+          </div>
+        );
+
+      case 'media-card':
+        return (
+          <div style={{ maxWidth: 360, width: '100%', margin: '0 auto' }}>
+            <MediaCard
+              media={
+                <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #1e293b, #0f172a)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: 13, fontWeight: 600 }}>
+                  Spectra UI Canvas
+                </div>
+              }
+              title="Spectra UI v1.0"
+              subtitle="Universal Design System"
+              badge={<Badge variant="info">Active</Badge>}
+              actions={
+                <>
+                  <Button variant="primary" size="sm">Explore Tokens</Button>
+                  <Button variant="secondary" size="sm">Docs</Button>
+                </>
+              }
+            >
+              Multi-platform component library benchmarked against Google Material UI and Microsoft Fluent UI 2.
+            </MediaCard>
+          </div>
+        );
+
+      case 'table':
+      case 'data-grid':
+        return (
+          <div style={{ width: '100%', maxWidth: 560, margin: '0 auto' }}>
+            <Table bordered striped>
+              <TableHead>
+                <TableRow>
+                  <TableHeaderCell>Microservice</TableHeaderCell>
+                  <TableHeaderCell>Latency</TableHeaderCell>
+                  <TableHeaderCell>Health</TableHeaderCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>API Gateway</TableCell>
+                  <TableCell>14ms</TableCell>
+                  <TableCell><Badge variant="success">Online</Badge></TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Auth Broker</TableCell>
+                  <TableCell>22ms</TableCell>
+                  <TableCell><Badge variant="success">Online</Badge></TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Search Index</TableCell>
+                  <TableCell>98ms</TableCell>
+                  <TableCell><Badge variant="warning">Degraded</Badge></TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+        );
+
+      case 'tree-view':
+        return (
+          <div style={{ maxWidth: 320, width: '100%', margin: '0 auto', background: 'var(--color-surface-elevated)', padding: 12, borderRadius: 8, border: '1px solid var(--color-border-subtle)' }}>
+            <TreeView
+              items={[
+                {
+                  id: 'src',
+                  label: 'src',
+                  children: [
+                    {
+                      id: 'components',
+                      label: 'components',
+                      children: [
+                        { id: 'btn', label: 'Button.tsx' },
+                        { id: 'sbtn', label: 'SplitButton.tsx' },
+                        { id: 'sld', label: 'Slider.tsx' },
+                      ],
+                    },
+                    { id: 'idx', label: 'index.ts' },
+                  ],
+                },
+                { id: 'pkg', label: 'package.json' },
+              ]}
+              defaultExpandedIds={['src', 'components']}
+            />
+          </div>
+        );
+
+      case 'statistic':
+        return (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, width: '100%', maxWidth: 540, margin: '0 auto' }}>
+            <Statistic
+              title="Monthly Active Users"
+              value="128,450"
+              trend={{ value: '14.2%', direction: 'up', label: 'vs last month' }}
+            />
+            <Statistic
+              title="Cache Hit Ratio"
+              value="99.4"
+              suffix="%"
+              trend={{ value: '0.8%', direction: 'up', label: 'improved' }}
+            />
+          </div>
+        );
+
+      case 'timeline':
+        return (
+          <div style={{ maxWidth: 440, width: '100%', margin: '0 auto' }}>
+            <Timeline>
+              <TimelineItem
+                title="Component Suite Synthesized"
+                description="Engineered SplitButton, Slider, Rating, and enterprise composite recipes."
+                timestamp="Just now"
+              />
+              <TimelineItem
+                title="Zero Emoji Verification Passed"
+                description="All icon slots strictly mapped to SVG vector paths."
+                timestamp="10 mins ago"
+              />
+              <TimelineItem
+                title="Monorepo Build Succeeded"
+                description="Verified 0 TypeScript compiler errors across all packages."
+                timestamp="25 mins ago"
+              />
+            </Timeline>
+          </div>
+        );
+
+      case 'calendar':
+        return (
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Calendar value={calendarDate} onChange={setCalendarDate} />
+          </div>
+        );
+
+      case 'progress-bar':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 18, maxWidth: 400, width: '100%', margin: '0 auto' }}>
+            <ProgressBar value={progressVal} label="Design System Build" showValue variant="primary" />
+            <ProgressBar value={100} label="A11y Test Suite" showValue variant="success" />
+            <ProgressBar indeterminate label="Optimizing Hermes Bytecode..." variant="info" />
+            <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
+              <Button size="sm" variant="secondary" onClick={() => setProgressVal((p) => Math.max(0, p - 10))}>-10%</Button>
+              <Button size="sm" variant="secondary" onClick={() => setProgressVal((p) => Math.min(100, p + 10))}>+10%</Button>
+            </div>
+          </div>
+        );
+
+      case 'toast':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center' }}>
+            {toastVisible && (
+              <Toast
+                variant="success"
+                title="Deployment Succeeded"
+                onClose={() => setToastVisible(false)}
+                action={<Button variant="secondary" size="sm" onClick={() => console.log('View build')}>View Build</Button>}
+              >
+                All 58 components synchronized across Web and Mobile runtimes.
+              </Toast>
+            )}
+            {!toastVisible && (
+              <Button variant="secondary" size="sm" onClick={() => setToastVisible(true)}>
+                Trigger Toast Banner
+              </Button>
+            )}
+          </div>
+        );
+
+      case 'drawer':
+        return (
+          <div style={{ textAlign: 'center' }}>
+            <Button variant="primary" onClick={() => setDemoDrawerOpen(true)}>
+              Open Drawer Sheet
+            </Button>
+            <Drawer
+              isOpen={demoDrawerOpen}
+              onClose={() => setDemoDrawerOpen(false)}
+              title="Design System Settings"
+              footer={
+                <>
+                  <Button variant="secondary" size="sm" onClick={() => setDemoDrawerOpen(false)}>Cancel</Button>
+                  <Button variant="primary" size="sm" onClick={() => setDemoDrawerOpen(false)}>Save Settings</Button>
+                </>
+              }
+            >
+              <p style={{ margin: 0, fontSize: 13, lineHeight: 1.6, color: 'var(--color-text-secondary)' }}>
+                Customize cross-platform token variables, motion curves, and layout density across client workspaces.
+              </p>
+            </Drawer>
+          </div>
+        );
+
+      case 'paper':
+        return (
+          <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
+            <Paper elevation={1}>Elevation 1</Paper>
+            <Paper elevation={2}>Elevation 2</Paper>
+            <Paper elevation={3}>Elevation 3</Paper>
+          </div>
+        );
+
+      case 'pagination':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
+            <Pagination count={10} page={demoPage} onChange={setDemoPage} />
+            <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>
+              Current page: <strong>{demoPage}</strong> of 10
+            </span>
+          </div>
+        );
+
+      case 'stepper':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 540, width: '100%', margin: '0 auto' }}>
+            <Stepper
+              steps={[
+                { title: 'Define Tokens', description: 'Colors & Typography' },
+                { title: 'Component Review', description: 'ARIA & Contrast' },
+                { title: 'Deploy', description: 'Publish to npm' },
+              ]}
+              activeStep={demoStep}
+            />
+            <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
+              <Button variant="secondary" size="sm" disabled={demoStep <= 0} onClick={() => setDemoStep((s) => s - 1)}>Back</Button>
+              <Button variant="primary" size="sm" disabled={demoStep >= 2} onClick={() => setDemoStep((s) => s + 1)}>Next</Button>
+            </div>
+          </div>
+        );
+
+      case 'menu':
+        return (
+          <div style={{ maxWidth: 220, width: '100%', margin: '0 auto' }}>
+            <Menu>
+              <MenuItem icon={<CopyIcon size={16} />} shortcut="Ctrl+C">Duplicate Node</MenuItem>
+              <MenuItem icon={<ExternalLinkIcon size={16} />}>Export Tokens</MenuItem>
+              <MenuItem danger icon={<CloseIcon size={16} />}>Delete Component</MenuItem>
+            </Menu>
+          </div>
+        );
+
+      case 'app-bar':
+        return (
+          <div style={{ width: '100%' }}>
+            <AppBar
+              brand={<span style={{ fontWeight: 700, fontSize: 16, color: 'var(--color-text-primary)' }}>Spectra UI</span>}
+              actions={<Button variant="primary" size="sm">Deploy</Button>}
+            >
+              <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', cursor: 'pointer' }}>Documentation</span>
+              <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', cursor: 'pointer' }}>Tokens</span>
+            </AppBar>
+          </div>
+        );
+
+      case 'link':
+        return (
+          <div style={{ display: 'flex', gap: 20, alignItems: 'center', justifyContent: 'center' }}>
+            <Link href="https://github.com/Winplaybox/spectra-ui" external>GitHub Repository</Link>
+            <Link href="/tokens/colors">Color Tokens</Link>
+          </div>
+        );
+
+      case 'speed-dial':
+        return (
+          <div style={{ padding: 40, display: 'flex', justifyContent: 'center' }}>
+            <SpeedDial
+              actions={[
+                { icon: <SearchIcon size={16} />, name: 'Search', onClick: () => console.log('Search') },
+                { icon: <CopyIcon size={16} />, name: 'Copy', onClick: () => console.log('Copy') },
+              ]}
+            />
+          </div>
+        );
+
+      case 'popover':
+        return (
+          <div style={{ textAlign: 'center' }}>
+            <Popover
+              title="Token Architecture"
+              trigger={<Button variant="secondary">View Token Info</Button>}
+            >
+              Spectra UI synchronizes 175 design tokens across Web and React Native Hermes runtimes.
+            </Popover>
+          </div>
         );
 
       default:

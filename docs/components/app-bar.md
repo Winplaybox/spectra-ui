@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { App Bar } from '@spectra/react';
+import { AppBar } from '@spectra/react';
 
 export default function BasicAppBarExample() {
   return (
-    <App Bar>
+    <AppBar>
       App Bar Example
-    </App Bar>
+    </AppBar>
   );
 }
 ```

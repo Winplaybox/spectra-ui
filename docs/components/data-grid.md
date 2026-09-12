@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { Data Grid } from '@spectra/react';
+import { DataGrid } from '@spectra/react';
 
 export default function BasicDataGridExample() {
   return (
-    <Data Grid>
+    <DataGrid>
       Data Grid Example
-    </Data Grid>
+    </DataGrid>
   );
 }
 ```

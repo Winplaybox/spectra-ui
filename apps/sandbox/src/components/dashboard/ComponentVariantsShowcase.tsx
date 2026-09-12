@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
 import {
   Button,
+  SplitButton,
+  CompoundButton,
+  ButtonGroup,
+  IconButton,
   TextInput,
+  Textarea,
   Select,
   Checkbox,
+  CheckboxGroup,
   Radio,
   RadioGroup,
   Switch,
+  Slider,
+  Rating,
+  Autocomplete,
+  Combobox,
   Badge,
+  Tag,
   Card,
+  MediaCard,
+  Paper,
   Tabs,
   TabList,
   Tab,
@@ -16,21 +29,47 @@ import {
   TabPanel,
   Dialog,
   Tooltip,
+  Popover,
   Avatar,
+  AvatarGroup,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  TableHeaderCell,
+  DataGrid,
+  TreeView,
+  Statistic,
+  Timeline,
+  TimelineItem,
+  Calendar,
   Accordion,
   AccordionItem,
   AccordionHeader,
   AccordionPanel,
   Alert,
+  Toast,
+  Drawer,
+  ProgressBar,
   Spinner,
   Skeleton,
   Divider,
   Chip,
   Breadcrumbs,
+  Pagination,
+  Stepper,
+  Menu,
+  MenuItem,
+  AppBar,
+  BottomNav,
+  Link,
+  SpeedDial,
+  Text,
 } from '@spectra/react';
 import {
   CheckIcon,
@@ -46,6 +85,7 @@ import {
   SparklesIcon,
   EyeIcon,
   EyeOffIcon,
+  CopyIcon,
 } from '@spectra/icons';
 import { ComponentDemoCard } from './ComponentDemoCard';
 
@@ -161,6 +201,105 @@ export const COMPONENT_VARIANTS_MAP: Record<string, VariantMeta[]> = {
     { id: 'breadcrumbs-basic', title: 'Standard Breadcrumb Trail' },
     { id: 'breadcrumbs-custom', title: 'Custom Separator Nodes' },
     { id: 'breadcrumbs-collapsed', title: 'Max Items with Collapsed Ellipsis' },
+  ],
+  'split-button': [
+    { id: 'split-button-merge', title: 'Primary Split Button (Git Merge Flow)' },
+    { id: 'split-button-secondary', title: 'Secondary Export & Download Split' },
+    { id: 'split-button-sizes', title: 'Density & Sizing Hierarchy' },
+  ],
+  'compound-button': [
+    { id: 'compound-button-variants', title: 'Action Hierarchy (Primary, Secondary)' },
+    { id: 'compound-button-icons', title: 'Contextual Feature Icon Badges' },
+  ],
+  'button-group': [
+    { id: 'button-group-segmented', title: 'Segmented Attached Mode' },
+    { id: 'button-group-vertical', title: 'Vertical Toolbar Orientation' },
+  ],
+  'icon-button': [
+    { id: 'icon-button-shapes', title: 'Shapes (Circle, Rounded, Square)' },
+    { id: 'icon-button-sizes', title: 'Sizing Scale & Compact Density' },
+  ],
+  slider: [
+    { id: 'slider-continuous', title: 'Continuous Range with Real-Time Tooltip' },
+    { id: 'slider-stepped', title: 'Discrete Incremental Steps' },
+  ],
+  rating: [
+    { id: 'rating-interactive', title: 'Interactive Star Rating with Hover' },
+    { id: 'rating-readonly', title: 'Read-only Metric Display' },
+  ],
+  textarea: [
+    { id: 'textarea-counter', title: 'Character Counter & Limit' },
+    { id: 'textarea-validation', title: 'Validation & Error States' },
+  ],
+  'checkbox-group': [
+    { id: 'checkbox-group-vertical', title: 'Vertical Fieldset Group' },
+    { id: 'checkbox-group-horizontal', title: 'Inline Horizontal Checkbox Group' },
+  ],
+  autocomplete: [
+    { id: 'autocomplete-filter', title: 'Filterable Platform Selector' },
+  ],
+  combobox: [
+    { id: 'combobox-filter', title: 'Filterable Platform Selector' },
+  ],
+  'avatar-group': [
+    { id: 'avatar-group-stack', title: 'Overlapping Avatar Stack with Overflow Counter' },
+  ],
+  tag: [
+    { id: 'tag-variants', title: 'Status Colors & Dismissible Badges' },
+  ],
+  'media-card': [
+    { id: 'media-card-banner', title: 'Structured Media Banner & Action Slots' },
+  ],
+  table: [
+    { id: 'table-striped', title: 'Striped Data Grid with Status Badges' },
+  ],
+  'data-grid': [
+    { id: 'data-grid-striped', title: 'Striped Data Grid with Status Badges' },
+  ],
+  'tree-view': [
+    { id: 'tree-view-folders', title: 'Collapsible Project Directory Tree' },
+  ],
+  statistic: [
+    { id: 'statistic-kpi', title: 'KPI Metrics with Trend Direction' },
+  ],
+  timeline: [
+    { id: 'timeline-audit', title: 'Deployment Audit Trail' },
+  ],
+  calendar: [
+    { id: 'calendar-grid', title: 'Interactive Month Calendar Grid' },
+  ],
+  'progress-bar': [
+    { id: 'progress-bar-states', title: 'Percentage Fill & Indeterminate States' },
+  ],
+  toast: [
+    { id: 'toast-banners', title: 'Status Severity Notifications' },
+  ],
+  drawer: [
+    { id: 'drawer-sheet', title: 'Slide-Out Sheet Overlay' },
+  ],
+  paper: [
+    { id: 'paper-elevations', title: 'Elevation Depth Scale (0-4)' },
+  ],
+  pagination: [
+    { id: 'pagination-controls', title: 'Interactive Multi-Page Controls' },
+  ],
+  stepper: [
+    { id: 'stepper-flow', title: 'Multi-Step Wizard Progress Indicator' },
+  ],
+  menu: [
+    { id: 'menu-flyout', title: 'Command Flyout with Shortcuts' },
+  ],
+  'app-bar': [
+    { id: 'app-bar-header', title: 'Persistent Application Navigation Bar' },
+  ],
+  link: [
+    { id: 'link-styles', title: 'External and Internal Link Styling' },
+  ],
+  'speed-dial': [
+    { id: 'speed-dial-fab', title: 'Floating Action Button Speed Dial' },
+  ],
+  popover: [
+    { id: 'popover-anchored', title: 'Anchored Floating Context Overlay' },
   ],
 };
 
@@ -4444,6 +4583,816 @@ export default function NativeCollapsedDemo() {
       ]}
     />
   );
+}`}
+          />
+        </div>
+      );
+
+    case 'split-button':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="split-button-merge"
+            title="Primary Split Button (Git Merge Flow)"
+            description="Combines direct execution of the primary action with a flyout dropdown menu for alternative strategies (MUI & Fluent UI 2 benchmark)."
+            webPreview={
+              <SplitButton
+                variant="primary"
+                options={[
+                  { label: 'Create a merge commit', onClick: () => console.log('Merge commit') },
+                  { label: 'Squash and merge', onClick: () => console.log('Squash merge') },
+                  { label: 'Rebase and merge', onClick: () => console.log('Rebase merge') },
+                ]}
+                onClick={() => console.log('Primary merge triggered')}
+              >
+                Merge pull request
+              </SplitButton>
+            }
+            nativePreview={<Button variant="primary">Merge Pull Request</Button>}
+            webCode={`import React from 'react';
+import { SplitButton } from '@spectra/react';
+
+export default function SplitMergeDemo(): JSX.Element {
+  const options = [
+    { label: 'Create a merge commit', onClick: () => console.log('Merge') },
+    { label: 'Squash and merge', onClick: () => console.log('Squash') },
+    { label: 'Rebase and merge', onClick: () => console.log('Rebase') },
+  ];
+
+  return (
+    <SplitButton
+      variant="primary"
+      options={options}
+      onClick={() => console.log('Primary action')}
+    >
+      Merge pull request
+    </SplitButton>
+  );
+}`}
+            nativeCode={`import { Button } from '@spectra/react-native';
+
+export default function NativeSplitDemo() {
+  return <Button variant="filled">Merge pull request</Button>;
+}`}
+          />
+
+          <ComponentDemoCard
+            id="split-button-secondary"
+            title="Secondary Export & Download Split"
+            description="Low-profile secondary outline variant for exporting formats like PDF, CSV, and JSON."
+            webPreview={
+              <SplitButton
+                variant="secondary"
+                options={[
+                  { label: 'Export as CSV', onClick: () => console.log('CSV') },
+                  { label: 'Export as PDF', onClick: () => console.log('PDF') },
+                  { label: 'Export as JSON', onClick: () => console.log('JSON') },
+                ]}
+                onClick={() => console.log('Default CSV export')}
+              >
+                Export Report
+              </SplitButton>
+            }
+            nativePreview={<Button variant="secondary">Export Report</Button>}
+            webCode={`import React from 'react';
+import { SplitButton } from '@spectra/react';
+
+export default function SplitSecondaryDemo(): JSX.Element {
+  return (
+    <SplitButton
+      variant="secondary"
+      options={[
+        { label: 'Export as CSV' },
+        { label: 'Export as PDF' },
+        { label: 'Export as JSON' },
+      ]}
+    >
+      Export Report
+    </SplitButton>
+  );
+}`}
+            nativeCode={`import { Button } from '@spectra/react-native';
+
+export default function NativeExportDemo() {
+  return <Button variant="outline">Export Report</Button>;
+}`}
+          />
+
+          <ComponentDemoCard
+            id="split-button-sizes"
+            title="Density & Sizing Hierarchy"
+            description="Compact (sm), Standard (md), and Prominent (lg) density scales."
+            webPreview={
+              <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+                <SplitButton size="sm" variant="primary" options={[{ label: 'Option A' }]}>Small</SplitButton>
+                <SplitButton size="md" variant="primary" options={[{ label: 'Option B' }]}>Medium</SplitButton>
+                <SplitButton size="lg" variant="primary" options={[{ label: 'Option C' }]}>Large</SplitButton>
+              </div>
+            }
+            nativePreview={<Button size="md" variant="primary">Split Button</Button>}
+            webCode={`import React from 'react';
+import { SplitButton } from '@spectra/react';
+
+export default function SplitSizesDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 12 }}>
+      <SplitButton size="sm" options={[{ label: 'Option A' }]}>Small</SplitButton>
+      <SplitButton size="md" options={[{ label: 'Option B' }]}>Medium</SplitButton>
+      <SplitButton size="lg" options={[{ label: 'Option C' }]}>Large</SplitButton>
+    </div>
+  );
+}`}
+            nativeCode={`import { Button } from '@spectra/react-native';
+
+export default function NativeSplitSizesDemo() {
+  return <Button size="md">Split Button</Button>;
+}`}
+          />
+        </div>
+      );
+
+    case 'compound-button':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="compound-button-variants"
+            title="Action Hierarchy (Primary, Secondary)"
+            description="High prominence button pairing a headline label with explanatory secondary text (Fluent UI 2 benchmark)."
+            webPreview={
+              <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+                <CompoundButton variant="primary" subtitle="Deploy build to staging">
+                  Deploy Staging
+                </CompoundButton>
+                <CompoundButton variant="secondary" subtitle="Review pending pull requests">
+                  Review Pull Requests
+                </CompoundButton>
+              </div>
+            }
+            nativePreview={<Button variant="primary">Deploy Staging</Button>}
+            webCode={`import React from 'react';
+import { CompoundButton } from '@spectra/react';
+
+export default function CompoundDemo(): JSX.Element {
+  return (
+    <CompoundButton variant="primary" subtitle="Deploy build to staging">
+      Deploy Staging
+    </CompoundButton>
+  );
+}`}
+            nativeCode={`import { Button } from '@spectra/react-native';
+
+export default function NativeCompoundDemo() {
+  return <Button variant="filled">Deploy Staging</Button>;
+}`}
+          />
+
+          <ComponentDemoCard
+            id="compound-button-icons"
+            title="Contextual Feature Icon Badges"
+            description="Embeds SVG vector icons to anchor user visual recognition."
+            webPreview={
+              <CompoundButton
+                variant="primary"
+                icon={<SparklesIcon size={22} />}
+                subtitle="Run 1,240 automated end-to-end tests"
+              >
+                Run Diagnostics
+              </CompoundButton>
+            }
+            nativePreview={<Button variant="primary">Run Diagnostics</Button>}
+            webCode={`import React from 'react';
+import { CompoundButton } from '@spectra/react';
+import { SparklesIcon } from '@spectra/icons';
+
+export default function CompoundIconDemo(): JSX.Element {
+  return (
+    <CompoundButton
+      variant="primary"
+      icon={<SparklesIcon size={22} />}
+      subtitle="Run 1,240 automated end-to-end tests"
+    >
+      Run Diagnostics
+    </CompoundButton>
+  );
+}`}
+            nativeCode={`import { Button } from '@spectra/react-native';
+
+export default function NativeCompoundIconDemo() {
+  return <Button variant="filled">Run Diagnostics</Button>;
+}`}
+          />
+        </div>
+      );
+
+    case 'button-group':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="button-group-segmented"
+            title="Segmented Attached Mode"
+            description="Contiguous buttons sharing joined borders with unified radii (MUI ButtonGroup benchmark)."
+            webPreview={
+              <ButtonGroup variant="secondary">
+                <Button variant="primary">Day</Button>
+                <Button variant="secondary">Week</Button>
+                <Button variant="secondary">Month</Button>
+              </ButtonGroup>
+            }
+            nativePreview={<Button variant="secondary">Day | Week | Month</Button>}
+            webCode={`import React from 'react';
+import { ButtonGroup, Button } from '@spectra/react';
+
+export default function ButtonGroupSegmentedDemo(): JSX.Element {
+  return (
+    <ButtonGroup variant="secondary">
+      <Button variant="primary">Day</Button>
+      <Button variant="secondary">Week</Button>
+      <Button variant="secondary">Month</Button>
+    </ButtonGroup>
+  );
+}`}
+            nativeCode={`import { View, Button } from '@spectra/react-native';
+
+export default function NativeButtonGroupDemo() {
+  return <Button variant="outline">Intervals</Button>;
+}`}
+          />
+
+          <ComponentDemoCard
+            id="button-group-vertical"
+            title="Vertical Toolbar Orientation"
+            description="Stacked vertical orientation ideal for canvas and diagram toolbars."
+            webPreview={
+              <ButtonGroup orientation="vertical" variant="secondary">
+                <Button size="sm">Top</Button>
+                <Button size="sm">Middle</Button>
+                <Button size="sm">Bottom</Button>
+              </ButtonGroup>
+            }
+            nativePreview={<Button variant="secondary">Vertical Group</Button>}
+            webCode={`import React from 'react';
+import { ButtonGroup, Button } from '@spectra/react';
+
+export default function ButtonGroupVerticalDemo(): JSX.Element {
+  return (
+    <ButtonGroup orientation="vertical">
+      <Button size="sm">Top</Button>
+      <Button size="sm">Middle</Button>
+      <Button size="sm">Bottom</Button>
+    </ButtonGroup>
+  );
+}`}
+            nativeCode={`import { View, Button } from '@spectra/react-native';
+
+export default function NativeVerticalGroupDemo() {
+  return <Button size="sm">Vertical Toolbar</Button>;
+}`}
+          />
+        </div>
+      );
+
+    case 'icon-button':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="icon-button-shapes"
+            title="Shapes (Circle, Rounded, Square)"
+            description="Geometric variations for toolbars, floating triggers, and inline table actions."
+            webPreview={
+              <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
+                <IconButton icon={<SearchIcon size={18} />} aria-label="Search" variant="primary" shape="circle" />
+                <IconButton icon={<CheckIcon size={18} />} aria-label="Confirm" variant="secondary" shape="rounded" />
+                <IconButton icon={<CloseIcon size={18} />} aria-label="Dismiss" variant="danger" shape="square" />
+              </div>
+            }
+            nativePreview={<IconButton icon={<SearchIcon size={18} />} aria-label="Search" />}
+            webCode={`import React from 'react';
+import { IconButton } from '@spectra/react';
+import { SearchIcon, CheckIcon, CloseIcon } from '@spectra/icons';
+
+export default function IconButtonShapesDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 12 }}>
+      <IconButton icon={<SearchIcon size={18} />} aria-label="Search" variant="primary" shape="circle" />
+      <IconButton icon={<CheckIcon size={18} />} aria-label="Confirm" variant="secondary" shape="rounded" />
+      <IconButton icon={<CloseIcon size={18} />} aria-label="Dismiss" variant="danger" shape="square" />
+    </div>
+  );
+}`}
+            nativeCode={`import { IconButton } from '@spectra/react-native';
+
+export default function NativeIconButtonDemo() {
+  return <IconButton aria-label="Search" />;
+}`}
+          />
+        </div>
+      );
+
+    case 'slider':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="slider-continuous"
+            title="Continuous Range with Real-Time Tooltip"
+            description="Draggable and clickable slider rail with percentage fill and keyboard step support."
+            webPreview={
+              <div style={{ maxWidth: 360, width: '100%' }}>
+                <Slider label="Screen Brightness" defaultValue={65} min={0} max={100} valueFormatter={(v) => `${v}%`} />
+              </div>
+            }
+            nativePreview={<Text>Slider Continuous Demo</Text>}
+            webCode={`import React from 'react';
+import { Slider } from '@spectra/react';
+
+export default function SliderContinuousDemo(): JSX.Element {
+  return (
+    <Slider label="Screen Brightness" defaultValue={65} min={0} max={100} valueFormatter={(v) => \`\${v}%\`} />
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeSliderDemo() {
+  return <Text>Slider Native</Text>;
+}`}
+          />
+
+          <ComponentDemoCard
+            id="slider-stepped"
+            title="Discrete Incremental Steps"
+            description="Snaps to defined numerical increments (step=25)."
+            webPreview={
+              <div style={{ maxWidth: 360, width: '100%' }}>
+                <Slider label="Memory Allocation" defaultValue={50} min={0} max={100} step={25} valueFormatter={(v) => `${v} GB`} />
+              </div>
+            }
+            nativePreview={<Text>Slider Discrete Demo</Text>}
+            webCode={`import React from 'react';
+import { Slider } from '@spectra/react';
+
+export default function SliderSteppedDemo(): JSX.Element {
+  return (
+    <Slider label="Memory Allocation" defaultValue={50} step={25} valueFormatter={(v) => \`\${v} GB\`} />
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeSteppedDemo() {
+  return <Text>Slider Step</Text>;
+}`}
+          />
+        </div>
+      );
+
+    case 'rating':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="rating-interactive"
+            title="Interactive Star Rating with Hover"
+            description="Interactive score selector utilizing authentic SVG vector paths with hover preview (Zero Emojis)."
+            webPreview={<Rating defaultValue={4} max={5} size="lg" />}
+            nativePreview={<Text>Rating: 4/5</Text>}
+            webCode={`import React from 'react';
+import { Rating } from '@spectra/react';
+
+export default function RatingInteractiveDemo(): JSX.Element {
+  return <Rating defaultValue={4} max={5} size="lg" />;
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeRatingDemo() {
+  return <Text>Rating 4/5</Text>;
+}`}
+          />
+
+          <ComponentDemoCard
+            id="rating-readonly"
+            title="Read-only Metric Display"
+            description="Static rating indicator for reviews, testimonial cards, and metric summaries."
+            webPreview={<Rating value={5} readOnly size="md" />}
+            nativePreview={<Text>5.0 / 5.0</Text>}
+            webCode={`import React from 'react';
+import { Rating } from '@spectra/react';
+
+export default function RatingReadonlyDemo(): JSX.Element {
+  return <Rating value={5} readOnly size="md" />;
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeRatingStaticDemo() {
+  return <Text>5 Stars</Text>;
+}`}
+          />
+        </div>
+      );
+
+    case 'textarea':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="textarea-counter"
+            title="Character Counter & Limit"
+            description="Tracks remaining character capacity with tabular number layout."
+            webPreview={
+              <div style={{ maxWidth: 420, width: '100%' }}>
+                <Textarea label="Pull Request Description" placeholder="Explain rationale..." showCount maxLength={150} defaultValue="Engineered high-density enterprise components." />
+              </div>
+            }
+            nativePreview={<Text>Textarea Counter</Text>}
+            webCode={`import React from 'react';
+import { Textarea } from '@spectra/react';
+
+export default function TextareaCounterDemo(): JSX.Element {
+  return (
+    <Textarea label="PR Description" showCount maxLength={150} />
+  );
+}`}
+            nativeCode={`import { TextInput } from 'react-native';
+
+export default function NativeTextareaDemo() {
+  return <TextInput multiline />;
+}`}
+          />
+        </div>
+      );
+
+    case 'avatar-group':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="avatar-group-stack"
+            title="Overlapping Avatar Stack with Overflow Counter"
+            description="Displays clustered user profiles with automatic +N counter when team size exceeds max limit."
+            webPreview={
+              <AvatarGroup max={3} size="md">
+                <Avatar name="Sarah Connor" status="online" />
+                <Avatar name="John Doe" status="busy" />
+                <Avatar name="Alex Mercer" status="away" />
+                <Avatar name="Elena Fisher" />
+                <Avatar name="Marcus Fenix" />
+              </AvatarGroup>
+            }
+            nativePreview={<Text>Avatar Group (3+)</Text>}
+            webCode={`import React from 'react';
+import { AvatarGroup, Avatar } from '@spectra/react';
+
+export default function AvatarGroupDemo(): JSX.Element {
+  return (
+    <AvatarGroup max={3} size="md">
+      <Avatar name="Sarah Connor" status="online" />
+      <Avatar name="John Doe" status="busy" />
+      <Avatar name="Alex Mercer" status="away" />
+      <Avatar name="Elena Fisher" />
+      <Avatar name="Marcus Fenix" />
+    </AvatarGroup>
+  );
+}`}
+            nativeCode={`import { View } from 'react-native';
+
+export default function NativeAvatarGroupDemo() {
+  return <View />;
+}`}
+          />
+        </div>
+      );
+
+    case 'tag':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="tag-variants"
+            title="Status Colors & Dismissible Badges"
+            description="Semantic color treatments with optional dismiss cross for dynamic filtering."
+            webPreview={
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                <Tag variant="primary">v1.2.0</Tag>
+                <Tag variant="success" closable onClose={() => console.log('Closed')}>Operational</Tag>
+                <Tag variant="warning">High Load</Tag>
+                <Tag variant="danger">Offline</Tag>
+              </div>
+            }
+            nativePreview={<Text>Tag Badges</Text>}
+            webCode={`import React from 'react';
+import { Tag } from '@spectra/react';
+
+export default function TagVariantsDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 8 }}>
+      <Tag variant="primary">v1.2.0</Tag>
+      <Tag variant="success" closable>Operational</Tag>
+      <Tag variant="warning">High Load</Tag>
+      <Tag variant="danger">Offline</Tag>
+    </div>
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeTagDemo() {
+  return <Text>Tags</Text>;
+}`}
+          />
+        </div>
+      );
+
+    case 'table':
+    case 'data-grid':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="table-striped"
+            title="Striped Data Grid with Status Badges"
+            description="Structured enterprise data table with alternating row highlights and semantic badges."
+            webPreview={
+              <div style={{ width: '100%', maxWidth: 540 }}>
+                <Table bordered striped>
+                  <TableHead>
+                    <TableRow>
+                      <TableHeaderCell>Cluster</TableHeaderCell>
+                      <TableHeaderCell>Nodes</TableHeaderCell>
+                      <TableHeaderCell>Status</TableHeaderCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>prod-us-east</TableCell>
+                      <TableCell>64</TableCell>
+                      <TableCell><Badge variant="success">Healthy</Badge></TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>prod-eu-west</TableCell>
+                      <TableCell>32</TableCell>
+                      <TableCell><Badge variant="success">Healthy</Badge></TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>stage-ap-south</TableCell>
+                      <TableCell>16</TableCell>
+                      <TableCell><Badge variant="warning">Syncing</Badge></TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </div>
+            }
+            nativePreview={<Text>Data Table</Text>}
+            webCode={`import React from 'react';
+import { Table, TableHead, TableBody, TableRow, TableCell, TableHeaderCell, Badge } from '@spectra/react';
+
+export default function TableGridDemo(): JSX.Element {
+  return (
+    <Table bordered striped>
+      <TableHead>
+        <TableRow>
+          <TableHeaderCell>Cluster</TableHeaderCell>
+          <TableHeaderCell>Status</TableHeaderCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <TableRow>
+          <TableCell>prod-us-east</TableCell>
+          <TableCell><Badge variant="success">Healthy</Badge></TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeTableDemo() {
+  return <Text>Table Data</Text>;
+}`}
+          />
+        </div>
+      );
+
+    case 'statistic':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="statistic-kpi"
+            title="KPI Metrics with Trend Direction"
+            description="Displays numerical telemetry with directional vector chevrons and comparison periods."
+            webPreview={
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, width: '100%', maxWidth: 480 }}>
+                <Statistic title="Total Revenue" value="$428,950" trend={{ value: '18.4%', direction: 'up', label: 'vs last quarter' }} />
+                <Statistic title="Avg Response" value="16" suffix="ms" trend={{ value: '3.1ms', direction: 'down', label: 'faster' }} />
+              </div>
+            }
+            nativePreview={<Text>KPI: $428,950 (+18.4%)</Text>}
+            webCode={`import React from 'react';
+import { Statistic } from '@spectra/react';
+
+export default function StatisticKpiDemo(): JSX.Element {
+  return (
+    <Statistic title="Total Revenue" value="$428,950" trend={{ value: '18.4%', direction: 'up', label: 'vs last quarter' }} />
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeStatisticDemo() {
+  return <Text>$428,950</Text>;
+}`}
+          />
+        </div>
+      );
+
+    case 'timeline':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="timeline-audit"
+            title="Deployment Audit Trail"
+            description="Vertical sequence connecting milestones with spine nodes and timestamps."
+            webPreview={
+              <div style={{ maxWidth: 420, width: '100%' }}>
+                <Timeline>
+                  <TimelineItem title="Release v1.2.0 Tagged" description="Git commit published to remote." timestamp="12:00 PM" />
+                  <TimelineItem title="Assets Distributed" description="CDN cache invalidated." timestamp="11:45 AM" />
+                </Timeline>
+              </div>
+            }
+            nativePreview={<Text>Timeline Audit</Text>}
+            webCode={`import React from 'react';
+import { Timeline, TimelineItem } from '@spectra/react';
+
+export default function TimelineAuditDemo(): JSX.Element {
+  return (
+    <Timeline>
+      <TimelineItem title="Release Tagged" timestamp="12:00 PM" />
+      <TimelineItem title="Assets Distributed" timestamp="11:45 AM" />
+    </Timeline>
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeTimelineDemo() {
+  return <Text>Timeline</Text>;
+}`}
+          />
+        </div>
+      );
+
+    case 'progress-bar':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="progress-bar-states"
+            title="Percentage Fill & Indeterminate States"
+            description="Smooth progress indicators with custom colors and animated pulse patterns."
+            webPreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 360, width: '100%' }}>
+                <ProgressBar value={80} showValue label="Upload Progress" variant="primary" />
+                <ProgressBar indeterminate label="Compiling Tokens..." variant="info" />
+              </div>
+            }
+            nativePreview={<Text>ProgressBar: 80%</Text>}
+            webCode={`import React from 'react';
+import { ProgressBar } from '@spectra/react';
+
+export default function ProgressBarStatesDemo(): JSX.Element {
+  return (
+    <ProgressBar value={80} showValue label="Upload Progress" />
+  );
+}`}
+            nativeCode={`import { View } from 'react-native';
+
+export default function NativeProgressDemo() {
+  return <View />;
+}`}
+          />
+        </div>
+      );
+
+    case 'toast':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="toast-banners"
+            title="Status Severity Notifications"
+            description="Notification alerts with icons, dismiss buttons, and action slots."
+            webPreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, maxWidth: 380, width: '100%' }}>
+                <Toast variant="success" title="Changes Saved">Preferences saved.</Toast>
+                <Toast variant="warning" title="Disk Warning">Storage capacity at 94%.</Toast>
+              </div>
+            }
+            nativePreview={<Text>Toast Notifications</Text>}
+            webCode={`import React from 'react';
+import { Toast } from '@spectra/react';
+
+export default function ToastBannersDemo(): JSX.Element {
+  return (
+    <Toast variant="success" title="Changes Saved">Preferences saved.</Toast>
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeToastDemo() {
+  return <Text>Toast</Text>;
+}`}
+          />
+        </div>
+      );
+
+    case 'pagination':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="pagination-controls"
+            title="Interactive Multi-Page Controls"
+            description="Navigate pages with numeric bubbles, ellipses, and next/prev triggers."
+            webPreview={<Pagination count={8} defaultPage={3} />}
+            nativePreview={<Text>Page 3 of 8</Text>}
+            webCode={`import React from 'react';
+import { Pagination } from '@spectra/react';
+
+export default function PaginationDemo(): JSX.Element {
+  return <Pagination count={8} defaultPage={3} />;
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativePaginationDemo() {
+  return <Text>Pages</Text>;
+}`}
+          />
+        </div>
+      );
+
+    case 'stepper':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="stepper-flow"
+            title="Multi-Step Wizard Progress Indicator"
+            description="Visual pipeline tracker showing completed checkmarks, current active step, and remaining phases."
+            webPreview={
+              <div style={{ maxWidth: 540, width: '100%' }}>
+                <Stepper
+                  steps={[
+                    { title: 'Define Tokens', description: 'Design tokens' },
+                    { title: 'Review ARIA', description: 'A11y checks' },
+                    { title: 'Publish', description: 'npm release' },
+                  ]}
+                  activeStep={1}
+                />
+              </div>
+            }
+            nativePreview={<Text>Step 2 of 3</Text>}
+            webCode={`import React from 'react';
+import { Stepper } from '@spectra/react';
+
+export default function StepperFlowDemo(): JSX.Element {
+  return (
+    <Stepper
+      steps={[
+        { title: 'Define Tokens' },
+        { title: 'Review ARIA' },
+        { title: 'Publish' },
+      ]}
+      activeStep={1}
+    />
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeStepperDemo() {
+  return <Text>Stepper</Text>;
+}`}
+          />
+        </div>
+      );
+
+    case 'menu':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="menu-flyout"
+            title="Command Flyout with Shortcuts"
+            description="Action menu with keyboard shortcut badges, SVG icons, and destructive styling."
+            webPreview={
+              <div style={{ maxWidth: 220, width: '100%' }}>
+                <Menu>
+                  <MenuItem icon={<CopyIcon size={16} />} shortcut="Ctrl+C">Duplicate Node</MenuItem>
+                  <MenuItem icon={<ExternalLinkIcon size={16} />}>Export Tokens</MenuItem>
+                  <MenuItem danger icon={<CloseIcon size={16} />}>Delete Component</MenuItem>
+                </Menu>
+              </div>
+            }
+            nativePreview={<Text>Command Menu</Text>}
+            webCode={`import React from 'react';
+import { Menu, MenuItem } from '@spectra/react';
+import { CopyIcon, CloseIcon } from '@spectra/icons';
+
+export default function MenuFlyoutDemo(): JSX.Element {
+  return (
+    <Menu>
+      <MenuItem icon={<CopyIcon size={16} />} shortcut="Ctrl+C">Duplicate</MenuItem>
+      <MenuItem danger icon={<CloseIcon size={16} />}>Delete</MenuItem>
+    </Menu>
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeMenuDemo() {
+  return <Text>Menu</Text>;
 }`}
           />
         </div>

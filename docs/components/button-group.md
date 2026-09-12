@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { Button Group } from '@spectra/react';
+import { ButtonGroup } from '@spectra/react';
 
 export default function BasicButtonGroupExample() {
   return (
-    <Button Group>
+    <ButtonGroup>
       Button Group Example
-    </Button Group>
+    </ButtonGroup>
   );
 }
 ```

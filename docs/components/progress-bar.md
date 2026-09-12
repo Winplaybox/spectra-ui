@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { Progress Bar } from '@spectra/react';
+import { ProgressBar } from '@spectra/react';
 
 export default function BasicProgressBarExample() {
   return (
-    <Progress Bar>
+    <ProgressBar>
       Progress Bar Example
-    </Progress Bar>
+    </ProgressBar>
   );
 }
 ```

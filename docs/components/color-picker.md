@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { Color Picker } from '@spectra/react';
+import { ColorPicker } from '@spectra/react';
 
 export default function BasicColorPickerExample() {
   return (
-    <Color Picker>
+    <ColorPicker>
       Color Picker Example
-    </Color Picker>
+    </ColorPicker>
   );
 }
 ```

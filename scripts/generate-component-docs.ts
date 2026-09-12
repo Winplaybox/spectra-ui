@@ -28,6 +28,7 @@ function generateMarkdown(meta: ComponentMetadata): string {
     .map((p) => `| \`${p.name}\` | \`${p.type.replace(/\|/g, '\\|')}\` | \`${p.defaultValue}\` | ${p.description} |`)
     .join('\n');
 
+  const safePascalName = meta.name.replace(/\s+/g, '');
   return `# ${meta.name}
 
 ${meta.description}
@@ -40,13 +41,13 @@ npm install @spectra/react @spectra/icons
 
 \`\`\`tsx
 import React from 'react';
-import { ${meta.name} } from '@spectra/react';
+import { ${safePascalName} } from '@spectra/react';
 
-export default function Basic${meta.name.replace(/\s+/g, '')}Example() {
+export default function Basic${safePascalName}Example() {
   return (
-    <${meta.name}>
+    <${safePascalName}>
       ${meta.name} Example
-    </${meta.name}>
+    </${safePascalName}>
   );
 }
 \`\`\`

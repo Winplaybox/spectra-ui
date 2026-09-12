@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { Icon Button } from '@spectra/react';
+import { IconButton } from '@spectra/react';
 
 export default function BasicIconButtonExample() {
   return (
-    <Icon Button>
+    <IconButton>
       Icon Button Example
-    </Icon Button>
+    </IconButton>
   );
 }
 ```

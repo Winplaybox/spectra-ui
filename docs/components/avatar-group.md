@@ -10,13 +10,13 @@ npm install @spectra/react @spectra/icons
 
 ```tsx
 import React from 'react';
-import { Avatar Group } from '@spectra/react';
+import { AvatarGroup } from '@spectra/react';
 
 export default function BasicAvatarGroupExample() {
   return (
-    <Avatar Group>
+    <AvatarGroup>
       Avatar Group Example
-    </Avatar Group>
+    </AvatarGroup>
   );
 }
 ```
