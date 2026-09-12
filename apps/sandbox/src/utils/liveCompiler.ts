@@ -42,11 +42,30 @@ export const LIVE_SCOPE: Record<string, any> = {
   handlePress: (...args: any[]) => console.log('[Spectra] Pressed', ...args),
   handleChange: (...args: any[]) => console.log('[Spectra] Changed', ...args),
   handleClear: (...args: any[]) => console.log('[Spectra] Cleared', ...args),
+  onValueChange: (...args: any[]) => console.log('[Spectra] onValueChange', ...args),
+  onChangeText: (...args: any[]) => console.log('[Spectra] onChangeText', ...args),
+  onSelect: (...args: any[]) => console.log('[Spectra] onSelect', ...args),
+  onDismiss: (...args: any[]) => console.log('[Spectra] onDismiss', ...args),
+  onClose: (...args: any[]) => console.log('[Spectra] onClose', ...args),
+  val: 'option-1',
+  setVal: () => {},
+  value: 'option-1',
+  setValue: () => {},
+  text: '',
+  setText: () => {},
+  selected: 'option-1',
+  setSelected: () => {},
+  loading: false,
+  setLoading: () => {},
+  open: false,
+  setOpen: () => {},
+  isOpen: false,
+  setIsOpen: () => {},
   searchTerm: '',
   setSearchTerm: () => {},
   checked: true,
   setChecked: () => {},
-  activeTab: 0,
+  activeTab: '1',
   setActiveTab: () => {},
 
   // Native React Native mock primitives for mobile preview live rendering
@@ -188,17 +207,33 @@ export function compileAndRender(code: string, options?: CompileOptions): Compil
       const styleStr = JSON.stringify(wrapperStyle);
 
       executableCode = `return function __SpectraCompactDynamicComponent() {
+  const [val, setVal] = React.useState('option-1');
+  const [value, setValue] = React.useState('option-1');
+  const [text, setText] = React.useState('');
+  const [selected, setSelected] = React.useState('option-1');
+  const [loading, setLoading] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
   const [searchTerm, setSearchTerm] = React.useState('');
   const [checked, setChecked] = React.useState(true);
-  const [activeTab, setActiveTab] = React.useState(0);
-  const [value, setValue] = React.useState('');
+  const [activeTab, setActiveTab] = React.useState('1');
   const [expanded, setExpanded] = React.useState(true);
   const sizes = ['sm', 'md', 'lg'];
   const handleApprove = (e) => console.log('[Spectra] Approved', e);
   const handleClick = (...args) => console.log('[Spectra] Clicked', ...args);
   const handlePress = (...args) => console.log('[Spectra] Pressed', ...args);
-  const handleChange = (e) => setSearchTerm(e && e.target ? e.target.value : e);
-  const handleClear = () => setSearchTerm('');
+  const handleChange = (e) => {
+    const next = e && e.target ? (e.target.value !== undefined ? e.target.value : e.target.checked) : e;
+    setVal(next);
+    setValue(next);
+    setSearchTerm(typeof next === 'string' ? next : '');
+  };
+  const handleClear = () => { setVal(''); setValue(''); setSearchTerm(''); };
+  const onValueChange = (next) => { setVal(next); setValue(next); };
+  const onChangeText = (next) => { setText(next); setVal(next); setValue(next); };
+  const onSelect = (next) => { setSelected(next); setVal(next); setValue(next); };
+  const onDismiss = () => { setOpen(false); setIsOpen(false); };
+  const onClose = () => { setOpen(false); setIsOpen(false); };
 
   return (
     <div style={${styleStr}}>

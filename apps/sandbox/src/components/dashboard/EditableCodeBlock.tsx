@@ -127,6 +127,7 @@ export const EditableCodeBlock: React.FC<EditableCodeBlockProps> = ({
           : '1px solid rgba(255, 255, 255, 0.08)',
         backgroundColor: '#0B0F19',
         overflow: 'hidden',
+        position: 'relative',
         boxShadow: isFocused
           ? '0 0 0 1px #007FFF, 0 4px 20px rgba(0, 127, 255, 0.15)'
           : isModified
@@ -141,80 +142,42 @@ export const EditableCodeBlock: React.FC<EditableCodeBlockProps> = ({
         }
       `}</style>
 
-      {/* Code Block Header */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '6px 14px',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
-          backgroundColor: '#0F172A',
-          fontSize: 11,
-          fontFamily: "'JetBrains Mono', Consolas, monospace",
-          color: '#94A3B8',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          {fileBadge && (
-            <span
-              style={{
-                fontWeight: 600,
-                color: language.includes('ts') ? '#38BDF8' : '#FBBF24',
-              }}
-            >
-              {fileBadge}
-            </span>
-          )}
-          {isModified && (
-            <span
-              style={{
-                fontSize: 10,
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: '0.04em',
-                padding: '1px 6px',
-                borderRadius: 4,
-                backgroundColor: 'rgba(56, 189, 248, 0.15)',
-                color: '#38BDF8',
-                border: '1px solid rgba(56, 189, 248, 0.3)',
-              }}
-            >
-              Editable (Modified)
-            </span>
-          )}
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          {isModified && (
-            <button
-              onClick={onResetCode}
-              style={{
-                background: 'rgba(255, 255, 255, 0.06)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                color: '#E2E8F0',
-                padding: '2px 8px',
-                borderRadius: 4,
-                cursor: 'pointer',
-                fontSize: 11,
-                display: 'flex',
-                alignItems: 'center',
-                gap: 4,
-                transition: 'background 0.15s ease',
-              }}
-              title="Reset code to original"
-            >
-              <RotateCcwIcon size={11} />
-              <span>Reset</span>
-            </button>
-          )}
-
-          <button
-            onClick={onCopy}
+      {/* Floating Modified & Reset Badge (MUI benchmark: no duplicate header/copy button) */}
+      {isModified && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 8,
+            right: 12,
+            zIndex: 10,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            pointerEvents: 'auto',
+          }}
+        >
+          <span
             style={{
-              background: 'rgba(255, 255, 255, 0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              color: copied ? '#4ADE80' : '#E2E8F0',
+              fontSize: 10,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.04em',
+              padding: '2px 7px',
+              borderRadius: 4,
+              backgroundColor: 'rgba(56, 189, 248, 0.18)',
+              color: '#38BDF8',
+              border: '1px solid rgba(56, 189, 248, 0.35)',
+              backdropFilter: 'blur(4px)',
+            }}
+          >
+            Modified
+          </span>
+          <button
+            onClick={onResetCode}
+            style={{
+              background: 'rgba(15, 23, 42, 0.85)',
+              border: '1px solid rgba(255, 255, 255, 0.14)',
+              color: '#E2E8F0',
               padding: '2px 8px',
               borderRadius: 4,
               cursor: 'pointer',
@@ -222,15 +185,15 @@ export const EditableCodeBlock: React.FC<EditableCodeBlockProps> = ({
               display: 'flex',
               alignItems: 'center',
               gap: 4,
-              transition: 'all 0.15s ease',
+              transition: 'background 0.15s ease',
             }}
-            title="Copy code"
+            title="Reset code to original"
           >
-            {copied ? <CheckIcon size={12} /> : <CopyIcon size={12} />}
-            <span>{copied ? 'Copied' : 'Copy'}</span>
+            <RotateCcwIcon size={11} />
+            <span>Reset</span>
           </button>
         </div>
-      </div>
+      )}
 
       {/* Editable Live Editor Area with Real-Time Syntax Layer */}
       <div

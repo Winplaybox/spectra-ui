@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useColorScheme, useRTL } from '@spectra/react';
-import { SunIcon, MoonIcon, SearchIcon, ExternalLinkIcon, MenuIcon, ChevronDownIcon, CheckIcon } from '@spectra/icons';
-import { RouteState } from '../../utils/router';
+import { SunIcon, MoonIcon, SearchIcon, ExternalLinkIcon, MenuIcon, ChevronDownIcon, CheckIcon, ChevronRightIcon } from '@spectra/icons';
+import { RouteState, navigate } from '../../utils/router';
 import { useVersion } from '../../context/VersionContext';
+import { COMPONENT_CATEGORIES } from './Sidebar';
 
 interface HeaderProps {
   currentRoute: RouteState;
@@ -37,21 +38,57 @@ export const Header: React.FC<HeaderProps> = ({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const getBreadcrumb = () => {
+  const getBreadcrumbs = (): Array<{ label: string; href?: string }> => {
+    const items: Array<{ label: string; href?: string }> = [
+      { label: 'Spectra UI', href: '/overview' },
+    ];
+
     switch (currentRoute.type) {
       case 'overview':
-        return 'Overview';
+        items.push({ label: 'Overview' });
+        break;
       case 'installation':
-        return 'Getting Started / Installation';
+        items.push({ label: 'Getting Started', href: '/installation' });
+        items.push({ label: 'Installation' });
+        break;
+      case 'cross-platform':
+        items.push({ label: 'Architecture', href: '/cross-platform' });
+        items.push({ label: 'Cross-Platform (Web & Native)' });
+        break;
       case 'tokens':
-        return `Design Tokens / ${currentRoute.id ? currentRoute.id.charAt(0).toUpperCase() + currentRoute.id.slice(1) : 'Tokens'}`;
+        items.push({ label: 'Design Tokens', href: '/tokens/colors' });
+        if (currentRoute.id) {
+          const tokenName = currentRoute.id.charAt(0).toUpperCase() + currentRoute.id.slice(1);
+          items.push({ label: tokenName });
+        }
+        break;
       case 'components':
-        return `Components / ${currentRoute.id ? currentRoute.id.charAt(0).toUpperCase() + currentRoute.id.slice(1) : 'All'}`;
+        items.push({ label: 'Components', href: '/components/button' });
+        if (currentRoute.id) {
+          const compCat = COMPONENT_CATEGORIES.find((cat) =>
+            cat.components.some((c) => c.id === currentRoute.id)
+          );
+          if (compCat) {
+            items.push({ label: compCat.name });
+          }
+          const compItem = compCat?.components.find((c) => c.id === currentRoute.id);
+          items.push({ label: compItem ? compItem.name : currentRoute.id });
+        }
+        break;
+      case 'hooks':
+        items.push({ label: 'Hooks', href: '/hooks/use-disclosure' });
+        if (currentRoute.id) {
+          items.push({ label: currentRoute.id });
+        }
+        break;
       case 'icons':
-        return 'Icons / 12,253 Catalog';
+        items.push({ label: 'Icons', href: '/icons' });
+        items.push({ label: '12,253 Catalog' });
+        break;
       default:
-        return 'Spectra UI';
+        break;
     }
+    return items;
   };
 
   return (
@@ -92,10 +129,52 @@ export const Header: React.FC<HeaderProps> = ({
           <MenuIcon size={16} />
         </button>
 
-        {/* Breadcrumb path */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--color-text-secondary)' }}>
-          <span style={{ fontWeight: 600, color: 'var(--color-text-primary)' }}>{getBreadcrumb()}</span>
-        </div>
+        {/* Dynamic Interactive Breadcrumbs (MUI & Fluent 2 benchmark) */}
+        <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
+          {getBreadcrumbs().map((crumb, idx, arr) => {
+            const isLast = idx === arr.length - 1;
+            return (
+              <React.Fragment key={`${crumb.label}-${idx}`}>
+                {idx > 0 && (
+                  <ChevronRightIcon
+                    size={11}
+                    style={{ color: 'var(--color-text-muted)', opacity: 0.6, flexShrink: 0 }}
+                  />
+                )}
+                {isLast || !crumb.href ? (
+                  <span
+                    style={{
+                      fontWeight: 600,
+                      color: 'var(--color-text-primary)',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {crumb.label}
+                  </span>
+                ) : (
+                  <a
+                    href={crumb.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate(crumb.href!);
+                    }}
+                    style={{
+                      color: 'var(--color-text-secondary)',
+                      textDecoration: 'none',
+                      fontWeight: 500,
+                      whiteSpace: 'nowrap',
+                      transition: 'color 0.12s ease',
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-action-primary)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-secondary)')}
+                  >
+                    {crumb.label}
+                  </a>
+                )}
+              </React.Fragment>
+            );
+          })}
+        </nav>
       </div>
 
       {/* Global Controls */}

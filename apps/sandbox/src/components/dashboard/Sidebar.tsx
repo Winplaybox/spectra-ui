@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useColorScheme } from '@spectra/react';
-import { SearchIcon, ExternalLinkIcon } from '@spectra/icons';
+import { SearchIcon, ExternalLinkIcon, ChevronDownIcon } from '@spectra/icons';
 import { navigate, RouteState } from '../../utils/router';
 import { useVersion } from '../../context/VersionContext';
+import { V010_NEW_COMPONENTS } from '../../data/versionReleaseData';
+import { COMPONENT_VARIANTS_MAP } from './ComponentVariantsShowcase';
 
 interface SidebarProps {
   currentRoute: RouteState;
@@ -17,35 +19,81 @@ interface ComponentItem {
   category: string;
 }
 
-const ALL_COMPONENTS: ComponentItem[] = [
-  // Actions
-  { id: 'button', name: 'Button', category: 'Actions' },
-  // Form
-  { id: 'text-input', name: 'TextInput', category: 'Form' },
-  { id: 'select', name: 'Select', category: 'Form' },
-  { id: 'checkbox', name: 'Checkbox', category: 'Form' },
-  { id: 'radio', name: 'Radio', category: 'Form' },
-  { id: 'switch', name: 'Switch', category: 'Form' },
-  // Layout
-  { id: 'divider', name: 'Divider', category: 'Layout' },
-  // Data Display
-  { id: 'accordion', name: 'Accordion', category: 'Data Display' },
-  { id: 'avatar', name: 'Avatar', category: 'Data Display' },
-  { id: 'chip', name: 'Chip', category: 'Data Display' },
-  { id: 'list', name: 'List', category: 'Data Display' },
-  // Feedback
-  { id: 'alert', name: 'Alert', category: 'Feedback' },
-  { id: 'badge', name: 'Badge', category: 'Feedback' },
-  { id: 'skeleton', name: 'Skeleton', category: 'Feedback' },
-  { id: 'spinner', name: 'Spinner', category: 'Feedback' },
-  { id: 'tooltip', name: 'Tooltip', category: 'Feedback' },
-  // Navigation
-  { id: 'breadcrumbs', name: 'Breadcrumbs', category: 'Navigation' },
-  { id: 'tabs', name: 'Tabs', category: 'Navigation' },
-  // Surfaces
-  { id: 'card', name: 'Card', category: 'Surfaces' },
-  // Overlay
-  { id: 'dialog', name: 'Dialog (Modal)', category: 'Overlay' },
+export interface ComponentCategory {
+  id: string;
+  name: string;
+  components: ComponentItem[];
+}
+
+export const COMPONENT_CATEGORIES: ComponentCategory[] = [
+  {
+    id: 'actions',
+    name: 'Actions',
+    components: [
+      { id: 'button', name: 'Button', category: 'Actions' },
+    ],
+  },
+  {
+    id: 'form',
+    name: 'Form & Inputs',
+    components: [
+      { id: 'text-input', name: 'TextInput', category: 'Form' },
+      { id: 'select', name: 'Select', category: 'Form' },
+      { id: 'checkbox', name: 'Checkbox', category: 'Form' },
+      { id: 'radio', name: 'Radio', category: 'Form' },
+      { id: 'switch', name: 'Switch', category: 'Form' },
+    ],
+  },
+  {
+    id: 'layout',
+    name: 'Layout',
+    components: [
+      { id: 'divider', name: 'Divider', category: 'Layout' },
+    ],
+  },
+  {
+    id: 'data-display',
+    name: 'Data Display',
+    components: [
+      { id: 'accordion', name: 'Accordion', category: 'Data Display' },
+      { id: 'avatar', name: 'Avatar', category: 'Data Display' },
+      { id: 'chip', name: 'Chip', category: 'Data Display' },
+      { id: 'list', name: 'List', category: 'Data Display' },
+    ],
+  },
+  {
+    id: 'feedback',
+    name: 'Feedback',
+    components: [
+      { id: 'alert', name: 'Alert', category: 'Feedback' },
+      { id: 'badge', name: 'Badge', category: 'Feedback' },
+      { id: 'skeleton', name: 'Skeleton', category: 'Feedback' },
+      { id: 'spinner', name: 'Spinner', category: 'Feedback' },
+      { id: 'tooltip', name: 'Tooltip', category: 'Feedback' },
+    ],
+  },
+  {
+    id: 'navigation',
+    name: 'Navigation',
+    components: [
+      { id: 'breadcrumbs', name: 'Breadcrumbs', category: 'Navigation' },
+      { id: 'tabs', name: 'Tabs', category: 'Navigation' },
+    ],
+  },
+  {
+    id: 'surfaces',
+    name: 'Surfaces',
+    components: [
+      { id: 'card', name: 'Card', category: 'Surfaces' },
+    ],
+  },
+  {
+    id: 'overlay',
+    name: 'Overlay',
+    components: [
+      { id: 'dialog', name: 'Dialog (Modal)', category: 'Overlay' },
+    ],
+  },
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -56,6 +104,64 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const { colorScheme } = useColorScheme();
   const { currentVersion } = useVersion();
+
+  // Track open/closed state for category folders (all open by default)
+  const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({
+    actions: true,
+    form: true,
+    layout: true,
+    'data-display': true,
+    feedback: true,
+    navigation: true,
+    surfaces: true,
+    overlay: true,
+  });
+
+  const [currentHash, setCurrentHash] = useState(
+    typeof window !== 'undefined' ? window.location.hash.substring(1) : ''
+  );
+
+  // Auto-expand the active component's category on navigation
+  useEffect(() => {
+    if (currentRoute.type === 'components' && currentRoute.id) {
+      const activeCat = COMPONENT_CATEGORIES.find((cat) =>
+        cat.components.some((c) => c.id === currentRoute.id)
+      );
+      if (activeCat) {
+        setExpandedCategories((prev) => ({ ...prev, [activeCat.id]: true }));
+      }
+    }
+  }, [currentRoute]);
+
+  // Keep track of hash changes for in-page sub-tree anchors
+  useEffect(() => {
+    const handleHash = () => {
+      setCurrentHash(window.location.hash.substring(1));
+    };
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
+  const toggleCategory = (catId: string) => {
+    setExpandedCategories((prev) => ({
+      ...prev,
+      [catId]: !prev[catId],
+    }));
+  };
+
+  const handleAnchorClick = (e: React.MouseEvent, compId: string, anchorId: string) => {
+    e.preventDefault();
+    if (currentRoute.type !== 'components' || currentRoute.id !== compId) {
+      navigate(`/components/${compId}#${anchorId}`);
+    } else {
+      window.location.hash = anchorId;
+      const el = document.getElementById(anchorId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    onCloseMobile();
+  };
 
   const handleLinkClick = (e: React.MouseEvent, path: string) => {
     e.preventDefault();
@@ -429,7 +535,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </div>
           </div>
 
-          {/* Section: Components (Grouped like MUI & Fluent 2) */}
+          {/* Section: Components Tree (MUI & Fluent 2 Benchmark) */}
           <div>
             <div
               style={{
@@ -437,7 +543,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 padding: '4px 12px',
-                marginBottom: 4,
+                marginBottom: 6,
               }}
             >
               <span
@@ -454,43 +560,189 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <span
                 style={{
                   fontSize: 10,
-                  fontWeight: 600,
-                  padding: '1px 5px',
+                  fontWeight: 700,
+                  padding: '1px 6px',
                   borderRadius: 10,
                   backgroundColor: 'var(--color-surface-raised)',
                   color: 'var(--color-text-muted)',
+                  border: '1px solid var(--color-border-subtle)',
                 }}
               >
-                {ALL_COMPONENTS.length}
+                20
               </span>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              {ALL_COMPONENTS.map((c) => {
-                const active = isComponentActive(c.id);
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+              {COMPONENT_CATEGORIES.map((cat) => {
+                const isExpanded = !!expandedCategories[cat.id];
+                const hasActiveChild = cat.components.some((c) => isComponentActive(c.id));
+
                 return (
-                  <a
-                    key={c.id}
-                    href={`/components/${c.id}`}
-                    onClick={(e) => handleLinkClick(e, `/components/${c.id}`)}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '7px 12px',
-                      borderRadius: 4,
-                      fontSize: 13,
-                      textDecoration: 'none',
-                      fontWeight: active ? 600 : 400,
-                      backgroundColor: active ? 'var(--color-surface-raised)' : 'transparent',
-                      color: active ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                      borderLeft: active ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                      transition: 'background-color 0.1s ease',
-                    }}
-                  >
-                    <span>{c.name}</span>
-                    <span style={{ fontSize: 10, color: 'var(--color-text-muted)' }}>{c.category}</span>
-                  </a>
+                  <div key={cat.id} style={{ display: 'flex', flexDirection: 'column' }}>
+                    {/* Category Tree Header */}
+                    <button
+                      onClick={() => toggleCategory(cat.id)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '6px 10px',
+                        borderRadius: 6,
+                        border: 'none',
+                        background: 'transparent',
+                        color: hasActiveChild ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+                        fontSize: 12,
+                        fontWeight: hasActiveChild ? 700 : 600,
+                        cursor: 'pointer',
+                        textAlign: 'left',
+                        transition: 'all 0.12s ease',
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <ChevronDownIcon
+                          size={12}
+                          style={{
+                            transform: isExpanded ? 'none' : 'rotate(-90deg)',
+                            transition: 'transform 0.15s ease',
+                            color: 'var(--color-text-muted)',
+                          }}
+                        />
+                        <span>{cat.name}</span>
+                      </div>
+                      <span
+                        style={{
+                          fontSize: 10,
+                          fontWeight: 600,
+                          color: 'var(--color-text-muted)',
+                          backgroundColor: 'var(--color-surface-raised)',
+                          padding: '0 4px',
+                          borderRadius: 4,
+                        }}
+                      >
+                        {cat.components.length}
+                      </span>
+                    </button>
+
+                    {/* Collapsible Category Branch */}
+                    {isExpanded && (
+                      <div
+                        style={{
+                          marginLeft: 14,
+                          paddingLeft: 10,
+                          borderLeft: '1px solid var(--color-border-subtle)',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: 2,
+                          marginTop: 2,
+                          marginBottom: 4,
+                        }}
+                      >
+                        {cat.components.map((c) => {
+                          const active = isComponentActive(c.id);
+                          const isNew = V010_NEW_COMPONENTS.includes(c.id);
+                          const inPageVariants = COMPONENT_VARIANTS_MAP[c.id] || [];
+
+                          return (
+                            <div key={c.id} style={{ display: 'flex', flexDirection: 'column' }}>
+                              <a
+                                href={`/components/${c.id}`}
+                                onClick={(e) => handleLinkClick(e, `/components/${c.id}`)}
+                                style={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'space-between',
+                                  padding: '6px 10px',
+                                  borderRadius: 6,
+                                  fontSize: 13,
+                                  textDecoration: 'none',
+                                  fontWeight: active ? 600 : 400,
+                                  backgroundColor: active ? 'rgba(0, 127, 255, 0.12)' : 'transparent',
+                                  color: active ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
+                                  borderLeft: active ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+                                  transition: 'background-color 0.12s ease',
+                                }}
+                                onMouseEnter={(e) => {
+                                  if (!active) e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
+                                }}
+                                onMouseLeave={(e) => {
+                                  if (!active) e.currentTarget.style.backgroundColor = 'transparent';
+                                }}
+                              >
+                                <span>{c.name}</span>
+                                {isNew && (
+                                  <span
+                                    style={{
+                                      fontSize: 9,
+                                      fontWeight: 700,
+                                      textTransform: 'uppercase',
+                                      letterSpacing: '0.04em',
+                                      padding: '1px 5px',
+                                      borderRadius: 10,
+                                      backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                                      color: '#10B981',
+                                      border: '1px solid rgba(16, 185, 129, 0.3)',
+                                    }}
+                                  >
+                                    NEW
+                                  </span>
+                                )}
+                              </a>
+
+                              {/* Nested in-page sub-tree deep links for active component */}
+                              {active && inPageVariants.length > 0 && (
+                                <div
+                                  style={{
+                                    marginLeft: 12,
+                                    paddingLeft: 8,
+                                    borderLeft: '1px solid var(--color-border-subtle)',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: 1,
+                                    marginTop: 2,
+                                    marginBottom: 4,
+                                  }}
+                                >
+                                  {inPageVariants.map((v) => {
+                                    const isAnchorActive = currentHash === v.id;
+                                    return (
+                                      <a
+                                        key={v.id}
+                                        href={`/components/${c.id}#${v.id}`}
+                                        onClick={(e) => handleAnchorClick(e, c.id, v.id)}
+                                        style={{
+                                          display: 'block',
+                                          padding: '4px 6px',
+                                          fontSize: 11.5,
+                                          borderRadius: 4,
+                                          textDecoration: 'none',
+                                          color: isAnchorActive
+                                            ? 'var(--color-action-primary)'
+                                            : 'var(--color-text-secondary)',
+                                          fontWeight: isAnchorActive ? 600 : 400,
+                                          backgroundColor: isAnchorActive
+                                            ? 'var(--color-surface-raised)'
+                                            : 'transparent',
+                                          whiteSpace: 'nowrap',
+                                          overflow: 'hidden',
+                                          textOverflow: 'ellipsis',
+                                          transition: 'color 0.1s ease',
+                                        }}
+                                        title={v.title}
+                                      >
+                                        {v.title}
+                                      </a>
+                                    );
+                                  })}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
                 );
               })}
             </div>
