@@ -69,7 +69,7 @@ export const App: React.FC = () => {
       // Quick numbers
       if (e.key === '1') navigate('/overview');
       if (e.key === '2') navigate('/installation');
-      if (e.key === '3') navigate('/components/button');
+      if (e.key === '3') navigate('/components');
       if (e.key === '4') navigate('/tokens/colors');
       if (e.key === '5') navigate('/icons');
     };
@@ -161,7 +161,7 @@ export const App: React.FC = () => {
           )}
 
           {currentRoute.type === 'components' && (
-            <ComponentsSection componentId={currentRoute.id || 'button'} />
+            <ComponentsSection componentId={currentRoute.id || 'all-components'} />
           )}
 
           {currentRoute.type === 'hooks' && (

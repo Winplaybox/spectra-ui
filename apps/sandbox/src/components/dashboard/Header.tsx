@@ -63,16 +63,18 @@ export const Header: React.FC<HeaderProps> = ({
         }
         break;
       case 'components':
-        items.push({ label: 'Components', href: '/components/button' });
-        if (currentRoute.id) {
+        items.push({ label: 'Components', href: '/components' });
+        if (currentRoute.id && currentRoute.id !== 'all-components' && currentRoute.id !== 'all') {
           const compCat = COMPONENT_CATEGORIES.find((cat) =>
             cat.components.some((c) => c.id === currentRoute.id)
           );
           if (compCat) {
-            items.push({ label: compCat.name });
+            items.push({ label: compCat.name, href: `/components#${compCat.id}` });
           }
           const compItem = compCat?.components.find((c) => c.id === currentRoute.id);
           items.push({ label: compItem ? compItem.name : currentRoute.id });
+        } else {
+          items.push({ label: 'All Components' });
         }
         break;
       case 'hooks':

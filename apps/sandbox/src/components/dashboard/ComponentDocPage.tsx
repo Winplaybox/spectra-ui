@@ -1433,24 +1433,6 @@ export const Native${meta.name}Demo = () => {
             borderRadius: 16,
           }}
         >
-          {/* Breadcrumbs */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-              fontSize: 13,
-              color: 'var(--color-text-muted)',
-              marginBottom: 8,
-            }}
-          >
-            <span>Components</span>
-            <span>/</span>
-            <span style={{ color: 'var(--color-text-secondary)', fontWeight: 500 }}>{meta.category}</span>
-            <span>/</span>
-            <span style={{ color: 'var(--color-action-primary)', fontWeight: 600 }}>{meta.name}</span>
-          </div>
-
           <div
             style={{
               display: 'flex',

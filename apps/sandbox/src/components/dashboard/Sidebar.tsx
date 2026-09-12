@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useColorScheme } from '@spectra/react';
-import { SearchIcon, ExternalLinkIcon, ChevronDownIcon } from '@spectra/icons';
+import { SearchIcon, ExternalLinkIcon, ChevronDownIcon, ComponentIcon } from '@spectra/icons';
 import { navigate, RouteState } from '../../utils/router';
 import { useVersion } from '../../context/VersionContext';
 import { V010_NEW_COMPONENTS } from '../../data/versionReleaseData';
@@ -176,6 +176,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const isComponentActive = (id: string) => {
     return currentRoute.type === 'components' && currentRoute.id === id;
   };
+
+  const isAllComponentsActive =
+    currentRoute.type === 'components' &&
+    (currentRoute.id === 'all-components' || currentRoute.id === 'all' || !currentRoute.id);
 
   return (
     <>
@@ -571,6 +575,56 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 20
               </span>
             </div>
+
+            {/* All Components Entry (MUI & Fluent UI benchmark) */}
+            <a
+              href="/components"
+              onClick={(e) => handleLinkClick(e, '/components')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '7px 10px',
+                borderRadius: 6,
+                fontSize: 13,
+                textDecoration: 'none',
+                fontWeight: isAllComponentsActive ? 600 : 500,
+                backgroundColor: isAllComponentsActive ? 'rgba(0, 127, 255, 0.12)' : 'transparent',
+                color: isAllComponentsActive ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
+                borderLeft: isAllComponentsActive ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+                transition: 'all 0.12s ease',
+                marginBottom: 6,
+              }}
+              onMouseEnter={(e) => {
+                if (!isAllComponentsActive) e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
+              }}
+              onMouseLeave={(e) => {
+                if (!isAllComponentsActive) e.currentTarget.style.backgroundColor = 'transparent';
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <ComponentIcon
+                  size={14}
+                  style={{
+                    color: isAllComponentsActive ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
+                  }}
+                />
+                <span>All Components</span>
+              </div>
+              <span
+                style={{
+                  fontSize: 10,
+                  fontWeight: 600,
+                  color: 'var(--color-text-muted)',
+                  backgroundColor: 'var(--color-surface-raised)',
+                  padding: '1px 6px',
+                  borderRadius: 10,
+                  border: '1px solid var(--color-border-subtle)',
+                }}
+              >
+                20
+              </span>
+            </a>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
               {COMPONENT_CATEGORIES.map((cat) => {

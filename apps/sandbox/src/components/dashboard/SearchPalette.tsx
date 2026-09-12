@@ -41,7 +41,7 @@ const QUICK_NAVIGATION_SECTIONS = [
     category: 'CORE PLATFORM',
     items: [
       { title: 'Installation', icon: 'download', path: '/installation' },
-      { title: 'Components', icon: 'components', path: '/components/button' },
+      { title: 'All Components', icon: 'components', path: '/components' },
       { title: 'Cross-Platform', icon: 'layers', path: '/cross-platform' },
       { title: 'Overview & Principles', icon: 'overview', path: '/overview' },
     ],

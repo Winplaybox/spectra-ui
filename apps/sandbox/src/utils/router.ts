@@ -53,8 +53,11 @@ export function parsePath(rawPath: string): RouteState {
   }
 
   if (segments[0] === 'components') {
-    const componentId = segments[1] || 'button';
-    return { type: 'components', id: componentId, path: `/components/${componentId}`, anchor };
+    const rawId = segments[1];
+    if (!rawId || rawId === 'all' || rawId === 'all-components') {
+      return { type: 'components', id: 'all-components', path: '/components', anchor };
+    }
+    return { type: 'components', id: rawId, path: `/components/${rawId}`, anchor };
   }
 
   if (segments[0] === 'hooks') {
