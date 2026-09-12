@@ -32,7 +32,8 @@ import {
   Chip,
   Breadcrumbs,
 } from '@spectra/react';
-import { getComponentReleaseVersion, getComponentGitHubUrl } from '../../data/versionReleaseData';
+import { getComponentReleaseVersion } from '../../data/versionReleaseData';
+import { useVersion } from '../../context/VersionContext';
 import {
   ExternalLinkIcon,
   CheckIcon,
@@ -63,6 +64,7 @@ interface ComponentDocPageProps {
 export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId }) => {
   const meta = COMPONENTS_DATA[componentId] || COMPONENTS_DATA['button'];
   const releaseInfo = getComponentReleaseVersion(meta.id);
+  const { currentVersion, getGitHubUrl } = useVersion();
 
   // View modes: Web vs Mobile Native vs Headless Primitives
   const [platformMode, setPlatformMode] = useState<'web' | 'native' | 'headless'>('web');
@@ -814,8 +816,10 @@ export const Native${meta.name}Demo = () => {
 
   const { Component: DynamicPlaygroundComp } = React.useMemo(() => {
     if (customPlaygroundCode === null) return { Component: null };
-    return compileAndRender(activePlaygroundSnippet);
-  }, [activePlaygroundSnippet, customPlaygroundCode]);
+    return compileAndRender(activePlaygroundSnippet, {
+      platform: platformMode === 'native' ? 'native' : 'web',
+    });
+  }, [activePlaygroundSnippet, customPlaygroundCode, platformMode]);
 
   // Render Web Component in Interactive Playground
   const renderComponentPreview = () => {
@@ -1483,7 +1487,7 @@ export const Native${meta.name}Demo = () => {
                     letterSpacing: '0.02em',
                   }}
                 >
-                  v0.1.0 (New)
+                  {currentVersion} (New)
                 </span>
               ) : (
                 <span
@@ -1497,16 +1501,16 @@ export const Native${meta.name}Demo = () => {
                     border: '1px solid var(--color-border-subtle)',
                   }}
                 >
-                  v0.1.0
+                  {currentVersion}
                 </span>
               )}
             </div>
 
             <a
-              href={getComponentGitHubUrl(meta.id, releaseInfo.version)}
+              href={getGitHubUrl(meta.id, platformMode)}
               target="_blank"
               rel="noreferrer"
-              title="View the source on GitHub pinned to release version"
+              title={`View the ${platformMode} source on GitHub pinned to ${currentVersion}`}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',

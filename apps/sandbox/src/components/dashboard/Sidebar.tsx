@@ -2,6 +2,7 @@ import React from 'react';
 import { useColorScheme } from '@spectra/react';
 import { SearchIcon, ExternalLinkIcon } from '@spectra/icons';
 import { navigate, RouteState } from '../../utils/router';
+import { useVersion } from '../../context/VersionContext';
 
 interface SidebarProps {
   currentRoute: RouteState;
@@ -54,6 +55,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onCloseMobile,
 }) => {
   const { colorScheme } = useColorScheme();
+  const { currentVersion } = useVersion();
 
   const handleLinkClick = (e: React.MouseEvent, path: string) => {
     e.preventDefault();
@@ -177,7 +179,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               color: 'var(--color-text-secondary)',
             }}
           >
-            v0.1.0
+            {currentVersion}
           </span>
         </div>
 
@@ -645,7 +647,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               fontWeight: 500,
             }}
           >
-            v0.1.0 · Cross-Platform
+            {currentVersion} · Cross-Platform
           </span>
         </div>
       </aside>

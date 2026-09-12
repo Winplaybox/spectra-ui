@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useColorScheme, useRTL } from '@spectra/react';
 import { SunIcon, MoonIcon, SearchIcon, ExternalLinkIcon, MenuIcon, ChevronDownIcon, CheckIcon } from '@spectra/icons';
 import { RouteState } from '../../utils/router';
-import { CURRENT_VERSION, RELEASES_DATA, VersionRelease } from '../../data/versionReleaseData';
+import { useVersion } from '../../context/VersionContext';
 
 interface HeaderProps {
   currentRoute: RouteState;
@@ -21,10 +21,10 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const { colorScheme, setColorScheme } = useColorScheme();
   const { isRTL, toggleRTL } = useRTL();
+  const { currentVersion, setCurrentVersion, releases } = useVersion();
 
   // Version selector state (MUI-benchmark)
   const [versionOpen, setVersionOpen] = useState(false);
-  const [selectedVersion, setSelectedVersion] = useState(CURRENT_VERSION);
   const versionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -129,7 +129,7 @@ export const Header: React.FC<HeaderProps> = ({
                 boxShadow: '0 0 8px #10B981',
               }}
             />
-            <span>{selectedVersion}</span>
+            <span>{currentVersion}</span>
             <ChevronDownIcon
               size={12}
               style={{
@@ -171,13 +171,13 @@ export const Header: React.FC<HeaderProps> = ({
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', padding: '4px 6px' }}>
-                {RELEASES_DATA.map((rel) => {
-                  const isCurrent = selectedVersion === rel.version;
+                {releases.map((rel) => {
+                  const isCurrent = currentVersion === rel.version;
                   return (
                     <button
                       key={rel.version}
                       onClick={() => {
-                        setSelectedVersion(rel.version);
+                        setCurrentVersion(rel.version);
                         setVersionOpen(false);
                       }}
                       style={{

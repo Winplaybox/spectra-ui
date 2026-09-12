@@ -107,10 +107,14 @@ export interface CompileResult {
   error: string | null;
 }
 
+export interface CompileOptions {
+  platform?: 'web' | 'native';
+}
+
 /**
  * Compiles user JSX/TSX code in real-time using Sucrase and binds it to LIVE_SCOPE
  */
-export function compileAndRender(code: string): CompileResult {
+export function compileAndRender(code: string, options?: CompileOptions): CompileResult {
   if (!code || !code.trim()) {
     return { Component: null, error: null };
   }
@@ -150,13 +154,39 @@ export function compileAndRender(code: string): CompileResult {
       const name = match ? match[1] : '__SpectraComp';
       cleanCode = cleanCode.replace(/export\s+function\s+([a-zA-Z0-9_]+)/, 'function $1');
       executableCode = `${cleanCode}\nreturn ${name};`;
-    } else if (/^(?:const|let|var|function)\s+([a-zA-Z0-9_]+)/.test(cleanCode)) {
-      const match = cleanCode.match(/(?:const|let|var|function)\s+([a-zA-Z0-9_]+)/);
+    } else if (/export\s+(?:const|let|var)\s+([a-zA-Z0-9_]+)/.test(cleanCode)) {
+      const match = cleanCode.match(/export\s+(?:const|let|var)\s+([a-zA-Z0-9_]+)/);
+      const name = match ? match[1] : null;
+      cleanCode = cleanCode.replace(/export\s+(?:const|let|var)\s+/, 'const ');
+      executableCode = `${cleanCode}\nreturn ${name || 'null'};`;
+    } else if (/(?:^|\n)\s*(?:const|let|var|function)\s+([a-zA-Z0-9_]+)/.test(cleanCode)) {
+      const match = cleanCode.match(/(?:^|\n)\s*(?:const|let|var|function)\s+([a-zA-Z0-9_]+)/);
       const name = match ? match[1] : null;
       executableCode = `${cleanCode}\nreturn ${name || 'null'};`;
     } else {
       // Direct JSX fragment (typical of compact snippets)
       // Provide built-in reactive state hooks for interactive snippets
+      const isNative = options?.platform === 'native';
+      const wrapperStyle = isNative
+        ? {
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 10,
+            width: '100%',
+            alignItems: 'stretch',
+            boxSizing: 'border-box',
+          }
+        : {
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 12,
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            boxSizing: 'border-box',
+          };
+      const styleStr = JSON.stringify(wrapperStyle);
+
       executableCode = `return function __SpectraCompactDynamicComponent() {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [checked, setChecked] = React.useState(true);
@@ -171,9 +201,9 @@ export function compileAndRender(code: string): CompileResult {
   const handleClear = () => setSearchTerm('');
 
   return (
-    <React.Fragment>
+    <div style={${styleStr}}>
       ${cleanCode}
-    </React.Fragment>
+    </div>
   );
 };`;
     }

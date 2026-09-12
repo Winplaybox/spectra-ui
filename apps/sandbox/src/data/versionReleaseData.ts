@@ -60,14 +60,37 @@ const COMPONENT_FOLDER_MAP: Record<string, string> = {
   badge: 'feedback/Badge.tsx',
   skeleton: 'feedback/Skeleton.tsx',
   spinner: 'feedback/Spinner.tsx',
-  tooltip: 'feedback/Tooltip.tsx',
+  tooltip: 'overlay/Tooltip.tsx',
   breadcrumbs: 'navigation/Breadcrumbs.tsx',
   tabs: 'navigation/Tabs.tsx',
   card: 'surfaces/Card.tsx',
   dialog: 'overlay/Dialog.tsx',
 };
 
-export function getComponentGitHubUrl(componentId: string, version: string = CURRENT_VERSION): string {
+export function getComponentGitHubUrl(
+  componentId: string,
+  platformOrVersion: 'web' | 'native' | 'headless' | string = 'web',
+  version: string = CURRENT_VERSION
+): string {
+  let platform: 'web' | 'native' | 'headless' = 'web';
+  let targetVersion = version;
+
+  if (
+    platformOrVersion === 'web' ||
+    platformOrVersion === 'native' ||
+    platformOrVersion === 'headless'
+  ) {
+    platform = platformOrVersion;
+  } else if (typeof platformOrVersion === 'string') {
+    // Legacy caller passed version as second argument
+    targetVersion = platformOrVersion;
+  }
+
+  if (platform === 'headless') {
+    return `https://github.com/Winplaybox/spectra-ui/blob/${targetVersion}/packages/primitives/src/index.ts`;
+  }
+
+  const pkg = platform === 'native' ? 'react-native' : 'react';
   const subpath = COMPONENT_FOLDER_MAP[componentId] || `components/${componentId}.tsx`;
-  return `https://github.com/Winplaybox/spectra-ui/blob/${version}/packages/react/src/components/${subpath}`;
+  return `https://github.com/Winplaybox/spectra-ui/blob/${targetVersion}/packages/${pkg}/src/components/${subpath}`;
 }

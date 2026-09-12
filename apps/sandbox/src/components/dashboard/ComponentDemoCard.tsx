@@ -15,6 +15,7 @@ import {
 } from '@spectra/icons';
 import { openInCodeSandbox, openInStackBlitz, openInExpoSnack, toJavaScript } from '../../utils/sandbox';
 import { compileAndRender } from '../../utils/liveCompiler';
+import { useVersion } from '../../context/VersionContext';
 import { EditableCodeBlock } from './EditableCodeBlock';
 import { EditInChatModal } from './EditInChatModal';
 
@@ -92,25 +93,7 @@ class LiveErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundar
   }
 }
 
-export const RELEASE_VERSION = 'v0.1.0';
 export const GITHUB_REPO_URL = 'https://github.com/Winplaybox/spectra-ui';
-
-export const COMPONENT_GITHUB_MAP: Record<string, { category: string; file: string }> = {
-  button: { category: 'actions', file: 'Button.tsx' },
-  'text-input': { category: 'form', file: 'TextInput.tsx' },
-  select: { category: 'form', file: 'Select.tsx' },
-  checkbox: { category: 'form', file: 'Checkbox.tsx' },
-  radio: { category: 'form', file: 'Radio.tsx' },
-  switch: { category: 'form', file: 'Switch.tsx' },
-  avatar: { category: 'data-display', file: 'Avatar.tsx' },
-  badge: { category: 'data-display', file: 'Badge.tsx' },
-  list: { category: 'data-display', file: 'List.tsx' },
-  accordion: { category: 'surfaces', file: 'Accordion.tsx' },
-  card: { category: 'surfaces', file: 'Card.tsx' },
-  dialog: { category: 'overlay', file: 'Dialog.tsx' },
-  tooltip: { category: 'feedback', file: 'Tooltip.tsx' },
-  tabs: { category: 'navigation', file: 'Tabs.tsx' },
-};
 
 /**
  * Extracts concise JSX snippet from full component code for the collapsed preview
@@ -167,6 +150,7 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
   compactCode,
   componentId,
 }) => {
+  const { currentVersion, getGitHubUrl } = useVersion();
   const [platform, setPlatform] = useState<'web' | 'native'>('web');
   const [codeLang, setCodeLang] = useState<'ts' | 'js'>('ts');
   const [isExpanded, setIsExpanded] = useState(false);
@@ -204,18 +188,23 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
   else if (id.startsWith('radio-')) compKey = 'radio';
   else if (id.startsWith('select-')) compKey = 'select';
   else if (id.startsWith('check-') || id.startsWith('checkbox-')) compKey = 'checkbox';
+  else if (id.startsWith('switch-')) compKey = 'switch';
   else if (id.startsWith('tab-') || id.startsWith('tabs-')) compKey = 'tabs';
   else if (id.startsWith('avatar-')) compKey = 'avatar';
   else if (id.startsWith('badge-')) compKey = 'badge';
+  else if (id.startsWith('chip-')) compKey = 'chip';
   else if (id.startsWith('list-')) compKey = 'list';
   else if (id.startsWith('accordion-')) compKey = 'accordion';
   else if (id.startsWith('card-')) compKey = 'card';
   else if (id.startsWith('dialog-')) compKey = 'dialog';
   else if (id.startsWith('tooltip-')) compKey = 'tooltip';
+  else if (id.startsWith('alert-')) compKey = 'alert';
+  else if (id.startsWith('spinner-')) compKey = 'spinner';
+  else if (id.startsWith('skeleton-')) compKey = 'skeleton';
+  else if (id.startsWith('divider-')) compKey = 'divider';
+  else if (id.startsWith('breadcrumbs-')) compKey = 'breadcrumbs';
 
-  const compInfo = COMPONENT_GITHUB_MAP[compKey] || { category: 'actions', file: 'Button.tsx' };
-  const targetFileName = codeLang === 'ts' ? compInfo.file : compInfo.file.replace('.tsx', '.js');
-  const githubSourceUrl = `${GITHUB_REPO_URL}/blob/${RELEASE_VERSION}/packages/${platform === 'web' ? 'react' : 'react-native'}/src/components/${compInfo.category}/${targetFileName}`;
+  const githubSourceUrl = getGitHubUrl(compKey, platform);
 
   // Whether user has made any in-place edits to code
   const isCodeModified = isExpanded
@@ -227,8 +216,8 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
     if (!isCodeModified) {
       return { Component: null, error: null };
     }
-    return compileAndRender(currentDisplayCode);
-  }, [currentDisplayCode, isCodeModified]);
+    return compileAndRender(currentDisplayCode, { platform });
+  }, [currentDisplayCode, isCodeModified, platform]);
 
   // Keep last valid component to avoid flickering while typing
   const lastValidComponentRef = useRef<React.ComponentType<any> | null>(null);
@@ -479,7 +468,7 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
         }}
       >
         {platform === 'web' ? (
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <LiveErrorBoundary
               fallbackKey={`${currentDisplayCode}-${demoKey}`}
               fallbackElement={webPreview}
