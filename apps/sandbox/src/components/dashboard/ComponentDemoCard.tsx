@@ -16,6 +16,7 @@ import {
 import { openInCodeSandbox, openInStackBlitz, openInExpoSnack, toJavaScript } from '../../utils/sandbox';
 import { compileAndRender } from '../../utils/liveCompiler';
 import { useVersion } from '../../context/VersionContext';
+import { usePlatform } from '../../context/PlatformContext';
 import { EditableCodeBlock } from './EditableCodeBlock';
 import { EditInChatModal } from './EditInChatModal';
 
@@ -151,7 +152,8 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
   componentId,
 }) => {
   const { currentVersion, getGitHubUrl } = useVersion();
-  const [platform, setPlatform] = useState<'web' | 'native'>('web');
+  const { currentPlatform } = usePlatform();
+  const platform = currentPlatform === 'web' ? 'web' : 'native';
   const [codeLang, setCodeLang] = useState<'ts' | 'js'>('ts');
   const [isExpanded, setIsExpanded] = useState(false);
   const [editedFullCodeTs, setEditedFullCodeTs] = useState<string | null>(null);
@@ -375,61 +377,8 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
           </p>
         </div>
 
-        {/* Platform Selector & Theme Toggle */}
+        {/* Canvas Theme Toggle */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          {/* Web vs Mobile Native Pill Toggle */}
-          <div
-            style={{
-              display: 'flex',
-              backgroundColor: 'var(--color-surface)',
-              borderRadius: 6,
-              padding: 3,
-              border: '1px solid var(--color-border-subtle)',
-            }}
-          >
-            <button
-              onClick={() => setPlatform('web')}
-              style={{
-                padding: '4px 10px',
-                border: 'none',
-                borderRadius: 4,
-                backgroundColor: platform === 'web' ? 'var(--color-action-primary)' : 'transparent',
-                color: platform === 'web' ? 'var(--color-text-inverse)' : 'var(--color-text-secondary)',
-                fontSize: 12,
-                fontWeight: 600,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 5,
-                transition: 'all 0.15s ease',
-              }}
-            >
-              <GlobeIcon size={13} color="currentColor" />
-              <span>Web</span>
-            </button>
-            <button
-              onClick={() => setPlatform('native')}
-              style={{
-                padding: '4px 10px',
-                border: 'none',
-                borderRadius: 4,
-                backgroundColor: platform === 'native' ? 'var(--color-action-primary)' : 'transparent',
-                color: platform === 'native' ? 'var(--color-text-inverse)' : 'var(--color-text-secondary)',
-                fontSize: 12,
-                fontWeight: 600,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 5,
-                transition: 'all 0.15s ease',
-              }}
-            >
-              <SmartphoneIcon size={13} color="currentColor" />
-              <span>Native</span>
-            </button>
-          </div>
-
-          {/* Theme Selector */}
           <select
             value={previewTheme}
             onChange={(e) => setPreviewTheme(e.target.value as 'light' | 'dark')}
