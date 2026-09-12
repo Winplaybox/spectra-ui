@@ -953,4 +953,302 @@ export function NavigationArrows() {
   return <div>{isRTL ? '← Previous' : 'Next →'}</div>;
 }`,
   },
+
+  'use-debounce': {
+    hookName: 'useDebounce',
+    importStatement: "import { useDebounce } from '@spectra/primitives';",
+    signature: 'function useDebounce<T>(value: T, delayMs: number): T',
+    description: 'Debounces a rapidly changing value (such as search input keystrokes) to prevent redundant rendering and API requests.',
+    parameters: [
+      { name: 'value', type: 'T', defaultValue: 'undefined', required: true, description: 'Target value to debounce.' },
+      { name: 'delayMs', type: 'number', defaultValue: '300', required: true, description: 'Delay duration in milliseconds.' },
+    ],
+    returnValues: [
+      { name: 'debouncedValue', type: 'T', description: 'Value delayed until after delayMs has elapsed since last change.' },
+    ],
+    exampleUsage: `import { useDebounce } from '@spectra/primitives';
+
+export function SearchFilter() {
+  const [query, setQuery] = useState('');
+  const debouncedQuery = useDebounce(query, 400);
+
+  useEffect(() => {
+    fetchResults(debouncedQuery);
+  }, [debouncedQuery]);
+}`,
+  },
+
+  'use-throttle': {
+    hookName: 'useThrottle',
+    importStatement: "import { useThrottle } from '@spectra/primitives';",
+    signature: 'function useThrottle<T>(value: T, intervalMs: number): T',
+    description: 'Throttles frequent value updates (e.g. scroll positions, mouse movements) to guarantee at most one update per interval.',
+    parameters: [
+      { name: 'value', type: 'T', defaultValue: 'undefined', required: true, description: 'Source state value to throttle.' },
+      { name: 'intervalMs', type: 'number', defaultValue: '200', required: true, description: 'Minimum interval duration in milliseconds.' },
+    ],
+    returnValues: [
+      { name: 'throttledValue', type: 'T', description: 'Value updated at most once per intervalMs.' },
+    ],
+    exampleUsage: `import { useThrottle } from '@spectra/primitives';
+
+export function ScrollMetrics() {
+  const [scrollY, setScrollY] = useState(0);
+  const throttledY = useThrottle(scrollY, 100);
+  return <div>Scroll Position: {throttledY}px</div>;
+}`,
+  },
+
+  'use-hover': {
+    hookName: 'useHover',
+    importStatement: "import { useHover } from '@spectra/primitives';",
+    signature: 'function useHover<T extends HTMLElement>(): [RefObject<T>, boolean]',
+    description: 'Tracks cursor hover state for any DOM element with automatic pointer event listeners.',
+    parameters: [],
+    returnValues: [
+      { name: 'ref', type: 'RefObject<T>', description: 'Ref to assign to the target interactive DOM element.' },
+      { name: 'isHovered', type: 'boolean', description: 'Boolean indicating whether pointer is hovering over element.' },
+    ],
+    exampleUsage: `import { useHover } from '@spectra/primitives';
+
+export function CardPreview() {
+  const [hoverRef, isHovered] = useHover<HTMLDivElement>();
+  return <div ref={hoverRef}>{isHovered ? 'Hovered' : 'Normal'}</div>;
+}`,
+  },
+
+  'use-platform': {
+    hookName: 'usePlatform',
+    importStatement: "import { usePlatform } from '@spectra/primitives';",
+    signature: 'function usePlatform(): UsePlatformReturn',
+    description: 'Detects and returns active client OS runtime (Web, iOS, Android, macOS, Windows) with platform capabilities.',
+    parameters: [],
+    returnValues: [
+      { name: 'platform', type: "'web' | 'ios' | 'android' | 'macos' | 'windows'", description: 'Current target runtime platform identifier.' },
+      { name: 'isNative', type: 'boolean', description: 'True when running on React Native iOS/Android runtime.' },
+      { name: 'isApple', type: 'boolean', description: 'True for iOS and macOS client environments.' },
+    ],
+    exampleUsage: `import { usePlatform } from '@spectra/primitives';
+
+export function PlatformBadge() {
+  const { platform, isNative } = usePlatform();
+  return <span>{isNative ? 'Native App' : 'Web Browser'} ({platform})</span>;
+}`,
+  },
+
+  'use-breakpoint': {
+    hookName: 'useBreakpoint',
+    importStatement: "import { useBreakpoint } from '@spectra/primitives';",
+    signature: 'function useBreakpoint(): "xs" | "sm" | "md" | "lg" | "xl" | "2xl"',
+    description: 'Returns active responsive viewport breakpoint token synchronized with Spectra UI grid tokens.',
+    parameters: [],
+    returnValues: [
+      { name: 'breakpoint', type: '"xs" | "sm" | "md" | "lg" | "xl" | "2xl"', description: 'Current active responsive tier.' },
+    ],
+    exampleUsage: `import { useBreakpoint } from '@spectra/primitives';
+
+export function ResponsiveLayout() {
+  const bp = useBreakpoint();
+  return <div>Active Screen Tier: {bp.toUpperCase()}</div>;
+}`,
+  },
+
+  'use-event-listener': {
+    hookName: 'useEventListener',
+    importStatement: "import { useEventListener } from '@spectra/primitives';",
+    signature: 'function useEventListener<K extends keyof WindowEventMap>(eventName: K, handler: (e: WindowEventMap[K]) => void, target?: EventTarget): void',
+    description: 'Declaratively binds event listeners to window, document, or custom DOM element with automatic lifecycle cleanup.',
+    parameters: [
+      { name: 'eventName', type: 'string', defaultValue: 'undefined', required: true, description: 'Event identifier (e.g. "keydown", "resize", "scroll").' },
+      { name: 'handler', type: '(e: Event) => void', defaultValue: 'undefined', required: true, description: 'Event handler callback.' },
+      { name: 'target', type: 'EventTarget', defaultValue: 'window', description: 'Event target object to bind listener to.' },
+    ],
+    returnValues: [],
+    exampleUsage: `import { useEventListener } from '@spectra/primitives';
+
+export function ShortcutHandler() {
+  useEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+}`,
+  },
+
+  'use-intersection-observer': {
+    hookName: 'useIntersectionObserver',
+    importStatement: "import { useIntersectionObserver } from '@spectra/primitives';",
+    signature: 'function useIntersectionObserver(options?: IntersectionObserverInit): [RefObject<Element>, IntersectionObserverEntry | null]',
+    description: 'Tracks DOM element viewport visibility for lazy loading images, infinite scroll, and scroll-triggered animations.',
+    parameters: [
+      { name: 'options', type: 'IntersectionObserverInit', defaultValue: '{}', description: 'Threshold, root, and rootMargin options.' },
+    ],
+    returnValues: [
+      { name: 'ref', type: 'RefObject<Element>', description: 'Ref to assign to observed DOM element.' },
+      { name: 'entry', type: 'IntersectionObserverEntry | null', description: 'Latest intersection observer state record.' },
+    ],
+    exampleUsage: `import { useIntersectionObserver } from '@spectra/primitives';
+
+export function LazyImage({ src }: { src: string }) {
+  const [ref, entry] = useIntersectionObserver({ threshold: 0.1 });
+  const isVisible = !!entry?.isIntersecting;
+  return <div ref={ref}>{isVisible && <img src={src} />}</div>;
+}`,
+  },
+
+  'use-element-size': {
+    hookName: 'useElementSize',
+    importStatement: "import { useElementSize } from '@spectra/primitives';",
+    signature: 'function useElementSize<T extends HTMLElement>(): [RefObject<T>, { width: number; height: number }]',
+    description: 'Measures live bounding dimensions (width and height) of a DOM element using ResizeObserver.',
+    parameters: [],
+    returnValues: [
+      { name: 'ref', type: 'RefObject<T>', description: 'Ref to attach to the measured target DOM element.' },
+      { name: 'size', type: '{ width: number; height: number }', description: 'Live dimensions object updated on container resize.' },
+    ],
+    exampleUsage: `import { useElementSize } from '@spectra/primitives';
+
+export function ResponsiveChart() {
+  const [ref, { width, height }] = useElementSize<HTMLDivElement>();
+  return <div ref={ref}><Canvas width={width} height={height} /></div>;
+}`,
+  },
+
+  'use-window-size': {
+    hookName: 'useWindowSize',
+    importStatement: "import { useWindowSize } from '@spectra/primitives';",
+    signature: 'function useWindowSize(): { width: number; height: number }',
+    description: 'Monitors window viewport dimensions with debounced resize handlers and SSR hydration safety.',
+    parameters: [],
+    returnValues: [
+      { name: 'width', type: 'number', description: 'Current viewport inner width in pixels.' },
+      { name: 'height', type: 'number', description: 'Current viewport inner height in pixels.' },
+    ],
+    exampleUsage: `import { useWindowSize } from '@spectra/primitives';
+
+export function ViewportInfo() {
+  const { width, height } = useWindowSize();
+  return <div>Viewport: {width} x {height}px</div>;
+}`,
+  },
+
+  'use-scroll-lock': {
+    hookName: 'useScrollLock',
+    importStatement: "import { useScrollLock } from '@spectra/primitives';",
+    signature: 'function useScrollLock(lock?: boolean): void',
+    description: 'Locks document body scrolling when modal dialogs, drawers, or mobile menus are opened to prevent background bleed.',
+    parameters: [
+      { name: 'lock', type: 'boolean', defaultValue: 'true', description: 'Whether document scrolling should be locked.' },
+    ],
+    returnValues: [],
+    exampleUsage: `import { useScrollLock } from '@spectra/primitives';
+
+export function Modal({ isOpen }: { isOpen: boolean }) {
+  useScrollLock(isOpen);
+  return isOpen ? <div className="modal">Modal Content</div> : null;
+}`,
+  },
+
+  'use-clipboard': {
+    hookName: 'useClipboard',
+    importStatement: "import { useClipboard } from '@spectra/primitives';",
+    signature: 'function useClipboard(timeoutMs?: number): UseClipboardReturn',
+    description: 'Copies text to system clipboard with automatic success state reset and permission fallbacks.',
+    parameters: [
+      { name: 'timeoutMs', type: 'number', defaultValue: '2000', description: 'Duration in milliseconds to preserve copied state.' },
+    ],
+    returnValues: [
+      { name: 'copy', type: '(text: string) => Promise<boolean>', description: 'Copies string to clipboard.' },
+      { name: 'hasCopied', type: 'boolean', description: 'True for timeoutMs after successful copy.' },
+    ],
+    exampleUsage: `import { useClipboard } from '@spectra/primitives';
+
+export function CodeCopyButton({ code }: { code: string }) {
+  const { copy, hasCopied } = useClipboard();
+  return <button onClick={() => copy(code)}>{hasCopied ? 'Copied' : 'Copy'}</button>;
+}`,
+  },
+
+  'use-local-storage': {
+    hookName: 'useLocalStorage',
+    importStatement: "import { useLocalStorage } from '@spectra/primitives';",
+    signature: 'function useLocalStorage<T>(key: string, initialValue: T): [T, (val: T | ((prev: T) => T)) => void]',
+    description: 'Persists and synchronizes state values with browser localStorage and cross-tab storage events.',
+    parameters: [
+      { name: 'key', type: 'string', defaultValue: 'undefined', required: true, description: 'Unique storage key string.' },
+      { name: 'initialValue', type: 'T', defaultValue: 'undefined', required: true, description: 'Default fallback value when key is unset.' },
+    ],
+    returnValues: [
+      { name: 'value', type: 'T', description: 'Current stored or default value.' },
+      { name: 'setValue', type: '(val: T) => void', description: 'State setter that writes to localStorage and updates state.' },
+    ],
+    exampleUsage: `import { useLocalStorage } from '@spectra/primitives';
+
+export function UserPreferences() {
+  const [theme, setTheme] = useLocalStorage('app-theme', 'dark');
+  return <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>Theme: {theme}</button>;
+}`,
+  },
+
+  'use-previous': {
+    hookName: 'usePrevious',
+    importStatement: "import { usePrevious } from '@spectra/primitives';",
+    signature: 'function usePrevious<T>(value: T): T | undefined',
+    description: 'Stores and returns the value from the previous render cycle using a React ref.',
+    parameters: [
+      { name: 'value', type: 'T', defaultValue: 'undefined', required: true, description: 'Target state or prop value to track.' },
+    ],
+    returnValues: [
+      { name: 'previousValue', type: 'T | undefined', description: 'The value before the most recent render.' },
+    ],
+    exampleUsage: `import { usePrevious } from '@spectra/primitives';
+
+export function CounterDiff({ count }: { count: number }) {
+  const prevCount = usePrevious(count);
+  return <span>Delta: {count - (prevCount ?? 0)}</span>;
+}`,
+  },
+
+  'use-async': {
+    hookName: 'useAsync',
+    importStatement: "import { useAsync } from '@spectra/primitives';",
+    signature: 'function useAsync<T>(asyncFn: () => Promise<T>, immediate?: boolean): UseAsyncReturn<T>',
+    description: 'Manages promise execution states (idle, pending, resolved, rejected) with loading flags and error capturing.',
+    parameters: [
+      { name: 'asyncFn', type: '() => Promise<T>', defaultValue: 'undefined', required: true, description: 'Asynchronous function to execute.' },
+      { name: 'immediate', type: 'boolean', defaultValue: 'true', description: 'Whether to execute the promise immediately upon mount.' },
+    ],
+    returnValues: [
+      { name: 'execute', type: '() => Promise<T>', description: 'Function to manually trigger execution.' },
+      { name: 'status', type: "'idle' | 'pending' | 'success' | 'error'", description: 'Current promise lifecycle status.' },
+      { name: 'value', type: 'T | null', description: 'Resolved result data.' },
+      { name: 'error', type: 'Error | null', description: 'Caught error instance if rejected.' },
+      { name: 'loading', type: 'boolean', description: 'True while promise is pending.' },
+    ],
+    exampleUsage: `import { useAsync } from '@spectra/primitives';
+
+export function UserProfile() {
+  const { loading, value, error } = useAsync(fetchUser);
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  return <div>User: {value?.name}</div>;
+}`,
+  },
+
+  'use-interval': {
+    hookName: 'useInterval',
+    importStatement: "import { useInterval } from '@spectra/primitives';",
+    signature: 'function useInterval(callback: () => void, delayMs: number | null): void',
+    description: 'Declarative setInterval hook with dynamic delay configuration and automatic cleanup.',
+    parameters: [
+      { name: 'callback', type: '() => void', defaultValue: 'undefined', required: true, description: 'Callback executed at each interval tick.' },
+      { name: 'delayMs', type: 'number | null', defaultValue: 'undefined', required: true, description: 'Interval in ms, or null to pause.' },
+    ],
+    returnValues: [],
+    exampleUsage: `import { useInterval } from '@spectra/primitives';
+
+export function Timer() {
+  const [seconds, setSeconds] = useState(0);
+  useInterval(() => setSeconds(s => s + 1), 1000);
+  return <div>Elapsed: {seconds}s</div>;
+}`,
+  },
 };

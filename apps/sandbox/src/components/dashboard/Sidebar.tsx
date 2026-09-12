@@ -20,6 +20,7 @@ interface SidebarProps {
 import {
   SIDEBAR_NAVIGATION,
   COMPONENT_CATEGORIES,
+  HOOK_CATEGORIES,
   NavSection,
   NavCategoryGroup,
   NavLeafItem,
@@ -80,7 +81,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     }));
   };
 
-  // Auto-expand the active component's category on navigation
+  // Auto-expand the active component's or hook's category on navigation
   useEffect(() => {
     if (currentRoute.type === 'components' && currentRoute.id) {
       const activeCat = COMPONENT_CATEGORIES.find((cat) =>
@@ -88,6 +89,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
       );
       if (activeCat) {
         setExpandedCategories((prev) => ({ ...prev, [activeCat.id]: true }));
+      }
+    } else if (currentRoute.type === 'hooks' && currentRoute.id) {
+      const activeHookCat = HOOK_CATEGORIES.find((cat) =>
+        cat.items.some((item) => item.id === currentRoute.id)
+      );
+      if (activeHookCat) {
+        setExpandedCategories((prev) => ({ ...prev, [activeHookCat.id]: true }));
       }
     }
   }, [currentRoute]);
@@ -683,50 +691,71 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   >
                     {section.items.map((item) => {
                       if ('isCategoryHeader' in item && item.isCategoryHeader) {
+                        const isCatOpen = expandedCategories[item.id] ?? true;
                         return (
                           <div key={item.id} style={{ display: 'flex', flexDirection: 'column' }}>
                             <div
+                              onClick={() => toggleCategory(item.id)}
                               style={{
                                 display: 'flex',
                                 alignItems: 'center',
-                                gap: 6,
-                                padding: '10px 8px 4px 6px',
+                                justifyContent: 'space-between',
+                                padding: '6px 8px 6px 6px',
                                 userSelect: 'none',
+                                cursor: 'pointer',
+                                borderRadius: 4,
+                                transition: 'background-color 0.12s ease',
                               }}
+                              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)')}
+                              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                             >
+                              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                                <ChevronDownIcon
+                                  size={11}
+                                  style={{
+                                    transform: isCatOpen ? 'none' : 'rotate(-90deg)',
+                                    transition: 'transform 0.15s ease',
+                                    color: 'var(--color-text-muted)',
+                                  }}
+                                />
+                                <span
+                                  style={{
+                                    fontSize: 11,
+                                    fontWeight: 700,
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '0.08em',
+                                    color: 'var(--color-text-muted)',
+                                  }}
+                                >
+                                  {item.name}
+                                </span>
+                              </div>
                               <span
                                 style={{
-                                  width: 5,
-                                  height: 5,
-                                  border: '1px solid var(--color-border-default)',
-                                  backgroundColor: 'var(--color-surface-raised)',
-                                  borderRadius: 1,
-                                  opacity: 0.7,
-                                  flexShrink: 0,
-                                }}
-                              />
-                              <span
-                                style={{
-                                  fontSize: 11,
-                                  fontWeight: 700,
-                                  textTransform: 'uppercase',
-                                  letterSpacing: '0.08em',
+                                  fontSize: 10,
                                   color: 'var(--color-text-muted)',
+                                  fontWeight: 500,
                                 }}
                               >
-                                {item.name}
+                                {item.items.length}
                               </span>
                             </div>
-                            <div
-                              style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: 2,
-                                paddingLeft: 4,
-                              }}
-                            >
-                              {item.items.map((leaf) => renderLeafItem(leaf, true))}
-                            </div>
+                            {isCatOpen && (
+                              <div
+                                style={{
+                                  display: 'flex',
+                                  flexDirection: 'column',
+                                  gap: 2,
+                                  paddingLeft: 10,
+                                  borderLeft: '1px solid var(--color-border-subtle)',
+                                  marginLeft: 8,
+                                  marginTop: 2,
+                                  marginBottom: 4,
+                                }}
+                              >
+                                {item.items.map((leaf) => renderLeafItem(leaf, true))}
+                              </div>
+                            )}
                           </div>
                         );
                       }

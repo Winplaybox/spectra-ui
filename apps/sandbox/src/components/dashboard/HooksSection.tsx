@@ -88,16 +88,34 @@ export const HooksSection: React.FC<HooksSectionProps> = ({ hookId = 'use-disclo
   };
 
   const hooksList = [
-    { id: 'use-disclosure', name: 'useDisclosure', category: 'Overlay & State', desc: 'Toggle open/close state for modals, tooltips, accordions, and drawers.' },
-    { id: 'use-controllable-state', name: 'useControllableState', category: 'Forms', desc: 'Support both controlled and uncontrolled component props seamlessly.' },
-    { id: 'use-outside-click', name: 'useOutsideClick', category: 'DOM Events', desc: 'Dismiss dropdowns, drawers, or popovers on pointer click outside target.' },
-    { id: 'use-id', name: 'useId', category: 'Accessibility', desc: 'Generate collision-free unique IDs for accessible ARIA labels.' },
-    { id: 'use-color-scheme', name: 'useColorScheme', category: 'Theming', desc: 'Manage light, dark, and system color mode preferences.' },
-    { id: 'use-media-query', name: 'useMediaQuery', category: 'Responsive', desc: 'Listen to CSS media queries dynamically with zero layout flicker.' },
-    { id: 'use-focus-ring', name: 'useFocusRing', category: 'Accessibility', desc: 'Differentiate keyboard focus-visible from mouse clicks for clean outlines.' },
-    { id: 'use-toast', name: 'useToast', category: 'Feedback', desc: 'Queue, trigger, and auto-dismiss floating notification messages.' },
-    { id: 'use-reduced-motion', name: 'useReducedMotion', category: 'Accessibility', desc: 'Detect user preference for reduced motion to disable intense animations.' },
-    { id: 'use-rtl', name: 'useRTL', category: 'Internationalization', desc: 'Detect or switch right-to-left document layout flow.' },
+    { id: 'use-disclosure', name: 'useDisclosure', category: 'State & Interaction', desc: 'Toggle open/close state for modals, tooltips, accordions, and drawers.' },
+    { id: 'use-controllable-state', name: 'useControllableState', category: 'State & Interaction', desc: 'Support both controlled and uncontrolled component props seamlessly.' },
+    { id: 'use-outside-click', name: 'useOutsideClick', category: 'State & Interaction', desc: 'Dismiss dropdowns, drawers, or popovers on pointer click outside target.' },
+    { id: 'use-focus-ring', name: 'useFocusRing', category: 'State & Interaction', desc: 'Differentiate keyboard focus-visible from mouse clicks for clean outlines.' },
+    { id: 'use-debounce', name: 'useDebounce', category: 'State & Interaction', desc: 'Debounce rapid value changes such as search keystrokes.' },
+    { id: 'use-throttle', name: 'useThrottle', category: 'State & Interaction', desc: 'Throttle high-frequency updates such as scroll and pointer movement.' },
+    { id: 'use-hover', name: 'useHover', category: 'State & Interaction', desc: 'Track pointer hover states with automatic event binding.' },
+
+    { id: 'use-color-scheme', name: 'useColorScheme', category: 'Theme & Environment', desc: 'Manage light, dark, and system color mode preferences.' },
+    { id: 'use-media-query', name: 'useMediaQuery', category: 'Theme & Environment', desc: 'Listen to CSS media queries dynamically with zero layout flicker.' },
+    { id: 'use-reduced-motion', name: 'useReducedMotion', category: 'Theme & Environment', desc: 'Detect user preference for reduced motion to disable intense animations.' },
+    { id: 'use-rtl', name: 'useRTL', category: 'Theme & Environment', desc: 'Detect or switch right-to-left document layout flow.' },
+    { id: 'use-platform', name: 'usePlatform', category: 'Theme & Environment', desc: 'Detect client runtime platform (Web, iOS, Android, macOS, Windows).' },
+    { id: 'use-breakpoint', name: 'useBreakpoint', category: 'Theme & Environment', desc: 'Access active responsive breakpoint token synchronized with token grid.' },
+
+    { id: 'use-id', name: 'useId', category: 'Lifecycle & DOM', desc: 'Generate collision-free unique IDs for accessible ARIA labels.' },
+    { id: 'use-event-listener', name: 'useEventListener', category: 'Lifecycle & DOM', desc: 'Declaratively bind event listeners to window or DOM elements.' },
+    { id: 'use-intersection-observer', name: 'useIntersectionObserver', category: 'Lifecycle & DOM', desc: 'Observe DOM element visibility for lazy loading and scroll triggers.' },
+    { id: 'use-element-size', name: 'useElementSize', category: 'Lifecycle & DOM', desc: 'Live bounding width and height measurements via ResizeObserver.' },
+    { id: 'use-window-size', name: 'useWindowSize', category: 'Lifecycle & DOM', desc: 'Track window inner viewport dimensions with debounced resize.' },
+    { id: 'use-scroll-lock', name: 'useScrollLock', category: 'Lifecycle & DOM', desc: 'Lock background body scrolling when modal or drawer is active.' },
+
+    { id: 'use-toast', name: 'useToast', category: 'Utilities & Feedback', desc: 'Queue, trigger, and auto-dismiss floating notification messages.' },
+    { id: 'use-clipboard', name: 'useClipboard', category: 'Utilities & Feedback', desc: 'Copy text to system clipboard with temporary success state.' },
+    { id: 'use-local-storage', name: 'useLocalStorage', category: 'Utilities & Feedback', desc: 'Persist state values in browser localStorage with cross-tab sync.' },
+    { id: 'use-previous', name: 'usePrevious', category: 'Utilities & Feedback', desc: 'Track and compare previous render cycle values.' },
+    { id: 'use-async', name: 'useAsync', category: 'Utilities & Feedback', desc: 'Manage async promise execution, loading flags, and error states.' },
+    { id: 'use-interval', name: 'useInterval', category: 'Utilities & Feedback', desc: 'Declarative setInterval lifecycle management with dynamic delay.' },
   ];
 
   return (

@@ -1,3 +1,5 @@
+import { EXTENDED_COMPONENTS_DATA } from './extendedComponentsData';
+
 export interface ComponentMetadata {
   id: string;
   name: string;
@@ -34,7 +36,7 @@ export interface ComponentMetadata {
   };
 }
 
-export const COMPONENTS_DATA: Record<string, ComponentMetadata> = {
+const CORE_COMPONENTS_DATA: Record<string, ComponentMetadata> = {
   button: {
     id: 'button',
     name: 'Button',
@@ -1094,4 +1096,9 @@ export function CustomBreadcrumbs({ items }) {
 }`,
     },
   },
+};
+
+export const COMPONENTS_DATA: Record<string, ComponentMetadata> = {
+  ...CORE_COMPONENTS_DATA,
+  ...EXTENDED_COMPONENTS_DATA,
 };

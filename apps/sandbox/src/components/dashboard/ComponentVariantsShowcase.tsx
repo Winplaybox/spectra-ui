@@ -61,12 +61,18 @@ export const COMPONENT_VARIANTS_MAP: Record<string, VariantMeta[]> = {
     { id: 'button-icons', title: 'Leading & Trailing Icons' },
     { id: 'button-states', title: 'Loading & Disabled States' },
     { id: 'button-block', title: 'Full-Width Block Layout' },
+    { id: 'button-compound', title: 'Compound Button (Fluent 2 Pattern)' },
+    { id: 'button-split', title: 'Split Button with Action Flyout' },
+    { id: 'button-group', title: 'Segmented Attached Button Group' },
   ],
   'text-input': [
     { id: 'input-icons', title: 'Contextual Vector Icons' },
     { id: 'input-validation', title: 'Validation & Error States' },
     { id: 'input-helper', title: 'Helper Text & Description' },
     { id: 'input-password', title: 'Password Reveal with Visibility Toggle' },
+    { id: 'input-clearable', title: 'Clearable Search Input with Reset' },
+    { id: 'input-adornments', title: 'Prefix & Suffix Currency/Domain Adornments' },
+    { id: 'input-counter', title: 'Live Character Counter & Length Limit' },
   ],
   select: [
     { id: 'select-basic', title: 'Standard Selection Dropdown' },
@@ -78,10 +84,12 @@ export const COMPONENT_VARIANTS_MAP: Record<string, VariantMeta[]> = {
     { id: 'checkbox-interactive', title: 'Single Checkbox with Description' },
     { id: 'checkbox-indeterminate', title: 'Indeterminate Multi-Item State' },
     { id: 'checkbox-group', title: 'Form Validation Preference Group' },
+    { id: 'checkbox-cards', title: 'Checkbox Selection Cards & Tiles' },
   ],
   radio: [
     { id: 'radio-billing', title: 'Mutually Exclusive Plan Cards' },
     { id: 'radio-horizontal', title: 'Horizontal Inline Radio Group' },
+    { id: 'radio-segmented', title: 'Segmented Pill Radio Group' },
   ],
   switch: [
     { id: 'switch-interactive', title: 'Instant Binary Setting Toggles' },
@@ -95,6 +103,7 @@ export const COMPONENT_VARIANTS_MAP: Record<string, VariantMeta[]> = {
     { id: 'avatar-scales', title: 'Sizing Scales with Presence Badges' },
     { id: 'avatar-stack', title: 'Overlapping Team Avatar Stack' },
     { id: 'avatar-fallback', title: 'Initials & Custom Status Indicator' },
+    { id: 'avatar-persona', title: 'Persona Card with Presence & Email' },
   ],
   badge: [
     { id: 'badge-variants', title: 'All Semantic Status Variants' },
@@ -103,11 +112,13 @@ export const COMPONENT_VARIANTS_MAP: Record<string, VariantMeta[]> = {
   tabs: [
     { id: 'tabs-underline', title: 'Underline Navigation Style' },
     { id: 'tabs-pills', title: 'Segmented Pills Style' },
+    { id: 'tabs-vertical', title: 'Vertical Sidebar Navigation Tabs' },
   ],
   card: [
     { id: 'card-variants', title: 'Surface Variants (Bordered, Elevated)' },
     { id: 'card-interactive', title: 'Structured Action Card' },
     { id: 'card-stats', title: 'KPI Analytics & Metrics Card' },
+    { id: 'card-media', title: 'Structured Media & Preview Card' },
   ],
   tooltip: [
     { id: 'tooltip-placements', title: 'Compass Placements (Top, Bottom, Left, Right)' },
@@ -126,6 +137,7 @@ export const COMPONENT_VARIANTS_MAP: Record<string, VariantMeta[]> = {
   alert: [
     { id: 'alert-variants', title: 'Status Severity Variants (Info, Success, Warning, Danger)' },
     { id: 'alert-dismissible', title: 'Dismissible Alerts with Custom Handlers' },
+    { id: 'alert-actionable', title: 'Actionable Alert with Inline Action' },
   ],
   spinner: [
     { id: 'spinner-sizes', title: 'Sizing Scale (Small, Medium, Large)' },
@@ -183,6 +195,15 @@ export const ComponentVariantsShowcase: React.FC<ComponentVariantsShowcaseProps>
   const [groupCheck2, setGroupCheck2] = useState(true);
   const [groupCheck3, setGroupCheck3] = useState(false);
   const [groupedSelectVal, setGroupedSelectVal] = useState('postgres');
+  const [splitMenuOpen, setSplitMenuOpen] = useState(false);
+  const [splitAction, setSplitAction] = useState('Create merge commit');
+  const [buttonGroupVal, setButtonGroupVal] = useState<'day' | 'week' | 'month'>('week');
+  const [clearableText, setClearableText] = useState('Search components and design tokens...');
+  const [counterText, setCounterText] = useState('Building a unified multi-platform design system');
+  const [adornmentPrice, setAdornmentPrice] = useState('249.00');
+  const [selectedCardTiers, setSelectedCardTiers] = useState<string[]>(['standard', 'performance']);
+  const [segmentedRadio, setSegmentedRadio] = useState('grid');
+  const [verticalTab, setVerticalTab] = useState('profile');
 
   switch (componentId) {
     case 'button':
@@ -478,6 +499,344 @@ export default function NativeBlockButtonDemo(): JSX.Element {
     <View style={{ width: '100%', gap: 10 }}>
       <Button variant="filled" style={{ width: '100%' }}>Continue to Checkout</Button>
       <Button variant="outline" style={{ width: '100%' }}>Cancel</Button>
+    </View>
+  );
+}`}
+          />
+
+          {/* Demo 6: Compound Button (Fluent 2 Pattern) */}
+          <ComponentDemoCard
+            id="button-compound"
+            title="Compound Button (Fluent 2 Pattern)"
+            description="Features a prominent primary label accompanied by a secondary descriptive subtitle, ideal for high-impact onboarding and choice actions."
+            webPreview={
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                <button
+                  type="button"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: 14,
+                    padding: '16px 20px',
+                    borderRadius: 12,
+                    border: '1px solid var(--color-border-subtle)',
+                    background: 'var(--color-surface-elevated)',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    transition: 'all 0.2s ease',
+                    boxShadow: 'var(--shadow-sm)',
+                    maxWidth: 320,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-primary)';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+                  }}
+                >
+                  <div style={{ padding: 8, borderRadius: 8, background: 'var(--color-primary-subtle)', color: 'var(--color-primary)', display: 'flex' }}>
+                    <SparklesIcon size={20} />
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--color-text-primary)' }}>New Workspace</div>
+                    <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', marginTop: 2 }}>Create a collaborative design repository with tokens</div>
+                  </div>
+                </button>
+                <button
+                  type="button"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: 14,
+                    padding: '16px 20px',
+                    borderRadius: 12,
+                    border: '1px solid var(--color-border-subtle)',
+                    background: 'var(--color-surface-elevated)',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    transition: 'all 0.2s ease',
+                    boxShadow: 'var(--shadow-sm)',
+                    maxWidth: 320,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-primary)';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
+                    e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+                  }}
+                >
+                  <div style={{ padding: 8, borderRadius: 8, background: 'var(--color-surface-hover)', color: 'var(--color-text-secondary)', display: 'flex' }}>
+                    <ExternalLinkIcon size={20} />
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--color-text-primary)' }}>Import Figma</div>
+                    <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', marginTop: 2 }}>Sync variables and design tokens from Figma styles</div>
+                  </div>
+                </button>
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%', gap: 10, display: 'flex', flexDirection: 'column' }}>
+                <Button variant="secondary" style={{ width: '100%', padding: '14px 16px' }}>
+                  New Workspace (Collaborative design repo)
+                </Button>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { SparklesIcon } from '@spectra/icons';
+
+export default function CompoundButtonDemo(): JSX.Element {
+  return (
+    <button
+      type="button"
+      className="spectra-compound-button"
+      style={{
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: 14,
+        padding: '16px 20px',
+        borderRadius: 12,
+        border: '1px solid var(--color-border-subtle)',
+        background: 'var(--color-surface-elevated)',
+        cursor: 'pointer',
+        textAlign: 'left',
+      }}
+    >
+      <div style={{ padding: 8, borderRadius: 8, background: 'var(--color-primary-subtle)', color: 'var(--color-primary)' }}>
+        <SparklesIcon size={20} />
+      </div>
+      <div>
+        <div style={{ fontWeight: 600, fontSize: '0.95rem' }}>New Workspace</div>
+        <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>Create a collaborative design repository</div>
+      </div>
+    </button>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+
+export default function NativeCompoundButtonDemo(): JSX.Element {
+  return (
+    <TouchableOpacity style={{ padding: 16, borderRadius: 12, borderWidth: 1, borderColor: '#E2E8F0' }}>
+      <Text style={{ fontWeight: '600', fontSize: 16 }}>New Workspace</Text>
+      <Text style={{ fontSize: 13, color: '#64748B', marginTop: 4 }}>Create a collaborative design repository</Text>
+    </TouchableOpacity>
+  );
+}`}
+          />
+
+          {/* Demo 7: Split Button with Action Flyout */}
+          <ComponentDemoCard
+            id="button-split"
+            title="Split Button with Action Flyout"
+            description="Combines a default single-click primary action with a secondary chevron button that reveals alternative execution choices."
+            webPreview={
+              <div style={{ position: 'relative', display: 'inline-flex' }}>
+                <div style={{ display: 'inline-flex', borderRadius: 8, overflow: 'hidden', boxShadow: 'var(--shadow-sm)' }}>
+                  <Button variant="primary" style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}>
+                    {splitAction}
+                  </Button>
+                  <button
+                    type="button"
+                    onClick={() => setSplitMenuOpen(!splitMenuOpen)}
+                    aria-label="Toggle actions"
+                    style={{
+                      border: 'none',
+                      background: 'var(--color-primary-hover, #1d4ed8)',
+                      color: '#ffffff',
+                      padding: '0 10px',
+                      cursor: 'pointer',
+                      borderLeft: '1px solid rgba(255,255,255,0.2)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <ChevronDownIcon size={16} />
+                  </button>
+                </div>
+                {splitMenuOpen && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '100%',
+                      right: 0,
+                      marginTop: 6,
+                      background: 'var(--color-surface-elevated)',
+                      border: '1px solid var(--color-border-subtle)',
+                      borderRadius: 8,
+                      boxShadow: 'var(--shadow-lg)',
+                      zIndex: 100,
+                      minWidth: 200,
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {['Create merge commit', 'Squash and merge', 'Rebase and merge'].map((action) => (
+                      <button
+                        key={action}
+                        type="button"
+                        onClick={() => {
+                          setSplitAction(action);
+                          setSplitMenuOpen(false);
+                        }}
+                        style={{
+                          width: '100%',
+                          padding: '10px 14px',
+                          border: 'none',
+                          background: splitAction === action ? 'var(--color-primary-subtle)' : 'transparent',
+                          color: splitAction === action ? 'var(--color-primary)' : 'var(--color-text-primary)',
+                          fontWeight: splitAction === action ? 600 : 400,
+                          fontSize: '0.875rem',
+                          textAlign: 'left',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                        }}
+                      >
+                        <span>{action}</span>
+                        {splitAction === action && <CheckIcon size={14} />}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <Button variant="primary" style={{ width: '100%' }}>
+                  {splitAction}
+                </Button>
+              </div>
+            }
+            webCode={`import React, { useState } from 'react';
+import { Button } from '@spectra/react';
+import { ChevronDownIcon, CheckIcon } from '@spectra/icons';
+
+export default function SplitButtonDemo(): JSX.Element {
+  const [open, setOpen] = useState(false);
+  const [action, setAction] = useState('Create merge commit');
+
+  return (
+    <div style={{ position: 'relative', display: 'inline-flex' }}>
+      <div style={{ display: 'inline-flex', borderRadius: 8, overflow: 'hidden' }}>
+        <Button variant="primary" style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}>
+          {action}
+        </Button>
+        <button
+          type="button"
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle actions"
+          style={{
+            border: 'none',
+            background: 'var(--color-primary-hover)',
+            color: '#fff',
+            padding: '0 10px',
+            cursor: 'pointer',
+            borderLeft: '1px solid rgba(255,255,255,0.2)',
+          }}
+        >
+          <ChevronDownIcon size={16} />
+        </button>
+      </div>
+      {open && (
+        <div style={{ position: 'absolute', top: '100%', right: 0, marginTop: 6, background: '#fff', borderRadius: 8, boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}>
+          {['Create merge commit', 'Squash and merge', 'Rebase and merge'].map((item) => (
+            <button key={item} onClick={() => { setAction(item); setOpen(false); }}>
+              {item}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { Button } from '@spectra/react-native';
+
+export default function NativeSplitButtonDemo(): JSX.Element {
+  return (
+    <View style={{ width: '100%' }}>
+      <Button variant="filled">Create merge commit</Button>
+    </View>
+  );
+}`}
+          />
+
+          {/* Demo 8: Segmented Attached Button Group */}
+          <ComponentDemoCard
+            id="button-group"
+            title="Segmented Attached Button Group"
+            description="Horizontally groups related button triggers with unified border radius and shared outer bounds (MUI & Fluent ButtonGroup)."
+            webPreview={
+              <div style={{ display: 'inline-flex', borderRadius: 8, border: '1px solid var(--color-border-subtle)', overflow: 'hidden', background: 'var(--color-surface-subtle)' }}>
+                {(['day', 'week', 'month'] as const).map((period, idx) => (
+                  <button
+                    key={period}
+                    type="button"
+                    onClick={() => setButtonGroupVal(period)}
+                    style={{
+                      border: 'none',
+                      padding: '8px 18px',
+                      background: buttonGroupVal === period ? 'var(--color-surface-elevated)' : 'transparent',
+                      color: buttonGroupVal === period ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+                      fontWeight: buttonGroupVal === period ? 600 : 500,
+                      fontSize: '0.875rem',
+                      cursor: 'pointer',
+                      borderLeft: idx > 0 ? '1px solid var(--color-border-subtle)' : 'none',
+                      boxShadow: buttonGroupVal === period ? 'var(--shadow-sm)' : 'none',
+                      transition: 'all 0.15s ease',
+                      textTransform: 'capitalize',
+                    }}
+                  >
+                    {period}
+                  </button>
+                ))}
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <Button variant="secondary">Active: {buttonGroupVal.toUpperCase()}</Button>
+              </div>
+            }
+            webCode={`import React, { useState } from 'react';
+
+export default function ButtonGroupDemo(): JSX.Element {
+  const [period, setPeriod] = useState<'day' | 'week' | 'month'>('week');
+
+  return (
+    <div style={{ display: 'inline-flex', borderRadius: 8, border: '1px solid var(--color-border-subtle)', overflow: 'hidden' }}>
+      {(['day', 'week', 'month'] as const).map((item, idx) => (
+        <button
+          key={item}
+          type="button"
+          onClick={() => setPeriod(item)}
+          style={{
+            border: 'none',
+            padding: '8px 18px',
+            background: period === item ? 'var(--color-surface-elevated)' : 'transparent',
+            borderLeft: idx > 0 ? '1px solid var(--color-border-subtle)' : 'none',
+            cursor: 'pointer',
+          }}
+        >
+          {item}
+        </button>
+      ))}
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View, Text } from 'react-native';
+
+export default function NativeButtonGroupDemo(): JSX.Element {
+  return (
+    <View style={{ flexDirection: 'row', borderRadius: 8, borderWidth: 1, borderColor: '#E2E8F0' }}>
+      <Text style={{ padding: 10 }}>Week</Text>
     </View>
   );
 }`}
@@ -909,6 +1268,222 @@ export default function NativePasswordInputDemo() {
   );
 }`}
           />
+
+          {/* Demo 5: Clearable Search Input with Reset */}
+          <ComponentDemoCard
+            id="input-clearable"
+            title="Clearable Search Input with Reset"
+            description="Displays a trailing dismiss icon when text is entered to provide one-click clearing for filter fields."
+            webPreview={
+              <div style={{ maxWidth: 400, width: '100%' }}>
+                <TextInput
+                  label="Clearable Query Field"
+                  value={clearableText}
+                  onChange={(e) => setClearableText(e.target.value)}
+                  leftIcon={<SearchIcon size={16} />}
+                  rightIcon={
+                    clearableText ? (
+                      <button
+                        type="button"
+                        onClick={() => setClearableText('')}
+                        aria-label="Clear text"
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          padding: 0,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'var(--color-text-secondary)',
+                        }}
+                      >
+                        <CloseIcon size={14} />
+                      </button>
+                    ) : undefined
+                  }
+                  description={clearableText ? 'Click cross icon to reset search value' : 'Type to see the clear reset button appear'}
+                />
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <TextInput
+                  label="Mobile Search"
+                  value={clearableText}
+                  onChange={(e) => setClearableText(e.target.value)}
+                  placeholder="Clearable input..."
+                />
+              </div>
+            }
+            webCode={`import React, { useState } from 'react';
+import { TextInput } from '@spectra/react';
+import { SearchIcon, CloseIcon } from '@spectra/icons';
+
+export default function ClearableInputDemo(): JSX.Element {
+  const [query, setQuery] = useState('Search tokens...');
+
+  return (
+    <TextInput
+      label="Search Field"
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+      leftIcon={<SearchIcon size={16} />}
+      rightIcon={
+        query ? (
+          <button
+            type="button"
+            onClick={() => setQuery('')}
+            aria-label="Clear text"
+            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+          >
+            <CloseIcon size={14} />
+          </button>
+        ) : undefined
+      }
+    />
+  );
+}`}
+            nativeCode={`import React, { useState } from 'react';
+import { TextInput } from '@spectra/react-native';
+
+export default function NativeClearableDemo(): JSX.Element {
+  const [val, setVal] = useState('Query');
+  return <TextInput label="Search" value={val} onChangeText={setVal} />;
+}`}
+          />
+
+          {/* Demo 6: Prefix & Suffix Currency/Domain Adornments */}
+          <ComponentDemoCard
+            id="input-adornments"
+            title="Prefix & Suffix Currency/Domain Adornments"
+            description="Fix visually locked prefixes (currencies, domain protocols) and suffixes (metric units, top-level domains) around the editable text area."
+            webPreview={
+              <div style={{ maxWidth: 400, width: '100%', display: 'flex', flexDirection: 'column', gap: 16 }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 6 }}>
+                    Enterprise Monthly Budget
+                  </label>
+                  <div style={{ display: 'flex', alignItems: 'center', borderRadius: 8, border: '1px solid var(--color-border-subtle)', background: 'var(--color-surface-elevated)', overflow: 'hidden' }}>
+                    <span style={{ padding: '8px 12px', background: 'var(--color-surface-subtle)', color: 'var(--color-text-secondary)', fontSize: '0.875rem', fontWeight: 600, borderRight: '1px solid var(--color-border-subtle)' }}>
+                      $
+                    </span>
+                    <input
+                      type="text"
+                      value={adornmentPrice}
+                      onChange={(e) => setAdornmentPrice(e.target.value)}
+                      style={{
+                        flex: 1,
+                        border: 'none',
+                        outline: 'none',
+                        padding: '10px 12px',
+                        fontSize: '0.875rem',
+                        background: 'transparent',
+                        color: 'var(--color-text-primary)',
+                      }}
+                      aria-label="Price in USD"
+                    />
+                    <span style={{ padding: '8px 12px', background: 'var(--color-surface-subtle)', color: 'var(--color-text-secondary)', fontSize: '0.82rem', borderLeft: '1px solid var(--color-border-subtle)' }}>
+                      USD / mo
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', marginTop: 4 }}>Fixed tier allocation for production cluster</div>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <TextInput label="Budget ($ USD)" value={adornmentPrice} onChange={(e) => setAdornmentPrice(e.target.value)} />
+              </div>
+            }
+            webCode={`import React, { useState } from 'react';
+
+export default function AdornmentInputDemo(): JSX.Element {
+  const [val, setVal] = useState('249.00');
+
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', borderRadius: 8, border: '1px solid #E2E8F0', overflow: 'hidden' }}>
+      <span style={{ padding: '8px 12px', background: '#F8FAFC', fontWeight: 600 }}>$</span>
+      <input
+        type="text"
+        value={val}
+        onChange={(e) => setVal(e.target.value)}
+        style={{ flex: 1, border: 'none', padding: '10px 12px' }}
+      />
+      <span style={{ padding: '8px 12px', background: '#F8FAFC', fontSize: 13 }}>USD / mo</span>
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View, Text, TextInput } from 'react-native';
+
+export default function NativeAdornmentDemo(): JSX.Element {
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderRadius: 8 }}>
+      <Text style={{ padding: 10 }}>$</Text>
+      <TextInput style={{ flex: 1 }} defaultValue="249.00" />
+      <Text style={{ padding: 10 }}>USD</Text>
+    </View>
+  );
+}`}
+          />
+
+          {/* Demo 7: Live Character Counter & Length Limit */}
+          <ComponentDemoCard
+            id="input-counter"
+            title="Live Character Counter & Length Limit"
+            description="Real-time character counting provides immediate feedback to users as they approach input boundary restrictions."
+            webPreview={
+              <div style={{ maxWidth: 400, width: '100%' }}>
+                <TextInput
+                  label="Release Milestone Title"
+                  value={counterText}
+                  maxLength={60}
+                  onChange={(e) => setCounterText(e.target.value)}
+                  description={`${counterText.length} / 60 characters used`}
+                />
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <TextInput
+                  label="Milestone Title"
+                  value={counterText}
+                  maxLength={60}
+                  onChange={(e) => setCounterText(e.target.value)}
+                />
+              </div>
+            }
+            webCode={`import React, { useState } from 'react';
+import { TextInput } from '@spectra/react';
+
+export default function CounterInputDemo(): JSX.Element {
+  const [text, setText] = useState('Spectra UI Enterprise Release');
+  const MAX = 60;
+
+  return (
+    <TextInput
+      label="Release Milestone Title"
+      value={text}
+      maxLength={MAX}
+      onChange={(e) => setText(e.target.value)}
+      description={\`\${text.length} / \${MAX} characters used\`}
+    />
+  );
+}`}
+            nativeCode={`import React, { useState } from 'react';
+import { TextInput, View, Text } from 'react-native';
+
+export default function NativeCounterDemo(): JSX.Element {
+  const [text, setText] = useState('');
+  return (
+    <View>
+      <TextInput maxLength={60} value={text} onChangeText={setText} />
+      <Text>{text.length} / 60</Text>
+    </View>
+  );
+}`}
+          />
         </div>
       );
 
@@ -1329,6 +1904,96 @@ export default function NativePillsTabsDemo() {
   return <Tabs tabs={['Daily', 'Weekly', 'Monthly']} selectedIndex={0} onTabPress={() => {}} />;
 }`}
           />
+
+          {/* Demo 3: Vertical Sidebar Navigation Tabs */}
+          <ComponentDemoCard
+            id="tabs-vertical"
+            title="Vertical Sidebar Navigation Tabs"
+            description="Vertical tab alignment ideal for settings dashboards, developer preferences, and multi-tier configuration panels."
+            webPreview={
+              <div style={{ display: 'flex', gap: 24, width: '100%', minHeight: 180, border: '1px solid var(--color-border-subtle)', borderRadius: 12, padding: 16, background: 'var(--color-surface-elevated)' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 4, width: 180, borderRight: '1px solid var(--color-border-subtle)', paddingRight: 12 }}>
+                  {[
+                    { id: 'profile', label: 'Account Profile' },
+                    { id: 'security', label: 'Security & 2FA' },
+                    { id: 'billing', label: 'Cloud Billing' },
+                    { id: 'api', label: 'API Keys' },
+                  ].map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => setVerticalTab(item.id)}
+                      style={{
+                        textAlign: 'left',
+                        padding: '8px 12px',
+                        borderRadius: 8,
+                        border: 'none',
+                        background: verticalTab === item.id ? 'var(--color-primary-subtle, rgba(37,99,235,0.08))' : 'transparent',
+                        color: verticalTab === item.id ? 'var(--color-primary)' : 'var(--color-text-secondary)',
+                        fontWeight: verticalTab === item.id ? 600 : 400,
+                        fontSize: '0.875rem',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                  <h4 style={{ margin: '0 0 8px 0', fontSize: '1rem', color: 'var(--color-text-primary)' }}>
+                    {verticalTab === 'profile' && 'User Identity & Organization Details'}
+                    {verticalTab === 'security' && 'Hardware Security Keys & Multi-Factor Auth'}
+                    {verticalTab === 'billing' && 'Enterprise Subscriptions & Invoicing'}
+                    {verticalTab === 'api' && 'Scoped Production API Access Tokens'}
+                  </h4>
+                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+                    Manage domain permissions and configure environment variables synchronized with Spectra UI tokens.
+                  </p>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <Tabs variant="pills" defaultValue="profile">
+                  <TabList>
+                    <Tab value="profile">Profile</Tab>
+                    <Tab value="security">Security</Tab>
+                  </TabList>
+                </Tabs>
+              </div>
+            }
+            webCode={`import React, { useState } from 'react';
+
+export default function VerticalTabsDemo(): JSX.Element {
+  const [tab, setTab] = useState('profile');
+
+  return (
+    <div style={{ display: 'flex', gap: 20 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', width: 160 }}>
+        {['profile', 'security', 'billing'].map((item) => (
+          <button
+            key={item}
+            onClick={() => setTab(item)}
+            className={tab === item ? 'tab-active' : 'tab-inactive'}
+          >
+            {item}
+          </button>
+        ))}
+      </div>
+      <div style={{ flex: 1 }}>
+        <p>Active Tab: {tab}</p>
+      </div>
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { Tabs } from '@spectra/react-native';
+
+export default function NativeVerticalTabsDemo(): JSX.Element {
+  return <Tabs tabs={['Profile', 'Security']} selectedIndex={0} onTabPress={() => {}} />;
+}`}
+          />
         </div>
       );
 
@@ -1613,6 +2278,100 @@ export default function NativeCheckboxGroupDemo() {
   );
 }`}
           />
+
+          {/* Demo 4: Checkbox Selection Cards & Tiles */}
+          <ComponentDemoCard
+            id="checkbox-cards"
+            title="Checkbox Selection Cards & Tiles"
+            description="Card-style selection units that combine a standard checkbox control with rich structured metadata and visual active highlighting."
+            webPreview={
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 14, width: '100%' }}>
+                {[
+                  { id: 'standard', name: 'Standard Nodes', spec: '4 vCPU · 16 GB RAM', price: '$40/mo' },
+                  { id: 'performance', name: 'High-Mem Nodes', spec: '16 vCPU · 64 GB RAM', price: '$160/mo' },
+                  { id: 'gpu', name: 'GPU Acceleration', spec: '1x NVIDIA L4 · 24 GB VRAM', price: '$320/mo' },
+                ].map((tier) => {
+                  const isChecked = selectedCardTiers.includes(tier.id);
+                  return (
+                    <div
+                      key={tier.id}
+                      onClick={() => {
+                        setSelectedCardTiers((prev) =>
+                          isChecked ? prev.filter((id) => id !== tier.id) : [...prev, tier.id]
+                        );
+                      }}
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 10,
+                        padding: 16,
+                        borderRadius: 12,
+                        border: isChecked ? '2px solid var(--color-primary)' : '1px solid var(--color-border-subtle)',
+                        background: isChecked ? 'var(--color-primary-subtle, rgba(37,99,235,0.04))' : 'var(--color-surface-elevated)',
+                        cursor: 'pointer',
+                        transition: 'all 0.15s ease',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <div style={{ fontWeight: 600, fontSize: '0.92rem', color: 'var(--color-text-primary)' }}>{tier.name}</div>
+                        <Checkbox
+                          checked={isChecked}
+                          onChange={(checked) => {
+                            setSelectedCardTiers((prev) =>
+                              checked ? [...prev, tier.id] : prev.filter((id) => id !== tier.id)
+                            );
+                          }}
+                        />
+                      </div>
+                      <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>{tier.spec}</div>
+                      <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-primary)', marginTop: 'auto' }}>{tier.price}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%', gap: 10, display: 'flex', flexDirection: 'column' }}>
+                <Checkbox label="Standard Nodes ($40/mo)" checked={selectedCardTiers.includes('standard')} />
+                <Checkbox label="High-Mem Nodes ($160/mo)" checked={selectedCardTiers.includes('performance')} />
+              </div>
+            }
+            webCode={`import React, { useState } from 'react';
+import { Checkbox } from '@spectra/react';
+
+export default function CheckboxCardsDemo(): JSX.Element {
+  const [selected, setSelected] = useState<string[]>(['standard']);
+
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>
+      {tiers.map((tier) => (
+        <div
+          key={tier.id}
+          className={selected.includes(tier.id) ? 'card-selected' : 'card-default'}
+          onClick={() => toggleTier(tier.id)}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <span>{tier.name}</span>
+            <Checkbox checked={selected.includes(tier.id)} />
+          </div>
+          <p>{tier.spec}</p>
+        </div>
+      ))}
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { Checkbox } from '@spectra/react-native';
+
+export default function NativeCheckboxCardsDemo(): JSX.Element {
+  return (
+    <View style={{ gap: 8 }}>
+      <Checkbox label="Standard Nodes ($40/mo)" checked={true} />
+    </View>
+  );
+}`}
+          />
         </div>
       );
     }
@@ -1652,7 +2411,7 @@ import { Radio } from '@spectra/react-native';
 
 export default function NativeRadioDemo() {
   return <Radio value="monthly" label="Monthly Billing" />;
-}`}
+} `}
           />
 
           <ComponentDemoCard
@@ -1688,6 +2447,80 @@ import { Radio } from '@spectra/react-native';
 
 export default function NativeHorizontalRadioDemo() {
   return <Radio value="left" label="Left Align" />;
+} `}
+          />
+
+          {/* Demo 3: Segmented Pill Radio Group */}
+          <ComponentDemoCard
+            id="radio-segmented"
+            title="Segmented Pill Radio Group"
+            description="Segmented pills present mutually exclusive toggles inside a shared pill background container."
+            webPreview={
+              <div style={{ display: 'inline-flex', padding: 4, borderRadius: 9999, background: 'var(--color-surface-subtle)', border: '1px solid var(--color-border-subtle)' }}>
+                {[
+                  { id: 'grid', label: 'Grid View' },
+                  { id: 'table', label: 'Table View' },
+                  { id: 'kanban', label: 'Kanban Board' },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => setSegmentedRadio(item.id)}
+                    style={{
+                      border: 'none',
+                      padding: '6px 16px',
+                      borderRadius: 9999,
+                      background: segmentedRadio === item.id ? 'var(--color-surface-elevated)' : 'transparent',
+                      color: segmentedRadio === item.id ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+                      fontWeight: segmentedRadio === item.id ? 600 : 500,
+                      fontSize: '0.85rem',
+                      cursor: 'pointer',
+                      boxShadow: segmentedRadio === item.id ? 'var(--shadow-sm)' : 'none',
+                      transition: 'all 0.15s ease',
+                    }}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <Radio value="grid" label="Grid View" />
+              </div>
+            }
+            webCode={`import React, { useState } from 'react';
+
+export default function SegmentedRadioDemo(): JSX.Element {
+  const [view, setView] = useState('grid');
+  return (
+    <div style={{ display: 'inline-flex', padding: 4, borderRadius: 9999, background: '#F1F5F9' }}>
+      {['grid', 'table', 'kanban'].map((item) => (
+        <button
+          key={item}
+          onClick={() => setView(item)}
+          style={{
+            borderRadius: 9999,
+            background: view === item ? '#fff' : 'transparent',
+            padding: '6px 16px',
+            border: 'none',
+          }}
+        >
+          {item}
+        </button>
+      ))}
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View, Text } from 'react-native';
+
+export default function NativeSegmentedRadioDemo(): JSX.Element {
+  return (
+    <View style={{ flexDirection: 'row', borderRadius: 20, backgroundColor: '#F1F5F9' }}>
+      <Text style={{ padding: 8 }}>Grid</Text>
+    </View>
+  );
 }`}
           />
         </div>
@@ -1860,6 +2693,68 @@ export default function NativeAvatarFallbackDemo() {
   );
 }`}
           />
+
+          {/* Demo 4: Persona Card with Presence & Contact Details */}
+          <ComponentDemoCard
+            id="avatar-persona"
+            title="Persona Card with Presence & Contact Details"
+            description="Fluent-style Persona combination grouping an avatar with status badge, display name, primary role, and presence status."
+            webPreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14, maxWidth: 360, width: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '12px 16px', borderRadius: 12, border: '1px solid var(--color-border-subtle)', background: 'var(--color-surface-elevated)' }}>
+                  <Avatar name="Sarah Connor" size="lg" status="online" />
+                  <div>
+                    <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--color-text-primary)' }}>Sarah Connor</div>
+                    <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>Principal Design Technologist</div>
+                    <div style={{ fontSize: '0.78rem', color: '#16A34A', fontWeight: 600, marginTop: 2 }}>Active now</div>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '12px 16px', borderRadius: 12, border: '1px solid var(--color-border-subtle)', background: 'var(--color-surface-elevated)' }}>
+                  <Avatar name="Elena Rostova" size="lg" status="busy" />
+                  <div>
+                    <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--color-text-primary)' }}>Elena Rostova</div>
+                    <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>Staff Accessibility Specialist</div>
+                    <div style={{ fontSize: '0.78rem', color: '#DC2626', fontWeight: 600, marginTop: 2 }}>In a meeting until 3:30 PM</div>
+                  </div>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <Avatar name="Sarah Connor" size="md" status="online" />
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Avatar } from '@spectra/react';
+
+export default function PersonaDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: 16, border: '1px solid #E2E8F0', borderRadius: 12 }}>
+      <Avatar name="Sarah Connor" size="lg" status="online" />
+      <div>
+        <div style={{ fontWeight: 600 }}>Sarah Connor</div>
+        <div style={{ fontSize: 13, color: '#64748B' }}>Principal Design Technologist</div>
+        <div style={{ fontSize: 12, color: '#16A34A' }}>Active now</div>
+      </div>
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View, Text } from 'react-native';
+import { Avatar } from '@spectra/react-native';
+
+export default function NativePersonaDemo(): JSX.Element {
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+      <Avatar name="Sarah Connor" size="md" status="online" />
+      <View>
+        <Text style={{ fontWeight: '600' }}>Sarah Connor</Text>
+        <Text style={{ color: '#64748B' }}>Active now</Text>
+      </View>
+    </View>
+  );
+}`}
+          />
         </div>
       );
 
@@ -2020,6 +2915,75 @@ export default function NativeMetricCardDemo() {
   return (
     <Card variant="bordered">
       <Text variant="body">128,450 MAU (+14.2%)</Text>
+    </Card>
+  );
+}`}
+          />
+
+          {/* Demo 3: Structured Card with Header Media & Actions */}
+          <ComponentDemoCard
+            id="card-media"
+            title="Structured Card with Header Media & Actions"
+            description="Composite card combining a top media banner, title badge, supporting descriptive body, and trailing action buttons."
+            webPreview={
+              <div style={{ maxWidth: 360, width: '100%' }}>
+                <div style={{ borderRadius: 12, border: '1px solid var(--color-border-subtle)', background: 'var(--color-surface-elevated)', overflow: 'hidden', boxShadow: 'var(--shadow-sm)' }}>
+                  <div style={{ height: 120, background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: '0.85rem', fontWeight: 600 }}>
+                    Component Design System Canvas
+                  </div>
+                  <div style={{ padding: 18, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--color-text-primary)' }}>Spectra UI v1.0</span>
+                      <Badge variant="info">Production</Badge>
+                    </div>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+                      Comprehensive cross-platform component library engineered with token symmetry and strict accessibility benchmarks.
+                    </p>
+                    <div style={{ display: 'flex', gap: 10, marginTop: 6 }}>
+                      <Button variant="primary" size="sm">Explore Tokens</Button>
+                      <Button variant="secondary" size="sm">Changelog</Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <Card variant="bordered">
+                  <div style={{ fontWeight: 700 }}>Spectra UI v1.0</div>
+                  <div style={{ fontSize: 13, color: '#64748B' }}>Production Design System</div>
+                </Card>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Card, Badge, Button } from '@spectra/react';
+
+export default function MediaCardDemo(): JSX.Element {
+  return (
+    <Card variant="bordered" style={{ overflow: 'hidden', padding: 0 }}>
+      <div style={{ height: 120, background: '#1e293b' }} />
+      <div style={{ padding: 18 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <h4>Spectra UI v1.0</h4>
+          <Badge variant="info">Production</Badge>
+        </div>
+        <p>Comprehensive cross-platform component library.</p>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <Button variant="primary" size="sm">Explore Tokens</Button>
+          <Button variant="secondary" size="sm">Changelog</Button>
+        </div>
+      </div>
+    </Card>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { Card, Text, Button } from '@spectra/react-native';
+
+export default function NativeMediaCardDemo(): JSX.Element {
+  return (
+    <Card variant="bordered">
+      <Text style={{ fontWeight: '700' }}>Spectra UI v1.0</Text>
+      <Button variant="filled">Explore</Button>
     </Card>
   );
 }`}
@@ -2600,6 +3564,78 @@ export default function NativeDismissibleDemo() {
     >
       Native dismiss banner
     </Alert>
+  );
+}`}
+          />
+
+          {/* Demo 3: Actionable Alert with Direct Action Buttons */}
+          <ComponentDemoCard
+            id="alert-actionable"
+            title="Actionable Alert with Direct Action Buttons"
+            description="Embeds dedicated action triggers directly within the alert notification banner for immediate remediation (MUI & Fluent Alert action slot)."
+            webPreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 18px', borderRadius: 10, background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <AlertCircleIcon size={20} color="#dc2626" />
+                    <div>
+                      <div style={{ fontWeight: 600, fontSize: '0.92rem', color: 'var(--color-text-primary)' }}>Storage Limit Exceeded</div>
+                      <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>You have utilized 98.4% of your allocated CDN asset cache.</div>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', gap: 8 }}>
+                    <Button variant="danger" size="sm">Upgrade Tier</Button>
+                    <Button variant="secondary" size="sm">Clear Cache</Button>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 18px', borderRadius: 10, background: 'rgba(37, 99, 235, 0.08)', border: '1px solid rgba(37, 99, 235, 0.3)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <InfoIcon size={20} color="#2563eb" />
+                    <div>
+                      <div style={{ fontWeight: 600, fontSize: '0.92rem', color: 'var(--color-text-primary)' }}>New Design System Version Available</div>
+                      <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>Spectra UI v0.3.0 includes 60+ components and 25+ functional hooks.</div>
+                    </div>
+                  </div>
+                  <Button variant="primary" size="sm">Update Now</Button>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <Alert variant="warning" title="Disk Warning">
+                  Free up space or upgrade
+                </Alert>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Alert, Button } from '@spectra/react';
+import { AlertCircleIcon } from '@spectra/icons';
+
+export default function ActionableAlertDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 16, border: '1px solid #ef4444', borderRadius: 10, background: 'rgba(239,68,68,0.08)' }}>
+      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+        <AlertCircleIcon size={20} color="#dc2626" />
+        <div>
+          <h4>Storage Limit Exceeded</h4>
+          <p>You have utilized 98.4% of your CDN cache.</p>
+        </div>
+      </div>
+      <Button variant="danger" size="sm">Upgrade Tier</Button>
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View, Text } from 'react-native';
+import { Button } from '@spectra/react-native';
+
+export default function NativeActionableAlertDemo(): JSX.Element {
+  return (
+    <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 14 }}>
+      <Text>Storage Limit Warning</Text>
+      <Button variant="filled">Upgrade</Button>
+    </View>
   );
 }`}
           />
