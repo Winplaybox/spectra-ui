@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Badge } from '@spectra/react';
-import { ExternalLinkIcon, CheckIcon, SmartphoneIcon } from '@spectra/icons';
+import { ExternalLinkIcon, CheckIcon, SmartphoneIcon, WindowsIcon } from '@spectra/icons';
 import { Platform, PLATFORMS, getComponentPlatformData } from '../../data/platformData';
 import { openInExpoSnack, openInReactNativeSandbox } from '../../utils/sandbox';
 
@@ -195,7 +195,7 @@ export const PlatformChassisViewer: React.FC<PlatformChassisViewerProps> = ({
                     animation: 'spectra-fade-in 0.2s ease',
                   }}
                 >
-                  📳 UIImpactFeedbackGenerator
+                  UIImpactFeedbackGenerator (Haptic)
                 </div>
               )}
             </div>
@@ -354,7 +354,7 @@ export const PlatformChassisViewer: React.FC<PlatformChassisViewerProps> = ({
                     animation: 'spectra-fade-in 0.2s ease',
                   }}
                 >
-                  🌊 Android Hardware Ripple Triggered
+                  Android Hardware Ripple Triggered
                 </div>
               )}
             </div>
@@ -410,7 +410,7 @@ export const PlatformChassisViewer: React.FC<PlatformChassisViewerProps> = ({
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ fontSize: 14 }}>🪟</span>
+                <WindowsIcon size={14} color="var(--color-action-primary)" />
                 <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-primary)' }}>
                   Spectra Windows 11 Desktop · {componentName}
                 </span>

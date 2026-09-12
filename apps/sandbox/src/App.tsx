@@ -142,6 +142,7 @@ export const App: React.FC = () => {
           onOpenMobileMenu={() => setIsMobileSidebarOpen(true)}
           onOpenSearch={() => setIsSearchOpen(true)}
           ambientIntensity={ambientIntensity}
+          onSetAmbientIntensity={setAmbientIntensity}
           onCycleAmbientIntensity={cycleAmbientIntensity}
         />
 

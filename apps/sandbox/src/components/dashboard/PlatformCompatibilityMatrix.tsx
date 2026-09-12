@@ -1,8 +1,9 @@
 import React from 'react';
 import { Card, Badge } from '@spectra/react';
-import { CheckIcon, ExternalLinkIcon } from '@spectra/icons';
+import { CheckIcon, ExternalLinkIcon, InfoIcon } from '@spectra/icons';
 import { PLATFORMS, Platform } from '../../data/platformData';
 import { usePlatform } from '../../context/PlatformContext';
+import { PlatformIcon } from './PlatformIcon';
 
 interface PlatformCompatibilityMatrixProps {
   componentName: string;
@@ -53,7 +54,7 @@ export const PlatformCompatibilityMatrix: React.FC<PlatformCompatibilityMatrixPr
       >
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-            <span style={{ fontSize: 18 }}>⚡</span>
+            <InfoIcon size={18} color="var(--color-action-primary)" />
             <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: 'var(--color-text-primary)' }}>
               Real-Time Universal Compatibility & Support Matrix
             </h3>
@@ -154,7 +155,7 @@ export const PlatformCompatibilityMatrix: React.FC<PlatformCompatibilityMatrixPr
                   {/* Platform Name & Badge */}
                   <td style={{ padding: '14px 18px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <span style={{ fontSize: 20 }}>{p.icon}</span>
+                      <PlatformIcon platform={p.id} size={20} color="var(--color-action-primary)" />
                       <div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                           <span style={{ fontWeight: isSelected ? 700 : 600, color: 'var(--color-text-primary)' }}>
@@ -270,8 +271,9 @@ export const PlatformCompatibilityMatrix: React.FC<PlatformCompatibilityMatrixPr
           color: 'var(--color-text-secondary)',
         }}
       >
-        <span>
-          💡 <strong>Architectural Note:</strong> Platform code, APIs, and hooks are strictly isolated. No DOM <code style={{ color: '#F43F5E' }}>onClick</code> or web attributes are rendered inside native views.
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+          <InfoIcon size={14} color="var(--color-action-primary)" />
+          <span><strong>Architectural Note:</strong> Platform code, APIs, and hooks are strictly isolated. No DOM <code style={{ color: '#F43F5E' }}>onClick</code> or web attributes are rendered inside native views.</span>
         </span>
         <span style={{ color: 'var(--color-text-muted)' }}>
           Benchmarked against Microsoft Fluent 2 & Apple Human Interface Guidelines

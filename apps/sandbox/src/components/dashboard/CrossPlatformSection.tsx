@@ -3,6 +3,7 @@ import { Badge, Button, Tabs, TabList, Tab, Card } from '@spectra/react';
 import { CheckIcon, PaletteIcon, SparklesIcon, SmartphoneIcon } from '@spectra/icons';
 import { CircuitAnimation } from './CircuitAnimation';
 import { PlatformCompatibilityMatrix } from './PlatformCompatibilityMatrix';
+import { PlatformIcon } from './PlatformIcon';
 import { usePlatform } from '../../context/PlatformContext';
 import { Platform } from '../../data/platformData';
 
@@ -335,20 +336,25 @@ export const MacOSLoginScreen = () => {
             setPlatform(p);
           }}>
             <TabList style={{ gap: 4 }}>
-              <Tab value="web" style={{ fontSize: 13, fontWeight: 600 }}>
-                🌐 Web (React)
+              <Tab value="web" style={{ fontSize: 13, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                <PlatformIcon platform="web" size={14} />
+                <span>Web (React)</span>
               </Tab>
-              <Tab value="ios" style={{ fontSize: 13, fontWeight: 600 }}>
-                🍎 iOS (Swift/RN)
+              <Tab value="ios" style={{ fontSize: 13, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                <PlatformIcon platform="ios" size={14} />
+                <span>iOS (Swift/RN)</span>
               </Tab>
-              <Tab value="android" style={{ fontSize: 13, fontWeight: 600 }}>
-                🤖 Android (Compose)
+              <Tab value="android" style={{ fontSize: 13, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                <PlatformIcon platform="android" size={14} />
+                <span>Android (Compose)</span>
               </Tab>
-              <Tab value="windows" style={{ fontSize: 13, fontWeight: 600 }}>
-                🪟 Windows (WinUI 3)
+              <Tab value="windows" style={{ fontSize: 13, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                <PlatformIcon platform="windows" size={14} />
+                <span>Windows (WinUI 3)</span>
               </Tab>
-              <Tab value="macos" style={{ fontSize: 13, fontWeight: 600 }}>
-                🖥️ macOS (Sequoia)
+              <Tab value="macos" style={{ fontSize: 13, fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                <PlatformIcon platform="macos" size={14} />
+                <span>macOS (Sequoia)</span>
               </Tab>
             </TabList>
           </Tabs>

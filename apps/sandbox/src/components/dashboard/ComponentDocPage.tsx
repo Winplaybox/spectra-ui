@@ -54,7 +54,7 @@ import { compileAndRender } from '../../utils/liveCompiler';
 import { EditableCodeBlock } from './EditableCodeBlock';
 import { MobileSimulator } from './MobileSimulator';
 import { PlatformChassisViewer } from './PlatformChassisViewer';
-import { PlatformCompatibilityMatrix } from './PlatformCompatibilityMatrix';
+import { PlatformIcon } from './PlatformIcon';
 import { usePlatform } from '../../context/PlatformContext';
 import { Platform } from '../../data/platformData';
 import { ComponentMetadata, COMPONENTS_DATA } from '../../data/componentsData';
@@ -70,22 +70,8 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
   const meta = COMPONENTS_DATA[componentId] || COMPONENTS_DATA['button'];
   const releaseInfo = getComponentReleaseVersion(meta.id);
   const { currentVersion, getGitHubUrl } = useVersion();
-  const { currentPlatform, setPlatform } = usePlatform();
-
-  // View modes: 5 Universal Platforms + Headless Primitives
-  const [platformMode, setPlatformMode] = useState<Platform | 'headless'>(currentPlatform);
-
-  useEffect(() => {
-    setPlatformMode(currentPlatform);
-  }, [currentPlatform]);
-
-  const handlePlatformChange = (val: string) => {
-    const mode = val as Platform | 'headless';
-    setPlatformMode(mode);
-    if (mode !== 'headless') {
-      setPlatform(mode);
-    }
-  };
+  const { currentPlatform, metadata: platformMeta } = usePlatform();
+  const platformMode = currentPlatform;
   const [previewTheme, setPreviewTheme] = useState<'light' | 'dark'>('light');
   const [showCode, setShowCode] = useState(false);
   const [playgroundLang, setPlaygroundLang] = useState<'ts' | 'js'>('ts');
@@ -1543,47 +1529,47 @@ export const Native${meta.name}Demo = () => {
             {meta.description}
           </p>
 
-          {/* 2. Universal Platform Selector Tabs (Web, iOS, Android, Windows, macOS, Headless) */}
-          <div style={{ marginTop: 8 }}>
-            <Tabs variant="underline" value={platformMode} onChange={handlePlatformChange}>
-              <TabList>
-                <Tab value="web" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
-                  <span>🌐</span>
-                  <span>Web (React DOM)</span>
-                </Tab>
-                <Tab value="ios" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
-                  <span>🍎</span>
-                  <span>iOS (Swift / RN)</span>
-                </Tab>
-                <Tab value="android" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
-                  <span>🤖</span>
-                  <span>Android (Compose / RN)</span>
-                </Tab>
-                <Tab value="windows" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
-                  <span>🪟</span>
-                  <span>Windows (WinUI 3 / RNW)</span>
-                </Tab>
-                <Tab value="macos" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
-                  <span>🖥️</span>
-                  <span>macOS (AppKit / RN)</span>
-                </Tab>
-                <Tab value="headless" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
-                  <ComponentIcon size={14} />
-                  <span>Headless Primitives</span>
-                </Tab>
-              </TabList>
-            </Tabs>
+          {/* Active Platform Banner (Strict Platform Isolation) */}
+          <div
+            style={{
+              marginTop: 16,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '10px 14px',
+              borderRadius: 8,
+              backgroundColor: 'var(--color-surface-raised)',
+              border: '1px solid var(--color-border-subtle)',
+              flexWrap: 'wrap',
+              gap: 8,
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <PlatformIcon platform={currentPlatform} size={18} color="var(--color-action-primary)" />
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                  {platformMeta.name} Platform Environment
+                </span>
+                <span
+                  style={{
+                    fontSize: 10,
+                    fontWeight: 700,
+                    padding: '1px 6px',
+                    borderRadius: 4,
+                    backgroundColor: 'rgba(0, 127, 255, 0.12)',
+                    color: 'var(--color-action-primary)',
+                    border: '1px solid rgba(0, 127, 255, 0.25)',
+                  }}
+                >
+                  {platformMeta.badge}
+                </span>
+              </div>
+            </div>
+            <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>
+              Showing isolated {platformMeta.name} documentation & syntax. Switch target platform in the sidebar dropdown.
+            </span>
           </div>
         </Card>
-
-      {/* Real-Time Platform Compatibility Matrix Card */}
-      <div id="compatibility-matrix" style={{ marginBottom: 28, scrollMarginTop: 80 }}>
-        <PlatformCompatibilityMatrix
-          componentName={meta.name}
-          componentId={meta.id}
-          onSelectPlatform={(p) => handlePlatformChange(p)}
-        />
-      </div>
 
       {/* 3. PLATFORM VIEW: Web Mode */}
       {platformMode === 'web' && (
@@ -2153,7 +2139,7 @@ export const Native${meta.name}Demo = () => {
 
       {/* 4. PLATFORM VIEW: Apple iOS */}
       {platformMode === 'ios' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
+        <div id="playground" style={{ display: 'flex', flexDirection: 'column', gap: 36, scrollMarginTop: 80 }}>
           <PlatformChassisViewer
             platform="ios"
             componentId={meta.id}
@@ -2189,7 +2175,7 @@ export const Native${meta.name}Demo = () => {
 
       {/* 5. PLATFORM VIEW: Google Android */}
       {platformMode === 'android' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
+        <div id="playground" style={{ display: 'flex', flexDirection: 'column', gap: 36, scrollMarginTop: 80 }}>
           <PlatformChassisViewer
             platform="android"
             componentId={meta.id}
@@ -2225,7 +2211,7 @@ export const Native${meta.name}Demo = () => {
 
       {/* 6. PLATFORM VIEW: Microsoft Windows */}
       {platformMode === 'windows' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
+        <div id="playground" style={{ display: 'flex', flexDirection: 'column', gap: 36, scrollMarginTop: 80 }}>
           <PlatformChassisViewer
             platform="windows"
             componentId={meta.id}
@@ -2261,7 +2247,7 @@ export const Native${meta.name}Demo = () => {
 
       {/* 7. PLATFORM VIEW: Apple macOS */}
       {platformMode === 'macos' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
+        <div id="playground" style={{ display: 'flex', flexDirection: 'column', gap: 36, scrollMarginTop: 80 }}>
           <PlatformChassisViewer
             platform="macos"
             componentId={meta.id}
@@ -2295,104 +2281,7 @@ export const Native${meta.name}Demo = () => {
         </div>
       )}
 
-      {/* 5. PLATFORM VIEW: Headless Primitives Mode */}
-      {platformMode === 'headless' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
-          <Card
-            variant="bordered"
-            style={{
-              padding: 24,
-              backgroundColor: 'var(--color-surface)',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-              <Badge variant="primary">@spectra/primitives</Badge>
-              <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: 'var(--color-text-primary)' }}>
-                {meta.headlessHook.name}
-              </h3>
-            </div>
-            <p style={{ margin: 0, fontSize: 14, color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>
-              {meta.headlessHook.description}
-            </p>
-          </Card>
 
-          <Card
-            variant="bordered"
-            style={{
-              padding: 24,
-              backgroundColor: 'var(--color-surface)',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
-              borderRadius: 12,
-            }}
-          >
-            <h3 style={{ fontSize: 18, fontWeight: 700, margin: '0 0 8px 0', color: 'var(--color-text-primary)' }}>
-              Headless Implementation Recipe
-            </h3>
-            <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
-              Build completely unstyled custom components with 100% W3C WAI-ARIA and accessibility logic built-in:
-            </p>
-          </Card>
-            <Card
-              variant="bordered"
-              style={{
-                backgroundColor: '#0F172A',
-                color: '#E2E8F0',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
-                boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
-                overflow: 'hidden',
-              }}
-            >
-              <div
-                style={{
-                  padding: '10px 16px',
-                  backgroundColor: '#1E293B',
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  fontSize: 12,
-                  color: '#94A3B8',
-                  fontFamily: "'JetBrains Mono', Consolas, monospace",
-                }}
-              >
-                <span>TypeScript · Zero-styling Hook</span>
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(meta.headlessHook.code);
-                    setCopied(true);
-                    setTimeout(() => setCopied(false), 2000);
-                  }}
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.08)',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    color: copied ? '#4ADE80' : '#F1F5F9',
-                    padding: '3px 10px',
-                    borderRadius: 4,
-                    cursor: 'pointer',
-                    fontSize: 11,
-                    fontWeight: 600,
-                  }}
-                >
-                  {copied ? 'Copied Recipe!' : 'Copy Recipe'}
-                </button>
-              </div>
-              <pre
-                style={{
-                  margin: 0,
-                  padding: '18px 20px',
-                  fontSize: 13,
-                  fontFamily: "'JetBrains Mono', Consolas, monospace",
-                  lineHeight: 1.6,
-                  overflowX: 'auto',
-                  color: '#F8FAFC',
-                }}
-              >
-                <code>{meta.headlessHook.code}</code>
-              </pre>
-            </Card>
-        </div>
-      )}
 
       {/* Resource Modal for Web React or Mobile Native */}
       {activeResourceModal && (
@@ -2480,7 +2369,7 @@ export const Native${meta.name}Demo = () => {
             On This Page
           </span>
 
-          {/* Section: Playground */}
+          {/* Section: Playground / Simulator */}
           <a
             href="#playground"
             onClick={(e) => scrollToSection(e, 'playground')}
@@ -2497,7 +2386,7 @@ export const Native${meta.name}Demo = () => {
               transition: 'all 0.15s ease',
             }}
           >
-            Interactive Playground
+            {platformMode === 'web' ? 'Interactive Playground' : `${platformMeta.name} Simulator`}
           </a>
 
           {/* Section: Usage & Variants */}
@@ -2517,11 +2406,11 @@ export const Native${meta.name}Demo = () => {
               transition: 'all 0.15s ease',
             }}
           >
-            Usage & Variants ({variants.length})
+            {platformMode === 'web' ? `Usage & Variants (${variants.length})` : `${platformMeta.name} Recipes`}
           </a>
 
           {/* Sub-variant links with indent & scrollspy */}
-          {variants.length > 0 && (
+          {platformMode === 'web' && variants.length > 0 && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 1, margin: '2px 0 6px 0', paddingLeft: 8 }}>
               {variants.map((v) => {
                 const isActive = activeSection === v.id;
@@ -2551,125 +2440,129 @@ export const Native${meta.name}Demo = () => {
             </div>
           )}
 
-          {/* Section: Resources */}
-          <a
-            href="#resources"
-            onClick={(e) => scrollToSection(e, 'resources')}
-            style={{
-              display: 'block',
-              padding: '6px 10px',
-              borderRadius: 6,
-              backgroundColor: activeSection === 'resources' ? 'var(--color-surface-raised)' : 'transparent',
-              borderLeft: activeSection === 'resources' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-              color: activeSection === 'resources' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-              fontWeight: activeSection === 'resources' ? 600 : 400,
-              textDecoration: 'none',
-              fontSize: 13,
-              transition: 'all 0.15s ease',
-            }}
-          >
-            Resources
-          </a>
+          {platformMode === 'web' && (
+            <>
+              {/* Section: Resources */}
+              <a
+                href="#resources"
+                onClick={(e) => scrollToSection(e, 'resources')}
+                style={{
+                  display: 'block',
+                  padding: '6px 10px',
+                  borderRadius: 6,
+                  backgroundColor: activeSection === 'resources' ? 'var(--color-surface-raised)' : 'transparent',
+                  borderLeft: activeSection === 'resources' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+                  color: activeSection === 'resources' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontWeight: activeSection === 'resources' ? 600 : 400,
+                  textDecoration: 'none',
+                  fontSize: 13,
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                Resources
+              </a>
 
-          {/* Section: Anatomy */}
-          <a
-            href="#anatomy"
-            onClick={(e) => scrollToSection(e, 'anatomy')}
-            style={{
-              display: 'block',
-              padding: '6px 10px',
-              borderRadius: 6,
-              backgroundColor: activeSection === 'anatomy' ? 'var(--color-surface-raised)' : 'transparent',
-              borderLeft: activeSection === 'anatomy' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-              color: activeSection === 'anatomy' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-              fontWeight: activeSection === 'anatomy' ? 600 : 400,
-              textDecoration: 'none',
-              fontSize: 13,
-              transition: 'all 0.15s ease',
-            }}
-          >
-            Anatomy & Slots
-          </a>
+              {/* Section: Anatomy */}
+              <a
+                href="#anatomy"
+                onClick={(e) => scrollToSection(e, 'anatomy')}
+                style={{
+                  display: 'block',
+                  padding: '6px 10px',
+                  borderRadius: 6,
+                  backgroundColor: activeSection === 'anatomy' ? 'var(--color-surface-raised)' : 'transparent',
+                  borderLeft: activeSection === 'anatomy' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+                  color: activeSection === 'anatomy' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontWeight: activeSection === 'anatomy' ? 600 : 400,
+                  textDecoration: 'none',
+                  fontSize: 13,
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                Anatomy & Slots
+              </a>
 
-          {/* Section: Motion */}
-          <a
-            href="#motion"
-            onClick={(e) => scrollToSection(e, 'motion')}
-            style={{
-              display: 'block',
-              padding: '6px 10px',
-              borderRadius: 6,
-              backgroundColor: activeSection === 'motion' ? 'var(--color-surface-raised)' : 'transparent',
-              borderLeft: activeSection === 'motion' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-              color: activeSection === 'motion' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-              fontWeight: activeSection === 'motion' ? 600 : 400,
-              textDecoration: 'none',
-              fontSize: 13,
-              transition: 'all 0.15s ease',
-            }}
-          >
-            Motion & Effects
-          </a>
+              {/* Section: Motion */}
+              <a
+                href="#motion"
+                onClick={(e) => scrollToSection(e, 'motion')}
+                style={{
+                  display: 'block',
+                  padding: '6px 10px',
+                  borderRadius: 6,
+                  backgroundColor: activeSection === 'motion' ? 'var(--color-surface-raised)' : 'transparent',
+                  borderLeft: activeSection === 'motion' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+                  color: activeSection === 'motion' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontWeight: activeSection === 'motion' ? 600 : 400,
+                  textDecoration: 'none',
+                  fontSize: 13,
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                Motion & Effects
+              </a>
 
-          {/* Section: Guidelines */}
-          <a
-            href="#guidelines"
-            onClick={(e) => scrollToSection(e, 'guidelines')}
-            style={{
-              display: 'block',
-              padding: '6px 10px',
-              borderRadius: 6,
-              backgroundColor: activeSection === 'guidelines' ? 'var(--color-surface-raised)' : 'transparent',
-              borderLeft: activeSection === 'guidelines' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-              color: activeSection === 'guidelines' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-              fontWeight: activeSection === 'guidelines' ? 600 : 400,
-              textDecoration: 'none',
-              fontSize: 13,
-              transition: 'all 0.15s ease',
-            }}
-          >
-            Guidelines (Dos & Don'ts)
-          </a>
+              {/* Section: Guidelines */}
+              <a
+                href="#guidelines"
+                onClick={(e) => scrollToSection(e, 'guidelines')}
+                style={{
+                  display: 'block',
+                  padding: '6px 10px',
+                  borderRadius: 6,
+                  backgroundColor: activeSection === 'guidelines' ? 'var(--color-surface-raised)' : 'transparent',
+                  borderLeft: activeSection === 'guidelines' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+                  color: activeSection === 'guidelines' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontWeight: activeSection === 'guidelines' ? 600 : 400,
+                  textDecoration: 'none',
+                  fontSize: 13,
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                Guidelines (Dos & Don'ts)
+              </a>
 
-          {/* Section: Keyboard */}
-          <a
-            href="#keyboard"
-            onClick={(e) => scrollToSection(e, 'keyboard')}
-            style={{
-              display: 'block',
-              padding: '6px 10px',
-              borderRadius: 6,
-              backgroundColor: activeSection === 'keyboard' ? 'var(--color-surface-raised)' : 'transparent',
-              borderLeft: activeSection === 'keyboard' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-              color: activeSection === 'keyboard' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-              fontWeight: activeSection === 'keyboard' ? 600 : 400,
-              textDecoration: 'none',
-              fontSize: 13,
-              transition: 'all 0.15s ease',
-            }}
-          >
-            Keyboard & ARIA
-          </a>
+              {/* Section: Keyboard */}
+              <a
+                href="#keyboard"
+                onClick={(e) => scrollToSection(e, 'keyboard')}
+                style={{
+                  display: 'block',
+                  padding: '6px 10px',
+                  borderRadius: 6,
+                  backgroundColor: activeSection === 'keyboard' ? 'var(--color-surface-raised)' : 'transparent',
+                  borderLeft: activeSection === 'keyboard' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+                  color: activeSection === 'keyboard' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontWeight: activeSection === 'keyboard' ? 600 : 400,
+                  textDecoration: 'none',
+                  fontSize: 13,
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                Keyboard & ARIA
+              </a>
 
-          {/* Section: API Reference */}
-          <a
-            href="#api"
-            onClick={(e) => scrollToSection(e, 'api')}
-            style={{
-              display: 'block',
-              padding: '6px 10px',
-              borderRadius: 6,
-              backgroundColor: activeSection === 'api' || activeSection === 'props' ? 'var(--color-surface-raised)' : 'transparent',
-              borderLeft: activeSection === 'api' || activeSection === 'props' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-              color: activeSection === 'api' || activeSection === 'props' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-              fontWeight: activeSection === 'api' || activeSection === 'props' ? 600 : 400,
-              textDecoration: 'none',
-              fontSize: 13,
-              transition: 'all 0.15s ease',
-            }}
-          >
-            API Reference (Props & CSS)
-          </a>
+              {/* Section: API Reference */}
+              <a
+                href="#api"
+                onClick={(e) => scrollToSection(e, 'api')}
+                style={{
+                  display: 'block',
+                  padding: '6px 10px',
+                  borderRadius: 6,
+                  backgroundColor: activeSection === 'api' || activeSection === 'props' ? 'var(--color-surface-raised)' : 'transparent',
+                  borderLeft: activeSection === 'api' || activeSection === 'props' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+                  color: activeSection === 'api' || activeSection === 'props' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontWeight: activeSection === 'api' || activeSection === 'props' ? 600 : 400,
+                  textDecoration: 'none',
+                  fontSize: 13,
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                API Reference (Props & CSS)
+              </a>
+            </>
+          )}
         </nav>
       </Card>
 

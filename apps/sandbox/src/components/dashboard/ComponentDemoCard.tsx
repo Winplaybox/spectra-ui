@@ -67,7 +67,7 @@ class LiveErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundar
             maxWidth: 500,
           }}
         >
-          <span>⚠️ Runtime Error: {this.state.errorMessage}</span>
+          <span>Runtime Error: {this.state.errorMessage}</span>
           {this.props.onReset && (
             <button
               onClick={this.props.onReset}
@@ -554,7 +554,7 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
               animation: 'fadeIn 0.15s ease',
             }}
           >
-            <span>⚠️</span>
+            <span style={{ fontWeight: 700, color: '#EF4444' }}>!</span>
             <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               Syntax: {compileError}
             </span>
@@ -578,7 +578,7 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
       >
         {/* Left Side: Edit in Chat Pill + Dynamic JS/TS Switcher */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          {/* ✨ Edit in Chat Pill Button (Matching MUI Screenshots) */}
+          {/* Edit in Chat Pill Button (Matching MUI Screenshots) */}
           <button
             onClick={() => setIsAiModalOpen(true)}
             style={{

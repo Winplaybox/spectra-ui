@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog, Button, Switch, Badge, Card } from '@spectra/react';
-import { CheckIcon, CloseIcon } from '@spectra/icons';
+import { CheckIcon, CloseIcon, SettingsIcon } from '@spectra/icons';
 
 interface CookiePreferencesModalProps {
   isOpen: boolean;
@@ -77,7 +77,7 @@ export const CookiePreferencesModal: React.FC<CookiePreferencesModalProps> = ({ 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-              <span style={{ fontSize: 20 }}>🍪</span>
+              <SettingsIcon size={20} color="var(--color-action-primary)" />
               <h2
                 style={{
                   fontSize: 20,

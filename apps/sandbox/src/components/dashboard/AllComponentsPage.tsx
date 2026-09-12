@@ -38,6 +38,7 @@ import { COMPONENTS_DATA } from '../../data/componentsData';
 import { useVersion } from '../../context/VersionContext';
 import { usePlatform } from '../../context/PlatformContext';
 import { PLATFORMS, Platform } from '../../data/platformData';
+import { PlatformIcon } from './PlatformIcon';
 
 // Mini visual preview component for each Spectra UI component
 const MiniComponentPreview: React.FC<{ componentId: string }> = ({ componentId }) => {
@@ -666,12 +667,12 @@ export const AllComponentsPage: React.FC = () => {
           </span>
 
           {[
-            { id: 'all', label: 'All Platforms (5)', icon: '⚡' },
-            { id: 'web', label: 'Web (React 19)', icon: '🌐' },
-            { id: 'ios', label: 'iOS (Swift/RN)', icon: '🍎' },
-            { id: 'android', label: 'Android (Compose/RN)', icon: '🤖' },
-            { id: 'windows', label: 'Windows (WinUI 3)', icon: '🪟' },
-            { id: 'macos', label: 'macOS (Sequoia)', icon: '🖥️' },
+            { id: 'all', label: 'All Platforms (5)', platform: null },
+            { id: 'web', label: 'Web (React 19)', platform: 'web' },
+            { id: 'ios', label: 'iOS (Swift/RN)', platform: 'ios' },
+            { id: 'android', label: 'Android (Compose/RN)', platform: 'android' },
+            { id: 'windows', label: 'Windows (WinUI 3)', platform: 'windows' },
+            { id: 'macos', label: 'macOS (Sequoia)', platform: 'macos' },
           ].map((p) => {
             const isSelected = selectedPlatform === p.id;
             return (
@@ -686,12 +687,12 @@ export const AllComponentsPage: React.FC = () => {
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: 5,
+                  gap: 6,
                   padding: '4px 10px',
                   borderRadius: 6,
                   border: '1px solid',
                   borderColor: isSelected ? 'var(--color-action-primary)' : 'var(--color-border-default)',
-                  backgroundColor: isSelected ? 'rgba(99, 102, 241, 0.15)' : 'var(--color-surface-raised)',
+                  backgroundColor: isSelected ? 'rgba(0, 127, 255, 0.12)' : 'var(--color-surface-raised)',
                   color: isSelected ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
                   fontSize: 12,
                   fontWeight: isSelected ? 700 : 500,
@@ -699,7 +700,11 @@ export const AllComponentsPage: React.FC = () => {
                   transition: 'all 0.12s ease',
                 }}
               >
-                <span>{p.icon}</span>
+                {p.platform ? (
+                  <PlatformIcon platform={p.platform as any} size={13} color={isSelected ? 'var(--color-action-primary)' : 'var(--color-text-secondary)'} />
+                ) : (
+                  <SparklesIcon size={13} color={isSelected ? 'var(--color-action-primary)' : 'var(--color-text-secondary)'} />
+                )}
                 <span>{p.label}</span>
               </button>
             );
@@ -1000,11 +1005,11 @@ export const AllComponentsPage: React.FC = () => {
                         }}
                       >
                         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                          <span title="Web (React DOM)">🌐</span>
-                          <span title="Apple iOS (Swift / RN)">🍎</span>
-                          <span title="Google Android (Compose / RN)">🤖</span>
-                          <span title="Microsoft Windows (WinUI 3 / RNW)">🪟</span>
-                          <span title="Apple macOS (AppKit / RN)">🖥️</span>
+                          <PlatformIcon platform="web" size={12} color="var(--color-text-secondary)" />
+                          <PlatformIcon platform="ios" size={12} color="var(--color-text-secondary)" />
+                          <PlatformIcon platform="android" size={12} color="var(--color-text-secondary)" />
+                          <PlatformIcon platform="windows" size={12} color="var(--color-text-secondary)" />
+                          <PlatformIcon platform="macos" size={12} color="var(--color-text-secondary)" />
                         </div>
                         <span
                           style={{

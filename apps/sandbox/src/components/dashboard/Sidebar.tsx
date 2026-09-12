@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useColorScheme } from '@spectra/react';
-import { SearchIcon, ExternalLinkIcon, ChevronDownIcon, ComponentIcon } from '@spectra/icons';
+import { SearchIcon, ExternalLinkIcon, ChevronDownIcon, ComponentIcon, CheckIcon } from '@spectra/icons';
 import { navigate, RouteState } from '../../utils/router';
 import { useVersion } from '../../context/VersionContext';
 import { usePlatform } from '../../context/PlatformContext';
+import { PlatformIcon } from './PlatformIcon';
 import { V010_NEW_COMPONENTS } from '../../data/versionReleaseData';
 import { COMPONENT_VARIANTS_MAP } from './ComponentVariantsShowcase';
 import { NativeSponsorAd } from './NativeSponsorAd';
@@ -107,8 +108,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const { colorScheme } = useColorScheme();
   const { currentVersion } = useVersion();
-  const { metadata: platformMeta } = usePlatform();
+  const { currentPlatform, setPlatform, metadata: platformMeta, allPlatforms } = usePlatform();
   const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
+  const [platformDropdownOpen, setPlatformDropdownOpen] = useState(false);
+  const platformDropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (platformDropdownRef.current && !platformDropdownRef.current.contains(e.target as Node)) {
+        setPlatformDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Track open/closed state for category folders (all open by default)
   const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({
@@ -283,39 +296,118 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </div>
           </a>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span
-              title={`Active Platform Architecture: ${platformMeta.name}`}
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 600,
+              padding: '2px 6px',
+              backgroundColor: 'var(--color-surface-raised)',
+              border: '1px solid var(--color-border-subtle)',
+              borderRadius: 4,
+              color: 'var(--color-text-secondary)',
+            }}
+          >
+            {currentVersion}
+          </span>
+        </div>
+
+        {/* Platform Selector Dropdown (Image 1 Benchmark) */}
+        <div ref={platformDropdownRef} style={{ padding: '12px 16px 4px 16px', position: 'relative', flexShrink: 0 }}>
+          <button
+            onClick={() => setPlatformDropdownOpen(!platformDropdownOpen)}
+            title="Switch documentation target platform"
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '8px 12px',
+              borderRadius: 8,
+              border: '1px solid var(--color-border-default)',
+              backgroundColor: 'var(--color-surface-raised)',
+              color: 'var(--color-text-primary)',
+              cursor: 'pointer',
+              fontSize: 13,
+              fontWeight: 600,
+              transition: 'all 0.15s ease',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <PlatformIcon platform={currentPlatform} size={16} color="var(--color-action-primary)" />
+              <span>{platformMeta.name}</span>
+            </div>
+            <ChevronDownIcon
+              size={13}
               style={{
-                fontSize: 11,
-                fontWeight: 700,
-                padding: '2px 6px',
-                backgroundColor: 'rgba(99, 102, 241, 0.15)',
-                border: '1px solid rgba(99, 102, 241, 0.3)',
-                borderRadius: 4,
-                color: '#6366F1',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 3,
+                transform: platformDropdownOpen ? 'rotate(180deg)' : 'none',
+                transition: 'transform 0.15s ease',
+                opacity: 0.7,
+              }}
+            />
+          </button>
+
+          {/* Platform Popover Dropdown (Image 1 Benchmark) */}
+          {platformDropdownOpen && (
+            <div
+              style={{
+                position: 'absolute',
+                top: 'calc(100% + 4px)',
+                left: 16,
+                right: 16,
+                backgroundColor: colorScheme === 'dark' ? '#0F172A' : '#FFFFFF',
+                border: '1px solid var(--color-border-default)',
+                borderRadius: 8,
+                boxShadow: '0 12px 32px rgba(0, 0, 0, 0.35)',
+                zIndex: 100,
+                overflow: 'hidden',
+                padding: 4,
+                animation: 'spectra-fade-in 0.12s ease',
               }}
             >
-              <span>{platformMeta.icon}</span>
-              <span>{platformMeta.shortName}</span>
-            </span>
-            <span
-              style={{
-                fontSize: 11,
-                fontWeight: 600,
-                padding: '2px 6px',
-                backgroundColor: 'var(--color-surface-raised)',
-                border: '1px solid var(--color-border-subtle)',
-                borderRadius: 4,
-                color: 'var(--color-text-secondary)',
-              }}
-            >
-              {currentVersion}
-            </span>
-          </div>
+              {allPlatforms.map((p) => {
+                const isCurrent = currentPlatform === p.id;
+                return (
+                  <button
+                    key={p.id}
+                    onClick={() => {
+                      setPlatform(p.id);
+                      setPlatformDropdownOpen(false);
+                    }}
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '8px 10px',
+                      borderRadius: 6,
+                      border: 'none',
+                      backgroundColor: isCurrent ? 'rgba(0, 127, 255, 0.1)' : 'transparent',
+                      color: isCurrent ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
+                      cursor: 'pointer',
+                      fontSize: 13,
+                      fontWeight: isCurrent ? 700 : 500,
+                      textAlign: 'left',
+                      transition: 'background-color 0.1s ease',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      {isCurrent ? (
+                        <CheckIcon size={14} color="var(--color-action-primary)" />
+                      ) : (
+                        <span style={{ width: 14 }} />
+                      )}
+                      <PlatformIcon
+                        platform={p.id}
+                        size={15}
+                        color={isCurrent ? 'var(--color-action-primary)' : 'var(--color-text-muted)'}
+                      />
+                      <span>{p.name}</span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* Wikipedia / MUI Style Fast Search Bar */}
@@ -989,7 +1081,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-secondary)')}
             title="Manage privacy and cookie settings"
           >
-            <span>🍪 Cookie Preferences</span>
+            <span>Cookie Preferences</span>
           </button>
 
           <span

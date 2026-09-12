@@ -525,15 +525,17 @@ export const SearchPalette: React.FC<SearchPaletteProps> = ({
                                   textAlign: 'center',
                                 }}
                               >
-                                {item.section === 'COMPONENT API'
-                                  ? '#'
-                                  : item.section === 'COMPONENTS'
-                                  ? '≡'
-                                  : item.section === 'DESIGN TOKENS'
-                                  ? '🎨'
-                                  : item.section === 'FUNCTIONAL HOOKS'
-                                  ? '🪝'
-                                  : '📑'}
+                                {item.section === 'COMPONENT API' ? (
+                                  <CodeIcon size={14} />
+                                ) : item.section === 'COMPONENTS' ? (
+                                  <CubeIcon size={14} />
+                                ) : item.section === 'DESIGN TOKENS' ? (
+                                  <PaletteIcon size={14} />
+                                ) : item.section === 'FUNCTIONAL HOOKS' ? (
+                                  <SparklesIcon size={14} />
+                                ) : (
+                                  <CodeIcon size={14} />
+                                )}
                               </div>
 
                               {/* Title & Subtitle */}
