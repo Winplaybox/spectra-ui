@@ -300,13 +300,15 @@ export const AllComponentsPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedPlatform, setSelectedPlatform] = useState<'all' | 'web' | 'native' | 'headless'>('all');
+  const [selectedTag, setSelectedTag] = useState<'all' | 'new' | 'form' | 'feedback'>('all');
+  const [sortBy, setSortBy] = useState<'category' | 'name-asc' | 'name-desc' | 'newest'>('category');
 
   // Total components count
   const allComponentsList = useMemo(() => {
     return COMPONENT_CATEGORIES.flatMap((cat) => cat.components);
   }, []);
 
-  // Filtered categories
+  // Filtered and Sorted categories
   const filteredCategories = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
 
@@ -316,21 +318,48 @@ export const AllComponentsPage: React.FC = () => {
         return { ...cat, components: [] };
       }
 
-      const matchingComponents = cat.components.filter((comp) => {
+      let matchingComponents = cat.components.filter((comp) => {
         const data = COMPONENTS_DATA[comp.id];
         const nameMatches = comp.name.toLowerCase().includes(q) || comp.id.toLowerCase().includes(q);
         const descMatches = data?.description.toLowerCase().includes(q) || false;
         const catMatches = cat.name.toLowerCase().includes(q);
 
-        return !q || nameMatches || descMatches || catMatches;
+        const searchMatch = !q || nameMatches || descMatches || catMatches;
+
+        // Tag filter check
+        let tagMatch = true;
+        if (selectedTag === 'new') {
+          tagMatch = V010_NEW_COMPONENTS.includes(comp.id);
+        } else if (selectedTag === 'form') {
+          tagMatch = cat.id === 'form';
+        } else if (selectedTag === 'feedback') {
+          tagMatch = cat.id === 'feedback' || cat.id === 'overlay';
+        }
+
+        return searchMatch && tagMatch;
       });
+
+      // Sorting within categories
+      if (sortBy === 'name-asc') {
+        matchingComponents = [...matchingComponents].sort((a, b) => a.name.localeCompare(b.name));
+      } else if (sortBy === 'name-desc') {
+        matchingComponents = [...matchingComponents].sort((a, b) => b.name.localeCompare(a.name));
+      } else if (sortBy === 'newest') {
+        matchingComponents = [...matchingComponents].sort((a, b) => {
+          const aNew = V010_NEW_COMPONENTS.includes(a.id);
+          const bNew = V010_NEW_COMPONENTS.includes(b.id);
+          if (aNew && !bNew) return -1;
+          if (!aNew && bNew) return 1;
+          return a.name.localeCompare(b.name);
+        });
+      }
 
       return {
         ...cat,
         components: matchingComponents,
       };
     }).filter((cat) => cat.components.length > 0);
-  }, [searchQuery, selectedCategory]);
+  }, [searchQuery, selectedCategory, selectedTag, sortBy]);
 
   const totalMatches = useMemo(() => {
     return filteredCategories.reduce((acc, cat) => acc + cat.components.length, 0);
@@ -518,15 +547,96 @@ export const AllComponentsPage: React.FC = () => {
             )}
           </div>
 
+          {/* Dynamic Sort Selector (Benchmark feature) */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-muted)' }}>
+              Sort by:
+            </span>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as any)}
+              style={{
+                padding: '8px 12px',
+                fontSize: 12,
+                fontWeight: 600,
+                borderRadius: 8,
+                border: '1px solid var(--color-border-default)',
+                backgroundColor: 'var(--color-surface-raised)',
+                color: 'var(--color-text-primary)',
+                outline: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              <option value="category">Category Default</option>
+              <option value="name-asc">Name (A → Z)</option>
+              <option value="name-desc">Name (Z → A)</option>
+              <option value="newest">Newest (v0.1.0 New)</option>
+            </select>
+          </div>
+
           <span
             style={{
               fontSize: 12,
               fontWeight: 600,
               color: 'var(--color-text-muted)',
+              marginLeft: 'auto',
             }}
           >
             Showing {totalMatches} of {allComponentsList.length} components
           </span>
+        </div>
+
+        {/* Quick Tag Filter Pills */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            flexWrap: 'wrap',
+            marginTop: 16,
+          }}
+        >
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.04em',
+              color: 'var(--color-text-muted)',
+              marginRight: 6,
+            }}
+          >
+            Filter By:
+          </span>
+
+          {[
+            { id: 'all', label: `All Components (${allComponentsList.length})` },
+            { id: 'new', label: `New in v0.1.0 (${V010_NEW_COMPONENTS.length})` },
+            { id: 'form', label: 'Form & Input Controls (5)' },
+            { id: 'feedback', label: 'Feedback & Overlays (6)' },
+          ].map((tag) => {
+            const isSelected = selectedTag === tag.id;
+            return (
+              <button
+                key={tag.id}
+                onClick={() => setSelectedTag(tag.id as any)}
+                style={{
+                  padding: '4px 10px',
+                  borderRadius: 6,
+                  border: '1px solid',
+                  borderColor: isSelected ? 'var(--color-action-primary)' : 'var(--color-border-default)',
+                  backgroundColor: isSelected ? 'rgba(0, 127, 255, 0.12)' : 'var(--color-surface-raised)',
+                  color: isSelected ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontSize: 12,
+                  fontWeight: isSelected ? 700 : 500,
+                  cursor: 'pointer',
+                  transition: 'all 0.12s ease',
+                }}
+              >
+                {tag.label}
+              </button>
+            );
+          })}
         </div>
 
         {/* Category Jump Pills */}

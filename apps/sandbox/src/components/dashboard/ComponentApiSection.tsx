@@ -25,9 +25,17 @@ export const ComponentApiSection: React.FC<ComponentApiSectionProps> = ({ compon
 
   return (
     <div id="api" style={{ display: 'flex', flexDirection: 'column', gap: 24, scrollMarginTop: 80 }}>
-      {/* Header */}
-      <div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+      {/* Header Card (Solid elevated surface - eliminates breathing dots bleed-through) */}
+      <Card
+        variant="bordered"
+        style={{
+          backgroundColor: 'var(--color-surface)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+          padding: '24px 28px',
+          borderRadius: 14,
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
           <span
             style={{
               display: 'inline-flex',
@@ -56,7 +64,7 @@ export const ComponentApiSection: React.FC<ComponentApiSectionProps> = ({ compon
           style={{
             fontSize: 26,
             fontWeight: 800,
-            margin: '0 0 6px 0',
+            margin: '0 0 8px 0',
             color: 'var(--color-text-primary)',
             letterSpacing: '-0.02em',
           }}
@@ -68,12 +76,13 @@ export const ComponentApiSection: React.FC<ComponentApiSectionProps> = ({ compon
             fontSize: 14,
             color: 'var(--color-text-secondary)',
             margin: 0,
-            lineHeight: 1.5,
+            lineHeight: 1.6,
+            maxWidth: 780,
           }}
         >
           {apiData.description}
         </p>
-      </div>
+      </Card>
 
       {/* 1. Module Import Box */}
       <Card

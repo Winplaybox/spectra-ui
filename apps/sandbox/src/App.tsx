@@ -78,6 +78,23 @@ export const App: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [colorScheme, setColorScheme]);
 
+  // Always reset scroll to top on screen/route transition, or smooth-scroll to target anchor
+  useEffect(() => {
+    const container = document.getElementById('main-scroll-container');
+    if (!container) return;
+
+    if (currentRoute.anchor) {
+      requestAnimationFrame(() => {
+        const el = document.getElementById(currentRoute.anchor!);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    } else {
+      container.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
+  }, [currentRoute.path, currentRoute.id, currentRoute.type]);
+
   return (
     <div
       style={{

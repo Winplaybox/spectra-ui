@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Card, Badge } from '@spectra/react';
 import { CheckIcon, ExternalLinkIcon, ComponentIcon, PaletteIcon, SparklesIcon } from '@spectra/icons';
 import { navigate } from '../../utils/router';
+import { CircuitAnimation } from './CircuitAnimation';
 
 export const OverviewSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -48,35 +49,87 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
 
   return (
     <div style={{ maxWidth: 1040, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 40 }}>
-      {/* Hero Header */}
-      <div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-          <Badge variant="primary">Design System</Badge>
-          <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>Version 0.1.0</span>
+      {/* Hero Header Card */}
+      <Card
+        variant="bordered"
+        style={{
+          padding: '32px 36px',
+          backgroundColor: 'var(--color-surface)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 32,
+          position: 'relative',
+          overflow: 'hidden',
+          borderRadius: 'var(--radius-component-lg, 16px)',
+        }}
+      >
+        <div style={{ flex: 1, maxWidth: 680, zIndex: 1 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+            <Badge variant="primary">Design System</Badge>
+            <Badge variant="info">Production Ready</Badge>
+            <span style={{ fontSize: 13, color: 'var(--color-text-muted)', fontWeight: 500 }}>Version 0.1.0</span>
+          </div>
+          <h1
+            style={{
+              fontSize: 36,
+              fontWeight: 800,
+              letterSpacing: '-0.03em',
+              margin: '0 0 12px 0',
+              color: 'var(--color-text-primary)',
+            }}
+          >
+            Spectra UI Documentation
+          </h1>
+          <p
+            style={{
+              fontSize: 16,
+              lineHeight: 1.6,
+              color: 'var(--color-text-secondary)',
+              margin: '0 0 20px 0',
+            }}
+          >
+            A fast, accessible, and token-driven design system with clean 2D flat aesthetics, zero runtime CSS overhead, multi-platform React + React Native support, and 12,253 on-demand icons.
+          </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+            <Button variant="primary" size="md" onClick={() => navigate('/components')}>
+              Explore 14 Components
+            </Button>
+            <Button variant="secondary" size="md" onClick={() => navigate('/cross-platform')}>
+              Cross-Platform & Pipeline
+            </Button>
+          </div>
         </div>
-        <h1
+
+        {/* Decorative Circuit Stream Engine */}
+        <div
           style={{
-            fontSize: 36,
-            fontWeight: 800,
-            letterSpacing: '-0.03em',
-            margin: '0 0 12px 0',
-            color: 'var(--color-text-primary)',
+            flexShrink: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '16px 20px',
+            background: 'var(--color-surface-raised, rgba(0,0,0,0.02))',
+            borderRadius: 'var(--radius-component-md, 12px)',
+            border: '1px solid var(--color-border-subtle)',
           }}
         >
-          Spectra UI Documentation
-        </h1>
-        <p
-          style={{
-            fontSize: 18,
-            lineHeight: 1.6,
-            color: 'var(--color-text-secondary)',
-            margin: 0,
-            maxWidth: 780,
-          }}
-        >
-          A fast, accessible, and token-driven design system with clean 2D flat aesthetics, zero runtime CSS overhead, and 12,253 on-demand icons.
-        </p>
-      </div>
+          <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-text-muted)', marginBottom: 8 }}>
+            Design Token Bus
+          </span>
+          <CircuitAnimation
+            width={160}
+            height={130}
+            strokeColor="var(--color-border-default)"
+            pulseColor="var(--color-action-primary)"
+            duration={3}
+          />
+          <span style={{ fontSize: 10, color: 'var(--color-text-muted)', marginTop: 6, fontFamily: 'monospace' }}>
+            web ⇄ tokens ⇄ native
+          </span>
+        </div>
+      </Card>
 
       {/* Quick Cards Grid */}
       <div

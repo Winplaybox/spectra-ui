@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Badge, Button, Tabs, TabList, Tab } from '@spectra/react';
+import { Badge, Button, Tabs, TabList, Tab, Card } from '@spectra/react';
 import { CheckIcon, PaletteIcon, SparklesIcon, SmartphoneIcon } from '@spectra/icons';
+import { CircuitAnimation } from './CircuitAnimation';
 
 export const CrossPlatformSection: React.FC = () => {
   const [platformTab, setPlatformTab] = useState<'web' | 'native'>('web');
@@ -138,6 +139,45 @@ export const LoginScreen = () => {
           </p>
         </div>
       </div>
+
+      {/* Universal Pipeline Architecture with Circuit & Network Animation */}
+      <Card
+        variant="bordered"
+        style={{
+          padding: '24px 28px',
+          backgroundColor: 'var(--color-surface)',
+          borderRadius: 14,
+          boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+          gap: 24,
+          overflow: 'hidden',
+          position: 'relative',
+        }}
+      >
+        <div style={{ flex: '1 1 360px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--color-action-primary)' }}>
+              NETWORK CIRCUIT PULSE
+            </span>
+          </div>
+          <h3 style={{ fontSize: 20, fontWeight: 800, margin: '0 0 8px 0', color: 'var(--color-text-primary)' }}>
+            Real-Time Token & Component Stream
+          </h3>
+          <p style={{ fontSize: 13.5, color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.6 }}>
+            The animated circuit traces below visualize the continuous data flow between the core token engine,
+            shared headless state machines, and universal runtime outputs across Web (CSS custom variables) and
+            Mobile Native (StyleSheet objects).
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <CircuitAnimation width={120} height={96} duration="3s" pulseColor="#007FFF" />
+          <CircuitAnimation width={120} height={96} duration="2.4s" pulseColor="#10B981" style={{ transform: 'scaleX(-1)' }} />
+        </div>
+      </Card>
 
       {/* Code Comparison Switcher */}
       <div>

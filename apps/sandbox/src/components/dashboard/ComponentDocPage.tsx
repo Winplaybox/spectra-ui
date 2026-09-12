@@ -56,6 +56,7 @@ import { MobileSimulator } from './MobileSimulator';
 import { ComponentMetadata, COMPONENTS_DATA } from '../../data/componentsData';
 import { ComponentVariantsShowcase, COMPONENT_VARIANTS_MAP } from './ComponentVariantsShowcase';
 import { ComponentApiSection } from './ComponentApiSection';
+import { NativeSponsorAd } from './NativeSponsorAd';
 
 interface ComponentDocPageProps {
   componentId: string;
@@ -1753,38 +1754,60 @@ export const Native${meta.name}Demo = () => {
 
           {/* 3.1 Multi-Variant Recipes Showcase */}
           <div id="usage-variants" style={{ display: 'flex', flexDirection: 'column', gap: 20, scrollMarginTop: 80 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
-              <div>
-                <h2 style={{ fontSize: 24, fontWeight: 800, margin: 0, color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
-                  Usage Recipes & Variants
-                </h2>
-                <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '4px 0 0 0', lineHeight: 1.5 }}>
-                  Interactive code recipes across both Web (<code style={{ color: 'var(--color-action-primary)' }}>@spectra/react</code>) and Mobile Native (<code style={{ color: 'var(--color-action-primary)' }}>@spectra/react-native</code>) platforms.
-                </p>
+            <Card
+              variant="bordered"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                padding: '20px 24px',
+                borderRadius: 12,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                <div>
+                  <h2 style={{ fontSize: 24, fontWeight: 800, margin: 0, color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
+                    Usage Recipes & Variants
+                  </h2>
+                  <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '4px 0 0 0', lineHeight: 1.5 }}>
+                    Interactive code recipes across both Web (<code style={{ color: 'var(--color-action-primary)' }}>@spectra/react</code>) and Mobile Native (<code style={{ color: 'var(--color-action-primary)' }}>@spectra/react-native</code>) platforms.
+                  </p>
+                </div>
+                <span
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 600,
+                    padding: '4px 10px',
+                    borderRadius: 20,
+                    backgroundColor: 'var(--color-surface-raised)',
+                    border: '1px solid var(--color-border-subtle)',
+                    color: 'var(--color-text-muted)',
+                  }}
+                >
+                  {variants.length} recipes available
+                </span>
               </div>
-              <span
-                style={{
-                  fontSize: 12,
-                  fontWeight: 600,
-                  padding: '4px 10px',
-                  borderRadius: 20,
-                  backgroundColor: 'var(--color-surface-raised)',
-                  border: '1px solid var(--color-border-subtle)',
-                  color: 'var(--color-text-muted)',
-                }}
-              >
-                {variants.length} recipes available
-              </span>
-            </div>
+            </Card>
 
             <ComponentVariantsShowcase componentId={meta.id} />
           </div>
 
           {/* Resources Section (Matching Fluent 2) */}
           <div id="resources" style={{ scrollMarginTop: 80 }}>
-            <h2 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 16px 0', color: 'var(--color-text-primary)' }}>
-              Resources
-            </h2>
+            <Card
+              variant="bordered"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                padding: '24px',
+                borderRadius: 12,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 16,
+              }}
+            >
+              <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                Resources & Quick Guides
+              </h2>
 
             <div
               style={{
@@ -1896,7 +1919,8 @@ export const Native${meta.name}Demo = () => {
                 </div>
               </a>
             </div>
-          </div>
+          </Card>
+        </div>
 
           {/* Component Anatomy & Slots */}
           <div id="anatomy" style={{ scrollMarginTop: 80 }}>
@@ -2102,14 +2126,24 @@ export const Native${meta.name}Demo = () => {
           </MobileSimulator>
 
           <div id="usage-variants" style={{ display: 'flex', flexDirection: 'column', gap: 16, scrollMarginTop: 80 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
-              <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                Native Mobile Usage Recipes & Variants
-              </h2>
-              <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>
-                {variants.length} variations available
-              </span>
-            </div>
+            <Card
+              variant="bordered"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                padding: '20px 24px',
+                borderRadius: 12,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                  Native Mobile Usage Recipes & Variants
+                </h2>
+                <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>
+                  {variants.length} variations available
+                </span>
+              </div>
+            </Card>
             <ComponentVariantsShowcase componentId={meta.id} />
           </div>
         </div>
@@ -2137,13 +2171,22 @@ export const Native${meta.name}Demo = () => {
             </p>
           </Card>
 
-          <div>
-            <h3 style={{ fontSize: 18, fontWeight: 700, margin: '0 0 12px 0', color: 'var(--color-text-primary)' }}>
+          <Card
+            variant="bordered"
+            style={{
+              padding: 24,
+              backgroundColor: 'var(--color-surface)',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+              borderRadius: 12,
+            }}
+          >
+            <h3 style={{ fontSize: 18, fontWeight: 700, margin: '0 0 8px 0', color: 'var(--color-text-primary)' }}>
               Headless Implementation Recipe
             </h3>
-            <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '0 0 14px 0' }}>
+            <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0 }}>
               Build completely unstyled custom components with 100% W3C WAI-ARIA and accessibility logic built-in:
             </p>
+          </Card>
             <Card
               variant="bordered"
               style={{
@@ -2202,7 +2245,6 @@ export const Native${meta.name}Demo = () => {
                 <code>{meta.headlessHook.code}</code>
               </pre>
             </Card>
-          </div>
         </div>
       )}
 
@@ -2247,22 +2289,28 @@ export const Native${meta.name}Demo = () => {
       </div> {/* End of Main Documentation Column */}
 
       {/* Sticky Table of Contents (On this page - matching MUI & Fluent 2 with real-time Scrollspy) */}
-      <Card
-        variant="bordered"
+      <div
         style={{
           width: 230,
           position: 'sticky',
           top: 20,
           alignSelf: 'flex-start',
-          backgroundColor: 'var(--color-surface)',
-          boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
-          borderRadius: 12,
-          padding: '14px 12px',
-          maxHeight: 'calc(100vh - 40px)',
-          overflowY: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 14,
           flexShrink: 0,
         }}
       >
+        <Card
+          variant="bordered"
+          style={{
+            width: '100%',
+            backgroundColor: 'var(--color-surface)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+            borderRadius: 12,
+            padding: '14px 12px',
+          }}
+        >
         <nav
           aria-label="Table of contents"
           style={{
@@ -2478,6 +2526,10 @@ export const Native${meta.name}Demo = () => {
           </a>
         </nav>
       </Card>
+
+      {/* Developer Native Sponsor Ad Unit (MUI & Carbon Ads benchmark) */}
+      <NativeSponsorAd publisherTheme="docs" style={{ width: '100%' }} />
     </div>
+  </div>
   );
 };

@@ -5,6 +5,8 @@ import { navigate, RouteState } from '../../utils/router';
 import { useVersion } from '../../context/VersionContext';
 import { V010_NEW_COMPONENTS } from '../../data/versionReleaseData';
 import { COMPONENT_VARIANTS_MAP } from './ComponentVariantsShowcase';
+import { NativeSponsorAd } from './NativeSponsorAd';
+import { CookiePreferencesModal } from './CookiePreferencesModal';
 
 interface SidebarProps {
   currentRoute: RouteState;
@@ -104,6 +106,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const { colorScheme } = useColorScheme();
   const { currentVersion } = useVersion();
+  const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
 
   // Track open/closed state for category folders (all open by default)
   const [expandedCategories, setExpandedCategories] = useState<Record<string, boolean>>({
@@ -928,12 +931,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
         </div>
 
-        {/* Footer info */}
+        {/* Developer Native Sponsor Ad Placement (Classic format in sidebar) */}
+        <div style={{ padding: '8px 14px', borderTop: '1px solid var(--color-border-subtle)', flexShrink: 0 }}>
+          <NativeSponsorAd initialFormat="classic" publisherTheme="devtools" allowFormatSwitch={false} />
+        </div>
+
+        {/* Footer info with Cookie Preferences */}
         <div
           style={{
-            padding: '12px 16px',
+            padding: '10px 16px',
             borderTop: '1px solid var(--color-border-subtle)',
-            fontSize: 12,
+            fontSize: 11.5,
             color: 'var(--color-text-muted)',
             display: 'flex',
             alignItems: 'center',
@@ -941,10 +949,30 @@ export const Sidebar: React.FC<SidebarProps> = ({
             flexShrink: 0,
           }}
         >
-          <span>Spectra UI</span>
+          <button
+            onClick={() => setIsCookieModalOpen(true)}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: 'var(--color-text-secondary)',
+              cursor: 'pointer',
+              padding: 0,
+              fontSize: 11,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 4,
+              transition: 'color 0.12s ease',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-action-primary)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-secondary)')}
+            title="Manage privacy and cookie settings"
+          >
+            <span>🍪 Cookie Preferences</span>
+          </button>
+
           <span
             style={{
-              fontSize: 11,
+              fontSize: 10.5,
               padding: '2px 6px',
               borderRadius: 4,
               backgroundColor: 'var(--color-surface-raised)',
@@ -953,10 +981,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
               fontWeight: 500,
             }}
           >
-            {currentVersion} · Cross-Platform
+            {currentVersion}
           </span>
         </div>
       </aside>
+
+      {/* Privacy & Cookie Preferences Modal */}
+      <CookiePreferencesModal
+        isOpen={isCookieModalOpen}
+        onClose={() => setIsCookieModalOpen(false)}
+      />
     </>
   );
 };
