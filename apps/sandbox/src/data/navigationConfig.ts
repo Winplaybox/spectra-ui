@@ -95,18 +95,41 @@ export interface NavSection {
   items: (NavLeafItem | NavCategoryGroup)[];
 }
 
-export const HOOKS_LIST: NavLeafItem[] = [
-  { id: 'use-disclosure', name: 'useDisclosure', path: '/hooks/use-disclosure', isMonospace: true },
-  { id: 'use-controllable-state', name: 'useControllableState', path: '/hooks/use-controllable-state', isMonospace: true },
-  { id: 'use-outside-click', name: 'useOutsideClick', path: '/hooks/use-outside-click', isMonospace: true },
-  { id: 'use-id', name: 'useId', path: '/hooks/use-id', isMonospace: true },
-  { id: 'use-color-scheme', name: 'useColorScheme', path: '/hooks/use-color-scheme', isMonospace: true },
-  { id: 'use-media-query', name: 'useMediaQuery', path: '/hooks/use-media-query', isMonospace: true },
-  { id: 'use-focus-ring', name: 'useFocusRing', path: '/hooks/use-focus-ring', isMonospace: true },
-  { id: 'use-toast', name: 'useToast', path: '/hooks/use-toast', isMonospace: true },
-  { id: 'use-reduced-motion', name: 'useReducedMotion', path: '/hooks/use-reduced-motion', isMonospace: true },
-  { id: 'use-rtl', name: 'useRTL', path: '/hooks/use-rtl', isMonospace: true },
+export const HOOK_CATEGORIES: NavCategoryGroup[] = [
+  {
+    id: 'state-interaction',
+    name: 'State & Interaction',
+    isCategoryHeader: true,
+    items: [
+      { id: 'use-controllable-state', name: 'useControllableState', path: '/hooks/use-controllable-state', isMonospace: true },
+      { id: 'use-disclosure', name: 'useDisclosure', path: '/hooks/use-disclosure', isMonospace: true },
+      { id: 'use-outside-click', name: 'useOutsideClick', path: '/hooks/use-outside-click', isMonospace: true },
+      { id: 'use-focus-ring', name: 'useFocusRing', path: '/hooks/use-focus-ring', isMonospace: true },
+    ],
+  },
+  {
+    id: 'theme-environment',
+    name: 'Theme & Environment',
+    isCategoryHeader: true,
+    items: [
+      { id: 'use-color-scheme', name: 'useColorScheme', path: '/hooks/use-color-scheme', isMonospace: true },
+      { id: 'use-media-query', name: 'useMediaQuery', path: '/hooks/use-media-query', isMonospace: true },
+      { id: 'use-reduced-motion', name: 'useReducedMotion', path: '/hooks/use-reduced-motion', isMonospace: true },
+      { id: 'use-rtl', name: 'useRTL', path: '/hooks/use-rtl', isMonospace: true },
+    ],
+  },
+  {
+    id: 'utilities-feedback',
+    name: 'Utilities & Feedback',
+    isCategoryHeader: true,
+    items: [
+      { id: 'use-id', name: 'useId', path: '/hooks/use-id', isMonospace: true },
+      { id: 'use-toast', name: 'useToast', path: '/hooks/use-toast', isMonospace: true },
+    ],
+  },
 ];
+
+export const HOOKS_LIST: NavLeafItem[] = HOOK_CATEGORIES.flatMap((cat) => cat.items);
 
 export const SIDEBAR_NAVIGATION: NavSection[] = [
   {
@@ -199,8 +222,14 @@ export const SIDEBAR_NAVIGATION: NavSection[] = [
   {
     id: 'functional-hooks',
     title: 'Functional Hooks',
+    path: '/hooks',
     badge: 10,
-    items: HOOKS_LIST,
+    collapsible: true,
+    defaultOpen: true,
+    items: [
+      { id: 'all-hooks', name: 'All hooks', path: '/hooks' },
+      ...HOOK_CATEGORIES,
+    ],
   },
   {
     id: 'icons-section',

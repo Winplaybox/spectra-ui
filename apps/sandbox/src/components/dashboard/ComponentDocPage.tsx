@@ -100,11 +100,15 @@ const W3CPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
   </svg>
 );
 
-const SectionCommentIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
+const SectionCommentPlusIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, ...style }}>
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    <line x1="12" y1="8" x2="12" y2="14" />
+    <line x1="9" y1="11" x2="15" y2="11" />
   </svg>
 );
+
+const SectionCommentIcon = SectionCommentPlusIcon;
 
 const ThumbsUpIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 15, style }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, ...style }}>
@@ -118,13 +122,16 @@ const ThumbsDownIcon: React.FC<{ size?: number; style?: React.CSSProperties }> =
   </svg>
 );
 
-const InfoHandIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 18, style }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#EAB308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, ...style }}>
-    <circle cx="12" cy="12" r="10" />
-    <line x1="12" y1="8" x2="12" y2="12" />
-    <line x1="12" y1="16" x2="12.01" y2="16" />
+const HandNoticeIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 18, style }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, ...style }}>
+    <path d="M18 11V6a2 2 0 0 0-4 0v5" />
+    <path d="M14 10V4a2 2 0 0 0-4 0v7" />
+    <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
+    <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
   </svg>
 );
+
+const InfoHandIcon = HandNoticeIcon;
 
 const EditPageIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, ...style }}>
@@ -211,7 +218,11 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 40);
+      const textarea = document.getElementById('feedback-textarea') as HTMLTextAreaElement | null;
+      if (textarea) {
+        textarea.focus();
+      }
+    }, 60);
   };
 
   useEffect(() => {
@@ -240,7 +251,6 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
       'keyboard',
       'props',
       'api',
-      'page-feedback',
     ];
 
     const handleScroll = () => {
@@ -1566,9 +1576,29 @@ export const Native${meta.name}Demo = () => {
   };
 
   return (
-    <div style={{ maxWidth: 1240, margin: '0 auto', display: 'flex', gap: 40, alignItems: 'flex-start' }}>
-      {/* Main Documentation Column */}
-      <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 44 }}>
+    <div
+      style={{
+        display: 'flex',
+        width: '100%',
+        minHeight: '100%',
+        position: 'relative',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+      }}
+    >
+      {/* Middle Content Container Body */}
+      <div
+        style={{
+          flex: 1,
+          minWidth: 0,
+          maxWidth: 960,
+          margin: '0 auto',
+          padding: '36px 40px 80px 40px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 40,
+        }}
+      >
         {/* 1. Header Hero Card & Platform Selector Tabs */}
         <Card
           variant="bordered"
@@ -1895,36 +1925,43 @@ export const Native${meta.name}Demo = () => {
           {/* 1. Primary Demo Section: Basic <Component> (MUI & Fluent UI Benchmark) */}
           <div id="playground" style={{ display: 'flex', flexDirection: 'column', gap: 14, scrollMarginTop: 80 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)', letterSpacing: '-0.01em' }}>
                   Basic {meta.name}
                 </h2>
-                <button
-                  onClick={() => openFeedbackForSection(`Basic ${meta.name}`)}
-                  title={`Give feedback on Basic ${meta.name}`}
-                  style={{
-                    background: 'none',
-                    border: '1px solid var(--color-border-subtle)',
-                    borderRadius: 6,
-                    padding: '4px 6px',
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    cursor: 'pointer',
-                    color: 'var(--color-text-muted)',
-                    transition: 'all 0.12s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = 'var(--color-action-primary)';
-                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = 'var(--color-text-muted)';
-                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
-                  }}
-                >
-                  <SectionCommentIcon size={14} />
-                </button>
+                <a href="#playground" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
               </div>
+              <button
+                type="button"
+                onClick={() => openFeedbackForSection(`Basic ${meta.name}`)}
+                title={`Give feedback on the "Basic ${meta.name}" section`}
+                aria-label={`Give feedback on Basic ${meta.name}`}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 28,
+                  height: 28,
+                  borderRadius: 6,
+                  border: '1px solid var(--color-border-subtle)',
+                  backgroundColor: 'var(--color-surface)',
+                  color: 'var(--color-text-muted)',
+                  cursor: 'pointer',
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--color-action-primary)';
+                  e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                  e.currentTarget.style.backgroundColor = 'rgba(0, 127, 255, 0.08)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--color-text-muted)';
+                  e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
+                  e.currentTarget.style.backgroundColor = 'var(--color-surface)';
+                }}
+              >
+                <SectionCommentPlusIcon size={14} />
+              </button>
             </div>
             <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
               Standard default {meta.name.toLowerCase()} implementation ready for production use.
@@ -2110,9 +2147,45 @@ export const Native${meta.name}Demo = () => {
                 gap: 16,
               }}
             >
-              <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                Resources & Quick Guides
-              </h2>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                    Resources & Quick Guides
+                  </h2>
+                  <a href="#resources" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => openFeedbackForSection('Resources & Quick Guides')}
+                  title="Give feedback on Resources & Quick Guides"
+                  aria-label="Give feedback on Resources & Quick Guides"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 28,
+                    height: 28,
+                    borderRadius: 6,
+                    border: '1px solid var(--color-border-subtle)',
+                    backgroundColor: 'var(--color-surface)',
+                    color: 'var(--color-text-muted)',
+                    cursor: 'pointer',
+                    transition: 'all 0.12s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--color-action-primary)';
+                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                    e.currentTarget.style.backgroundColor = 'rgba(0, 127, 255, 0.08)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--color-text-muted)';
+                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface)';
+                  }}
+                >
+                  <SectionCommentPlusIcon size={14} />
+                </button>
+              </div>
 
             <div
               style={{
@@ -2239,10 +2312,44 @@ export const Native${meta.name}Demo = () => {
                 overflow: 'hidden',
               }}
             >
-              <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-raised)' }}>
-                <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                  Anatomy & Slots
-                </h2>
+              <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                    Anatomy & Slots
+                  </h2>
+                  <a href="#anatomy" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => openFeedbackForSection('Anatomy & Slots')}
+                  title="Give feedback on Anatomy & Slots"
+                  aria-label="Give feedback on Anatomy & Slots"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 26,
+                    height: 26,
+                    borderRadius: 6,
+                    border: '1px solid var(--color-border-subtle)',
+                    backgroundColor: 'var(--color-surface)',
+                    color: 'var(--color-text-muted)',
+                    cursor: 'pointer',
+                    transition: 'all 0.12s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--color-action-primary)';
+                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                    e.currentTarget.style.backgroundColor = 'rgba(0, 127, 255, 0.08)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--color-text-muted)';
+                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface)';
+                  }}
+                >
+                  <SectionCommentPlusIcon size={14} />
+                </button>
               </div>
               <div style={{ overflowX: 'auto', backgroundColor: 'var(--color-surface)' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13, backgroundColor: 'var(--color-surface)' }}>
@@ -2285,9 +2392,45 @@ export const Native${meta.name}Demo = () => {
                 padding: 24,
               }}
             >
-              <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 16px 0', color: 'var(--color-text-primary)' }}>
-                Motion, Micro-interactions & Timing
-              </h2>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, flexWrap: 'wrap', gap: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                    Motion, Micro-interactions & Timing
+                  </h2>
+                  <a href="#motion" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => openFeedbackForSection('Motion & Transitions')}
+                  title="Give feedback on Motion & Transitions"
+                  aria-label="Give feedback on Motion & Transitions"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 26,
+                    height: 26,
+                    borderRadius: 6,
+                    border: '1px solid var(--color-border-subtle)',
+                    backgroundColor: 'var(--color-surface)',
+                    color: 'var(--color-text-muted)',
+                    cursor: 'pointer',
+                    transition: 'all 0.12s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--color-action-primary)';
+                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                    e.currentTarget.style.backgroundColor = 'rgba(0, 127, 255, 0.08)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--color-text-muted)';
+                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface)';
+                  }}
+                >
+                  <SectionCommentPlusIcon size={14} />
+                </button>
+              </div>
               <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 16 }}>
                 <div style={{ padding: '8px 16px', borderRadius: 'var(--radius-component-md, 6px)', backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-default)' }}>
                   <span style={{ color: 'var(--color-text-muted)', fontSize: 12 }}>Duration: </span>
@@ -2314,37 +2457,44 @@ export const Native${meta.name}Demo = () => {
                 padding: 24,
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, flexWrap: 'wrap', gap: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
                     Usage Guidelines (Dos and Don'ts)
                   </h2>
-                  <button
-                    onClick={() => openFeedbackForSection('Usage Guidelines')}
-                    title="Give feedback on Usage Guidelines"
-                    style={{
-                      background: 'none',
-                      border: '1px solid var(--color-border-subtle)',
-                      borderRadius: 6,
-                      padding: '4px 6px',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      cursor: 'pointer',
-                      color: 'var(--color-text-muted)',
-                      transition: 'all 0.12s ease',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = 'var(--color-action-primary)';
-                      e.currentTarget.style.borderColor = 'var(--color-action-primary)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'var(--color-text-muted)';
-                      e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
-                    }}
-                  >
-                    <SectionCommentIcon size={14} />
-                  </button>
+                  <a href="#guidelines" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => openFeedbackForSection('Usage Guidelines')}
+                  title="Give feedback on Usage Guidelines"
+                  aria-label="Give feedback on Usage Guidelines"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 26,
+                    height: 26,
+                    borderRadius: 6,
+                    border: '1px solid var(--color-border-subtle)',
+                    backgroundColor: 'var(--color-surface)',
+                    color: 'var(--color-text-muted)',
+                    cursor: 'pointer',
+                    transition: 'all 0.12s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--color-action-primary)';
+                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                    e.currentTarget.style.backgroundColor = 'rgba(0, 127, 255, 0.08)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--color-text-muted)';
+                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface)';
+                  }}
+                >
+                  <SectionCommentPlusIcon size={14} />
+                </button>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
                 {/* DO Card */}
@@ -2406,37 +2556,44 @@ export const Native${meta.name}Demo = () => {
                 overflow: 'hidden',
               }}
             >
-              <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
                     Keyboard Navigation & ARIA Behavior
                   </h2>
-                  <button
-                    onClick={() => openFeedbackForSection('Keyboard Navigation & ARIA')}
-                    title="Give feedback on Keyboard Navigation"
-                    style={{
-                      background: 'none',
-                      border: '1px solid var(--color-border-subtle)',
-                      borderRadius: 6,
-                      padding: '4px 6px',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      cursor: 'pointer',
-                      color: 'var(--color-text-muted)',
-                      transition: 'all 0.12s ease',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = 'var(--color-action-primary)';
-                      e.currentTarget.style.borderColor = 'var(--color-action-primary)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'var(--color-text-muted)';
-                      e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
-                    }}
-                  >
-                    <SectionCommentIcon size={14} />
-                  </button>
+                  <a href="#keyboard" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => openFeedbackForSection('Keyboard Navigation & ARIA')}
+                  title="Give feedback on Keyboard Navigation"
+                  aria-label="Give feedback on Keyboard Navigation"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 26,
+                    height: 26,
+                    borderRadius: 6,
+                    border: '1px solid var(--color-border-subtle)',
+                    backgroundColor: 'var(--color-surface)',
+                    color: 'var(--color-text-muted)',
+                    cursor: 'pointer',
+                    transition: 'all 0.12s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--color-action-primary)';
+                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                    e.currentTarget.style.backgroundColor = 'rgba(0, 127, 255, 0.08)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--color-text-muted)';
+                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface)';
+                  }}
+                >
+                  <SectionCommentPlusIcon size={14} />
+                </button>
               </div>
               <div style={{ overflowX: 'auto', backgroundColor: 'var(--color-surface)' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13, backgroundColor: 'var(--color-surface)' }}>
@@ -3086,18 +3243,25 @@ export default function Example() {
       </div>
       </div> {/* End of Main Documentation Column */}
 
-      {/* Sticky Table of Contents (On this page - matching MUI Benchmark with continuous left guide rule) */}
+      {/* Sticky Table of Contents (Card Pattern Touching Corner Right Side) */}
       <div
         style={{
-          width: 220,
+          width: 250,
           position: 'sticky',
-          top: 80,
+          top: 0,
+          right: 0,
           alignSelf: 'flex-start',
+          maxHeight: '100vh',
+          overflowY: 'auto',
+          borderLeft: '1px solid var(--color-border-subtle)',
+          backgroundColor: colorScheme === 'dark' ? 'rgba(15, 23, 42, 0.65)' : 'rgba(255, 255, 255, 0.85)',
+          backdropFilter: 'blur(12px)',
           display: 'flex',
           flexDirection: 'column',
-          gap: 16,
+          gap: 20,
           flexShrink: 0,
-          paddingLeft: 4,
+          padding: '36px 18px 40px 16px',
+          scrollbarWidth: 'thin',
         }}
       >
         <nav
@@ -3363,31 +3527,6 @@ export default function Example() {
               </a>
             </>
           )}
-
-          {/* Section: Feedback & Edit */}
-          <a
-            href="#page-feedback"
-            onClick={(e) => scrollToSection(e, 'page-feedback')}
-            style={{
-              display: 'block',
-              padding: '6px 0 6px 14px',
-              marginLeft: -1,
-              borderLeft: activeSection === 'page-feedback' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
-              color: activeSection === 'page-feedback' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-              fontWeight: activeSection === 'page-feedback' ? 600 : 400,
-              textDecoration: 'none',
-              fontSize: 13,
-              transition: 'all 0.12s ease',
-            }}
-            onMouseEnter={(e) => {
-              if (activeSection !== 'page-feedback') e.currentTarget.style.color = 'var(--color-text-primary)';
-            }}
-            onMouseLeave={(e) => {
-              if (activeSection !== 'page-feedback') e.currentTarget.style.color = 'var(--color-text-secondary)';
-            }}
-          >
-            Feedback & Edit
-          </a>
         </nav>
 
       {/* Developer Native Sponsor Ad Unit (MUI & Carbon Ads benchmark) */}

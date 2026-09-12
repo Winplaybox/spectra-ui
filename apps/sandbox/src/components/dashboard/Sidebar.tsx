@@ -68,7 +68,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const [currentHash, setCurrentHash] = useState(
     typeof window !== 'undefined' ? window.location.hash.substring(1) : ''
   );
-  const [isComponentsTreeOpen, setIsComponentsTreeOpen] = useState(true);
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+    components: true,
+    'functional-hooks': true,
+  });
+
+  const toggleSection = (sectionId: string) => {
+    setExpandedSections((prev) => ({
+      ...prev,
+      [sectionId]: prev[sectionId] !== undefined ? !prev[sectionId] : false,
+    }));
+  };
 
   // Auto-expand the active component's category on navigation
   useEffect(() => {
@@ -399,7 +409,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           {/* Dynamic Data-Driven Navigation Generated from navigationConfig.ts */}
           {SIDEBAR_NAVIGATION.map((section) => {
             const isCollapsible = section.collapsible;
-            const isOpen = isCollapsible ? isComponentsTreeOpen : true;
+            const isOpen = isCollapsible ? (expandedSections[section.id] ?? section.defaultOpen ?? true) : true;
 
             const renderLeafItem = (item: NavLeafItem, isCategoryChild = false) => {
               const isComponent = item.path.startsWith('/components/') && item.id !== 'all-components';
@@ -407,6 +417,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 ? isComponentActive(item.id)
                 : item.id === 'all-components'
                 ? isAllComponentsActive
+                : item.id === 'all-hooks'
+                ? currentRoute.type === 'hooks' && (!currentRoute.id || currentRoute.id === 'all-hooks')
                 : currentRoute.path === item.path ||
                   (item.path.startsWith('/hooks/') && currentRoute.type === 'hooks' && currentRoute.id === item.id) ||
                   (item.path === '/icons' && currentRoute.type === 'icons');
@@ -554,7 +566,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   >
                     <div
                       style={{ display: 'flex', alignItems: 'center', gap: 6, flex: 1 }}
-                      onClick={() => setIsComponentsTreeOpen(!isComponentsTreeOpen)}
+                      onClick={() => toggleSection(section.id)}
                     >
                       <ChevronDownIcon
                         size={13}
@@ -574,9 +586,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
                           style={{
                             fontSize: 13,
                             fontWeight: 700,
-                            color: isAllComponentsActive
-                              ? 'var(--color-action-primary)'
-                              : 'var(--color-text-primary)',
+                            color:
+                              (section.id === 'components' && isAllComponentsActive) ||
+                              (section.id === 'functional-hooks' &&
+                                currentRoute.type === 'hooks' &&
+                                (!currentRoute.id || currentRoute.id === 'all-hooks')) ||
+                              currentRoute.path === section.path
+                                ? 'var(--color-action-primary)'
+                                : 'var(--color-text-primary)',
                             textDecoration: 'none',
                             letterSpacing: '0.01em',
                           }}

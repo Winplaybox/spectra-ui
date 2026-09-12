@@ -152,7 +152,13 @@ export const App: React.FC = () => {
           style={{
             flex: 1,
             minHeight: 0,
-            padding: '36px 44px',
+            padding:
+              currentRoute.type === 'components' &&
+              currentRoute.id &&
+              currentRoute.id !== 'all-components' &&
+              currentRoute.id !== 'all'
+                ? 0
+                : '36px 44px',
             overflowY: 'auto',
             position: 'relative',
             zIndex: 1,
