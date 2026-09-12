@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Badge } from '@spectra/react';
+import { Button, Badge, Card } from '@spectra/react';
 import { SparklesIcon, CheckIcon } from '@spectra/icons';
 
 export const MotionSection: React.FC = () => {
@@ -40,11 +40,19 @@ export const MotionSection: React.FC = () => {
 
   return (
     <div style={{ maxWidth: 1040, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 40 }}>
-      {/* Header */}
-      <div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+      {/* 1. Hero Header Card */}
+      <Card
+        variant="bordered"
+        style={{
+          padding: '32px 36px',
+          backgroundColor: 'var(--color-surface)',
+          borderRadius: 16,
+          boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
           <Badge variant="primary">Design Tokens</Badge>
-          <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>Motion & Transitions</span>
+          <span style={{ fontSize: 13, color: 'var(--color-text-muted)', fontWeight: 500 }}>Motion & Transitions</span>
         </div>
         <h1
           style={{
@@ -63,19 +71,20 @@ export const MotionSection: React.FC = () => {
             lineHeight: 1.6,
             color: 'var(--color-text-secondary)',
             margin: 0,
-            maxWidth: 760,
+            maxWidth: 780,
           }}
         >
           Spectra UI motion is subtle, swift, and purposeful. It provides natural spatial continuity without distracting skeuomorphic bounce. Supports automatic <code>prefers-reduced-motion</code> overrides.
         </p>
-      </div>
+      </Card>
 
-      {/* Interactive Motion Playground */}
-      <div
+      {/* 2. Interactive Motion Playground */}
+      <Card
+        variant="bordered"
         style={{
-          border: '1px solid var(--color-border-default)',
-          borderRadius: 'var(--radius-component-md)',
+          borderRadius: 16,
           backgroundColor: 'var(--color-surface)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
           overflow: 'hidden',
         }}
       >
@@ -239,20 +248,30 @@ export const MotionSection: React.FC = () => {
             Replay Motion
           </Button>
         </div>
-      </div>
+      </Card>
 
-      {/* Motion Token Reference Table */}
-      <div>
-        <h2 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 16px 0' }}>
-          CSS Motion Variables Reference
-        </h2>
+      {/* 3. Motion Token Reference Table Card */}
+      <Card
+        variant="bordered"
+        style={{
+          borderRadius: 16,
+          backgroundColor: 'var(--color-surface)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+          overflow: 'hidden',
+        }}
+      >
         <div
           style={{
-            border: '1px solid var(--color-border-default)',
-            borderRadius: 'var(--radius-component-md)',
-            overflow: 'hidden',
+            padding: '18px 24px',
+            backgroundColor: 'var(--color-surface-raised)',
+            borderBottom: '1px solid var(--color-border-subtle)',
           }}
         >
+          <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+            CSS Motion Variables Reference
+          </h2>
+        </div>
+        <div>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
             <thead>
               <tr style={{ backgroundColor: 'var(--color-surface-raised)', borderBottom: '1px solid var(--color-border-subtle)' }}>
@@ -300,7 +319,7 @@ export const MotionSection: React.FC = () => {
             </tbody>
           </table>
         </div>
-      </div>
+      </Card>
     </div>
   );
 };

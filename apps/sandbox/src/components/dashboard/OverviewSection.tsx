@@ -139,13 +139,14 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
           gap: 20,
         }}
       >
-        <div
+        <Card
+          variant="bordered"
           onClick={() => navigate('/components/button')}
           style={{
             padding: 24,
             borderRadius: 'var(--radius-component-md)',
-            border: '1px solid var(--color-border-default)',
-            backgroundColor: 'var(--color-surface-raised)',
+            backgroundColor: 'var(--color-surface)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
             cursor: 'pointer',
             transition: 'border-color 0.15s ease',
           }}
@@ -153,21 +154,22 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
           <div style={{ marginBottom: 12 }}>
             <ComponentIcon size={24} color="var(--color-action-primary)" />
           </div>
-          <h3 style={{ margin: '0 0 6px 0', fontSize: 17, color: 'var(--color-text-primary)' }}>
+          <h3 style={{ margin: '0 0 6px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
             14 Core Components
           </h3>
           <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
             Buttons, Accordion, Inputs, Dialogs, and Badges with live interactive prop controls and CodeSandbox integration.
           </p>
-        </div>
+        </Card>
 
-        <div
+        <Card
+          variant="bordered"
           onClick={() => navigate('/tokens/colors')}
           style={{
             padding: 24,
             borderRadius: 'var(--radius-component-md)',
-            border: '1px solid var(--color-border-default)',
-            backgroundColor: 'var(--color-surface-raised)',
+            backgroundColor: 'var(--color-surface)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
             cursor: 'pointer',
             transition: 'border-color 0.15s ease',
           }}
@@ -175,21 +177,22 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
           <div style={{ marginBottom: 12 }}>
             <PaletteIcon size={24} color="var(--color-action-primary)" />
           </div>
-          <h3 style={{ margin: '0 0 6px 0', fontSize: 17, color: 'var(--color-text-primary)' }}>
+          <h3 style={{ margin: '0 0 6px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
             Flat Design Tokens
           </h3>
           <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
             Curated Flat UI color swatches, 4px modular spacing scale, and typography ladder with one-click CSS variable copy.
           </p>
-        </div>
+        </Card>
 
-        <div
+        <Card
+          variant="bordered"
           onClick={() => navigate('/icons')}
           style={{
             padding: 24,
             borderRadius: 'var(--radius-component-md)',
-            border: '1px solid var(--color-border-default)',
-            backgroundColor: 'var(--color-surface-raised)',
+            backgroundColor: 'var(--color-surface)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
             cursor: 'pointer',
             transition: 'border-color 0.15s ease',
           }}
@@ -197,114 +200,154 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
           <div style={{ marginBottom: 12 }}>
             <SparklesIcon size={24} color="#818CF8" />
           </div>
-          <h3 style={{ margin: '0 0 6px 0', fontSize: 17, color: 'var(--color-text-primary)' }}>
+          <h3 style={{ margin: '0 0 6px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
             12,253 Icons Catalog
           </h3>
           <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
             Filled, outlined, rounded, sharp, and two-tone vector icons with category-level code splitting and lazy loading.
           </p>
-        </div>
+        </Card>
       </div>
 
-      {/* Installation Block */}
-      <div>
-        <h2
-          style={{
-            fontSize: 22,
-            fontWeight: 700,
-            letterSpacing: '-0.02em',
-            margin: '0 0 16px 0',
-            color: 'var(--color-text-primary)',
-          }}
-        >
-          Quick Start Installation
-        </h2>
-
-        {/* Command box */}
+      {/* Installation Block Card */}
+      <Card
+        variant="bordered"
+        style={{
+          borderRadius: 16,
+          backgroundColor: 'var(--color-surface)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+          overflow: 'hidden',
+        }}
+      >
         <div
           style={{
+            padding: '18px 24px',
+            backgroundColor: 'var(--color-surface-raised)',
+            borderBottom: '1px solid var(--color-border-subtle)',
+          }}
+        >
+          <h2
+            style={{
+              fontSize: 20,
+              fontWeight: 800,
+              letterSpacing: '-0.02em',
+              margin: 0,
+              color: 'var(--color-text-primary)',
+            }}
+          >
+            Quick Start Installation
+          </h2>
+        </div>
+
+        <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: 20 }}>
+          {/* Command box */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '14px 20px',
+              backgroundColor: '#1E1E24',
+              borderRadius: 'var(--radius-component-md)',
+            }}
+          >
+            <code style={{ color: '#F8F8F2', fontSize: 14, fontFamily: "'JetBrains Mono', Consolas, monospace" }}>
+              {installCode}
+            </code>
+            <button
+              onClick={() => handleCopy(installCode)}
+              style={{
+                padding: '6px 12px',
+                backgroundColor: 'rgba(255, 255, 255, 0.12)',
+                border: 'none',
+                borderRadius: 4,
+                color: '#FFFFFF',
+                cursor: 'pointer',
+                fontSize: 12,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+              }}
+            >
+              {copied ? <CheckIcon size={14} /> : null}
+              <span>{copied ? 'Copied!' : 'Copy'}</span>
+            </button>
+          </div>
+
+          {/* Code Example */}
+          <div
+            style={{
+              border: '1px solid var(--color-border-default)',
+              borderRadius: 'var(--radius-component-md)',
+              overflow: 'hidden',
+            }}
+          >
+            <div
+              style={{
+                padding: '10px 16px',
+                backgroundColor: 'var(--color-surface-raised)',
+                borderBottom: '1px solid var(--color-border-subtle)',
+                fontSize: 12,
+                fontWeight: 600,
+                color: 'var(--color-text-secondary)',
+              }}
+            >
+              App Setup (React 18 / 19)
+            </div>
+            <pre
+              style={{
+                margin: 0,
+                padding: '20px 24px',
+                backgroundColor: '#1E1E24',
+                color: '#F8F8F2',
+                fontSize: 13,
+                fontFamily: "'JetBrains Mono', Consolas, monospace",
+                lineHeight: 1.6,
+                overflowX: 'auto',
+              }}
+            >
+              <code>{setupSnippet}</code>
+            </pre>
+          </div>
+        </div>
+      </Card>
+
+      {/* Component Directory */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <Card
+          variant="bordered"
+          style={{
+            padding: '18px 24px',
+            backgroundColor: 'var(--color-surface)',
+            borderRadius: 14,
+            boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            padding: '14px 20px',
-            backgroundColor: '#1E1E24',
-            borderRadius: 'var(--radius-component-md)',
-            marginBottom: 16,
+            flexWrap: 'wrap',
+            gap: 12,
           }}
         >
-          <code style={{ color: '#F8F8F2', fontSize: 14, fontFamily: 'monospace' }}>
-            {installCode}
-          </code>
-          <button
-            onClick={() => handleCopy(installCode)}
-            style={{
-              padding: '6px 12px',
-              backgroundColor: 'rgba(255, 255, 255, 0.12)',
-              border: 'none',
-              borderRadius: 4,
-              color: '#FFFFFF',
-              cursor: 'pointer',
-              fontSize: 12,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-            }}
-          >
-            {copied ? <CheckIcon size={14} /> : null}
-            <span>{copied ? 'Copied!' : 'Copy'}</span>
-          </button>
-        </div>
-
-        {/* Code Example */}
-        <div
-          style={{
-            border: '1px solid var(--color-border-default)',
-            borderRadius: 'var(--radius-component-md)',
-            overflow: 'hidden',
-          }}
-        >
-          <div
-            style={{
-              padding: '10px 16px',
-              backgroundColor: 'var(--color-surface-raised)',
-              borderBottom: '1px solid var(--color-border-subtle)',
-              fontSize: 12,
-              fontWeight: 600,
-              color: 'var(--color-text-secondary)',
-            }}
-          >
-            App Setup (React 18 / 19)
+          <div>
+            <h2
+              style={{
+                fontSize: 20,
+                fontWeight: 800,
+                letterSpacing: '-0.02em',
+                margin: 0,
+                color: 'var(--color-text-primary)',
+              }}
+            >
+              Core Components Directory
+            </h2>
+            <span style={{ fontSize: 13, color: 'var(--color-text-muted)', marginTop: 2, display: 'block' }}>
+              14 foundation components with interactive controls, code generation, and mobile simulation
+            </span>
           </div>
-          <pre
-            style={{
-              margin: 0,
-              padding: '20px 24px',
-              backgroundColor: '#1E1E24',
-              color: '#F8F8F2',
-              fontSize: 13,
-              fontFamily: 'monospace',
-              lineHeight: 1.6,
-              overflowX: 'auto',
-            }}
-          >
-            <code>{setupSnippet}</code>
-          </pre>
-        </div>
-      </div>
-
-      {/* Component Directory */}
-      <div>
-        <h2
-          style={{
-            fontSize: 22,
-            fontWeight: 700,
-            letterSpacing: '-0.02em',
-            margin: '0 0 16px 0',
-            color: 'var(--color-text-primary)',
-          }}
-        >
-          Components Directory
-        </h2>
+          <Button variant="secondary" size="sm" onClick={() => navigate('/components')}>
+            View All Components →
+          </Button>
+        </Card>
 
         <div
           style={{
@@ -314,14 +357,15 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
           }}
         >
           {componentLinks.map((item) => (
-            <div
+            <Card
               key={item.id}
+              variant="bordered"
               onClick={() => navigate(`/components/${item.id}`)}
               style={{
                 padding: '16px 20px',
                 borderRadius: 'var(--radius-component-md)',
-                border: '1px solid var(--color-border-default)',
                 backgroundColor: 'var(--color-surface)',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
                 cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'column',
@@ -365,7 +409,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
                 <span>View component</span>
                 <span>→</span>
               </div>
-            </div>
+            </Card>
           ))}
         </div>
       </div>

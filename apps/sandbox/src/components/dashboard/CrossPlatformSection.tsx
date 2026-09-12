@@ -51,10 +51,19 @@ export const LoginScreen = () => {
 
   return (
     <div style={{ maxWidth: 1040, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 40 }}>
-      <div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+      {/* 1. Hero Header Card */}
+      <Card
+        variant="bordered"
+        style={{
+          padding: '32px 36px',
+          backgroundColor: 'var(--color-surface)',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+          borderRadius: 16,
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
           <Badge variant="primary">Architecture</Badge>
-          <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>Universal Design System</span>
+          <span style={{ fontSize: 13, color: 'var(--color-text-muted)', fontWeight: 500 }}>Universal Design System</span>
         </div>
         <h1
           style={{
@@ -73,14 +82,14 @@ export const LoginScreen = () => {
             lineHeight: 1.6,
             color: 'var(--color-text-secondary)',
             margin: 0,
-            maxWidth: 760,
+            maxWidth: 780,
           }}
         >
           Spectra UI is engineered from the ground up as a universal design system. The exact same token contract and headless primitives power both responsive web applications and native iOS/Android mobile apps.
         </p>
-      </div>
+      </Card>
 
-      {/* 3 Pillars of Cross-Platform Architecture */}
+      {/* 2. 3 Pillars of Cross-Platform Architecture */}
       <div
         style={{
           display: 'grid',
@@ -88,65 +97,74 @@ export const LoginScreen = () => {
           gap: 20,
         }}
       >
-        <div
+        <Card
+          variant="bordered"
           style={{
             padding: 24,
             borderRadius: 'var(--radius-component-md)',
-            border: '1px solid var(--color-border-default)',
             backgroundColor: 'var(--color-surface)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
           }}
         >
           <div style={{ marginBottom: 12 }}>
             <PaletteIcon size={26} color="var(--color-action-primary)" />
           </div>
-          <h3 style={{ margin: '0 0 8px 0', fontSize: 17 }}>1. Universal Tokens</h3>
+          <h3 style={{ margin: '0 0 8px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+            1. Universal Tokens
+          </h3>
           <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
             <code>@spectra/tokens</code> compiles into CSS custom variables for Web and strictly typed JavaScript objects for React Native <code>StyleSheet</code>.
           </p>
-        </div>
+        </Card>
 
-        <div
+        <Card
+          variant="bordered"
           style={{
             padding: 24,
             borderRadius: 'var(--radius-component-md)',
-            border: '1px solid var(--color-border-default)',
             backgroundColor: 'var(--color-surface)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
           }}
         >
           <div style={{ marginBottom: 12 }}>
             <SparklesIcon size={26} color="#818CF8" />
           </div>
-          <h3 style={{ margin: '0 0 8px 0', fontSize: 17 }}>2. Shared Headless Logic</h3>
+          <h3 style={{ margin: '0 0 8px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+            2. Shared Headless Logic
+          </h3>
           <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
             <code>@spectra/primitives</code> houses state machines (controllable state, disclosure, focus) without any DOM assumptions, executing identically on Node, Web, and React Native runtimes.
           </p>
-        </div>
+        </Card>
 
-        <div
+        <Card
+          variant="bordered"
           style={{
             padding: 24,
             borderRadius: 'var(--radius-component-md)',
-            border: '1px solid var(--color-border-default)',
             backgroundColor: 'var(--color-surface)',
+            boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
           }}
         >
           <div style={{ marginBottom: 12 }}>
             <SmartphoneIcon size={26} color="var(--color-semantic-success, #16A34A)" />
           </div>
-          <h3 style={{ margin: '0 0 8px 0', fontSize: 17 }}>3. Identical API Surface</h3>
+          <h3 style={{ margin: '0 0 8px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+            3. Identical API Surface
+          </h3>
           <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
             Both <code>@spectra/react</code> and <code>@spectra/react-native</code> expose matching component signatures, reducing context switching across frontend and mobile teams.
           </p>
-        </div>
+        </Card>
       </div>
 
-      {/* Universal Pipeline Architecture with Circuit & Network Animation */}
+      {/* 3. Real-Time Token & Component Stream Pipeline Card */}
       <Card
         variant="bordered"
         style={{
           padding: '24px 28px',
           backgroundColor: 'var(--color-surface)',
-          borderRadius: 14,
+          borderRadius: 16,
           boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
           display: 'flex',
           alignItems: 'center',
@@ -179,12 +197,37 @@ export const LoginScreen = () => {
         </div>
       </Card>
 
-      {/* Code Comparison Switcher */}
-      <div>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-          <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0 }}>
-            Unified Component Code Comparison
-          </h2>
+      {/* 4. Unified Component Code Comparison Card */}
+      <Card
+        variant="bordered"
+        style={{
+          backgroundColor: 'var(--color-surface)',
+          borderRadius: 16,
+          boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Header Bar with Tabs */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '18px 24px',
+            borderBottom: '1px solid var(--color-border-subtle)',
+            backgroundColor: 'var(--color-surface-raised)',
+            flexWrap: 'wrap',
+            gap: 16,
+          }}
+        >
+          <div>
+            <h2 style={{ fontSize: 20, fontWeight: 800, margin: 0, color: 'var(--color-text-primary)', letterSpacing: '-0.015em' }}>
+              Unified Component Code Comparison
+            </h2>
+            <span style={{ fontSize: 12.5, color: 'var(--color-text-muted)', marginTop: 2, display: 'block' }}>
+              Zero mental tax: import identically across web and mobile native targets
+            </span>
+          </div>
           <Tabs variant="pills" size="sm" value={platformTab} onChange={(val) => setPlatformTab(val as 'web' | 'native')}>
             <TabList style={{ gap: 4 }}>
               <Tab value="web" style={{ fontSize: 13, fontWeight: 600 }}>
@@ -197,10 +240,9 @@ export const LoginScreen = () => {
           </Tabs>
         </div>
 
+        {/* Code Content */}
         <div
           style={{
-            borderRadius: 'var(--radius-component-md)',
-            border: '1px solid var(--color-border-default)',
             backgroundColor: '#1E1E24',
             overflow: 'hidden',
           }}
@@ -241,7 +283,7 @@ export const LoginScreen = () => {
               margin: 0,
               padding: '20px 24px',
               fontSize: 13,
-              fontFamily: 'monospace',
+              fontFamily: "'JetBrains Mono', Consolas, monospace",
               color: '#F8F8F2',
               lineHeight: 1.6,
               overflowX: 'auto',
@@ -250,7 +292,7 @@ export const LoginScreen = () => {
             <code>{platformTab === 'web' ? webCode : nativeCode}</code>
           </pre>
         </div>
-      </div>
+      </Card>
     </div>
   );
 };

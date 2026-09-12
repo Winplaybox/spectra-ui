@@ -740,20 +740,25 @@ export const AllComponentsPage: React.FC = () => {
       ) : (
         filteredCategories.map((cat) => (
           <section key={cat.id} id={cat.id} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            {/* Category Header */}
-            <div
+            {/* Category Header Card */}
+            <Card
+              variant="bordered"
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                paddingBottom: 8,
-                borderBottom: '1px solid var(--color-border-subtle)',
+                padding: '14px 20px',
+                backgroundColor: 'var(--color-surface)',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                borderRadius: 12,
+                flexWrap: 'wrap',
+                gap: 8,
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <h2
                   style={{
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: 800,
                     letterSpacing: '-0.015em',
                     margin: 0,
@@ -773,10 +778,20 @@ export const AllComponentsPage: React.FC = () => {
                     border: '1px solid var(--color-border-subtle)',
                   }}
                 >
-                  {cat.components.length}
+                  {cat.components.length} {cat.components.length === 1 ? 'component' : 'components'}
                 </span>
               </div>
-            </div>
+              <span style={{ fontSize: 12, color: 'var(--color-text-muted)', fontWeight: 500 }}>
+                {cat.id === 'actions' && 'Buttons & Triggers'}
+                {cat.id === 'form' && 'Form Controls & Inputs'}
+                {cat.id === 'layout' && 'Structure & Spacing'}
+                {cat.id === 'data-display' && 'Data & Visual Lists'}
+                {cat.id === 'feedback' && 'Badges & Indicators'}
+                {cat.id === 'surfaces' && 'Cards & Panels'}
+                {cat.id === 'navigation' && 'Tabs & Wayfinding'}
+                {cat.id === 'overlay' && 'Dialogs & Floating UI'}
+              </span>
+            </Card>
 
             {/* Component Cards Responsive Grid */}
             <div

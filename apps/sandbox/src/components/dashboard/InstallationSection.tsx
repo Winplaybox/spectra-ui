@@ -111,11 +111,19 @@ const styles = StyleSheet.create({
 
   return (
     <div style={{ maxWidth: 960, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 36 }}>
-      {/* Header */}
-      <div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+      {/* 1. Hero Header Card */}
+      <Card
+        variant="bordered"
+        style={{
+          padding: '32px 36px',
+          backgroundColor: 'var(--color-surface)',
+          borderRadius: 16,
+          boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
           <Badge variant="primary">Installation & Setup</Badge>
-          <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>Cross-Platform Architecture</span>
+          <span style={{ fontSize: 13, color: 'var(--color-text-muted)', fontWeight: 500 }}>Cross-Platform Architecture</span>
         </div>
         <h1
           style={{
@@ -141,10 +149,21 @@ const styles = StyleSheet.create({
           <strong>Mobile Native (iOS & Android via Expo / React Native)</strong>, sharing the exact same design
           tokens and icon architecture.
         </p>
-      </div>
+      </Card>
 
-      {/* Target Platform Selector Pills */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      {/* 2. Target Platform Selector Card */}
+      <Card
+        variant="bordered"
+        style={{
+          padding: '20px 24px',
+          backgroundColor: 'var(--color-surface)',
+          borderRadius: 12,
+          boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 12,
+        }}
+      >
         <span style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)' }}>
           Choose Your Target Platform:
         </span>
@@ -165,21 +184,24 @@ const styles = StyleSheet.create({
             </Tab>
           </TabList>
         </Tabs>
-      </div>
+      </Card>
 
-      {/* Step 1: Package Manager Selector & Install */}
-      <div>
-        <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 12px 0', color: 'var(--color-text-primary)' }}>
-          1. Install Packages
-        </h2>
-        <div
-          style={{
-            border: '1px solid var(--color-border-default)',
-            borderRadius: 'var(--radius-component-md)',
-            backgroundColor: '#0F172A',
-            overflow: 'hidden',
-          }}
-        >
+      {/* 3. Step 1: Package Manager Selector & Install */}
+      <Card
+        variant="bordered"
+        style={{
+          backgroundColor: 'var(--color-surface)',
+          borderRadius: 12,
+          boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+          overflow: 'hidden',
+        }}
+      >
+        <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border-subtle)', backgroundColor: 'var(--color-surface-raised)' }}>
+          <h2 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+            1. Install Packages
+          </h2>
+        </div>
+        <div>
           {/* Package Manager Tabs */}
           <div
             style={{
@@ -187,7 +209,7 @@ const styles = StyleSheet.create({
               justifyContent: 'space-between',
               alignItems: 'center',
               borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-              padding: '6px 12px',
+              padding: '8px 16px',
               backgroundColor: '#0B1120',
             }}
           >
@@ -231,17 +253,26 @@ const styles = StyleSheet.create({
             </button>
           </div>
 
-          <div style={{ padding: '16px 20px' }}>
+          <div style={{ padding: '16px 20px', backgroundColor: '#0F172A' }}>
             <pre style={{ margin: 0, color: '#F8FAFC', fontSize: 13, fontFamily: "'JetBrains Mono', Consolas, monospace", whiteSpace: 'pre-wrap' }}>
               <code>{installCmd}</code>
             </pre>
           </div>
         </div>
-      </div>
+      </Card>
 
-      {/* Step 2: Code Integration */}
-      <div>
-        <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 12px 0', color: 'var(--color-text-primary)' }}>
+      {/* 4. Step 2: Code Integration */}
+      <Card
+        variant="bordered"
+        style={{
+          backgroundColor: 'var(--color-surface)',
+          borderRadius: 12,
+          boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+          overflow: 'hidden',
+          padding: 24,
+        }}
+      >
+        <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 16px 0', color: 'var(--color-text-primary)' }}>
           2. Code Integration
         </h2>
 
@@ -346,20 +377,30 @@ const styles = StyleSheet.create({
             </div>
           </div>
         )}
-      </div>
+      </Card>
 
-      {/* Step 3: Realtime Testing & Demos */}
-      <div>
-        <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 12px 0', color: 'var(--color-text-primary)' }}>
-          3. Realtime Testing & Interactive Sandboxes
-        </h2>
-        <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '0 0 16px 0', lineHeight: 1.6 }}>
-          You can test, inspect, and demo Spectra UI components in realtime using live sandboxes:
-        </p>
+      {/* 5. Step 3: Realtime Testing & Demos */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <Card
+          variant="bordered"
+          style={{
+            padding: '20px 24px',
+            backgroundColor: 'var(--color-surface)',
+            borderRadius: 12,
+            boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+          }}
+        >
+          <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 6px 0', color: 'var(--color-text-primary)' }}>
+            3. Realtime Testing & Interactive Sandboxes
+          </h2>
+          <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.6 }}>
+            You can test, inspect, and demo Spectra UI components in realtime using live sandboxes:
+          </p>
+        </Card>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
           {/* Expo Snack Card */}
-          <Card variant="bordered" style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <Card variant="bordered" style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 10, backgroundColor: 'var(--color-surface)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <SmartphoneIcon size={20} color="var(--color-action-primary)" />
               <h4 style={{ margin: 0, fontSize: 15, fontWeight: 700 }}>Expo Snack (Mobile Native)</h4>
@@ -376,7 +417,7 @@ const styles = StyleSheet.create({
           </Card>
 
           {/* Built-in MobileSimulator Card */}
-          <Card variant="bordered" style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <Card variant="bordered" style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 10, backgroundColor: 'var(--color-surface)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <SmartphoneIcon size={20} color="var(--color-semantic-success, #16A34A)" />
               <h4 style={{ margin: 0, fontSize: 15, fontWeight: 700 }}>Spectra Mobile Simulator</h4>
@@ -392,7 +433,7 @@ const styles = StyleSheet.create({
           </Card>
 
           {/* StackBlitz & CodeSandbox Card */}
-          <Card variant="bordered" style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <Card variant="bordered" style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 10, backgroundColor: 'var(--color-surface)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <LightningIcon size={20} color="#F59E0B" />
               <h4 style={{ margin: 0, fontSize: 15, fontWeight: 700 }}>StackBlitz & CodeSandbox (Web)</h4>

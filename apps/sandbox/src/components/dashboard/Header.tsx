@@ -97,9 +97,9 @@ export const Header: React.FC<HeaderProps> = ({
     <header
       style={{
         borderBottom: '1px solid var(--color-border-default)',
-        backgroundColor: colorScheme === 'dark' ? 'rgba(9, 13, 22, 0.78)' : 'rgba(255, 255, 255, 0.82)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
+        backgroundColor: colorScheme === 'dark' ? 'rgba(9, 13, 22, 0.94)' : 'rgba(255, 255, 255, 0.96)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
         padding: '12px 32px',
         display: 'flex',
         alignItems: 'center',
