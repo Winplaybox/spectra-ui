@@ -100,25 +100,36 @@ const W3CPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
   </svg>
 );
 
-const MaterialDesignPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0, color: 'var(--color-text-muted)' }}>
-    <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5H5.5L12 6.5z" />
+const SectionCommentIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, ...style }}>
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
   </svg>
 );
 
-const FigmaPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
-  <svg width={size} height={size} viewBox="0 0 38 57" fill="none" style={{ flexShrink: 0 }}>
-    <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE" />
-    <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83" />
-    <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262" />
-    <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E" />
-    <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF" />
+const ThumbsUpIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 15, style }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, ...style }}>
+    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
   </svg>
 );
 
-const SketchPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#FDB300" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-    <polygon points="6 3 18 3 22 9 12 22 2 9" />
+const ThumbsDownIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 15, style }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, ...style }}>
+    <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3" />
+  </svg>
+);
+
+const InfoHandIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 18, style }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#EAB308" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, ...style }}>
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="8" x2="12" y2="12" />
+    <line x1="12" y1="16" x2="12.01" y2="16" />
+  </svg>
+);
+
+const EditPageIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, ...style }}>
+    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
   </svg>
 );
 
@@ -162,23 +173,6 @@ const COMPONENT_WAI_ARIA: Record<string, string> = {
   list: 'https://www.w3.org/WAI/ARIA/apg/patterns/listbox/',
 };
 
-const COMPONENT_MATERIAL_URLS: Record<string, string> = {
-  button: 'https://m3.material.io/components/buttons/overview',
-  'text-input': 'https://m3.material.io/components/text-fields/overview',
-  select: 'https://m3.material.io/components/menus/overview',
-  checkbox: 'https://m3.material.io/components/checkbox/overview',
-  radio: 'https://m3.material.io/components/radio-button/overview',
-  switch: 'https://m3.material.io/components/switch/overview',
-  card: 'https://m3.material.io/components/cards/overview',
-  dialog: 'https://m3.material.io/components/dialogs/overview',
-  badge: 'https://m3.material.io/components/badges/overview',
-  chip: 'https://m3.material.io/components/chips/overview',
-  list: 'https://m3.material.io/components/lists/overview',
-  tabs: 'https://m3.material.io/components/tabs/overview',
-  divider: 'https://m3.material.io/components/divider/overview',
-  tooltip: 'https://m3.material.io/components/tooltips/overview',
-};
-
 interface ComponentDocPageProps {
   componentId: string;
 }
@@ -198,9 +192,37 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
   const [customPlaygroundCodeJs, setCustomPlaygroundCodeJs] = useState<string | null>(null);
   const customPlaygroundCode = playgroundLang === 'ts' ? customPlaygroundCodeTs : customPlaygroundCodeJs;
   const [copied, setCopied] = useState(false);
-  const [activeResourceModal, setActiveResourceModal] = useState<'react' | 'native' | null>(null);
+  const [activeResourceModal, setActiveResourceModal] = useState<'react' | 'native' | 'tokens' | null>(null);
   const [activeSection, setActiveSection] = useState<string>('playground');
   const variants = COMPONENT_VARIANTS_MAP[meta.id] || [];
+
+  // Feedback & Edit State (MUI Image 1 Benchmark)
+  const [feedbackFormOpen, setFeedbackFormOpen] = useState(false);
+  const [feedbackSection, setFeedbackSection] = useState<string>('Overview');
+  const [feedbackText, setFeedbackText] = useState('');
+  const [feedbackRating, setFeedbackRating] = useState<'positive' | 'negative' | null>(null);
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+
+  const openFeedbackForSection = (sectionName: string) => {
+    setFeedbackSection(sectionName);
+    setFeedbackFormOpen(true);
+    setTimeout(() => {
+      const el = document.getElementById('page-feedback');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 40);
+  };
+
+  useEffect(() => {
+    const handleSectionFeedback = (e: any) => {
+      if (e?.detail) {
+        openFeedbackForSection(e.detail);
+      }
+    };
+    window.addEventListener('spectra:section-feedback', handleSectionFeedback as any);
+    return () => window.removeEventListener('spectra:section-feedback', handleSectionFeedback as any);
+  }, []);
 
   // Active scrollspy tracking for Table of Contents
   useEffect(() => {
@@ -218,6 +240,7 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
       'keyboard',
       'props',
       'api',
+      'page-feedback',
     ];
 
     const handleScroll = () => {
@@ -1690,12 +1713,10 @@ export const Native${meta.name}Demo = () => {
               <span>View as Markdown</span>
             </button>
 
-            {/* 2. Feedback */}
-            <a
-              href={`https://github.com/Winplaybox/spectra-ui/issues/new?title=%5BFeedback%5D+${encodeURIComponent(meta.name)}+Component`}
-              target="_blank"
-              rel="noreferrer"
-              title="Send feedback or report an issue"
+            {/* 2. Feedback (Opens page feedback drawer/section) */}
+            <button
+              onClick={() => openFeedbackForSection('General Page Feedback')}
+              title="Leave feedback or suggestions on this component"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -1707,7 +1728,8 @@ export const Native${meta.name}Demo = () => {
                 border: '1px solid var(--color-border-default)',
                 borderRadius: 20,
                 padding: '5px 12px',
-                textDecoration: 'none',
+                cursor: 'pointer',
+                fontFamily: 'inherit',
                 transition: 'all 0.12s ease',
               }}
               onMouseEnter={(e) => {
@@ -1721,7 +1743,7 @@ export const Native${meta.name}Demo = () => {
             >
               <FeedbackPillIcon size={14} />
               <span>Feedback</span>
-            </a>
+            </button>
 
             {/* 3. Bundle size */}
             <a
@@ -1823,107 +1845,6 @@ export const Native${meta.name}Demo = () => {
                 <span>WAI-ARIA</span>
               </a>
             )}
-
-            {/* 6. Material Design */}
-            {COMPONENT_MATERIAL_URLS[meta.id] && (
-              <a
-                href={COMPONENT_MATERIAL_URLS[meta.id]}
-                target="_blank"
-                rel="noreferrer"
-                title="Material Design Specification"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  fontSize: 12,
-                  fontWeight: 600,
-                  color: 'var(--color-text-secondary)',
-                  backgroundColor: 'var(--color-surface)',
-                  border: '1px solid var(--color-border-default)',
-                  borderRadius: 20,
-                  padding: '5px 12px',
-                  textDecoration: 'none',
-                  transition: 'all 0.12s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-action-primary)';
-                  e.currentTarget.style.color = 'var(--color-action-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-border-default)';
-                  e.currentTarget.style.color = 'var(--color-text-secondary)';
-                }}
-              >
-                <MaterialDesignPillIcon size={14} />
-                <span>Material Design</span>
-              </a>
-            )}
-
-            {/* 7. Figma */}
-            <a
-              href="https://www.figma.com/@spectraui"
-              target="_blank"
-              rel="noreferrer"
-              title="Open in Spectra Figma UI Kit"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
-                fontSize: 12,
-                fontWeight: 600,
-                color: 'var(--color-text-secondary)',
-                backgroundColor: 'var(--color-surface)',
-                border: '1px solid var(--color-border-default)',
-                borderRadius: 20,
-                padding: '5px 12px',
-                textDecoration: 'none',
-                transition: 'all 0.12s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-action-primary)';
-                e.currentTarget.style.color = 'var(--color-action-primary)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-border-default)';
-                e.currentTarget.style.color = 'var(--color-text-secondary)';
-              }}
-            >
-              <FigmaPillIcon size={14} />
-              <span>Figma</span>
-            </a>
-
-            {/* 8. Sketch */}
-            <a
-              href="https://github.com/Winplaybox/spectra-ui"
-              target="_blank"
-              rel="noreferrer"
-              title="Sketch UI Assets"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
-                fontSize: 12,
-                fontWeight: 600,
-                color: 'var(--color-text-secondary)',
-                backgroundColor: 'var(--color-surface)',
-                border: '1px solid var(--color-border-default)',
-                borderRadius: 20,
-                padding: '5px 12px',
-                textDecoration: 'none',
-                transition: 'all 0.12s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-action-primary)';
-                e.currentTarget.style.color = 'var(--color-action-primary)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-border-default)';
-                e.currentTarget.style.color = 'var(--color-text-secondary)';
-              }}
-            >
-              <SketchPillIcon size={14} />
-              <span>Sketch</span>
-            </a>
           </div>
 
           {/* Active Platform Banner (Strict Platform Isolation) */}
@@ -1971,222 +1892,207 @@ export const Native${meta.name}Demo = () => {
       {/* 3. PLATFORM VIEW: Web Mode */}
       {platformMode === 'web' && (
         <>
-          {/* Interactive Web Playground */}
-          <div
-            id="playground"
-            style={{
-              borderRadius: 'var(--radius-component-md)',
-              border: '1px solid var(--color-border-default)',
-              backgroundColor: 'var(--color-surface)',
-              color: 'var(--color-text-primary)',
-              overflow: 'hidden',
-              transition: 'background-color 0.2s ease',
-              scrollMarginTop: 80,
-            }}
-          >
-            {/* Top Preview Bar */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '12px 20px',
-                borderBottom: '1px solid var(--color-border-subtle)',
-                backgroundColor: 'var(--color-surface-raised)',
-                fontSize: 13,
-              }}
-            >
-              <span style={{ fontWeight: 600, color: 'var(--color-text-primary)' }}>
-                Interactive Web Playground
-              </span>
-            </div>
-
-            {/* Live Preview Area */}
-            <div
-              style={{
-                padding: '48px 32px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                minHeight: 220,
-              }}
-            >
-              {customPlaygroundCode !== null && DynamicPlaygroundComp ? (
-                React.createElement(DynamicPlaygroundComp)
-              ) : (
-                renderComponentPreview()
-              )}
-            </div>
-
-            {/* Bottom Action Bar (Fluent 2 / MUI Exact implementation) */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                gap: 20,
-                padding: '12px 24px',
-                borderTop: '1px solid var(--color-border-subtle)',
-                backgroundColor: 'var(--color-surface-raised)',
-                fontSize: 13,
-              }}
-            >
-              <button
-                onClick={() => openInCodeSandbox({ title: meta.name, code: activePlaygroundSnippet, theme: colorScheme })}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: 'var(--color-text-secondary)',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  cursor: 'pointer',
-                  fontSize: 13,
-                  fontFamily: 'inherit',
-                  padding: 0,
-                }}
-              >
-                <ExternalLinkIcon size={14} />
-                <span>Open in CodeSandbox</span>
-              </button>
-
-              <button
-                onClick={() => openInStackBlitz({ title: meta.name, code: activePlaygroundSnippet, theme: colorScheme })}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: 'var(--color-text-secondary)',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  cursor: 'pointer',
-                  fontSize: 13,
-                  fontFamily: 'inherit',
-                  padding: 0,
-                }}
-              >
-                <ExternalLinkIcon size={14} />
-                <span>Open in Stackblitz</span>
-              </button>
-
-              <button
-                onClick={() => openInNewTab({ title: meta.name, code: activePlaygroundSnippet, theme: colorScheme })}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: 'var(--color-text-secondary)',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  cursor: 'pointer',
-                  fontSize: 13,
-                  fontFamily: 'inherit',
-                  padding: 0,
-                }}
-              >
-                <ExternalLinkIcon size={14} />
-                <span>Open in new tab</span>
-              </button>
-
-              <button
-                onClick={() => setShowCode(!showCode)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: showCode ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                  fontWeight: 600,
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  cursor: 'pointer',
-                  fontSize: 13,
-                  fontFamily: 'inherit',
-                  padding: 0,
-                }}
-              >
-                <span>{showCode ? 'Hide code' : 'Show code'}</span>
-              </button>
-
-              {showCode && (
-                <div style={{ marginLeft: 6 }}>
-                  <Tabs variant="pills" size="sm" value={playgroundLang} onChange={(val) => setPlaygroundLang(val as 'ts' | 'js')}>
-                    <TabList style={{ padding: '2px 4px' }}>
-                      <Tab value="js" style={{ padding: '2px 8px', fontSize: 11, fontWeight: 700 }}>
-                        JS
-                      </Tab>
-                      <Tab value="ts" style={{ padding: '2px 8px', fontSize: 11, fontWeight: 700 }}>
-                        TS
-                      </Tab>
-                    </TabList>
-                  </Tabs>
-                </div>
-              )}
-            </div>
-
-            {/* Expandable Editable Code Snippet */}
-            {showCode && (
-              <div style={{ backgroundColor: 'var(--color-surface-raised)', padding: '6px 10px 10px 10px', borderTop: '1px solid var(--color-border-subtle)' }}>
-                <EditableCodeBlock
-                  code={activePlaygroundSnippet}
-                  onChange={(newCode) => {
-                    if (playgroundLang === 'ts') {
-                      setCustomPlaygroundCodeTs(newCode);
-                    } else {
-                      setCustomPlaygroundCodeJs(newCode);
-                    }
-                  }}
-                  language={playgroundLang}
-                  isExpanded={true}
-                  isModified={customPlaygroundCode !== null}
-                  onResetCode={() => {
-                    setCustomPlaygroundCodeTs(null);
-                    setCustomPlaygroundCodeJs(null);
-                  }}
-                  onCopy={handleCopyCode}
-                  copied={copied}
-                  fileBadge={playgroundLang === 'ts' ? 'App.tsx (TypeScript)' : 'App.jsx (JavaScript)'}
-                  maxHeight={380}
-                />
-              </div>
-            )}
-          </div>
-
-          {/* 3.1 Multi-Variant Recipes Showcase */}
-          <div id="usage-variants" style={{ display: 'flex', flexDirection: 'column', gap: 20, scrollMarginTop: 80 }}>
-            <Card
-              variant="bordered"
-              style={{
-                backgroundColor: 'var(--color-surface)',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
-                padding: '20px 24px',
-                borderRadius: 12,
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
-                <div>
-                  <h2 style={{ fontSize: 24, fontWeight: 800, margin: 0, color: 'var(--color-text-primary)', letterSpacing: '-0.02em' }}>
-                    Usage Recipes & Variants
-                  </h2>
-                  <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: '4px 0 0 0', lineHeight: 1.5 }}>
-                    Interactive code recipes across both Web (<code style={{ color: 'var(--color-action-primary)' }}>@spectra/react</code>) and Mobile Native (<code style={{ color: 'var(--color-action-primary)' }}>@spectra/react-native</code>) platforms.
-                  </p>
-                </div>
-                <span
+          {/* 1. Primary Demo Section: Basic <Component> (MUI & Fluent UI Benchmark) */}
+          <div id="playground" style={{ display: 'flex', flexDirection: 'column', gap: 14, scrollMarginTop: 80 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)', letterSpacing: '-0.01em' }}>
+                  Basic {meta.name}
+                </h2>
+                <button
+                  onClick={() => openFeedbackForSection(`Basic ${meta.name}`)}
+                  title={`Give feedback on Basic ${meta.name}`}
                   style={{
-                    fontSize: 12,
-                    fontWeight: 600,
-                    padding: '4px 10px',
-                    borderRadius: 20,
-                    backgroundColor: 'var(--color-surface-raised)',
+                    background: 'none',
                     border: '1px solid var(--color-border-subtle)',
+                    borderRadius: 6,
+                    padding: '4px 6px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    cursor: 'pointer',
                     color: 'var(--color-text-muted)',
+                    transition: 'all 0.12s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--color-action-primary)';
+                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--color-text-muted)';
+                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
                   }}
                 >
-                  {variants.length} recipes available
-                </span>
+                  <SectionCommentIcon size={14} />
+                </button>
               </div>
-            </Card>
+            </div>
+            <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
+              Standard default {meta.name.toLowerCase()} implementation ready for production use.
+            </p>
 
+            <div
+              style={{
+                borderRadius: 'var(--radius-component-md)',
+                border: '1px solid var(--color-border-default)',
+                backgroundColor: 'var(--color-surface)',
+                color: 'var(--color-text-primary)',
+                overflow: 'hidden',
+                transition: 'background-color 0.2s ease',
+              }}
+            >
+              {/* Live Preview Area */}
+              <div
+                style={{
+                  padding: '48px 32px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  minHeight: 200,
+                }}
+              >
+                {customPlaygroundCode !== null && DynamicPlaygroundComp ? (
+                  React.createElement(DynamicPlaygroundComp)
+                ) : (
+                  renderComponentPreview()
+                )}
+              </div>
+
+              {/* Bottom Action Bar (Fluent 2 / MUI Exact implementation) */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  gap: 20,
+                  padding: '12px 24px',
+                  borderTop: '1px solid var(--color-border-subtle)',
+                  backgroundColor: 'var(--color-surface-raised)',
+                  fontSize: 13,
+                }}
+              >
+                <button
+                  onClick={() => openInCodeSandbox({ title: meta.name, code: activePlaygroundSnippet, theme: colorScheme })}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'var(--color-text-secondary)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    cursor: 'pointer',
+                    fontSize: 13,
+                    fontFamily: 'inherit',
+                    padding: 0,
+                  }}
+                >
+                  <ExternalLinkIcon size={14} />
+                  <span>Open in CodeSandbox</span>
+                </button>
+
+                <button
+                  onClick={() => openInStackBlitz({ title: meta.name, code: activePlaygroundSnippet, theme: colorScheme })}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'var(--color-text-secondary)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    cursor: 'pointer',
+                    fontSize: 13,
+                    fontFamily: 'inherit',
+                    padding: 0,
+                  }}
+                >
+                  <ExternalLinkIcon size={14} />
+                  <span>Open in Stackblitz</span>
+                </button>
+
+                <button
+                  onClick={() => openInNewTab({ title: meta.name, code: activePlaygroundSnippet, theme: colorScheme })}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: 'var(--color-text-secondary)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    cursor: 'pointer',
+                    fontSize: 13,
+                    fontFamily: 'inherit',
+                    padding: 0,
+                  }}
+                >
+                  <ExternalLinkIcon size={14} />
+                  <span>Open in new tab</span>
+                </button>
+
+                <button
+                  onClick={() => setShowCode(!showCode)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: showCode ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
+                    fontWeight: 600,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    cursor: 'pointer',
+                    fontSize: 13,
+                    fontFamily: 'inherit',
+                    padding: 0,
+                  }}
+                >
+                  <span>{showCode ? 'Hide code' : 'Show code'}</span>
+                </button>
+
+                {showCode && (
+                  <div style={{ marginLeft: 6 }}>
+                    <Tabs variant="pills" size="sm" value={playgroundLang} onChange={(val) => setPlaygroundLang(val as 'ts' | 'js')}>
+                      <TabList style={{ padding: '2px 4px' }}>
+                        <Tab value="js" style={{ padding: '2px 8px', fontSize: 11, fontWeight: 700 }}>
+                          JS
+                        </Tab>
+                        <Tab value="ts" style={{ padding: '2px 8px', fontSize: 11, fontWeight: 700 }}>
+                          TS
+                        </Tab>
+                      </TabList>
+                    </Tabs>
+                  </div>
+                )}
+              </div>
+
+              {/* Expandable Editable Code Snippet */}
+              {showCode && (
+                <div style={{ backgroundColor: 'var(--color-surface-raised)', padding: '6px 10px 10px 10px', borderTop: '1px solid var(--color-border-subtle)' }}>
+                  <EditableCodeBlock
+                    code={activePlaygroundSnippet}
+                    onChange={(newCode) => {
+                      if (playgroundLang === 'ts') {
+                        setCustomPlaygroundCodeTs(newCode);
+                      } else {
+                        setCustomPlaygroundCodeJs(newCode);
+                      }
+                    }}
+                    language={playgroundLang}
+                    isExpanded={true}
+                    isModified={customPlaygroundCode !== null}
+                    onResetCode={() => {
+                      setCustomPlaygroundCodeTs(null);
+                      setCustomPlaygroundCodeJs(null);
+                    }}
+                    onCopy={handleCopyCode}
+                    copied={copied}
+                    fileBadge={playgroundLang === 'ts' ? 'App.tsx (TypeScript)' : 'App.jsx (JavaScript)'}
+                    maxHeight={380}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* 2. Variants Showcase (Rendered directly without redundant banner) */}
+          <div id="usage-variants" style={{ display: 'flex', flexDirection: 'column', gap: 20, scrollMarginTop: 80 }}>
             <ComponentVariantsShowcase componentId={meta.id} />
           </div>
 
@@ -2247,9 +2153,9 @@ export const Native${meta.name}Demo = () => {
                 </div>
               </div>
 
-              {/* Card 2: Mobile Native Guidance */}
+              {/* Card 2: Design Tokens Guidance */}
               <div
-                onClick={() => setActiveResourceModal('native')}
+                onClick={() => setActiveResourceModal('tokens')}
                 style={{
                   padding: '20px',
                   borderRadius: 'var(--radius-component-md)',
@@ -2263,15 +2169,17 @@ export const Native${meta.name}Demo = () => {
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-semantic-success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-                    <line x1="12" y1="18" x2="12.01" y2="18" />
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-action-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 2a7 7 0 0 0 0 14v6" />
+                    <line x1="12" y1="8" x2="12.01" y2="8" />
+                    <line x1="16" y1="12" x2="16.01" y2="12" />
                   </svg>
                   <ExternalLinkIcon size={16} color="var(--color-text-muted)" />
                 </div>
                 <div>
-                  <div style={{ fontWeight: 600, fontSize: 14 }}>{meta.name} Mobile Native</div>
-                  <div style={{ fontSize: 12, color: 'var(--color-text-muted)', marginTop: 2 }}>React Native guidance</div>
+                  <div style={{ fontWeight: 600, fontSize: 14 }}>{meta.name} Design Tokens</div>
+                  <div style={{ fontSize: 12, color: 'var(--color-text-muted)', marginTop: 2 }}>CSS variables & theme integration</div>
                 </div>
               </div>
 
@@ -2406,9 +2314,38 @@ export const Native${meta.name}Demo = () => {
                 padding: 24,
               }}
             >
-              <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 16px 0', color: 'var(--color-text-primary)' }}>
-                Usage Guidelines (Dos and Don'ts)
-              </h2>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                    Usage Guidelines (Dos and Don'ts)
+                  </h2>
+                  <button
+                    onClick={() => openFeedbackForSection('Usage Guidelines')}
+                    title="Give feedback on Usage Guidelines"
+                    style={{
+                      background: 'none',
+                      border: '1px solid var(--color-border-subtle)',
+                      borderRadius: 6,
+                      padding: '4px 6px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      cursor: 'pointer',
+                      color: 'var(--color-text-muted)',
+                      transition: 'all 0.12s ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--color-action-primary)';
+                      e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'var(--color-text-muted)';
+                      e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
+                    }}
+                  >
+                    <SectionCommentIcon size={14} />
+                  </button>
+                </div>
+              </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
                 {/* DO Card */}
                 <div
@@ -2469,10 +2406,37 @@ export const Native${meta.name}Demo = () => {
                 overflow: 'hidden',
               }}
             >
-              <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-raised)' }}>
-                <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                  Keyboard Navigation & ARIA Behavior
-                </h2>
+              <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                    Keyboard Navigation & ARIA Behavior
+                  </h2>
+                  <button
+                    onClick={() => openFeedbackForSection('Keyboard Navigation & ARIA')}
+                    title="Give feedback on Keyboard Navigation"
+                    style={{
+                      background: 'none',
+                      border: '1px solid var(--color-border-subtle)',
+                      borderRadius: 6,
+                      padding: '4px 6px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      cursor: 'pointer',
+                      color: 'var(--color-text-muted)',
+                      transition: 'all 0.12s ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--color-action-primary)';
+                      e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'var(--color-text-muted)';
+                      e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
+                    }}
+                  >
+                    <SectionCommentIcon size={14} />
+                  </button>
+                </div>
               </div>
               <div style={{ overflowX: 'auto', backgroundColor: 'var(--color-surface)' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13, backgroundColor: 'var(--color-surface)' }}>
@@ -2666,11 +2630,17 @@ export const Native${meta.name}Demo = () => {
         >
           <div style={{ padding: 24 }}>
             <h3 style={{ margin: '0 0 12px', fontSize: 18 }}>
-              {activeResourceModal === 'react' ? `${meta.name} — Web React Guidance` : `${meta.name} — Mobile Native Guidance`}
+              {activeResourceModal === 'react'
+                ? `${meta.name} — Web React Guidance`
+                : activeResourceModal === 'tokens'
+                ? `${meta.name} — Design Tokens & CSS Variables`
+                : `${meta.name} — Mobile Native Guidance`}
             </h3>
             <p style={{ color: 'var(--color-text-secondary)', fontSize: 14, margin: '0 0 16px' }}>
               {activeResourceModal === 'react'
                 ? `Import directly from @spectra/react for Web applications:`
+                : activeResourceModal === 'tokens'
+                ? `Customizable CSS design tokens and variables available for ${meta.name}:`
                 : `Import from @spectra/react-native for native iOS and Android mobile apps:`}
             </p>
             <pre
@@ -2685,7 +2655,16 @@ export const Native${meta.name}Demo = () => {
               }}
             >
               <code>
-                {activeResourceModal === 'react' ? getCodeSnippet() : getNativeCodeSnippet()}
+                {activeResourceModal === 'react'
+                  ? getCodeSnippet()
+                  : activeResourceModal === 'tokens'
+                  ? `/* Design Tokens for ${meta.name} */
+--color-${meta.id}-bg: var(--color-surface);
+--color-${meta.id}-border: var(--color-border-default);
+--color-${meta.id}-text: var(--color-text-primary);
+--radius-${meta.id}: var(--radius-component-md);
+--shadow-${meta.id}: var(--elevation-raised);`
+                  : getNativeCodeSnippet()}
               </code>
             </pre>
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 20 }}>
@@ -2815,6 +2794,296 @@ export default function Example() {
           </div>
         </Dialog>
       )}
+
+      {/* 4. Page Feedback & Edit Section (MUI & Fluent UI Benchmark - Image 1) */}
+      <div
+        id="page-feedback"
+        style={{
+          marginTop: 48,
+          paddingTop: 32,
+          borderTop: '1px solid var(--color-border-subtle)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 20,
+          scrollMarginTop: 80,
+        }}
+      >
+        {/* Top Action Bar: [Edit this page] on Left, [Was this page helpful? 👍 👎] on Right */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: 16,
+          }}
+        >
+          {/* Edit this page link */}
+          <a
+            href={getGitHubUrl(meta.id, platformMode).replace('/blob/', '/edit/')}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              fontSize: 13,
+              fontWeight: 500,
+              color: 'var(--color-text-secondary)',
+              textDecoration: 'none',
+              transition: 'color 0.15s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = 'var(--color-action-primary)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = 'var(--color-text-secondary)';
+            }}
+          >
+            <EditPageIcon size={14} />
+            <span>Edit this page</span>
+          </a>
+
+          {/* Was this page helpful widget */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', fontWeight: 500 }}>
+              Was this page helpful?
+            </span>
+            <div style={{ display: 'flex', gap: 6 }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setFeedbackRating('positive');
+                  setFeedbackFormOpen(true);
+                }}
+                title="Yes, this page was helpful"
+                aria-label="Yes, this page was helpful"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 32,
+                  height: 32,
+                  borderRadius: 6,
+                  border: `1px solid ${feedbackRating === 'positive' ? 'var(--color-action-primary)' : 'var(--color-border-default)'}`,
+                  backgroundColor: feedbackRating === 'positive' ? 'rgba(0, 127, 255, 0.08)' : 'var(--color-surface)',
+                  color: feedbackRating === 'positive' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  cursor: 'pointer',
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (feedbackRating !== 'positive') {
+                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                    e.currentTarget.style.color = 'var(--color-action-primary)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (feedbackRating !== 'positive') {
+                    e.currentTarget.style.borderColor = 'var(--color-border-default)';
+                    e.currentTarget.style.color = 'var(--color-text-secondary)';
+                  }
+                }}
+              >
+                <ThumbsUpIcon size={14} />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setFeedbackRating('negative');
+                  setFeedbackFormOpen(true);
+                }}
+                title="No, this page was not helpful"
+                aria-label="No, this page was not helpful"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 32,
+                  height: 32,
+                  borderRadius: 6,
+                  border: `1px solid ${feedbackRating === 'negative' ? 'var(--color-semantic-error, #ef4444)' : 'var(--color-border-default)'}`,
+                  backgroundColor: feedbackRating === 'negative' ? 'rgba(239, 68, 68, 0.08)' : 'var(--color-surface)',
+                  color: feedbackRating === 'negative' ? 'var(--color-semantic-error, #ef4444)' : 'var(--color-text-secondary)',
+                  cursor: 'pointer',
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (feedbackRating !== 'negative') {
+                    e.currentTarget.style.borderColor = 'var(--color-semantic-error, #ef4444)';
+                    e.currentTarget.style.color = 'var(--color-semantic-error, #ef4444)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (feedbackRating !== 'negative') {
+                    e.currentTarget.style.borderColor = 'var(--color-border-default)';
+                    e.currentTarget.style.color = 'var(--color-text-secondary)';
+                  }
+                }}
+              >
+                <ThumbsDownIcon size={14} />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Feedback Form (MUI Image 1 Benchmark) */}
+        {feedbackFormOpen && (
+          <div
+            style={{
+              padding: 20,
+              borderRadius: 8,
+              border: '1px solid var(--color-border-default)',
+              backgroundColor: 'var(--color-surface-raised)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 14,
+              animation: 'fadeIn 0.2s ease-in-out',
+            }}
+          >
+            {feedbackSubmitted ? (
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 10,
+                  padding: '14px 16px',
+                  borderRadius: 6,
+                  backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                  border: '1px solid rgba(16, 185, 129, 0.3)',
+                  color: 'var(--color-semantic-success, #10B981)',
+                  fontSize: 13,
+                  fontWeight: 500,
+                }}
+              >
+                <CheckIcon size={16} />
+                <span>Thank you for your feedback! We continuously review documentation feedback to improve Spectra UI.</span>
+              </div>
+            ) : (
+              <>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <label
+                    htmlFor="feedback-textarea"
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 600,
+                      color: 'var(--color-text-primary)',
+                    }}
+                  >
+                    How can we improve the &ldquo;{feedbackSection}&rdquo; section?{' '}
+                    <span style={{ fontWeight: 400, color: 'var(--color-text-muted)' }}>(optional)</span>
+                  </label>
+                  {feedbackRating && (
+                    <span
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 600,
+                        padding: '2px 8px',
+                        borderRadius: 12,
+                        backgroundColor: feedbackRating === 'positive' ? 'rgba(16, 185, 129, 0.12)' : 'rgba(239, 68, 68, 0.12)',
+                        color: feedbackRating === 'positive' ? '#10B981' : '#EF4444',
+                      }}
+                    >
+                      {feedbackRating === 'positive' ? 'Marked helpful' : 'Needs improvement'}
+                    </span>
+                  )}
+                </div>
+
+                <textarea
+                  id="feedback-textarea"
+                  value={feedbackText}
+                  onChange={(e) => setFeedbackText(e.target.value)}
+                  placeholder="Tell us what was confusing, missing, or could be improved..."
+                  rows={4}
+                  style={{
+                    width: '100%',
+                    padding: '10px 12px',
+                    borderRadius: 6,
+                    border: '1px solid var(--color-border-default)',
+                    backgroundColor: 'var(--color-surface)',
+                    color: 'var(--color-text-primary)',
+                    fontSize: 13,
+                    fontFamily: 'inherit',
+                    lineHeight: 1.5,
+                    resize: 'vertical',
+                    boxSizing: 'border-box',
+                    outline: 'none',
+                  }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-border-default)';
+                  }}
+                />
+
+                {/* Callout Notice linking to GitHub Issues */}
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    padding: '10px 14px',
+                    borderRadius: 6,
+                    backgroundColor: 'rgba(234, 179, 8, 0.08)',
+                    border: '1px solid rgba(234, 179, 8, 0.25)',
+                    fontSize: 12,
+                    color: 'var(--color-text-secondary)',
+                    lineHeight: 1.4,
+                  }}
+                >
+                  <InfoHandIcon size={16} />
+                  <span>
+                    Looking for help or troubleshooting an issue? Please{' '}
+                    <a
+                      href="https://github.com/sagarkm/spectra-ui/issues/new/choose"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        color: 'var(--color-action-primary)',
+                        fontWeight: 600,
+                        textDecoration: 'underline',
+                      }}
+                    >
+                      open an issue instead
+                    </a>
+                    .
+                  </span>
+                </div>
+
+                {/* Bottom buttons */}
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 10, marginTop: 4 }}>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => {
+                      setFeedbackFormOpen(false);
+                      setFeedbackText('');
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => {
+                      setFeedbackSubmitted(true);
+                      setTimeout(() => {
+                        setFeedbackFormOpen(false);
+                        setFeedbackSubmitted(false);
+                        setFeedbackText('');
+                        setFeedbackRating(null);
+                      }, 2500);
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </>
+            )}
+          </div>
+        )}
+      </div>
       </div> {/* End of Main Documentation Column */}
 
       {/* Sticky Table of Contents (On this page - matching MUI Benchmark with continuous left guide rule) */}
@@ -2877,7 +3146,7 @@ export default function Example() {
               if (activeSection !== 'playground') e.currentTarget.style.color = 'var(--color-text-secondary)';
             }}
           >
-            {platformMode === 'web' ? 'Interactive Playground' : `${platformMeta.name} Simulator`}
+            {platformMode === 'web' ? `Basic ${meta.name}` : `${platformMeta.name} Simulator`}
           </a>
 
           {/* Section: Usage & Variants */}
@@ -2902,7 +3171,7 @@ export default function Example() {
               if (activeSection !== 'usage-variants') e.currentTarget.style.color = 'var(--color-text-secondary)';
             }}
           >
-            {platformMode === 'web' ? `Usage & Variants (${variants.length})` : `${platformMeta.name} Recipes`}
+            {platformMode === 'web' ? `Variants (${variants.length})` : `${platformMeta.name} Recipes`}
           </a>
 
           {/* Sub-variant links with indent & scrollspy connected to guide rule */}
@@ -3094,6 +3363,31 @@ export default function Example() {
               </a>
             </>
           )}
+
+          {/* Section: Feedback & Edit */}
+          <a
+            href="#page-feedback"
+            onClick={(e) => scrollToSection(e, 'page-feedback')}
+            style={{
+              display: 'block',
+              padding: '6px 0 6px 14px',
+              marginLeft: -1,
+              borderLeft: activeSection === 'page-feedback' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
+              color: activeSection === 'page-feedback' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+              fontWeight: activeSection === 'page-feedback' ? 600 : 400,
+              textDecoration: 'none',
+              fontSize: 13,
+              transition: 'all 0.12s ease',
+            }}
+            onMouseEnter={(e) => {
+              if (activeSection !== 'page-feedback') e.currentTarget.style.color = 'var(--color-text-primary)';
+            }}
+            onMouseLeave={(e) => {
+              if (activeSection !== 'page-feedback') e.currentTarget.style.color = 'var(--color-text-secondary)';
+            }}
+          >
+            Feedback & Edit
+          </a>
         </nav>
 
       {/* Developer Native Sponsor Ad Unit (MUI & Carbon Ads benchmark) */}

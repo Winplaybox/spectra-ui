@@ -17,70 +17,18 @@ interface SidebarProps {
   onCloseMobile: () => void;
 }
 
-interface ComponentItem {
-  id: string;
-  name: string;
-  category: string;
-}
+import {
+  SIDEBAR_NAVIGATION,
+  COMPONENT_CATEGORIES,
+  NavSection,
+  NavCategoryGroup,
+  NavLeafItem,
+  ComponentCategory,
+  ComponentItem,
+} from '../../data/navigationConfig';
 
-export interface ComponentCategory {
-  id: string;
-  name: string;
-  components: ComponentItem[];
-}
-
-export const COMPONENT_CATEGORIES: ComponentCategory[] = [
-  {
-    id: 'inputs',
-    name: 'Inputs',
-    components: [
-      { id: 'button', name: 'Button', category: 'Inputs' },
-      { id: 'text-input', name: 'TextInput', category: 'Inputs' },
-      { id: 'select', name: 'Select', category: 'Inputs' },
-      { id: 'checkbox', name: 'Checkbox', category: 'Inputs' },
-      { id: 'radio', name: 'Radio', category: 'Inputs' },
-      { id: 'switch', name: 'Switch', category: 'Inputs' },
-    ],
-  },
-  {
-    id: 'data-display',
-    name: 'Data Display',
-    components: [
-      { id: 'accordion', name: 'Accordion', category: 'Data Display' },
-      { id: 'avatar', name: 'Avatar', category: 'Data Display' },
-      { id: 'badge', name: 'Badge', category: 'Data Display' },
-      { id: 'chip', name: 'Chip', category: 'Data Display' },
-      { id: 'divider', name: 'Divider', category: 'Data Display' },
-      { id: 'list', name: 'List', category: 'Data Display' },
-    ],
-  },
-  {
-    id: 'feedback',
-    name: 'Feedback',
-    components: [
-      { id: 'alert', name: 'Alert', category: 'Feedback' },
-      { id: 'dialog', name: 'Dialog (Modal)', category: 'Feedback' },
-      { id: 'skeleton', name: 'Skeleton', category: 'Feedback' },
-      { id: 'spinner', name: 'Spinner', category: 'Feedback' },
-      { id: 'tooltip', name: 'Tooltip', category: 'Feedback' },
-    ],
-  },
-  {
-    id: 'surfaces',
-    name: 'Surfaces',
-    components: [
-      { id: 'card', name: 'Card', category: 'Surfaces' },
-    ],
-  },
-  {
-    id: 'navigation',
-    name: 'Navigation',
-    components: [
-      { id: 'breadcrumbs', name: 'Breadcrumbs', category: 'Navigation' },
-      { id: 'tabs', name: 'Tabs', category: 'Navigation' },
-    ],
-  },
-];
+export { COMPONENT_CATEGORIES };
+export type { ComponentCategory, ComponentItem };
 
 export const Sidebar: React.FC<SidebarProps> = ({
   currentRoute,
@@ -448,589 +396,330 @@ export const Sidebar: React.FC<SidebarProps> = ({
             scrollbarColor: colorScheme === 'dark' ? 'rgba(255, 255, 255, 0.18) transparent' : 'rgba(0, 0, 0, 0.18) transparent',
           }}
         >
-          {/* Section: Getting Started */}
-          <div>
-            <div
-              style={{
-                fontSize: 11,
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                color: 'var(--color-text-muted)',
-                padding: '4px 12px',
-                marginBottom: 4,
-              }}
-            >
-              Getting Started
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <a
-                href="/overview"
-                onClick={(e) => handleLinkClick(e, '/overview')}
-                style={{
-                  display: 'block',
-                  padding: '7px 12px',
-                  borderRadius: 4,
-                  fontSize: 13,
-                  textDecoration: 'none',
-                  fontWeight: isRouteActive('/overview') ? 600 : 400,
-                  backgroundColor: isRouteActive('/overview') ? 'var(--color-surface-raised)' : 'transparent',
-                  color: isRouteActive('/overview') ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                  borderLeft: isRouteActive('/overview') ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                }}
-              >
-                Overview & Quickstart
-              </a>
-              <a
-                href="/installation"
-                onClick={(e) => handleLinkClick(e, '/installation')}
-                style={{
-                  display: 'block',
-                  padding: '7px 12px',
-                  borderRadius: 4,
-                  fontSize: 13,
-                  textDecoration: 'none',
-                  fontWeight: isRouteActive('/installation') ? 600 : 400,
-                  backgroundColor: isRouteActive('/installation') ? 'var(--color-surface-raised)' : 'transparent',
-                  color: isRouteActive('/installation') ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                  borderLeft: isRouteActive('/installation') ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                }}
-              >
-                Installation
-              </a>
-              <a
-                href="/cross-platform"
-                onClick={(e) => handleLinkClick(e, '/cross-platform')}
-                style={{
-                  display: 'block',
-                  padding: '7px 12px',
-                  borderRadius: 4,
-                  fontSize: 13,
-                  textDecoration: 'none',
-                  fontWeight: isRouteActive('/cross-platform') ? 600 : 400,
-                  backgroundColor: isRouteActive('/cross-platform') ? 'var(--color-surface-raised)' : 'transparent',
-                  color: isRouteActive('/cross-platform') ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                  borderLeft: isRouteActive('/cross-platform') ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                }}
-              >
-                Cross-Platform (Web & Native)
-              </a>
-            </div>
-          </div>
+          {/* Dynamic Data-Driven Navigation Generated from navigationConfig.ts */}
+          {SIDEBAR_NAVIGATION.map((section) => {
+            const isCollapsible = section.collapsible;
+            const isOpen = isCollapsible ? isComponentsTreeOpen : true;
 
-          {/* Section: Design Tokens */}
-          <div>
-            <div
-              style={{
-                fontSize: 11,
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                color: 'var(--color-text-muted)',
-                padding: '4px 12px',
-                marginBottom: 4,
-              }}
-            >
-              Design Tokens
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <a
-                href="/tokens/colors"
-                onClick={(e) => handleLinkClick(e, '/tokens/colors')}
-                style={{
-                  display: 'block',
-                  padding: '7px 12px',
-                  borderRadius: 4,
-                  fontSize: 13,
-                  textDecoration: 'none',
-                  fontWeight: currentRoute.path === '/tokens/colors' ? 600 : 400,
-                  backgroundColor: currentRoute.path === '/tokens/colors' ? 'var(--color-surface-raised)' : 'transparent',
-                  color: currentRoute.path === '/tokens/colors' ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                  borderLeft: currentRoute.path === '/tokens/colors' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                }}
-              >
-                Colors & Swatches
-              </a>
-              <a
-                href="/tokens/typography"
-                onClick={(e) => handleLinkClick(e, '/tokens/typography')}
-                style={{
-                  display: 'block',
-                  padding: '7px 12px',
-                  borderRadius: 4,
-                  fontSize: 13,
-                  textDecoration: 'none',
-                  fontWeight: currentRoute.path === '/tokens/typography' ? 600 : 400,
-                  backgroundColor: currentRoute.path === '/tokens/typography' ? 'var(--color-surface-raised)' : 'transparent',
-                  color: currentRoute.path === '/tokens/typography' ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                  borderLeft: currentRoute.path === '/tokens/typography' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                }}
-              >
-                Typography Scale
-              </a>
-              <a
-                href="/tokens/spacing"
-                onClick={(e) => handleLinkClick(e, '/tokens/spacing')}
-                style={{
-                  display: 'block',
-                  padding: '7px 12px',
-                  borderRadius: 4,
-                  fontSize: 13,
-                  textDecoration: 'none',
-                  fontWeight: currentRoute.path === '/tokens/spacing' ? 600 : 400,
-                  backgroundColor: currentRoute.path === '/tokens/spacing' ? 'var(--color-surface-raised)' : 'transparent',
-                  color: currentRoute.path === '/tokens/spacing' ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                  borderLeft: currentRoute.path === '/tokens/spacing' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                }}
-              >
-                Spacing & 4px Grid
-              </a>
-              <a
-                href="/tokens/radii"
-                onClick={(e) => handleLinkClick(e, '/tokens/radii')}
-                style={{
-                  display: 'block',
-                  padding: '7px 12px',
-                  borderRadius: 4,
-                  fontSize: 13,
-                  textDecoration: 'none',
-                  fontWeight: currentRoute.path === '/tokens/radii' ? 600 : 400,
-                  backgroundColor: currentRoute.path === '/tokens/radii' ? 'var(--color-surface-raised)' : 'transparent',
-                  color: currentRoute.path === '/tokens/radii' ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                  borderLeft: currentRoute.path === '/tokens/radii' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                }}
-              >
-                Corner Radii Scale
-              </a>
-              <a
-                href="/tokens/shadows"
-                onClick={(e) => handleLinkClick(e, '/tokens/shadows')}
-                style={{
-                  display: 'block',
-                  padding: '7px 12px',
-                  borderRadius: 4,
-                  fontSize: 13,
-                  textDecoration: 'none',
-                  fontWeight: currentRoute.path === '/tokens/shadows' ? 600 : 400,
-                  backgroundColor: currentRoute.path === '/tokens/shadows' ? 'var(--color-surface-raised)' : 'transparent',
-                  color: currentRoute.path === '/tokens/shadows' ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                  borderLeft: currentRoute.path === '/tokens/shadows' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                }}
-              >
-                Elevation & Shadows
-              </a>
-              <a
-                href="/tokens/motion"
-                onClick={(e) => handleLinkClick(e, '/tokens/motion')}
-                style={{
-                  display: 'block',
-                  padding: '7px 12px',
-                  borderRadius: 4,
-                  fontSize: 13,
-                  textDecoration: 'none',
-                  fontWeight: currentRoute.path === '/tokens/motion' ? 600 : 400,
-                  backgroundColor: currentRoute.path === '/tokens/motion' ? 'var(--color-surface-raised)' : 'transparent',
-                  color: currentRoute.path === '/tokens/motion' ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                  borderLeft: currentRoute.path === '/tokens/motion' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                }}
-              >
-                Motion & Transitions
-              </a>
-            </div>
-          </div>
+            const renderLeafItem = (item: NavLeafItem, isCategoryChild = false) => {
+              const isComponent = item.path.startsWith('/components/') && item.id !== 'all-components';
+              const active = isComponent
+                ? isComponentActive(item.id)
+                : item.id === 'all-components'
+                ? isAllComponentsActive
+                : currentRoute.path === item.path ||
+                  (item.path.startsWith('/hooks/') && currentRoute.type === 'hooks' && currentRoute.id === item.id) ||
+                  (item.path === '/icons' && currentRoute.type === 'icons');
 
-          {/* Section: Components Tree (MUI Benchmark - Header selectable, Title nonselectable, Categories, Navigation) */}
-          <div>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '6px 8px',
-                borderRadius: 6,
-                marginBottom: 4,
-                cursor: 'pointer',
-                transition: 'background-color 0.12s ease',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)')}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
-            >
-              <div
-                style={{ display: 'flex', alignItems: 'center', gap: 6, flex: 1 }}
-                onClick={() => setIsComponentsTreeOpen(!isComponentsTreeOpen)}
-              >
-                <ChevronDownIcon
-                  size={13}
-                  style={{
-                    transform: isComponentsTreeOpen ? 'none' : 'rotate(-90deg)',
-                    transition: 'transform 0.15s ease',
-                    color: 'var(--color-text-muted)',
-                  }}
-                />
-                <a
-                  href="/components"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleLinkClick(e, '/components');
-                  }}
-                  style={{
-                    fontSize: 13,
-                    fontWeight: 700,
-                    color: isAllComponentsActive ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                    textDecoration: 'none',
-                    letterSpacing: '0.01em',
-                  }}
-                >
-                  Components
-                </a>
-              </div>
-              <span
-                style={{
-                  fontSize: 10,
-                  fontWeight: 700,
-                  padding: '1px 6px',
-                  borderRadius: 10,
-                  backgroundColor: 'var(--color-surface-raised)',
-                  color: 'var(--color-text-muted)',
-                  border: '1px solid var(--color-border-subtle)',
-                }}
-              >
-                20
-              </span>
-            </div>
+              const isNew = V010_NEW_COMPONENTS.includes(item.id) || item.badge === 'NEW';
+              const inPageVariants = isComponent ? COMPONENT_VARIANTS_MAP[item.id] || [] : [];
 
-            {/* Tree Branch when Components section is expanded */}
-            {isComponentsTreeOpen && (
-              <div
-                style={{
-                  marginLeft: 11,
-                  paddingLeft: 10,
-                  borderLeft: '1px solid var(--color-border-subtle)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: 3,
-                  marginTop: 2,
-                }}
-              >
-                {/* 1. All Components Navigation Link */}
-                <a
-                  href="/components"
-                  onClick={(e) => handleLinkClick(e, '/components')}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '6px 10px',
-                    borderRadius: 6,
-                    fontSize: 13,
-                    textDecoration: 'none',
-                    fontWeight: isAllComponentsActive ? 600 : 400,
-                    backgroundColor: isAllComponentsActive
-                      ? (colorScheme === 'dark' ? 'rgba(0, 127, 255, 0.18)' : 'rgba(0, 127, 255, 0.09)')
-                      : 'transparent',
-                    color: isAllComponentsActive ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                    borderLeft: isAllComponentsActive ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                    transition: 'all 0.12s ease',
-                    marginBottom: 4,
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!isAllComponentsActive) e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isAllComponentsActive) e.currentTarget.style.backgroundColor = 'transparent';
-                  }}
-                >
-                  <span>All components</span>
-                  <span
-                    style={{
-                      fontSize: 10,
-                      fontWeight: 600,
-                      color: 'var(--color-text-muted)',
-                      backgroundColor: 'var(--color-surface-raised)',
-                      padding: '0 5px',
-                      borderRadius: 10,
-                      border: '1px solid var(--color-border-subtle)',
-                    }}
-                  >
-                    20
-                  </span>
-                </a>
-
-                {/* 2. Categorized Components (MUI Image 3 Benchmark) */}
-                {COMPONENT_CATEGORIES.map((cat) => {
-                  return (
-                    <div key={cat.id} style={{ display: 'flex', flexDirection: 'column' }}>
-                      {/* Non-selectable category header */}
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 6,
-                          padding: '10px 8px 4px 6px',
-                          userSelect: 'none',
-                        }}
-                      >
-                        <span
-                          style={{
-                            width: 5,
-                            height: 5,
-                            border: '1px solid var(--color-border-default)',
-                            backgroundColor: 'var(--color-surface-raised)',
-                            borderRadius: 1,
-                            opacity: 0.7,
-                            flexShrink: 0,
-                          }}
-                        />
-                        <span
-                          style={{
-                            fontSize: 11,
-                            fontWeight: 700,
-                            textTransform: 'uppercase',
-                            letterSpacing: '0.08em',
-                            color: 'var(--color-text-muted)',
-                          }}
-                        >
-                          {cat.name}
-                        </span>
-                      </div>
-
-                      {/* Component links under category */}
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 2, paddingLeft: 4 }}>
-                        {cat.components.map((c) => {
-                          const active = isComponentActive(c.id);
-                          const isNew = V010_NEW_COMPONENTS.includes(c.id);
-                          const inPageVariants = COMPONENT_VARIANTS_MAP[c.id] || [];
-
-                          return (
-                            <div key={c.id} style={{ display: 'flex', flexDirection: 'column' }}>
-                              <a
-                                href={`/components/${c.id}`}
-                                onClick={(e) => handleLinkClick(e, `/components/${c.id}`)}
-                                style={{
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  justifyContent: 'space-between',
-                                  padding: '6px 10px',
-                                  borderRadius: 6,
-                                  fontSize: 13,
-                                  textDecoration: 'none',
-                                  fontWeight: active ? 600 : 400,
-                                  backgroundColor: active
-                                    ? (colorScheme === 'dark' ? 'rgba(0, 127, 255, 0.18)' : 'rgba(0, 127, 255, 0.09)')
-                                    : 'transparent',
-                                  color: active ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                                  borderLeft: active ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                                  transition: 'background-color 0.12s ease',
-                                }}
-                                onMouseEnter={(e) => {
-                                  if (!active) e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
-                                }}
-                                onMouseLeave={(e) => {
-                                  if (!active) e.currentTarget.style.backgroundColor = 'transparent';
-                                }}
-                              >
-                                <span>{c.name}</span>
-                                {isNew && (
-                                  <span
-                                    style={{
-                                      fontSize: 9,
-                                      fontWeight: 700,
-                                      textTransform: 'uppercase',
-                                      letterSpacing: '0.04em',
-                                      padding: '1px 5px',
-                                      borderRadius: 10,
-                                      backgroundColor: 'rgba(16, 185, 129, 0.15)',
-                                      color: '#10B981',
-                                      border: '1px solid rgba(16, 185, 129, 0.3)',
-                                    }}
-                                  >
-                                    NEW
-                                  </span>
-                                )}
-                              </a>
-
-                              {/* Nested in-page sub-tree deep links for active component */}
-                              {active && inPageVariants.length > 0 && (
-                                <div
-                                  style={{
-                                    marginLeft: 12,
-                                    paddingLeft: 8,
-                                    borderLeft: '1px solid var(--color-border-subtle)',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    gap: 1,
-                                    marginTop: 2,
-                                    marginBottom: 4,
-                                  }}
-                                >
-                                  {inPageVariants.map((v) => {
-                                    const isAnchorActive = currentHash === v.id;
-                                    return (
-                                      <a
-                                        key={v.id}
-                                        href={`/components/${c.id}#${v.id}`}
-                                        onClick={(e) => handleAnchorClick(e, c.id, v.id)}
-                                        style={{
-                                          display: 'block',
-                                          padding: '4px 6px',
-                                          fontSize: 11.5,
-                                          borderRadius: 4,
-                                          textDecoration: 'none',
-                                          color: isAnchorActive
-                                            ? 'var(--color-action-primary)'
-                                            : 'var(--color-text-secondary)',
-                                          fontWeight: isAnchorActive ? 600 : 400,
-                                          backgroundColor: isAnchorActive
-                                            ? 'var(--color-surface-raised)'
-                                            : 'transparent',
-                                          whiteSpace: 'nowrap',
-                                          overflow: 'hidden',
-                                          textOverflow: 'ellipsis',
-                                          transition: 'color 0.1s ease',
-                                        }}
-                                        title={v.title}
-                                      >
-                                        {v.title}
-                                      </a>
-                                    );
-                                  })}
-                                </div>
-                              )}
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
-          {/* Section: Functional Hooks */}
-          <div>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '4px 12px',
-                marginBottom: 4,
-              }}
-            >
-              <span
-                style={{
-                  fontSize: 11,
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
-                  color: 'var(--color-text-muted)',
-                }}
-              >
-                Functional Hooks
-              </span>
-              <span
-                style={{
-                  fontSize: 10,
-                  fontWeight: 600,
-                  padding: '1px 5px',
-                  borderRadius: 10,
-                  backgroundColor: 'var(--color-surface-raised)',
-                  color: 'var(--color-text-muted)',
-                }}
-              >
-                10
-              </span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              {[
-                { id: 'use-disclosure', name: 'useDisclosure' },
-                { id: 'use-controllable-state', name: 'useControllableState' },
-                { id: 'use-outside-click', name: 'useOutsideClick' },
-                { id: 'use-id', name: 'useId' },
-                { id: 'use-color-scheme', name: 'useColorScheme' },
-                { id: 'use-media-query', name: 'useMediaQuery' },
-                { id: 'use-focus-ring', name: 'useFocusRing' },
-                { id: 'use-toast', name: 'useToast' },
-                { id: 'use-reduced-motion', name: 'useReducedMotion' },
-                { id: 'use-rtl', name: 'useRTL' },
-              ].map((h) => {
-                const active = currentRoute.type === 'hooks' && currentRoute.id === h.id;
-                return (
+              return (
+                <div key={item.id} style={{ display: 'flex', flexDirection: 'column' }}>
                   <a
-                    key={h.id}
-                    href={`/hooks/${h.id}`}
-                    onClick={(e) => handleLinkClick(e, `/hooks/${h.id}`)}
+                    href={item.path}
+                    onClick={(e) => handleLinkClick(e, item.path)}
                     style={{
-                      display: 'block',
-                      padding: '7px 12px',
-                      borderRadius: 4,
-                      fontSize: 13,
-                      fontFamily: 'monospace',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '6px 10px',
+                      borderRadius: 6,
+                      fontSize: item.isMonospace ? 12.5 : 13,
+                      fontFamily: item.isMonospace ? 'var(--font-mono, monospace)' : 'inherit',
                       textDecoration: 'none',
                       fontWeight: active ? 600 : 400,
-                      backgroundColor: active ? 'var(--color-surface-raised)' : 'transparent',
+                      backgroundColor: active
+                        ? colorScheme === 'dark'
+                          ? 'rgba(0, 127, 255, 0.18)'
+                          : 'rgba(0, 127, 255, 0.09)'
+                        : 'transparent',
                       color: active ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
                       borderLeft: active ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                      transition: 'background-color 0.1s ease',
+                      transition: 'background-color 0.12s ease',
+                      marginBottom: item.id === 'all-components' ? 4 : 0,
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!active) e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!active) e.currentTarget.style.backgroundColor = 'transparent';
                     }}
                   >
-                    {h.name}
+                    <span>{item.name}</span>
+                    {isNew ? (
+                      <span
+                        style={{
+                          fontSize: 9,
+                          fontWeight: 700,
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.04em',
+                          padding: '1px 5px',
+                          borderRadius: 10,
+                          backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                          color: '#10B981',
+                          border: '1px solid rgba(16, 185, 129, 0.3)',
+                        }}
+                      >
+                        NEW
+                      </span>
+                    ) : item.badge ? (
+                      <span
+                        style={{
+                          fontSize: 10,
+                          fontWeight: 600,
+                          padding: item.badgeColor === 'primary' ? '1px 5px' : '0 5px',
+                          borderRadius: 10,
+                          backgroundColor:
+                            item.badgeColor === 'primary'
+                              ? 'var(--color-action-primary)'
+                              : 'var(--color-surface-raised)',
+                          color: item.badgeColor === 'primary' ? '#FFFFFF' : 'var(--color-text-muted)',
+                          border:
+                            item.badgeColor === 'primary' ? 'none' : '1px solid var(--color-border-subtle)',
+                        }}
+                      >
+                        {item.badge}
+                      </span>
+                    ) : null}
                   </a>
-                );
-              })}
-            </div>
-          </div>
 
-          {/* Section: Icons */}
-          <div>
-            <div
-              style={{
-                fontSize: 11,
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                color: 'var(--color-text-muted)',
-                padding: '4px 12px',
-                marginBottom: 4,
-              }}
-            >
-              Icons
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <a
-                href="/icons"
-                onClick={(e) => handleLinkClick(e, '/icons')}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '7px 12px',
-                  borderRadius: 4,
-                  fontSize: 13,
-                  textDecoration: 'none',
-                  fontWeight: currentRoute.type === 'icons' ? 600 : 400,
-                  backgroundColor: currentRoute.type === 'icons' ? 'var(--color-surface-raised)' : 'transparent',
-                  color: currentRoute.type === 'icons' ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                  borderLeft: currentRoute.type === 'icons' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                }}
-              >
-                <span>12,253 Icons Catalog</span>
-                <span
-                  style={{
-                    fontSize: 10,
-                    padding: '1px 5px',
-                    backgroundColor: 'var(--color-action-primary)',
-                    color: '#FFFFFF',
-                    borderRadius: 8,
-                    fontWeight: 600,
-                  }}
-                >
-                  Code-Split
-                </span>
-              </a>
-            </div>
-          </div>
+                  {/* In-page variant deep links for active component */}
+                  {active && inPageVariants.length > 0 && (
+                    <div
+                      style={{
+                        marginLeft: 12,
+                        paddingLeft: 8,
+                        borderLeft: '1px solid var(--color-border-subtle)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 1,
+                        marginTop: 2,
+                        marginBottom: 4,
+                      }}
+                    >
+                      {inPageVariants.map((v) => {
+                        const isAnchorActive = currentHash === v.id;
+                        return (
+                          <a
+                            key={v.id}
+                            href={`/components/${item.id}#${v.id}`}
+                            onClick={(e) => handleAnchorClick(e, item.id, v.id)}
+                            style={{
+                              display: 'block',
+                              padding: '4px 6px',
+                              fontSize: 11.5,
+                              borderRadius: 4,
+                              textDecoration: 'none',
+                              color: isAnchorActive
+                                ? 'var(--color-action-primary)'
+                                : 'var(--color-text-secondary)',
+                              fontWeight: isAnchorActive ? 600 : 400,
+                              backgroundColor: isAnchorActive
+                                ? 'var(--color-surface-raised)'
+                                : 'transparent',
+                              whiteSpace: 'nowrap',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis',
+                              transition: 'color 0.1s ease',
+                            }}
+                            title={v.title}
+                          >
+                            {v.title}
+                          </a>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            };
+
+            return (
+              <div key={section.id}>
+                {isCollapsible ? (
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '6px 8px',
+                      borderRadius: 6,
+                      marginBottom: 4,
+                      cursor: 'pointer',
+                      transition: 'background-color 0.12s ease',
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+                  >
+                    <div
+                      style={{ display: 'flex', alignItems: 'center', gap: 6, flex: 1 }}
+                      onClick={() => setIsComponentsTreeOpen(!isComponentsTreeOpen)}
+                    >
+                      <ChevronDownIcon
+                        size={13}
+                        style={{
+                          transform: isOpen ? 'none' : 'rotate(-90deg)',
+                          transition: 'transform 0.15s ease',
+                          color: 'var(--color-text-muted)',
+                        }}
+                      />
+                      {section.path ? (
+                        <a
+                          href={section.path}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleLinkClick(e, section.path!);
+                          }}
+                          style={{
+                            fontSize: 13,
+                            fontWeight: 700,
+                            color: isAllComponentsActive
+                              ? 'var(--color-action-primary)'
+                              : 'var(--color-text-primary)',
+                            textDecoration: 'none',
+                            letterSpacing: '0.01em',
+                          }}
+                        >
+                          {section.title}
+                        </a>
+                      ) : (
+                        <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                          {section.title}
+                        </span>
+                      )}
+                    </div>
+                    {section.badge && (
+                      <span
+                        style={{
+                          fontSize: 10,
+                          fontWeight: 700,
+                          padding: '1px 6px',
+                          borderRadius: 10,
+                          backgroundColor: 'var(--color-surface-raised)',
+                          color: 'var(--color-text-muted)',
+                          border: '1px solid var(--color-border-subtle)',
+                        }}
+                      >
+                        {section.badge}
+                      </span>
+                    )}
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '4px 12px',
+                      marginBottom: 4,
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 700,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.06em',
+                        color: 'var(--color-text-muted)',
+                      }}
+                    >
+                      {section.title}
+                    </span>
+                    {section.badge && (
+                      <span
+                        style={{
+                          fontSize: 10,
+                          fontWeight: 600,
+                          padding: '1px 5px',
+                          borderRadius: 10,
+                          backgroundColor: 'var(--color-surface-raised)',
+                          color: 'var(--color-text-muted)',
+                        }}
+                      >
+                        {section.badge}
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                {/* Section Content */}
+                {isOpen && (
+                  <div
+                    style={
+                      isCollapsible
+                        ? {
+                            marginLeft: 11,
+                            paddingLeft: 10,
+                            borderLeft: '1px solid var(--color-border-subtle)',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 3,
+                            marginTop: 2,
+                          }
+                        : {
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 2,
+                          }
+                    }
+                  >
+                    {section.items.map((item) => {
+                      if ('isCategoryHeader' in item && item.isCategoryHeader) {
+                        return (
+                          <div key={item.id} style={{ display: 'flex', flexDirection: 'column' }}>
+                            <div
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 6,
+                                padding: '10px 8px 4px 6px',
+                                userSelect: 'none',
+                              }}
+                            >
+                              <span
+                                style={{
+                                  width: 5,
+                                  height: 5,
+                                  border: '1px solid var(--color-border-default)',
+                                  backgroundColor: 'var(--color-surface-raised)',
+                                  borderRadius: 1,
+                                  opacity: 0.7,
+                                  flexShrink: 0,
+                                }}
+                              />
+                              <span
+                                style={{
+                                  fontSize: 11,
+                                  fontWeight: 700,
+                                  textTransform: 'uppercase',
+                                  letterSpacing: '0.08em',
+                                  color: 'var(--color-text-muted)',
+                                }}
+                              >
+                                {item.name}
+                              </span>
+                            </div>
+                            <div
+                              style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: 2,
+                                paddingLeft: 4,
+                              }}
+                            >
+                              {item.items.map((leaf) => renderLeafItem(leaf, true))}
+                            </div>
+                          </div>
+                        );
+                      }
+                      return renderLeafItem(item as NavLeafItem);
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         {/* Developer Native Sponsor Ad Placement (Classic format in sidebar) */}

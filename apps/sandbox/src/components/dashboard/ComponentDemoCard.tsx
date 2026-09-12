@@ -372,6 +372,35 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
             >
               #
             </a>
+            <button
+              type="button"
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('spectra:section-feedback', { detail: title }));
+              }}
+              title={`Give feedback on "${title}"`}
+              aria-label={`Give feedback on ${title}`}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: '2px 4px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                cursor: 'pointer',
+                color: 'var(--color-text-muted)',
+                borderRadius: 4,
+                transition: 'color 0.12s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--color-action-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--color-text-muted)';
+              }}
+            >
+              <svg width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+            </button>
           </div>
           <p style={{ margin: '4px 0 0 0', fontSize: 13, color: 'var(--color-text-secondary)' }}>
             {description}
