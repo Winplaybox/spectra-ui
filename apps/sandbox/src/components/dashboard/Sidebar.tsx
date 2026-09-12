@@ -31,28 +31,15 @@ export interface ComponentCategory {
 
 export const COMPONENT_CATEGORIES: ComponentCategory[] = [
   {
-    id: 'actions',
-    name: 'Actions',
+    id: 'inputs',
+    name: 'Inputs',
     components: [
-      { id: 'button', name: 'Button', category: 'Actions' },
-    ],
-  },
-  {
-    id: 'form',
-    name: 'Form & Inputs',
-    components: [
-      { id: 'text-input', name: 'TextInput', category: 'Form' },
-      { id: 'select', name: 'Select', category: 'Form' },
-      { id: 'checkbox', name: 'Checkbox', category: 'Form' },
-      { id: 'radio', name: 'Radio', category: 'Form' },
-      { id: 'switch', name: 'Switch', category: 'Form' },
-    ],
-  },
-  {
-    id: 'layout',
-    name: 'Layout',
-    components: [
-      { id: 'divider', name: 'Divider', category: 'Layout' },
+      { id: 'button', name: 'Button', category: 'Inputs' },
+      { id: 'text-input', name: 'TextInput', category: 'Inputs' },
+      { id: 'select', name: 'Select', category: 'Inputs' },
+      { id: 'checkbox', name: 'Checkbox', category: 'Inputs' },
+      { id: 'radio', name: 'Radio', category: 'Inputs' },
+      { id: 'switch', name: 'Switch', category: 'Inputs' },
     ],
   },
   {
@@ -61,7 +48,9 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     components: [
       { id: 'accordion', name: 'Accordion', category: 'Data Display' },
       { id: 'avatar', name: 'Avatar', category: 'Data Display' },
+      { id: 'badge', name: 'Badge', category: 'Data Display' },
       { id: 'chip', name: 'Chip', category: 'Data Display' },
+      { id: 'divider', name: 'Divider', category: 'Data Display' },
       { id: 'list', name: 'List', category: 'Data Display' },
     ],
   },
@@ -70,18 +59,10 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     name: 'Feedback',
     components: [
       { id: 'alert', name: 'Alert', category: 'Feedback' },
-      { id: 'badge', name: 'Badge', category: 'Feedback' },
+      { id: 'dialog', name: 'Dialog (Modal)', category: 'Feedback' },
       { id: 'skeleton', name: 'Skeleton', category: 'Feedback' },
       { id: 'spinner', name: 'Spinner', category: 'Feedback' },
       { id: 'tooltip', name: 'Tooltip', category: 'Feedback' },
-    ],
-  },
-  {
-    id: 'navigation',
-    name: 'Navigation',
-    components: [
-      { id: 'breadcrumbs', name: 'Breadcrumbs', category: 'Navigation' },
-      { id: 'tabs', name: 'Tabs', category: 'Navigation' },
     ],
   },
   {
@@ -92,10 +73,11 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     ],
   },
   {
-    id: 'overlay',
-    name: 'Overlay',
+    id: 'navigation',
+    name: 'Navigation',
     components: [
-      { id: 'dialog', name: 'Dialog (Modal)', category: 'Overlay' },
+      { id: 'breadcrumbs', name: 'Breadcrumbs', category: 'Navigation' },
+      { id: 'tabs', name: 'Tabs', category: 'Navigation' },
     ],
   },
 ];
@@ -138,6 +120,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const [currentHash, setCurrentHash] = useState(
     typeof window !== 'undefined' ? window.location.hash.substring(1) : ''
   );
+  const [isComponentsTreeOpen, setIsComponentsTreeOpen] = useState(true);
 
   // Auto-expand the active component's category on navigation
   useEffect(() => {
@@ -656,28 +639,51 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </div>
           </div>
 
-          {/* Section: Components Tree (MUI & Fluent 2 Benchmark) */}
+          {/* Section: Components Tree (MUI Benchmark - Header selectable, Title nonselectable, Categories, Navigation) */}
           <div>
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                padding: '4px 12px',
-                marginBottom: 6,
+                padding: '6px 8px',
+                borderRadius: 6,
+                marginBottom: 4,
+                cursor: 'pointer',
+                transition: 'background-color 0.12s ease',
               }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
             >
-              <span
-                style={{
-                  fontSize: 11,
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
-                  color: 'var(--color-text-muted)',
-                }}
+              <div
+                style={{ display: 'flex', alignItems: 'center', gap: 6, flex: 1 }}
+                onClick={() => setIsComponentsTreeOpen(!isComponentsTreeOpen)}
               >
-                Components
-              </span>
+                <ChevronDownIcon
+                  size={13}
+                  style={{
+                    transform: isComponentsTreeOpen ? 'none' : 'rotate(-90deg)',
+                    transition: 'transform 0.15s ease',
+                    color: 'var(--color-text-muted)',
+                  }}
+                />
+                <a
+                  href="/components"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleLinkClick(e, '/components');
+                  }}
+                  style={{
+                    fontSize: 13,
+                    fontWeight: 700,
+                    color: isAllComponentsActive ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
+                    textDecoration: 'none',
+                    letterSpacing: '0.01em',
+                  }}
+                >
+                  Components
+                </a>
+              </div>
               <span
                 style={{
                   fontSize: 10,
@@ -693,123 +699,103 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </span>
             </div>
 
-            {/* All Components Entry (MUI & Fluent UI benchmark) */}
-            <a
-              href="/components"
-              onClick={(e) => handleLinkClick(e, '/components')}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '7px 10px',
-                borderRadius: 6,
-                fontSize: 13,
-                textDecoration: 'none',
-                fontWeight: isAllComponentsActive ? 600 : 500,
-                backgroundColor: isAllComponentsActive ? 'rgba(0, 127, 255, 0.12)' : 'transparent',
-                color: isAllComponentsActive ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                borderLeft: isAllComponentsActive ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                transition: 'all 0.12s ease',
-                marginBottom: 6,
-              }}
-              onMouseEnter={(e) => {
-                if (!isAllComponentsActive) e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
-              }}
-              onMouseLeave={(e) => {
-                if (!isAllComponentsActive) e.currentTarget.style.backgroundColor = 'transparent';
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <ComponentIcon
-                  size={14}
-                  style={{
-                    color: isAllComponentsActive ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
-                  }}
-                />
-                <span>All Components</span>
-              </div>
-              <span
+            {/* Tree Branch when Components section is expanded */}
+            {isComponentsTreeOpen && (
+              <div
                 style={{
-                  fontSize: 10,
-                  fontWeight: 600,
-                  color: 'var(--color-text-muted)',
-                  backgroundColor: 'var(--color-surface-raised)',
-                  padding: '1px 6px',
-                  borderRadius: 10,
-                  border: '1px solid var(--color-border-subtle)',
+                  marginLeft: 11,
+                  paddingLeft: 10,
+                  borderLeft: '1px solid var(--color-border-subtle)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 3,
+                  marginTop: 2,
                 }}
               >
-                20
-              </span>
-            </a>
+                {/* 1. All Components Navigation Link */}
+                <a
+                  href="/components"
+                  onClick={(e) => handleLinkClick(e, '/components')}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '6px 10px',
+                    borderRadius: 6,
+                    fontSize: 13,
+                    textDecoration: 'none',
+                    fontWeight: isAllComponentsActive ? 600 : 400,
+                    backgroundColor: isAllComponentsActive
+                      ? (colorScheme === 'dark' ? 'rgba(0, 127, 255, 0.18)' : 'rgba(0, 127, 255, 0.09)')
+                      : 'transparent',
+                    color: isAllComponentsActive ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
+                    borderLeft: isAllComponentsActive ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+                    transition: 'all 0.12s ease',
+                    marginBottom: 4,
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isAllComponentsActive) e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isAllComponentsActive) e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
+                >
+                  <span>All components</span>
+                  <span
+                    style={{
+                      fontSize: 10,
+                      fontWeight: 600,
+                      color: 'var(--color-text-muted)',
+                      backgroundColor: 'var(--color-surface-raised)',
+                      padding: '0 5px',
+                      borderRadius: 10,
+                      border: '1px solid var(--color-border-subtle)',
+                    }}
+                  >
+                    20
+                  </span>
+                </a>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              {COMPONENT_CATEGORIES.map((cat) => {
-                const isExpanded = !!expandedCategories[cat.id];
-                const hasActiveChild = cat.components.some((c) => isComponentActive(c.id));
-
-                return (
-                  <div key={cat.id} style={{ display: 'flex', flexDirection: 'column' }}>
-                    {/* Category Tree Header */}
-                    <button
-                      onClick={() => toggleCategory(cat.id)}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        padding: '6px 10px',
-                        borderRadius: 6,
-                        border: 'none',
-                        background: 'transparent',
-                        color: hasActiveChild ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
-                        fontSize: 12,
-                        fontWeight: hasActiveChild ? 700 : 600,
-                        cursor: 'pointer',
-                        textAlign: 'left',
-                        transition: 'all 0.12s ease',
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)')}
-                      onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
-                    >
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <ChevronDownIcon
-                          size={12}
-                          style={{
-                            transform: isExpanded ? 'none' : 'rotate(-90deg)',
-                            transition: 'transform 0.15s ease',
-                            color: 'var(--color-text-muted)',
-                          }}
-                        />
-                        <span>{cat.name}</span>
-                      </div>
-                      <span
-                        style={{
-                          fontSize: 10,
-                          fontWeight: 600,
-                          color: 'var(--color-text-muted)',
-                          backgroundColor: 'var(--color-surface-raised)',
-                          padding: '0 4px',
-                          borderRadius: 4,
-                        }}
-                      >
-                        {cat.components.length}
-                      </span>
-                    </button>
-
-                    {/* Collapsible Category Branch */}
-                    {isExpanded && (
+                {/* 2. Categorized Components (MUI Image 3 Benchmark) */}
+                {COMPONENT_CATEGORIES.map((cat) => {
+                  return (
+                    <div key={cat.id} style={{ display: 'flex', flexDirection: 'column' }}>
+                      {/* Non-selectable category header */}
                       <div
                         style={{
-                          marginLeft: 14,
-                          paddingLeft: 10,
-                          borderLeft: '1px solid var(--color-border-subtle)',
                           display: 'flex',
-                          flexDirection: 'column',
-                          gap: 2,
-                          marginTop: 2,
-                          marginBottom: 4,
+                          alignItems: 'center',
+                          gap: 6,
+                          padding: '10px 8px 4px 6px',
+                          userSelect: 'none',
                         }}
                       >
+                        <span
+                          style={{
+                            width: 5,
+                            height: 5,
+                            border: '1px solid var(--color-border-default)',
+                            backgroundColor: 'var(--color-surface-raised)',
+                            borderRadius: 1,
+                            opacity: 0.7,
+                            flexShrink: 0,
+                          }}
+                        />
+                        <span
+                          style={{
+                            fontSize: 11,
+                            fontWeight: 700,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.08em',
+                            color: 'var(--color-text-muted)',
+                          }}
+                        >
+                          {cat.name}
+                        </span>
+                      </div>
+
+                      {/* Component links under category */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 2, paddingLeft: 4 }}>
                         {cat.components.map((c) => {
                           const active = isComponentActive(c.id);
                           const isNew = V010_NEW_COMPONENTS.includes(c.id);
@@ -829,7 +815,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
                                   fontSize: 13,
                                   textDecoration: 'none',
                                   fontWeight: active ? 600 : 400,
-                                  backgroundColor: active ? 'rgba(0, 127, 255, 0.12)' : 'transparent',
+                                  backgroundColor: active
+                                    ? (colorScheme === 'dark' ? 'rgba(0, 127, 255, 0.18)' : 'rgba(0, 127, 255, 0.09)')
+                                    : 'transparent',
                                   color: active ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
                                   borderLeft: active ? '3px solid var(--color-action-primary)' : '3px solid transparent',
                                   transition: 'background-color 0.12s ease',
@@ -912,11 +900,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
                           );
                         })}
                       </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Section: Functional Hooks */}

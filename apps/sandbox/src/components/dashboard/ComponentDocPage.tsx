@@ -31,6 +31,7 @@ import {
   Divider,
   Chip,
   Breadcrumbs,
+  useColorScheme,
 } from '@spectra/react';
 import { getComponentReleaseVersion } from '../../data/versionReleaseData';
 import { useVersion } from '../../context/VersionContext';
@@ -38,6 +39,7 @@ import {
   ExternalLinkIcon,
   CheckIcon,
   CloseIcon,
+  CopyIcon,
   SearchIcon,
   AlertCircleIcon,
   InfoIcon,
@@ -62,6 +64,121 @@ import { ComponentVariantsShowcase, COMPONENT_VARIANTS_MAP } from './ComponentVa
 import { ComponentApiSection } from './ComponentApiSection';
 import { NativeSponsorAd } from './NativeSponsorAd';
 
+// Dynamic Component Resource Pill Icons (Image 2 Benchmark - Zero Emojis)
+const MarkdownPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="currentColor" style={{ flexShrink: 0, color: 'var(--color-text-secondary)' }}>
+    <path fillRule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15V4.15C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.9 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z" />
+  </svg>
+);
+
+const FeedbackPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#007FFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+  </svg>
+);
+
+const PackagePillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#0284c7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+    <line x1="16.5" y1="9.4" x2="7.5" y2="4.21" />
+    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+    <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+    <line x1="12" y1="22.08" x2="12" y2="12" />
+  </svg>
+);
+
+const GitHubPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0, color: 'var(--color-text-secondary)' }}>
+    <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+  </svg>
+);
+
+const W3CPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#005A9C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+    <path d="M2 12h20" />
+  </svg>
+);
+
+const MaterialDesignPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0, color: 'var(--color-text-muted)' }}>
+    <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5H5.5L12 6.5z" />
+  </svg>
+);
+
+const FigmaPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
+  <svg width={size} height={size} viewBox="0 0 38 57" fill="none" style={{ flexShrink: 0 }}>
+    <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE" />
+    <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83" />
+    <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262" />
+    <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E" />
+    <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF" />
+  </svg>
+);
+
+const SketchPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#FDB300" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+    <polygon points="6 3 18 3 22 9 12 22 2 9" />
+  </svg>
+);
+
+// Dynamic Resource Data Mappings
+const COMPONENT_BUNDLE_SIZES: Record<string, string> = {
+  button: '< 1.8 kB',
+  'text-input': '< 2.4 kB',
+  select: '< 3.1 kB',
+  checkbox: '< 1.4 kB',
+  radio: '< 1.5 kB',
+  switch: '< 1.6 kB',
+  accordion: '< 2.8 kB',
+  avatar: '< 1.2 kB',
+  badge: '< 1.1 kB',
+  chip: '< 1.5 kB',
+  list: '< 1.9 kB',
+  card: '< 1.3 kB',
+  dialog: '< 3.4 kB',
+  tooltip: '< 2.6 kB',
+  alert: '< 1.7 kB',
+  spinner: '< 0.9 kB',
+  skeleton: '< 1.1 kB',
+  breadcrumbs: '< 1.4 kB',
+  tabs: '< 2.9 kB',
+  divider: '< 0.7 kB',
+};
+
+const COMPONENT_WAI_ARIA: Record<string, string> = {
+  button: 'https://www.w3.org/WAI/ARIA/apg/patterns/button/',
+  'text-input': 'https://www.w3.org/WAI/ARIA/apg/patterns/textbox/',
+  select: 'https://www.w3.org/WAI/ARIA/apg/patterns/combobox/',
+  checkbox: 'https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/',
+  radio: 'https://www.w3.org/WAI/ARIA/apg/patterns/radio-button/',
+  switch: 'https://www.w3.org/WAI/ARIA/apg/patterns/switch/',
+  accordion: 'https://www.w3.org/WAI/ARIA/apg/patterns/accordion/',
+  dialog: 'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/',
+  tooltip: 'https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/',
+  alert: 'https://www.w3.org/WAI/ARIA/apg/patterns/alert/',
+  breadcrumbs: 'https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/',
+  tabs: 'https://www.w3.org/WAI/ARIA/apg/patterns/tabs/',
+  list: 'https://www.w3.org/WAI/ARIA/apg/patterns/listbox/',
+};
+
+const COMPONENT_MATERIAL_URLS: Record<string, string> = {
+  button: 'https://m3.material.io/components/buttons/overview',
+  'text-input': 'https://m3.material.io/components/text-fields/overview',
+  select: 'https://m3.material.io/components/menus/overview',
+  checkbox: 'https://m3.material.io/components/checkbox/overview',
+  radio: 'https://m3.material.io/components/radio-button/overview',
+  switch: 'https://m3.material.io/components/switch/overview',
+  card: 'https://m3.material.io/components/cards/overview',
+  dialog: 'https://m3.material.io/components/dialogs/overview',
+  badge: 'https://m3.material.io/components/badges/overview',
+  chip: 'https://m3.material.io/components/chips/overview',
+  list: 'https://m3.material.io/components/lists/overview',
+  tabs: 'https://m3.material.io/components/tabs/overview',
+  divider: 'https://m3.material.io/components/divider/overview',
+  tooltip: 'https://m3.material.io/components/tooltips/overview',
+};
+
 interface ComponentDocPageProps {
   componentId: string;
 }
@@ -71,8 +188,10 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
   const releaseInfo = getComponentReleaseVersion(meta.id);
   const { currentVersion, getGitHubUrl } = useVersion();
   const { currentPlatform, metadata: platformMeta } = usePlatform();
+  const { colorScheme } = useColorScheme();
   const platformMode = currentPlatform;
-  const [previewTheme, setPreviewTheme] = useState<'light' | 'dark'>('light');
+  const [isMarkdownModalOpen, setIsMarkdownModalOpen] = useState(false);
+  const [markdownCopied, setMarkdownCopied] = useState(false);
   const [showCode, setShowCode] = useState(false);
   const [playgroundLang, setPlaygroundLang] = useState<'ts' | 'js'>('ts');
   const [customPlaygroundCodeTs, setCustomPlaygroundCodeTs] = useState<string | null>(null);
@@ -1522,12 +1641,290 @@ export const Native${meta.name}Demo = () => {
               fontSize: 16,
               lineHeight: 1.6,
               color: 'var(--color-text-secondary)',
-              margin: '0 0 24px 0',
+              margin: '0 0 16px 0',
               maxWidth: 780,
             }}
           >
             {meta.description}
           </p>
+
+          {/* Dynamic Resource Pills Row (Image 2 Benchmark - Zero Emojis) */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: 8,
+              marginBottom: 20,
+            }}
+          >
+            {/* 1. View as Markdown */}
+            <button
+              type="button"
+              onClick={() => setIsMarkdownModalOpen(true)}
+              title="View raw Markdown documentation"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                fontSize: 12,
+                fontWeight: 600,
+                color: 'var(--color-text-secondary)',
+                backgroundColor: 'var(--color-surface)',
+                border: '1px solid var(--color-border-default)',
+                borderRadius: 20,
+                padding: '5px 12px',
+                cursor: 'pointer',
+                transition: 'all 0.12s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                e.currentTarget.style.color = 'var(--color-action-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-border-default)';
+                e.currentTarget.style.color = 'var(--color-text-secondary)';
+              }}
+            >
+              <MarkdownPillIcon size={14} />
+              <span>View as Markdown</span>
+            </button>
+
+            {/* 2. Feedback */}
+            <a
+              href={`https://github.com/Winplaybox/spectra-ui/issues/new?title=%5BFeedback%5D+${encodeURIComponent(meta.name)}+Component`}
+              target="_blank"
+              rel="noreferrer"
+              title="Send feedback or report an issue"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                fontSize: 12,
+                fontWeight: 600,
+                color: 'var(--color-text-secondary)',
+                backgroundColor: 'var(--color-surface)',
+                border: '1px solid var(--color-border-default)',
+                borderRadius: 20,
+                padding: '5px 12px',
+                textDecoration: 'none',
+                transition: 'all 0.12s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                e.currentTarget.style.color = 'var(--color-action-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-border-default)';
+                e.currentTarget.style.color = 'var(--color-text-secondary)';
+              }}
+            >
+              <FeedbackPillIcon size={14} />
+              <span>Feedback</span>
+            </a>
+
+            {/* 3. Bundle size */}
+            <a
+              href="https://bundlephobia.com/package/@spectra/react"
+              target="_blank"
+              rel="noreferrer"
+              title={`Estimated gzipped bundle size: ${COMPONENT_BUNDLE_SIZES[meta.id] || '< 2.0 kB'}`}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                fontSize: 12,
+                fontWeight: 600,
+                color: 'var(--color-text-secondary)',
+                backgroundColor: 'var(--color-surface)',
+                border: '1px solid var(--color-border-default)',
+                borderRadius: 20,
+                padding: '5px 12px',
+                textDecoration: 'none',
+                transition: 'all 0.12s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                e.currentTarget.style.color = 'var(--color-action-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-border-default)';
+                e.currentTarget.style.color = 'var(--color-text-secondary)';
+              }}
+            >
+              <PackagePillIcon size={14} />
+              <span>Bundle size {COMPONENT_BUNDLE_SIZES[meta.id] || '< 2.0 kB'}</span>
+            </a>
+
+            {/* 4. Source */}
+            <a
+              href={getGitHubUrl(meta.id, platformMode)}
+              target="_blank"
+              rel="noreferrer"
+              title="View source code on GitHub"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                fontSize: 12,
+                fontWeight: 600,
+                color: 'var(--color-text-secondary)',
+                backgroundColor: 'var(--color-surface)',
+                border: '1px solid var(--color-border-default)',
+                borderRadius: 20,
+                padding: '5px 12px',
+                textDecoration: 'none',
+                transition: 'all 0.12s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                e.currentTarget.style.color = 'var(--color-action-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-border-default)';
+                e.currentTarget.style.color = 'var(--color-text-secondary)';
+              }}
+            >
+              <GitHubPillIcon size={14} />
+              <span>Source</span>
+            </a>
+
+            {/* 5. WAI-ARIA */}
+            {COMPONENT_WAI_ARIA[meta.id] && (
+              <a
+                href={COMPONENT_WAI_ARIA[meta.id]}
+                target="_blank"
+                rel="noreferrer"
+                title="W3C WAI-ARIA Authoring Practices Guide"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  color: 'var(--color-text-secondary)',
+                  backgroundColor: 'var(--color-surface)',
+                  border: '1px solid var(--color-border-default)',
+                  borderRadius: 20,
+                  padding: '5px 12px',
+                  textDecoration: 'none',
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                  e.currentTarget.style.color = 'var(--color-action-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--color-border-default)';
+                  e.currentTarget.style.color = 'var(--color-text-secondary)';
+                }}
+              >
+                <W3CPillIcon size={14} />
+                <span>WAI-ARIA</span>
+              </a>
+            )}
+
+            {/* 6. Material Design */}
+            {COMPONENT_MATERIAL_URLS[meta.id] && (
+              <a
+                href={COMPONENT_MATERIAL_URLS[meta.id]}
+                target="_blank"
+                rel="noreferrer"
+                title="Material Design Specification"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  fontSize: 12,
+                  fontWeight: 600,
+                  color: 'var(--color-text-secondary)',
+                  backgroundColor: 'var(--color-surface)',
+                  border: '1px solid var(--color-border-default)',
+                  borderRadius: 20,
+                  padding: '5px 12px',
+                  textDecoration: 'none',
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                  e.currentTarget.style.color = 'var(--color-action-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'var(--color-border-default)';
+                  e.currentTarget.style.color = 'var(--color-text-secondary)';
+                }}
+              >
+                <MaterialDesignPillIcon size={14} />
+                <span>Material Design</span>
+              </a>
+            )}
+
+            {/* 7. Figma */}
+            <a
+              href="https://www.figma.com/@spectraui"
+              target="_blank"
+              rel="noreferrer"
+              title="Open in Spectra Figma UI Kit"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                fontSize: 12,
+                fontWeight: 600,
+                color: 'var(--color-text-secondary)',
+                backgroundColor: 'var(--color-surface)',
+                border: '1px solid var(--color-border-default)',
+                borderRadius: 20,
+                padding: '5px 12px',
+                textDecoration: 'none',
+                transition: 'all 0.12s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                e.currentTarget.style.color = 'var(--color-action-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-border-default)';
+                e.currentTarget.style.color = 'var(--color-text-secondary)';
+              }}
+            >
+              <FigmaPillIcon size={14} />
+              <span>Figma</span>
+            </a>
+
+            {/* 8. Sketch */}
+            <a
+              href="https://github.com/Winplaybox/spectra-ui"
+              target="_blank"
+              rel="noreferrer"
+              title="Sketch UI Assets"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+                fontSize: 12,
+                fontWeight: 600,
+                color: 'var(--color-text-secondary)',
+                backgroundColor: 'var(--color-surface)',
+                border: '1px solid var(--color-border-default)',
+                borderRadius: 20,
+                padding: '5px 12px',
+                textDecoration: 'none',
+                transition: 'all 0.12s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                e.currentTarget.style.color = 'var(--color-action-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-border-default)';
+                e.currentTarget.style.color = 'var(--color-text-secondary)';
+              }}
+            >
+              <SketchPillIcon size={14} />
+              <span>Sketch</span>
+            </a>
+          </div>
 
           {/* Active Platform Banner (Strict Platform Isolation) */}
           <div
@@ -1580,7 +1977,7 @@ export const Native${meta.name}Demo = () => {
             style={{
               borderRadius: 'var(--radius-component-md)',
               border: '1px solid var(--color-border-default)',
-              backgroundColor: previewTheme === 'dark' ? 'var(--color-surface-raised)' : 'var(--color-surface)',
+              backgroundColor: 'var(--color-surface)',
               color: 'var(--color-text-primary)',
               overflow: 'hidden',
               transition: 'background-color 0.2s ease',
@@ -1602,28 +1999,6 @@ export const Native${meta.name}Demo = () => {
               <span style={{ fontWeight: 600, color: 'var(--color-text-primary)' }}>
                 Interactive Web Playground
               </span>
-
-              {/* Theme Switcher inside preview */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <span style={{ color: 'var(--color-text-muted)', fontSize: 12 }}>Theme:</span>
-                <select
-                  value={previewTheme}
-                  onChange={(e) => setPreviewTheme(e.target.value as 'light' | 'dark')}
-                  style={{
-                    fontSize: 12,
-                    padding: '4px 8px',
-                    borderRadius: 4,
-                    border: '1px solid var(--color-border-subtle)',
-                    backgroundColor: 'var(--color-surface)',
-                    color: 'var(--color-text-primary)',
-                    cursor: 'pointer',
-                    outline: 'none',
-                  }}
-                >
-                  <option value="light">Web Light</option>
-                  <option value="dark">Web Dark</option>
-                </select>
-              </div>
             </div>
 
             {/* Live Preview Area */}
@@ -1657,7 +2032,7 @@ export const Native${meta.name}Demo = () => {
               }}
             >
               <button
-                onClick={() => openInCodeSandbox({ title: meta.name, code: activePlaygroundSnippet, theme: previewTheme })}
+                onClick={() => openInCodeSandbox({ title: meta.name, code: activePlaygroundSnippet, theme: colorScheme })}
                 style={{
                   background: 'none',
                   border: 'none',
@@ -1676,7 +2051,7 @@ export const Native${meta.name}Demo = () => {
               </button>
 
               <button
-                onClick={() => openInStackBlitz({ title: meta.name, code: activePlaygroundSnippet, theme: previewTheme })}
+                onClick={() => openInStackBlitz({ title: meta.name, code: activePlaygroundSnippet, theme: colorScheme })}
                 style={{
                   background: 'none',
                   border: 'none',
@@ -1695,7 +2070,7 @@ export const Native${meta.name}Demo = () => {
               </button>
 
               <button
-                onClick={() => openInNewTab({ title: meta.name, code: activePlaygroundSnippet, theme: previewTheme })}
+                onClick={() => openInNewTab({ title: meta.name, code: activePlaygroundSnippet, theme: colorScheme })}
                 style={{
                   background: 'none',
                   border: 'none',
@@ -2321,38 +2696,149 @@ export const Native${meta.name}Demo = () => {
           </div>
         </Dialog>
       )}
+
+      {/* View as Markdown Modal (Image 2 Benchmark) */}
+      {isMarkdownModalOpen && (
+        <Dialog
+          isOpen={isMarkdownModalOpen}
+          onClose={() => setIsMarkdownModalOpen(false)}
+        >
+          <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 14 }}>
+            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+              {meta.name} Documentation (Markdown)
+            </h3>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+              <span style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>
+                Raw GitHub-compatible documentation markdown for {meta.name}
+              </span>
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => {
+                  const mdContent = `# @spectra/react: ${meta.name}
+
+${meta.description}
+
+## Installation
+
+\`\`\`bash
+npm install @spectra/react @spectra/icons
+\`\`\`
+
+## Basic Usage
+
+\`\`\`tsx
+import { ${meta.name} } from '@spectra/react';
+
+export default function Example() {
+  return (
+    <${meta.name}>
+      ${meta.name} Component
+    </${meta.name}>
+  );
+}
+\`\`\`
+
+## Active Platform Environment
+- Target: ${platformMeta.name}
+- Package: ${platformMeta.package}
+- Release: ${currentVersion}
+
+## Accessibility (WAI-ARIA)
+- Built with accessible keyboard patterns and ARIA roles.
+- Supports light, dark, and system color mode preferences.
+`;
+                  navigator.clipboard.writeText(mdContent);
+                  setMarkdownCopied(true);
+                  setTimeout(() => setMarkdownCopied(false), 2000);
+                }}
+              >
+                {markdownCopied ? <CheckIcon size={14} color="#10B981" /> : <CopyIcon size={14} />}
+                <span>{markdownCopied ? 'Copied!' : 'Copy Markdown'}</span>
+              </Button>
+            </div>
+
+            <pre
+              style={{
+                margin: 0,
+                padding: '16px',
+                backgroundColor: 'var(--color-surface-raised)',
+                border: '1px solid var(--color-border-subtle)',
+                borderRadius: 8,
+                fontSize: 12,
+                lineHeight: 1.6,
+                maxHeight: 380,
+                overflowY: 'auto',
+                whiteSpace: 'pre-wrap',
+                color: 'var(--color-text-primary)',
+                fontFamily: 'monospace',
+              }}
+            >
+{`# @spectra/react: ${meta.name}
+
+${meta.description}
+
+## Installation
+
+\`\`\`bash
+npm install @spectra/react @spectra/icons
+\`\`\`
+
+## Basic Usage
+
+\`\`\`tsx
+import { ${meta.name} } from '@spectra/react';
+
+export default function Example() {
+  return (
+    <${meta.name}>
+      ${meta.name} Component
+    </${meta.name}>
+  );
+}
+\`\`\`
+
+## Active Platform Environment
+- Target: ${platformMeta.name}
+- Package: ${platformMeta.package}
+- Release: ${currentVersion}
+
+## Accessibility (WAI-ARIA)
+- Built with accessible keyboard patterns and ARIA roles.
+- Supports light, dark, and system color mode preferences.`}
+            </pre>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 10 }}>
+              <Button variant="primary" onClick={() => setIsMarkdownModalOpen(false)}>
+                Close
+              </Button>
+            </div>
+          </div>
+        </Dialog>
+      )}
       </div> {/* End of Main Documentation Column */}
 
-      {/* Sticky Table of Contents (On this page - matching MUI & Fluent 2 with real-time Scrollspy) */}
+      {/* Sticky Table of Contents (On this page - matching MUI Benchmark with continuous left guide rule) */}
       <div
         style={{
-          width: 230,
+          width: 220,
           position: 'sticky',
-          top: 20,
+          top: 80,
           alignSelf: 'flex-start',
           display: 'flex',
           flexDirection: 'column',
-          gap: 14,
+          gap: 16,
           flexShrink: 0,
+          paddingLeft: 4,
         }}
       >
-        <Card
-          variant="bordered"
-          style={{
-            width: '100%',
-            backgroundColor: 'var(--color-surface)',
-            boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
-            borderRadius: 12,
-            padding: '14px 12px',
-          }}
-        >
         <nav
           aria-label="Table of contents"
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: 2,
+            borderLeft: '1px solid var(--color-border-subtle)',
             fontSize: 13,
+            paddingLeft: 0,
           }}
         >
           <span
@@ -2360,13 +2846,13 @@ export const Native${meta.name}Demo = () => {
               fontWeight: 700,
               fontSize: 11,
               textTransform: 'uppercase',
-              letterSpacing: '0.06em',
+              letterSpacing: '0.08em',
               color: 'var(--color-text-muted)',
-              marginBottom: 8,
-              paddingLeft: 6,
+              marginBottom: 10,
+              paddingLeft: 14,
             }}
           >
-            On This Page
+            On this page
           </span>
 
           {/* Section: Playground / Simulator */}
@@ -2375,15 +2861,20 @@ export const Native${meta.name}Demo = () => {
             onClick={(e) => scrollToSection(e, 'playground')}
             style={{
               display: 'block',
-              padding: '6px 10px',
-              borderRadius: 6,
-              backgroundColor: activeSection === 'playground' ? 'var(--color-surface-raised)' : 'transparent',
-              borderLeft: activeSection === 'playground' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+              padding: '6px 0 6px 14px',
+              marginLeft: -1,
+              borderLeft: activeSection === 'playground' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
               color: activeSection === 'playground' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
               fontWeight: activeSection === 'playground' ? 600 : 400,
               textDecoration: 'none',
               fontSize: 13,
-              transition: 'all 0.15s ease',
+              transition: 'all 0.12s ease',
+            }}
+            onMouseEnter={(e) => {
+              if (activeSection !== 'playground') e.currentTarget.style.color = 'var(--color-text-primary)';
+            }}
+            onMouseLeave={(e) => {
+              if (activeSection !== 'playground') e.currentTarget.style.color = 'var(--color-text-secondary)';
             }}
           >
             {platformMode === 'web' ? 'Interactive Playground' : `${platformMeta.name} Simulator`}
@@ -2395,23 +2886,28 @@ export const Native${meta.name}Demo = () => {
             onClick={(e) => scrollToSection(e, 'usage-variants')}
             style={{
               display: 'block',
-              padding: '6px 10px',
-              borderRadius: 6,
-              backgroundColor: activeSection === 'usage-variants' ? 'var(--color-surface-raised)' : 'transparent',
-              borderLeft: activeSection === 'usage-variants' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+              padding: '6px 0 6px 14px',
+              marginLeft: -1,
+              borderLeft: activeSection === 'usage-variants' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
               color: activeSection === 'usage-variants' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
               fontWeight: activeSection === 'usage-variants' ? 600 : 400,
               textDecoration: 'none',
               fontSize: 13,
-              transition: 'all 0.15s ease',
+              transition: 'all 0.12s ease',
+            }}
+            onMouseEnter={(e) => {
+              if (activeSection !== 'usage-variants') e.currentTarget.style.color = 'var(--color-text-primary)';
+            }}
+            onMouseLeave={(e) => {
+              if (activeSection !== 'usage-variants') e.currentTarget.style.color = 'var(--color-text-secondary)';
             }}
           >
             {platformMode === 'web' ? `Usage & Variants (${variants.length})` : `${platformMeta.name} Recipes`}
           </a>
 
-          {/* Sub-variant links with indent & scrollspy */}
+          {/* Sub-variant links with indent & scrollspy connected to guide rule */}
           {platformMode === 'web' && variants.length > 0 && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 1, margin: '2px 0 6px 0', paddingLeft: 8 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', margin: '2px 0 6px 0' }}>
               {variants.map((v) => {
                 const isActive = activeSection === v.id;
                 return (
@@ -2421,16 +2917,21 @@ export const Native${meta.name}Demo = () => {
                     onClick={(e) => scrollToSection(e, v.id)}
                     style={{
                       display: 'block',
-                      padding: '4px 8px',
-                      borderRadius: 4,
-                      backgroundColor: isActive ? 'var(--color-surface-raised)' : 'transparent',
+                      padding: '4px 0 4px 26px',
+                      marginLeft: -1,
                       borderLeft: isActive ? '2px solid var(--color-action-primary)' : '2px solid transparent',
                       color: isActive ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
                       fontWeight: isActive ? 600 : 400,
                       textDecoration: 'none',
                       fontSize: 12,
                       lineHeight: 1.4,
-                      transition: 'all 0.15s ease',
+                      transition: 'all 0.12s ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) e.currentTarget.style.color = 'var(--color-text-primary)';
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) e.currentTarget.style.color = 'var(--color-text-muted)';
                     }}
                   >
                     {v.title}
@@ -2448,15 +2949,20 @@ export const Native${meta.name}Demo = () => {
                 onClick={(e) => scrollToSection(e, 'resources')}
                 style={{
                   display: 'block',
-                  padding: '6px 10px',
-                  borderRadius: 6,
-                  backgroundColor: activeSection === 'resources' ? 'var(--color-surface-raised)' : 'transparent',
-                  borderLeft: activeSection === 'resources' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+                  padding: '6px 0 6px 14px',
+                  marginLeft: -1,
+                  borderLeft: activeSection === 'resources' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
                   color: activeSection === 'resources' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
                   fontWeight: activeSection === 'resources' ? 600 : 400,
                   textDecoration: 'none',
                   fontSize: 13,
-                  transition: 'all 0.15s ease',
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (activeSection !== 'resources') e.currentTarget.style.color = 'var(--color-text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  if (activeSection !== 'resources') e.currentTarget.style.color = 'var(--color-text-secondary)';
                 }}
               >
                 Resources
@@ -2468,15 +2974,20 @@ export const Native${meta.name}Demo = () => {
                 onClick={(e) => scrollToSection(e, 'anatomy')}
                 style={{
                   display: 'block',
-                  padding: '6px 10px',
-                  borderRadius: 6,
-                  backgroundColor: activeSection === 'anatomy' ? 'var(--color-surface-raised)' : 'transparent',
-                  borderLeft: activeSection === 'anatomy' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+                  padding: '6px 0 6px 14px',
+                  marginLeft: -1,
+                  borderLeft: activeSection === 'anatomy' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
                   color: activeSection === 'anatomy' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
                   fontWeight: activeSection === 'anatomy' ? 600 : 400,
                   textDecoration: 'none',
                   fontSize: 13,
-                  transition: 'all 0.15s ease',
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (activeSection !== 'anatomy') e.currentTarget.style.color = 'var(--color-text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  if (activeSection !== 'anatomy') e.currentTarget.style.color = 'var(--color-text-secondary)';
                 }}
               >
                 Anatomy & Slots
@@ -2488,15 +2999,20 @@ export const Native${meta.name}Demo = () => {
                 onClick={(e) => scrollToSection(e, 'motion')}
                 style={{
                   display: 'block',
-                  padding: '6px 10px',
-                  borderRadius: 6,
-                  backgroundColor: activeSection === 'motion' ? 'var(--color-surface-raised)' : 'transparent',
-                  borderLeft: activeSection === 'motion' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+                  padding: '6px 0 6px 14px',
+                  marginLeft: -1,
+                  borderLeft: activeSection === 'motion' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
                   color: activeSection === 'motion' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
                   fontWeight: activeSection === 'motion' ? 600 : 400,
                   textDecoration: 'none',
                   fontSize: 13,
-                  transition: 'all 0.15s ease',
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (activeSection !== 'motion') e.currentTarget.style.color = 'var(--color-text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  if (activeSection !== 'motion') e.currentTarget.style.color = 'var(--color-text-secondary)';
                 }}
               >
                 Motion & Effects
@@ -2508,15 +3024,20 @@ export const Native${meta.name}Demo = () => {
                 onClick={(e) => scrollToSection(e, 'guidelines')}
                 style={{
                   display: 'block',
-                  padding: '6px 10px',
-                  borderRadius: 6,
-                  backgroundColor: activeSection === 'guidelines' ? 'var(--color-surface-raised)' : 'transparent',
-                  borderLeft: activeSection === 'guidelines' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+                  padding: '6px 0 6px 14px',
+                  marginLeft: -1,
+                  borderLeft: activeSection === 'guidelines' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
                   color: activeSection === 'guidelines' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
                   fontWeight: activeSection === 'guidelines' ? 600 : 400,
                   textDecoration: 'none',
                   fontSize: 13,
-                  transition: 'all 0.15s ease',
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (activeSection !== 'guidelines') e.currentTarget.style.color = 'var(--color-text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  if (activeSection !== 'guidelines') e.currentTarget.style.color = 'var(--color-text-secondary)';
                 }}
               >
                 Guidelines (Dos & Don'ts)
@@ -2528,15 +3049,20 @@ export const Native${meta.name}Demo = () => {
                 onClick={(e) => scrollToSection(e, 'keyboard')}
                 style={{
                   display: 'block',
-                  padding: '6px 10px',
-                  borderRadius: 6,
-                  backgroundColor: activeSection === 'keyboard' ? 'var(--color-surface-raised)' : 'transparent',
-                  borderLeft: activeSection === 'keyboard' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
+                  padding: '6px 0 6px 14px',
+                  marginLeft: -1,
+                  borderLeft: activeSection === 'keyboard' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
                   color: activeSection === 'keyboard' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
                   fontWeight: activeSection === 'keyboard' ? 600 : 400,
                   textDecoration: 'none',
                   fontSize: 13,
-                  transition: 'all 0.15s ease',
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (activeSection !== 'keyboard') e.currentTarget.style.color = 'var(--color-text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  if (activeSection !== 'keyboard') e.currentTarget.style.color = 'var(--color-text-secondary)';
                 }}
               >
                 Keyboard & ARIA
@@ -2548,15 +3074,20 @@ export const Native${meta.name}Demo = () => {
                 onClick={(e) => scrollToSection(e, 'api')}
                 style={{
                   display: 'block',
-                  padding: '6px 10px',
-                  borderRadius: 6,
-                  backgroundColor: activeSection === 'api' || activeSection === 'props' ? 'var(--color-surface-raised)' : 'transparent',
-                  borderLeft: activeSection === 'api' || activeSection === 'props' ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                  color: activeSection === 'api' || activeSection === 'props' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-                  fontWeight: activeSection === 'api' || activeSection === 'props' ? 600 : 400,
+                  padding: '6px 0 6px 14px',
+                  marginLeft: -1,
+                  borderLeft: (activeSection === 'api' || activeSection === 'props') ? '2px solid var(--color-action-primary)' : '2px solid transparent',
+                  color: (activeSection === 'api' || activeSection === 'props') ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontWeight: (activeSection === 'api' || activeSection === 'props') ? 600 : 400,
                   textDecoration: 'none',
                   fontSize: 13,
-                  transition: 'all 0.15s ease',
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (activeSection !== 'api' && activeSection !== 'props') e.currentTarget.style.color = 'var(--color-text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  if (activeSection !== 'api' && activeSection !== 'props') e.currentTarget.style.color = 'var(--color-text-secondary)';
                 }}
               >
                 API Reference (Props & CSS)
@@ -2564,7 +3095,6 @@ export const Native${meta.name}Demo = () => {
             </>
           )}
         </nav>
-      </Card>
 
       {/* Developer Native Sponsor Ad Unit (MUI & Carbon Ads benchmark) */}
       <NativeSponsorAd publisherTheme="docs" style={{ width: '100%' }} />

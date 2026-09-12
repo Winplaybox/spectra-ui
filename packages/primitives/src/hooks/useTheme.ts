@@ -10,6 +10,8 @@ export function useTheme(): ThemeContextValue {
       setPack: () => {},
       colorScheme: 'light',
       setColorScheme: () => {},
+      mode: 'system',
+      setMode: () => {},
       isDark: false,
       isReducedMotion: false,
       isRTL: false,

@@ -17,6 +17,7 @@ import { openInCodeSandbox, openInStackBlitz, openInExpoSnack, toJavaScript } fr
 import { compileAndRender } from '../../utils/liveCompiler';
 import { useVersion } from '../../context/VersionContext';
 import { usePlatform } from '../../context/PlatformContext';
+import { useColorScheme } from '@spectra/react';
 import { EditableCodeBlock } from './EditableCodeBlock';
 import { EditInChatModal } from './EditInChatModal';
 
@@ -160,9 +161,9 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
   const [editedFullCodeJs, setEditedFullCodeJs] = useState<string | null>(null);
   const [editedCompactCode, setEditedCompactCode] = useState<string | null>(null);
 
+  const { colorScheme } = useColorScheme();
   const [copied, setCopied] = useState(false);
   const [copiedMessage, setCopiedMessage] = useState<string | null>(null);
-  const [previewTheme, setPreviewTheme] = useState<'light' | 'dark'>('light');
   const [demoKey, setDemoKey] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAiModalOpen, setIsAiModalOpen] = useState(false);
@@ -320,14 +321,14 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
 
   const handleOpenSandbox = () => {
     if (platform === 'web') {
-      openInCodeSandbox({ title, code: currentFullCode, theme: previewTheme });
+      openInCodeSandbox({ title, code: currentFullCode, theme: colorScheme });
     } else {
       openInExpoSnack({ title, code: currentFullCode });
     }
   };
 
   const handleOpenStackBlitz = () => {
-    openInStackBlitz({ title, code: currentFullCode, theme: previewTheme });
+    openInStackBlitz({ title, code: currentFullCode, theme: colorScheme });
   };
 
   return (
@@ -376,27 +377,6 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
             {description}
           </p>
         </div>
-
-        {/* Canvas Theme Toggle */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <select
-            value={previewTheme}
-            onChange={(e) => setPreviewTheme(e.target.value as 'light' | 'dark')}
-            style={{
-              fontSize: 12,
-              padding: '4px 8px',
-              borderRadius: 4,
-              border: '1px solid var(--color-border-subtle)',
-              backgroundColor: 'var(--color-surface)',
-              color: 'var(--color-text-primary)',
-              cursor: 'pointer',
-              outline: 'none',
-            }}
-          >
-            <option value="light">Light Canvas</option>
-            <option value="dark">Dark Canvas</option>
-          </select>
-        </div>
       </div>
 
       {/* Demo Canvas Preview Area */}
@@ -410,7 +390,7 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
           alignItems: 'center',
           justifyContent: 'center',
           minHeight: 150,
-          backgroundColor: previewTheme === 'dark' ? 'var(--color-surface-raised)' : 'var(--color-surface)',
+          backgroundColor: 'var(--color-surface)',
           borderBottom: '1px solid var(--color-border-subtle)',
           transition: 'background-color 0.15s ease',
           outline: 'none',

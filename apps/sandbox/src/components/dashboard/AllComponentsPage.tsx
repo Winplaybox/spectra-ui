@@ -335,7 +335,7 @@ export const AllComponentsPage: React.FC = () => {
         if (selectedTag === 'new') {
           tagMatch = V010_NEW_COMPONENTS.includes(comp.id);
         } else if (selectedTag === 'form') {
-          tagMatch = cat.id === 'form';
+          tagMatch = cat.id === 'inputs' || cat.id === 'form';
         } else if (selectedTag === 'feedback') {
           tagMatch = cat.id === 'feedback' || cat.id === 'overlay';
         }

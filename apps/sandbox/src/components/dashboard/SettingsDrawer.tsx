@@ -1,6 +1,6 @@
 import React from 'react';
 import { useColorScheme, useRTL } from '@spectra/react';
-import { CloseIcon, SettingsIcon, CheckIcon, ExternalLinkIcon, SunIcon, MoonIcon } from '@spectra/icons';
+import { CloseIcon, SettingsIcon, CheckIcon, ExternalLinkIcon, SunIcon, MoonIcon, MonitorIcon } from '@spectra/icons';
 import { useVersion } from '../../context/VersionContext';
 
 interface SettingsDrawerProps {
@@ -18,7 +18,7 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
   onSetAmbientIntensity,
   onOpenCookieModal,
 }) => {
-  const { colorScheme, setColorScheme } = useColorScheme();
+  const { colorScheme, setColorScheme, mode, setMode } = useColorScheme();
   const { isRTL, toggleRTL } = useRTL();
   const { currentVersion, setCurrentVersion, releases } = useVersion();
 
@@ -108,50 +108,91 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
             gap: 28,
           }}
         >
-          {/* 1. Theme Mode */}
+          {/* 1. Theme Mode (Matching Benchmark Image 1) */}
           <div>
-            <label style={{ display: 'block', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)', marginBottom: 10 }}>
-              Color Theme
+            <label style={{ display: 'block', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-text-muted)', marginBottom: 10 }}>
+              Mode
             </label>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr 1fr',
+                padding: 4,
+                borderRadius: 10,
+                border: '1px solid var(--color-border-default)',
+                backgroundColor: 'var(--color-surface-raised)',
+                gap: 4,
+              }}
+            >
+              {/* Light Option */}
               <button
-                onClick={() => setColorScheme('light')}
+                type="button"
+                onClick={() => setMode('light')}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: 8,
-                  padding: '10px 14px',
-                  borderRadius: 8,
-                  border: colorScheme === 'light' ? '2px solid var(--color-action-primary)' : '1px solid var(--color-border-default)',
-                  backgroundColor: colorScheme === 'light' ? 'rgba(0, 127, 255, 0.1)' : 'var(--color-surface-raised)',
-                  color: colorScheme === 'light' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  gap: 7,
+                  padding: '9px 8px',
+                  borderRadius: 7,
+                  border: mode === 'light' ? '1.5px solid var(--color-action-primary)' : '1.5px solid transparent',
+                  backgroundColor: mode === 'light' ? 'rgba(0, 127, 255, 0.14)' : 'transparent',
+                  color: mode === 'light' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
                   cursor: 'pointer',
-                  fontWeight: 600,
+                  fontWeight: mode === 'light' ? 700 : 500,
                   fontSize: 13,
+                  transition: 'all 0.12s ease',
                 }}
               >
-                <SunIcon size={16} />
+                <SunIcon size={15} color={mode === 'light' ? 'var(--color-action-primary)' : 'currentColor'} />
                 <span>Light</span>
               </button>
+
+              {/* System Option */}
               <button
-                onClick={() => setColorScheme('dark')}
+                type="button"
+                onClick={() => setMode('system')}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: 8,
-                  padding: '10px 14px',
-                  borderRadius: 8,
-                  border: colorScheme === 'dark' ? '2px solid var(--color-action-primary)' : '1px solid var(--color-border-default)',
-                  backgroundColor: colorScheme === 'dark' ? 'rgba(0, 127, 255, 0.1)' : 'var(--color-surface-raised)',
-                  color: colorScheme === 'dark' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  gap: 7,
+                  padding: '9px 8px',
+                  borderRadius: 7,
+                  border: mode === 'system' ? '1.5px solid var(--color-action-primary)' : '1.5px solid transparent',
+                  backgroundColor: mode === 'system' ? 'rgba(0, 127, 255, 0.14)' : 'transparent',
+                  color: mode === 'system' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
                   cursor: 'pointer',
-                  fontWeight: 600,
+                  fontWeight: mode === 'system' ? 700 : 500,
                   fontSize: 13,
+                  transition: 'all 0.12s ease',
                 }}
               >
-                <MoonIcon size={16} />
+                <MonitorIcon size={15} color={mode === 'system' ? 'var(--color-action-primary)' : 'currentColor'} />
+                <span>System</span>
+              </button>
+
+              {/* Dark Option */}
+              <button
+                type="button"
+                onClick={() => setMode('dark')}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 7,
+                  padding: '9px 8px',
+                  borderRadius: 7,
+                  border: mode === 'dark' ? '1.5px solid var(--color-action-primary)' : '1.5px solid transparent',
+                  backgroundColor: mode === 'dark' ? 'rgba(0, 127, 255, 0.14)' : 'transparent',
+                  color: mode === 'dark' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  cursor: 'pointer',
+                  fontWeight: mode === 'dark' ? 700 : 500,
+                  fontSize: 13,
+                  transition: 'all 0.12s ease',
+                }}
+              >
+                <MoonIcon size={15} color={mode === 'dark' ? 'var(--color-action-primary)' : 'currentColor'} />
                 <span>Dark</span>
               </button>
             </div>

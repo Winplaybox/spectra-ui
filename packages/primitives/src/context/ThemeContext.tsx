@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 export type ColorScheme = 'light' | 'dark';
+export type ThemeMode = 'light' | 'dark' | 'system';
 export type StylePack = 'minimal';
 
 export interface ThemeContextValue {
@@ -8,6 +9,8 @@ export interface ThemeContextValue {
   setPack: (pack: StylePack) => void;
   colorScheme: ColorScheme;
   setColorScheme: (scheme: ColorScheme) => void;
+  mode: ThemeMode;
+  setMode: (mode: ThemeMode) => void;
   isDark: boolean;
   isReducedMotion: boolean;
   isRTL: boolean;
@@ -20,6 +23,7 @@ export interface ThemeProviderProps {
   children: React.ReactNode;
   defaultPack?: StylePack;
   defaultColorScheme?: ColorScheme;
+  defaultMode?: ThemeMode;
   defaultRTL?: boolean;
 }
 
@@ -27,21 +31,77 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
   defaultPack = 'minimal',
   defaultColorScheme = 'light',
+  defaultMode = 'system',
   defaultRTL = false,
 }) => {
   const [pack, setPack] = useState<StylePack>(defaultPack);
-  const [colorScheme, setColorScheme] = useState<ColorScheme>(() => {
+
+  const [mode, setModeState] = useState<ThemeMode>(() => {
     if (typeof window !== 'undefined') {
       try {
-        const saved = window.localStorage?.getItem('spectra-color-scheme') as ColorScheme;
-        if (saved && ['light', 'dark'].includes(saved)) return saved;
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+        const savedMode = window.localStorage?.getItem('spectra-theme-mode') as ThemeMode;
+        if (savedMode && ['light', 'dark', 'system'].includes(savedMode)) return savedMode;
+        const savedScheme = window.localStorage?.getItem('spectra-color-scheme') as ColorScheme;
+        if (savedScheme && ['light', 'dark'].includes(savedScheme)) return savedScheme;
       } catch {
-        // Ignore storage/matchMedia errors in restricted test environments
+        // Ignore storage errors in restricted test environments
       }
     }
-    return defaultColorScheme;
+    return defaultMode;
   });
+
+  const getSystemScheme = (): ColorScheme => {
+    if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  };
+
+  const [colorScheme, setColorSchemeState] = useState<ColorScheme>(() => {
+    if (mode === 'system') return getSystemScheme();
+    return mode;
+  });
+
+  // Listen to OS system color scheme changes when in 'system' mode
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+
+    if (mode === 'system') {
+      setColorSchemeState(getSystemScheme());
+      try {
+        const media = window.matchMedia('(prefers-color-scheme: dark)');
+        const handler = (e: MediaQueryListEvent) => {
+          setColorSchemeState(e.matches ? 'dark' : 'light');
+        };
+        media.addEventListener?.('change', handler);
+        return () => media.removeEventListener?.('change', handler);
+      } catch {
+        // Ignore
+      }
+    } else {
+      setColorSchemeState(mode);
+    }
+  }, [mode]);
+
+  const setMode = (newMode: ThemeMode) => {
+    setModeState(newMode);
+    if (typeof window !== 'undefined') {
+      try {
+        window.localStorage?.setItem('spectra-theme-mode', newMode);
+      } catch {
+        // Ignore
+      }
+    }
+    if (newMode === 'system') {
+      setColorSchemeState(getSystemScheme());
+    } else {
+      setColorSchemeState(newMode);
+    }
+  };
+
+  const setColorScheme = (scheme: ColorScheme) => {
+    setMode(scheme);
+  };
 
   const [isRTL, setIsRTL] = useState(defaultRTL);
   const [isReducedMotion, setIsReducedMotion] = useState(false);
@@ -81,6 +141,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     setPack,
     colorScheme,
     setColorScheme,
+    mode,
+    setMode,
     isDark,
     isReducedMotion,
     isRTL,
