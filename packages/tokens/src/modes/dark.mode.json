@@ -3,6 +3,7 @@
     "semantic": {
       "surface": { "value": "#1A1A1A" },
       "surface-raised": { "value": "#242424" },
+      "surface-elevated": { "value": "#202023" },
       "surface-overlay": { "value": "rgba(26, 26, 26, 0.95)" },
       "surface-sunken": { "value": "#0F172A" },
       "border": {
@@ -14,7 +15,8 @@
         "primary": { "value": "#F4F4F5" },
         "secondary": { "value": "#D4D4D8" },
         "muted": { "value": "#A1A1AA" },
-        "inverse": { "value": "#18181B" }
+        "inverse": { "value": "#18181B" },
+        "on-action": { "value": "#FFFFFF" }
       },
       "action": {
         "primary": { "value": "#3B82F6" },
@@ -26,6 +28,8 @@
       "feedback": {
         "error": { "value": "#F87171" },
         "error-light": { "value": "#450A0A" },
+        "danger": { "value": "#F87171" },
+        "danger-light": { "value": "#450A0A" },
         "success": { "value": "#4ADE80" },
         "success-light": { "value": "#052E16" },
         "warning": { "value": "#FBBF24" },

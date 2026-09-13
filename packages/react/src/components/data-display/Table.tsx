@@ -33,8 +33,8 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
           width: '100%',
           overflowX: 'auto',
           borderRadius: 'var(--radius-component-md, 8px)',
-          border: bordered ? '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))' : 'none',
-          backgroundColor: 'var(--color-surface-elevated, #1e293b)',
+          border: bordered ? '1px solid var(--color-border-default)' : 'none',
+          backgroundColor: 'var(--color-surface-elevated)',
         }}
       >
         <table
@@ -45,7 +45,7 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
             borderCollapse: 'collapse',
             textAlign: 'left',
             fontSize: dense ? 12 : 13,
-            color: 'var(--color-text-primary, #f8fafc)',
+            color: 'var(--color-text-primary)',
             ...style,
           }}
           {...rest}
@@ -64,8 +64,8 @@ export const TableHead = forwardRef<HTMLTableSectionElement, React.ComponentProp
     <thead
       ref={ref}
       style={{
-        backgroundColor: 'var(--color-surface-raised, #0f172a)',
-        borderBottom: '1px solid var(--color-border-default, rgba(255,255,255,0.15))',
+        backgroundColor: 'var(--color-surface-raised)',
+        borderBottom: '1px solid var(--color-border-default)',
         ...style,
       }}
       {...rest}
@@ -86,11 +86,11 @@ export const TableRow = forwardRef<HTMLTableRowElement, React.ComponentPropsWith
     <tr
       ref={ref}
       style={{
-        borderBottom: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
+        borderBottom: '1px solid var(--color-border-subtle)',
         transition: 'background-color 0.12s ease',
         ...style,
       }}
-      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface-raised, rgba(255,255,255,0.04))')}
+      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)')}
       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
       {...rest}
     >
@@ -107,7 +107,7 @@ export const TableHeaderCell = forwardRef<HTMLTableCellElement, React.ComponentP
       style={{
         padding: '12px 16px',
         fontWeight: 600,
-        color: 'var(--color-text-secondary, #94a3b8)',
+        color: 'var(--color-text-secondary)',
         letterSpacing: '0.04em',
         textTransform: 'uppercase',
         fontSize: 11,

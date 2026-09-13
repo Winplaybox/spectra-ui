@@ -101,12 +101,12 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
             height: !isHorizontal ? size : '100%',
             maxWidth: '100%',
             maxHeight: '100%',
-            backgroundColor: 'var(--color-surface-elevated, #1e293b)',
-            borderLeft: placement === 'right' ? '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))' : 'none',
-            borderRight: placement === 'left' ? '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))' : 'none',
-            borderBottom: placement === 'top' ? '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))' : 'none',
-            borderTop: placement === 'bottom' ? '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))' : 'none',
-            boxShadow: 'var(--shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.5))',
+            backgroundColor: 'var(--color-surface-elevated)',
+            borderLeft: placement === 'right' ? '1px solid var(--color-border-default)' : 'none',
+            borderRight: placement === 'left' ? '1px solid var(--color-border-default)' : 'none',
+            borderBottom: placement === 'top' ? '1px solid var(--color-border-default)' : 'none',
+            borderTop: placement === 'bottom' ? '1px solid var(--color-border-default)' : 'none',
+            boxShadow: 'var(--shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.25))',
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
@@ -122,10 +122,10 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              borderBottom: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
+              borderBottom: '1px solid var(--color-border-default)',
             }}
           >
-            <div style={{ fontWeight: 600, fontSize: 16, color: 'var(--color-text-primary, #f8fafc)' }}>
+            <div style={{ fontWeight: 600, fontSize: 16, color: 'var(--color-text-primary)' }}>
               {title}
             </div>
             <button
@@ -137,7 +137,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
                 border: 'none',
                 padding: 4,
                 cursor: 'pointer',
-                color: 'var(--color-text-muted, #94a3b8)',
+                color: 'var(--color-text-muted)',
                 display: 'flex',
                 borderRadius: 4,
               }}
@@ -152,7 +152,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
               padding: 20,
               flex: 1,
               overflowY: 'auto',
-              color: 'var(--color-text-primary, #f8fafc)',
+              color: 'var(--color-text-primary)',
             }}
           >
             {children}
@@ -163,8 +163,8 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
             <div
               style={{
                 padding: '14px 20px',
-                borderTop: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
-                backgroundColor: 'var(--color-surface-raised, #0f172a)',
+                borderTop: '1px solid var(--color-border-default)',
+                backgroundColor: 'var(--color-surface-raised)',
                 display: 'flex',
                 justifyContent: 'flex-end',
                 gap: 10,

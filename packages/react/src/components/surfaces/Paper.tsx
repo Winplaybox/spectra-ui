@@ -44,12 +44,12 @@ export const Paper = forwardRef<HTMLDivElement, PaperProps>(
         ref={ref}
         className={className}
         style={{
-          backgroundColor: 'var(--color-surface-elevated, #1e293b)',
-          color: 'var(--color-text-primary, #f8fafc)',
+          backgroundColor: 'var(--color-surface-elevated)',
+          color: 'var(--color-text-primary)',
           borderRadius: rounded ? 'var(--radius-component-md, 8px)' : 0,
           border:
             variant === 'outlined' || elevation === 0
-              ? '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))'
+              ? '1px solid var(--color-border-default)'
               : 'none',
           boxShadow: getShadow(),
           padding: '16px 20px',

@@ -89,10 +89,10 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               left: placement === 'right' ? 'calc(100% + 8px)' : 0,
               right: placement === 'left' ? 'calc(100% + 8px)' : undefined,
               width: 280,
-              backgroundColor: 'var(--color-surface-elevated, #1e293b)',
-              border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+              backgroundColor: 'var(--color-surface-elevated)',
+              border: '1px solid var(--color-border-default)',
               borderRadius: 'var(--radius-component-md, 8px)',
-              boxShadow: 'var(--shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.4))',
+              boxShadow: 'var(--shadow-xl, 0 20px 25px -5px rgba(0, 0, 0, 0.2))',
               zIndex: 1000,
               padding: '14px 16px',
             }}
@@ -106,7 +106,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               }}
             >
               {title && (
-                <div style={{ fontWeight: 600, fontSize: 13, color: 'var(--color-text-primary, #f8fafc)' }}>
+                <div style={{ fontWeight: 600, fontSize: 13, color: 'var(--color-text-primary)' }}>
                   {title}
                 </div>
               )}
@@ -119,7 +119,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
                   border: 'none',
                   padding: 2,
                   cursor: 'pointer',
-                  color: 'var(--color-text-muted, #94a3b8)',
+                  color: 'var(--color-text-muted)',
                   display: 'flex',
                   marginLeft: 'auto',
                 }}
@@ -128,7 +128,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               </button>
             </div>
 
-            <div style={{ fontSize: 12, color: 'var(--color-text-secondary, #94a3b8)', lineHeight: 1.5 }}>
+            <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
               {children}
             </div>
           </div>

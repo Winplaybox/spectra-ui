@@ -36,8 +36,8 @@ export const AppBar = forwardRef<HTMLElement, AppBarProps>(
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '0 24px',
-          backgroundColor: 'var(--color-surface-elevated, #1e293b)',
-          borderBottom: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+          backgroundColor: 'var(--color-surface-elevated)',
+          borderBottom: '1px solid var(--color-border-default)',
           position: sticky ? 'sticky' : 'relative',
           top: sticky ? 0 : undefined,
           zIndex: 100,
@@ -82,8 +82,8 @@ export const BottomNav = forwardRef<HTMLElement, BottomNavProps>(
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-around',
-          backgroundColor: 'var(--color-surface-elevated, #1e293b)',
-          borderTop: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+          backgroundColor: 'var(--color-surface-elevated)',
+          borderTop: '1px solid var(--color-border-default)',
           width: '100%',
           ...style,
         }}
@@ -105,8 +105,8 @@ export const BottomNav = forwardRef<HTMLElement, BottomNavProps>(
                 border: 'none',
                 cursor: 'pointer',
                 color: isActive
-                  ? 'var(--color-action-primary, #007FFF)'
-                  : 'var(--color-text-muted, #94a3b8)',
+                  ? 'var(--color-action-primary)'
+                  : 'var(--color-text-muted)',
                 fontSize: 11,
                 fontWeight: isActive ? 600 : 400,
                 transition: 'color 0.12s ease',

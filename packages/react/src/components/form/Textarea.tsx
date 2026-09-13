@@ -65,7 +65,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             style={{
               fontSize: 13,
               fontWeight: 600,
-              color: error ? 'var(--color-feedback-danger, #ef4444)' : 'var(--color-text-primary, #f8fafc)',
+              color: error ? 'var(--color-feedback-danger)' : 'var(--color-text-primary)',
             }}
           >
             {label}
@@ -86,12 +86,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             fontFamily: 'inherit',
             lineHeight: 1.5,
             borderRadius: 'var(--radius-component-md, 8px)',
-            backgroundColor: 'var(--color-surface-raised, #0f172a)',
-            color: 'var(--color-text-primary, #f8fafc)',
+            backgroundColor: 'var(--color-surface)',
+            color: 'var(--color-text-primary)',
             border: `1px solid ${
               error
-                ? 'var(--color-feedback-danger, #ef4444)'
-                : 'var(--color-border-default, rgba(255,255,255,0.15))'
+                ? 'var(--color-feedback-danger)'
+                : 'var(--color-border-default)'
             }`,
             outline: 'none',
             resize,
@@ -113,9 +113,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           }}
         >
           {error ? (
-            <span style={{ color: 'var(--color-feedback-danger, #ef4444)' }}>{error}</span>
+            <span style={{ color: 'var(--color-feedback-danger)' }}>{error}</span>
           ) : description ? (
-            <span style={{ color: 'var(--color-text-muted, #94a3b8)' }}>{description}</span>
+            <span style={{ color: 'var(--color-text-muted)' }}>{description}</span>
           ) : (
             <span />
           )}
@@ -125,8 +125,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               style={{
                 color:
                   maxLength && charCount >= maxLength
-                    ? 'var(--color-feedback-danger, #ef4444)'
-                    : 'var(--color-text-muted, #94a3b8)',
+                    ? 'var(--color-feedback-danger)'
+                    : 'var(--color-text-muted)',
                 fontVariantNumeric: 'tabular-nums',
                 marginLeft: 'auto',
               }}

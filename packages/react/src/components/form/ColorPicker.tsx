@@ -76,7 +76,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
         {...rest}
       >
         {label && (
-          <label style={{ fontSize: 14, fontWeight: 600, color: 'var(--color-text-primary, #0f172a)' }}>
+          <label style={{ fontSize: 14, fontWeight: 600, color: 'var(--color-text-primary)' }}>
             {label}
           </label>
         )}
@@ -89,7 +89,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
               height: 38,
               borderRadius: 8,
               backgroundColor: currentColor,
-              border: '2px solid var(--color-border-subtle, rgba(0,0,0,0.15))',
+              border: '2px solid var(--color-border-subtle)',
               boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
               flexShrink: 0,
             }}
@@ -106,9 +106,9 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
               fontSize: 13,
               fontWeight: 600,
               borderRadius: 6,
-              border: `1px solid ${error ? 'var(--color-feedback-danger, #ef4444)' : 'var(--color-border-subtle, rgba(255,255,255,0.15))'}`,
-              backgroundColor: 'var(--color-surface, #1e293b)',
-              color: 'var(--color-text-primary, #ffffff)',
+              border: `1px solid ${error ? 'var(--color-feedback-danger)' : 'var(--color-border-default)'}`,
+              backgroundColor: 'var(--color-surface)',
+              color: 'var(--color-text-primary)',
               outline: 'none',
             }}
           />
@@ -145,8 +145,8 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
                   height: 28,
                   borderRadius: '50%',
                   backgroundColor: preset,
-                  border: isSelected ? '2px solid var(--color-action-primary, #2563eb)' : '2px solid transparent',
-                  boxShadow: isSelected ? '0 0 0 2px var(--color-surface, #ffffff)' : '0 1px 3px rgba(0,0,0,0.15)',
+                  border: isSelected ? '2px solid var(--color-action-primary)' : '2px solid transparent',
+                  boxShadow: isSelected ? '0 0 0 2px var(--color-surface)' : '0 1px 3px rgba(0,0,0,0.15)',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
@@ -170,13 +170,13 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(
         </div>
 
         {description && !error && (
-          <span style={{ fontSize: 12, color: 'var(--color-text-muted, #64748b)' }}>
+          <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>
             {description}
           </span>
         )}
 
         {error && (
-          <span style={{ fontSize: 12, color: 'var(--color-feedback-danger, #ef4444)', fontWeight: 500 }}>
+          <span style={{ fontSize: 12, color: 'var(--color-feedback-danger)', fontWeight: 500 }}>
             {error}
           </span>
         )}

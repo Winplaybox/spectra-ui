@@ -56,7 +56,7 @@ export const MediaCard = forwardRef<HTMLDivElement, MediaCardProps>(
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: 'var(--color-surface-raised, #0f172a)',
+              backgroundColor: 'var(--color-surface-raised)',
             }}
           >
             {media}
@@ -67,11 +67,11 @@ export const MediaCard = forwardRef<HTMLDivElement, MediaCardProps>(
         <div style={{ padding: '18px 20px', display: 'flex', flexDirection: 'column', gap: 10, flex: 1 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
             <div>
-              <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--color-text-primary, #f8fafc)' }}>
+              <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--color-text-primary)' }}>
                 {title}
               </div>
               {subtitle && (
-                <div style={{ fontSize: 13, color: 'var(--color-text-muted, #94a3b8)', marginTop: 2 }}>
+                <div style={{ fontSize: 13, color: 'var(--color-text-muted)', marginTop: 2 }}>
                   {subtitle}
                 </div>
               )}
@@ -80,7 +80,7 @@ export const MediaCard = forwardRef<HTMLDivElement, MediaCardProps>(
           </div>
 
           {children && (
-            <div style={{ fontSize: 13, color: 'var(--color-text-secondary, #94a3b8)', lineHeight: 1.5 }}>
+            <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
               {children}
             </div>
           )}

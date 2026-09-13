@@ -41,10 +41,10 @@ export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
           border: 'none',
           background: 'transparent',
           color: disabled
-            ? 'var(--color-text-muted, #64748b)'
+            ? 'var(--color-text-muted)'
             : danger
-            ? 'var(--color-feedback-danger, #ef4444)'
-            : 'var(--color-text-primary, #f8fafc)',
+            ? 'var(--color-feedback-danger)'
+            : 'var(--color-text-primary)',
           fontSize: 13,
           cursor: disabled ? 'not-allowed' : 'pointer',
           borderRadius: 4,
@@ -56,8 +56,8 @@ export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
         onMouseEnter={(e) => {
           if (!disabled) {
             e.currentTarget.style.backgroundColor = danger
-              ? 'rgba(239, 68, 68, 0.12)'
-              : 'var(--color-surface-raised, rgba(255,255,255,0.08))';
+              ? 'var(--color-feedback-danger-light, rgba(239, 68, 68, 0.12))'
+              : 'var(--color-surface-raised)';
           }
         }}
         onMouseLeave={(e) => {
@@ -68,7 +68,7 @@ export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
         {icon && <span style={{ display: 'inline-flex', flexShrink: 0 }}>{icon}</span>}
         <span style={{ flex: 1 }}>{children}</span>
         {shortcut && (
-          <span style={{ fontSize: 11, color: 'var(--color-text-muted, #64748b)', fontVariantNumeric: 'tabular-nums' }}>
+          <span style={{ fontSize: 11, color: 'var(--color-text-muted)', fontVariantNumeric: 'tabular-nums' }}>
             {shortcut}
           </span>
         )}
@@ -97,9 +97,9 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
           minWidth: 180,
           padding: 4,
           borderRadius: 'var(--radius-component-md, 8px)',
-          backgroundColor: 'var(--color-surface-elevated, #1e293b)',
-          border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
-          boxShadow: 'var(--shadow-lg, 0 10px 25px -5px rgba(0, 0, 0, 0.3))',
+          backgroundColor: 'var(--color-surface-elevated)',
+          border: '1px solid var(--color-border-default)',
+          boxShadow: 'var(--shadow-lg, 0 10px 25px -5px rgba(0, 0, 0, 0.15))',
           display: 'flex',
           flexDirection: 'column',
           gap: 2,

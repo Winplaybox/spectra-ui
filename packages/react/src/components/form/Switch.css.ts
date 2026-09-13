@@ -34,7 +34,7 @@ export const controlDisabled = style({
 
 export const thumb = style({
   position: 'absolute',
-  backgroundColor: 'var(--color-text-inverse)',
+  backgroundColor: 'var(--color-surface-elevated, #ffffff)',
   borderRadius: 'var(--radius-control-full)',
   boxShadow: '0 1px 2px 0 var(--color-border-default)',
   transition: 'transform var(--motion-subtle)',

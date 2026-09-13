@@ -41,11 +41,11 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
 
     const getBgColor = () => {
       switch (variant) {
-        case 'primary': return 'var(--color-action-primary, #007FFF)';
-        case 'secondary': return 'var(--color-surface-raised, #1e293b)';
+        case 'primary': return 'var(--color-action-primary)';
+        case 'secondary': return 'var(--color-surface-raised)';
         case 'tertiary': return 'transparent';
-        case 'danger': return 'var(--color-feedback-danger, #ef4444)';
-        default: return 'var(--color-surface-raised, #1e293b)';
+        case 'danger': return 'var(--color-feedback-danger)';
+        default: return 'var(--color-surface-raised)';
       }
     };
 
@@ -53,19 +53,19 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       switch (variant) {
         case 'primary':
         case 'danger':
-          return 'var(--color-text-inverse, #ffffff)';
+          return 'var(--color-text-on-action, #ffffff)';
         default:
-          return 'var(--color-text-primary, #f8fafc)';
+          return 'var(--color-text-primary)';
       }
     };
 
     const getBorderColor = () => {
       switch (variant) {
-        case 'primary': return 'var(--color-action-primary, #007FFF)';
-        case 'secondary': return 'var(--color-border-default, rgba(255,255,255,0.15))';
+        case 'primary': return 'var(--color-action-primary)';
+        case 'secondary': return 'var(--color-border-default)';
         case 'tertiary': return 'transparent';
-        case 'danger': return 'var(--color-feedback-danger, #ef4444)';
-        default: return 'var(--color-border-default, rgba(255,255,255,0.15))';
+        case 'danger': return 'var(--color-feedback-danger)';
+        default: return 'var(--color-border-default)';
       }
     };
 

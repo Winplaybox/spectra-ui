@@ -40,7 +40,7 @@ export const defaultVariant = style({
 
 export const primary = style({
   backgroundColor: 'var(--color-action-primary)',
-  color: 'var(--color-text-inverse)',
+  color: 'var(--color-text-on-action, #ffffff)',
 });
 
 export const success = style({

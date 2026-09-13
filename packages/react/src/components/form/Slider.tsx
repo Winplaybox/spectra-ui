@@ -124,7 +124,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
               alignItems: 'center',
               fontSize: 13,
               fontWeight: 500,
-              color: 'var(--color-text-primary, #f8fafc)',
+              color: 'var(--color-text-primary)',
             }}
           >
             {label && <span>{label}</span>}
@@ -133,7 +133,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
                 style={{
                   fontVariantNumeric: 'tabular-nums',
                   fontSize: 12,
-                  color: 'var(--color-text-muted, #94a3b8)',
+                  color: 'var(--color-text-muted)',
                 }}
               >
                 {valueFormatter(value)}
@@ -159,7 +159,8 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
               width: '100%',
               height: 4,
               borderRadius: 2,
-              backgroundColor: 'var(--color-surface-raised, rgba(255,255,255,0.15))',
+              backgroundColor: 'var(--color-surface-raised)',
+              border: '1px solid var(--color-border-subtle)',
             }}
           />
 
@@ -171,7 +172,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
               width: `${percentage}%`,
               height: 4,
               borderRadius: 2,
-              backgroundColor: 'var(--color-action-primary, #007FFF)',
+              backgroundColor: 'var(--color-action-primary)',
               transition: isDragging.current ? 'none' : 'width 0.1s ease',
             }}
           />
@@ -192,9 +193,9 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(
               width: 18,
               height: 18,
               borderRadius: '50%',
-              backgroundColor: 'var(--color-surface-elevated, #ffffff)',
-              border: '2px solid var(--color-action-primary, #007FFF)',
-              boxShadow: '0 2px 6px rgba(0,0,0,0.25)',
+              backgroundColor: 'var(--color-surface-elevated)',
+              border: '2px solid var(--color-action-primary)',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
               cursor: disabled ? 'not-allowed' : 'grab',
               outline: 'none',
               transition: isDragging.current ? 'none' : 'left 0.1s ease',

@@ -60,9 +60,9 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
           gap: 12,
           padding: '12px 16px',
           borderRadius: 'var(--radius-component-md, 8px)',
-          backgroundColor: 'var(--color-surface-elevated, #1e293b)',
+          backgroundColor: 'var(--color-surface-elevated)',
           border: `1px solid ${getBorderColor()}`,
-          boxShadow: 'var(--shadow-lg, 0 10px 25px -5px rgba(0, 0, 0, 0.3))',
+          boxShadow: 'var(--shadow-lg, 0 10px 25px -5px rgba(0, 0, 0, 0.15))',
           minWidth: 280,
           maxWidth: 420,
           ...style,
@@ -75,11 +75,11 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 2, flex: 1 }}>
           {title && (
-            <div style={{ fontWeight: 600, fontSize: 13, color: 'var(--color-text-primary, #f8fafc)' }}>
+            <div style={{ fontWeight: 600, fontSize: 13, color: 'var(--color-text-primary)' }}>
               {title}
             </div>
           )}
-          <div style={{ fontSize: 12, color: 'var(--color-text-secondary, #94a3b8)', lineHeight: 1.4 }}>
+          <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
             {children}
           </div>
           {action && <div style={{ marginTop: 8 }}>{action}</div>}
@@ -95,7 +95,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
               border: 'none',
               padding: 2,
               cursor: 'pointer',
-              color: 'var(--color-text-muted, #64748b)',
+              color: 'var(--color-text-muted)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

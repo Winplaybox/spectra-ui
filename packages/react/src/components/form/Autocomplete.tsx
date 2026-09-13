@@ -133,7 +133,7 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(
         {...rest}
       >
         {label && (
-          <label style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-primary, #f8fafc)' }}>
+          <label style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-primary)' }}>
             {label}
           </label>
         )}
@@ -151,7 +151,7 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(
               position: 'absolute',
               left: 12,
               display: 'flex',
-              color: 'var(--color-text-muted, #94a3b8)',
+              color: 'var(--color-text-muted)',
               pointerEvents: 'none',
             }}
           >
@@ -175,9 +175,9 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(
               padding: '10px 36px 10px 36px',
               fontSize: 14,
               borderRadius: 'var(--radius-component-md, 8px)',
-              backgroundColor: 'var(--color-surface-raised, #0f172a)',
-              color: 'var(--color-text-primary, #f8fafc)',
-              border: '1px solid var(--color-border-default, rgba(255,255,255,0.15))',
+              backgroundColor: 'var(--color-surface)',
+              color: 'var(--color-text-primary)',
+              border: '1px solid var(--color-border-default)',
               outline: 'none',
               boxSizing: 'border-box',
             }}
@@ -202,7 +202,7 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(
                   border: 'none',
                   padding: 2,
                   cursor: 'pointer',
-                  color: 'var(--color-text-muted, #94a3b8)',
+                  color: 'var(--color-text-muted)',
                   display: 'flex',
                 }}
               >
@@ -219,7 +219,7 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(
                 border: 'none',
                 padding: 2,
                 cursor: 'pointer',
-                color: 'var(--color-text-muted, #94a3b8)',
+                color: 'var(--color-text-muted)',
                 display: 'flex',
               }}
             >
@@ -246,10 +246,10 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(
               marginTop: 4,
               maxHeight: 220,
               overflowY: 'auto',
-              backgroundColor: 'var(--color-surface-elevated, #1e293b)',
-              border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+              backgroundColor: 'var(--color-surface-elevated)',
+              border: '1px solid var(--color-border-default)',
               borderRadius: 'var(--radius-component-md, 8px)',
-              boxShadow: 'var(--shadow-lg, 0 10px 25px -5px rgba(0, 0, 0, 0.3))',
+              boxShadow: 'var(--shadow-lg, 0 10px 25px -5px rgba(0, 0, 0, 0.15))',
               zIndex: 1000,
               padding: '4px 0',
             }}
@@ -259,7 +259,7 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(
                 style={{
                   padding: '10px 14px',
                   fontSize: 13,
-                  color: 'var(--color-text-muted, #64748b)',
+                  color: 'var(--color-text-muted)',
                   textAlign: 'center',
                 }}
               >
@@ -282,13 +282,13 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(
                       cursor: opt.disabled ? 'not-allowed' : 'pointer',
                       fontSize: 13,
                       backgroundColor: isHighlighted
-                        ? 'var(--color-surface-raised, rgba(255,255,255,0.08))'
+                        ? 'var(--color-surface-raised)'
                         : 'transparent',
                       color: opt.disabled
-                        ? 'var(--color-text-muted, #64748b)'
+                        ? 'var(--color-text-muted)'
                         : isSelected
-                        ? 'var(--color-action-primary, #007FFF)'
-                        : 'var(--color-text-primary, #f8fafc)',
+                        ? 'var(--color-action-primary)'
+                        : 'var(--color-text-primary)',
                       display: 'flex',
                       flexDirection: 'column',
                       gap: 2,
@@ -296,7 +296,7 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(
                   >
                     <span style={{ fontWeight: isSelected ? 600 : 400 }}>{opt.label}</span>
                     {opt.description && (
-                      <span style={{ fontSize: 11, color: 'var(--color-text-muted, #94a3b8)' }}>
+                      <span style={{ fontSize: 11, color: 'var(--color-text-muted)' }}>
                         {opt.description}
                       </span>
                     )}

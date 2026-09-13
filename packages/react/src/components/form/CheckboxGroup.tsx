@@ -48,7 +48,7 @@ export const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>
               padding: 0,
               fontSize: 13,
               fontWeight: 600,
-              color: error ? 'var(--color-feedback-danger, #ef4444)' : 'var(--color-text-primary, #f8fafc)',
+              color: error ? 'var(--color-feedback-danger)' : 'var(--color-text-primary)',
               marginBottom: 4,
             }}
           >
@@ -68,9 +68,9 @@ export const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>
         </div>
 
         {error ? (
-          <span style={{ fontSize: 12, color: 'var(--color-feedback-danger, #ef4444)' }}>{error}</span>
+          <span style={{ fontSize: 12, color: 'var(--color-feedback-danger)' }}>{error}</span>
         ) : description ? (
-          <span style={{ fontSize: 12, color: 'var(--color-text-muted, #94a3b8)' }}>{description}</span>
+          <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>{description}</span>
         ) : null}
       </fieldset>
     );

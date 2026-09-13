@@ -42,9 +42,9 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
       switch (variant) {
         case 'success': return 'var(--color-feedback-success, #22c55e)';
         case 'warning': return 'var(--color-feedback-warning, #f59e0b)';
-        case 'danger': return 'var(--color-feedback-danger, #ef4444)';
-        case 'info': return '#0ea5e9';
-        default: return 'var(--color-action-primary, #007FFF)';
+        case 'danger': return 'var(--color-feedback-danger)';
+        case 'info': return 'var(--color-action-primary, #0ea5e9)';
+        default: return 'var(--color-action-primary)';
       }
     };
 
@@ -69,7 +69,7 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
               alignItems: 'center',
               fontSize: 12,
               fontWeight: 500,
-              color: 'var(--color-text-secondary, #94a3b8)',
+              color: 'var(--color-text-secondary)',
             }}
           >
             {label && <span>{label}</span>}
@@ -89,7 +89,8 @@ export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
             width: '100%',
             height,
             borderRadius: height / 2,
-            backgroundColor: 'var(--color-surface-raised, rgba(255,255,255,0.12))',
+            backgroundColor: 'var(--color-surface-raised)',
+            border: '1px solid var(--color-border-subtle)',
             overflow: 'hidden',
             position: 'relative',
           }}

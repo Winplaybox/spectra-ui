@@ -9,6 +9,10 @@
         "value": "{color.primitive.gray.100}",
         "description": "Raised surface (cards, panels)"
       },
+      "surface-elevated": {
+        "value": "{color.primitive.gray.50}",
+        "description": "Elevated surface (popovers, menus, dialogs)"
+      },
       "surface-overlay": {
         "value": "{color.primitive.gray.950}",
         "description": "Overlay background (modals, dropdowns)"
@@ -47,6 +51,10 @@
         "inverse": {
           "value": "{color.primitive.gray.50}",
           "description": "Text on dark backgrounds"
+        },
+        "on-action": {
+          "value": "#FFFFFF",
+          "description": "High contrast text on primary or danger action buttons"
         }
       },
       "action": {
@@ -79,6 +87,14 @@
         "error-light": {
           "value": "{color.primitive.red.50}",
           "description": "Error background"
+        },
+        "danger": {
+          "value": "{color.primitive.red.600}",
+          "description": "Danger action state"
+        },
+        "danger-light": {
+          "value": "{color.primitive.red.50}",
+          "description": "Danger action background"
         },
         "success": {
           "value": "{color.primitive.green.600}",

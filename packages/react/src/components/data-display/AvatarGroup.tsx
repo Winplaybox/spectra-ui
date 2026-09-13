@@ -55,7 +55,7 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
               marginLeft: index === 0 ? 0 : spacing,
               zIndex: visibleCount - index,
               borderRadius: '50%',
-              boxShadow: '0 0 0 2px var(--color-surface, #090D16)',
+              boxShadow: '0 0 0 2px var(--color-surface)',
             }}
           >
             {React.isValidElement(child)
@@ -73,9 +73,9 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
               width: dim,
               height: dim,
               borderRadius: '50%',
-              backgroundColor: 'var(--color-surface-raised, #1e293b)',
-              color: 'var(--color-text-secondary, #94a3b8)',
-              border: '2px solid var(--color-surface, #090D16)',
+              backgroundColor: 'var(--color-surface-raised)',
+              color: 'var(--color-text-secondary)',
+              border: '2px solid var(--color-surface)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

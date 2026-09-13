@@ -110,7 +110,9 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
           style={{
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
-            borderRight: '1px solid rgba(255, 255, 255, 0.2)',
+            borderRight: (variant === 'primary' || variant === 'danger')
+              ? '1px solid rgba(255, 255, 255, 0.3)'
+              : '1px solid var(--color-border-default)',
           }}
         >
           {children}
@@ -153,10 +155,10 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
               right: 0,
               marginTop: 4,
               minWidth: 160,
-              backgroundColor: 'var(--color-surface-elevated, #1e293b)',
-              border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+              backgroundColor: 'var(--color-surface-elevated)',
+              border: '1px solid var(--color-border-default)',
               borderRadius: 'var(--radius-component-md, 8px)',
-              boxShadow: 'var(--shadow-lg, 0 10px 25px -5px rgba(0, 0, 0, 0.3))',
+              boxShadow: 'var(--shadow-lg, 0 10px 25px -5px rgba(0, 0, 0, 0.15))',
               zIndex: 1000,
               overflow: 'hidden',
               padding: '4px 0',
@@ -177,8 +179,8 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
                   border: 'none',
                   background: 'transparent',
                   color: opt.disabled
-                    ? 'var(--color-text-muted, #64748b)'
-                    : 'var(--color-text-primary, #f8fafc)',
+                    ? 'var(--color-text-muted)'
+                    : 'var(--color-text-primary)',
                   fontSize: size === 'sm' ? 12 : 13,
                   cursor: opt.disabled ? 'not-allowed' : 'pointer',
                   textAlign: 'left',
@@ -186,7 +188,7 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
                 }}
                 onMouseEnter={(e) => {
                   if (!opt.disabled) {
-                    e.currentTarget.style.backgroundColor = 'var(--color-surface-raised, rgba(255,255,255,0.08))';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
                   }
                 }}
                 onMouseLeave={(e) => {

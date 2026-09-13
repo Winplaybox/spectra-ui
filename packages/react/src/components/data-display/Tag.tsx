@@ -61,15 +61,15 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
           };
         case 'info':
           return {
-            bg: 'rgba(14, 165, 233, 0.12)',
+            bg: 'var(--color-feedback-info-light, rgba(14, 165, 233, 0.12))',
             border: 'rgba(14, 165, 233, 0.35)',
-            text: '#0ea5e9',
+            text: 'var(--color-action-primary, #0ea5e9)',
           };
         default:
           return {
-            bg: 'var(--color-surface-raised, #1e293b)',
-            border: 'var(--color-border-default, rgba(255,255,255,0.15))',
-            text: 'var(--color-text-secondary, #94a3b8)',
+            bg: 'var(--color-surface-raised)',
+            border: 'var(--color-border-default)',
+            text: 'var(--color-text-primary)',
           };
       }
     };

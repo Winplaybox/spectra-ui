@@ -36,7 +36,7 @@ export const button = style({
 
 export const primary = style({
   backgroundColor: 'var(--color-action-primary)',
-  color: 'var(--color-text-inverse)',
+  color: 'var(--color-text-on-action, #ffffff)',
   borderColor: 'var(--color-action-primary)',
   selectors: {
     '&:hover:not(:disabled)': {
@@ -75,7 +75,7 @@ export const tertiary = style({
 
 export const danger = style({
   backgroundColor: 'var(--color-feedback-error)',
-  color: 'var(--color-text-inverse)',
+  color: 'var(--color-text-on-action, #ffffff)',
   borderColor: 'var(--color-feedback-error)',
   selectors: {
     '&:hover:not(:disabled)': {

@@ -31,7 +31,7 @@ export const box = style({
   borderRadius: 'var(--radius-component-sm)',
   border: '1.5px solid var(--color-border-strong)',
   backgroundColor: 'var(--color-surface)',
-  color: 'var(--color-text-inverse)',
+  color: 'var(--color-text-on-action, #ffffff)',
   transition: 'all var(--motion-subtle)',
   flexShrink: 0,
   selectors: {

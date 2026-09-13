@@ -78,14 +78,14 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
                     backgroundColor: isCompleted
                       ? 'var(--color-feedback-success, #22c55e)'
                       : isCurrent
-                      ? 'var(--color-action-primary, #007FFF)'
-                      : 'var(--color-surface-raised, #1e293b)',
+                      ? 'var(--color-action-primary)'
+                      : 'var(--color-surface-raised)',
                     color: isCompleted || isCurrent
-                      ? 'var(--color-text-inverse, #ffffff)'
-                      : 'var(--color-text-muted, #94a3b8)',
+                      ? 'var(--color-text-on-action, #ffffff)'
+                      : 'var(--color-text-muted)',
                     border: isCurrent
-                      ? '2px solid var(--color-action-primary, #007FFF)'
-                      : '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+                      ? '2px solid var(--color-action-primary)'
+                      : '1px solid var(--color-border-default)',
                     boxShadow: isCurrent ? '0 0 0 3px rgba(0, 127, 255, 0.2)' : 'none',
                     transition: 'all 0.2s ease',
                   }}
@@ -99,17 +99,15 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
                     style={{
                       fontSize: 13,
                       fontWeight: isCurrent ? 700 : 500,
-                      color: isCurrent
-                        ? 'var(--color-text-primary, #f8fafc)'
-                        : isCompleted
-                        ? 'var(--color-text-primary, #f8fafc)'
-                        : 'var(--color-text-muted, #64748b)',
+                      color: isCurrent || isCompleted
+                        ? 'var(--color-text-primary)'
+                        : 'var(--color-text-muted)',
                     }}
                   >
                     {step.title}
                   </span>
                   {step.description && (
-                    <span style={{ fontSize: 11, color: 'var(--color-text-muted, #94a3b8)' }}>
+                    <span style={{ fontSize: 11, color: 'var(--color-text-muted)' }}>
                       {step.description}
                     </span>
                   )}
@@ -124,7 +122,7 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
                     height: 2,
                     backgroundColor: isCompleted
                       ? 'var(--color-feedback-success, #22c55e)'
-                      : 'var(--color-border-subtle, rgba(255,255,255,0.12))',
+                      : 'var(--color-border-default)',
                     transition: 'background-color 0.2s ease',
                   }}
                 />

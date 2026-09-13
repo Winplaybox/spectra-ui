@@ -79,9 +79,9 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
             alignItems: 'center',
             justifyContent: 'center',
             borderRadius: 'var(--radius-component-md, 8px)',
-            border: '1px solid var(--color-border-default, rgba(255,255,255,0.12))',
-            backgroundColor: 'var(--color-surface-raised, #1e293b)',
-            color: 'var(--color-text-primary, #f8fafc)',
+            border: '1px solid var(--color-border-default)',
+            backgroundColor: 'var(--color-surface-raised)',
+            color: 'var(--color-text-primary)',
             cursor: disabled || currentPage <= 1 ? 'not-allowed' : 'pointer',
             opacity: disabled || currentPage <= 1 ? 0.4 : 1,
           }}
@@ -101,7 +101,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: 'var(--color-text-muted, #64748b)',
+                  color: 'var(--color-text-muted)',
                   fontSize: 13,
                 }}
               >
@@ -126,14 +126,14 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                 justifyContent: 'center',
                 borderRadius: 'var(--radius-component-md, 8px)',
                 border: isSelected
-                  ? '1px solid var(--color-action-primary, #007FFF)'
-                  : '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
+                  ? '1px solid var(--color-action-primary)'
+                  : '1px solid var(--color-border-default)',
                 backgroundColor: isSelected
-                  ? 'var(--color-action-primary, #007FFF)'
+                  ? 'var(--color-action-primary)'
                   : 'transparent',
                 color: isSelected
-                  ? 'var(--color-text-inverse, #ffffff)'
-                  : 'var(--color-text-primary, #f8fafc)',
+                  ? 'var(--color-text-on-action, #ffffff)'
+                  : 'var(--color-text-primary)',
                 fontSize: 13,
                 fontWeight: isSelected ? 600 : 400,
                 cursor: disabled ? 'not-allowed' : 'pointer',
@@ -141,7 +141,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               }}
               onMouseEnter={(e) => {
                 if (!isSelected && !disabled) {
-                  e.currentTarget.style.backgroundColor = 'var(--color-surface-raised, rgba(255,255,255,0.08))';
+                  e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
                 }
               }}
               onMouseLeave={(e) => {
@@ -168,9 +168,9 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
             alignItems: 'center',
             justifyContent: 'center',
             borderRadius: 'var(--radius-component-md, 8px)',
-            border: '1px solid var(--color-border-default, rgba(255,255,255,0.12))',
-            backgroundColor: 'var(--color-surface-raised, #1e293b)',
-            color: 'var(--color-text-primary, #f8fafc)',
+            border: '1px solid var(--color-border-default)',
+            backgroundColor: 'var(--color-surface-raised)',
+            color: 'var(--color-text-primary)',
             cursor: disabled || currentPage >= count ? 'not-allowed' : 'pointer',
             opacity: disabled || currentPage >= count ? 0.4 : 1,
           }}

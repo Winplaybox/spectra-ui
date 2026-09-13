@@ -90,8 +90,8 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
           width: 280,
           padding: 16,
           borderRadius: 'var(--radius-component-md, 8px)',
-          backgroundColor: 'var(--color-surface-elevated, #1e293b)',
-          border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+          backgroundColor: 'var(--color-surface-elevated)',
+          border: '1px solid var(--color-border-default)',
           boxShadow: 'var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.1))',
           userSelect: 'none',
           ...style,
@@ -107,7 +107,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
             marginBottom: 12,
           }}
         >
-          <span style={{ fontWeight: 600, fontSize: 13, color: 'var(--color-text-primary, #f8fafc)' }}>
+          <span style={{ fontWeight: 600, fontSize: 13, color: 'var(--color-text-primary)' }}>
             {MONTH_NAMES[currentMonth]} {currentYear}
           </span>
           <div style={{ display: 'flex', gap: 4 }}>
@@ -123,7 +123,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
                 justifyContent: 'center',
                 background: 'transparent',
                 border: 'none',
-                color: 'var(--color-text-muted, #94a3b8)',
+                color: 'var(--color-text-muted)',
                 cursor: 'pointer',
                 borderRadius: 4,
               }}
@@ -142,7 +142,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
                 justifyContent: 'center',
                 background: 'transparent',
                 border: 'none',
-                color: 'var(--color-text-muted, #94a3b8)',
+                color: 'var(--color-text-muted)',
                 cursor: 'pointer',
                 borderRadius: 4,
               }}
@@ -168,7 +168,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
               style={{
                 fontSize: 11,
                 fontWeight: 600,
-                color: 'var(--color-text-muted, #64748b)',
+                color: 'var(--color-text-muted)',
                 padding: '4px 0',
               }}
             >
@@ -210,13 +210,13 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
                   alignItems: 'center',
                   justifyContent: 'center',
                   borderRadius: '50%',
-                  border: today && !selected ? '1px solid var(--color-action-primary, #007FFF)' : 'none',
+                  border: today && !selected ? '1px solid var(--color-action-primary)' : 'none',
                   backgroundColor: selected
-                    ? 'var(--color-action-primary, #007FFF)'
+                    ? 'var(--color-action-primary)'
                     : 'transparent',
                   color: selected
-                    ? 'var(--color-text-inverse, #ffffff)'
-                    : 'var(--color-text-primary, #f8fafc)',
+                    ? 'var(--color-text-on-action, #ffffff)'
+                    : 'var(--color-text-primary)',
                   fontSize: 12,
                   fontWeight: selected || today ? 600 : 400,
                   cursor: 'pointer',
@@ -225,7 +225,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
                 }}
                 onMouseEnter={(e) => {
                   if (!selected) {
-                    e.currentTarget.style.backgroundColor = 'var(--color-surface-raised, rgba(255,255,255,0.08))';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
                   }
                 }}
                 onMouseLeave={(e) => {

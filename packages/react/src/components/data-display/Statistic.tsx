@@ -43,8 +43,8 @@ export const Statistic = forwardRef<HTMLDivElement, StatisticProps>(
           gap: 6,
           padding: '16px 20px',
           borderRadius: 'var(--radius-component-md, 8px)',
-          backgroundColor: 'var(--color-surface-elevated, #1e293b)',
-          border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+          backgroundColor: 'var(--color-surface-elevated)',
+          border: '1px solid var(--color-border-default)',
           ...style,
         }}
         {...rest}
@@ -53,7 +53,7 @@ export const Statistic = forwardRef<HTMLDivElement, StatisticProps>(
           style={{
             fontSize: 13,
             fontWeight: 500,
-            color: 'var(--color-text-secondary, #94a3b8)',
+            color: 'var(--color-text-secondary)',
           }}
         >
           {title}
@@ -66,14 +66,14 @@ export const Statistic = forwardRef<HTMLDivElement, StatisticProps>(
             gap: 4,
             fontSize: 28,
             fontWeight: 700,
-            color: 'var(--color-text-primary, #f8fafc)',
+            color: 'var(--color-text-primary)',
             fontVariantNumeric: 'tabular-nums',
             lineHeight: 1.2,
           }}
         >
           {prefix && <span style={{ fontSize: '0.75em', opacity: 0.8 }}>{prefix}</span>}
           <span>{value}</span>
-          {suffix && <span style={{ fontSize: '0.65em', color: 'var(--color-text-muted, #64748b)' }}>{suffix}</span>}
+          {suffix && <span style={{ fontSize: '0.65em', color: 'var(--color-text-muted)' }}>{suffix}</span>}
         </div>
 
         {(trend || extra) && (
@@ -97,8 +97,8 @@ export const Statistic = forwardRef<HTMLDivElement, StatisticProps>(
                     trend.direction === 'up'
                       ? 'var(--color-feedback-success, #22c55e)'
                       : trend.direction === 'down'
-                      ? 'var(--color-feedback-danger, #ef4444)'
-                      : 'var(--color-text-muted, #94a3b8)',
+                      ? 'var(--color-feedback-danger)'
+                      : 'var(--color-text-muted)',
                 }}
               >
                 {trend.direction === 'up' && (
@@ -113,7 +113,7 @@ export const Statistic = forwardRef<HTMLDivElement, StatisticProps>(
                 )}
                 <span>{trend.value}</span>
                 {trend.label && (
-                  <span style={{ color: 'var(--color-text-muted, #94a3b8)', fontWeight: 400, marginLeft: 2 }}>
+                  <span style={{ color: 'var(--color-text-muted)', fontWeight: 400, marginLeft: 2 }}>
                     {trend.label}
                   </span>
                 )}

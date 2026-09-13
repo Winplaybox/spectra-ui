@@ -69,17 +69,17 @@ export const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
               cursor: 'pointer',
               fontSize: 13,
               backgroundColor: isSelected
-                ? 'var(--color-action-primary, #007FFF)'
+                ? 'var(--color-action-primary)'
                 : 'transparent',
               color: isSelected
-                ? 'var(--color-text-inverse, #ffffff)'
-                : 'var(--color-text-primary, #f8fafc)',
+                ? 'var(--color-text-on-action, #ffffff)'
+                : 'var(--color-text-primary)',
               userSelect: 'none',
               transition: 'background-color 0.12s ease',
             }}
             onMouseEnter={(e) => {
               if (!isSelected) {
-                e.currentTarget.style.backgroundColor = 'var(--color-surface-raised, rgba(255,255,255,0.06))';
+                e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
               }
             }}
             onMouseLeave={(e) => {
@@ -94,7 +94,7 @@ export const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  color: isSelected ? 'inherit' : 'var(--color-text-muted, #94a3b8)',
+                  color: isSelected ? 'inherit' : 'var(--color-text-muted)',
                   transform: isExpanded ? 'none' : 'rotate(-90deg)',
                   transition: 'transform 0.15s ease',
                   flexShrink: 0,
@@ -118,7 +118,7 @@ export const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                borderLeft: '1px solid var(--color-border-subtle, rgba(255,255,255,0.08))',
+                borderLeft: '1px solid var(--color-border-default)',
                 marginLeft: depth * 18 + 16,
               }}
             >

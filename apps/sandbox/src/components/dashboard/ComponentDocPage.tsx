@@ -1116,7 +1116,7 @@ export default function MediaCardDemo(): JSX.Element {
   return (
     <div style={{ maxWidth: 360, width: '100%' }}>
       <MediaCard
-        media={<div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #1e293b, #0f172a)' }} />}
+        media={<div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--color-surface-raised), var(--color-surface-elevated))' }} />}
         title="Spectra UI v1.0"
         subtitle="Universal Design System"
         badge={<Badge variant="info">Production</Badge>}
@@ -2563,7 +2563,7 @@ export const Native${meta.name}Demo = () => {
           <div style={{ maxWidth: 360, width: '100%', margin: '0 auto' }}>
             <MediaCard
               media={
-                <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, #1e293b, #0f172a)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: 13, fontWeight: 600 }}>
+                <div style={{ width: '100%', height: '100%', background: 'linear-gradient(135deg, var(--color-surface-raised), var(--color-surface-elevated))', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-muted)', fontSize: 13, fontWeight: 600 }}>
                   Spectra UI Canvas
                 </div>
               }
@@ -2847,9 +2847,9 @@ export const Native${meta.name}Demo = () => {
             <Box
               style={{
                 padding: '28px 36px',
-                backgroundColor: 'var(--color-surface-elevated, #1e293b)',
+                backgroundColor: 'var(--color-surface-elevated)',
                 borderRadius: 'var(--radius-component-md, 8px)',
-                border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+                border: '1px solid var(--color-border-default)',
                 boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
                 textAlign: 'center',
                 maxWidth: 420,
@@ -2870,7 +2870,7 @@ export const Native${meta.name}Demo = () => {
               size="md"
               style={{
                 padding: 24,
-                backgroundColor: 'var(--color-surface-elevated, #1e293b)',
+                backgroundColor: 'var(--color-surface-elevated)',
                 borderRadius: 8,
                 border: '1px dashed var(--color-action-primary, #2563eb)',
                 textAlign: 'center',
@@ -2891,19 +2891,19 @@ export const Native${meta.name}Demo = () => {
           <div style={{ width: '100%', maxWidth: 580, margin: '0 auto' }}>
             <Grid container spacing={2}>
               <Grid item xs={4}>
-                <Box style={{ padding: 20, textAlign: 'center', backgroundColor: 'var(--color-surface-elevated, #1e293b)', borderRadius: 8, border: '1px solid var(--color-border-subtle)' }}>
+                <Box style={{ padding: 20, textAlign: 'center', backgroundColor: 'var(--color-surface-elevated)', borderRadius: 8, border: '1px solid var(--color-border-default)' }}>
                   <strong>Col 1</strong>
                   <div style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>Span 4</div>
                 </Box>
               </Grid>
               <Grid item xs={4}>
-                <Box style={{ padding: 20, textAlign: 'center', backgroundColor: 'var(--color-surface-elevated, #1e293b)', borderRadius: 8, border: '1px solid var(--color-border-subtle)' }}>
+                <Box style={{ padding: 20, textAlign: 'center', backgroundColor: 'var(--color-surface-elevated)', borderRadius: 8, border: '1px solid var(--color-border-default)' }}>
                   <strong>Col 2</strong>
                   <div style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>Span 4</div>
                 </Box>
               </Grid>
               <Grid item xs={4}>
-                <Box style={{ padding: 20, textAlign: 'center', backgroundColor: 'var(--color-surface-elevated, #1e293b)', borderRadius: 8, border: '1px solid var(--color-border-subtle)' }}>
+                <Box style={{ padding: 20, textAlign: 'center', backgroundColor: 'var(--color-surface-elevated)', borderRadius: 8, border: '1px solid var(--color-border-default)' }}>
                   <strong>Col 3</strong>
                   <div style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>Span 4</div>
                 </Box>

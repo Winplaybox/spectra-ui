@@ -3097,7 +3097,7 @@ export default function NativeMetricCardDemo() {
             webPreview={
               <div style={{ maxWidth: 360, width: '100%' }}>
                 <div style={{ borderRadius: 12, border: '1px solid var(--color-border-subtle)', background: 'var(--color-surface-elevated)', overflow: 'hidden', boxShadow: 'var(--shadow-sm)' }}>
-                  <div style={{ height: 120, background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#94a3b8', fontSize: '0.85rem', fontWeight: 600 }}>
+                  <div style={{ height: 120, background: 'linear-gradient(135deg, var(--color-surface-raised) 0%, var(--color-surface-elevated) 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text-muted)', fontSize: '0.85rem', fontWeight: 600 }}>
                     Component Design System Canvas
                   </div>
                   <div style={{ padding: 18, display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -3120,7 +3120,7 @@ export default function NativeMetricCardDemo() {
               <div style={{ width: '100%' }}>
                 <Card variant="bordered">
                   <div style={{ fontWeight: 700 }}>Spectra UI v1.0</div>
-                  <div style={{ fontSize: 13, color: '#64748B' }}>Production Design System</div>
+                  <div style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>Production Design System</div>
                 </Card>
               </div>
             }
@@ -3130,7 +3130,7 @@ import { Card, Badge, Button } from '@spectra/react';
 export default function MediaCardDemo(): JSX.Element {
   return (
     <Card variant="bordered" style={{ overflow: 'hidden', padding: 0 }}>
-      <div style={{ height: 120, background: '#1e293b' }} />
+      <div style={{ height: 120, background: 'var(--color-surface-raised)' }} />
       <div style={{ padding: 18 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <h4>Spectra UI v1.0</h4>
