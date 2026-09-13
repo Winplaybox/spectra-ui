@@ -14,7 +14,7 @@ export interface MediaCardProps extends Omit<React.ComponentPropsWithoutRef<'div
 
 /**
  * MediaCard - Composite surface combining a visual media header with structured content and actions.
- * Benchmarked against Google Material UI Card with Media & Microsoft Fluent UI 2 Card.
+ * Engineered for rich media cards, visual showcases, and structured callouts.
  */
 export const MediaCard = forwardRef<HTMLDivElement, MediaCardProps>(
   (

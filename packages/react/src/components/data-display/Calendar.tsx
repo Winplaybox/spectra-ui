@@ -18,7 +18,7 @@ const MONTH_NAMES = [
 
 /**
  * Calendar - Interactive monthly grid date picker.
- * Benchmarked against Microsoft Fluent UI 2 & Google Material UI DateCalendar.
+ * Engineered for accessible date selection, localized month navigation, and keyboard control.
  */
 export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
   (

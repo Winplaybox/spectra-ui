@@ -170,7 +170,7 @@ export const IconExplorer: React.FC = () => {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
               <Badge variant="primary">12,253 Vectors</Badge>
-              <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>MUI & Fluent 2 Sizing Standards</span>
+              <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>Spectra Enterprise Sizing Standards</span>
             </div>
             <CardTitle>Spectra Icon Explorer & Interactive Recipes</CardTitle>
             <CardDescription>
@@ -223,7 +223,7 @@ export const IconExplorer: React.FC = () => {
           /* ========================================================== */
           <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
 
-            {/* HERO INTERACTIVE PLAYGROUND (Like Fluent 2 / MUI) */}
+            {/* HERO INTERACTIVE PLAYGROUND */}
             <div
               style={{
                 borderRadius: 'var(--radius-component-md, 8px)',

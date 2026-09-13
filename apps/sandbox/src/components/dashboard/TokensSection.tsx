@@ -348,7 +348,7 @@ export const TokensSection: React.FC<TokensSectionProps> = ({ tokenId = 'colors'
             <CardHeader>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                 <Badge variant="primary">Semantic Color System</Badge>
-                <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>MUI & Fluent 2 Calibrated</span>
+                <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>Spectra Calibrated Tokens</span>
               </div>
               <CardTitle>Semantic Color Tokens (Light & Dark Reactive)</CardTitle>
               <CardDescription>
@@ -962,7 +962,7 @@ export const TokensSection: React.FC<TokensSectionProps> = ({ tokenId = 'colors'
             <CardHeader>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                 <Badge variant="primary">Elevation Scale (0–5)</Badge>
-                <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>Fluent 2 & MUI Layering</span>
+                <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>Spectra Layering Tokens</span>
               </div>
               <CardTitle>Elevation Levels & Ambient Shadows</CardTitle>
               <CardDescription>

@@ -84,7 +84,7 @@ export interface MenuProps extends React.ComponentPropsWithoutRef<'div'> {
 
 /**
  * Menu - Floating context menu container for commands and options.
- * Benchmarked against Google Material UI Menu & Microsoft Fluent UI 2 Menu.
+ * Engineered for contextual command surfaces, grouped menu items, and accessible hotkeys.
  */
 export const Menu = forwardRef<HTMLDivElement, MenuProps>(
   ({ children, className, style, ...rest }, ref) => {

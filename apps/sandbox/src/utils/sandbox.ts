@@ -1,5 +1,5 @@
 // CodeSandbox & StackBlitz Integration for Spectra UI
-// Inspired by MUI and Fluent 2 live sandbox runners
+// Spectra UI interactive live sandbox runners
 
 import LZString from 'lz-string';
 

@@ -14,7 +14,7 @@ export interface ToastProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 
 
 /**
  * Toast - Ephemeral floating alert notification banner.
- * Benchmarked against Microsoft Fluent UI 2 & Google Material UI Snackbar.
+ * Engineered for contextual system feedback with configurable durations and dismissal actions.
  */
 export const Toast = forwardRef<HTMLDivElement, ToastProps>(
   (

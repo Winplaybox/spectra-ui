@@ -10,7 +10,7 @@ export interface AppBarProps extends React.ComponentPropsWithoutRef<'header'> {
 
 /**
  * AppBar - Primary top-level application header bar.
- * Benchmarked against Google Material UI AppBar & Microsoft Fluent UI 2.
+ * Engineered for universal header bars, brand identity slots, search anchors, and global navigation.
  */
 export const AppBar = forwardRef<HTMLElement, AppBarProps>(
   (

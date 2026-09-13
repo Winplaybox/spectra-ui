@@ -13,7 +13,7 @@ export interface PopoverProps extends Omit<React.ComponentPropsWithoutRef<'div'>
 
 /**
  * Popover - Anchored card overlay displaying rich contextual content.
- * Benchmarked against Google Material UI Popover & Microsoft Fluent UI 2 Popover.
+ * Engineered for anchored content disclosures, rich tooltips, and interactive micro-dialogs.
  */
 export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (

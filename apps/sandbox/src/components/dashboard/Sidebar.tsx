@@ -359,7 +359,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           )}
         </div>
 
-        {/* Wikipedia / MUI Style Fast Search Bar */}
+        {/* Fast Command & Search Bar */}
         <div style={{ padding: '12px 16px', flexShrink: 0 }}>
           <button
             onClick={onOpenSearch}
@@ -399,7 +399,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </button>
         </div>
 
-        {/* Scrollable Navigation Tree (Fluent 2 & MUI Independent Scroll) */}
+        {/* Scrollable Navigation Tree (Independent Scroll) */}
         <div
           style={{
             flex: 1,

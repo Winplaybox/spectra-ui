@@ -11,7 +11,7 @@ export interface LinkProps extends React.ComponentPropsWithoutRef<'a'> {
 
 /**
  * Link - Accessible interactive hyperlink component.
- * Benchmarked against Google Material UI Link & Microsoft Fluent UI 2 Link.
+ * Engineered for inline anchors, navigation references, and external target indicators.
  */
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   (

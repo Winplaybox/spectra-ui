@@ -71,8 +71,13 @@ import {
   SpeedDial,
   Box,
   Grid,
+  Container,
+  Stack,
+  ColorPicker,
+  PlatformChassis,
   useColorScheme,
 } from '@spectra/react';
+import type { ChassisPlatform } from '@spectra/react';
 import { getComponentReleaseVersion } from '../../data/versionReleaseData';
 import { useVersion } from '../../context/VersionContext';
 import {
@@ -344,7 +349,7 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
   const [activeSection, setActiveSection] = useState<string>('playground');
   const variants = COMPONENT_VARIANTS_MAP[meta.id] || [];
 
-  // Feedback & Edit State (MUI Image 1 Benchmark)
+  // Documentation Page Feedback & Edit State
   const [feedbackFormOpen, setFeedbackFormOpen] = useState(false);
   const [feedbackSection, setFeedbackSection] = useState<string>('Overview');
   const [feedbackText, setFeedbackText] = useState('');
@@ -485,6 +490,9 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
   const [groupVal, setGroupVal] = useState<'day' | 'week' | 'month'>('week');
   const [progressVal, setProgressVal] = useState(72);
   const [toastVisible, setToastVisible] = useState(true);
+  const [pickerColor, setPickerColor] = useState('#2563EB');
+  const [chassisPlatform, setChassisPlatform] = useState<ChassisPlatform>('web');
+  const [bottomNavTab, setBottomNavTab] = useState('home');
 
   // Generate clean JSX snippet according to active demo
   const getRawSnippet = (): string => {
@@ -1437,6 +1445,154 @@ export default function PopoverDemo(): JSX.Element {
   );
 }`;
 
+      case 'box':
+        return `import React from 'react';
+import { Box } from '@spectra/react';
+
+export default function BoxDemo(): JSX.Element {
+  return (
+    <Box
+      as="div"
+      style={{
+        padding: '28px 36px',
+        backgroundColor: 'var(--color-surface-elevated)',
+        borderRadius: 8,
+        border: '1px solid var(--color-border-subtle)',
+        boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+        textAlign: 'center',
+      }}
+    >
+      <h4 style={{ margin: '0 0 8px', fontSize: 16, fontWeight: 700 }}>Polymorphic Box Surface</h4>
+      <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)' }}>
+        Adapts seamlessly to any HTML semantic element while inheriting design token variables.
+      </p>
+    </Box>
+  );
+}`;
+
+      case 'container':
+        return `import React from 'react';
+import { Container } from '@spectra/react';
+
+export default function ContainerDemo(): JSX.Element {
+  return (
+    <Container size="md" style={{ padding: 24, textAlign: 'center' }}>
+      <h3>Responsive Viewport Container</h3>
+      <p>Centers content with responsive horizontal constraints calibrated to token scales.</p>
+    </Container>
+  );
+}`;
+
+      case 'grid':
+        return `import React from 'react';
+import { Grid, Box } from '@spectra/react';
+
+export default function GridDemo(): JSX.Element {
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={4}>
+        <Box style={{ padding: 20, textAlign: 'center', background: 'var(--color-surface-elevated)', borderRadius: 8 }}>Column 1</Box>
+      </Grid>
+      <Grid item xs={4}>
+        <Box style={{ padding: 20, textAlign: 'center', background: 'var(--color-surface-elevated)', borderRadius: 8 }}>Column 2</Box>
+      </Grid>
+      <Grid item xs={4}>
+        <Box style={{ padding: 20, textAlign: 'center', background: 'var(--color-surface-elevated)', borderRadius: 8 }}>Column 3</Box>
+      </Grid>
+    </Grid>
+  );
+}`;
+
+      case 'stack':
+        return `import React from 'react';
+import { Stack, Button } from '@spectra/react';
+
+export default function StackDemo(): JSX.Element {
+  return (
+    <Stack direction="row" gap="md" align="center">
+      <Button variant="primary">Action 1</Button>
+      <Button variant="secondary">Action 2</Button>
+      <Button variant="tertiary">Action 3</Button>
+    </Stack>
+  );
+}`;
+
+      case 'bottom-nav':
+        return `import React, { useState } from 'react';
+import { BottomNav } from '@spectra/react';
+import { SearchIcon, SparklesIcon, UserIcon } from '@spectra/icons';
+
+export default function BottomNavDemo(): JSX.Element {
+  const [activeTab, setActiveTab] = useState('home');
+
+  return (
+    <div style={{ maxWidth: 360, width: '100%', margin: '0 auto' }}>
+      <BottomNav
+        items={[
+          { id: 'home', label: 'Home', icon: <SearchIcon size={18} /> },
+          { id: 'explore', label: 'Explore', icon: <SparklesIcon size={18} /> },
+          { id: 'profile', label: 'Profile', icon: <UserIcon size={18} /> },
+        ]}
+        activeId={activeTab}
+        onChange={setActiveTab}
+      />
+    </div>
+  );
+}`;
+
+      case 'platform-chassis':
+        return `import React, { useState } from 'react';
+import { PlatformChassis, Button } from '@spectra/react';
+
+export default function PlatformChassisDemo(): JSX.Element {
+  const [platform, setPlatform] = useState<'web' | 'ios' | 'android' | 'macos' | 'windows'>('web');
+
+  return (
+    <PlatformChassis platform={platform} title="Spectra UI Frame">
+      <div style={{ padding: 20, textAlign: 'center' }}>
+        <h3>Platform Chassis Simulator</h3>
+        <p>Preview components inside authentic OS titlebars and viewport frames.</p>
+        <Button variant="primary">Simulated Action</Button>
+      </div>
+    </PlatformChassis>
+  );
+}`;
+
+      case 'color-picker':
+        return `import React, { useState } from 'react';
+import { ColorPicker } from '@spectra/react';
+
+export default function ColorPickerDemo(): JSX.Element {
+  const [color, setColor] = useState('#2563EB');
+
+  return (
+    <div style={{ maxWidth: 320, margin: '0 auto' }}>
+      <ColorPicker
+        label="Theme Accent Token"
+        description="Choose a preset swatch or type custom hexadecimal color"
+        value={color}
+        onChange={setColor}
+      />
+    </div>
+  );
+}`;
+
+      case 'radio-group':
+        return `import React, { useState } from 'react';
+import { RadioGroup, Radio } from '@spectra/react';
+
+export default function RadioGroupDemo(): JSX.Element {
+  const [value, setValue] = useState('standard');
+
+  return (
+    <RadioGroup value={value} onChange={setValue}>
+      <Radio value="standard" label="Standard Performance (1 CPU, 2GB RAM)" />
+      <Radio value="high" label="High Throughput (4 CPU, 16GB RAM)" />
+      <Radio value="serverless" label="Serverless Auto-scaling" />
+    </RadioGroup>
+  );
+}`;
+
       default: {
         const safeName = meta.name.replace(/[\s-]+/g, '');
         return `import React from 'react';
@@ -1846,6 +2002,7 @@ export const Native${meta.name}Demo = () => {
         );
 
       case 'radio':
+      case 'radio-group':
         return (
           <div style={{ maxWidth: 380, width: '100%', margin: '0 auto' }}>
             <RadioGroup value={radioValue} onChange={setRadioValue}>
@@ -2420,7 +2577,7 @@ export const Native${meta.name}Demo = () => {
                 </>
               }
             >
-              Multi-platform component library benchmarked against Google Material UI and Microsoft Fluent UI 2.
+              Universal cross-platform design system engineered for enterprise applications.
             </MediaCard>
           </div>
         );
@@ -2681,6 +2838,145 @@ export const Native${meta.name}Demo = () => {
             >
               Spectra UI synchronizes 175 design tokens across Web and React Native Hermes runtimes.
             </Popover>
+          </div>
+        );
+
+      case 'box':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
+            <Box
+              style={{
+                padding: '28px 36px',
+                backgroundColor: 'var(--color-surface-elevated, #1e293b)',
+                borderRadius: 'var(--radius-component-md, 8px)',
+                border: '1px solid var(--color-border-subtle, rgba(255,255,255,0.12))',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+                textAlign: 'center',
+                maxWidth: 420,
+              }}
+            >
+              <h4 style={{ margin: '0 0 8px', fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)' }}>Polymorphic Box Surface</h4>
+              <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+                Serves as the foundational structural container adapting to any HTML semantic element.
+              </p>
+            </Box>
+          </div>
+        );
+
+      case 'container':
+        return (
+          <div style={{ width: '100%', maxWidth: 640, margin: '0 auto' }}>
+            <Container
+              size="md"
+              style={{
+                padding: 24,
+                backgroundColor: 'var(--color-surface-elevated, #1e293b)',
+                borderRadius: 8,
+                border: '1px dashed var(--color-action-primary, #2563eb)',
+                textAlign: 'center',
+              }}
+            >
+              <span style={{ fontWeight: 600, fontSize: 14, color: 'var(--color-action-primary, #2563eb)' }}>
+                Container (size="md")
+              </span>
+              <p style={{ margin: '8px 0 0', fontSize: 13, color: 'var(--color-text-secondary)' }}>
+                Centers and constrains viewport width across responsive breakpoints.
+              </p>
+            </Container>
+          </div>
+        );
+
+      case 'grid':
+        return (
+          <div style={{ width: '100%', maxWidth: 580, margin: '0 auto' }}>
+            <Grid container spacing={2}>
+              <Grid item xs={4}>
+                <Box style={{ padding: 20, textAlign: 'center', backgroundColor: 'var(--color-surface-elevated, #1e293b)', borderRadius: 8, border: '1px solid var(--color-border-subtle)' }}>
+                  <strong>Col 1</strong>
+                  <div style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>Span 4</div>
+                </Box>
+              </Grid>
+              <Grid item xs={4}>
+                <Box style={{ padding: 20, textAlign: 'center', backgroundColor: 'var(--color-surface-elevated, #1e293b)', borderRadius: 8, border: '1px solid var(--color-border-subtle)' }}>
+                  <strong>Col 2</strong>
+                  <div style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>Span 4</div>
+                </Box>
+              </Grid>
+              <Grid item xs={4}>
+                <Box style={{ padding: 20, textAlign: 'center', backgroundColor: 'var(--color-surface-elevated, #1e293b)', borderRadius: 8, border: '1px solid var(--color-border-subtle)' }}>
+                  <strong>Col 3</strong>
+                  <div style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>Span 4</div>
+                </Box>
+              </Grid>
+            </Grid>
+          </div>
+        );
+
+      case 'stack':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
+            <Stack direction="row" gap="md" align="center">
+              <Button variant="primary">Action 1</Button>
+              <Button variant="secondary">Action 2</Button>
+              <Button variant="tertiary">Action 3</Button>
+            </Stack>
+            <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>
+              Stack direction="row" gap="md"
+            </span>
+          </div>
+        );
+
+      case 'bottom-nav':
+        return (
+          <div style={{ maxWidth: 360, width: '100%', margin: '0 auto', borderRadius: 12, overflow: 'hidden', border: '1px solid var(--color-border-subtle)' }}>
+            <BottomNav
+              items={[
+                { id: 'home', label: 'Home', icon: <SearchIcon size={18} /> },
+                { id: 'explore', label: 'Explore', icon: <SparklesIcon size={18} /> },
+                { id: 'settings', label: 'Settings', icon: <UserIcon size={18} /> },
+              ]}
+              activeId={bottomNavTab}
+              onChange={setBottomNavTab}
+            />
+          </div>
+        );
+
+      case 'platform-chassis':
+        return (
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
+              {(['web', 'ios', 'android', 'macos', 'windows'] as const).map((p) => (
+                <Button
+                  key={p}
+                  size="sm"
+                  variant={chassisPlatform === p ? 'primary' : 'secondary'}
+                  onClick={() => setChassisPlatform(p)}
+                >
+                  {p.toUpperCase()}
+                </Button>
+              ))}
+            </div>
+            <PlatformChassis platform={chassisPlatform} title={`Spectra UI on ${chassisPlatform.toUpperCase()}`}>
+              <div style={{ textAlign: 'center', padding: 16 }}>
+                <h4 style={{ margin: '0 0 8px', fontSize: 15, color: 'var(--color-text-primary)' }}>Native Chassis Surface</h4>
+                <p style={{ margin: '0 0 12px', fontSize: 12, color: 'var(--color-text-secondary)' }}>
+                  Faithfully renders platform-authentic titlebars, status indicators, and viewports.
+                </p>
+                <Button size="sm" variant="primary">Trigger Action</Button>
+              </div>
+            </PlatformChassis>
+          </div>
+        );
+
+      case 'color-picker':
+        return (
+          <div style={{ maxWidth: 320, width: '100%', margin: '0 auto' }}>
+            <ColorPicker
+              label="Theme Accent Token"
+              description="Click a swatch or enter custom HEX code"
+              value={pickerColor}
+              onChange={setPickerColor}
+            />
           </div>
         );
 
@@ -3182,7 +3478,7 @@ export const Native${meta.name}Demo = () => {
       {/* 3. PLATFORM VIEW: Web Mode */}
       {platformMode === 'web' && (
         <>
-          {/* 1. Primary Demo Section: Basic <Component> (MUI & Fluent UI Benchmark) */}
+          {/* 1. Primary Demo Section: Basic <Component> */}
           <div id="playground" style={{ display: 'flex', flexDirection: 'column', gap: 14, scrollMarginTop: 80 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -3254,7 +3550,7 @@ export const Native${meta.name}Demo = () => {
                 )}
               </div>
 
-              {/* Bottom Action Bar (Fluent 2 / MUI Exact implementation) */}
+              {/* Bottom Action Bar */}
               <div
                 style={{
                   display: 'flex',
@@ -3393,7 +3689,7 @@ export const Native${meta.name}Demo = () => {
             <ComponentVariantsShowcase componentId={meta.id} />
           </div>
 
-          {/* Resources Section (Matching Fluent 2) */}
+          {/* Resources Section */}
           <div id="resources" style={{ scrollMarginTop: 80 }}>
             <Card
               variant="bordered"
@@ -4149,7 +4445,7 @@ export const Native${meta.name}Demo = () => {
         </Dialog>
       )}
 
-      {/* 4. Page Feedback & Edit Section (MUI & Fluent UI Benchmark - Image 1) */}
+      {/* 4. Page Feedback & Edit Section */}
       <div
         id="page-feedback"
         style={{
@@ -4162,7 +4458,7 @@ export const Native${meta.name}Demo = () => {
           scrollMarginTop: 80,
         }}
       >
-        {/* Top Action Bar: [Edit this page] on Left, [Was this page helpful? 👍 👎] on Right */}
+        {/* Top Action Bar: [Edit this page] on Left, [Was this page helpful?] on Right */}
         <div
           style={{
             display: 'flex',
@@ -4172,7 +4468,7 @@ export const Native${meta.name}Demo = () => {
             gap: 16,
           }}
         >
-          {/* Edit this page link (MUI Benchmark: opens component markdown documentation on GitHub) */}
+          {/* Edit this page link: opens component markdown documentation on GitHub */}
           <a
             href={githubDocEditUrl}
             target="_blank"
@@ -4282,7 +4578,7 @@ export const Native${meta.name}Demo = () => {
           </div>
         </div>
 
-        {/* Feedback Form (MUI Image 1 Benchmark) */}
+        {/* Direct Feedback Form */}
         {feedbackFormOpen && (
           <div
             style={{
@@ -4728,7 +5024,7 @@ export const Native${meta.name}Demo = () => {
           )}
         </nav>
 
-      {/* Developer Native Sponsor Ad Unit (MUI & Carbon Ads benchmark) */}
+      {/* Developer Native Sponsor Ad Unit */}
       <NativeSponsorAd publisherTheme="docs" style={{ width: '100%' }} />
     </div>
   </div>

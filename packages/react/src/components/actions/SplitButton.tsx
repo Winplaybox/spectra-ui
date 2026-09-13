@@ -23,7 +23,7 @@ export interface SplitButtonProps extends Omit<React.ComponentPropsWithoutRef<'d
 
 /**
  * SplitButton - Composite button pairing a primary action with a flyout options menu.
- * Benchmarked against Google Material UI (MUI v5/v6) & Microsoft Fluent UI 2.
+ * Engineered for multi-action workflows with accessible popup state management.
  */
 export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
   (

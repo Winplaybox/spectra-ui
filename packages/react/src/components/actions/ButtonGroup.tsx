@@ -13,7 +13,7 @@ export interface ButtonGroupProps extends React.ComponentPropsWithoutRef<'div'> 
 
 /**
  * ButtonGroup - Container that joins a group of buttons into a contiguous segmented bar.
- * Benchmarked against Google Material UI (MUI v5/v6) & Microsoft Fluent UI 2.
+ * Engineered for coordinated action toolbars and segmented control layouts.
  */
 export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
   (

@@ -18,7 +18,7 @@ export interface TreeViewProps extends Omit<React.ComponentPropsWithoutRef<'div'
 
 /**
  * TreeView - Hierarchical navigation and file explorer tree.
- * Benchmarked against Microsoft Fluent UI 2 & Google Material UI TreeView.
+ * Engineered for nested folder structures, hierarchical categorization, and keyboard navigation.
  */
 export const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
   (

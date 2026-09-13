@@ -277,7 +277,7 @@ export const SearchPalette: React.FC<SearchPaletteProps> = ({
           maxWidth: 660,
           borderRadius: 12,
           border: '1px solid #1E293B',
-          backgroundColor: '#0F172A', // Solid high-contrast surface matching MUI screenshot
+          backgroundColor: '#0F172A', // Solid high-contrast surface for deep focus
           color: '#F8FAFC',
           overflow: 'hidden',
           display: 'flex',

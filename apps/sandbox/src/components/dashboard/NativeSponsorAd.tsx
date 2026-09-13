@@ -59,7 +59,7 @@ export const NativeSponsorAd: React.FC<NativeSponsorAdProps> = ({
       }}
       className={className}
     >
-      {/* Optional Format Switcher (MUI / Developer benchmark preview) */}
+      {/* Optional Format Switcher */}
       {allowFormatSwitch && (
         <div
           style={{

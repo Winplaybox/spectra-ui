@@ -528,7 +528,7 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
         )}
       </div>
 
-      {/* MUI-Style Interactive Sandbox Action Toolbar */}
+      {/* Interactive Sandbox Action Toolbar */}
       <div
         style={{
           display: 'flex',
@@ -544,7 +544,7 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
       >
         {/* Left Side: Edit in Chat Pill + Dynamic JS/TS Switcher */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          {/* Edit in Chat Pill Button (Matching MUI Screenshots) */}
+          {/* Edit in Chat Pill Button */}
           <button
             onClick={() => setIsAiModalOpen(true)}
             style={{
@@ -576,7 +576,7 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
             <span>Edit in Chat</span>
           </button>
 
-          {/* JS / TS Language Toggle (Appears when expanded, matching MUI Image 2) */}
+          {/* JS / TS Language Toggle (Appears when expanded) */}
           {isExpanded && (
             <div
               style={{
@@ -626,7 +626,7 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
           )}
         </div>
 
-        {/* Right Side: MUI Action Icons */}
+        {/* Right Side: Action Icons */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
           {/* Collapse / Expand Code Button */}
           <button
@@ -818,7 +818,7 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
               <MoreVerticalIcon size={16} />
             </button>
 
-            {/* Dropdown Popover Menu (Matching MUI Screenshot Image 4 & 5) */}
+            {/* Dropdown Popover Menu */}
             {isMenuOpen && (
               <div
                 style={{
@@ -943,7 +943,7 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
         )}
       </div>
 
-      {/* Editable Live Code Block (MUI Collapsed / Expanded Behavior) */}
+      {/* Editable Live Code Block */}
       <EditableCodeBlock
         code={currentDisplayCode}
         onChange={handleCodeChange}

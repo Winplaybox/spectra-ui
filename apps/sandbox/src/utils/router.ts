@@ -1,5 +1,5 @@
 // Deep Linking URL Router for Spectra UI Documentation Dashboard
-// Mimics Wikipedia, MUI, and Fluent 2 shareable URL patterns
+// Spectra UI canonical and shareable URL routing patterns
 
 export type RouteType = 'overview' | 'installation' | 'cross-platform' | 'tokens' | 'components' | 'hooks' | 'icons';
 

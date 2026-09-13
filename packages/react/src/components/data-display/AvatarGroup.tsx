@@ -10,7 +10,7 @@ export interface AvatarGroupProps extends React.ComponentPropsWithoutRef<'div'> 
 
 /**
  * AvatarGroup - Stack of overlapping avatars with an automatic overflow count indicator.
- * Benchmarked against Google Material UI & Microsoft Fluent UI 2.
+ * Engineered for compact team rosters and hierarchical presence presentation.
  */
 export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
   (

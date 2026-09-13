@@ -20,6 +20,7 @@ export * from './components/form/Select';
 export * from './components/form/Slider';
 export * from './components/form/Rating';
 export * from './components/form/Autocomplete';
+export * from './components/form/ColorPicker';
 
 // Navigation
 export * from './components/navigation/Tabs';
@@ -30,6 +31,7 @@ export * from './components/navigation/Menu';
 export * from './components/navigation/AppBar';
 export * from './components/navigation/Link';
 export * from './components/navigation/SpeedDial';
+export * from './components/navigation/PlatformChassis';
 
 // Surfaces
 export * from './components/surfaces/Card';

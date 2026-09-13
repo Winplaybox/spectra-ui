@@ -23,7 +23,7 @@ export interface AutocompleteProps extends Omit<React.ComponentPropsWithoutRef<'
 
 /**
  * Autocomplete / Combobox - Text input with filterable dropdown list.
- * Benchmarked against Google Material UI (MUI v5/v6) & Microsoft Fluent UI 2.
+ * Engineered for dynamic query filtering, option highlighting, and accessible listbox navigation.
  */
 export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(
   (

@@ -16,7 +16,7 @@ export interface TagProps extends React.ComponentPropsWithoutRef<'span'> {
 
 /**
  * Tag - Compact label for categorizing, metadata attribution, or interactive filtering.
- * Benchmarked against Google Material UI Chip & Microsoft Fluent UI 2 Tag.
+ * Engineered for taxonomy tags, entity badges, and interactive removal chips.
  */
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
   (

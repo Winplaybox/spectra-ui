@@ -371,7 +371,7 @@ export const AllComponentsPage: React.FC = () => {
 
   return (
     <div style={{ maxWidth: 1240, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 32 }}>
-      {/* 1. Hero Header Card (MUI & Microsoft Fluent 2 benchmark) */}
+      {/* 1. Hero Header Card */}
       <Card
         variant="bordered"
         style={{
@@ -643,7 +643,7 @@ export const AllComponentsPage: React.FC = () => {
           })}
         </div>
 
-        {/* Universal Platform Filter Pills (Fluent 2 Benchmark) */}
+        {/* Universal Platform Filter Pills */}
         <div
           style={{
             display: 'flex',

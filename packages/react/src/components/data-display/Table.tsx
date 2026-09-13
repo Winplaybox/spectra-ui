@@ -11,7 +11,7 @@ export interface TableProps extends React.ComponentPropsWithoutRef<'table'> {
 
 /**
  * Table & DataGrid - High density tabular data presentation.
- * Benchmarked against Google Material UI (MUI Table) & IBM Carbon.
+ * Engineered for tabular data grids, sortable records, and enterprise datasets.
  */
 export const Table = forwardRef<HTMLTableElement, TableProps>(
   (

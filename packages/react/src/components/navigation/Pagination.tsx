@@ -12,7 +12,7 @@ export interface PaginationProps extends Omit<React.ComponentPropsWithoutRef<'na
 
 /**
  * Pagination - Enables navigation across partitioned datasets.
- * Benchmarked against Google Material UI Pagination & Microsoft Fluent UI 2.
+ * Engineered for multi-page tables, data catalogs, and accessible range jumping.
  */
 export const Pagination = forwardRef<HTMLElement, PaginationProps>(
   (

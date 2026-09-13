@@ -1,6 +1,6 @@
 /**
  * Central Navigation Configuration Schema & Array
- * Benchmarked against Material UI & Microsoft Fluent UI 2
+ * Spectra Enterprise Master Navigation Architecture
  * Enables data-driven, maintainable, and recursively consistent sidebar rendering.
  */
 

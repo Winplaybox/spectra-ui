@@ -12,7 +12,7 @@ export interface PaperProps extends React.ComponentPropsWithoutRef<'div'> {
 
 /**
  * Paper - Elevated container surface providing background contrast and elevation depth.
- * Benchmarked against Google Material UI (MUI Paper) & IBM Carbon Tile.
+ * Engineered for card backdrops, elevated sections, and structured grouping containers.
  */
 export const Paper = forwardRef<HTMLDivElement, PaperProps>(
   (

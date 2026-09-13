@@ -14,7 +14,7 @@ export const LIVE_SCOPE: Record<string, any> = {
   ...SpectraReact,
   ...SpectraIcons,
 
-  // Universal Stack layout primitive (supports MUI / Fluent / Spectra style props)
+  // Universal Stack layout primitive (supports flexible gap and direction props)
   Stack: ({ direction = 'row', spacing = 2, gap, style, children, ...props }: any) => {
     const computedGap = gap !== undefined ? gap : typeof spacing === 'number' ? spacing * 8 : spacing;
     return React.createElement(

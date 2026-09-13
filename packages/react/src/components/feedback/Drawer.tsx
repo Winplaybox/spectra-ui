@@ -14,7 +14,7 @@ export interface DrawerProps extends Omit<React.ComponentPropsWithoutRef<'div'>,
 
 /**
  * Drawer - Slide-out sheet panel anchored to the edge of the viewport.
- * Benchmarked against Google Material UI Drawer & Microsoft Fluent UI 2 Drawer.
+ * Engineered for deep navigation sheets, filter drawers, and detail panels with focus trapping.
  */
 export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
   (

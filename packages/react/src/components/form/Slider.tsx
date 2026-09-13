@@ -16,7 +16,7 @@ export interface SliderProps extends Omit<React.ComponentPropsWithoutRef<'div'>,
 
 /**
  * Slider - Continuous and discrete range input component.
- * Benchmarked against Google Material UI (MUI v5/v6) & Microsoft Fluent UI 2.
+ * Engineered for numeric adjustments with step marks, value tooltips, and keyboard navigation.
  */
 export const Slider = forwardRef<HTMLDivElement, SliderProps>(
   (

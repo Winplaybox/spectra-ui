@@ -276,7 +276,7 @@ export const PlatformCompatibilityMatrix: React.FC<PlatformCompatibilityMatrixPr
           <span><strong>Architectural Note:</strong> Platform code, APIs, and hooks are strictly isolated. No DOM <code style={{ color: '#F43F5E' }}>onClick</code> or web attributes are rendered inside native views.</span>
         </span>
         <span style={{ color: 'var(--color-text-muted)' }}>
-          Benchmarked against Microsoft Fluent 2 & Apple Human Interface Guidelines
+          Spectra Universal Cross-Platform Architecture
         </span>
       </div>
     </Card>

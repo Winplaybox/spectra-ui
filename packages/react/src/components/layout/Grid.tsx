@@ -14,7 +14,7 @@ export interface GridProps extends React.ComponentPropsWithoutRef<'div'> {
 
 /**
  * Grid - 12-column responsive layout grid system.
- * Benchmarked against Google Material UI Grid v2.
+ * Engineered for flexible responsive layouts and fluid breakpoints.
  */
 export const Grid = forwardRef<HTMLDivElement, GridProps>(
   (

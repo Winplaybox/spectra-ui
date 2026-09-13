@@ -70,6 +70,12 @@ import {
   Link,
   SpeedDial,
   Text,
+  Box,
+  Container,
+  Grid,
+  Stack,
+  ColorPicker,
+  PlatformChassis,
 } from '@spectra/react';
 import {
   CheckIcon,
@@ -101,7 +107,7 @@ export const COMPONENT_VARIANTS_MAP: Record<string, VariantMeta[]> = {
     { id: 'button-icons', title: 'Leading & Trailing Icons' },
     { id: 'button-states', title: 'Loading & Disabled States' },
     { id: 'button-block', title: 'Full-Width Block Layout' },
-    { id: 'button-compound', title: 'Compound Button (Fluent 2 Pattern)' },
+    { id: 'button-compound', title: 'Compound Button (Spectra Pattern)' },
     { id: 'button-split', title: 'Split Button with Action Flyout' },
     { id: 'button-group', title: 'Segmented Attached Button Group' },
   ],
@@ -300,6 +306,30 @@ export const COMPONENT_VARIANTS_MAP: Record<string, VariantMeta[]> = {
   ],
   popover: [
     { id: 'popover-anchored', title: 'Anchored Floating Context Overlay' },
+  ],
+  box: [
+    { id: 'box-surfaces', title: 'Box Layout Container & Surface Tokens' },
+  ],
+  container: [
+    { id: 'container-breakpoints', title: 'Responsive Viewport Containment' },
+  ],
+  grid: [
+    { id: 'grid-12col', title: '12-Column Responsive Layout Grid' },
+  ],
+  stack: [
+    { id: 'stack-flex', title: 'Directional Flex Stack & Spacing' },
+  ],
+  'bottom-nav': [
+    { id: 'bottom-nav-mobile', title: 'Mobile Bottom Navigation Bar' },
+  ],
+  'platform-chassis': [
+    { id: 'platform-chassis-simulator', title: 'Multi-Platform Device Chassis Chrome' },
+  ],
+  'color-picker': [
+    { id: 'color-picker-swatches', title: 'Palette Swatches & Hex/RGB Picker' },
+  ],
+  'radio-group': [
+    { id: 'radio-group-orientations', title: 'Vertical & Horizontal Radio Groups' },
   ],
 };
 
@@ -643,10 +673,10 @@ export default function NativeBlockButtonDemo(): JSX.Element {
 }`}
           />
 
-          {/* Demo 6: Compound Button (Fluent 2 Pattern) */}
+          {/* Demo 6: Compound Button (Spectra Pattern) */}
           <ComponentDemoCard
             id="button-compound"
-            title="Compound Button (Fluent 2 Pattern)"
+            title="Compound Button (Spectra Pattern)"
             description="Features a prominent primary label accompanied by a secondary descriptive subtitle, ideal for high-impact onboarding and choice actions."
             webPreview={
               <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
@@ -911,7 +941,7 @@ export default function NativeSplitButtonDemo(): JSX.Element {
           <ComponentDemoCard
             id="button-group"
             title="Segmented Attached Button Group"
-            description="Horizontally groups related button triggers with unified border radius and shared outer bounds (MUI & Fluent ButtonGroup)."
+            description="Horizontally groups related button triggers with unified border radius and shared outer bounds (Spectra ButtonGroup)."
             webPreview={
               <div style={{ display: 'inline-flex', borderRadius: 8, border: '1px solid var(--color-border-subtle)', overflow: 'hidden', background: 'var(--color-surface-subtle)' }}>
                 {(['day', 'week', 'month'] as const).map((period, idx) => (
@@ -2837,7 +2867,7 @@ export default function NativeAvatarFallbackDemo() {
           <ComponentDemoCard
             id="avatar-persona"
             title="Persona Card with Presence & Contact Details"
-            description="Fluent-style Persona combination grouping an avatar with status badge, display name, primary role, and presence status."
+            description="Spectra Persona composite grouping an avatar with status badge, display name, primary role, and presence status."
             webPreview={
               <div style={{ display: 'flex', flexDirection: 'column', gap: 14, maxWidth: 360, width: '100%' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '12px 16px', borderRadius: 12, border: '1px solid var(--color-border-subtle)', background: 'var(--color-surface-elevated)' }}>
@@ -3711,7 +3741,7 @@ export default function NativeDismissibleDemo() {
           <ComponentDemoCard
             id="alert-actionable"
             title="Actionable Alert with Direct Action Buttons"
-            description="Embeds dedicated action triggers directly within the alert notification banner for immediate remediation (MUI & Fluent Alert action slot)."
+            description="Embeds dedicated action triggers directly within the alert notification banner for immediate remediation (Spectra Actionable Alert)."
             webPreview={
               <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 18px', borderRadius: 10, background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
@@ -4594,7 +4624,7 @@ export default function NativeCollapsedDemo() {
           <ComponentDemoCard
             id="split-button-merge"
             title="Primary Split Button (Git Merge Flow)"
-            description="Combines direct execution of the primary action with a flyout dropdown menu for alternative strategies (MUI & Fluent UI 2 benchmark)."
+            description="Combines direct execution of the primary action with a flyout dropdown menu for alternative strategies (Spectra Split Action)."
             webPreview={
               <SplitButton
                 variant="primary"
@@ -4717,7 +4747,7 @@ export default function NativeSplitSizesDemo() {
           <ComponentDemoCard
             id="compound-button-variants"
             title="Action Hierarchy (Primary, Secondary)"
-            description="High prominence button pairing a headline label with explanatory secondary text (Fluent UI 2 benchmark)."
+            description="High prominence button pairing a headline label with explanatory secondary text (Spectra Compound Action)."
             webPreview={
               <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
                 <CompoundButton variant="primary" subtitle="Deploy build to staging">
@@ -4790,7 +4820,7 @@ export default function NativeCompoundIconDemo() {
           <ComponentDemoCard
             id="button-group-segmented"
             title="Segmented Attached Mode"
-            description="Contiguous buttons sharing joined borders with unified radii (MUI ButtonGroup benchmark)."
+            description="Contiguous buttons sharing joined borders with unified radii."
             webPreview={
               <ButtonGroup variant="secondary">
                 <Button variant="primary">Day</Button>
@@ -5393,6 +5423,338 @@ export default function MenuFlyoutDemo(): JSX.Element {
 
 export default function NativeMenuDemo() {
   return <Text>Menu</Text>;
+}`}
+          />
+        </div>
+      );
+
+    case 'box':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="box-surfaces"
+            title="Polymorphic Box Container & Surfaces"
+            description="Foundational structural primitive adapting to any HTML element with elevation shadows."
+            webPreview={
+              <Box
+                style={{
+                  padding: '24px 32px',
+                  backgroundColor: 'var(--color-surface-elevated)',
+                  borderRadius: 8,
+                  border: '1px solid var(--color-border-subtle)',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
+                  textAlign: 'center',
+                  maxWidth: 380,
+                }}
+              >
+                <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 6 }}>Polymorphic Box Container</div>
+                <div style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>
+                  Inherits theme background and border radius tokens.
+                </div>
+              </Box>
+            }
+            nativePreview={<Text>Native Box Container</Text>}
+            webCode={`import React from 'react';
+import { Box } from '@spectra/react';
+
+export default function BoxDemo(): JSX.Element {
+  return (
+    <Box as="section" style={{ padding: 24, background: 'var(--color-surface-elevated)' }}>
+      <h4>Box Container</h4>
+    </Box>
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeBoxDemo() {
+  return <View style={{ padding: 24 }}><Text>Box</Text></View>;
+}`}
+          />
+        </div>
+      );
+
+    case 'container':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="container-breakpoints"
+            title="Responsive Viewport Containment"
+            description="Centers content with fluid max-width constraints calibrated to responsive breakpoints."
+            webPreview={
+              <div style={{ width: '100%', maxWidth: 500 }}>
+                <Container size="md" style={{ padding: 20, backgroundColor: 'var(--color-surface-elevated)', borderRadius: 8, border: '1px dashed var(--color-action-primary)', textAlign: 'center' }}>
+                  <span style={{ fontWeight: 600, color: 'var(--color-action-primary)', fontSize: 13 }}>Container size="md"</span>
+                  <p style={{ margin: '6px 0 0', fontSize: 12, color: 'var(--color-text-muted)' }}>Responsive horizontal padding</p>
+                </Container>
+              </div>
+            }
+            nativePreview={<Text>Native Container</Text>}
+            webCode={`import React from 'react';
+import { Container } from '@spectra/react';
+
+export default function ContainerDemo(): JSX.Element {
+  return (
+    <Container size="md">
+      <div>Constrained Page Body</div>
+    </Container>
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeContainerDemo() {
+  return <View style={{ maxWidth: 400 }}><Text>Container</Text></View>;
+}`}
+          />
+        </div>
+      );
+
+    case 'grid':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="grid-12col"
+            title="12-Column Responsive Layout Grid"
+            description="Structured layout grid supporting configurable column divisions and spacing tokens."
+            webPreview={
+              <div style={{ width: '100%', maxWidth: 480 }}>
+                <Grid container spacing={2}>
+                  <Grid item xs={4}>
+                    <Box style={{ padding: 14, textAlign: 'center', background: 'var(--color-surface-elevated)', borderRadius: 6, border: '1px solid var(--color-border-subtle)', fontSize: 12 }}>1/3</Box>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Box style={{ padding: 14, textAlign: 'center', background: 'var(--color-surface-elevated)', borderRadius: 6, border: '1px solid var(--color-border-subtle)', fontSize: 12 }}>2/3</Box>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Box style={{ padding: 14, textAlign: 'center', background: 'var(--color-surface-elevated)', borderRadius: 6, border: '1px solid var(--color-border-subtle)', fontSize: 12 }}>3/3</Box>
+                  </Grid>
+                </Grid>
+              </div>
+            }
+            nativePreview={<Text>Native Grid</Text>}
+            webCode={`import React from 'react';
+import { Grid, Box } from '@spectra/react';
+
+export default function GridDemo(): JSX.Element {
+  return (
+    <Grid container spacing={2}>
+      <Grid item xs={4}>
+        <Box>Col 1</Box>
+      </Grid>
+      <Grid item xs={4}>
+        <Box>Col 2</Box>
+      </Grid>
+      <Grid item xs={4}>
+        <Box>Col 3</Box>
+      </Grid>
+    </Grid>
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeGridDemo() {
+  return <View style={{ flexDirection: 'row' }}><Text>Grid</Text></View>;
+}`}
+          />
+        </div>
+      );
+
+    case 'stack':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="stack-flex"
+            title="Directional Flex Stack & Spacing"
+            description="Convenient flex layout primitive managing gap alignment and direction without custom CSS."
+            webPreview={
+              <Stack direction="row" gap="md" align="center">
+                <Button variant="primary" size="sm">Primary</Button>
+                <Button variant="secondary" size="sm">Secondary</Button>
+                <Button variant="tertiary" size="sm">Tertiary</Button>
+              </Stack>
+            }
+            nativePreview={<Text>Native Stack</Text>}
+            webCode={`import React from 'react';
+import { Stack, Button } from '@spectra/react';
+
+export default function StackDemo(): JSX.Element {
+  return (
+    <Stack direction="row" gap="md">
+      <Button variant="primary">Action</Button>
+      <Button variant="secondary">Cancel</Button>
+    </Stack>
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeStackDemo() {
+  return <View style={{ flexDirection: 'row', gap: 12 }}><Text>Stack</Text></View>;
+}`}
+          />
+        </div>
+      );
+
+    case 'bottom-nav':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="bottom-nav-mobile"
+            title="Mobile Bottom Navigation Bar"
+            description="Persistent bottom action bar for mobile viewports with icon labels and badge indicators."
+            webPreview={
+              <div style={{ width: '100%', maxWidth: 340, borderRadius: 10, overflow: 'hidden', border: '1px solid var(--color-border-subtle)' }}>
+                <BottomNav
+                  items={[
+                    { id: 'tab1', label: 'Feed', icon: <SearchIcon size={18} /> },
+                    { id: 'tab2', label: 'Starred', icon: <SparklesIcon size={18} /> },
+                    { id: 'tab3', label: 'Account', icon: <UserIcon size={18} /> },
+                  ]}
+                  activeId="tab1"
+                  onChange={() => {}}
+                />
+              </div>
+            }
+            nativePreview={<Text>Native BottomNav</Text>}
+            webCode={`import React, { useState } from 'react';
+import { BottomNav } from '@spectra/react';
+import { SearchIcon, SparklesIcon, UserIcon } from '@spectra/icons';
+
+export default function BottomNavDemo(): JSX.Element {
+  const [active, setActive] = useState('feed');
+
+  return (
+    <BottomNav
+      items={[
+        { id: 'feed', label: 'Feed', icon: <SearchIcon size={18} /> },
+        { id: 'starred', label: 'Starred', icon: <SparklesIcon size={18} /> },
+        { id: 'account', label: 'Account', icon: <UserIcon size={18} /> },
+      ]}
+      activeId={active}
+      onChange={setActive}
+    />
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeBottomNavDemo() {
+  return <View><Text>Bottom Navigation</Text></View>;
+}`}
+          />
+        </div>
+      );
+
+    case 'platform-chassis':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="platform-chassis-simulator"
+            title="Multi-Platform Device Chassis Chrome"
+            description="Faithfully mirrors native system chrome and viewports for Web, iOS, Android, macOS, and Windows."
+            webPreview={
+              <div style={{ width: '100%', maxWidth: 380 }}>
+                <PlatformChassis platform="web" title="Spectra UI App">
+                  <div style={{ padding: 14, textAlign: 'center' }}>
+                    <h5 style={{ margin: '0 0 6px', fontSize: 14 }}>Chassis Sandbox</h5>
+                    <p style={{ margin: 0, fontSize: 12, color: 'var(--color-text-secondary)' }}>
+                      Simulating authentic platform chrome.
+                    </p>
+                  </div>
+                </PlatformChassis>
+              </div>
+            }
+            nativePreview={<Text>Platform Chassis</Text>}
+            webCode={`import React from 'react';
+import { PlatformChassis } from '@spectra/react';
+
+export default function ChassisDemo(): JSX.Element {
+  return (
+    <PlatformChassis platform="macos" title="Design System">
+      <p>macOS Desktop Chrome</p>
+    </PlatformChassis>
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeChassisDemo() {
+  return <View><Text>Chassis</Text></View>;
+}`}
+          />
+        </div>
+      );
+
+    case 'color-picker':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="color-picker-swatches"
+            title="Palette Swatches & Hex/RGB Input"
+            description="Interactive color selection with preset palette swatches and direct hexadecimal input."
+            webPreview={
+              <div style={{ maxWidth: 300, width: '100%' }}>
+                <ColorPicker
+                  label="Accent Color Token"
+                  defaultValue="#2563EB"
+                  description="Choose brand primary accent"
+                />
+              </div>
+            }
+            nativePreview={<Text>Color Picker</Text>}
+            webCode={`import React, { useState } from 'react';
+import { ColorPicker } from '@spectra/react';
+
+export default function ColorPickerDemo(): JSX.Element {
+  const [color, setColor] = useState('#2563EB');
+
+  return (
+    <ColorPicker
+      label="Brand Color"
+      value={color}
+      onChange={setColor}
+    />
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeColorPickerDemo() {
+  return <View><Text>Color Picker</Text></View>;
+}`}
+          />
+        </div>
+      );
+
+    case 'radio-group':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="radio-group-orientations"
+            title="Vertical & Horizontal Radio Groups"
+            description="Accessible radio button collection with keyboard roving focus and status descriptions."
+            webPreview={
+              <div style={{ maxWidth: 360, width: '100%' }}>
+                <RadioGroup value="cloud" onChange={() => {}}>
+                  <Radio value="cloud" label="Cloud Native Hosting (AWS / GCP)" />
+                  <Radio value="onprem" label="On-Premises Dedicated Cluster" />
+                  <Radio value="edge" label="Global Edge Distribution" />
+                </RadioGroup>
+              </div>
+            }
+            nativePreview={<Text>Radio Group</Text>}
+            webCode={`import React, { useState } from 'react';
+import { RadioGroup, Radio } from '@spectra/react';
+
+export default function RadioGroupDemo(): JSX.Element {
+  const [val, setVal] = useState('cloud');
+
+  return (
+    <RadioGroup value={val} onChange={setVal}>
+      <Radio value="cloud" label="Cloud Native" />
+      <Radio value="onprem" label="On-Premises" />
+    </RadioGroup>
+  );
+}`}
+            nativeCode={`import { View, Text } from 'react-native';
+
+export default function NativeRadioGroupDemo() {
+  return <View><Text>Radio Group</Text></View>;
 }`}
           />
         </div>

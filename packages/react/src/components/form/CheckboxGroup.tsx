@@ -11,7 +11,7 @@ export interface CheckboxGroupProps extends React.ComponentPropsWithoutRef<'fiel
 
 /**
  * CheckboxGroup - Groups multiple checkboxes under a shared accessible fieldset and legend.
- * Benchmarked against Google Material UI (MUI FormGroup) & Microsoft Fluent UI 2.
+ * Engineered for coordinated multi-select options and accessible form fieldsets.
  */
 export const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
   (

@@ -14,7 +14,7 @@ export interface CompoundButtonProps extends React.ComponentPropsWithoutRef<'but
 
 /**
  * CompoundButton - High-prominence action button pairing a headline with explanatory secondary text.
- * Benchmarked against Microsoft Fluent UI 2 CompoundButton.
+ * Engineered for call-to-action cards and multi-line decision points.
  */
 export const CompoundButton = forwardRef<HTMLButtonElement, CompoundButtonProps>(
   (

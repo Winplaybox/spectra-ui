@@ -16,7 +16,7 @@ export interface ProgressBarProps extends React.ComponentPropsWithoutRef<'div'> 
 
 /**
  * ProgressBar - Linear progress indicator for loading states and multi-step tasks.
- * Benchmarked against Google Material UI LinearProgress & Microsoft Fluent UI 2.
+ * Engineered for deterministic progress tracking and indeterminate loading states.
  */
 export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
   (

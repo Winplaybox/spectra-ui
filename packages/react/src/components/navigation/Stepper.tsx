@@ -16,7 +16,7 @@ export interface StepperProps extends React.ComponentPropsWithoutRef<'div'> {
 
 /**
  * Stepper - Multi-step workflow navigation wizard.
- * Benchmarked against Google Material UI Stepper & Microsoft Fluent UI 2.
+ * Engineered for sequential workflows, onboarding wizards, and multi-stage form progress.
  */
 export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
   (

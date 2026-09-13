@@ -142,7 +142,7 @@ export const EditableCodeBlock: React.FC<EditableCodeBlockProps> = ({
         }
       `}</style>
 
-      {/* Floating Modified & Reset Badge (MUI benchmark: no duplicate header/copy button) */}
+      {/* Floating Modified & Reset Badge */}
       {isModified && (
         <div
           style={{

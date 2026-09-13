@@ -12,7 +12,7 @@ export interface TextareaProps extends React.ComponentPropsWithoutRef<'textarea'
 
 /**
  * Textarea - Multi-line text field with field labels, validation messaging, and live capacity counters.
- * Benchmarked against Microsoft Fluent UI 2 & Google Material UI.
+ * Engineered for comprehensive multi-line text input with character tracking and auto-resizing.
  */
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (

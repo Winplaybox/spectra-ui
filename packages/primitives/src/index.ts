@@ -16,3 +16,20 @@ export * from './hooks/useFormField';
 export * from './hooks/useListNavigation';
 export * from './hooks/useOutsideClick';
 export * from './hooks/useRTL';
+
+// Extended Enterprise Primitives Suite
+export * from './hooks/useDebounce';
+export * from './hooks/useThrottle';
+export * from './hooks/useHover';
+export * from './hooks/usePlatform';
+export * from './hooks/useBreakpoint';
+export * from './hooks/useEventListener';
+export * from './hooks/useIntersectionObserver';
+export * from './hooks/useElementSize';
+export * from './hooks/useWindowSize';
+export * from './hooks/useScrollLock';
+export * from './hooks/useClipboard';
+export * from './hooks/useLocalStorage';
+export * from './hooks/usePrevious';
+export * from './hooks/useAsync';
+export * from './hooks/useInterval';

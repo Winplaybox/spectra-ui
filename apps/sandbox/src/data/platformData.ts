@@ -1,5 +1,5 @@
 // Universal Multi-Platform Design System Specifications & Registry
-// Benchmarked against Microsoft Fluent 2 & Apple Human Interface Guidelines
+// Spectra Universal Cross-Platform Architecture
 
 export type Platform = 'web' | 'ios' | 'android' | 'windows' | 'macos';
 
@@ -256,7 +256,7 @@ fun Android${comp}View() {
       platform: 'windows',
       status: 'supported',
       version: 'v0.1.0 (Win 10/11)',
-      notes: 'Fluent UI Mica composition, keyboard accelerators (Alt+Key), high-contrast mode, and UI Automation.',
+      notes: 'Windows Mica composition, keyboard accelerators (Alt+Key), high-contrast mode, and UI Automation.',
       touchStandard: '32×32 epx (Desktop Pointer & Touch)',
       primarySnippet: `// Windows React Native (RNW) Implementation
 import React from 'react';
