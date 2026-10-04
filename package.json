@@ -4,6 +4,7 @@
   "description": "Spectra UI - WinPlayBox Design System",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@9.15.4",
   "scripts": {
     "build": "pnpm run build:tokens && turbo build",
     "build:tokens": "pnpm --filter @spectra/tokens run build",
