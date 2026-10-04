@@ -1,5 +1,5 @@
 {
-  "name": "@spectra/react",
+  "name": "@winplaybox/react",
   "version": "0.1.0",
   "description": "Styled web components for Spectra UI (WinPlayBox Design System)",
   "type": "module",
@@ -29,9 +29,9 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@spectra/icons": "workspace:*",
-    "@spectra/primitives": "workspace:*",
-    "@spectra/tokens": "workspace:*"
+    "@winplaybox/icons": "workspace:*",
+    "@winplaybox/primitives": "workspace:*",
+    "@winplaybox/tokens": "workspace:*"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",

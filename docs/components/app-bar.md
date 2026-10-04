@@ -3,14 +3,14 @@
 Top application header providing branding identity, breadcrumbs, search trigger, and user actions.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { AppBar } from '@spectra/react';
+import { AppBar } from '@winplaybox/react';
 
 export default function BasicAppBarExample() {
   return (
@@ -62,7 +62,7 @@ Official pattern: [Banner Landmark & Toolbar](https://www.w3.org/WAI/ARIA/apg/pa
 | :--- | :--- | :--- | :--- |
 | `sticky` | `boolean` | `true` | Pins header to top of viewport. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Provides backdrop blur and border styling tokens.

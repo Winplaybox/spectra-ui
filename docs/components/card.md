@@ -3,14 +3,14 @@
 Cards group related content, actions, and media into a unified surface container with distinct borders and elevations.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Card } from '@spectra/react';
+import { Card } from '@winplaybox/react';
 
 export default function BasicCardExample() {
   return (
@@ -65,13 +65,13 @@ Official pattern: [Card pattern](https://www.w3.org/WAI/ARIA/apg/patterns/card/)
 | `padding` | `'none' \| 'sm' \| 'md' \| 'lg'` | `'md'` | Internal padding spacing. |
 | `interactive` | `boolean` | `false` | Adds hover elevation and clickable focus ring. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Provides current theme tokens (colors.surface, colors.border) for custom card containers.
 
 ```tsx
-import { useTheme } from '@spectra/primitives';
+import { useTheme } from '@winplaybox/primitives';
 
 export function CustomCard({ children }) {
   const { colorScheme } = useTheme();

@@ -21,7 +21,7 @@ import {
   Text,
 } from './index';
 
-describe('@spectra/react-native Tier 2 Components', () => {
+describe('@winplaybox/react-native Tier 2 Components', () => {
   describe('Checkbox', () => {
     it('creates a Checkbox element with default props', () => {
       const el = React.createElement(Checkbox, { label: 'Accept Terms' });

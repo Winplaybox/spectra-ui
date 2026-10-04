@@ -3,14 +3,14 @@
 Displays prominent, urgent feedback or system status messages to users without interrupting their current workflow.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Alert } from '@spectra/react';
+import { Alert } from '@winplaybox/react';
 
 export default function BasicAlertExample() {
   return (
@@ -70,13 +70,13 @@ Official pattern: [Alert pattern](https://www.w3.org/WAI/ARIA/apg/patterns/alert
 | `onDismiss` | `() => void` | `undefined` | Callback fired when user clicks close button. |
 | `icon` | `ReactNode` | `undefined` | Custom icon overriding default variant icon. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useDisclosure`
 Description: Controls visibility, transition states, and unmount lifecycles for dismissible alerts.
 
 ```tsx
-import { useDisclosure } from '@spectra/primitives';
+import { useDisclosure } from '@winplaybox/primitives';
 
 export function CustomAlert({ message }) {
   const { isOpen, close } = useDisclosure(true);

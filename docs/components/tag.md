@@ -3,14 +3,14 @@
 Compact visual token for categorization, status indicators, and keyword labeling.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Tag } from '@spectra/react';
+import { Tag } from '@winplaybox/react';
 
 export default function BasicTagExample() {
   return (
@@ -63,13 +63,13 @@ Official pattern: [Tag / Badge Pattern](https://www.w3.org/WAI/ARIA/apg/patterns
 | `onClose` | `() => void` | `undefined` | Callback fired on close trigger. |
 | `color` | `'default' \| 'primary' \| 'success' \| 'warning' \| 'danger'` | `'default'` | Color theme token. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Calculates color contrast ratios for tag backgrounds.
 
 ```tsx
-import { useTheme } from '@spectra/primitives';
+import { useTheme } from '@winplaybox/primitives';
 
 export function CustomTag({ label }) {
   return <span className="spectra-tag">{label}</span>;

@@ -1,8 +1,8 @@
-# @spectra/react
+# @winplaybox/react
 
 > Production-ready, enterprise React component library for the **Spectra UI** design system by **Winplaybox**.
 
-[![npm version](https://img.shields.io/npm/v/@spectra/react.svg?style=flat-square&color=0969da)](https://www.npmjs.com/package/@spectra/react)
+[![npm version](https://img.shields.io/npm/v/@winplaybox/react.svg?style=flat-square&color=0969da)](https://www.npmjs.com/package/@winplaybox/react)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178c6.svg?style=flat-square)](https://www.typescriptlang.org/)
 [![Repository](https://img.shields.io/badge/GitHub-Winplaybox%2Fspectra--ui-181717.svg?style=flat-square)](https://github.com/Winplaybox/spectra-ui)
@@ -11,7 +11,7 @@
 
 ## Overview
 
-`@spectra/react` provides 58 enterprise-grade React components built with type safety, zero-runtime CSS (via Vanilla Extract), and rigorous WAI-ARIA / WCAG 2.1 AA accessibility. Benchmarked against Google Material UI (MUI v5/v6), Microsoft Fluent UI 2 (v9), and Apple Human Interface Guidelines (HIG), it offers a cohesive and resilient foundation for mission-critical web applications.
+`@winplaybox/react` provides 58 enterprise-grade React components built with type safety, zero-runtime CSS (via Vanilla Extract), and rigorous WAI-ARIA / WCAG 2.1 AA accessibility. Benchmarked against Google Material UI (MUI v5/v6), Microsoft Fluent UI 2 (v9), and Apple Human Interface Guidelines (HIG), it offers a cohesive and resilient foundation for mission-critical web applications.
 
 ---
 
@@ -19,12 +19,12 @@
 
 | Package | Purpose | NPM Link |
 | :--- | :--- | :--- |
-| **`@spectra/react`** | Core web component library | [npmjs.com/package/@spectra/react](https://www.npmjs.com/package/@spectra/react) |
-| **`@spectra/tokens`** | Multi-tier design tokens (CSS, TS, JSON) | [npmjs.com/package/@spectra/tokens](https://www.npmjs.com/package/@spectra/tokens) |
-| **`@spectra/icons`** | 14,200+ vector SVG icons (multi-shade) | [npmjs.com/package/@spectra/icons](https://www.npmjs.com/package/@spectra/icons) |
-| **`@spectra/primitives`** | 25 Headless hooks and behavioral state primitives | [npmjs.com/package/@spectra/primitives](https://www.npmjs.com/package/@spectra/primitives) |
-| **`@spectra/react-native`** | Mobile components for iOS and Android | [npmjs.com/package/@spectra/react-native](https://www.npmjs.com/package/@spectra/react-native) |
-| **`@spectra/mcp`** | Model Context Protocol server for AI coding assistants | [npmjs.com/package/@spectra/mcp](https://www.npmjs.com/package/@spectra/mcp) |
+| **`@winplaybox/react`** | Core web component library | [npmjs.com/package/@winplaybox/react](https://www.npmjs.com/package/@winplaybox/react) |
+| **`@winplaybox/tokens`** | Multi-tier design tokens (CSS, TS, JSON) | [npmjs.com/package/@winplaybox/tokens](https://www.npmjs.com/package/@winplaybox/tokens) |
+| **`@winplaybox/icons`** | 14,200+ vector SVG icons (multi-shade) | [npmjs.com/package/@winplaybox/icons](https://www.npmjs.com/package/@winplaybox/icons) |
+| **`@winplaybox/primitives`** | 25 Headless hooks and behavioral state primitives | [npmjs.com/package/@winplaybox/primitives](https://www.npmjs.com/package/@winplaybox/primitives) |
+| **`@winplaybox/react-native`** | Mobile components for iOS and Android | [npmjs.com/package/@winplaybox/react-native](https://www.npmjs.com/package/@winplaybox/react-native) |
+| **`@winplaybox/mcp`** | Model Context Protocol server for AI coding assistants | [npmjs.com/package/@winplaybox/mcp](https://www.npmjs.com/package/@winplaybox/mcp) |
 
 ---
 
@@ -32,13 +32,13 @@
 
 ```bash
 # Using pnpm
-pnpm add @spectra/react @spectra/tokens @spectra/icons
+pnpm add @winplaybox/react @winplaybox/tokens @winplaybox/icons
 
 # Using npm
-npm install @spectra/react @spectra/tokens @spectra/icons
+npm install @winplaybox/react @winplaybox/tokens @winplaybox/icons
 
 # Using yarn
-yarn add @spectra/react @spectra/tokens @spectra/icons
+yarn add @winplaybox/react @winplaybox/tokens @winplaybox/icons
 ```
 
 ---
@@ -50,7 +50,7 @@ yarn add @spectra/react @spectra/tokens @spectra/icons
 Include the Spectra UI stylesheet at your application root (e.g. `main.tsx` or `index.css`):
 
 ```css
-@import '@spectra/tokens/tokens.css';
+@import '@winplaybox/tokens/tokens.css';
 ```
 
 ### 2. Wrap Application in `SpectraProvider`
@@ -58,7 +58,7 @@ Include the Spectra UI stylesheet at your application root (e.g. `main.tsx` or `
 ```tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { SpectraProvider } from '@spectra/react';
+import { SpectraProvider } from '@winplaybox/react';
 import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -82,8 +82,8 @@ import {
   Stack,
   Dialog,
   useDisclosure,
-} from '@spectra/react';
-import { SearchIcon, PlusIcon } from '@spectra/icons';
+} from '@winplaybox/react';
+import { SearchIcon, PlusIcon } from '@winplaybox/icons';
 
 export function Dashboard() {
   const { isOpen, open, close } = useDisclosure();

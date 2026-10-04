@@ -3,14 +3,14 @@
 Controls for navigating across discrete pages of long tabular datasets or catalog listings.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Pagination } from '@spectra/react';
+import { Pagination } from '@winplaybox/react';
 
 export default function BasicPaginationExample() {
   return (
@@ -64,13 +64,13 @@ Official pattern: [Navigation Landmark with Pagination](https://www.w3.org/WAI/A
 | `page` | `number` | `1` | Active 1-indexed page. |
 | `onChange` | `(page: number) => void` | `undefined` | Page change callback. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useControllableState`
 Description: Manages active page index and ellipsis truncation logic.
 
 ```tsx
-import { useControllableState } from '@spectra/primitives';
+import { useControllableState } from '@winplaybox/primitives';
 
 export function PaginationPrimitive({ count, defaultValue = 1, onChange }) {
   const [page, setPage] = useControllableState({ defaultValue, onChange });

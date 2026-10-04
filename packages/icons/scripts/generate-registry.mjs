@@ -27,7 +27,7 @@ manifest.forEach((item) => {
   }
 });
 
-const registryContent = `// Auto-generated compact registry for @spectra/icons dynamic/lazy loading
+const registryContent = `// Auto-generated compact registry for @winplaybox/icons dynamic/lazy loading
 // Enables instant category resolution without loading the full 4.7MB manifest
 
 export const nameToCategory: Record<string, string> = ${JSON.stringify(nameToCategory)};

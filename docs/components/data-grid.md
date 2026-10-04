@@ -3,14 +3,14 @@
 High-performance virtualized grid with column sorting, filtering, cell selection, and keyboard roaming.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { DataGrid } from '@spectra/react';
+import { DataGrid } from '@winplaybox/react';
 
 export default function BasicDataGridExample() {
   return (
@@ -66,13 +66,13 @@ Official pattern: [Grid Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/grid/)
 | `rows` | `RowData[]` | `[]` | Dataset rows array. |
 | `pagination` | `boolean` | `true` | Enables bottom pagination bar. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useListNavigation`
 Description: Coordinates 2D arrow key roaming across columns and rows.
 
 ```tsx
-import { useListNavigation } from '@spectra/primitives';
+import { useListNavigation } from '@winplaybox/primitives';
 
 export function GridPrimitive() {
   return <div role="grid">{/* virtualized rows */}</div>;

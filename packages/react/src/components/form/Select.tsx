@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { useId } from '@spectra/primitives';
-import { ChevronDownIcon } from '@spectra/icons';
+import { useId } from '@winplaybox/primitives';
+import { ChevronDownIcon } from '@winplaybox/icons';
 import * as styles from './Select.css';
 
 export interface SelectOption {

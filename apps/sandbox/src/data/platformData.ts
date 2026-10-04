@@ -30,7 +30,7 @@ export const PLATFORMS: Record<Platform, PlatformMetadata> = {
     badge: 'React 18/19',
     icon: 'web',
     runtime: 'Modern Evergreen Browsers (Chrome 90+, Safari 14+, Firefox 88+, Edge 90+)',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     primaryLanguage: 'TypeScript / TSX',
     nativeLanguage: 'HTML5 & CSS Variables',
     minOsVersion: 'Any modern OS with Evergreen Browser',
@@ -48,7 +48,7 @@ export const PLATFORMS: Record<Platform, PlatformMetadata> = {
     badge: 'iOS 15.0+',
     icon: 'ios',
     runtime: 'React Native Fabric / JavaScriptCore / Hermes',
-    package: '@spectra/react-native',
+    package: '@winplaybox/react-native',
     primaryLanguage: 'TypeScript / TSX (React Native)',
     nativeLanguage: 'Swift / SwiftUI',
     minOsVersion: 'iOS 15.0+ / iPadOS 15.0+',
@@ -66,7 +66,7 @@ export const PLATFORMS: Record<Platform, PlatformMetadata> = {
     badge: 'API 26+ (8.0)',
     icon: 'android',
     runtime: 'React Native Hermes / Android Runtime (ART)',
-    package: '@spectra/react-native',
+    package: '@winplaybox/react-native',
     primaryLanguage: 'TypeScript / TSX (React Native)',
     nativeLanguage: 'Kotlin / Jetpack Compose',
     minOsVersion: 'Android 8.0 Oreo (API Level 26+), Target SDK 34+',
@@ -84,7 +84,7 @@ export const PLATFORMS: Record<Platform, PlatformMetadata> = {
     badge: 'Win 10/11',
     icon: 'windows',
     runtime: 'React Native for Windows / WinUI 3 (Windows App SDK)',
-    package: '@spectra/react-native-windows',
+    package: '@winplaybox/react-native-windows',
     primaryLanguage: 'TypeScript / TSX (RNW)',
     nativeLanguage: 'C# / XAML (WinUI 3)',
     minOsVersion: 'Windows 10 (1809+, build 17763+) & Windows 11 (build 22000+)',
@@ -102,7 +102,7 @@ export const PLATFORMS: Record<Platform, PlatformMetadata> = {
     badge: 'macOS 12.0+',
     icon: 'macos',
     runtime: 'React Native for macOS / AppKit / SwiftUI Mac',
-    package: '@spectra/react-native-macos',
+    package: '@winplaybox/react-native-macos',
     primaryLanguage: 'TypeScript / TSX (RN macOS)',
     nativeLanguage: 'Swift / AppKit / SwiftUI',
     minOsVersion: 'macOS Monterey 12.0+, Ventura 13+, Sonoma 14+, Sequoia 15+',
@@ -137,8 +137,8 @@ export function getComponentPlatformData(componentId: string, componentName: str
       notes: '100% token contract synced with CSS variables. SSR & RSC compatible with full WAI-ARIA.',
       touchStandard: '24×24px minimum (WCAG 2.1 AA)',
       primarySnippet: `// Web Implementation (React DOM)
-import '@spectra/tokens/css';
-import { ${comp} } from '@spectra/react';
+import '@winplaybox/tokens/css';
+import { ${comp} } from '@winplaybox/react';
 
 export const Web${comp}Example = () => {
   return (
@@ -171,7 +171,7 @@ export const Web${comp}Example = () => {
       touchStandard: '44×44 pt minimum (Apple HIG)',
       primarySnippet: `// iOS React Native Implementation
 import React from 'react';
-import { ${comp} } from '@spectra/react-native';
+import { ${comp} } from '@winplaybox/react-native';
 
 export const IOS${comp}Example = () => {
   return (
@@ -216,7 +216,7 @@ struct IOS${comp}View: View {
       touchStandard: '48×48 dp minimum (Material Design)',
       primarySnippet: `// Android React Native Implementation
 import React from 'react';
-import { ${comp} } from '@spectra/react-native';
+import { ${comp} } from '@winplaybox/react-native';
 
 export const Android${comp}Example = () => {
   return (
@@ -260,7 +260,7 @@ fun Android${comp}View() {
       touchStandard: '32×32 epx (Desktop Pointer & Touch)',
       primarySnippet: `// Windows React Native (RNW) Implementation
 import React from 'react';
-import { ${comp} } from '@spectra/react-native-windows';
+import { ${comp} } from '@winplaybox/react-native-windows';
 
 export const Windows${comp}Example = () => {
   return (
@@ -300,7 +300,7 @@ export const Windows${comp}Example = () => {
       touchStandard: '28×28 pt (Precision Trackpad / Mouse)',
       primarySnippet: `// macOS React Native Implementation
 import React from 'react';
-import { ${comp} } from '@spectra/react-native-macos';
+import { ${comp} } from '@winplaybox/react-native-macos';
 
 export const MacOS${comp}Example = () => {
   return (

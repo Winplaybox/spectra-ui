@@ -18,7 +18,7 @@ import {
   Chip,
   Breadcrumbs,
   Avatar,
-} from '@spectra/react';
+} from '@winplaybox/react';
 import {
   SearchIcon,
   ChevronDownIcon,
@@ -30,7 +30,7 @@ import {
   SparklesIcon,
   CloseIcon,
   ExternalLinkIcon,
-} from '@spectra/icons';
+} from '@winplaybox/icons';
 import { navigate } from '../../utils/router';
 import { COMPONENT_CATEGORIES } from './Sidebar';
 import { V010_NEW_COMPONENTS } from '../../data/versionReleaseData';

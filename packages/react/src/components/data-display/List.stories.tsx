@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { List, ListItem, ListItemText, ListItemIcon, ListItemAction } from './List';
-import { ChevronRightIcon, UserIcon, InfoIcon } from '@spectra/icons';
+import { ChevronRightIcon, UserIcon, InfoIcon } from '@winplaybox/icons';
 
 const meta: Meta<typeof List> = {
   title: 'Data Display/List',

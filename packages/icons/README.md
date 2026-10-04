@@ -1,8 +1,8 @@
-# @spectra/icons
+# @winplaybox/icons
 
 > Accessible, tree-shakeable, multi-shade vector icon library for the **Spectra UI** design system by **Winplaybox**.
 
-[![npm version](https://img.shields.io/npm/v/@spectra/icons.svg?style=flat-square&color=0969da)](https://www.npmjs.com/package/@spectra/icons)
+[![npm version](https://img.shields.io/npm/v/@winplaybox/icons.svg?style=flat-square&color=0969da)](https://www.npmjs.com/package/@winplaybox/icons)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178c6.svg?style=flat-square)](https://www.typescriptlang.org/)
 [![Repository](https://img.shields.io/badge/GitHub-Winplaybox%2Fspectra--ui-181717.svg?style=flat-square)](https://github.com/Winplaybox/spectra-ui)
@@ -11,7 +11,7 @@
 
 ## Overview
 
-`@spectra/icons` provides over 14,200+ accessible SVG vector glyphs across 7 distinct visual styles. Built specifically for Spectra UI, every icon automatically respects the active Light and Dark theme modes using `currentColor`, provides strict centered alignment guarantees, and supports subpath imports for maximum tree-shaking performance.
+`@winplaybox/icons` provides over 14,200+ accessible SVG vector glyphs across 7 distinct visual styles. Built specifically for Spectra UI, every icon automatically respects the active Light and Dark theme modes using `currentColor`, provides strict centered alignment guarantees, and supports subpath imports for maximum tree-shaking performance.
 
 ---
 
@@ -19,12 +19,12 @@
 
 | Package | Purpose | NPM Link |
 | :--- | :--- | :--- |
-| **`@spectra/react`** | Core web component library | [npmjs.com/package/@spectra/react](https://www.npmjs.com/package/@spectra/react) |
-| **`@spectra/tokens`** | Multi-tier design tokens (CSS, TS, JSON) | [npmjs.com/package/@spectra/tokens](https://www.npmjs.com/package/@spectra/tokens) |
-| **`@spectra/icons`** | 14,200+ vector SVG icons (multi-shade) | [npmjs.com/package/@spectra/icons](https://www.npmjs.com/package/@spectra/icons) |
-| **`@spectra/primitives`** | 25 Headless hooks and behavioral state primitives | [npmjs.com/package/@spectra/primitives](https://www.npmjs.com/package/@spectra/primitives) |
-| **`@spectra/react-native`** | Mobile components for iOS and Android | [npmjs.com/package/@spectra/react-native](https://www.npmjs.com/package/@spectra/react-native) |
-| **`@spectra/mcp`** | Model Context Protocol server for AI coding assistants | [npmjs.com/package/@spectra/mcp](https://www.npmjs.com/package/@spectra/mcp) |
+| **`@winplaybox/react`** | Core web component library | [npmjs.com/package/@winplaybox/react](https://www.npmjs.com/package/@winplaybox/react) |
+| **`@winplaybox/tokens`** | Multi-tier design tokens (CSS, TS, JSON) | [npmjs.com/package/@winplaybox/tokens](https://www.npmjs.com/package/@winplaybox/tokens) |
+| **`@winplaybox/icons`** | 14,200+ vector SVG icons (multi-shade) | [npmjs.com/package/@winplaybox/icons](https://www.npmjs.com/package/@winplaybox/icons) |
+| **`@winplaybox/primitives`** | 25 Headless hooks and behavioral state primitives | [npmjs.com/package/@winplaybox/primitives](https://www.npmjs.com/package/@winplaybox/primitives) |
+| **`@winplaybox/react-native`** | Mobile components for iOS and Android | [npmjs.com/package/@winplaybox/react-native](https://www.npmjs.com/package/@winplaybox/react-native) |
+| **`@winplaybox/mcp`** | Model Context Protocol server for AI coding assistants | [npmjs.com/package/@winplaybox/mcp](https://www.npmjs.com/package/@winplaybox/mcp) |
 
 ---
 
@@ -32,13 +32,13 @@
 
 ```bash
 # Using pnpm
-pnpm add @spectra/icons
+pnpm add @winplaybox/icons
 
 # Using npm
-npm install @spectra/icons
+npm install @winplaybox/icons
 
 # Using yarn
-yarn add @spectra/icons
+yarn add @winplaybox/icons
 ```
 
 ---
@@ -49,7 +49,7 @@ Import any icon directly by component name:
 
 ```tsx
 import React from 'react';
-import { CheckIcon, FilledHomeIcon, OutlinedSearchIcon } from '@spectra/icons';
+import { CheckIcon, FilledHomeIcon, OutlinedSearchIcon } from '@winplaybox/icons';
 
 export const IconDemo = () => {
   return (
@@ -84,9 +84,9 @@ To minimize compile times and bundle size, import directly from style subpaths:
 
 ```tsx
 // Direct subpath imports
-import { HomeIcon, SearchIcon } from '@spectra/icons/filled';
-import { UserIcon, SettingsIcon } from '@spectra/icons/outlined';
-import { GithubIcon, TwitterIcon } from '@spectra/icons/social';
+import { HomeIcon, SearchIcon } from '@winplaybox/icons/filled';
+import { UserIcon, SettingsIcon } from '@winplaybox/icons/outlined';
+import { GithubIcon, TwitterIcon } from '@winplaybox/icons/social';
 ```
 
 ---
@@ -97,7 +97,7 @@ For dashboards or menus where icons are configured dynamically from a database o
 
 ```tsx
 import React from 'react';
-import { DynamicIcon } from '@spectra/icons';
+import { DynamicIcon } from '@winplaybox/icons';
 
 export function NavigationItem({ iconName, label }: { iconName: string; label: string }) {
   return (

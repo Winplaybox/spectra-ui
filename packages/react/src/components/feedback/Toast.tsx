@@ -1,6 +1,6 @@
 // packages/react/src/components/feedback/Toast.tsx
 import React, { forwardRef, ReactNode } from 'react';
-import { CloseIcon, CheckIcon, AlertCircleIcon, InfoIcon } from '@spectra/icons';
+import { CloseIcon, CheckIcon, AlertCircleIcon, InfoIcon } from '@winplaybox/icons';
 
 export type ToastVariant = 'info' | 'success' | 'warning' | 'danger';
 

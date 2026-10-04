@@ -1,8 +1,8 @@
-# @spectra/tokens
+# @winplaybox/tokens
 
 > Multi-tier design token engine for the **Spectra UI** design system by **Winplaybox**.
 
-[![npm version](https://img.shields.io/npm/v/@spectra/tokens.svg?style=flat-square&color=0969da)](https://www.npmjs.com/package/@spectra/tokens)
+[![npm version](https://img.shields.io/npm/v/@winplaybox/tokens.svg?style=flat-square&color=0969da)](https://www.npmjs.com/package/@winplaybox/tokens)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178c6.svg?style=flat-square)](https://www.typescriptlang.org/)
 [![Repository](https://img.shields.io/badge/GitHub-Winplaybox%2Fspectra--ui-181717.svg?style=flat-square)](https://github.com/Winplaybox/spectra-ui)
@@ -11,7 +11,7 @@
 
 ## Overview
 
-`@spectra/tokens` is the single source of truth for all visual values across the Spectra UI ecosystem. Using a multi-tier token architecture (Primitives -> Semantic -> Theme Modes -> Brand Packs), it deterministically compiles into standard CSS variables, type-safe TypeScript definitions, and JSON contracts for consumption across Web, React Native, and design tools.
+`@winplaybox/tokens` is the single source of truth for all visual values across the Spectra UI ecosystem. Using a multi-tier token architecture (Primitives -> Semantic -> Theme Modes -> Brand Packs), it deterministically compiles into standard CSS variables, type-safe TypeScript definitions, and JSON contracts for consumption across Web, React Native, and design tools.
 
 ---
 
@@ -19,12 +19,12 @@
 
 | Package | Purpose | NPM Link |
 | :--- | :--- | :--- |
-| **`@spectra/react`** | Core web component library | [npmjs.com/package/@spectra/react](https://www.npmjs.com/package/@spectra/react) |
-| **`@spectra/tokens`** | Multi-tier design tokens (CSS, TS, JSON) | [npmjs.com/package/@spectra/tokens](https://www.npmjs.com/package/@spectra/tokens) |
-| **`@spectra/icons`** | 14,200+ vector SVG icons (multi-shade) | [npmjs.com/package/@spectra/icons](https://www.npmjs.com/package/@spectra/icons) |
-| **`@spectra/primitives`** | 25 Headless hooks and behavioral state primitives | [npmjs.com/package/@spectra/primitives](https://www.npmjs.com/package/@spectra/primitives) |
-| **`@spectra/react-native`** | Mobile components for iOS and Android | [npmjs.com/package/@spectra/react-native](https://www.npmjs.com/package/@spectra/react-native) |
-| **`@spectra/mcp`** | Model Context Protocol server for AI coding assistants | [npmjs.com/package/@spectra/mcp](https://www.npmjs.com/package/@spectra/mcp) |
+| **`@winplaybox/react`** | Core web component library | [npmjs.com/package/@winplaybox/react](https://www.npmjs.com/package/@winplaybox/react) |
+| **`@winplaybox/tokens`** | Multi-tier design tokens (CSS, TS, JSON) | [npmjs.com/package/@winplaybox/tokens](https://www.npmjs.com/package/@winplaybox/tokens) |
+| **`@winplaybox/icons`** | 14,200+ vector SVG icons (multi-shade) | [npmjs.com/package/@winplaybox/icons](https://www.npmjs.com/package/@winplaybox/icons) |
+| **`@winplaybox/primitives`** | 25 Headless hooks and behavioral state primitives | [npmjs.com/package/@winplaybox/primitives](https://www.npmjs.com/package/@winplaybox/primitives) |
+| **`@winplaybox/react-native`** | Mobile components for iOS and Android | [npmjs.com/package/@winplaybox/react-native](https://www.npmjs.com/package/@winplaybox/react-native) |
+| **`@winplaybox/mcp`** | Model Context Protocol server for AI coding assistants | [npmjs.com/package/@winplaybox/mcp](https://www.npmjs.com/package/@winplaybox/mcp) |
 
 ---
 
@@ -32,13 +32,13 @@
 
 ```bash
 # Using pnpm
-pnpm add @spectra/tokens
+pnpm add @winplaybox/tokens
 
 # Using npm
-npm install @spectra/tokens
+npm install @winplaybox/tokens
 
 # Using yarn
-yarn add @spectra/tokens
+yarn add @winplaybox/tokens
 ```
 
 ---
@@ -50,7 +50,7 @@ yarn add @spectra/tokens
 Import the compiled tokens stylesheet into your application root:
 
 ```css
-@import '@spectra/tokens/tokens.css';
+@import '@winplaybox/tokens/tokens.css';
 
 .my-card {
   background-color: var(--color-background-surface);
@@ -65,7 +65,7 @@ Import the compiled tokens stylesheet into your application root:
 ### 2. In TypeScript / JavaScript
 
 ```typescript
-import { tokens } from '@spectra/tokens';
+import { tokens } from '@winplaybox/tokens';
 
 const primaryColor = tokens.color.action.primary;
 const baseSpacing = tokens.spacing.medium;
@@ -75,7 +75,7 @@ const defaultRadius = tokens.radius.medium;
 ### 3. In JSON / Style Dictionary
 
 ```typescript
-import tokensJson from '@spectra/tokens/json';
+import tokensJson from '@winplaybox/tokens/json';
 
 console.log(tokensJson.color.action.primary.value);
 ```

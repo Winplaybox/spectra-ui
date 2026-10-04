@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, cloneElement } from 'react';
-import { useId } from '@spectra/primitives';
+import { useId } from '@winplaybox/primitives';
 import * as styles from './Tooltip.css';
 
 export interface TooltipProps {

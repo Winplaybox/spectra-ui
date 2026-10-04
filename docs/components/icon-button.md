@@ -3,14 +3,14 @@
 Compact circular or rounded square button displaying only a vector icon with accessible aria-label.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { IconButton } from '@spectra/react';
+import { IconButton } from '@winplaybox/react';
 
 export default function BasicIconButtonExample() {
   return (
@@ -66,13 +66,13 @@ Official pattern: [Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/butt
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Dimensions scale (32px, 40px, 48px). |
 | `variant` | `'primary' \| 'secondary' \| 'ghost'` | `'ghost'` | Visual surface variant. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useFocusRing`
 Description: Supplies accessible focus ring parameters for circular boundaries.
 
 ```tsx
-import { useFocusRing } from '@spectra/primitives';
+import { useFocusRing } from '@winplaybox/primitives';
 
 export function ActionIconButton(props) {
   const { isFocusVisible, focusProps } = useFocusRing();

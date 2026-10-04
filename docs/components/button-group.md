@@ -3,14 +3,14 @@
 Horizontally or vertically groups related buttons with shared borders and unified outer corner radii.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { ButtonGroup } from '@spectra/react';
+import { ButtonGroup } from '@winplaybox/react';
 
 export default function BasicButtonGroupExample() {
   return (
@@ -65,13 +65,13 @@ Official pattern: [Toolbar Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/too
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Unified sizing scale. |
 | `children` | `ReactNode` | `undefined` | Button instances to render. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useListNavigation`
 Description: Manages arrow key roaming and active index synchronization.
 
 ```tsx
-import { useListNavigation } from '@spectra/primitives';
+import { useListNavigation } from '@winplaybox/primitives';
 
 export function ToolbarGroup() {
   const { activeIndex } = useListNavigation({ totalItems: 3 });

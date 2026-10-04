@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
-import { useControllableState, useId } from '@spectra/primitives';
-import { CheckIcon, MinusIcon } from '@spectra/icons';
+import { useControllableState, useId } from '@winplaybox/primitives';
+import { CheckIcon, MinusIcon } from '@winplaybox/icons';
 import * as styles from './Checkbox.css';
 
 export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'size'> {

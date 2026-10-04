@@ -3,14 +3,14 @@
 Interactive hue, saturation, and hex input panel for selecting design tokens and custom color values.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { ColorPicker } from '@spectra/react';
+import { ColorPicker } from '@winplaybox/react';
 
 export default function BasicColorPickerExample() {
   return (
@@ -64,13 +64,13 @@ Official pattern: [Color Dialog Pattern](https://www.w3.org/WAI/ARIA/apg/pattern
 | `value` | `string` | `'#2563EB'` | Active hex color string. |
 | `onChange` | `(color: string) => void` | `undefined` | Color change callback. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useDisclosure`
 Description: Opens and closes color picker popover.
 
 ```tsx
-import { useDisclosure } from '@spectra/primitives';
+import { useDisclosure } from '@winplaybox/primitives';
 
 export function ColorPickerDemo() {
   const { isOpen, onToggle } = useDisclosure();

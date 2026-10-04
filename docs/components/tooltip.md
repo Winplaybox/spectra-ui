@@ -3,14 +3,14 @@
 Tooltips display brief informative text when users hover, focus, or tap an interactive element.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@spectra/react';
+import { Tooltip } from '@winplaybox/react';
 
 export default function BasicTooltipExample() {
   return (
@@ -64,13 +64,13 @@ Official pattern: [Tooltip pattern](https://www.w3.org/WAI/ARIA/apg/patterns/too
 | `placement` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` | Placement direction relative to target. |
 | `delay` | `number` | `100` | Hover delay in milliseconds before appearance. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useOutsideClick`
 Description: Automatically dismisses floating popovers and tooltips when clicking outside the boundary.
 
 ```tsx
-import { useOutsideClick } from '@spectra/primitives';
+import { useOutsideClick } from '@winplaybox/primitives';
 
 export function CustomTooltip() {
   const ref = useOutsideClick(() => setVisible(false));

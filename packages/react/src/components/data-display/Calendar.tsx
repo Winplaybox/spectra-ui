@@ -1,6 +1,6 @@
 // packages/react/src/components/data-display/Calendar.tsx
 import React, { useState, forwardRef } from 'react';
-import { ChevronDownIcon } from '@spectra/icons';
+import { ChevronDownIcon } from '@winplaybox/icons';
 
 export interface CalendarProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue'> {
   value?: Date;

@@ -3,14 +3,14 @@
 Prominent numerical display for KPI metric dashboards, comparison delta percentages, and trend arrows.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Statistic } from '@spectra/react';
+import { Statistic } from '@winplaybox/react';
 
 export default function BasicStatisticExample() {
   return (
@@ -64,13 +64,13 @@ Official pattern: [Status / Metric Pattern](https://www.w3.org/WAI/ARIA/apg/patt
 | `value` | `string \| number` | `0` | Primary numerical statistic. |
 | `delta` | `string` | `''` | Percentage change indicator. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Provides typography scale tokens for headline numerical font.
 
 ```tsx
-import { useTheme } from '@spectra/primitives';
+import { useTheme } from '@winplaybox/primitives';
 
 export function StatisticCard({ title, value }) {
   return <div><span>{title}</span><h2>{value}</h2></div>;

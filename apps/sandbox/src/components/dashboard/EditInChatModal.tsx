@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SparklesIcon, CloseIcon, CopyIcon, CheckIcon, ExternalLinkIcon } from '@spectra/icons';
+import { SparklesIcon, CloseIcon, CopyIcon, CheckIcon, ExternalLinkIcon } from '@winplaybox/icons';
 
 interface EditInChatModalProps {
   isOpen: boolean;
@@ -86,7 +86,7 @@ Please provide the updated, clean runnable code for Spectra UI.`;
       if (!modified.includes('SparklesIcon')) {
         modified = modified.replace(
           /import {([^}]+)} from '@spectra\/icons';/,
-          "import { $1, SparklesIcon } from '@spectra/icons';"
+          "import { $1, SparklesIcon } from '@winplaybox/icons';"
         );
         modified = modified.replace(
           /<Button([^>]*)>/,

@@ -1,6 +1,6 @@
 // packages/react/src/components/data-display/Tag.tsx
 import React, { forwardRef, ReactNode } from 'react';
-import { CloseIcon } from '@spectra/icons';
+import { CloseIcon } from '@winplaybox/icons';
 
 export type TagVariant = 'neutral' | 'primary' | 'success' | 'warning' | 'danger' | 'info';
 export type TagSize = 'sm' | 'md' | 'lg';

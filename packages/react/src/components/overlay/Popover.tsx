@@ -1,6 +1,6 @@
 // packages/react/src/components/overlay/Popover.tsx
 import React, { forwardRef, ReactNode, useState, useRef, useEffect } from 'react';
-import { CloseIcon } from '@spectra/icons';
+import { CloseIcon } from '@winplaybox/icons';
 
 export interface PopoverProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
   trigger: ReactNode;

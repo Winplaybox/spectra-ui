@@ -1,6 +1,6 @@
 import React, { forwardRef, ReactNode } from 'react';
 import * as styles from './Breadcrumbs.css';
-import { ChevronRightIcon } from '@spectra/icons';
+import { ChevronRightIcon } from '@winplaybox/icons';
 
 export interface BreadcrumbItem {
   label: ReactNode;

@@ -3,14 +3,14 @@
 Checkboxes allow users to select one or multiple items from a list, or toggle an independent option on or off.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Checkbox } from '@spectra/react';
+import { Checkbox } from '@winplaybox/react';
 
 export default function BasicCheckboxExample() {
   return (
@@ -66,13 +66,13 @@ Official pattern: [Checkbox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/ch
 | `label` | `ReactNode` | `undefined` | Text or node displayed beside checkbox. |
 | `description` | `ReactNode` | `undefined` | Subtext giving extra guidance. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useControllableState`
 Description: Handles indeterminate and controlled/uncontrolled checked states with full keyboard toggling.
 
 ```tsx
-import { useControllableState } from '@spectra/primitives';
+import { useControllableState } from '@winplaybox/primitives';
 
 export function CustomCheckbox({ checked, defaultChecked, onChange }) {
   const [val, setVal] = useControllableState({ value: checked, defaultValue: defaultChecked, onChange });

@@ -3,14 +3,14 @@
 Physical metaphor surface receiving elevation shadows and border radius according to token scale.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Paper } from '@spectra/react';
+import { Paper } from '@winplaybox/react';
 
 export default function BasicPaperExample() {
   return (
@@ -60,13 +60,13 @@ Official pattern: [Surface Region](https://www.w3.org/WAI/ARIA/apg/patterns/)
 | `elevation` | `0 \| 1 \| 2 \| 3 \| 4 \| 5` | `1` | Shadow depth level. |
 | `variant` | `'flat' \| 'elevation' \| 'outlined'` | `'elevation'` | Surface finish. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Extracts theme shadow tokens.
 
 ```tsx
-import { useTheme } from '@spectra/primitives';
+import { useTheme } from '@winplaybox/primitives';
 
 export function PaperPrimitive({ elevation = 1, children }) {
   return <div className={`spectra-paper-elevation-${elevation}`}>{children}</div>;

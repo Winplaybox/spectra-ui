@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Tabs, TabList, Tab } from '@spectra/react';
-import { CopyIcon, CheckIcon, CodeIcon, PaletteIcon, CubeIcon, SmartphoneIcon } from '@spectra/icons';
+import { Card, Tabs, TabList, Tab } from '@winplaybox/react';
+import { CopyIcon, CheckIcon, CodeIcon, PaletteIcon, CubeIcon, SmartphoneIcon } from '@winplaybox/icons';
 import { COMPONENT_API_DATA, ComponentApiReference } from '../../data/apiReferenceData';
 
 interface ComponentApiSectionProps {
@@ -185,14 +185,14 @@ export const ComponentApiSection: React.FC<ComponentApiSectionProps> = ({ compon
               <span style={{ color: '#38BDF8' }}>import</span> {'{ '}
               <span style={{ color: '#4ADE80', fontWeight: 600 }}>{apiData.exportName}</span>
               {' }'} <span style={{ color: '#38BDF8' }}>from</span>{' '}
-              <span style={{ color: '#F472B6' }}>'@spectra/react'</span>;
+              <span style={{ color: '#F472B6' }}>'@winplaybox/react'</span>;
             </div>
             <div style={{ color: '#64748B', margin: '4px 0' }}>// or via direct subpath export</div>
             <div>
               <span style={{ color: '#38BDF8' }}>import</span>{' '}
               <span style={{ color: '#4ADE80', fontWeight: 600 }}>{apiData.exportName}</span>{' '}
               <span style={{ color: '#38BDF8' }}>from</span>{' '}
-              <span style={{ color: '#F472B6' }}>'@spectra/react/{apiData.exportName}'</span>;
+              <span style={{ color: '#F472B6' }}>'@winplaybox/react/{apiData.exportName}'</span>;
             </div>
           </div>
 

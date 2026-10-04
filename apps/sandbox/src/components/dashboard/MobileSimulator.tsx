@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card } from '@spectra/react';
-import { ExternalLinkIcon, CheckIcon, SmartphoneIcon } from '@spectra/icons';
+import { Card } from '@winplaybox/react';
+import { ExternalLinkIcon, CheckIcon, SmartphoneIcon } from '@winplaybox/icons';
 import { openInExpoSnack, openInReactNativeSandbox } from '../../utils/sandbox';
 
 interface MobileSimulatorProps {
@@ -365,7 +365,7 @@ export const MobileSimulator: React.FC<MobileSimulatorProps> = ({
             color: '#A1A1AA',
           }}
         >
-          <span>@spectra/react-native · iOS & Android</span>
+          <span>@winplaybox/react-native · iOS & Android</span>
           <span style={{ fontSize: 11 }}>TypeScript · React Native 0.73+</span>
         </div>
         <pre

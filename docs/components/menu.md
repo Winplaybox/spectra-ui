@@ -3,14 +3,14 @@
 Floating action menu displaying a list of choices on temporary surfaces (APG Menu pattern).
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Menu } from '@spectra/react';
+import { Menu } from '@winplaybox/react';
 
 export default function BasicMenuExample() {
   return (
@@ -65,13 +65,13 @@ Official pattern: [Menu Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menu-b
 | `isOpen` | `boolean` | `false` | Menu visibility state. |
 | `onClose` | `() => void` | `undefined` | Close callback. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useListNavigation`
 Description: Manages arrow key roving focus across menu items.
 
 ```tsx
-import { useListNavigation } from '@spectra/primitives';
+import { useListNavigation } from '@winplaybox/primitives';
 
 export function MenuPrimitive() {
   const { activeIndex } = useListNavigation({ totalItems: 4 });

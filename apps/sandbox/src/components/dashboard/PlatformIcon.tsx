@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform } from '../../data/platformData';
-import { GlobeIcon, BookOpenIcon, AppleIcon, AndroidIcon, WindowsIcon, MonitorIcon } from '@spectra/icons';
+import { GlobeIcon, BookOpenIcon, AppleIcon, AndroidIcon, WindowsIcon, MonitorIcon } from '@winplaybox/icons';
 
 interface PlatformIconProps {
   platform: Platform | 'headless' | 'all';

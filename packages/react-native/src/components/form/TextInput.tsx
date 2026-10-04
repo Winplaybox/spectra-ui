@@ -6,8 +6,8 @@ import {
   StyleSheet,
   TextInputProps as RNTextInputProps,
 } from 'react-native';
-import { useTheme, useFormField } from '@spectra/primitives';
-import { getTokens } from '@spectra/tokens';
+import { useTheme, useFormField } from '@winplaybox/primitives';
+import { getTokens } from '@winplaybox/tokens';
 
 export interface NativeTextInputProps extends RNTextInputProps {
   label?: string;

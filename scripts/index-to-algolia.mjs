@@ -23,7 +23,7 @@ const guides = [
     section: 'DOCUMENTATION',
     title: 'Overview & Architecture',
     subtitle: 'Getting Started',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     path: '/overview',
     description: 'Autonomous cross-platform design system engine for React and React Native. Universal tokens, headless primitives, and 12,253 icons.',
     tags: ['overview', 'architecture', 'design system', 'quickstart', 'getting started'],
@@ -35,9 +35,9 @@ const guides = [
     section: 'DOCUMENTATION',
     title: 'Installation & SpectraProvider',
     subtitle: 'Getting Started',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     path: '/installation',
-    description: 'Quickstart setup for @spectra/react, @spectra/tokens, and @spectra/icons with dark mode and TypeScript support.',
+    description: 'Quickstart setup for @winplaybox/react, @winplaybox/tokens, and @winplaybox/icons with dark mode and TypeScript support.',
     tags: ['installation', 'setup', 'npm', 'pnpm', 'provider', 'SpectraProvider'],
     importance: 95,
   },
@@ -47,7 +47,7 @@ const guides = [
     section: 'DOCUMENTATION',
     title: 'Cross-Platform Parity (Web & Mobile)',
     subtitle: 'Getting Started',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     path: '/cross-platform',
     description: 'Single token dictionary with dual platform targets. 100% token and component parity between React DOM and React Native.',
     tags: ['cross-platform', 'react-native', 'mobile', 'universal', 'parity'],
@@ -59,7 +59,7 @@ const guides = [
     section: 'DOCUMENTATION',
     title: '12,253 Vector Icons & Social Brands',
     subtitle: 'Icons',
-    package: '@spectra/icons',
+    package: '@winplaybox/icons',
     path: '/icons',
     description: 'Vector SVG icon library featuring 20 authentic brand marks and filled, outlined, and two-tone icon styles.',
     tags: ['icons', 'svg', 'brands', 'social', 'vector', 'search icon'],
@@ -71,7 +71,7 @@ const guides = [
     section: 'DOCUMENTATION',
     title: 'Motion, Physics & Easing Curves',
     subtitle: 'Design Tokens',
-    package: '@spectra/tokens',
+    package: '@winplaybox/tokens',
     path: '/tokens/motion',
     description: 'Standardized duration tokens (fast 150ms, normal 250ms, slow 400ms) and cubic-bezier easing curves.',
     tags: ['motion', 'animation', 'easing', 'physics', 'spring', 'duration'],
@@ -84,7 +84,7 @@ const rawComponents = [
   {
     id: 'button',
     name: 'Button',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Actions',
     path: '/components/button',
     description: 'Primary interactive trigger for user actions. Supports 5 visual variants (primary, secondary, subtle, danger, outline), 3 sizes (sm, md, lg), loading spinner states, and left/right contextual vector icons.',
@@ -122,7 +122,7 @@ const rawComponents = [
   {
     id: 'text-input',
     name: 'TextInput',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Inputs',
     path: '/components/text-input',
     description: 'Text fields let users enter and edit text across forms, search bars, and dialogs with built-in states for focus, error, helper text, and password visibility reveal.',
@@ -154,7 +154,7 @@ const rawComponents = [
   {
     id: 'select',
     name: 'Select',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Inputs',
     path: '/components/select',
     description: 'Accessible dropdown selection menu supporting grouped categories (optgroup), placeholder prompts, validation errors, and keyboard navigation.',
@@ -179,7 +179,7 @@ const rawComponents = [
   {
     id: 'checkbox',
     name: 'Checkbox',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Inputs',
     path: '/components/checkbox',
     description: 'Binary and multi-select checkbox control with support for indeterminate parent-child states, descriptive labels, and keyboard activation.',
@@ -202,7 +202,7 @@ const rawComponents = [
   {
     id: 'radio',
     name: 'Radio',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Inputs',
     path: '/components/radio',
     description: 'Mutually exclusive selection in radio groups with arrow key navigation, focus ring management, and helper text.',
@@ -222,7 +222,7 @@ const rawComponents = [
   {
     id: 'switch',
     name: 'Switch',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Inputs',
     path: '/components/switch',
     description: 'Instant binary setting toggle switch with smooth physics animations, touch drag support, and accessible role="switch".',
@@ -243,7 +243,7 @@ const rawComponents = [
   {
     id: 'avatar',
     name: 'Avatar',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Data Display',
     path: '/components/avatar',
     description: 'Visual representation of a user or entity with initials fallback, color tints, and presence badges (online, busy, away, offline).',
@@ -265,7 +265,7 @@ const rawComponents = [
   {
     id: 'badge',
     name: 'Badge',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Data Display',
     path: '/components/badge',
     description: 'Compact status tags, numerical counters, and semantic chips with neutral, primary, success, warning, and danger variants.',
@@ -286,7 +286,7 @@ const rawComponents = [
   {
     id: 'card',
     name: 'Card',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Surfaces',
     path: '/components/card',
     description: 'Structured surface container with elevated, flat, and bordered variants. High contrast background preventing floating elements bleed-through.',
@@ -309,7 +309,7 @@ const rawComponents = [
   {
     id: 'tabs',
     name: 'Tabs',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Navigation',
     path: '/components/tabs',
     description: 'Navigation tab strip with underline and pill variants, smooth active indicator transitions, and keyboard arrow navigation.',
@@ -330,7 +330,7 @@ const rawComponents = [
   {
     id: 'accordion',
     name: 'Accordion',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Data Display',
     path: '/components/accordion',
     description: 'Vertically stacked collapsible panels with smooth height animations, keyboard arrow navigation, and multi-expand or single-expand modes.',
@@ -351,7 +351,7 @@ const rawComponents = [
   {
     id: 'dialog',
     name: 'Dialog',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Feedback',
     path: '/components/dialog',
     description: 'Accessible modal dialog surface with focus trap, backdrop blur, keyboard Escape dismissal, and return focus restore.',
@@ -374,7 +374,7 @@ const rawComponents = [
   {
     id: 'tooltip',
     name: 'Tooltip',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Feedback',
     path: '/components/tooltip',
     description: 'Contextual hover and keyboard focus popup explaining an action or icon. Features automatic boundary collision detection and arrow pointer.',
@@ -395,7 +395,7 @@ const rawComponents = [
   {
     id: 'list',
     name: 'List',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Data Display',
     path: '/components/list',
     description: 'Structured list items with leading vector icons, avatars, titles, descriptions, trailing interactive controls, and divider rules.',
@@ -414,7 +414,7 @@ const rawComponents = [
   {
     id: 'alert',
     name: 'Alert',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Feedback',
     path: '/components/alert',
     description: 'Prominent feedback banners communicating status severity (info, success, warning, danger) with dismissible close actions and vector icons.',
@@ -443,7 +443,7 @@ const rawComponents = [
   {
     id: 'spinner',
     name: 'Spinner',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Feedback',
     path: '/components/spinner',
     description: 'Circular rotating progress indicator providing smooth continuous motion feedback across small (16px), medium (24px), and large (36px) sizes.',
@@ -466,7 +466,7 @@ const rawComponents = [
   {
     id: 'skeleton',
     name: 'Skeleton',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Feedback',
     path: '/components/skeleton',
     description: 'Placeholder preview showing continuous shimmer wave animations before data finishes loading across text lines, circular avatars, and card shapes.',
@@ -491,7 +491,7 @@ const rawComponents = [
   {
     id: 'divider',
     name: 'Divider',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Layout',
     path: '/components/divider',
     description: 'Visual separator dividing content sections horizontally or vertically, supporting dashed/dotted borders and centered text label insets.',
@@ -514,7 +514,7 @@ const rawComponents = [
   {
     id: 'chip',
     name: 'Chip',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Data Display',
     path: '/components/chip',
     description: 'Compact interactive badges representing entities, inputs, selections, or filters with optional leading avatars/icons and dismiss actions.',
@@ -541,7 +541,7 @@ const rawComponents = [
   {
     id: 'breadcrumbs',
     name: 'Breadcrumbs',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Navigation',
     path: '/components/breadcrumbs',
     description: 'Hierarchical navigation trail displaying current page location with interactive ancestor links, custom separators, and maxItems collapsing.',
@@ -570,7 +570,7 @@ const rawHooks = [
   {
     id: 'use-disclosure',
     name: 'useDisclosure',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Functional Hooks',
     path: '/hooks/use-disclosure',
     description: 'Headless open/close/toggle state machine for modals, dialogs, drawers, and popovers with built-in callback hooks.',
@@ -579,7 +579,7 @@ const rawHooks = [
   {
     id: 'use-controllable-state',
     name: 'useControllableState',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Functional Hooks',
     path: '/hooks/use-controllable-state',
     description: 'Universal state hook supporting both controlled and uncontrolled component patterns seamlessly without warnings.',
@@ -588,7 +588,7 @@ const rawHooks = [
   {
     id: 'use-outside-click',
     name: 'useOutsideClick',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Functional Hooks',
     path: '/hooks/use-outside-click',
     description: 'Listens for pointerdown or mousedown events outside of a designated ref element to dismiss floating menus and modals.',
@@ -597,7 +597,7 @@ const rawHooks = [
   {
     id: 'use-id',
     name: 'useId',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Functional Hooks',
     path: '/hooks/use-id',
     description: 'Generates collision-free, SSR-safe unique HTML and accessibility IDs for linking labels to form controls (aria-labelledby).',
@@ -606,7 +606,7 @@ const rawHooks = [
   {
     id: 'use-color-scheme',
     name: 'useColorScheme',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Functional Hooks',
     path: '/hooks/use-color-scheme',
     description: 'Detects and controls light/dark color scheme with system preference synchronization and persistent storage.',
@@ -615,7 +615,7 @@ const rawHooks = [
   {
     id: 'use-media-query',
     name: 'useMediaQuery',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Functional Hooks',
     path: '/hooks/use-media-query',
     description: 'Reactive CSS media query hook with listener pooling and SSR fallback value support.',
@@ -624,7 +624,7 @@ const rawHooks = [
   {
     id: 'use-focus-ring',
     name: 'useFocusRing',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Functional Hooks',
     path: '/hooks/use-focus-ring',
     description: 'Determines whether focus ring should be visible based on keyboard vs pointer modality (:focus-visible polyfill).',
@@ -633,7 +633,7 @@ const rawHooks = [
   {
     id: 'use-toast',
     name: 'useToast',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Functional Hooks',
     path: '/hooks/use-toast',
     description: 'Imperative toast and notification dispatcher with auto-dismiss timers, action buttons, and deduplication.',
@@ -642,7 +642,7 @@ const rawHooks = [
   {
     id: 'use-reduced-motion',
     name: 'useReducedMotion',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Functional Hooks',
     path: '/hooks/use-reduced-motion',
     description: 'Detects if the user has requested the system minimize non-essential motion or animations (WCAG 2.3.3).',
@@ -651,7 +651,7 @@ const rawHooks = [
   {
     id: 'use-rtl',
     name: 'useRTL',
-    package: '@spectra/react',
+    package: '@winplaybox/react',
     category: 'Functional Hooks',
     path: '/hooks/use-rtl',
     description: 'Detects right-to-left document directionality and flips directional icons, padding, and layout anchors.',
@@ -751,7 +751,7 @@ function buildCompleteAlgoliaRecords() {
         section: 'COMPONENT API',
         title: tok.token,
         subtitle: `${comp.name} API`,
-        package: '@spectra/tokens',
+        package: '@winplaybox/tokens',
         path: `${comp.path}#api`,
         description: tok.desc,
         iconType: 'token',
@@ -784,7 +784,7 @@ function buildCompleteAlgoliaRecords() {
       section: 'DESIGN TOKENS',
       title: token.name,
       subtitle: token.value || `Light: ${token.light} · Dark: ${token.dark}`,
-      package: '@spectra/tokens',
+      package: '@winplaybox/tokens',
       path: '/tokens/colors',
       description: token.role,
       iconType: 'token',

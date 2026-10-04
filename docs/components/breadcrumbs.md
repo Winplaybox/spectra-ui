@@ -3,14 +3,14 @@
 A hierarchical navigation trail displaying the user current position within an application hierarchy and enabling one-click navigation up levels.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Breadcrumbs } from '@spectra/react';
+import { Breadcrumbs } from '@winplaybox/react';
 
 export default function BasicBreadcrumbsExample() {
   return (
@@ -69,13 +69,13 @@ Official pattern: [Breadcrumb pattern](https://www.w3.org/WAI/ARIA/apg/patterns/
 | `separator` | `ReactNode` | `'/'` | Custom delimiter element between crumbs. |
 | `maxItems` | `number` | `8` | Maximum visible crumbs before truncating with ellipsis. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Provides theme styling tokens for breadcrumb links and separators.
 
 ```tsx
-import { useTheme } from '@spectra/primitives';
+import { useTheme } from '@winplaybox/primitives';
 
 export function CustomBreadcrumbs({ items }) {
   const { colorScheme } = useTheme();

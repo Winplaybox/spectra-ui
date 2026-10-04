@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text as RNText, TextStyle } from 'react-native';
-import { useTheme } from '@spectra/primitives';
-import { getTokens } from '@spectra/tokens';
+import { useTheme } from '@winplaybox/primitives';
+import { getTokens } from '@winplaybox/tokens';
 
 export interface NativeTextProps {
   children?: React.ReactNode;

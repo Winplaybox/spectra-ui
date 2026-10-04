@@ -1,5 +1,5 @@
 {
-  "name": "@spectra/primitives",
+  "name": "@winplaybox/primitives",
   "version": "0.1.0",
   "description": "Headless hooks and state primitives for Spectra UI",
   "type": "module",

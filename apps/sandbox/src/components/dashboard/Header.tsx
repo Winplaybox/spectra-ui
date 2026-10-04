@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useColorScheme } from '@spectra/react';
+import { useColorScheme } from '@winplaybox/react';
 import {
   SunIcon,
   MoonIcon,
@@ -8,7 +8,7 @@ import {
   ChevronRightIcon,
   SettingsIcon,
   GitHubIcon,
-} from '@spectra/icons';
+} from '@winplaybox/icons';
 import { RouteState, navigate } from '../../utils/router';
 import { COMPONENT_CATEGORIES } from './Sidebar';
 import { SettingsDrawer } from './SettingsDrawer';

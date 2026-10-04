@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Badge } from '@spectra/react';
-import { ExternalLinkIcon, CheckIcon, SmartphoneIcon, WindowsIcon } from '@spectra/icons';
+import { Card, Badge } from '@winplaybox/react';
+import { ExternalLinkIcon, CheckIcon, SmartphoneIcon, WindowsIcon } from '@winplaybox/icons';
 import { Platform, PLATFORMS, getComponentPlatformData } from '../../data/platformData';
 import { openInExpoSnack, openInReactNativeSandbox } from '../../utils/sandbox';
 

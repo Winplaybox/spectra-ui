@@ -3,14 +3,14 @@
 Avatars represent users or entities with an image, initials, or fallback icon, often paired with real-time status presence indicators.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Avatar } from '@spectra/react';
+import { Avatar } from '@winplaybox/react';
 
 export default function BasicAvatarExample() {
   return (
@@ -66,13 +66,13 @@ Official pattern: [Image pattern](https://www.w3.org/WAI/ARIA/apg/patterns/img/)
 | `shape` | `'circle' \| 'square'` | `'circle'` | Border radius shape. |
 | `status` | `'online' \| 'offline' \| 'busy' \| 'away'` | `undefined` | Presence indicator dot. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `getInitials`
 Description: Helper algorithm extracting clean 2-letter uppercase initials from full names.
 
 ```tsx
-import { getInitials } from '@spectra/primitives';
+import { getInitials } from '@winplaybox/primitives';
 
 const initials = getInitials('Alexander Hamilton'); // 'AH'
 ```

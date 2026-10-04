@@ -1,6 +1,6 @@
 // packages/react/src/components/navigation/SpeedDial.tsx
 import React, { useState, forwardRef, ReactNode } from 'react';
-import { PlusIcon } from '@spectra/icons';
+import { PlusIcon } from '@winplaybox/icons';
 
 export interface SpeedDialAction {
   icon: ReactNode;

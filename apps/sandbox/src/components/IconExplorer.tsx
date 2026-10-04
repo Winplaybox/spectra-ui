@@ -9,7 +9,7 @@ import {
   CopyIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-} from '@spectra/icons';
+} from '@winplaybox/icons';
 import {
   Badge,
   Button,
@@ -21,7 +21,7 @@ import {
   Tab,
   useToast,
   useColorScheme,
-} from '@spectra/react';
+} from '@winplaybox/react';
 
 // ============================================================================
 // Authentic SVG Vector Icons for UI Controls (Zero Emojis - Rule 2)
@@ -1361,7 +1361,7 @@ export const IconExplorer: React.FC<IconExplorerProps> = ({ screen = 'catalog' }
             </Button>
           </div>
 
-          {/* 1. Fill Toggle Switch using @spectra/react Switch */}
+          {/* 1. Fill Toggle Switch using @winplaybox/react Switch */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: isDark ? '#FFFFFF' : '#0F172A', fontWeight: 500 }}>
               <span>Fill</span>
@@ -1398,7 +1398,7 @@ export const IconExplorer: React.FC<IconExplorerProps> = ({ screen = 'catalog' }
             />
           </div>
 
-          {/* 2. Weight Slider (100 to 700) using @spectra/react Slider */}
+          {/* 2. Weight Slider (100 to 700) using @winplaybox/react Slider */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: isDark ? '#FFFFFF' : '#0F172A', fontWeight: 500 }}>
@@ -1445,7 +1445,7 @@ export const IconExplorer: React.FC<IconExplorerProps> = ({ screen = 'catalog' }
             </div>
           </div>
 
-          {/* 3. Grade Slider (-25 to 200) using @spectra/react Slider */}
+          {/* 3. Grade Slider (-25 to 200) using @winplaybox/react Slider */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: isDark ? '#FFFFFF' : '#0F172A', fontWeight: 500 }}>
@@ -1492,7 +1492,7 @@ export const IconExplorer: React.FC<IconExplorerProps> = ({ screen = 'catalog' }
             </div>
           </div>
 
-          {/* 4. Optical Size Slider (20px to 48px) using @spectra/react Slider */}
+          {/* 4. Optical Size Slider (20px to 48px) using @winplaybox/react Slider */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 2 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: isDark ? '#FFFFFF' : '#0F172A', fontWeight: 500 }}>
@@ -2190,7 +2190,7 @@ export const IconExplorer: React.FC<IconExplorerProps> = ({ screen = 'catalog' }
               </div>
             )}
 
-            {/* Action Buttons: Download SVG & Download PNG using @spectra/react Button */}
+            {/* Action Buttons: Download SVG & Download PNG using @winplaybox/react Button */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
               <Button
                 variant="primary"
@@ -2211,7 +2211,7 @@ export const IconExplorer: React.FC<IconExplorerProps> = ({ screen = 'catalog' }
               </Button>
             </div>
 
-            {/* Platform Tabs: Web, Android, Apple using @spectra/react Tabs (variant="pills") */}
+            {/* Platform Tabs: Web, Android, Apple using @winplaybox/react Tabs (variant="pills") */}
             <div>
               <Tabs
                 value={drawerPlatform}
@@ -2249,9 +2249,9 @@ export const IconExplorer: React.FC<IconExplorerProps> = ({ screen = 'catalog' }
                   }}
                 >
                   {drawerPlatform === 'web' &&
-                    `import { ${selectedIcon.componentName} } from '@spectra/icons';\n\n<${selectedIcon.componentName} size={${drawerSize}}${drawerColor !== (isDark ? '#FFFFFF' : '#0F172A') ? ` color="${drawerColor}"` : ''} />`}
+                    `import { ${selectedIcon.componentName} } from '@winplaybox/icons';\n\n<${selectedIcon.componentName} size={${drawerSize}}${drawerColor !== (isDark ? '#FFFFFF' : '#0F172A') ? ` color="${drawerColor}"` : ''} />`}
                   {drawerPlatform === 'android' &&
-                    `import { ${selectedIcon.componentName} } from '@spectra/icons/native';\n\n<${selectedIcon.componentName} size={${drawerSize}}${drawerColor !== (isDark ? '#FFFFFF' : '#0F172A') ? ` color="${drawerColor}"` : ''} />`}
+                    `import { ${selectedIcon.componentName} } from '@winplaybox/icons/native';\n\n<${selectedIcon.componentName} size={${drawerSize}}${drawerColor !== (isDark ? '#FFFFFF' : '#0F172A') ? ` color="${drawerColor}"` : ''} />`}
                   {drawerPlatform === 'apple' &&
                     (getSanitizedDrawerSvgMarkup() ||
                       `<svg width="${drawerSize}" height="${drawerSize}" viewBox="0 0 24 24" fill="none">...</svg>`)}
@@ -2261,9 +2261,9 @@ export const IconExplorer: React.FC<IconExplorerProps> = ({ screen = 'catalog' }
                   onClick={() => {
                     let code = '';
                     if (drawerPlatform === 'web') {
-                      code = `import { ${selectedIcon.componentName} } from '@spectra/icons';\n\n<${selectedIcon.componentName} size={${drawerSize}}${drawerColor !== (isDark ? '#FFFFFF' : '#0F172A') ? ` color="${drawerColor}"` : ''} />`;
+                      code = `import { ${selectedIcon.componentName} } from '@winplaybox/icons';\n\n<${selectedIcon.componentName} size={${drawerSize}}${drawerColor !== (isDark ? '#FFFFFF' : '#0F172A') ? ` color="${drawerColor}"` : ''} />`;
                     } else if (drawerPlatform === 'android') {
-                      code = `import { ${selectedIcon.componentName} } from '@spectra/icons/native';\n\n<${selectedIcon.componentName} size={${drawerSize}}${drawerColor !== (isDark ? '#FFFFFF' : '#0F172A') ? ` color="${drawerColor}"` : ''} />`;
+                      code = `import { ${selectedIcon.componentName} } from '@winplaybox/icons/native';\n\n<${selectedIcon.componentName} size={${drawerSize}}${drawerColor !== (isDark ? '#FFFFFF' : '#0F172A') ? ` color="${drawerColor}"` : ''} />`;
                     } else {
                       code = getSanitizedDrawerSvgMarkup();
                     }

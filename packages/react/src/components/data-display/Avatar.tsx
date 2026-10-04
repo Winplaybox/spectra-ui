@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UserIcon } from '@spectra/icons';
+import { UserIcon } from '@winplaybox/icons';
 import * as styles from './Avatar.css';
 
 export type AvatarStatus =

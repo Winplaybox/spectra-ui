@@ -3,14 +3,14 @@
 Switches toggle the state of a single setting on or off immediately without requiring a Save or Submit step.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Switch } from '@spectra/react';
+import { Switch } from '@winplaybox/react';
 
 export default function BasicSwitchExample() {
   return (
@@ -64,13 +64,13 @@ Official pattern: [Switch pattern](https://www.w3.org/WAI/ARIA/apg/patterns/swit
 | `checked` | `boolean` | `false` | Controlled boolean state. |
 | `disabled` | `boolean` | `false` | Disables the toggle switch. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useControllableState`
 Description: Manages instant binary boolean transitions with ARIA switch roles.
 
 ```tsx
-import { useControllableState } from '@spectra/primitives';
+import { useControllableState } from '@winplaybox/primitives';
 
 export function CustomSwitch({ checked, onChange }) {
   const [isOn, setIsOn] = useControllableState({ value: checked, defaultValue: false, onChange });

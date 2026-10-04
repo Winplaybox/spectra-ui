@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useColorScheme } from '@spectra/react';
+import { useColorScheme } from '@winplaybox/react';
 import { Sidebar } from './components/dashboard/Sidebar';
 import { Header } from './components/dashboard/Header';
 import { OverviewSection } from './components/dashboard/OverviewSection';
@@ -11,7 +11,7 @@ import { ComponentsSection } from './components/dashboard/ComponentsSection';
 import { HooksSection } from './components/dashboard/HooksSection';
 import { SearchPalette } from './components/dashboard/SearchPalette';
 import { getCurrentRoute, subscribeToRoute, RouteState, navigate } from './utils/router';
-import { SpinnerIcon } from '@spectra/icons';
+import { SpinnerIcon } from '@winplaybox/icons';
 import { BreathingDotsBackground } from './components/dashboard/BreathingDotsBackground';
 
 const IconExplorer = React.lazy(() => import('./components/IconExplorer'));

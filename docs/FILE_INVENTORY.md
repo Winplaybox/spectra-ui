@@ -93,7 +93,7 @@ WEEK1_2_SUMMARY.md             (12,043 lines) - Progress & deployment guide
 ```
 setup-monorepo.sh              (2,847 lines) - Monorepo initialization
 setup-tier1-web-files.sh       (3,806 lines) - Tier 1 deployment script
-tokens-package.json            (456 lines) - @spectra/tokens config
+tokens-package.json            (456 lines) - @winplaybox/tokens config
 root-package.json              (1,238 lines) - Monorepo root package.json
 ```
 

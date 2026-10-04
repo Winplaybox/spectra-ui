@@ -3,14 +3,14 @@
 Displays an animated placeholder preview of content before data finishes loading, reducing perceived loading time.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Skeleton } from '@spectra/react';
+import { Skeleton } from '@winplaybox/react';
 
 export default function BasicSkeletonExample() {
   return (
@@ -65,13 +65,13 @@ Official pattern: [Placeholder pattern](https://www.w3.org/WAI/ARIA/apg/patterns
 | `height` | `string \| number` | `undefined` | Height of skeleton block. |
 | `animation` | `'wave' \| 'pulse' \| 'none'` | `'wave'` | Shimmer wave or pulsing opacity. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Provides theme-aware shimmer colors adjusting between dark and light modes.
 
 ```tsx
-import { useTheme } from '@spectra/primitives';
+import { useTheme } from '@winplaybox/primitives';
 
 export function CustomSkeleton() {
   const { colorScheme } = useTheme();

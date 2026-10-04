@@ -3,14 +3,14 @@
 Combines a default single-click primary action with a secondary chevron dropdown button revealing alternative actions.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { SplitButton } from '@spectra/react';
+import { SplitButton } from '@winplaybox/react';
 
 export default function BasicSplitButtonExample() {
   return (
@@ -69,13 +69,13 @@ Official pattern: [Menu Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns
 | `options` | `string[]` | `[]` | Alternative actions shown in flyout. |
 | `onAction` | `(action: string) => void` | `undefined` | Callback fired on action trigger. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useDisclosure`
 Description: Controls open and closed flyout state with outside click dismissal.
 
 ```tsx
-import { useDisclosure } from '@spectra/primitives';
+import { useDisclosure } from '@winplaybox/primitives';
 
 export function SplitAction() {
   const { isOpen, onToggle, onClose } = useDisclosure();

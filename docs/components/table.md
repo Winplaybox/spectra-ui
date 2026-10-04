@@ -3,14 +3,14 @@
 Accessible tabular data display supporting zebra striping, sticky headers, and responsive horizontal scrolling.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Table } from '@spectra/react';
+import { Table } from '@winplaybox/react';
 
 export default function BasicTableExample() {
   return (
@@ -65,13 +65,13 @@ Official pattern: [Table Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/table
 | `hoverable` | `boolean` | `true` | Highlights rows on hover. |
 | `compact` | `boolean` | `false` | Reduces padding for dense data display. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Applies token border colors and hover surface backgrounds.
 
 ```tsx
-import { useTheme } from '@spectra/primitives';
+import { useTheme } from '@winplaybox/primitives';
 
 export function CustomTable() {
   const { colorScheme } = useTheme();

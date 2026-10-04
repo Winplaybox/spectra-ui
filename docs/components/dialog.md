@@ -3,14 +3,14 @@
 Dialogs are modal windows that require users to interact before returning to the parent application, used for critical decisions.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Dialog } from '@spectra/react';
+import { Dialog } from '@winplaybox/react';
 
 export default function BasicDialogExample() {
   return (
@@ -68,13 +68,13 @@ Official pattern: [Modal Dialog pattern](https://www.w3.org/WAI/ARIA/apg/pattern
 | `isOpen` | `boolean` | `false` | Controls visibility of the modal dialog. |
 | `onClose` | `() => void` | `undefined` | Callback when user clicks overlay, close button, or presses Escape. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useDisclosure`
 Description: Manages modal open/close states, focus trapping, and backdrop click handlers.
 
 ```tsx
-import { useDisclosure } from '@spectra/primitives';
+import { useDisclosure } from '@winplaybox/primitives';
 
 export function CustomModal() {
   const { isOpen, open, close } = useDisclosure();

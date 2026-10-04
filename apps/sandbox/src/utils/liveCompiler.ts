@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { transform } from 'sucrase';
-import * as SpectraReact from '@spectra/react';
-import * as SpectraIcons from '@spectra/icons';
+import * as SpectraReact from '@winplaybox/react';
+import * as SpectraIcons from '@winplaybox/icons';
 
 // Scope provided to dynamically evaluated component code
 export const LIVE_SCOPE: Record<string, any> = {

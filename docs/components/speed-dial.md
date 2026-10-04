@@ -3,14 +3,14 @@
 Floating action button that blossoms into a fan of related quick actions when activated.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { SpeedDial } from '@spectra/react';
+import { SpeedDial } from '@winplaybox/react';
 
 export default function BasicSpeedDialExample() {
   return (
@@ -62,13 +62,13 @@ Official pattern: [Speed Dial Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/
 | :--- | :--- | :--- | :--- |
 | `actions` | `Array<{ label: string; icon: ReactNode; onClick: () => void }>` | `[]` | Secondary speed dial actions. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useDisclosure`
 Description: Controls open state and handles dismissal.
 
 ```tsx
-import { useDisclosure } from '@spectra/primitives';
+import { useDisclosure } from '@winplaybox/primitives';
 
 export function SpeedDialPrimitive() {
   const { isOpen, onToggle } = useDisclosure();

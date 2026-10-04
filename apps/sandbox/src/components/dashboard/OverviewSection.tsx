@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { Button, Card, Badge } from '@spectra/react';
-import { CheckIcon, ExternalLinkIcon, ComponentIcon, PaletteIcon, SparklesIcon } from '@spectra/icons';
+import { Button, Card, Badge } from '@winplaybox/react';
+import { CheckIcon, ExternalLinkIcon, ComponentIcon, PaletteIcon, SparklesIcon } from '@winplaybox/icons';
 import { navigate } from '../../utils/router';
 import { CircuitAnimation } from './CircuitAnimation';
 
 export const OverviewSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
 
-  const installCode = `pnpm add @spectra/react @spectra/tokens @spectra/icons`;
+  const installCode = `pnpm add @winplaybox/react @winplaybox/tokens @winplaybox/icons`;
 
   const setupSnippet = `import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '@spectra/tokens/css';
-import { SpectraProvider, Button } from '@spectra/react';
+import '@winplaybox/tokens/css';
+import { SpectraProvider, Button } from '@winplaybox/react';
 
 function App() {
   return (

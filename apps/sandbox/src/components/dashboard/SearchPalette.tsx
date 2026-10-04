@@ -8,7 +8,7 @@ import {
   PaletteIcon,
   CubeIcon,
   AlgoliaLogo,
-} from '@spectra/icons';
+} from '@winplaybox/icons';
 import { navigate } from '../../utils/router';
 
 const ALGOLIA_APP_ID = '777PLTTOXX';
@@ -200,8 +200,8 @@ export const SearchPalette: React.FC<SearchPaletteProps> = ({
     setTimeout(() => {
       setAiAnswer({
         title: `Spectra UI: ${promptText}`,
-        summary: `Use @spectra/react components and semantic tokens for zero runtime styling overhead. Full accessibility (ARIA) and keyboard navigation are built-in.`,
-        code: `import React, { useState } from 'react';\nimport { Button, TextInput } from '@spectra/react';\nimport { SearchIcon, CheckIcon } from '@spectra/icons';\n\nexport function Solution() {\n  return (\n    <div>\n      <TextInput label="Search field" leftIcon={<SearchIcon size={16} />} />\n      <Button variant="primary" icon={<CheckIcon size={16} />}>Submit</Button>\n    </div>\n  );\n}`,
+        summary: `Use @winplaybox/react components and semantic tokens for zero runtime styling overhead. Full accessibility (ARIA) and keyboard navigation are built-in.`,
+        code: `import React, { useState } from 'react';\nimport { Button, TextInput } from '@winplaybox/react';\nimport { SearchIcon, CheckIcon } from '@winplaybox/icons';\n\nexport function Solution() {\n  return (\n    <div>\n      <TextInput label="Search field" leftIcon={<SearchIcon size={16} />} />\n      <Button variant="primary" icon={<CheckIcon size={16} />}>Submit</Button>\n    </div>\n  );\n}`,
         citationPath: '/components/button',
         citationTitle: 'Button Component Documentation',
       });
@@ -599,7 +599,7 @@ export const SearchPalette: React.FC<SearchPaletteProps> = ({
                                   whiteSpace: 'nowrap',
                                 }}
                               >
-                                {item.package || '@spectra/react'}
+                                {item.package || '@winplaybox/react'}
                               </span>
                             </div>
                           </div>

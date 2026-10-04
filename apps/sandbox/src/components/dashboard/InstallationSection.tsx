@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Badge, Card, Tabs, TabList, Tab } from '@spectra/react';
+import { Badge, Card, Tabs, TabList, Tab } from '@winplaybox/react';
 import {
   CheckIcon,
   CopyIcon,
@@ -8,7 +8,7 @@ import {
   CubeIcon,
   LightningIcon,
   ExternalLinkIcon,
-} from '@spectra/icons';
+} from '@winplaybox/icons';
 
 type PackageManager = 'pnpm' | 'npm' | 'yarn' | 'expo';
 type PlatformTarget = 'web' | 'native' | 'all';
@@ -29,38 +29,38 @@ export const InstallationSection: React.FC = () => {
     if (platformTarget === 'native') {
       switch (pkgManager) {
         case 'expo':
-          return `npx expo install @spectra/react-native @spectra/tokens @spectra/icons react-native-svg`;
+          return `npx expo install @winplaybox/react-native @winplaybox/tokens @winplaybox/icons react-native-svg`;
         case 'pnpm':
-          return `pnpm add @spectra/react-native @spectra/tokens @spectra/icons react-native-svg`;
+          return `pnpm add @winplaybox/react-native @winplaybox/tokens @winplaybox/icons react-native-svg`;
         case 'yarn':
-          return `yarn add @spectra/react-native @spectra/tokens @spectra/icons react-native-svg`;
+          return `yarn add @winplaybox/react-native @winplaybox/tokens @winplaybox/icons react-native-svg`;
         case 'npm':
         default:
-          return `npm install @spectra/react-native @spectra/tokens @spectra/icons react-native-svg`;
+          return `npm install @winplaybox/react-native @winplaybox/tokens @winplaybox/icons react-native-svg`;
       }
     } else if (platformTarget === 'all') {
       switch (pkgManager) {
         case 'expo':
-          return `npx expo install @spectra/react-native @spectra/tokens @spectra/icons react-native-svg\npnpm add @spectra/react`;
+          return `npx expo install @winplaybox/react-native @winplaybox/tokens @winplaybox/icons react-native-svg\npnpm add @winplaybox/react`;
         case 'pnpm':
-          return `pnpm add @spectra/react @spectra/react-native @spectra/tokens @spectra/icons react-native-svg`;
+          return `pnpm add @winplaybox/react @winplaybox/react-native @winplaybox/tokens @winplaybox/icons react-native-svg`;
         case 'yarn':
-          return `yarn add @spectra/react @spectra/react-native @spectra/tokens @spectra/icons react-native-svg`;
+          return `yarn add @winplaybox/react @winplaybox/react-native @winplaybox/tokens @winplaybox/icons react-native-svg`;
         case 'npm':
         default:
-          return `npm install @spectra/react @spectra/react-native @spectra/tokens @spectra/icons react-native-svg`;
+          return `npm install @winplaybox/react @winplaybox/react-native @winplaybox/tokens @winplaybox/icons react-native-svg`;
       }
     } else {
       // web
       switch (pkgManager) {
         case 'pnpm':
-          return `pnpm add @spectra/react @spectra/tokens @spectra/icons`;
+          return `pnpm add @winplaybox/react @winplaybox/tokens @winplaybox/icons`;
         case 'yarn':
-          return `yarn add @spectra/react @spectra/tokens @spectra/icons`;
+          return `yarn add @winplaybox/react @winplaybox/tokens @winplaybox/icons`;
         case 'expo':
         case 'npm':
         default:
-          return `npm install @spectra/react @spectra/tokens @spectra/icons`;
+          return `npm install @winplaybox/react @winplaybox/tokens @winplaybox/icons`;
       }
     }
   };
@@ -68,9 +68,9 @@ export const InstallationSection: React.FC = () => {
   const webSetupCode = `import React from 'react';
 import ReactDOM from 'react-dom/client';
 // 1. Import Design Tokens CSS
-import '@spectra/tokens/css';
+import '@winplaybox/tokens/css';
 // 2. Import Spectra Components
-import { SpectraProvider, Button } from '@spectra/react';
+import { SpectraProvider, Button } from '@winplaybox/react';
 
 const App = () => (
   <SpectraProvider defaultColorScheme="light">
@@ -86,7 +86,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
   const nativeSetupCode = `import React from 'react';
 import { View, StyleSheet, SafeAreaView } from 'react-native';
 // 1. Import Spectra Native Components (iOS & Android)
-import { Button, Text } from '@spectra/react-native';
+import { Button, Text } from '@winplaybox/react-native';
 
 export default function App() {
   return (
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
           <TabList style={{ flexWrap: 'wrap', gap: 8 }}>
             <Tab value="web" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
               <GlobeIcon size={16} />
-              <span>Web (@spectra/react)</span>
+              <span>Web (@winplaybox/react)</span>
             </Tab>
             <Tab value="native" style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
               <SmartphoneIcon size={16} />

@@ -1,8 +1,8 @@
-# @spectra/react-native
+# @winplaybox/react-native
 
 > Cross-platform mobile components and primitives for the **Spectra UI** design system by **Winplaybox**.
 
-[![npm version](https://img.shields.io/npm/v/@spectra/react-native.svg?style=flat-square&color=0969da)](https://www.npmjs.com/package/@spectra/react-native)
+[![npm version](https://img.shields.io/npm/v/@winplaybox/react-native.svg?style=flat-square&color=0969da)](https://www.npmjs.com/package/@winplaybox/react-native)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178c6.svg?style=flat-square)](https://www.typescriptlang.org/)
 [![Repository](https://img.shields.io/badge/GitHub-Winplaybox%2Fspectra--ui-181717.svg?style=flat-square)](https://github.com/Winplaybox/spectra-ui)
@@ -11,7 +11,7 @@
 
 ## Overview
 
-`@spectra/react-native` brings the design language and token discipline of Spectra UI to iOS and Android applications. Engineered without heavy web DOM dependencies, it provides native components adhering to Apple Human Interface Guidelines (HIG) and Android Material standards while maintaining full visual parity with `@spectra/react`.
+`@winplaybox/react-native` brings the design language and token discipline of Spectra UI to iOS and Android applications. Engineered without heavy web DOM dependencies, it provides native components adhering to Apple Human Interface Guidelines (HIG) and Android Material standards while maintaining full visual parity with `@winplaybox/react`.
 
 ---
 
@@ -19,12 +19,12 @@
 
 | Package | Purpose | NPM Link |
 | :--- | :--- | :--- |
-| **`@spectra/react`** | Core web component library | [npmjs.com/package/@spectra/react](https://www.npmjs.com/package/@spectra/react) |
-| **`@spectra/tokens`** | Multi-tier design tokens (CSS, TS, JSON) | [npmjs.com/package/@spectra/tokens](https://www.npmjs.com/package/@spectra/tokens) |
-| **`@spectra/icons`** | 14,200+ vector SVG icons (multi-shade) | [npmjs.com/package/@spectra/icons](https://www.npmjs.com/package/@spectra/icons) |
-| **`@spectra/primitives`** | 25 Headless hooks and behavioral state primitives | [npmjs.com/package/@spectra/primitives](https://www.npmjs.com/package/@spectra/primitives) |
-| **`@spectra/react-native`** | Mobile components for iOS and Android | [npmjs.com/package/@spectra/react-native](https://www.npmjs.com/package/@spectra/react-native) |
-| **`@spectra/mcp`** | Model Context Protocol server for AI coding assistants | [npmjs.com/package/@spectra/mcp](https://www.npmjs.com/package/@spectra/mcp) |
+| **`@winplaybox/react`** | Core web component library | [npmjs.com/package/@winplaybox/react](https://www.npmjs.com/package/@winplaybox/react) |
+| **`@winplaybox/tokens`** | Multi-tier design tokens (CSS, TS, JSON) | [npmjs.com/package/@winplaybox/tokens](https://www.npmjs.com/package/@winplaybox/tokens) |
+| **`@winplaybox/icons`** | 14,200+ vector SVG icons (multi-shade) | [npmjs.com/package/@winplaybox/icons](https://www.npmjs.com/package/@winplaybox/icons) |
+| **`@winplaybox/primitives`** | 25 Headless hooks and behavioral state primitives | [npmjs.com/package/@winplaybox/primitives](https://www.npmjs.com/package/@winplaybox/primitives) |
+| **`@winplaybox/react-native`** | Mobile components for iOS and Android | [npmjs.com/package/@winplaybox/react-native](https://www.npmjs.com/package/@winplaybox/react-native) |
+| **`@winplaybox/mcp`** | Model Context Protocol server for AI coding assistants | [npmjs.com/package/@winplaybox/mcp](https://www.npmjs.com/package/@winplaybox/mcp) |
 
 ---
 
@@ -32,13 +32,13 @@
 
 ```bash
 # Using pnpm
-pnpm add @spectra/react-native @spectra/tokens @spectra/primitives
+pnpm add @winplaybox/react-native @winplaybox/tokens @winplaybox/primitives
 
 # Using npm
-npm install @spectra/react-native @spectra/tokens @spectra/primitives
+npm install @winplaybox/react-native @winplaybox/tokens @winplaybox/primitives
 
 # Using yarn
-yarn add @spectra/react-native @spectra/tokens @spectra/primitives
+yarn add @winplaybox/react-native @winplaybox/tokens @winplaybox/primitives
 ```
 
 ---
@@ -55,7 +55,7 @@ import {
   Badge,
   TextInput,
   Stack,
-} from '@spectra/react-native';
+} from '@winplaybox/react-native';
 
 export function ProfileScreen() {
   return (
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 
 ## Platform Chassis & Safe Area
 
-All layout primitives in `@spectra/react-native` are tested against notch insets, dynamic islands, and system navigation bars across iOS and Android runtimes.
+All layout primitives in `@winplaybox/react-native` are tested against notch insets, dynamic islands, and system navigation bars across iOS and Android runtimes.
 
 ---
 

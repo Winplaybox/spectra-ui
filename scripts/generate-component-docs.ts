@@ -34,14 +34,14 @@ function generateMarkdown(meta: ComponentMetadata): string {
 ${meta.description}
 
 \`\`\`bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 \`\`\`
 
 ## Basic Usage
 
 \`\`\`tsx
 import React from 'react';
-import { ${safePascalName} } from '@spectra/react';
+import { ${safePascalName} } from '@winplaybox/react';
 
 export default function Basic${safePascalName}Example() {
   return (
@@ -90,7 +90,7 @@ ${keyboardRows}
 | :--- | :--- | :--- | :--- |
 ${propRows}
 
-## Headless Primitive (\`@spectra/primitives\`)
+## Headless Primitive (\`@winplaybox/primitives\`)
 
 Hook: \`${meta.headlessHook.name}\`
 Description: ${meta.headlessHook.description}

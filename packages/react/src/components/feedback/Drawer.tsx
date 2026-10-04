@@ -1,6 +1,6 @@
 // packages/react/src/components/feedback/Drawer.tsx
 import React, { useEffect, forwardRef, ReactNode } from 'react';
-import { CloseIcon } from '@spectra/icons';
+import { CloseIcon } from '@winplaybox/icons';
 
 export interface DrawerProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
   isOpen: boolean;

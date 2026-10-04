@@ -1,7 +1,7 @@
 // packages/react/src/components/actions/SplitButton.tsx
 import React, { useState, useRef, useEffect, forwardRef, ReactNode } from 'react';
 import { Button, ButtonVariant, ButtonSize } from './Button';
-import { ChevronDownIcon } from '@spectra/icons';
+import { ChevronDownIcon } from '@winplaybox/icons';
 
 export interface SplitButtonOption {
   label: string;

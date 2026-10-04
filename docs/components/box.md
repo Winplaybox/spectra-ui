@@ -3,14 +3,14 @@
 Fundamental polymorphic container element with direct token prop bindings and responsive styling.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Box } from '@spectra/react';
+import { Box } from '@winplaybox/react';
 
 export default function BasicBoxExample() {
   return (
@@ -60,13 +60,13 @@ Official pattern: [Generic Container](https://www.w3.org/WAI/ARIA/apg/patterns/)
 | `as` | `ElementType` | `'div'` | Underlying HTML element to render. |
 | `padding` | `string` | `undefined` | Token spacing multiplier. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Translates design token keys into CSS custom properties.
 
 ```tsx
-import { useTheme } from '@spectra/primitives';
+import { useTheme } from '@winplaybox/primitives';
 
 export function BoxPrimitive({ as: Tag = 'div', ...props }) {
   return <Tag {...props} />;

@@ -3,14 +3,14 @@
 Select menus allow users to choose one option from a list of predefined options in compact form surfaces.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Select } from '@spectra/react';
+import { Select } from '@winplaybox/react';
 
 export default function BasicSelectExample() {
   return (
@@ -65,13 +65,13 @@ Official pattern: [Combobox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/co
 | `options` | `Array<{ value: string; label: string }>` | `[]` | List of selectable items. |
 | `disabled` | `boolean` | `false` | Disables select menu interaction. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useControllableState`
 Description: Seamlessly synchronizes controlled vs uncontrolled state for dropdown selection across Web and Mobile Native.
 
 ```tsx
-import { useControllableState } from '@spectra/primitives';
+import { useControllableState } from '@winplaybox/primitives';
 
 export function CustomSelect({ value: controlled, defaultValue = '', onChange }) {
   const [value, setValue] = useControllableState({ value: controlled, defaultValue, onChange });

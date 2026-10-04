@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, Badge } from '@spectra/react';
-import { CheckIcon, ExternalLinkIcon, InfoIcon } from '@spectra/icons';
+import { Card, Badge } from '@winplaybox/react';
+import { CheckIcon, ExternalLinkIcon, InfoIcon } from '@winplaybox/icons';
 import { PLATFORMS, Platform } from '../../data/platformData';
 import { usePlatform } from '../../context/PlatformContext';
 import { PlatformIcon } from './PlatformIcon';

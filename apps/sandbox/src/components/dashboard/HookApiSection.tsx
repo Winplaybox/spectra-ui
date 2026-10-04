@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card } from '@spectra/react';
-import { CopyIcon, CheckIcon, CodeIcon, SparklesIcon, InfoIcon } from '@spectra/icons';
+import { Card } from '@winplaybox/react';
+import { CopyIcon, CheckIcon, CodeIcon, SparklesIcon, InfoIcon } from '@winplaybox/icons';
 import { HOOK_API_DATA, HookApiReference } from '../../data/apiReferenceData';
 
 interface HookApiSectionProps {
@@ -128,7 +128,7 @@ export const HookApiSection: React.FC<HookApiSectionProps> = ({ hookId }) => {
             <span style={{ color: '#38BDF8' }}>import</span> {'{ '}
             <span style={{ color: '#4ADE80', fontWeight: 600 }}>{hookData.hookName}</span>
             {' }'} <span style={{ color: '#38BDF8' }}>from</span>{' '}
-            <span style={{ color: '#F472B6' }}>'@spectra/primitives'</span>;
+            <span style={{ color: '#F472B6' }}>'@winplaybox/primitives'</span>;
           </div>
         </div>
       </Card>

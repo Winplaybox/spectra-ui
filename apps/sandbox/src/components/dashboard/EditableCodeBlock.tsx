@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { CopyIcon, CheckIcon, RotateCcwIcon } from '@spectra/icons';
+import { CopyIcon, CheckIcon, RotateCcwIcon } from '@winplaybox/icons';
 
 interface EditableCodeBlockProps {
   code: string;

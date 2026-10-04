@@ -3,14 +3,14 @@
 An accordion groups sections of related content that can be opened and closed. Accordions decrease cognitive load by letting people choose which sections of content they see, like questions in an FAQ.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Accordion } from '@spectra/react';
+import { Accordion } from '@winplaybox/react';
 
 export default function BasicAccordionExample() {
   return (
@@ -75,13 +75,13 @@ Official pattern: [Accordion pattern](https://www.w3.org/WAI/ARIA/apg/patterns/a
 | `defaultValue` | `string \| string[]` | `[]` | Initially expanded value(s). |
 | `onChange` | `(val: string \| string[]) => void` | `undefined` | Callback invoked when expansion state changes. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useDisclosure`
 Description: Manages open/closed states with automatic ID linking between trigger and panel.
 
 ```tsx
-import { useDisclosure } from '@spectra/primitives';
+import { useDisclosure } from '@winplaybox/primitives';
 
 export function CustomAccordionItem({ title, children }) {
   const { isOpen, toggle, getTriggerProps, getPanelProps } = useDisclosure();

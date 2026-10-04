@@ -3,14 +3,14 @@
 Ergonomic mobile bottom navigation bar providing quick switching between 3 to 5 top-level views.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { BottomNavigation } from '@spectra/react';
+import { BottomNavigation } from '@winplaybox/react';
 
 export default function BasicBottomNavigationExample() {
   return (
@@ -62,13 +62,13 @@ Official pattern: [Tablist Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tab
 | `value` | `string` | `''` | Active route identifier. |
 | `onChange` | `(value: string) => void` | `undefined` | Route change callback. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useControllableState`
 Description: Manages active bottom navigation index.
 
 ```tsx
-import { useControllableState } from '@spectra/primitives';
+import { useControllableState } from '@winplaybox/primitives';
 
 export function BottomNavPrimitive() {
   const [tab, setTab] = useControllableState({ defaultValue: 'home' });

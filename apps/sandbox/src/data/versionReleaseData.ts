@@ -22,7 +22,7 @@ export const RELEASES_DATA: VersionRelease[] = [
     description:
       'The initial release of the WinPlayBox Spectra UI Design System: 20 multi-platform components across Web and React Native, unified semantic design tokens, 12,253 icons, Algolia search database, and interactive documentation sandbox.',
     highlights: [
-      '20 Multi-Platform Components across Web (@spectra/react) and React Native (@spectra/react-native).',
+      '20 Multi-Platform Components across Web (@winplaybox/react) and React Native (@winplaybox/react-native).',
       'Algolia Search Database with 249 indexed records for CSS rules, component APIs, tokens, and hooks.',
       'Unified Semantic Design Token Engine with 100% contract enforcement and light/dark modes.',
       'Curated & Full Material Symbols Icon Catalog (12,253 icons) + 20 authentic brand SVGs.',

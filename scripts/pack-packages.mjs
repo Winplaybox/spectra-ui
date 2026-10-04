@@ -16,7 +16,7 @@ if (!fs.existsSync(outDir)) {
   fs.mkdirSync(outDir, { recursive: true });
 }
 
-console.log('📦 Packaging all Spectra UI packages according to release standards...\n');
+console.log('Packaging all Spectra UI packages according to release standards...\n');
 
 const results = [];
 
@@ -46,12 +46,12 @@ for (const pkgRel of PACKAGES) {
         filename: tarballName,
         size: `${(stats.size / 1024).toFixed(1)} kB`,
       });
-      console.log(`  ✅ Generated: dist-packages/${tarballName} (${(stats.size / 1024).toFixed(1)} kB)`);
+      console.log(`  [OK] Generated: dist-packages/${tarballName} (${(stats.size / 1024).toFixed(1)} kB)`);
     }
   } catch (err) {
-    console.error(`  ❌ Failed to pack ${pkgJson.name}:`, err.message);
+    console.error(`  [ERROR] Failed to pack ${pkgJson.name}:`, err.message);
   }
 }
 
-console.log('\n🎉 Package Generation Complete! Summary:');
+console.log('\nPackage Generation Complete! Summary:');
 console.table(results);

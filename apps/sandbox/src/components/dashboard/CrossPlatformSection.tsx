@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Badge, Button, Tabs, TabList, Tab, Card } from '@spectra/react';
-import { CheckIcon, PaletteIcon, SparklesIcon, SmartphoneIcon } from '@spectra/icons';
+import { Badge, Button, Tabs, TabList, Tab, Card } from '@winplaybox/react';
+import { CheckIcon, PaletteIcon, SparklesIcon, SmartphoneIcon } from '@winplaybox/icons';
 import { CircuitAnimation } from './CircuitAnimation';
 import { PlatformCompatibilityMatrix } from './PlatformCompatibilityMatrix';
 import { PlatformIcon } from './PlatformIcon';
@@ -15,11 +15,11 @@ export const CrossPlatformSection: React.FC = () => {
   const snippets: Record<Platform, { title: string; pkg: string; code: string }> = {
     web: {
       title: 'Web Implementation (React DOM 18/19)',
-      pkg: '@spectra/react',
+      pkg: '@winplaybox/react',
       code: `// Web Implementation (React DOM 18/19)
-import '@spectra/tokens/css';
-import { Button, TextInput, Stack, Card } from '@spectra/react';
-import { CheckIcon } from '@spectra/icons';
+import '@winplaybox/tokens/css';
+import { Button, TextInput, Stack, Card } from '@winplaybox/react';
+import { CheckIcon } from '@winplaybox/icons';
 
 export const WebLoginScreen = () => {
   return (
@@ -36,11 +36,11 @@ export const WebLoginScreen = () => {
     },
     ios: {
       title: 'Apple iOS Implementation (Swift & React Native)',
-      pkg: '@spectra/react-native',
+      pkg: '@winplaybox/react-native',
       code: `// Apple iOS React Native Implementation (Apple HIG 44pt Target)
 import React from 'react';
-import { Button, TextInput, Stack, Card } from '@spectra/react-native';
-import { CheckIcon } from '@spectra/icons';
+import { Button, TextInput, Stack, Card } from '@winplaybox/react-native';
+import { CheckIcon } from '@winplaybox/icons';
 
 export const IOSLoginScreen = () => {
   return (
@@ -63,11 +63,11 @@ export const IOSLoginScreen = () => {
     },
     android: {
       title: 'Google Android Implementation (Material 3 & React Native)',
-      pkg: '@spectra/react-native',
+      pkg: '@winplaybox/react-native',
       code: `// Google Android React Native Implementation (Material 48dp Target)
 import React from 'react';
-import { Button, TextInput, Stack, Card } from '@spectra/react-native';
-import { CheckIcon } from '@spectra/icons';
+import { Button, TextInput, Stack, Card } from '@winplaybox/react-native';
+import { CheckIcon } from '@winplaybox/icons';
 
 export const AndroidLoginScreen = () => {
   return (
@@ -90,11 +90,11 @@ export const AndroidLoginScreen = () => {
     },
     windows: {
       title: 'Microsoft Windows Implementation (WinUI 3 / RNW)',
-      pkg: '@spectra/react-native-windows',
+      pkg: '@winplaybox/react-native-windows',
       code: `// Microsoft Windows RNW Implementation (WinUI 3 / Acrylic Surface)
 import React from 'react';
-import { Button, TextInput, Stack, Card } from '@spectra/react-native-windows';
-import { CheckIcon } from '@spectra/icons';
+import { Button, TextInput, Stack, Card } from '@winplaybox/react-native-windows';
+import { CheckIcon } from '@winplaybox/icons';
 
 export const WindowsLoginScreen = () => {
   return (
@@ -117,11 +117,11 @@ export const WindowsLoginScreen = () => {
     },
     macos: {
       title: 'Apple macOS Implementation (AppKit / SwiftUI / RN macOS)',
-      pkg: '@spectra/react-native-macos',
+      pkg: '@winplaybox/react-native-macos',
       code: `// Apple macOS RN Implementation (macOS Sequoia / Vibrancy Material)
 import React from 'react';
-import { Button, TextInput, Stack, Card } from '@spectra/react-native-macos';
-import { CheckIcon } from '@spectra/icons';
+import { Button, TextInput, Stack, Card } from '@winplaybox/react-native-macos';
+import { CheckIcon } from '@winplaybox/icons';
 
 export const MacOSLoginScreen = () => {
   return (
@@ -215,7 +215,7 @@ export const MacOSLoginScreen = () => {
             1. Universal Tokens
           </h3>
           <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-            <code>@spectra/tokens</code> compiles into CSS custom variables for Web and strictly typed JavaScript objects for React Native <code>StyleSheet</code>.
+            <code>@winplaybox/tokens</code> compiles into CSS custom variables for Web and strictly typed JavaScript objects for React Native <code>StyleSheet</code>.
           </p>
         </Card>
 
@@ -235,7 +235,7 @@ export const MacOSLoginScreen = () => {
             2. Shared Headless Logic
           </h3>
           <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-            <code>@spectra/primitives</code> houses state machines (controllable state, disclosure, focus) without any DOM assumptions, executing identically on Node, Web, and React Native runtimes.
+            <code>@winplaybox/primitives</code> houses state machines (controllable state, disclosure, focus) without any DOM assumptions, executing identically on Node, Web, and React Native runtimes.
           </p>
         </Card>
 
@@ -255,7 +255,7 @@ export const MacOSLoginScreen = () => {
             3. Identical API Surface
           </h3>
           <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-            Both <code>@spectra/react</code> and <code>@spectra/react-native</code> expose matching component signatures, reducing context switching across frontend and mobile teams.
+            Both <code>@winplaybox/react</code> and <code>@winplaybox/react-native</code> expose matching component signatures, reducing context switching across frontend and mobile teams.
           </p>
         </Card>
       </div>

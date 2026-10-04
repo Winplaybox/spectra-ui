@@ -8,7 +8,7 @@ export const COMPONENTS = {
     name: 'Button',
     category: 'Actions',
     description: 'Primary interactive trigger for user actions. Supports 5 visual variants, 3 sizes, loading spinner, and contextual icons.',
-    importStatement: "import { Button } from '@spectra/react';",
+    importStatement: "import { Button } from '@winplaybox/react';",
     props: [
       { name: 'variant', type: "'primary' | 'secondary' | 'subtle' | 'danger' | 'outline'", defaultValue: "'primary'", description: 'Visual appearance and emphasis.' },
       { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Density and touch target scale.' },
@@ -24,11 +24,11 @@ export const COMPONENTS = {
     recipes: [
       {
         title: 'Primary Button with Leading Icon',
-        code: `import { Button } from '@spectra/react';\nimport { DownloadIcon } from '@spectra/icons';\n\n<Button variant="primary" icon={<DownloadIcon size={16} />}>Export Report</Button>`
+        code: `import { Button } from '@winplaybox/react';\nimport { DownloadIcon } from '@winplaybox/icons';\n\n<Button variant="primary" icon={<DownloadIcon size={16} />}>Export Report</Button>`
       },
       {
         title: 'Danger Button with Loading State',
-        code: `import { Button } from '@spectra/react';\n\n<Button variant="danger" loading={isDeleting} onClick={handleDelete}>Delete Resource</Button>`
+        code: `import { Button } from '@winplaybox/react';\n\n<Button variant="danger" loading={isDeleting} onClick={handleDelete}>Delete Resource</Button>`
       }
     ]
   },
@@ -37,7 +37,7 @@ export const COMPONENTS = {
     name: 'TextInput',
     category: 'Inputs',
     description: 'Text fields for user input across forms, search bars, and modals with validation states and password reveal.',
-    importStatement: "import { TextInput } from '@spectra/react';",
+    importStatement: "import { TextInput } from '@winplaybox/react';",
     props: [
       { name: 'label', type: 'string', description: 'Accessible label above field.' },
       { name: 'placeholder', type: 'string', description: 'Hint text.' },
@@ -54,7 +54,7 @@ export const COMPONENTS = {
     recipes: [
       {
         title: 'Password Field with Reveal Toggle',
-        code: `import React, { useState } from 'react';\nimport { TextInput } from '@spectra/react';\nimport { EyeIcon, EyeOffIcon } from '@spectra/icons';\n\nexport function PasswordInput() {\n  const [show, setShow] = useState(false);\n  return (\n    <TextInput\n      label="Password"\n      type={show ? 'text' : 'password'}\n      rightAction={\n        <button type="button" onClick={() => setShow(!show)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>\n          {show ? <EyeOffIcon size={16} /> : <EyeIcon size={16} />}\n        </button>\n      }\n    />\n  );\n}`
+        code: `import React, { useState } from 'react';\nimport { TextInput } from '@winplaybox/react';\nimport { EyeIcon, EyeOffIcon } from '@winplaybox/icons';\n\nexport function PasswordInput() {\n  const [show, setShow] = useState(false);\n  return (\n    <TextInput\n      label="Password"\n      type={show ? 'text' : 'password'}\n      rightAction={\n        <button type="button" onClick={() => setShow(!show)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>\n          {show ? <EyeOffIcon size={16} /> : <EyeIcon size={16} />}\n        </button>\n      }\n    />\n  );\n}`
       }
     ]
   },
@@ -63,7 +63,7 @@ export const COMPONENTS = {
     name: 'Select',
     category: 'Inputs',
     description: 'Accessible dropdown selection menu supporting grouped categories (optgroup) and validation states.',
-    importStatement: "import { Select } from '@spectra/react';",
+    importStatement: "import { Select } from '@winplaybox/react';",
     props: [
       { name: 'label', type: 'string', description: 'Form label.' },
       { name: 'options', type: 'SelectOption[] | SelectGroup[]', description: 'Selectable items or grouped categories.' },
@@ -78,7 +78,7 @@ export const COMPONENTS = {
     name: 'Checkbox',
     category: 'Inputs',
     description: 'Binary and multi-select checkbox control with indeterminate state for parent-child tree selection.',
-    importStatement: "import { Checkbox } from '@spectra/react';",
+    importStatement: "import { Checkbox } from '@winplaybox/react';",
     props: [
       { name: 'checked', type: 'boolean', description: 'Active checked state.' },
       { name: 'indeterminate', type: 'boolean', description: 'Partial selection minus line.' },
@@ -93,7 +93,7 @@ export const COMPONENTS = {
     name: 'Dialog',
     category: 'Feedback',
     description: 'Accessible modal dialog surface with focus trap, backdrop blur, keyboard Escape dismissal, and return focus restore.',
-    importStatement: "import { Dialog, DialogHeader, DialogBody, DialogFooter } from '@spectra/react';",
+    importStatement: "import { Dialog, DialogHeader, DialogBody, DialogFooter } from '@winplaybox/react';",
     props: [
       { name: 'isOpen', type: 'boolean', required: true, description: 'Controls modal visibility.' },
       { name: 'onClose', type: '() => void', required: true, description: 'Backdrop click or Escape dismissal.' },
@@ -103,7 +103,7 @@ export const COMPONENTS = {
     recipes: [
       {
         title: 'Modal Dialog with useDisclosure',
-        code: `import { Button, Dialog, DialogBody, DialogFooter, useDisclosure } from '@spectra/react';\n\nexport function ModalDemo() {\n  const { isOpen, onOpen, onClose } = useDisclosure();\n  return (\n    <>\n      <Button onClick={onOpen}>Open Modal</Button>\n      <Dialog isOpen={isOpen} onClose={onClose} title="Project Settings">\n        <DialogBody>Configure project options...</DialogBody>\n        <DialogFooter>\n          <Button variant="subtle" onClick={onClose}>Close</Button>\n        </DialogFooter>\n      </Dialog>\n    </>\n  );\n}`
+        code: `import { Button, Dialog, DialogBody, DialogFooter, useDisclosure } from '@winplaybox/react';\n\nexport function ModalDemo() {\n  const { isOpen, onOpen, onClose } = useDisclosure();\n  return (\n    <>\n      <Button onClick={onOpen}>Open Modal</Button>\n      <Dialog isOpen={isOpen} onClose={onClose} title="Project Settings">\n        <DialogBody>Configure project options...</DialogBody>\n        <DialogFooter>\n          <Button variant="subtle" onClick={onClose}>Close</Button>\n        </DialogFooter>\n      </Dialog>\n    </>\n  );\n}`
       }
     ]
   },
@@ -112,7 +112,7 @@ export const COMPONENTS = {
     name: 'Card',
     category: 'Surfaces',
     description: 'Structured surface container with elevated, flat, and bordered variants. High contrast background preventing floating dots bleed-through.',
-    importStatement: "import { Card } from '@spectra/react';",
+    importStatement: "import { Card } from '@winplaybox/react';",
     props: [
       { name: 'variant', type: "'elevated' | 'flat' | 'bordered'", defaultValue: "'elevated'", description: 'Surface visual style.' },
       { name: 'padding', type: "'none' | 'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Padding scale.' },
@@ -125,7 +125,7 @@ export const COMPONENTS = {
     name: 'Accordion',
     category: 'Data Display',
     description: 'Vertically stacked collapsible panels with smooth animations and keyboard arrow navigation.',
-    importStatement: "import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@spectra/react';",
+    importStatement: "import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@winplaybox/react';",
     props: [
       { name: 'allowMultiple', type: 'boolean', defaultValue: 'false', description: 'Permit multiple panels open simultaneously.' },
       { name: 'items', type: 'AccordionItemData[]', description: 'List of accordion items.' },
@@ -138,7 +138,7 @@ export const COMPONENTS = {
     name: 'Tabs',
     category: 'Navigation',
     description: 'Navigation tab strip with underline and pill variants, smooth active indicator transitions, and keyboard arrow navigation.',
-    importStatement: "import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@spectra/react';",
+    importStatement: "import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@winplaybox/react';",
     props: [
       { name: 'variant', type: "'underline' | 'pill'", defaultValue: "'underline'", description: 'Tab indicator style.' },
       { name: 'selectedIndex', type: 'number', defaultValue: '0', description: 'Controlled active tab index.' },

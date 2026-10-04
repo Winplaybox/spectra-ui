@@ -3,14 +3,14 @@
 Allows users to make selections from a continuous or discrete range of numeric values along a horizontal track.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Slider } from '@spectra/react';
+import { Slider } from '@winplaybox/react';
 
 export default function BasicSliderExample() {
   return (
@@ -69,13 +69,13 @@ Official pattern: [Slider Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/slid
 | `step` | `number` | `1` | Granular step increment. |
 | `value` | `number` | `50` | Current numeric value. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useControllableState`
 Description: Manages continuous numeric range values with min/max clamps.
 
 ```tsx
-import { useControllableState } from '@spectra/primitives';
+import { useControllableState } from '@winplaybox/primitives';
 
 export function SliderPrimitive({ min = 0, max = 100, defaultValue = 50 }) {
   const [val, setVal] = useControllableState({ defaultValue });

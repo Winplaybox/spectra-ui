@@ -9,8 +9,8 @@ import {
   TouchableWithoutFeedback,
   LayoutRectangle,
 } from 'react-native';
-import { useTheme } from '@spectra/primitives';
-import { getTokens } from '@spectra/tokens';
+import { useTheme } from '@winplaybox/primitives';
+import { getTokens } from '@winplaybox/tokens';
 
 export interface NativeTooltipProps {
   content: React.ReactNode | string;

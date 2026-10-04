@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useColorScheme } from '@spectra/react';
-import { SearchIcon, ExternalLinkIcon, ChevronDownIcon, ComponentIcon, CheckIcon } from '@spectra/icons';
+import { useColorScheme } from '@winplaybox/react';
+import { SearchIcon, ExternalLinkIcon, ChevronDownIcon, ComponentIcon, CheckIcon } from '@winplaybox/icons';
 import { navigate, RouteState } from '../../utils/router';
 import { useVersion } from '../../context/VersionContext';
 import { usePlatform } from '../../context/PlatformContext';

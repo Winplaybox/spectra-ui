@@ -1,5 +1,5 @@
 {
-  "name": "@spectra/config",
+  "name": "@winplaybox/config",
   "version": "0.1.0",
   "description": "Shared configuration and lint rules for Spectra UI",
   "type": "module",

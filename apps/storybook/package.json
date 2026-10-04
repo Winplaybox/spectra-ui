@@ -8,10 +8,10 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@spectra/icons": "workspace:*",
-    "@spectra/primitives": "workspace:*",
-    "@spectra/react": "workspace:*",
-    "@spectra/tokens": "workspace:*",
+    "@winplaybox/icons": "workspace:*",
+    "@winplaybox/primitives": "workspace:*",
+    "@winplaybox/react": "workspace:*",
+    "@winplaybox/tokens": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

@@ -1,6 +1,6 @@
 // packages/react/src/components/navigation/Stepper.tsx
 import React, { forwardRef, ReactNode } from 'react';
-import { CheckIcon } from '@spectra/icons';
+import { CheckIcon } from '@winplaybox/icons';
 
 export interface StepItem {
   title: ReactNode;

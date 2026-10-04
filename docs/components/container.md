@@ -3,14 +3,14 @@
 Centers content horizontally with calibrated maximum width bounds (sm, md, lg, xl, 2xl) and gutters.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Container } from '@spectra/react';
+import { Container } from '@winplaybox/react';
 
 export default function BasicContainerExample() {
   return (
@@ -60,13 +60,13 @@ Official pattern: [Layout Region](https://www.w3.org/WAI/ARIA/apg/patterns/)
 | `maxWidth` | `'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| 'full'` | `'xl'` | Max width ceiling. |
 | `center` | `boolean` | `true` | Auto-centers horizontally. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Applies responsive breakpoint widths.
 
 ```tsx
-import { useTheme } from '@spectra/primitives';
+import { useTheme } from '@winplaybox/primitives';
 
 export function ContainerPrimitive({ children }) {
   return <div style={{ maxWidth: 1200, margin: '0 auto' }}>{children}</div>;

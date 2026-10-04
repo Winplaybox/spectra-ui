@@ -8,7 +8,7 @@ import {
   Badge,
   TextInput,
   Button,
-} from '@spectra/react';
+} from '@winplaybox/react';
 import {
   SearchIcon,
   ChevronRightIcon,
@@ -16,7 +16,7 @@ import {
   CheckIcon,
   CloseIcon,
   CodeIcon,
-} from '@spectra/icons';
+} from '@winplaybox/icons';
 import { navigate } from '../../utils/router';
 
 export interface HookItem {
@@ -288,7 +288,7 @@ export const AllHooksPage: React.FC = () => {
         <CardHeader>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
             <Badge variant="primary">Functional Primitives</Badge>
-            <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>@spectra/primitives</span>
+            <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>@winplaybox/primitives</span>
           </div>
           <CardTitle style={{ fontSize: 26, fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--color-text-primary)' }}>
             Headless Hooks & State Machines

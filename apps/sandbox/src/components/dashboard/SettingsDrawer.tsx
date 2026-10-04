@@ -1,6 +1,6 @@
 import React from 'react';
-import { useColorScheme, useRTL } from '@spectra/react';
-import { CloseIcon, SettingsIcon, CheckIcon, ExternalLinkIcon, SunIcon, MoonIcon, MonitorIcon } from '@spectra/icons';
+import { useColorScheme, useRTL } from '@winplaybox/react';
+import { CloseIcon, SettingsIcon, CheckIcon, ExternalLinkIcon, SunIcon, MoonIcon, MonitorIcon } from '@winplaybox/icons';
 import { useVersion } from '../../context/VersionContext';
 
 interface SettingsDrawerProps {

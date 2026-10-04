@@ -76,8 +76,8 @@ import {
   ColorPicker,
   PlatformChassis,
   useColorScheme,
-} from '@spectra/react';
-import type { ChassisPlatform } from '@spectra/react';
+} from '@winplaybox/react';
+import type { ChassisPlatform } from '@winplaybox/react';
 import { getComponentReleaseVersion } from '../../data/versionReleaseData';
 import { useVersion } from '../../context/VersionContext';
 import {
@@ -96,7 +96,7 @@ import {
   SmartphoneIcon,
   ComponentIcon,
   SparklesIcon,
-} from '@spectra/icons';
+} from '@winplaybox/icons';
 import { openInCodeSandbox, openInStackBlitz, openInNewTab, toJavaScript } from '../../utils/sandbox';
 import { compileAndRender } from '../../utils/liveCompiler';
 import { EditableCodeBlock } from './EditableCodeBlock';
@@ -259,14 +259,14 @@ const getComponentFullMarkdown = (meta: ComponentMetadata): string => {
 ${meta.description}
 
 \`\`\`bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 \`\`\`
 
 ## Basic Usage
 
 \`\`\`tsx
 import React from 'react';
-import { ${meta.name} } from '@spectra/react';
+import { ${meta.name} } from '@winplaybox/react';
 
 export default function Basic${meta.name.replace(/\s+/g, '')}Example() {
   return (
@@ -315,7 +315,7 @@ ${keyboardRows}
 | :--- | :--- | :--- | :--- |
 ${propRows}
 
-## Headless Primitive (\`@spectra/primitives\`)
+## Headless Primitive (\`@winplaybox/primitives\`)
 
 Hook: \`${meta.headlessHook.name}\`
 Description: ${meta.headlessHook.description}
@@ -502,8 +502,8 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
     switch (meta.id) {
       case 'accordion':
         return `import React from 'react';
-import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@spectra/react';
-import type { AccordionProps } from '@spectra/react';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react';
+import type { AccordionProps } from '@winplaybox/react';
 
 export default function AccordionDemo(): JSX.Element {
   return (
@@ -532,9 +532,9 @@ export default function AccordionDemo(): JSX.Element {
 }`;
       case 'button':
         return `import React from 'react';
-import { Button } from '@spectra/react';
-import type { ButtonProps } from '@spectra/react';
-import { CheckIcon } from '@spectra/icons';
+import { Button } from '@winplaybox/react';
+import type { ButtonProps } from '@winplaybox/react';
+import { CheckIcon } from '@winplaybox/icons';
 
 export default function ButtonDemo(): JSX.Element {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -560,9 +560,9 @@ export default function ButtonDemo(): JSX.Element {
 }`;
       case 'text-input':
         return `import React, { useState } from 'react';
-import { TextInput } from '@spectra/react';
-import type { TextInputProps } from '@spectra/react';
-import { SearchIcon } from '@spectra/icons';
+import { TextInput } from '@winplaybox/react';
+import type { TextInputProps } from '@winplaybox/react';
+import { SearchIcon } from '@winplaybox/icons';
 
 export default function TextInputDemo(): JSX.Element {
   const [query, setQuery] = useState<string>('');
@@ -584,8 +584,8 @@ export default function TextInputDemo(): JSX.Element {
 }`;
       case 'select':
         return `import React, { useState } from 'react';
-import { Select } from '@spectra/react';
-import type { SelectOption } from '@spectra/react';
+import { Select } from '@winplaybox/react';
+import type { SelectOption } from '@winplaybox/react';
 
 const REGIONS: SelectOption[] = [
   { value: 'us-east-1', label: 'US East (N. Virginia)' },
@@ -611,8 +611,8 @@ export default function SelectDemo(): JSX.Element {
 }`;
       case 'checkbox':
         return `import React, { useState } from 'react';
-import { Checkbox } from '@spectra/react';
-import type { CheckboxProps } from '@spectra/react';
+import { Checkbox } from '@winplaybox/react';
+import type { CheckboxProps } from '@winplaybox/react';
 
 export default function CheckboxDemo(): JSX.Element {
   const [checked, setChecked] = useState<boolean>(${checkboxChecked});
@@ -632,8 +632,8 @@ export default function CheckboxDemo(): JSX.Element {
 }`;
       case 'radio':
         return `import React, { useState } from 'react';
-import { RadioGroup, Radio } from '@spectra/react';
-import type { RadioGroupProps } from '@spectra/react';
+import { RadioGroup, Radio } from '@winplaybox/react';
+import type { RadioGroupProps } from '@winplaybox/react';
 
 export default function RadioDemo(): JSX.Element {
   const [tier, setTier] = useState<string>('${radioValue}');
@@ -652,8 +652,8 @@ export default function RadioDemo(): JSX.Element {
 }`;
       case 'switch':
         return `import React, { useState } from 'react';
-import { Switch } from '@spectra/react';
-import type { SwitchProps } from '@spectra/react';
+import { Switch } from '@winplaybox/react';
+import type { SwitchProps } from '@winplaybox/react';
 
 export default function SwitchDemo(): JSX.Element {
   const [enabled, setEnabled] = useState<boolean>(${switchChecked});
@@ -672,8 +672,8 @@ export default function SwitchDemo(): JSX.Element {
 }`;
       case 'avatar':
         return `import React from 'react';
-import { Avatar } from '@spectra/react';
-import type { AvatarProps } from '@spectra/react';
+import { Avatar } from '@winplaybox/react';
+import type { AvatarProps } from '@winplaybox/react';
 
 export default function AvatarDemo(): JSX.Element {
   return (
@@ -686,8 +686,8 @@ export default function AvatarDemo(): JSX.Element {
 }`;
       case 'badge':
         return `import React from 'react';
-import { Badge } from '@spectra/react';
-import type { BadgeProps } from '@spectra/react';
+import { Badge } from '@winplaybox/react';
+import type { BadgeProps } from '@winplaybox/react';
 
 export default function BadgeDemo(): JSX.Element {
   return (
@@ -701,8 +701,8 @@ export default function BadgeDemo(): JSX.Element {
 }`;
       case 'tooltip':
         return `import React from 'react';
-import { Tooltip, Button } from '@spectra/react';
-import type { TooltipProps } from '@spectra/react';
+import { Tooltip, Button } from '@winplaybox/react';
+import type { TooltipProps } from '@winplaybox/react';
 
 export default function TooltipDemo(): JSX.Element {
   return (
@@ -713,8 +713,8 @@ export default function TooltipDemo(): JSX.Element {
 }`;
       case 'tabs':
         return `import React, { useState } from 'react';
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@spectra/react';
-import type { TabsProps } from '@spectra/react';
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@winplaybox/react';
+import type { TabsProps } from '@winplaybox/react';
 
 export default function TabsDemo(): JSX.Element {
   const [activeTab, setActiveTab] = useState<string>('tab-1');
@@ -736,8 +736,8 @@ export default function TabsDemo(): JSX.Element {
 }`;
       case 'card':
         return `import React from 'react';
-import { Card, Button } from '@spectra/react';
-import type { CardProps } from '@spectra/react';
+import { Card, Button } from '@winplaybox/react';
+import type { CardProps } from '@winplaybox/react';
 
 export default function CardDemo(): JSX.Element {
   return (
@@ -752,9 +752,9 @@ export default function CardDemo(): JSX.Element {
 }`;
       case 'list':
         return `import React from 'react';
-import { List, ListItem, ListItemIcon, ListItemText } from '@spectra/react';
-import type { ListProps } from '@spectra/react';
-import { UserIcon } from '@spectra/icons';
+import { List, ListItem, ListItemIcon, ListItemText } from '@winplaybox/react';
+import type { ListProps } from '@winplaybox/react';
+import { UserIcon } from '@winplaybox/icons';
 
 export default function ListDemo(): JSX.Element {
   return (
@@ -772,8 +772,8 @@ export default function ListDemo(): JSX.Element {
 }`;
       case 'alert':
         return `import React, { useState } from 'react';
-import { Alert, Button } from '@spectra/react';
-import type { AlertProps } from '@spectra/react';
+import { Alert, Button } from '@winplaybox/react';
+import type { AlertProps } from '@winplaybox/react';
 
 export default function AlertDemo(): JSX.Element {
   const [dismissed, setDismissed] = useState(false);
@@ -806,8 +806,8 @@ export default function AlertDemo(): JSX.Element {
 }`;
       case 'spinner':
         return `import React from 'react';
-import { Spinner, Button } from '@spectra/react';
-import type { SpinnerProps } from '@spectra/react';
+import { Spinner, Button } from '@winplaybox/react';
+import type { SpinnerProps } from '@winplaybox/react';
 
 export default function SpinnerDemo(): JSX.Element {
   return (
@@ -823,8 +823,8 @@ export default function SpinnerDemo(): JSX.Element {
 }`;
       case 'skeleton':
         return `import React from 'react';
-import { Skeleton } from '@spectra/react';
-import type { SkeletonProps } from '@spectra/react';
+import { Skeleton } from '@winplaybox/react';
+import type { SkeletonProps } from '@winplaybox/react';
 
 export default function SkeletonDemo(): JSX.Element {
   return (
@@ -842,8 +842,8 @@ export default function SkeletonDemo(): JSX.Element {
 }`;
       case 'divider':
         return `import React from 'react';
-import { Divider, Button, TextInput } from '@spectra/react';
-import type { DividerProps } from '@spectra/react';
+import { Divider, Button, TextInput } from '@winplaybox/react';
+import type { DividerProps } from '@winplaybox/react';
 
 export default function DividerDemo(): JSX.Element {
   return (
@@ -857,9 +857,9 @@ export default function DividerDemo(): JSX.Element {
 }`;
       case 'chip':
         return `import React, { useState } from 'react';
-import { Chip } from '@spectra/react';
-import type { ChipProps } from '@spectra/react';
-import { SparklesIcon } from '@spectra/icons';
+import { Chip } from '@winplaybox/react';
+import type { ChipProps } from '@winplaybox/react';
+import { SparklesIcon } from '@winplaybox/icons';
 
 export default function ChipDemo(): JSX.Element {
   const [selected, setSelected] = useState<string>('react');
@@ -890,8 +890,8 @@ export default function ChipDemo(): JSX.Element {
 }`;
       case 'breadcrumbs':
         return `import React from 'react';
-import { Breadcrumbs } from '@spectra/react';
-import type { BreadcrumbsProps } from '@spectra/react';
+import { Breadcrumbs } from '@winplaybox/react';
+import type { BreadcrumbsProps } from '@winplaybox/react';
 
 export default function BreadcrumbsDemo(): JSX.Element {
   return (
@@ -907,7 +907,7 @@ export default function BreadcrumbsDemo(): JSX.Element {
 }`;
       case 'split-button':
         return `import React from 'react';
-import { SplitButton } from '@spectra/react';
+import { SplitButton } from '@winplaybox/react';
 
 export default function SplitButtonDemo(): JSX.Element {
   const options = [
@@ -929,8 +929,8 @@ export default function SplitButtonDemo(): JSX.Element {
 
       case 'compound-button':
         return `import React from 'react';
-import { CompoundButton } from '@spectra/react';
-import { SparklesIcon } from '@spectra/icons';
+import { CompoundButton } from '@winplaybox/react';
+import { SparklesIcon } from '@winplaybox/icons';
 
 export default function CompoundButtonDemo(): JSX.Element {
   return (
@@ -947,7 +947,7 @@ export default function CompoundButtonDemo(): JSX.Element {
 
       case 'button-group':
         return `import React, { useState } from 'react';
-import { ButtonGroup, Button } from '@spectra/react';
+import { ButtonGroup, Button } from '@winplaybox/react';
 
 export default function ButtonGroupDemo(): JSX.Element {
   const [active, setActive] = useState<'day' | 'week' | 'month'>('week');
@@ -963,8 +963,8 @@ export default function ButtonGroupDemo(): JSX.Element {
 
       case 'icon-button':
         return `import React from 'react';
-import { IconButton } from '@spectra/react';
-import { SearchIcon } from '@spectra/icons';
+import { IconButton } from '@winplaybox/react';
+import { SearchIcon } from '@winplaybox/icons';
 
 export default function IconButtonDemo(): JSX.Element {
   return (
@@ -979,7 +979,7 @@ export default function IconButtonDemo(): JSX.Element {
 
       case 'slider':
         return `import React, { useState } from 'react';
-import { Slider } from '@spectra/react';
+import { Slider } from '@winplaybox/react';
 
 export default function SliderDemo(): JSX.Element {
   const [val, setVal] = useState(64);
@@ -1000,7 +1000,7 @@ export default function SliderDemo(): JSX.Element {
 
       case 'rating':
         return `import React, { useState } from 'react';
-import { Rating } from '@spectra/react';
+import { Rating } from '@winplaybox/react';
 
 export default function RatingDemo(): JSX.Element {
   const [rating, setRating] = useState(4);
@@ -1016,7 +1016,7 @@ export default function RatingDemo(): JSX.Element {
 
       case 'textarea':
         return `import React, { useState } from 'react';
-import { Textarea } from '@spectra/react';
+import { Textarea } from '@winplaybox/react';
 
 export default function TextareaDemo(): JSX.Element {
   const [text, setText] = useState('');
@@ -1038,7 +1038,7 @@ export default function TextareaDemo(): JSX.Element {
 
       case 'checkbox-group':
         return `import React, { useState } from 'react';
-import { CheckboxGroup, Checkbox } from '@spectra/react';
+import { CheckboxGroup, Checkbox } from '@winplaybox/react';
 
 export default function CheckboxGroupDemo(): JSX.Element {
   const [security, setSecurity] = useState(true);
@@ -1055,7 +1055,7 @@ export default function CheckboxGroupDemo(): JSX.Element {
       case 'autocomplete':
       case 'combobox':
         return `import React, { useState } from 'react';
-import { Autocomplete } from '@spectra/react';
+import { Autocomplete } from '@winplaybox/react';
 
 const TECHNOLOGIES = [
   { value: 'react', label: 'React.js', description: 'Declarative UI library' },
@@ -1082,7 +1082,7 @@ export default function AutocompleteDemo(): JSX.Element {
 
       case 'avatar-group':
         return `import React from 'react';
-import { AvatarGroup, Avatar } from '@spectra/react';
+import { AvatarGroup, Avatar } from '@winplaybox/react';
 
 export default function AvatarGroupDemo(): JSX.Element {
   return (
@@ -1098,7 +1098,7 @@ export default function AvatarGroupDemo(): JSX.Element {
 
       case 'tag':
         return `import React from 'react';
-import { Tag } from '@spectra/react';
+import { Tag } from '@winplaybox/react';
 
 export default function TagDemo(): JSX.Element {
   return (
@@ -1113,7 +1113,7 @@ export default function TagDemo(): JSX.Element {
 
       case 'media-card':
         return `import React from 'react';
-import { MediaCard, Badge, Button } from '@spectra/react';
+import { MediaCard, Badge, Button } from '@winplaybox/react';
 
 export default function MediaCardDemo(): JSX.Element {
   return (
@@ -1134,7 +1134,7 @@ export default function MediaCardDemo(): JSX.Element {
       case 'table':
       case 'data-grid':
         return `import React from 'react';
-import { Table, TableHead, TableBody, TableRow, TableCell, TableHeaderCell, Badge } from '@spectra/react';
+import { Table, TableHead, TableBody, TableRow, TableCell, TableHeaderCell, Badge } from '@winplaybox/react';
 
 export default function TableDemo(): JSX.Element {
   return (
@@ -1169,7 +1169,7 @@ export default function TableDemo(): JSX.Element {
 
       case 'tree-view':
         return `import React from 'react';
-import { TreeView } from '@spectra/react';
+import { TreeView } from '@winplaybox/react';
 
 const TREE_DATA = [
   {
@@ -1199,7 +1199,7 @@ export default function TreeViewDemo(): JSX.Element {
 
       case 'statistic':
         return `import React from 'react';
-import { Statistic } from '@spectra/react';
+import { Statistic } from '@winplaybox/react';
 
 export default function StatisticDemo(): JSX.Element {
   return (
@@ -1221,7 +1221,7 @@ export default function StatisticDemo(): JSX.Element {
 
       case 'timeline':
         return `import React from 'react';
-import { Timeline, TimelineItem } from '@spectra/react';
+import { Timeline, TimelineItem } from '@winplaybox/react';
 
 export default function TimelineDemo(): JSX.Element {
   return (
@@ -1244,7 +1244,7 @@ export default function TimelineDemo(): JSX.Element {
 
       case 'calendar':
         return `import React, { useState } from 'react';
-import { Calendar } from '@spectra/react';
+import { Calendar } from '@winplaybox/react';
 
 export default function CalendarDemo(): JSX.Element {
   const [date, setDate] = useState(new Date());
@@ -1258,7 +1258,7 @@ export default function CalendarDemo(): JSX.Element {
 
       case 'progress-bar':
         return `import React from 'react';
-import { ProgressBar } from '@spectra/react';
+import { ProgressBar } from '@winplaybox/react';
 
 export default function ProgressBarDemo(): JSX.Element {
   return (
@@ -1272,7 +1272,7 @@ export default function ProgressBarDemo(): JSX.Element {
 
       case 'toast':
         return `import React from 'react';
-import { Toast, Button } from '@spectra/react';
+import { Toast, Button } from '@winplaybox/react';
 
 export default function ToastDemo(): JSX.Element {
   return (
@@ -1293,7 +1293,7 @@ export default function ToastDemo(): JSX.Element {
 
       case 'drawer':
         return `import React, { useState } from 'react';
-import { Drawer, Button } from '@spectra/react';
+import { Drawer, Button } from '@winplaybox/react';
 
 export default function DrawerDemo(): JSX.Element {
   const [open, setOpen] = useState(false);
@@ -1315,7 +1315,7 @@ export default function DrawerDemo(): JSX.Element {
 
       case 'paper':
         return `import React from 'react';
-import { Paper } from '@spectra/react';
+import { Paper } from '@winplaybox/react';
 
 export default function PaperDemo(): JSX.Element {
   return (
@@ -1329,7 +1329,7 @@ export default function PaperDemo(): JSX.Element {
 
       case 'pagination':
         return `import React, { useState } from 'react';
-import { Pagination } from '@spectra/react';
+import { Pagination } from '@winplaybox/react';
 
 export default function PaginationDemo(): JSX.Element {
   const [page, setPage] = useState(1);
@@ -1343,7 +1343,7 @@ export default function PaginationDemo(): JSX.Element {
 
       case 'stepper':
         return `import React, { useState } from 'react';
-import { Stepper, Button } from '@spectra/react';
+import { Stepper, Button } from '@winplaybox/react';
 
 const STEPS = [
   { title: 'Project Scope', description: 'Define tokens and platforms' },
@@ -1367,8 +1367,8 @@ export default function StepperDemo(): JSX.Element {
 
       case 'menu':
         return `import React from 'react';
-import { Menu, MenuItem } from '@spectra/react';
-import { CopyIcon, CloseIcon } from '@spectra/icons';
+import { Menu, MenuItem } from '@winplaybox/react';
+import { CopyIcon, CloseIcon } from '@winplaybox/icons';
 
 export default function MenuDemo(): JSX.Element {
   return (
@@ -1383,7 +1383,7 @@ export default function MenuDemo(): JSX.Element {
 
       case 'app-bar':
         return `import React from 'react';
-import { AppBar, Button } from '@spectra/react';
+import { AppBar, Button } from '@winplaybox/react';
 
 export default function AppBarDemo(): JSX.Element {
   return (
@@ -1402,7 +1402,7 @@ export default function AppBarDemo(): JSX.Element {
 
       case 'link':
         return `import React from 'react';
-import { Link } from '@spectra/react';
+import { Link } from '@winplaybox/react';
 
 export default function LinkDemo(): JSX.Element {
   return (
@@ -1415,8 +1415,8 @@ export default function LinkDemo(): JSX.Element {
 
       case 'speed-dial':
         return `import React from 'react';
-import { SpeedDial } from '@spectra/react';
-import { SearchIcon, CopyIcon } from '@spectra/icons';
+import { SpeedDial } from '@winplaybox/react';
+import { SearchIcon, CopyIcon } from '@winplaybox/icons';
 
 export default function SpeedDialDemo(): JSX.Element {
   const actions = [
@@ -1433,7 +1433,7 @@ export default function SpeedDialDemo(): JSX.Element {
 
       case 'popover':
         return `import React from 'react';
-import { Popover, Button } from '@spectra/react';
+import { Popover, Button } from '@winplaybox/react';
 
 export default function PopoverDemo(): JSX.Element {
   return (
@@ -1450,7 +1450,7 @@ export default function PopoverDemo(): JSX.Element {
 
       case 'box':
         return `import React from 'react';
-import { Box } from '@spectra/react';
+import { Box } from '@winplaybox/react';
 
 export default function BoxDemo(): JSX.Element {
   return (
@@ -1475,7 +1475,7 @@ export default function BoxDemo(): JSX.Element {
 
       case 'container':
         return `import React from 'react';
-import { Container } from '@spectra/react';
+import { Container } from '@winplaybox/react';
 
 export default function ContainerDemo(): JSX.Element {
   return (
@@ -1488,7 +1488,7 @@ export default function ContainerDemo(): JSX.Element {
 
       case 'grid':
         return `import React from 'react';
-import { Grid, Box } from '@spectra/react';
+import { Grid, Box } from '@winplaybox/react';
 
 export default function GridDemo(): JSX.Element {
   return (
@@ -1508,7 +1508,7 @@ export default function GridDemo(): JSX.Element {
 
       case 'stack':
         return `import React from 'react';
-import { Stack, Button } from '@spectra/react';
+import { Stack, Button } from '@winplaybox/react';
 
 export default function StackDemo(): JSX.Element {
   return (
@@ -1522,8 +1522,8 @@ export default function StackDemo(): JSX.Element {
 
       case 'bottom-nav':
         return `import React, { useState } from 'react';
-import { BottomNav } from '@spectra/react';
-import { SearchIcon, SparklesIcon, UserIcon } from '@spectra/icons';
+import { BottomNav } from '@winplaybox/react';
+import { SearchIcon, SparklesIcon, UserIcon } from '@winplaybox/icons';
 
 export default function BottomNavDemo(): JSX.Element {
   const [activeTab, setActiveTab] = useState('home');
@@ -1545,7 +1545,7 @@ export default function BottomNavDemo(): JSX.Element {
 
       case 'platform-chassis':
         return `import React, { useState } from 'react';
-import { PlatformChassis, Button } from '@spectra/react';
+import { PlatformChassis, Button } from '@winplaybox/react';
 
 export default function PlatformChassisDemo(): JSX.Element {
   const [platform, setPlatform] = useState<'web' | 'ios' | 'android' | 'macos' | 'windows'>('web');
@@ -1563,7 +1563,7 @@ export default function PlatformChassisDemo(): JSX.Element {
 
       case 'color-picker':
         return `import React, { useState } from 'react';
-import { ColorPicker } from '@spectra/react';
+import { ColorPicker } from '@winplaybox/react';
 
 export default function ColorPickerDemo(): JSX.Element {
   const [color, setColor] = useState('#2563EB');
@@ -1582,7 +1582,7 @@ export default function ColorPickerDemo(): JSX.Element {
 
       case 'radio-group':
         return `import React, { useState } from 'react';
-import { RadioGroup, Radio } from '@spectra/react';
+import { RadioGroup, Radio } from '@winplaybox/react';
 
 export default function RadioGroupDemo(): JSX.Element {
   const [value, setValue] = useState('standard');
@@ -1599,7 +1599,7 @@ export default function RadioGroupDemo(): JSX.Element {
       default: {
         const safeName = meta.name.replace(/[\s-]+/g, '');
         return `import React from 'react';
-import { ${safeName} } from '@spectra/react';
+import { ${safeName} } from '@winplaybox/react';
 
 export default function ${safeName}Demo(): JSX.Element {
   return (
@@ -1623,8 +1623,8 @@ export default function ${safeName}Demo(): JSX.Element {
       case 'button':
         return `// React Native Mobile Implementation (iOS & Android)
 import React from 'react';
-import { Button } from '@spectra/react-native';
-import { CheckIcon } from '@spectra/icons';
+import { Button } from '@winplaybox/react-native';
+import { CheckIcon } from '@winplaybox/icons';
 
 export const NativeButtonDemo = () => {
   return (
@@ -1642,7 +1642,7 @@ export const NativeButtonDemo = () => {
       case 'text-input':
         return `// React Native Mobile Implementation (iOS & Android)
 import React, { useState } from 'react';
-import { TextInput } from '@spectra/react-native';
+import { TextInput } from '@winplaybox/react-native';
 
 export const NativeTextInputDemo = () => {
   const [text, setText] = useState('');
@@ -1659,7 +1659,7 @@ export const NativeTextInputDemo = () => {
       case 'switch':
         return `// React Native Mobile Implementation (iOS & Android)
 import React, { useState } from 'react';
-import { Switch } from '@spectra/react-native';
+import { Switch } from '@winplaybox/react-native';
 
 export const NativeSwitchDemo = () => {
   const [enabled, setEnabled] = useState(true);
@@ -1674,7 +1674,7 @@ export const NativeSwitchDemo = () => {
       case 'accordion':
         return `// React Native Mobile Implementation (iOS & Android)
 import React from 'react';
-import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@spectra/react-native';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react-native';
 
 export const NativeAccordionDemo = () => {
   return (
@@ -1691,7 +1691,7 @@ export const NativeAccordionDemo = () => {
       case 'avatar':
         return `// React Native Mobile Implementation (iOS & Android)
 import React from 'react';
-import { Avatar } from '@spectra/react-native';
+import { Avatar } from '@winplaybox/react-native';
 
 export const NativeAvatarDemo = () => {
   return <Avatar name="Sarah Connor" size="md" status="online" />;
@@ -1699,7 +1699,7 @@ export const NativeAvatarDemo = () => {
       case 'badge':
         return `// React Native Mobile Implementation (iOS & Android)
 import React from 'react';
-import { Badge } from '@spectra/react-native';
+import { Badge } from '@winplaybox/react-native';
 
 export const NativeBadgeDemo = () => {
   return <Badge variant="success">Active</Badge>;
@@ -1707,7 +1707,7 @@ export const NativeBadgeDemo = () => {
       case 'card':
         return `// React Native Mobile Implementation (iOS & Android)
 import React from 'react';
-import { Card, Text } from '@spectra/react-native';
+import { Card, Text } from '@winplaybox/react-native';
 
 export const NativeCardDemo = () => {
   return (
@@ -1720,7 +1720,7 @@ export const NativeCardDemo = () => {
       case 'tabs':
         return `// React Native Mobile Implementation (iOS & Android)
 import React, { useState } from 'react';
-import { Tabs } from '@spectra/react-native';
+import { Tabs } from '@winplaybox/react-native';
 
 export const NativeTabsDemo = () => {
   const [index, setIndex] = useState(0);
@@ -1736,7 +1736,7 @@ export const NativeTabsDemo = () => {
         return `// React Native Mobile Implementation (iOS & Android)
 import React from 'react';
 import { View } from 'react-native';
-import { Alert } from '@spectra/react-native';
+import { Alert } from '@winplaybox/react-native';
 
 export const NativeAlertDemo = () => {
   return (
@@ -1754,7 +1754,7 @@ export const NativeAlertDemo = () => {
         return `// React Native Mobile Implementation (iOS & Android)
 import React from 'react';
 import { View } from 'react-native';
-import { Spinner } from '@spectra/react-native';
+import { Spinner } from '@winplaybox/react-native';
 
 export const NativeSpinnerDemo = () => {
   return (
@@ -1769,7 +1769,7 @@ export const NativeSpinnerDemo = () => {
         return `// React Native Mobile Implementation (iOS & Android)
 import React from 'react';
 import { View } from 'react-native';
-import { Skeleton } from '@spectra/react-native';
+import { Skeleton } from '@winplaybox/react-native';
 
 export const NativeSkeletonDemo = () => {
   return (
@@ -1784,7 +1784,7 @@ export const NativeSkeletonDemo = () => {
         return `// React Native Mobile Implementation (iOS & Android)
 import React from 'react';
 import { View } from 'react-native';
-import { Divider, Button } from '@spectra/react-native';
+import { Divider, Button } from '@winplaybox/react-native';
 
 export const NativeDividerDemo = () => {
   return (
@@ -1799,7 +1799,7 @@ export const NativeDividerDemo = () => {
         return `// React Native Mobile Implementation (iOS & Android)
 import React from 'react';
 import { View } from 'react-native';
-import { Chip } from '@spectra/react-native';
+import { Chip } from '@winplaybox/react-native';
 
 export const NativeChipDemo = () => {
   return (
@@ -1813,7 +1813,7 @@ export const NativeChipDemo = () => {
       case 'breadcrumbs':
         return `// React Native Mobile Implementation (iOS & Android)
 import React from 'react';
-import { Breadcrumbs } from '@spectra/react-native';
+import { Breadcrumbs } from '@winplaybox/react-native';
 
 export const NativeBreadcrumbsDemo = () => {
   return (
@@ -1829,7 +1829,7 @@ export const NativeBreadcrumbsDemo = () => {
       default:
         return `// React Native Mobile Implementation (iOS & Android)
 import React from 'react';
-import { ${meta.name} } from '@spectra/react-native';
+import { ${meta.name} } from '@winplaybox/react-native';
 
 export const Native${meta.name}Demo = () => {
   return <${meta.name} />;
@@ -2042,7 +2042,7 @@ export const Native${meta.name}Demo = () => {
               <AccordionItem value="item-2">
                 <AccordionHeader>Can I use these tokens in React Native?</AccordionHeader>
                 <AccordionPanel>
-                  Yes! @spectra/tokens compiles to strictly typed JavaScript objects that plug directly
+                  Yes! @winplaybox/tokens compiles to strictly typed JavaScript objects that plug directly
                   into React Native StyleSheet.
                 </AccordionPanel>
               </AccordionItem>
@@ -3386,7 +3386,7 @@ export const Native${meta.name}Demo = () => {
 
             {/* 3. Bundle size */}
             <a
-              href="https://bundlephobia.com/package/@spectra/react"
+              href="https://bundlephobia.com/package/@winplaybox/react"
               target="_blank"
               rel="noreferrer"
               title={`Estimated gzipped bundle size: ${COMPONENT_BUNDLE_SIZES[meta.id] || '< 2.0 kB'}`}
@@ -4404,10 +4404,10 @@ export const Native${meta.name}Demo = () => {
             </h3>
             <p style={{ color: 'var(--color-text-secondary)', fontSize: 14, margin: '0 0 16px' }}>
               {activeResourceModal === 'react'
-                ? `Import directly from @spectra/react for Web applications:`
+                ? `Import directly from @winplaybox/react for Web applications:`
                 : activeResourceModal === 'tokens'
                 ? `Customizable CSS design tokens and variables available for ${meta.name}:`
-                : `Import from @spectra/react-native for native iOS and Android mobile apps:`}
+                : `Import from @winplaybox/react-native for native iOS and Android mobile apps:`}
             </p>
             <pre
               style={{

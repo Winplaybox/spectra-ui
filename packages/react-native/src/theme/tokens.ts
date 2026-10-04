@@ -1,4 +1,4 @@
-import { getTokens, lightTokens, darkTokens, ColorScheme } from '@spectra/tokens';
+import { getTokens, lightTokens, darkTokens, ColorScheme } from '@winplaybox/tokens';
 
 export { getTokens, lightTokens, darkTokens };
 

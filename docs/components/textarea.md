@@ -3,14 +3,14 @@
 Multi-line text input field supporting auto-expansion, character limit counters, and resize constraints.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { TextArea } from '@spectra/react';
+import { TextArea } from '@winplaybox/react';
 
 export default function BasicTextAreaExample() {
   return (
@@ -67,13 +67,13 @@ Official pattern: [Textbox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/)
 | `maxLength` | `number` | `undefined` | Maximum allowed character count. |
 | `autoResize` | `boolean` | `false` | Automatically expands height to fit text. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useFormField`
 Description: Binds label ID and error descriptions for accessible form validation.
 
 ```tsx
-import { useFormField } from '@spectra/primitives';
+import { useFormField } from '@winplaybox/primitives';
 
 export function CustomTextArea(props) {
   const { inputProps, labelProps } = useFormField(props);

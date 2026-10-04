@@ -1,5 +1,5 @@
 import React, { createContext, useContext, forwardRef } from 'react';
-import { useControllableState, useId } from '@spectra/primitives';
+import { useControllableState, useId } from '@winplaybox/primitives';
 import * as styles from './Tabs.css';
 
 interface TabsContextValue {

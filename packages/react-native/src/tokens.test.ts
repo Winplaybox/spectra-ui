@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { getTokens, lightTokens, darkTokens, useNativeTokens } from './theme/tokens';
 
-describe('@spectra/react-native token parity', () => {
+describe('@winplaybox/react-native token parity', () => {
   it('provides complete lightTokens with semantic tokens', () => {
     expect(lightTokens['color-action-primary']).toBeDefined();
     expect(lightTokens['color-surface']).toBeDefined();

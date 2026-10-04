@@ -3,14 +3,14 @@
 Semantic hypertext anchor with token-driven hover states, external link indicator vectors, and focus rings.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Link } from '@spectra/react';
+import { Link } from '@winplaybox/react';
 
 export default function BasicLinkExample() {
   return (
@@ -62,13 +62,13 @@ Official pattern: [Link Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/link/)
 | `href` | `string` | `''` | Destination URL. |
 | `external` | `boolean` | `false` | Appends target="_blank" and external icon. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useFocusRing`
 Description: Provides accessible focus ring styling for inline links.
 
 ```tsx
-import { useFocusRing } from '@spectra/primitives';
+import { useFocusRing } from '@winplaybox/primitives';
 
 export function CustomLink(props) {
   const { isFocusVisible, focusProps } = useFocusRing();

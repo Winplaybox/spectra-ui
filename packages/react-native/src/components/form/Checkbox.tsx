@@ -7,8 +7,8 @@ import {
   ViewStyle,
   GestureResponderEvent,
 } from 'react-native';
-import { useTheme, useControllableState } from '@spectra/primitives';
-import { getTokens } from '@spectra/tokens';
+import { useTheme, useControllableState } from '@winplaybox/primitives';
+import { getTokens } from '@winplaybox/tokens';
 
 export interface NativeCheckboxProps {
   checked?: boolean;

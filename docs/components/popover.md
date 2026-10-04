@@ -3,14 +3,14 @@
 Contextual floating container anchored to a trigger element containing interactive forms and actions.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Popover } from '@spectra/react';
+import { Popover } from '@winplaybox/react';
 
 export default function BasicPopoverExample() {
   return (
@@ -63,13 +63,13 @@ Official pattern: [Non-modal Dialog Pattern](https://www.w3.org/WAI/ARIA/apg/pat
 | `trigger` | `ReactNode` | `undefined` | Anchor button opening popover. |
 | `placement` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'bottom'` | Preferred compass anchor side. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useOutsideClick`
 Description: Dismisses popover when user clicks outside surface bounds.
 
 ```tsx
-import { useOutsideClick } from '@spectra/primitives';
+import { useOutsideClick } from '@winplaybox/primitives';
 
 export function PopoverDemo() {
   const ref = useRef(null);

@@ -3,14 +3,14 @@
 An accessible circular rotating progress indicator used to signify background activity or pending operations.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Spinner } from '@spectra/react';
+import { Spinner } from '@winplaybox/react';
 
 export default function BasicSpinnerExample() {
   return (
@@ -65,13 +65,13 @@ Official pattern: [Progress Indicator pattern](https://www.w3.org/WAI/ARIA/apg/p
 | `color` | `string` | `'primary'` | Stroke color token or CSS color. |
 | `label` | `string` | `'Loading...'` | Accessible screen reader status label. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useReducedMotion`
 Description: Detects if the user prefers reduced motion and replaces spinner spin with pulsing opacity.
 
 ```tsx
-import { useReducedMotion } from '@spectra/primitives';
+import { useReducedMotion } from '@winplaybox/primitives';
 
 export function AccessibleSpinner() {
   const prefersReduced = useReducedMotion();

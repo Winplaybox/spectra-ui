@@ -1,5 +1,5 @@
 {
-  "name": "@spectra/tokens",
+  "name": "@winplaybox/tokens",
   "version": "0.1.0",
   "description": "Design tokens engine for Spectra UI (WinPlayBox Design System)",
   "type": "module",

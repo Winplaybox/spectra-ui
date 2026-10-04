@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card, Button } from '@spectra/react';
-import { ExternalLinkIcon, SparklesIcon, CloseIcon } from '@spectra/icons';
+import { Card, Button } from '@winplaybox/react';
+import { ExternalLinkIcon, SparklesIcon, CloseIcon } from '@winplaybox/icons';
 
 export type AdFormat = 'cover' | 'responsive' | 'classic';
 export type PublisherTheme = 'docs' | 'devtools' | 'editorial';

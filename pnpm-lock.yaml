@@ -39,16 +39,16 @@ importers:
       '@codesandbox/sdk':
         specifier: ^2.4.2
         version: 2.4.2(@hey-api/openapi-ts@0.99.0(typescript@5.9.3))(@xterm/xterm@5.5.0)(ink@7.1.1(@types/react@18.3.31)(bufferutil@4.1.0)(react-devtools-core@6.1.5(bufferutil@4.1.0)(utf-8-validate@6.0.6))(react@18.3.1)(utf-8-validate@6.0.6))
-      '@spectra/icons':
+      '@winplaybox/icons':
         specifier: workspace:*
         version: link:../../packages/icons
-      '@spectra/primitives':
+      '@winplaybox/primitives':
         specifier: workspace:*
         version: link:../../packages/primitives
-      '@spectra/react':
+      '@winplaybox/react':
         specifier: workspace:*
         version: link:../../packages/react
-      '@spectra/tokens':
+      '@winplaybox/tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
       '@types/lz-string':
@@ -88,16 +88,16 @@ importers:
 
   apps/storybook:
     dependencies:
-      '@spectra/icons':
+      '@winplaybox/icons':
         specifier: workspace:*
         version: link:../../packages/icons
-      '@spectra/primitives':
+      '@winplaybox/primitives':
         specifier: workspace:*
         version: link:../../packages/primitives
-      '@spectra/react':
+      '@winplaybox/react':
         specifier: workspace:*
         version: link:../../packages/react
-      '@spectra/tokens':
+      '@winplaybox/tokens':
         specifier: workspace:*
         version: link:../../packages/tokens
       react:
@@ -198,13 +198,13 @@ importers:
 
   packages/react:
     dependencies:
-      '@spectra/icons':
+      '@winplaybox/icons':
         specifier: workspace:*
         version: link:../icons
-      '@spectra/primitives':
+      '@winplaybox/primitives':
         specifier: workspace:*
         version: link:../primitives
-      '@spectra/tokens':
+      '@winplaybox/tokens':
         specifier: workspace:*
         version: link:../tokens
       react:
@@ -256,10 +256,10 @@ importers:
 
   packages/react-native:
     dependencies:
-      '@spectra/primitives':
+      '@winplaybox/primitives':
         specifier: workspace:*
         version: link:../primitives
-      '@spectra/tokens':
+      '@winplaybox/tokens':
         specifier: workspace:*
         version: link:../tokens
       react:

@@ -13,14 +13,14 @@ import {
   MoonIcon,
   SparklesIcon,
   ExternalLinkIcon,
-} from '@spectra/icons';
+} from '@winplaybox/icons';
 import {
   GithubIcon,
   GoogleIcon,
   AppleIcon,
   TwitterIcon,
   FacebookIcon,
-} from '@spectra/icons/social';
+} from '@winplaybox/icons/social';
 import {
   Button,
   TextInput,
@@ -49,7 +49,7 @@ export default meta;
 /**
  * Real-World Component Usage Patterns
  *
- * Demonstrates best practices for integrating @spectra/icons with Spectra UI components:
+ * Demonstrates best practices for integrating @winplaybox/icons with Spectra UI components:
  * Buttons, TextInputs, Badges, Lists, Social Auth, and Two-Tone styling.
  */
 export const UsagePatterns: StoryObj = {
@@ -66,7 +66,7 @@ export const UsagePatterns: StoryObj = {
             Icon Component Recipes & Usage
           </h1>
           <p style={{ fontSize: 15, color: 'var(--color-text-secondary)', marginTop: 8 }}>
-            Pairing <code style={{ color: 'var(--color-action-primary)' }}>@spectra/icons</code> with Spectra UI components for accessible, theme-reactive interfaces.
+            Pairing <code style={{ color: 'var(--color-action-primary)' }}>@winplaybox/icons</code> with Spectra UI components for accessible, theme-reactive interfaces.
           </p>
         </div>
 
@@ -250,7 +250,7 @@ export const UsagePatterns: StoryObj = {
           <CardHeader>
             <CardTitle>5. Social Authentication & Platform Buttons</CardTitle>
             <CardDescription>
-              Built-in brand vector icons from the native <code style={{ color: 'var(--color-action-primary)' }}>@spectra/icons/social</code> subpath.
+              Built-in brand vector icons from the native <code style={{ color: 'var(--color-action-primary)' }}>@winplaybox/icons/social</code> subpath.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -273,7 +273,7 @@ export const UsagePatterns: StoryObj = {
             </div>
 
             <pre style={{ backgroundColor: 'var(--color-surface-raised, #f5f5f5)', padding: 12, borderRadius: 6, marginTop: 16, fontSize: 13, overflowX: 'auto' }}>
-{`import { GithubIcon, GoogleIcon, AppleIcon } from '@spectra/icons/social';
+{`import { GithubIcon, GoogleIcon, AppleIcon } from '@winplaybox/icons/social';
 
 <Button variant="secondary" icon={<GithubIcon size={18} />}>
   Continue with GitHub
@@ -457,13 +457,13 @@ export const DynamicAndLazyLoading: StoryObj = {
                   {typedName}
                 </div>
                 <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginTop: 4 }}>
-                  Dynamically loaded via <code>@spectra/icons</code>
+                  Dynamically loaded via <code>@winplaybox/icons</code>
                 </div>
               </div>
             </div>
 
             <pre style={{ backgroundColor: 'var(--color-surface-raised, #f5f5f5)', padding: 14, borderRadius: 6, marginTop: 24, fontSize: 13, overflowX: 'auto' }}>
-{`import { DynamicIcon } from '@spectra/icons';
+{`import { DynamicIcon } from '@winplaybox/icons';
 
 // Only loads the specific category chunk (~15KB) over the network
 <DynamicIcon
@@ -556,7 +556,7 @@ export const Catalog: StoryObj = {
     }, [manifest, search, selectedStyle, selectedCategory]);
 
     const handleCopy = (compName: string) => {
-      const text = `import { ${compName} } from '@spectra/icons';`;
+      const text = `import { ${compName} } from '@winplaybox/icons';`;
       if (navigator.clipboard) {
         navigator.clipboard.writeText(text);
       }
@@ -708,7 +708,7 @@ export const Catalog: StoryObj = {
           Showing {Math.min(filteredIcons.length, displayLimit).toLocaleString()} of {filteredIcons.length.toLocaleString()} matched icons
           {copiedName && (
             <span style={{ marginLeft: 16, color: 'var(--color-feedback-success, green)', fontWeight: 600 }}>
-              ✓ Copied: import &#123; {copiedName} &#125; from '@spectra/icons';
+              ✓ Copied: import &#123; {copiedName} &#125; from '@winplaybox/icons';
             </span>
           )}
         </div>
@@ -725,7 +725,7 @@ export const Catalog: StoryObj = {
             <div
               key={item.id}
               onClick={() => handleCopy(item.componentName)}
-              title={`Click to copy: import { ${item.componentName} } from '@spectra/icons'`}
+              title={`Click to copy: import { ${item.componentName} } from '@winplaybox/icons'`}
               style={{
                 display: 'flex',
                 flexDirection: 'column',

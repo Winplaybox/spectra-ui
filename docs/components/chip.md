@@ -3,14 +3,14 @@
 Compact interactive badges representing entities, inputs, selections, or filters with optional leading avatars/icons and dismiss actions.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Chip } from '@spectra/react';
+import { Chip } from '@winplaybox/react';
 
 export default function BasicChipExample() {
   return (
@@ -70,13 +70,13 @@ Official pattern: [Button / Tag pattern](https://www.w3.org/WAI/ARIA/apg/pattern
 | `onClick` | `() => void` | `undefined` | Enables interactive hover/click behavior. |
 | `icon` | `ReactNode` | `undefined` | Leading icon. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useButtonProps`
 Description: Generates keyboard and ARIA handlers for interactive chips.
 
 ```tsx
-import { useButtonProps } from '@spectra/primitives';
+import { useButtonProps } from '@winplaybox/primitives';
 
 export function CustomChip({ label, onClick }) {
   const buttonProps = useButtonProps({ onClick });

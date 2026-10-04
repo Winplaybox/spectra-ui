@@ -1,6 +1,6 @@
 // packages/react/src/components/data-display/TreeView.tsx
 import React, { useState, forwardRef, ReactNode } from 'react';
-import { ChevronDownIcon } from '@spectra/icons';
+import { ChevronDownIcon } from '@winplaybox/icons';
 
 export interface TreeItemData {
   id: string;

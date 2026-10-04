@@ -3,14 +3,14 @@
 Chronological event stream with connecting vertical vectors, status icons, and timestamp metadata.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Timeline } from '@spectra/react';
+import { Timeline } from '@winplaybox/react';
 
 export default function BasicTimelineExample() {
   return (
@@ -64,13 +64,13 @@ Official pattern: [Ordered List Pattern](https://www.w3.org/WAI/ARIA/apg/pattern
 | `items` | `TimelineItem[]` | `[]` | Array of timeline event records. |
 | `align` | `'left' \| 'right' \| 'alternate'` | `'left'` | Layout alignment. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Supplies connector stroke and status color tokens.
 
 ```tsx
-import { useTheme } from '@spectra/primitives';
+import { useTheme } from '@winplaybox/primitives';
 
 export function TimelinePrimitive({ events }) {
   return <ol className="timeline">{/* items */}</ol>;

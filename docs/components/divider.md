@@ -3,14 +3,14 @@
 A visual separator dividing content into distinct thematic groups or sections, supporting horizontal and vertical orientations.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Divider } from '@spectra/react';
+import { Divider } from '@winplaybox/react';
 
 export default function BasicDividerExample() {
   return (
@@ -65,13 +65,13 @@ Official pattern: [Separator pattern](https://www.w3.org/WAI/ARIA/apg/patterns/)
 | `label` | `string` | `undefined` | Text label inset within divider. |
 | `labelPosition` | `'center' \| 'left' \| 'right'` | `'center'` | Placement of label along the line. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Injects design token border colors.
 
 ```tsx
-import { useTheme } from '@spectra/primitives';
+import { useTheme } from '@winplaybox/primitives';
 
 export function ThemedDivider() {
   const { colorScheme } = useTheme();

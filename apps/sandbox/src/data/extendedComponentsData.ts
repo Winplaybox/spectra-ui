@@ -48,7 +48,7 @@ export const EXTENDED_COMPONENTS_DATA: Record<string, ComponentMetadata> = {
     headlessHook: {
       name: 'useFocusRing',
       description: 'Applies visible keyboard focus ring without mouse click outline.',
-      code: `import { useFocusRing } from '@spectra/primitives';
+      code: `import { useFocusRing } from '@winplaybox/primitives';
 
 export function CustomCompoundButton(props) {
   const { isFocusVisible, focusProps } = useFocusRing();
@@ -102,7 +102,7 @@ export function CustomCompoundButton(props) {
     headlessHook: {
       name: 'useDisclosure',
       description: 'Controls open and closed flyout state with outside click dismissal.',
-      code: `import { useDisclosure } from '@spectra/primitives';
+      code: `import { useDisclosure } from '@winplaybox/primitives';
 
 export function SplitAction() {
   const { isOpen, onToggle, onClose } = useDisclosure();
@@ -151,7 +151,7 @@ export function SplitAction() {
     headlessHook: {
       name: 'useListNavigation',
       description: 'Manages arrow key roaming and active index synchronization.',
-      code: `import { useListNavigation } from '@spectra/primitives';
+      code: `import { useListNavigation } from '@winplaybox/primitives';
 
 export function ToolbarGroup() {
   const { activeIndex } = useListNavigation({ totalItems: 3 });
@@ -202,7 +202,7 @@ export function ToolbarGroup() {
     headlessHook: {
       name: 'useFocusRing',
       description: 'Supplies accessible focus ring parameters for circular boundaries.',
-      code: `import { useFocusRing } from '@spectra/primitives';
+      code: `import { useFocusRing } from '@winplaybox/primitives';
 
 export function ActionIconButton(props) {
   const { isFocusVisible, focusProps } = useFocusRing();
@@ -254,7 +254,7 @@ export function ActionIconButton(props) {
     headlessHook: {
       name: 'useFormField',
       description: 'Binds label ID and error descriptions for accessible form validation.',
-      code: `import { useFormField } from '@spectra/primitives';
+      code: `import { useFormField } from '@winplaybox/primitives';
 
 export function CustomTextArea(props) {
   const { inputProps, labelProps } = useFormField(props);
@@ -305,7 +305,7 @@ export function CustomTextArea(props) {
     headlessHook: {
       name: 'useListNavigation',
       description: 'Controls active item selection and keyboard roaming.',
-      code: `import { useListNavigation } from '@spectra/primitives';
+      code: `import { useListNavigation } from '@winplaybox/primitives';
 
 export function CustomCombobox() {
   const { activeIndex } = useListNavigation({ totalItems: 10 });
@@ -352,7 +352,7 @@ export function CustomCombobox() {
     headlessHook: {
       name: 'useDebounce',
       description: 'Debounces query changes to prevent excessive API invocations.',
-      code: `import { useDebounce } from '@spectra/primitives';
+      code: `import { useDebounce } from '@winplaybox/primitives';
 
 export function AutocompleteDemo() {
   const [val, setVal] = useState('');
@@ -402,7 +402,7 @@ export function AutocompleteDemo() {
     headlessHook: {
       name: 'useControllableState',
       description: 'Manages array of selected IDs across controlled and uncontrolled modes.',
-      code: `import { useControllableState } from '@spectra/primitives';
+      code: `import { useControllableState } from '@winplaybox/primitives';
 
 export function CheckboxGroupPrimitive(props) {
   const [selected, setSelected] = useControllableState({ defaultValue: [] });
@@ -451,7 +451,7 @@ export function CheckboxGroupPrimitive(props) {
     headlessHook: {
       name: 'useListNavigation',
       description: 'Provides circular arrow key focus management across options.',
-      code: `import { useListNavigation } from '@spectra/primitives';
+      code: `import { useListNavigation } from '@winplaybox/primitives';
 
 export function RadioGroupPrimitive() {
   const { activeIndex } = useListNavigation({ totalItems: 3, loop: true });
@@ -505,7 +505,7 @@ export function RadioGroupPrimitive() {
     headlessHook: {
       name: 'useControllableState',
       description: 'Manages continuous numeric range values with min/max clamps.',
-      code: `import { useControllableState } from '@spectra/primitives';
+      code: `import { useControllableState } from '@winplaybox/primitives';
 
 export function SliderPrimitive({ min = 0, max = 100, defaultValue = 50 }) {
   const [val, setVal] = useControllableState({ defaultValue });
@@ -553,7 +553,7 @@ export function SliderPrimitive({ min = 0, max = 100, defaultValue = 50 }) {
     headlessHook: {
       name: 'useControllableState',
       description: 'Handles hovered and locked rating scores.',
-      code: `import { useControllableState } from '@spectra/primitives';
+      code: `import { useControllableState } from '@winplaybox/primitives';
 
 export function RatingPrimitive() {
   const [rating, setRating] = useControllableState({ defaultValue: 0 });
@@ -601,7 +601,7 @@ export function RatingPrimitive() {
     headlessHook: {
       name: 'useDisclosure',
       description: 'Opens and closes color picker popover.',
-      code: `import { useDisclosure } from '@spectra/primitives';
+      code: `import { useDisclosure } from '@winplaybox/primitives';
 
 export function ColorPickerDemo() {
   const { isOpen, onToggle } = useDisclosure();
@@ -648,7 +648,7 @@ export function ColorPickerDemo() {
     headlessHook: {
       name: 'useTheme',
       description: 'Extracts surface background color for ring borders.',
-      code: `import { useTheme } from '@spectra/primitives';
+      code: `import { useTheme } from '@winplaybox/primitives';
 
 export function AvatarGroupPrimitive() {
   const { colorScheme } = useTheme();
@@ -697,7 +697,7 @@ export function AvatarGroupPrimitive() {
     headlessHook: {
       name: 'useTheme',
       description: 'Applies token border colors and hover surface backgrounds.',
-      code: `import { useTheme } from '@spectra/primitives';
+      code: `import { useTheme } from '@winplaybox/primitives';
 
 export function CustomTable() {
   const { colorScheme } = useTheme();
@@ -747,7 +747,7 @@ export function CustomTable() {
     headlessHook: {
       name: 'useListNavigation',
       description: 'Coordinates 2D arrow key roaming across columns and rows.',
-      code: `import { useListNavigation } from '@spectra/primitives';
+      code: `import { useListNavigation } from '@winplaybox/primitives';
 
 export function GridPrimitive() {
   return <div role="grid">{/* virtualized rows */}</div>;
@@ -795,7 +795,7 @@ export function GridPrimitive() {
     headlessHook: {
       name: 'useDisclosure',
       description: 'Manages expanded/collapsed state for nested sub-trees.',
-      code: `import { useDisclosure } from '@spectra/primitives';
+      code: `import { useDisclosure } from '@winplaybox/primitives';
 
 export function TreeNode({ label, children }) {
   const { isOpen, onToggle } = useDisclosure();
@@ -842,7 +842,7 @@ export function TreeNode({ label, children }) {
     headlessHook: {
       name: 'useTheme',
       description: 'Calculates color contrast ratios for tag backgrounds.',
-      code: `import { useTheme } from '@spectra/primitives';
+      code: `import { useTheme } from '@winplaybox/primitives';
 
 export function CustomTag({ label }) {
   return <span className="spectra-tag">{label}</span>;
@@ -889,7 +889,7 @@ export function CustomTag({ label }) {
     headlessHook: {
       name: 'useTheme',
       description: 'Supplies connector stroke and status color tokens.',
-      code: `import { useTheme } from '@spectra/primitives';
+      code: `import { useTheme } from '@winplaybox/primitives';
 
 export function TimelinePrimitive({ events }) {
   return <ol className="timeline">{/* items */}</ol>;
@@ -935,7 +935,7 @@ export function TimelinePrimitive({ events }) {
     headlessHook: {
       name: 'useTheme',
       description: 'Provides typography scale tokens for headline numerical font.',
-      code: `import { useTheme } from '@spectra/primitives';
+      code: `import { useTheme } from '@winplaybox/primitives';
 
 export function StatisticCard({ title, value }) {
   return <div><span>{title}</span><h2>{value}</h2></div>;
@@ -983,7 +983,7 @@ export function StatisticCard({ title, value }) {
     headlessHook: {
       name: 'useControllableState',
       description: 'Manages selected Date objects and active month offsets.',
-      code: `import { useControllableState } from '@spectra/primitives';
+      code: `import { useControllableState } from '@winplaybox/primitives';
 
 export function CalendarPrimitive() {
   const [date, setDate] = useControllableState({ defaultValue: new Date() });
@@ -1033,7 +1033,7 @@ export function CalendarPrimitive() {
     headlessHook: {
       name: 'useDisclosure',
       description: 'Controls open state and binds scroll-lock to document body.',
-      code: `import { useDisclosure, useScrollLock } from '@spectra/primitives';
+      code: `import { useDisclosure, useScrollLock } from '@winplaybox/primitives';
 
 export function DrawerPrimitive() {
   const { isOpen, onClose } = useDisclosure();
@@ -1081,7 +1081,7 @@ export function DrawerPrimitive() {
     headlessHook: {
       name: 'useOutsideClick',
       description: 'Dismisses popover when user clicks outside surface bounds.',
-      code: `import { useOutsideClick } from '@spectra/primitives';
+      code: `import { useOutsideClick } from '@winplaybox/primitives';
 
 export function PopoverDemo() {
   const ref = useRef(null);
@@ -1127,7 +1127,7 @@ export function PopoverDemo() {
     headlessHook: {
       name: 'useTheme',
       description: 'Extracts action color variables for the progress fill bar.',
-      code: `import { useTheme } from '@spectra/primitives';
+      code: `import { useTheme } from '@winplaybox/primitives';
 
 export function ProgressBarPrimitive({ value }) {
   return <div role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={100} />;
@@ -1173,7 +1173,7 @@ export function ProgressBarPrimitive({ value }) {
     headlessHook: {
       name: 'useToast',
       description: 'Programmatic toast dispatcher with queueing and auto-dismissal.',
-      code: `import { useToast } from '@spectra/primitives';
+      code: `import { useToast } from '@winplaybox/primitives';
 
 export function SaveButton() {
   const { toast } = useToast();
@@ -1221,7 +1221,7 @@ export function SaveButton() {
     headlessHook: {
       name: 'useTheme',
       description: 'Applies surface token backgrounds and border radii.',
-      code: `import { useTheme } from '@spectra/primitives';
+      code: `import { useTheme } from '@winplaybox/primitives';
 
 export function CustomMediaCard() {
   const { colorScheme } = useTheme();
@@ -1263,7 +1263,7 @@ export function CustomMediaCard() {
     headlessHook: {
       name: 'useTheme',
       description: 'Translates design token keys into CSS custom properties.',
-      code: `import { useTheme } from '@spectra/primitives';
+      code: `import { useTheme } from '@winplaybox/primitives';
 
 export function BoxPrimitive({ as: Tag = 'div', ...props }) {
   return <Tag {...props} />;
@@ -1304,7 +1304,7 @@ export function BoxPrimitive({ as: Tag = 'div', ...props }) {
     headlessHook: {
       name: 'useTheme',
       description: 'Applies responsive breakpoint widths.',
-      code: `import { useTheme } from '@spectra/primitives';
+      code: `import { useTheme } from '@winplaybox/primitives';
 
 export function ContainerPrimitive({ children }) {
   return <div style={{ maxWidth: 1200, margin: '0 auto' }}>{children}</div>;
@@ -1425,7 +1425,7 @@ export function ContainerPrimitive({ children }) {
     headlessHook: {
       name: 'useTheme',
       description: 'Extracts theme shadow tokens.',
-      code: `import { useTheme } from '@spectra/primitives';
+      code: `import { useTheme } from '@winplaybox/primitives';
 
 export function PaperPrimitive({ elevation = 1, children }) {
   return <div className={\`spectra-paper-elevation-\${elevation}\`}>{children}</div>;
@@ -1515,7 +1515,7 @@ export function PaperPrimitive({ elevation = 1, children }) {
     headlessHook: {
       name: 'useControllableState',
       description: 'Manages active page index and ellipsis truncation logic.',
-      code: `import { useControllableState } from '@spectra/primitives';
+      code: `import { useControllableState } from '@winplaybox/primitives';
 
 export function PaginationPrimitive({ count, defaultValue = 1, onChange }) {
   const [page, setPage] = useControllableState({ defaultValue, onChange });
@@ -1562,7 +1562,7 @@ export function PaginationPrimitive({ count, defaultValue = 1, onChange }) {
     headlessHook: {
       name: 'useControllableState',
       description: 'Tracks step progress and completion status.',
-      code: `import { useControllableState } from '@spectra/primitives';
+      code: `import { useControllableState } from '@winplaybox/primitives';
 
 export function StepperPrimitive({ steps, defaultValue = 0 }) {
   const [activeStep, setActiveStep] = useControllableState({ defaultValue });
@@ -1611,7 +1611,7 @@ export function StepperPrimitive({ steps, defaultValue = 0 }) {
     headlessHook: {
       name: 'useListNavigation',
       description: 'Manages arrow key roving focus across menu items.',
-      code: `import { useListNavigation } from '@spectra/primitives';
+      code: `import { useListNavigation } from '@winplaybox/primitives';
 
 export function MenuPrimitive() {
   const { activeIndex } = useListNavigation({ totalItems: 4 });
@@ -1657,7 +1657,7 @@ export function MenuPrimitive() {
     headlessHook: {
       name: 'useFocusRing',
       description: 'Provides accessible focus ring styling for inline links.',
-      code: `import { useFocusRing } from '@spectra/primitives';
+      code: `import { useFocusRing } from '@winplaybox/primitives';
 
 export function CustomLink(props) {
   const { isFocusVisible, focusProps } = useFocusRing();
@@ -1703,7 +1703,7 @@ export function CustomLink(props) {
     headlessHook: {
       name: 'useDisclosure',
       description: 'Controls open state and handles dismissal.',
-      code: `import { useDisclosure } from '@spectra/primitives';
+      code: `import { useDisclosure } from '@winplaybox/primitives';
 
 export function SpeedDialPrimitive() {
   const { isOpen, onToggle } = useDisclosure();
@@ -1749,7 +1749,7 @@ export function SpeedDialPrimitive() {
     headlessHook: {
       name: 'useControllableState',
       description: 'Manages active bottom navigation index.',
-      code: `import { useControllableState } from '@spectra/primitives';
+      code: `import { useControllableState } from '@winplaybox/primitives';
 
 export function BottomNavPrimitive() {
   const [tab, setTab] = useControllableState({ defaultValue: 'home' });
@@ -1794,7 +1794,7 @@ export function BottomNavPrimitive() {
     headlessHook: {
       name: 'usePlatform',
       description: 'Extracts platform metadata and geometry dimensions.',
-      code: `import { usePlatform } from '@spectra/primitives';
+      code: `import { usePlatform } from '@winplaybox/primitives';
 
 export function ChassisPrimitive({ children }) {
   const { platform } = usePlatform();

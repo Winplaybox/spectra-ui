@@ -1,6 +1,6 @@
 // packages/react/src/components/form/Switch.tsx
 import { forwardRef } from 'react';
-import { useControllableState, useId } from '@spectra/primitives';
+import { useControllableState, useId } from '@winplaybox/primitives';
 import * as styles from './Switch.css';
 
 export interface SwitchProps extends Omit<React.ComponentPropsWithoutRef<'input'>, 'type' | 'size' | 'onChange'> {

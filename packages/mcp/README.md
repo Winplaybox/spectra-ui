@@ -1,8 +1,8 @@
-# @spectra/mcp
+# @winplaybox/mcp
 
 > Model Context Protocol (MCP) server for the **Spectra UI** design system by **Winplaybox**.
 
-[![npm version](https://img.shields.io/npm/v/@spectra/mcp.svg?style=flat-square&color=0969da)](https://www.npmjs.com/package/@spectra/mcp)
+[![npm version](https://img.shields.io/npm/v/@winplaybox/mcp.svg?style=flat-square&color=0969da)](https://www.npmjs.com/package/@winplaybox/mcp)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![Repository](https://img.shields.io/badge/GitHub-Winplaybox%2Fspectra--ui-181717.svg?style=flat-square)](https://github.com/Winplaybox/spectra-ui)
 
@@ -20,12 +20,12 @@ It provides AI agents with grounded, real-time access to components, props, desi
 
 | Package | Purpose | NPM Link |
 | :--- | :--- | :--- |
-| **`@spectra/react`** | Core web component library | [npmjs.com/package/@spectra/react](https://www.npmjs.com/package/@spectra/react) |
-| **`@spectra/tokens`** | Multi-tier design tokens (CSS, TS, JSON) | [npmjs.com/package/@spectra/tokens](https://www.npmjs.com/package/@spectra/tokens) |
-| **`@spectra/icons`** | 14,200+ vector SVG icons (multi-shade) | [npmjs.com/package/@spectra/icons](https://www.npmjs.com/package/@spectra/icons) |
-| **`@spectra/primitives`** | 25 Headless hooks and behavioral state primitives | [npmjs.com/package/@spectra/primitives](https://www.npmjs.com/package/@spectra/primitives) |
-| **`@spectra/react-native`** | Mobile components for iOS and Android | [npmjs.com/package/@spectra/react-native](https://www.npmjs.com/package/@spectra/react-native) |
-| **`@spectra/mcp`** | Model Context Protocol server for AI coding assistants | [npmjs.com/package/@spectra/mcp](https://www.npmjs.com/package/@spectra/mcp) |
+| **`@winplaybox/react`** | Core web component library | [npmjs.com/package/@winplaybox/react](https://www.npmjs.com/package/@winplaybox/react) |
+| **`@winplaybox/tokens`** | Multi-tier design tokens (CSS, TS, JSON) | [npmjs.com/package/@winplaybox/tokens](https://www.npmjs.com/package/@winplaybox/tokens) |
+| **`@winplaybox/icons`** | 14,200+ vector SVG icons (multi-shade) | [npmjs.com/package/@winplaybox/icons](https://www.npmjs.com/package/@winplaybox/icons) |
+| **`@winplaybox/primitives`** | 25 Headless hooks and behavioral state primitives | [npmjs.com/package/@winplaybox/primitives](https://www.npmjs.com/package/@winplaybox/primitives) |
+| **`@winplaybox/react-native`** | Mobile components for iOS and Android | [npmjs.com/package/@winplaybox/react-native](https://www.npmjs.com/package/@winplaybox/react-native) |
+| **`@winplaybox/mcp`** | Model Context Protocol server for AI coding assistants | [npmjs.com/package/@winplaybox/mcp](https://www.npmjs.com/package/@winplaybox/mcp) |
 
 ---
 
@@ -54,7 +54,7 @@ Add the following to your Cursor MCP configuration (`~/.cursor/mcp.json` or Proj
   "mcpServers": {
     "spectra-ui": {
       "command": "npx",
-      "args": ["-y", "@spectra/mcp"]
+      "args": ["-y", "@winplaybox/mcp"]
     }
   }
 }
@@ -69,7 +69,7 @@ Add the following to your `claude_desktop_config.json`:
   "mcpServers": {
     "spectra-ui": {
       "command": "npx",
-      "args": ["-y", "@spectra/mcp"]
+      "args": ["-y", "@winplaybox/mcp"]
     }
   }
 }
@@ -84,7 +84,7 @@ Add to your `.gemini/antigravity-ide/mcp_config.json`:
   "mcpServers": {
     "spectra-ui": {
       "command": "npx",
-      "args": ["-y", "@spectra/mcp"]
+      "args": ["-y", "@winplaybox/mcp"]
     }
   }
 }
@@ -98,7 +98,7 @@ You can run the MCP server directly in stdio mode:
 
 ```bash
 # Start MCP server directly
-pnpm --filter @spectra/mcp start
+pnpm --filter @winplaybox/mcp start
 
 # Run automated MCP test suite
 node packages/mcp/scripts/test-mcp.js

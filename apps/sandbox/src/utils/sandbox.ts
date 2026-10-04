@@ -27,9 +27,9 @@ export function openInCodeSandbox({ title, code, theme = 'light' }: SandboxProje
     dependencies: {
       react: '^18.2.0',
       'react-dom': '^18.2.0',
-      '@spectra/react': '^0.1.0',
-      '@spectra/tokens': '^0.1.0',
-      '@spectra/icons': '^0.1.0',
+      '@winplaybox/react': '^0.1.0',
+      '@winplaybox/tokens': '^0.1.0',
+      '@winplaybox/icons': '^0.1.0',
     },
     scripts: {
       start: 'react-scripts start',
@@ -47,7 +47,7 @@ export function openInCodeSandbox({ title, code, theme = 'light' }: SandboxProje
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/@spectra/tokens/dist/css/tokens.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@winplaybox/tokens/dist/css/tokens.css" />
     <style>
       body {
         margin: 0;
@@ -65,7 +65,7 @@ export function openInCodeSandbox({ title, code, theme = 'light' }: SandboxProje
 
   const indexTsx = `import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { SpectraProvider } from '@spectra/react';
+import { SpectraProvider } from '@winplaybox/react';
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
@@ -132,9 +132,9 @@ export function openInStackBlitz({ title, code, theme = 'light' }: SandboxProjec
     JSON.stringify({
       react: '^18.2.0',
       'react-dom': '^18.2.0',
-      '@spectra/react': '^0.1.0',
-      '@spectra/tokens': '^0.1.0',
-      '@spectra/icons': '^0.1.0',
+      '@winplaybox/react': '^0.1.0',
+      '@winplaybox/tokens': '^0.1.0',
+      '@winplaybox/icons': '^0.1.0',
     })
   );
 
@@ -157,7 +157,7 @@ export function openInStackBlitz({ title, code, theme = 'light' }: SandboxProjec
     'project[files][src/index.tsx]',
     `import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { SpectraProvider } from '@spectra/react';
+import { SpectraProvider } from '@winplaybox/react';
 import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -228,10 +228,10 @@ export function openInReactNativeSandbox({ title, code, theme = 'light' }: Sandb
       'react-native': '0.73.4',
       'react-native-web': '^0.19.10',
       'react-dom': '^18.2.0',
-      '@spectra/react-native': '^0.1.0',
-      '@spectra/tokens': '^0.1.0',
-      '@spectra/icons': '^0.1.0',
-      '@spectra/primitives': '^0.1.0',
+      '@winplaybox/react-native': '^0.1.0',
+      '@winplaybox/tokens': '^0.1.0',
+      '@winplaybox/icons': '^0.1.0',
+      '@winplaybox/primitives': '^0.1.0',
     },
     scripts: {
       start: 'expo start',

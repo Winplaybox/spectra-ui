@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, Button, Switch, Badge, Card } from '@spectra/react';
-import { CheckIcon, CloseIcon, SettingsIcon } from '@spectra/icons';
+import { Dialog, Button, Switch, Badge, Card } from '@winplaybox/react';
+import { CheckIcon, CloseIcon, SettingsIcon } from '@winplaybox/icons';
 
 interface CookiePreferencesModalProps {
   isOpen: boolean;

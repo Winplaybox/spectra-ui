@@ -12,12 +12,12 @@ import {
   MoreVerticalIcon,
   ExternalLinkIcon,
   CodeIcon,
-} from '@spectra/icons';
+} from '@winplaybox/icons';
 import { openInCodeSandbox, openInStackBlitz, openInExpoSnack, toJavaScript } from '../../utils/sandbox';
 import { compileAndRender } from '../../utils/liveCompiler';
 import { useVersion } from '../../context/VersionContext';
 import { usePlatform } from '../../context/PlatformContext';
-import { useColorScheme } from '@spectra/react';
+import { useColorScheme } from '@winplaybox/react';
 import { EditableCodeBlock } from './EditableCodeBlock';
 import { EditInChatModal } from './EditInChatModal';
 

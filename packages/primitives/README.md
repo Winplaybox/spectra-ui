@@ -1,8 +1,8 @@
-# @spectra/primitives
+# @winplaybox/primitives
 
 > Headless state hooks and unstyled behavioral primitives for the **Spectra UI** design system by **Winplaybox**.
 
-[![npm version](https://img.shields.io/npm/v/@spectra/primitives.svg?style=flat-square&color=0969da)](https://www.npmjs.com/package/@spectra/primitives)
+[![npm version](https://img.shields.io/npm/v/@winplaybox/primitives.svg?style=flat-square&color=0969da)](https://www.npmjs.com/package/@winplaybox/primitives)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178c6.svg?style=flat-square)](https://www.typescriptlang.org/)
 [![Repository](https://img.shields.io/badge/GitHub-Winplaybox%2Fspectra--ui-181717.svg?style=flat-square)](https://github.com/Winplaybox/spectra-ui)
@@ -11,7 +11,7 @@
 
 ## Overview
 
-`@spectra/primitives` is the headless behavioral foundation of Spectra UI. It contains 25 zero-dependency, tree-shakeable React hooks and unstyled state machines that handle complex UI state, DOM interactions, accessibility bindings, and lifecycle logic. You can use these primitives directly to build completely custom components or as the engine powering your own design system.
+`@winplaybox/primitives` is the headless behavioral foundation of Spectra UI. It contains 25 zero-dependency, tree-shakeable React hooks and unstyled state machines that handle complex UI state, DOM interactions, accessibility bindings, and lifecycle logic. You can use these primitives directly to build completely custom components or as the engine powering your own design system.
 
 ---
 
@@ -19,12 +19,12 @@
 
 | Package | Purpose | NPM Link |
 | :--- | :--- | :--- |
-| **`@spectra/react`** | Core web component library | [npmjs.com/package/@spectra/react](https://www.npmjs.com/package/@spectra/react) |
-| **`@spectra/tokens`** | Multi-tier design tokens (CSS, TS, JSON) | [npmjs.com/package/@spectra/tokens](https://www.npmjs.com/package/@spectra/tokens) |
-| **`@spectra/icons`** | 14,200+ vector SVG icons (multi-shade) | [npmjs.com/package/@spectra/icons](https://www.npmjs.com/package/@spectra/icons) |
-| **`@spectra/primitives`** | 25 Headless hooks and behavioral state primitives | [npmjs.com/package/@spectra/primitives](https://www.npmjs.com/package/@spectra/primitives) |
-| **`@spectra/react-native`** | Mobile components for iOS and Android | [npmjs.com/package/@spectra/react-native](https://www.npmjs.com/package/@spectra/react-native) |
-| **`@spectra/mcp`** | Model Context Protocol server for AI coding assistants | [npmjs.com/package/@spectra/mcp](https://www.npmjs.com/package/@spectra/mcp) |
+| **`@winplaybox/react`** | Core web component library | [npmjs.com/package/@winplaybox/react](https://www.npmjs.com/package/@winplaybox/react) |
+| **`@winplaybox/tokens`** | Multi-tier design tokens (CSS, TS, JSON) | [npmjs.com/package/@winplaybox/tokens](https://www.npmjs.com/package/@winplaybox/tokens) |
+| **`@winplaybox/icons`** | 14,200+ vector SVG icons (multi-shade) | [npmjs.com/package/@winplaybox/icons](https://www.npmjs.com/package/@winplaybox/icons) |
+| **`@winplaybox/primitives`** | 25 Headless hooks and behavioral state primitives | [npmjs.com/package/@winplaybox/primitives](https://www.npmjs.com/package/@winplaybox/primitives) |
+| **`@winplaybox/react-native`** | Mobile components for iOS and Android | [npmjs.com/package/@winplaybox/react-native](https://www.npmjs.com/package/@winplaybox/react-native) |
+| **`@winplaybox/mcp`** | Model Context Protocol server for AI coding assistants | [npmjs.com/package/@winplaybox/mcp](https://www.npmjs.com/package/@winplaybox/mcp) |
 
 ---
 
@@ -32,13 +32,13 @@
 
 ```bash
 # Using pnpm
-pnpm add @spectra/primitives
+pnpm add @winplaybox/primitives
 
 # Using npm
-npm install @spectra/primitives
+npm install @winplaybox/primitives
 
 # Using yarn
-yarn add @spectra/primitives
+yarn add @winplaybox/primitives
 ```
 
 ---
@@ -88,7 +88,7 @@ yarn add @spectra/primitives
 
 ```tsx
 import React from 'react';
-import { useDisclosure } from '@spectra/primitives';
+import { useDisclosure } from '@winplaybox/primitives';
 
 export function Modal() {
   const { isOpen, open, close, toggle } = useDisclosure(false);
@@ -113,7 +113,7 @@ export function Modal() {
 
 ```tsx
 import React from 'react';
-import { useControllableState } from '@spectra/primitives';
+import { useControllableState } from '@winplaybox/primitives';
 
 interface CustomInputProps {
   value?: string;

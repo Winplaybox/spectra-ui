@@ -66,7 +66,7 @@ const TOOLS = [
   },
   {
     name: 'spectra_search_icons',
-    description: 'Search across 12,253 vector icons and authentic social brand marks from @spectra/icons.',
+    description: 'Search across 12,253 vector icons and authentic social brand marks from @winplaybox/icons.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -174,7 +174,7 @@ async function executeTool(name, args = {}) {
         count: matches.length,
         icons: matches.map((name) => ({
           name,
-          import: `import { ${name} } from '@spectra/icons';`
+          import: `import { ${name} } from '@winplaybox/icons';`
         }))
       };
     }
@@ -186,7 +186,7 @@ async function executeTool(name, args = {}) {
         hooks: matches.map(([id, hook]) => ({
           id,
           name: hook.name,
-          import: `import { ${hook.name} } from '@spectra/react';`,
+          import: `import { ${hook.name} } from '@winplaybox/react';`,
           signature: hook.signature,
           description: hook.description,
           returns: hook.returns,
@@ -387,7 +387,7 @@ rl.on('line', async (line) => {
                 role: 'user',
                 content: {
                   type: 'text',
-                  text: 'You are a frontend expert building an application using Spectra UI (@spectra/react, @spectra/tokens, @spectra/icons). Follow these strict rules:\n1. Never use raw color hex codes. Always use CSS tokens: var(--color-primary-default), var(--color-surface), var(--color-surface-sunken).\n2. Use @spectra/react components (<Button>, <TextInput>, <Dialog>, <Card>, <Checkbox>) instead of standard HTML equivalents.\n3. Use @spectra/icons for icons.\n4. Ensure full keyboard accessibility (a11y) and ARIA attributes.'
+                  text: 'You are a frontend expert building an application using Spectra UI (@winplaybox/react, @winplaybox/tokens, @winplaybox/icons). Follow these strict rules:\n1. Never use raw color hex codes. Always use CSS tokens: var(--color-primary-default), var(--color-surface), var(--color-surface-sunken).\n2. Use @winplaybox/react components (<Button>, <TextInput>, <Dialog>, <Card>, <Checkbox>) instead of standard HTML equivalents.\n3. Use @winplaybox/icons for icons.\n4. Ensure full keyboard accessibility (a11y) and ARIA attributes.'
                 }
               }
             ]

@@ -3,14 +3,14 @@
 Displays progress through a sequential multi-step wizard with active, completed, and error step nodes.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Stepper } from '@spectra/react';
+import { Stepper } from '@winplaybox/react';
 
 export default function BasicStepperExample() {
   return (
@@ -63,13 +63,13 @@ Official pattern: [Progress & Wizard Pattern](https://www.w3.org/WAI/ARIA/apg/pa
 | `activeStep` | `number` | `0` | Zero-indexed active step. |
 | `steps` | `Array<{ label: string; description?: string }>` | `[]` | Step definitions. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useControllableState`
 Description: Tracks step progress and completion status.
 
 ```tsx
-import { useControllableState } from '@spectra/primitives';
+import { useControllableState } from '@winplaybox/primitives';
 
 export function StepperPrimitive({ steps, defaultValue = 0 }) {
   const [activeStep, setActiveStep] = useControllableState({ defaultValue });

@@ -3,14 +3,14 @@
 Horizontal determinate or indeterminate animated bar communicating background process completion.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { ProgressBar } from '@spectra/react';
+import { ProgressBar } from '@winplaybox/react';
 
 export default function BasicProgressBarExample() {
   return (
@@ -63,13 +63,13 @@ Official pattern: [Progressbar Pattern](https://www.w3.org/WAI/ARIA/apg/patterns
 | `indeterminate` | `boolean` | `false` | Continuous loading wave animation. |
 | `color` | `'primary' \| 'success' \| 'warning' \| 'danger'` | `'primary'` | Fill bar token color. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Extracts action color variables for the progress fill bar.
 
 ```tsx
-import { useTheme } from '@spectra/primitives';
+import { useTheme } from '@winplaybox/primitives';
 
 export function ProgressBarPrimitive({ value }) {
   return <div role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={100} />;

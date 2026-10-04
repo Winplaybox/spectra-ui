@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { App } from './App';
-import { SpectraProvider } from '@spectra/react';
+import { SpectraProvider } from '@winplaybox/react';
 import { VersionProvider } from './context/VersionContext';
 import { PlatformProvider } from './context/PlatformContext';
-import '@spectra/tokens/css';
+import '@winplaybox/tokens/css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

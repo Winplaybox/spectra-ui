@@ -1,4 +1,4 @@
-// @spectra/react - WinPlayBox Design System Web Components
+// @winplaybox/react - WinPlayBox Design System Web Components
 
 export * from './provider/SpectraProvider';
 
@@ -74,5 +74,5 @@ export * from './components/layout/Box';
 export * from './components/layout/Grid';
 
 // Re-export primitives hooks & icons for convenience
-export * from '@spectra/primitives';
-export * from '@spectra/icons';
+export * from '@winplaybox/primitives';
+export * from '@winplaybox/icons';

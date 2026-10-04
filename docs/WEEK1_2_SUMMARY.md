@@ -72,7 +72,7 @@ All files are in: `$HOME/.copilot/session-state/06192f23-4eb2-4a88-b70e-ce971450
 **Setup (2 files):**
 - `setup-monorepo.sh` — Monorepo initialization
 - `setup-tier1-web-files.sh` — Deploy script
-- `tokens-package.json` — @spectra/tokens config
+- `tokens-package.json` — @winplaybox/tokens config
 - `root-package.json` — Monorepo package.json
 
 ---
@@ -267,7 +267,7 @@ pnpm run storybook
 **React Native Tier 1 (7 components):**
 - Create `.native.tsx` versions for all Tier 1 components
 - Use React Native API (View, Text, TouchableOpacity, Switch)
-- Share hooks from `@spectra/primitives`
+- Share hooks from `@winplaybox/primitives`
 - Create `.styles.ts` with token-driven StyleSheet
 
 **Test Expansion:**
@@ -311,8 +311,8 @@ Each Tier 3 component:
 
 ```tsx
 // app.tsx
-import { ThemeProvider } from '@spectra/primitives';
-import { Button, TextInput, Stack, Card, Text, Container } from '@spectra/react';
+import { ThemeProvider } from '@winplaybox/primitives';
+import { Button, TextInput, Stack, Card, Text, Container } from '@winplaybox/react';
 
 export default function App() {
   return (
@@ -428,7 +428,7 @@ All documentation is in `/files/`:
 
 1. **Zero Hardcoded Values:** All components use semantic tokens via CSS variables
 2. **Pack-Blind Architecture:** Can add Glass pack in Phase 2 with ZERO code changes
-3. **Shared Hooks:** 14 headless hooks in @spectra/primitives reduce duplication
+3. **Shared Hooks:** 14 headless hooks in @winplaybox/primitives reduce duplication
 4. **Full Accessibility:** Every component has proper WCAG AA support
 5. **Parallel Platforms:** Web (vanilla-extract) and React Native (StyleSheet) on same foundation
 6. **Testing First:** 54 test cases provide confidence for rapid Tier 2/3 development

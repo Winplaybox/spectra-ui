@@ -1,7 +1,7 @@
 import type { Preview } from '@storybook/react';
 import React, { useEffect } from 'react';
-import { SpectraProvider } from '@spectra/react';
-import '@spectra/tokens/css';
+import { SpectraProvider } from '@winplaybox/react';
+import '@winplaybox/tokens/css';
 
 export const globalTypes = {
   pack: {

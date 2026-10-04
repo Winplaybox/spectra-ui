@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Badge, Card } from '@spectra/react';
-import { SparklesIcon, CheckIcon } from '@spectra/icons';
+import { Button, Badge, Card } from '@winplaybox/react';
+import { SparklesIcon, CheckIcon } from '@winplaybox/icons';
 
 export const MotionSection: React.FC = () => {
   const [activeDuration, setActiveDuration] = useState<'instant' | 'subtle' | 'normal' | 'expressive'>('subtle');

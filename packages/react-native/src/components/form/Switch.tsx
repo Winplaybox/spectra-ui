@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useTheme, useControllableState } from '@spectra/primitives';
-import { getTokens } from '@spectra/tokens';
+import { useTheme, useControllableState } from '@winplaybox/primitives';
+import { getTokens } from '@winplaybox/tokens';
 
 export interface NativeSwitchProps {
   checked?: boolean;

@@ -3,14 +3,14 @@
 One-dimensional flexbox layout primitive managing horizontal or vertical spacing between children.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Stack } from '@spectra/react';
+import { Stack } from '@winplaybox/react';
 
 export default function BasicStackExample() {
   return (
@@ -61,7 +61,7 @@ Official pattern: [Layout Structure](https://www.w3.org/WAI/ARIA/apg/patterns/)
 | `gap` | `number \| string` | `12` | Space between elements. |
 | `align` | `string` | `'stretch'` | Cross-axis alignment. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Applies token spacing values to flex gap.

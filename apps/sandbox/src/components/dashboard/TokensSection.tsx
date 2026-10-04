@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, Button, Badge } from '@spectra/react';
-import { CheckIcon, CopyIcon, ExternalLinkIcon } from '@spectra/icons';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, Button, Badge } from '@winplaybox/react';
+import { CheckIcon, CopyIcon, ExternalLinkIcon } from '@winplaybox/icons';
 
 interface TokensSectionProps {
   tokenId?: string;

@@ -3,14 +3,14 @@
 Enforces mutually exclusive single selection across a group of radio buttons with arrow key roaming.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { RadioGroup } from '@spectra/react';
+import { RadioGroup } from '@winplaybox/react';
 
 export default function BasicRadioGroupExample() {
   return (
@@ -65,13 +65,13 @@ Official pattern: [Radio Group Pattern](https://www.w3.org/WAI/ARIA/apg/patterns
 | `name` | `string` | `''` | HTML form group name attribute. |
 | `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Layout arrangement. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useListNavigation`
 Description: Provides circular arrow key focus management across options.
 
 ```tsx
-import { useListNavigation } from '@spectra/primitives';
+import { useListNavigation } from '@winplaybox/primitives';
 
 export function RadioGroupPrimitive() {
   const { activeIndex } = useListNavigation({ totalItems: 3, loop: true });

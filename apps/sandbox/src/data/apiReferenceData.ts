@@ -69,10 +69,10 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   button: {
     componentName: 'Button',
     exportName: 'Button',
-    importStatement: "import { Button } from '@spectra/react';",
-    subpathImport: "import Button from '@spectra/react/Button';",
-    nativeImport: "import { Button } from '@spectra/react-native';",
-    primitivesImport: "import { useButtonProps } from '@spectra/primitives';",
+    importStatement: "import { Button } from '@winplaybox/react';",
+    subpathImport: "import Button from '@winplaybox/react/Button';",
+    nativeImport: "import { Button } from '@winplaybox/react-native';",
+    primitivesImport: "import { useButtonProps } from '@winplaybox/primitives';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'variant', type: "'primary' | 'secondary' | 'tertiary' | 'danger'", defaultValue: "'primary'", description: 'Visual appearance and semantic hierarchy of the button.' },
@@ -119,10 +119,10 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   'text-input': {
     componentName: 'TextInput',
     exportName: 'TextInput',
-    importStatement: "import { TextInput } from '@spectra/react';",
-    subpathImport: "import TextInput from '@spectra/react/TextInput';",
-    nativeImport: "import { TextInput } from '@spectra/react-native';",
-    primitivesImport: "import { useId } from '@spectra/primitives';",
+    importStatement: "import { TextInput } from '@winplaybox/react';",
+    subpathImport: "import TextInput from '@winplaybox/react/TextInput';",
+    nativeImport: "import { TextInput } from '@winplaybox/react-native';",
+    primitivesImport: "import { useId } from '@winplaybox/primitives';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'label', type: 'string', defaultValue: 'undefined', description: 'Accessible label text associated with the input element.' },
@@ -161,9 +161,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   select: {
     componentName: 'Select',
     exportName: 'Select',
-    importStatement: "import { Select } from '@spectra/react';",
-    subpathImport: "import Select from '@spectra/react/Select';",
-    nativeImport: "import { Select } from '@spectra/react-native';",
+    importStatement: "import { Select } from '@winplaybox/react';",
+    subpathImport: "import Select from '@winplaybox/react/Select';",
+    nativeImport: "import { Select } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'label', type: 'string', defaultValue: 'undefined', description: 'Label title displayed above the dropdown field.' },
@@ -193,9 +193,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   checkbox: {
     componentName: 'Checkbox',
     exportName: 'Checkbox',
-    importStatement: "import { Checkbox } from '@spectra/react';",
-    subpathImport: "import Checkbox from '@spectra/react/Checkbox';",
-    nativeImport: "import { Checkbox } from '@spectra/react-native';",
+    importStatement: "import { Checkbox } from '@winplaybox/react';",
+    subpathImport: "import Checkbox from '@winplaybox/react/Checkbox';",
+    nativeImport: "import { Checkbox } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'checked', type: 'boolean', defaultValue: 'undefined', description: 'Controlled boolean selection state.' },
@@ -226,9 +226,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   radio: {
     componentName: 'Radio',
     exportName: 'Radio',
-    importStatement: "import { Radio, RadioGroup } from '@spectra/react';",
-    subpathImport: "import Radio from '@spectra/react/Radio';",
-    nativeImport: "import { Radio } from '@spectra/react-native';",
+    importStatement: "import { Radio, RadioGroup } from '@winplaybox/react';",
+    subpathImport: "import Radio from '@winplaybox/react/Radio';",
+    nativeImport: "import { Radio } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'value', type: 'string', defaultValue: 'undefined', required: true, description: 'Unique string value of this radio option within its group.' },
@@ -255,9 +255,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   switch: {
     componentName: 'Switch',
     exportName: 'Switch',
-    importStatement: "import { Switch } from '@spectra/react';",
-    subpathImport: "import Switch from '@spectra/react/Switch';",
-    nativeImport: "import { Switch } from '@spectra/react-native';",
+    importStatement: "import { Switch } from '@winplaybox/react';",
+    subpathImport: "import Switch from '@winplaybox/react/Switch';",
+    nativeImport: "import { Switch } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'checked', type: 'boolean', defaultValue: 'undefined', description: 'Controlled boolean toggle state.' },
@@ -285,9 +285,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   avatar: {
     componentName: 'Avatar',
     exportName: 'Avatar',
-    importStatement: "import { Avatar } from '@spectra/react';",
-    subpathImport: "import Avatar from '@spectra/react/Avatar';",
-    nativeImport: "import { Avatar } from '@spectra/react-native';",
+    importStatement: "import { Avatar } from '@winplaybox/react';",
+    subpathImport: "import Avatar from '@winplaybox/react/Avatar';",
+    nativeImport: "import { Avatar } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'src', type: 'string', defaultValue: 'undefined', description: 'Image source URL.' },
@@ -315,9 +315,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   badge: {
     componentName: 'Badge',
     exportName: 'Badge',
-    importStatement: "import { Badge } from '@spectra/react';",
-    subpathImport: "import Badge from '@spectra/react/Badge';",
-    nativeImport: "import { Badge } from '@spectra/react-native';",
+    importStatement: "import { Badge } from '@winplaybox/react';",
+    subpathImport: "import Badge from '@winplaybox/react/Badge';",
+    nativeImport: "import { Badge } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'variant', type: "'primary' | 'success' | 'warning' | 'error' | 'neutral'", defaultValue: "'neutral'", description: 'Semantic intent and color palette.' },
@@ -342,9 +342,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   card: {
     componentName: 'Card',
     exportName: 'Card',
-    importStatement: "import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@spectra/react';",
-    subpathImport: "import Card from '@spectra/react/Card';",
-    nativeImport: "import { Card } from '@spectra/react-native';",
+    importStatement: "import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@winplaybox/react';",
+    subpathImport: "import Card from '@winplaybox/react/Card';",
+    nativeImport: "import { Card } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'variant', type: "'bordered' | 'elevated' | 'flat'", defaultValue: "'bordered'", description: 'Surface depth styling.' },
@@ -370,9 +370,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   tabs: {
     componentName: 'Tabs',
     exportName: 'Tabs',
-    importStatement: "import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@spectra/react';",
-    subpathImport: "import Tabs from '@spectra/react/Tabs';",
-    nativeImport: "import { Tabs } from '@spectra/react-native';",
+    importStatement: "import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@winplaybox/react';",
+    subpathImport: "import Tabs from '@winplaybox/react/Tabs';",
+    nativeImport: "import { Tabs } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'value', type: 'string', defaultValue: 'undefined', description: 'Active tab value in controlled mode.' },
@@ -400,9 +400,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   accordion: {
     componentName: 'Accordion',
     exportName: 'Accordion',
-    importStatement: "import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@spectra/react';",
-    subpathImport: "import Accordion from '@spectra/react/Accordion';",
-    nativeImport: "import { Accordion } from '@spectra/react-native';",
+    importStatement: "import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react';",
+    subpathImport: "import Accordion from '@winplaybox/react/Accordion';",
+    nativeImport: "import { Accordion } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'type', type: "'single' | 'multiple'", defaultValue: "'single'", description: 'Whether one or multiple panels can be expanded simultaneously.' },
@@ -428,8 +428,8 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   dialog: {
     componentName: 'Dialog',
     exportName: 'Dialog',
-    importStatement: "import { Dialog } from '@spectra/react';",
-    subpathImport: "import Dialog from '@spectra/react/Dialog';",
+    importStatement: "import { Dialog } from '@winplaybox/react';",
+    subpathImport: "import Dialog from '@winplaybox/react/Dialog';",
     nativeImport: "import { Modal } from 'react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
@@ -455,9 +455,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   tooltip: {
     componentName: 'Tooltip',
     exportName: 'Tooltip',
-    importStatement: "import { Tooltip } from '@spectra/react';",
-    subpathImport: "import Tooltip from '@spectra/react/Tooltip';",
-    nativeImport: "import { Tooltip } from '@spectra/react-native';",
+    importStatement: "import { Tooltip } from '@winplaybox/react';",
+    subpathImport: "import Tooltip from '@winplaybox/react/Tooltip';",
+    nativeImport: "import { Tooltip } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'content', type: 'React.ReactNode', defaultValue: 'undefined', required: true, description: 'Text or node to render inside floating tooltip bubble.' },
@@ -483,8 +483,8 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   list: {
     componentName: 'List',
     exportName: 'List',
-    importStatement: "import { List, ListItem, ListItemIcon, ListItemText } from '@spectra/react';",
-    subpathImport: "import List from '@spectra/react/List';",
+    importStatement: "import { List, ListItem, ListItemIcon, ListItemText } from '@winplaybox/react';",
+    subpathImport: "import List from '@winplaybox/react/List';",
     nativeImport: "import { FlatList } from 'react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
@@ -511,9 +511,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   alert: {
     componentName: 'Alert',
     exportName: 'Alert',
-    importStatement: "import { Alert } from '@spectra/react';",
-    subpathImport: "import Alert from '@spectra/react/Alert';",
-    nativeImport: "import { Alert } from '@spectra/react-native';",
+    importStatement: "import { Alert } from '@winplaybox/react';",
+    subpathImport: "import Alert from '@winplaybox/react/Alert';",
+    nativeImport: "import { Alert } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'variant', type: "'info' | 'success' | 'warning' | 'danger'", defaultValue: "'info'", description: 'Semantic status severity variant.' },
@@ -549,9 +549,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   spinner: {
     componentName: 'Spinner',
     exportName: 'Spinner',
-    importStatement: "import { Spinner } from '@spectra/react';",
-    subpathImport: "import Spinner from '@spectra/react/Spinner';",
-    nativeImport: "import { Spinner } from '@spectra/react-native';",
+    importStatement: "import { Spinner } from '@winplaybox/react';",
+    subpathImport: "import Spinner from '@winplaybox/react/Spinner';",
+    nativeImport: "import { Spinner } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Dimensions: sm (16px), md (24px), lg (36px).' },
@@ -577,9 +577,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   skeleton: {
     componentName: 'Skeleton',
     exportName: 'Skeleton',
-    importStatement: "import { Skeleton } from '@spectra/react';",
-    subpathImport: "import Skeleton from '@spectra/react/Skeleton';",
-    nativeImport: "import { Skeleton } from '@spectra/react-native';",
+    importStatement: "import { Skeleton } from '@winplaybox/react';",
+    subpathImport: "import Skeleton from '@winplaybox/react/Skeleton';",
+    nativeImport: "import { Skeleton } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'variant', type: "'text' | 'circular' | 'rectangular' | 'rounded'", defaultValue: "'text'", description: 'Geometric shape of placeholder.' },
@@ -609,9 +609,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   divider: {
     componentName: 'Divider',
     exportName: 'Divider',
-    importStatement: "import { Divider } from '@spectra/react';",
-    subpathImport: "import Divider from '@spectra/react/Divider';",
-    nativeImport: "import { Divider } from '@spectra/react-native';",
+    importStatement: "import { Divider } from '@winplaybox/react';",
+    subpathImport: "import Divider from '@winplaybox/react/Divider';",
+    nativeImport: "import { Divider } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'orientation', type: "'horizontal' | 'vertical'", defaultValue: "'horizontal'", description: 'Separation line orientation.' },
@@ -640,9 +640,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   chip: {
     componentName: 'Chip',
     exportName: 'Chip',
-    importStatement: "import { Chip } from '@spectra/react';",
-    subpathImport: "import Chip from '@spectra/react/Chip';",
-    nativeImport: "import { Chip } from '@spectra/react-native';",
+    importStatement: "import { Chip } from '@winplaybox/react';",
+    subpathImport: "import Chip from '@winplaybox/react/Chip';",
+    nativeImport: "import { Chip } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'label', type: 'string', defaultValue: "''", required: true, description: 'Text label displayed inside chip.' },
@@ -680,9 +680,9 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   breadcrumbs: {
     componentName: 'Breadcrumbs',
     exportName: 'Breadcrumbs',
-    importStatement: "import { Breadcrumbs } from '@spectra/react';",
-    subpathImport: "import Breadcrumbs from '@spectra/react/Breadcrumbs';",
-    nativeImport: "import { Breadcrumbs } from '@spectra/react-native';",
+    importStatement: "import { Breadcrumbs } from '@winplaybox/react';",
+    subpathImport: "import Breadcrumbs from '@winplaybox/react/Breadcrumbs';",
+    nativeImport: "import { Breadcrumbs } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'items', type: 'BreadcrumbItem[]', defaultValue: '[]', required: true, description: 'Array of items with label, href, onClick, isCurrent.' },
@@ -711,7 +711,7 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
 export const HOOK_API_DATA: Record<string, HookApiReference> = {
   'use-disclosure': {
     hookName: 'useDisclosure',
-    importStatement: "import { useDisclosure } from '@spectra/primitives';",
+    importStatement: "import { useDisclosure } from '@winplaybox/primitives';",
     signature: 'function useDisclosure(options?: UseDisclosureOptions): UseDisclosureReturn',
     description: 'Learn about the parameters, return values, and other APIs of this exported hook.',
     parameters: [
@@ -733,7 +733,7 @@ export const HOOK_API_DATA: Record<string, HookApiReference> = {
       { attr: 'aria-expanded', description: 'Set to "true" on trigger when open, "false" when closed.' },
       { attr: 'aria-controls', description: 'Links trigger to disclosure target element by unique ID.' },
     ],
-    exampleUsage: `import { useDisclosure } from '@spectra/primitives';
+    exampleUsage: `import { useDisclosure } from '@winplaybox/primitives';
 
 export function DrawerExample() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -748,7 +748,7 @@ export function DrawerExample() {
 
   'use-controllable-state': {
     hookName: 'useControllableState',
-    importStatement: "import { useControllableState } from '@spectra/primitives';",
+    importStatement: "import { useControllableState } from '@winplaybox/primitives';",
     signature: 'function useControllableState<T>(props: UseControllableStateProps<T>): [T, (next: T) => void]',
     description: 'Learn about the parameters, return values, and other APIs of this exported hook.',
     parameters: [
@@ -760,7 +760,7 @@ export function DrawerExample() {
       { name: 'state', type: 'T', description: 'Resolved current state value (controlled or internal).' },
       { name: 'setState', type: '(next: T | ((prev: T) => T)) => void', description: 'Dispatcher to update state and trigger onChange.' },
     ],
-    exampleUsage: `import { useControllableState } from '@spectra/primitives';
+    exampleUsage: `import { useControllableState } from '@winplaybox/primitives';
 
 export function Rating({ value: valueProp, defaultValue = 0, onChange }: RatingProps) {
   const [value, setValue] = useControllableState({
@@ -775,7 +775,7 @@ export function Rating({ value: valueProp, defaultValue = 0, onChange }: RatingP
 
   'use-outside-click': {
     hookName: 'useOutsideClick',
-    importStatement: "import { useOutsideClick } from '@spectra/primitives';",
+    importStatement: "import { useOutsideClick } from '@winplaybox/primitives';",
     signature: 'function useOutsideClick(ref: RefObject<HTMLElement>, handler: (event: MouseEvent) => void, enabled?: boolean): void',
     description: 'Learn about the parameters, return values, and other APIs of this exported hook.',
     parameters: [
@@ -784,7 +784,7 @@ export function Rating({ value: valueProp, defaultValue = 0, onChange }: RatingP
       { name: 'enabled', type: 'boolean', defaultValue: 'true', description: 'Conditionally attach/detach global document listeners.' },
     ],
     returnValues: [],
-    exampleUsage: `import { useOutsideClick } from '@spectra/primitives';
+    exampleUsage: `import { useOutsideClick } from '@winplaybox/primitives';
 
 export function DropdownMenu({ isOpen, onClose }: MenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
@@ -796,7 +796,7 @@ export function DropdownMenu({ isOpen, onClose }: MenuProps) {
 
   'use-id': {
     hookName: 'useId',
-    importStatement: "import { useId } from '@spectra/primitives';",
+    importStatement: "import { useId } from '@winplaybox/primitives';",
     signature: 'function useId(prefix?: string): string',
     description: 'Learn about the parameters, return values, and other APIs of this exported hook.',
     parameters: [
@@ -810,7 +810,7 @@ export function DropdownMenu({ isOpen, onClose }: MenuProps) {
       { attr: 'htmlFor', description: 'Applied to label to associate with input.' },
       { attr: 'aria-describedby', description: 'Links input to helper text or error message.' },
     ],
-    exampleUsage: `import { useId } from '@spectra/primitives';
+    exampleUsage: `import { useId } from '@winplaybox/primitives';
 
 export function FormField({ label, error }: Props) {
   const id = useId('input');
@@ -826,7 +826,7 @@ export function FormField({ label, error }: Props) {
 
   'use-color-scheme': {
     hookName: 'useColorScheme',
-    importStatement: "import { useColorScheme } from '@spectra/primitives';",
+    importStatement: "import { useColorScheme } from '@winplaybox/primitives';",
     signature: 'function useColorScheme(): UseColorSchemeReturn',
     description: 'Learn about the parameters, return values, and other APIs of this exported hook.',
     parameters: [],
@@ -835,7 +835,7 @@ export function FormField({ label, error }: Props) {
       { name: 'setColorScheme', type: '(scheme: "light" | "dark" | "system") => void', description: 'Function to toggle or persist color mode.' },
       { name: 'isDark', type: 'boolean', description: 'Resolved boolean indicating whether dark theme tokens are currently active.' },
     ],
-    exampleUsage: `import { useColorScheme } from '@spectra/primitives';
+    exampleUsage: `import { useColorScheme } from '@winplaybox/primitives';
 
 export function ThemeToggle() {
   const { colorScheme, setColorScheme, isDark } = useColorScheme();
@@ -849,7 +849,7 @@ export function ThemeToggle() {
 
   'use-media-query': {
     hookName: 'useMediaQuery',
-    importStatement: "import { useMediaQuery } from '@spectra/primitives';",
+    importStatement: "import { useMediaQuery } from '@winplaybox/primitives';",
     signature: 'function useMediaQuery(query: string): boolean',
     description: 'Learn about the parameters, return values, and other APIs of this exported hook.',
     parameters: [
@@ -858,7 +858,7 @@ export function ThemeToggle() {
     returnValues: [
       { name: 'matches', type: 'boolean', description: 'True if current browser viewport matches query, false otherwise.' },
     ],
-    exampleUsage: `import { useMediaQuery } from '@spectra/primitives';
+    exampleUsage: `import { useMediaQuery } from '@winplaybox/primitives';
 
 export function ResponsiveNav() {
   const isMobile = useMediaQuery('(max-width: 640px)');
@@ -868,7 +868,7 @@ export function ResponsiveNav() {
 
   'use-focus-ring': {
     hookName: 'useFocusRing',
-    importStatement: "import { useFocusRing } from '@spectra/primitives';",
+    importStatement: "import { useFocusRing } from '@winplaybox/primitives';",
     signature: 'function useFocusRing(): UseFocusRingReturn',
     description: 'Learn about the parameters, return values, and other APIs of this exported hook.',
     parameters: [],
@@ -880,7 +880,7 @@ export function ResponsiveNav() {
     ariaAttributes: [
       { attr: ':focus-visible', description: 'Ensures compliance with WCAG 2.4.7 Focus Visible without distracting mouse click outlines.' },
     ],
-    exampleUsage: `import { useFocusRing } from '@spectra/primitives';
+    exampleUsage: `import { useFocusRing } from '@winplaybox/primitives';
 
 export function CustomAction() {
   const { isFocusVisible, focusProps } = useFocusRing();
@@ -900,7 +900,7 @@ export function CustomAction() {
 
   'use-toast': {
     hookName: 'useToast',
-    importStatement: "import { useToast } from '@spectra/primitives';",
+    importStatement: "import { useToast } from '@winplaybox/primitives';",
     signature: 'function useToast(): UseToastReturn',
     description: 'Learn about the parameters, return values, and other APIs of this exported hook.',
     parameters: [],
@@ -908,7 +908,7 @@ export function CustomAction() {
       { name: 'toast', type: '(options: ToastOptions) => string', description: 'Triggers a floating notification message and returns unique toast ID.' },
       { name: 'dismiss', type: '(id: string) => void', description: 'Dismisses active toast before its timeout.' },
     ],
-    exampleUsage: `import { useToast } from '@spectra/primitives';
+    exampleUsage: `import { useToast } from '@winplaybox/primitives';
 
 export function ActionButton() {
   const { toast } = useToast();
@@ -922,14 +922,14 @@ export function ActionButton() {
 
   'use-reduced-motion': {
     hookName: 'useReducedMotion',
-    importStatement: "import { useReducedMotion } from '@spectra/primitives';",
+    importStatement: "import { useReducedMotion } from '@winplaybox/primitives';",
     signature: 'function useReducedMotion(): boolean',
     description: 'Learn about the parameters, return values, and other APIs of this exported hook.',
     parameters: [],
     returnValues: [
       { name: 'prefersReducedMotion', type: 'boolean', description: 'True if user has enabled "prefers-reduced-motion: reduce" in OS settings.' },
     ],
-    exampleUsage: `import { useReducedMotion } from '@spectra/primitives';
+    exampleUsage: `import { useReducedMotion } from '@winplaybox/primitives';
 
 export function AnimatedBox() {
   const prefersReduced = useReducedMotion();
@@ -939,14 +939,14 @@ export function AnimatedBox() {
 
   'use-rtl': {
     hookName: 'useRTL',
-    importStatement: "import { useRTL } from '@spectra/primitives';",
+    importStatement: "import { useRTL } from '@winplaybox/primitives';",
     signature: 'function useRTL(): boolean',
     description: 'Learn about the parameters, return values, and other APIs of this exported hook.',
     parameters: [],
     returnValues: [
       { name: 'isRTL', type: 'boolean', description: 'True if document root direction is right-to-left (dir="rtl").' },
     ],
-    exampleUsage: `import { useRTL } from '@spectra/primitives';
+    exampleUsage: `import { useRTL } from '@winplaybox/primitives';
 
 export function NavigationArrows() {
   const isRTL = useRTL();
@@ -956,7 +956,7 @@ export function NavigationArrows() {
 
   'use-debounce': {
     hookName: 'useDebounce',
-    importStatement: "import { useDebounce } from '@spectra/primitives';",
+    importStatement: "import { useDebounce } from '@winplaybox/primitives';",
     signature: 'function useDebounce<T>(value: T, delayMs: number): T',
     description: 'Debounces a rapidly changing value (such as search input keystrokes) to prevent redundant rendering and API requests.',
     parameters: [
@@ -966,7 +966,7 @@ export function NavigationArrows() {
     returnValues: [
       { name: 'debouncedValue', type: 'T', description: 'Value delayed until after delayMs has elapsed since last change.' },
     ],
-    exampleUsage: `import { useDebounce } from '@spectra/primitives';
+    exampleUsage: `import { useDebounce } from '@winplaybox/primitives';
 
 export function SearchFilter() {
   const [query, setQuery] = useState('');
@@ -980,7 +980,7 @@ export function SearchFilter() {
 
   'use-throttle': {
     hookName: 'useThrottle',
-    importStatement: "import { useThrottle } from '@spectra/primitives';",
+    importStatement: "import { useThrottle } from '@winplaybox/primitives';",
     signature: 'function useThrottle<T>(value: T, intervalMs: number): T',
     description: 'Throttles frequent value updates (e.g. scroll positions, mouse movements) to guarantee at most one update per interval.',
     parameters: [
@@ -990,7 +990,7 @@ export function SearchFilter() {
     returnValues: [
       { name: 'throttledValue', type: 'T', description: 'Value updated at most once per intervalMs.' },
     ],
-    exampleUsage: `import { useThrottle } from '@spectra/primitives';
+    exampleUsage: `import { useThrottle } from '@winplaybox/primitives';
 
 export function ScrollMetrics() {
   const [scrollY, setScrollY] = useState(0);
@@ -1001,7 +1001,7 @@ export function ScrollMetrics() {
 
   'use-hover': {
     hookName: 'useHover',
-    importStatement: "import { useHover } from '@spectra/primitives';",
+    importStatement: "import { useHover } from '@winplaybox/primitives';",
     signature: 'function useHover<T extends HTMLElement>(): [RefObject<T>, boolean]',
     description: 'Tracks cursor hover state for any DOM element with automatic pointer event listeners.',
     parameters: [],
@@ -1009,7 +1009,7 @@ export function ScrollMetrics() {
       { name: 'ref', type: 'RefObject<T>', description: 'Ref to assign to the target interactive DOM element.' },
       { name: 'isHovered', type: 'boolean', description: 'Boolean indicating whether pointer is hovering over element.' },
     ],
-    exampleUsage: `import { useHover } from '@spectra/primitives';
+    exampleUsage: `import { useHover } from '@winplaybox/primitives';
 
 export function CardPreview() {
   const [hoverRef, isHovered] = useHover<HTMLDivElement>();
@@ -1019,7 +1019,7 @@ export function CardPreview() {
 
   'use-platform': {
     hookName: 'usePlatform',
-    importStatement: "import { usePlatform } from '@spectra/primitives';",
+    importStatement: "import { usePlatform } from '@winplaybox/primitives';",
     signature: 'function usePlatform(): UsePlatformReturn',
     description: 'Detects and returns active client OS runtime (Web, iOS, Android, macOS, Windows) with platform capabilities.',
     parameters: [],
@@ -1028,7 +1028,7 @@ export function CardPreview() {
       { name: 'isNative', type: 'boolean', description: 'True when running on React Native iOS/Android runtime.' },
       { name: 'isApple', type: 'boolean', description: 'True for iOS and macOS client environments.' },
     ],
-    exampleUsage: `import { usePlatform } from '@spectra/primitives';
+    exampleUsage: `import { usePlatform } from '@winplaybox/primitives';
 
 export function PlatformBadge() {
   const { platform, isNative } = usePlatform();
@@ -1038,14 +1038,14 @@ export function PlatformBadge() {
 
   'use-breakpoint': {
     hookName: 'useBreakpoint',
-    importStatement: "import { useBreakpoint } from '@spectra/primitives';",
+    importStatement: "import { useBreakpoint } from '@winplaybox/primitives';",
     signature: 'function useBreakpoint(): "xs" | "sm" | "md" | "lg" | "xl" | "2xl"',
     description: 'Returns active responsive viewport breakpoint token synchronized with Spectra UI grid tokens.',
     parameters: [],
     returnValues: [
       { name: 'breakpoint', type: '"xs" | "sm" | "md" | "lg" | "xl" | "2xl"', description: 'Current active responsive tier.' },
     ],
-    exampleUsage: `import { useBreakpoint } from '@spectra/primitives';
+    exampleUsage: `import { useBreakpoint } from '@winplaybox/primitives';
 
 export function ResponsiveLayout() {
   const bp = useBreakpoint();
@@ -1055,7 +1055,7 @@ export function ResponsiveLayout() {
 
   'use-event-listener': {
     hookName: 'useEventListener',
-    importStatement: "import { useEventListener } from '@spectra/primitives';",
+    importStatement: "import { useEventListener } from '@winplaybox/primitives';",
     signature: 'function useEventListener<K extends keyof WindowEventMap>(eventName: K, handler: (e: WindowEventMap[K]) => void, target?: EventTarget): void',
     description: 'Declaratively binds event listeners to window, document, or custom DOM element with automatic lifecycle cleanup.',
     parameters: [
@@ -1064,7 +1064,7 @@ export function ResponsiveLayout() {
       { name: 'target', type: 'EventTarget', defaultValue: 'window', description: 'Event target object to bind listener to.' },
     ],
     returnValues: [],
-    exampleUsage: `import { useEventListener } from '@spectra/primitives';
+    exampleUsage: `import { useEventListener } from '@winplaybox/primitives';
 
 export function ShortcutHandler() {
   useEventListener('keydown', (e) => {
@@ -1075,7 +1075,7 @@ export function ShortcutHandler() {
 
   'use-intersection-observer': {
     hookName: 'useIntersectionObserver',
-    importStatement: "import { useIntersectionObserver } from '@spectra/primitives';",
+    importStatement: "import { useIntersectionObserver } from '@winplaybox/primitives';",
     signature: 'function useIntersectionObserver(options?: IntersectionObserverInit): [RefObject<Element>, IntersectionObserverEntry | null]',
     description: 'Tracks DOM element viewport visibility for lazy loading images, infinite scroll, and scroll-triggered animations.',
     parameters: [
@@ -1085,7 +1085,7 @@ export function ShortcutHandler() {
       { name: 'ref', type: 'RefObject<Element>', description: 'Ref to assign to observed DOM element.' },
       { name: 'entry', type: 'IntersectionObserverEntry | null', description: 'Latest intersection observer state record.' },
     ],
-    exampleUsage: `import { useIntersectionObserver } from '@spectra/primitives';
+    exampleUsage: `import { useIntersectionObserver } from '@winplaybox/primitives';
 
 export function LazyImage({ src }: { src: string }) {
   const [ref, entry] = useIntersectionObserver({ threshold: 0.1 });
@@ -1096,7 +1096,7 @@ export function LazyImage({ src }: { src: string }) {
 
   'use-element-size': {
     hookName: 'useElementSize',
-    importStatement: "import { useElementSize } from '@spectra/primitives';",
+    importStatement: "import { useElementSize } from '@winplaybox/primitives';",
     signature: 'function useElementSize<T extends HTMLElement>(): [RefObject<T>, { width: number; height: number }]',
     description: 'Measures live bounding dimensions (width and height) of a DOM element using ResizeObserver.',
     parameters: [],
@@ -1104,7 +1104,7 @@ export function LazyImage({ src }: { src: string }) {
       { name: 'ref', type: 'RefObject<T>', description: 'Ref to attach to the measured target DOM element.' },
       { name: 'size', type: '{ width: number; height: number }', description: 'Live dimensions object updated on container resize.' },
     ],
-    exampleUsage: `import { useElementSize } from '@spectra/primitives';
+    exampleUsage: `import { useElementSize } from '@winplaybox/primitives';
 
 export function ResponsiveChart() {
   const [ref, { width, height }] = useElementSize<HTMLDivElement>();
@@ -1114,7 +1114,7 @@ export function ResponsiveChart() {
 
   'use-window-size': {
     hookName: 'useWindowSize',
-    importStatement: "import { useWindowSize } from '@spectra/primitives';",
+    importStatement: "import { useWindowSize } from '@winplaybox/primitives';",
     signature: 'function useWindowSize(): { width: number; height: number }',
     description: 'Monitors window viewport dimensions with debounced resize handlers and SSR hydration safety.',
     parameters: [],
@@ -1122,7 +1122,7 @@ export function ResponsiveChart() {
       { name: 'width', type: 'number', description: 'Current viewport inner width in pixels.' },
       { name: 'height', type: 'number', description: 'Current viewport inner height in pixels.' },
     ],
-    exampleUsage: `import { useWindowSize } from '@spectra/primitives';
+    exampleUsage: `import { useWindowSize } from '@winplaybox/primitives';
 
 export function ViewportInfo() {
   const { width, height } = useWindowSize();
@@ -1132,14 +1132,14 @@ export function ViewportInfo() {
 
   'use-scroll-lock': {
     hookName: 'useScrollLock',
-    importStatement: "import { useScrollLock } from '@spectra/primitives';",
+    importStatement: "import { useScrollLock } from '@winplaybox/primitives';",
     signature: 'function useScrollLock(lock?: boolean): void',
     description: 'Locks document body scrolling when modal dialogs, drawers, or mobile menus are opened to prevent background bleed.',
     parameters: [
       { name: 'lock', type: 'boolean', defaultValue: 'true', description: 'Whether document scrolling should be locked.' },
     ],
     returnValues: [],
-    exampleUsage: `import { useScrollLock } from '@spectra/primitives';
+    exampleUsage: `import { useScrollLock } from '@winplaybox/primitives';
 
 export function Modal({ isOpen }: { isOpen: boolean }) {
   useScrollLock(isOpen);
@@ -1149,7 +1149,7 @@ export function Modal({ isOpen }: { isOpen: boolean }) {
 
   'use-clipboard': {
     hookName: 'useClipboard',
-    importStatement: "import { useClipboard } from '@spectra/primitives';",
+    importStatement: "import { useClipboard } from '@winplaybox/primitives';",
     signature: 'function useClipboard(timeoutMs?: number): UseClipboardReturn',
     description: 'Copies text to system clipboard with automatic success state reset and permission fallbacks.',
     parameters: [
@@ -1159,7 +1159,7 @@ export function Modal({ isOpen }: { isOpen: boolean }) {
       { name: 'copy', type: '(text: string) => Promise<boolean>', description: 'Copies string to clipboard.' },
       { name: 'hasCopied', type: 'boolean', description: 'True for timeoutMs after successful copy.' },
     ],
-    exampleUsage: `import { useClipboard } from '@spectra/primitives';
+    exampleUsage: `import { useClipboard } from '@winplaybox/primitives';
 
 export function CodeCopyButton({ code }: { code: string }) {
   const { copy, hasCopied } = useClipboard();
@@ -1169,7 +1169,7 @@ export function CodeCopyButton({ code }: { code: string }) {
 
   'use-local-storage': {
     hookName: 'useLocalStorage',
-    importStatement: "import { useLocalStorage } from '@spectra/primitives';",
+    importStatement: "import { useLocalStorage } from '@winplaybox/primitives';",
     signature: 'function useLocalStorage<T>(key: string, initialValue: T): [T, (val: T | ((prev: T) => T)) => void]',
     description: 'Persists and synchronizes state values with browser localStorage and cross-tab storage events.',
     parameters: [
@@ -1180,7 +1180,7 @@ export function CodeCopyButton({ code }: { code: string }) {
       { name: 'value', type: 'T', description: 'Current stored or default value.' },
       { name: 'setValue', type: '(val: T) => void', description: 'State setter that writes to localStorage and updates state.' },
     ],
-    exampleUsage: `import { useLocalStorage } from '@spectra/primitives';
+    exampleUsage: `import { useLocalStorage } from '@winplaybox/primitives';
 
 export function UserPreferences() {
   const [theme, setTheme] = useLocalStorage('app-theme', 'dark');
@@ -1190,7 +1190,7 @@ export function UserPreferences() {
 
   'use-previous': {
     hookName: 'usePrevious',
-    importStatement: "import { usePrevious } from '@spectra/primitives';",
+    importStatement: "import { usePrevious } from '@winplaybox/primitives';",
     signature: 'function usePrevious<T>(value: T): T | undefined',
     description: 'Stores and returns the value from the previous render cycle using a React ref.',
     parameters: [
@@ -1199,7 +1199,7 @@ export function UserPreferences() {
     returnValues: [
       { name: 'previousValue', type: 'T | undefined', description: 'The value before the most recent render.' },
     ],
-    exampleUsage: `import { usePrevious } from '@spectra/primitives';
+    exampleUsage: `import { usePrevious } from '@winplaybox/primitives';
 
 export function CounterDiff({ count }: { count: number }) {
   const prevCount = usePrevious(count);
@@ -1209,7 +1209,7 @@ export function CounterDiff({ count }: { count: number }) {
 
   'use-async': {
     hookName: 'useAsync',
-    importStatement: "import { useAsync } from '@spectra/primitives';",
+    importStatement: "import { useAsync } from '@winplaybox/primitives';",
     signature: 'function useAsync<T>(asyncFn: () => Promise<T>, immediate?: boolean): UseAsyncReturn<T>',
     description: 'Manages promise execution states (idle, pending, resolved, rejected) with loading flags and error capturing.',
     parameters: [
@@ -1223,7 +1223,7 @@ export function CounterDiff({ count }: { count: number }) {
       { name: 'error', type: 'Error | null', description: 'Caught error instance if rejected.' },
       { name: 'loading', type: 'boolean', description: 'True while promise is pending.' },
     ],
-    exampleUsage: `import { useAsync } from '@spectra/primitives';
+    exampleUsage: `import { useAsync } from '@winplaybox/primitives';
 
 export function UserProfile() {
   const { loading, value, error } = useAsync(fetchUser);
@@ -1235,7 +1235,7 @@ export function UserProfile() {
 
   'use-interval': {
     hookName: 'useInterval',
-    importStatement: "import { useInterval } from '@spectra/primitives';",
+    importStatement: "import { useInterval } from '@winplaybox/primitives';",
     signature: 'function useInterval(callback: () => void, delayMs: number | null): void',
     description: 'Declarative setInterval hook with dynamic delay configuration and automatic cleanup.',
     parameters: [
@@ -1243,7 +1243,7 @@ export function UserProfile() {
       { name: 'delayMs', type: 'number | null', defaultValue: 'undefined', required: true, description: 'Interval in ms, or null to pause.' },
     ],
     returnValues: [],
-    exampleUsage: `import { useInterval } from '@spectra/primitives';
+    exampleUsage: `import { useInterval } from '@winplaybox/primitives';
 
 export function Timer() {
   const [seconds, setSeconds] = useState(0);

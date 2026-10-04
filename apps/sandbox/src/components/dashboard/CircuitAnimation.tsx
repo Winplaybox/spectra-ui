@@ -1,5 +1,5 @@
 import React from 'react';
-import { useColorScheme } from '@spectra/react';
+import { useColorScheme } from '@winplaybox/react';
 
 interface CircuitAnimationProps {
   width?: number | string;

@@ -1,6 +1,6 @@
 import React, { forwardRef, ReactNode } from 'react';
 import * as styles from './Alert.css';
-import { CloseIcon, SparklesIcon, CheckIcon } from '@spectra/icons';
+import { CloseIcon, SparklesIcon, CheckIcon } from '@winplaybox/icons';
 
 export type AlertSeverity = 'info' | 'success' | 'warning' | 'error' | 'danger';
 

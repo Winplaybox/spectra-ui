@@ -23,9 +23,9 @@ import {
   usePrevious,
   useAsync,
   useInterval,
-} from '@spectra/primitives';
-import { Button, Badge, Card, CardHeader, CardTitle, CardDescription, CardContent, TextInput, Switch, Spinner } from '@spectra/react';
-import { CheckIcon, CloseIcon, CopyIcon, SparklesIcon, AlertCircleIcon, InfoIcon } from '@spectra/icons';
+} from '@winplaybox/primitives';
+import { Button, Badge, Card, CardHeader, CardTitle, CardDescription, CardContent, TextInput, Switch, Spinner } from '@winplaybox/react';
+import { CheckIcon, CloseIcon, CopyIcon, SparklesIcon, AlertCircleIcon, InfoIcon } from '@winplaybox/icons';
 import { HookApiSection } from './HookApiSection';
 import { AllHooksPage } from './AllHooksPage';
 
@@ -240,7 +240,7 @@ const HookDetailSection: React.FC<{ hookId: string }> = ({ hookId }) => {
                 {/* Code Recipe */}
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useDisclosure } from '@spectra/primitives';
+{`import { useDisclosure } from '@winplaybox/primitives';
 
 export function ModalExample() {
   const { isOpen, onOpen, onClose, onToggle } = useDisclosure({ defaultIsOpen: false });
@@ -335,7 +335,7 @@ export function ModalExample() {
 
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useControllableState } from '@spectra/primitives';
+{`import { useControllableState } from '@winplaybox/primitives';
 
 export function CustomInput({ value, defaultValue, onChange }) {
   const [val, setVal] = useControllableState({
@@ -414,7 +414,7 @@ export function CustomInput({ value, defaultValue, onChange }) {
 
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useOutsideClick } from '@spectra/primitives';
+{`import { useOutsideClick } from '@winplaybox/primitives';
 
 export function DropdownMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -509,7 +509,7 @@ export function DropdownMenu() {
 
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useId } from '@spectra/primitives';
+{`import { useId } from '@winplaybox/primitives';
 
 export function FormField({ label }) {
   const id = useId('spectra-field');
@@ -587,7 +587,7 @@ export function FormField({ label }) {
 
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useColorScheme } from '@spectra/primitives';
+{`import { useColorScheme } from '@winplaybox/primitives';
 
 export function ThemeToggle() {
   const { colorScheme, setColorScheme, isDark } = useColorScheme();
@@ -662,7 +662,7 @@ export function ThemeToggle() {
 
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useMediaQuery } from '@spectra/primitives';
+{`import { useMediaQuery } from '@winplaybox/primitives';
 
 export function ResponsiveHeader() {
   const isMobile = useMediaQuery('(max-width: 640px)');
@@ -739,7 +739,7 @@ export function ResponsiveHeader() {
 
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useFocusRing } from '@spectra/primitives';
+{`import { useFocusRing } from '@winplaybox/primitives';
 
 export function CustomButton(props) {
   const { isFocused, isFocusVisible, focusProps } = useFocusRing();
@@ -835,7 +835,7 @@ export function CustomButton(props) {
 
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useToast } from '@spectra/react';
+{`import { useToast } from '@winplaybox/react';
 
 export function SaveButton() {
   const { toast } = useToast();
@@ -899,7 +899,7 @@ export function SaveButton() {
 
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useReducedMotion } from '@spectra/primitives';
+{`import { useReducedMotion } from '@winplaybox/primitives';
 
 export function AnimatedHero() {
   const shouldReduceMotion = useReducedMotion();
@@ -982,7 +982,7 @@ export function AnimatedHero() {
 
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useRTL } from '@spectra/primitives';
+{`import { useRTL } from '@winplaybox/primitives';
 
 export function Breadcrumbs() {
   const isRTL = useRTL();
@@ -1044,7 +1044,7 @@ export function Breadcrumbs() {
                 </div>
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useDebounce } from '@spectra/primitives';
+{`import { useDebounce } from '@winplaybox/primitives';
 
 export function SearchBox() {
   const [query, setQuery] = useState('');
@@ -1102,7 +1102,7 @@ export function SearchBox() {
                 </div>
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useThrottle } from '@spectra/primitives';
+{`import { useThrottle } from '@winplaybox/primitives';
 
 export function ScrollTracker() {
   const [scrollY, setScrollY] = useState(0);
@@ -1160,7 +1160,7 @@ export function ScrollTracker() {
                 </div>
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useHover } from '@spectra/primitives';
+{`import { useHover } from '@winplaybox/primitives';
 
 export function HoverCard() {
   const [hoverRef, isHovered] = useHover<HTMLDivElement>();
@@ -1217,7 +1217,7 @@ export function HoverCard() {
                 </div>
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { usePlatform } from '@spectra/primitives';
+{`import { usePlatform } from '@winplaybox/primitives';
 
 export function AdaptiveWidget() {
   const { platform, isMobile } = usePlatform();
@@ -1282,7 +1282,7 @@ export function AdaptiveWidget() {
                 </div>
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useBreakpoint } from '@spectra/primitives';
+{`import { useBreakpoint } from '@winplaybox/primitives';
 
 export function ResponsiveGrid() {
   const { breakpoint, isMobile } = useBreakpoint();
@@ -1323,7 +1323,7 @@ export function ResponsiveGrid() {
                 </div>
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useEventListener } from '@spectra/primitives';
+{`import { useEventListener } from '@winplaybox/primitives';
 
 export function EscapeListener({ onEscape }) {
   useEventListener('keydown', (e) => {
@@ -1382,7 +1382,7 @@ export function EscapeListener({ onEscape }) {
                 </div>
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useIntersectionObserver } from '@spectra/primitives';
+{`import { useIntersectionObserver } from '@winplaybox/primitives';
 
 export function LazyHero() {
   const ref = useRef(null);
@@ -1438,7 +1438,7 @@ export function LazyHero() {
                 </div>
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useElementSize } from '@spectra/primitives';
+{`import { useElementSize } from '@winplaybox/primitives';
 
 export function ChartContainer() {
   const [ref, { width, height }] = useElementSize();
@@ -1483,7 +1483,7 @@ export function ChartContainer() {
                 </div>
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useWindowSize } from '@spectra/primitives';
+{`import { useWindowSize } from '@winplaybox/primitives';
 
 export function ViewportInfo() {
   const { width, height } = useWindowSize();
@@ -1529,7 +1529,7 @@ export function ViewportInfo() {
                 </div>
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useScrollLock } from '@spectra/primitives';
+{`import { useScrollLock } from '@winplaybox/primitives';
 
 export function Modal({ isOpen }) {
   useScrollLock(isOpen);
@@ -1582,7 +1582,7 @@ export function Modal({ isOpen }) {
                 </div>
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useClipboard } from '@spectra/primitives';
+{`import { useClipboard } from '@winplaybox/primitives';
 
 export function ShareButton({ url }) {
   const { copy, hasCopied } = useClipboard({ timeout: 2000 });
@@ -1631,7 +1631,7 @@ export function ShareButton({ url }) {
                 </div>
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useLocalStorage } from '@spectra/primitives';
+{`import { useLocalStorage } from '@winplaybox/primitives';
 
 export function Counter() {
   const [count, setCount] = useLocalStorage('app-count', 0);
@@ -1682,7 +1682,7 @@ export function Counter() {
                 </div>
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { usePrevious } from '@spectra/primitives';
+{`import { usePrevious } from '@winplaybox/primitives';
 
 export function DeltaTracker({ value }) {
   const prevValue = usePrevious(value);
@@ -1736,7 +1736,7 @@ export function DeltaTracker({ value }) {
                 </div>
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useAsync } from '@spectra/primitives';
+{`import { useAsync } from '@winplaybox/primitives';
 
 export function DataLoader() {
   const { execute, status, value, error, isLoading } = useAsync(fetchData);
@@ -1785,7 +1785,7 @@ export function DataLoader() {
                 </div>
                 <div style={{ backgroundColor: 'var(--color-surface-sunken)', padding: 16, borderRadius: 6, border: '1px solid var(--color-border-subtle)' }}>
                   <pre style={{ margin: 0, fontSize: 12, fontFamily: 'monospace', overflowX: 'auto', color: 'var(--color-text-primary)' }}>
-{`import { useInterval } from '@spectra/primitives';
+{`import { useInterval } from '@winplaybox/primitives';
 
 export function Ticker() {
   const [seconds, setSeconds] = useState(0);

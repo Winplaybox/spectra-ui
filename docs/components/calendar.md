@@ -3,14 +3,14 @@
 Monthly date picker grid with multi-day range selection, disabled bounds, and keyboard arrow roaming.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Calendar } from '@spectra/react';
+import { Calendar } from '@winplaybox/react';
 
 export default function BasicCalendarExample() {
   return (
@@ -65,13 +65,13 @@ Official pattern: [Date Picker Grid Pattern](https://www.w3.org/WAI/ARIA/apg/pat
 | `value` | `Date \| null` | `null` | Currently selected date object. |
 | `onChange` | `(date: Date) => void` | `undefined` | Selection callback. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useControllableState`
 Description: Manages selected Date objects and active month offsets.
 
 ```tsx
-import { useControllableState } from '@spectra/primitives';
+import { useControllableState } from '@winplaybox/primitives';
 
 export function CalendarPrimitive() {
   const [date, setDate] = useControllableState({ defaultValue: new Date() });

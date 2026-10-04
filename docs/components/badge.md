@@ -3,14 +3,14 @@
 Badges are small status descriptors used to highlight item metadata, counts, tags, or system state alerts.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Badge } from '@spectra/react';
+import { Badge } from '@winplaybox/react';
 
 export default function BasicBadgeExample() {
   return (
@@ -64,13 +64,13 @@ Official pattern: [Status pattern](https://www.w3.org/WAI/ARIA/apg/patterns/stat
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Size of the badge pill. |
 | `dot` | `boolean` | `false` | Displays an active status dot on the left. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Provides active colorScheme and design tokens to render badges matching system palette.
 
 ```tsx
-import { useTheme } from '@spectra/primitives';
+import { useTheme } from '@winplaybox/primitives';
 
 export function CustomBadge({ text }) {
   const { colorScheme } = useTheme();

@@ -1,6 +1,6 @@
 // packages/react/src/components/navigation/Link.tsx
 import React, { forwardRef, ReactNode } from 'react';
-import { ExternalLinkIcon } from '@spectra/icons';
+import { ExternalLinkIcon } from '@winplaybox/icons';
 
 export interface LinkProps extends React.ComponentPropsWithoutRef<'a'> {
   children: ReactNode;

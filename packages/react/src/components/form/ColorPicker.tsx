@@ -1,5 +1,5 @@
 import React, { forwardRef, useState, useEffect, useRef } from 'react';
-import { CheckIcon } from '@spectra/icons';
+import { CheckIcon } from '@winplaybox/icons';
 
 export interface ColorPickerProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue'> {
   value?: string;

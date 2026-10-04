@@ -1,4 +1,4 @@
-// @spectra/primitives - Headless UI logic & hooks
+// @winplaybox/primitives - Headless UI logic & hooks
 
 export * from './context/ThemeContext';
 export * from './hooks/useTheme';

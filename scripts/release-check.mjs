@@ -11,7 +11,7 @@ const PACKAGES = [
   'packages/mcp',
 ];
 
-console.log('🔍 Checking @spectra packages for npm release readiness...\n');
+console.log('[CHECK] Checking @winplaybox packages for npm release readiness...\n');
 
 let hasErrors = false;
 
@@ -20,49 +20,49 @@ for (const pkgRel of PACKAGES) {
   const pkgJsonPath = path.join(pkgDir, 'package.json');
 
   if (!fs.existsSync(pkgJsonPath)) {
-    console.error(`❌ Missing package.json in ${pkgRel}`);
+    console.error(`[ERROR] Missing package.json in ${pkgRel}`);
     hasErrors = true;
     continue;
   }
 
   const pkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf-8'));
-  console.log(`📦 ${pkgJson.name}@${pkgJson.version}`);
+  console.log(`[PACKAGE] ${pkgJson.name}@${pkgJson.version}`);
 
   // Validate version format
-  if (!pkgJson.version || !pkgJson.version.startsWith('0.1.0')) {
-    console.warn(`  ⚠️ Version is ${pkgJson.version}, expected 0.1.0`);
+  if (!pkgJson.version) {
+    console.warn(`  [WARN] Missing version in ${pkgRel}`);
   }
 
   // Validate publishConfig
   if (!pkgJson.publishConfig || pkgJson.publishConfig.access !== 'public') {
-    console.error(`  ❌ Missing or invalid publishConfig.access: "public"`);
+    console.error(`  [ERROR] Missing or invalid publishConfig.access: "public"`);
     hasErrors = true;
   } else {
-    console.log(`  ✅ publishConfig.access: "public"`);
+    console.log(`  [OK] publishConfig.access: "public"`);
   }
 
   // Validate license and author
   if (!pkgJson.license) {
-    console.warn(`  ⚠️ Missing license field`);
+    console.warn(`  [WARN] Missing license field`);
   } else {
-    console.log(`  ✅ license: ${pkgJson.license}`);
+    console.log(`  [OK] license: ${pkgJson.license}`);
   }
 
   // Validate main/exports
   if (!pkgJson.main && !pkgJson.exports) {
-    console.error(`  ❌ Missing main/exports entry`);
+    console.error(`  [ERROR] Missing main/exports entry`);
     hasErrors = true;
   } else {
-    console.log(`  ✅ entrypoints defined`);
+    console.log(`  [OK] entrypoints defined`);
   }
 
   // Simulate npm pack dry-run
   try {
     const packOutput = execSync('npm pack --dry-run', { cwd: pkgDir, encoding: 'utf-8' });
     const filenameLine = packOutput.split('\n').find(l => l.includes('filename:') || l.includes('name:'));
-    console.log(`  ✅ pack simulation: OK (${filenameLine ? filenameLine.trim() : 'passed'})`);
+    console.log(`  [OK] pack simulation: OK (${filenameLine ? filenameLine.trim() : 'passed'})`);
   } catch (err) {
-    console.error(`  ❌ Failed pack simulation in ${pkgRel}:`, err.message);
+    console.error(`  [ERROR] Failed pack simulation in ${pkgRel}:`, err.message);
     hasErrors = true;
   }
 
@@ -70,8 +70,8 @@ for (const pkgRel of PACKAGES) {
 }
 
 if (hasErrors) {
-  console.error('❌ Release check failed with errors. Please fix package configurations above.');
+  console.error('[FAIL] Release check failed with errors. Please fix package configurations above.');
   process.exit(1);
 } else {
-  console.log('🎉 All packages are valid and ready for npm publication!');
+  console.log('[PASS] All packages are valid and ready for npm publication!');
 }

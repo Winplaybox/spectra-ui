@@ -3,14 +3,14 @@
 Hierarchical collapsible folder and item list with arrow key navigation (APG Tree View pattern).
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { TreeView } from '@spectra/react';
+import { TreeView } from '@winplaybox/react';
 
 export default function BasicTreeViewExample() {
   return (
@@ -65,13 +65,13 @@ Official pattern: [Tree View Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/t
 | `data` | `TreeNode[]` | `[]` | Hierarchical tree data structure. |
 | `multiSelect` | `boolean` | `false` | Allows multiple item selection. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useDisclosure`
 Description: Manages expanded/collapsed state for nested sub-trees.
 
 ```tsx
-import { useDisclosure } from '@spectra/primitives';
+import { useDisclosure } from '@winplaybox/primitives';
 
 export function TreeNode({ label, children }) {
   const { isOpen, onToggle } = useDisclosure();

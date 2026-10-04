@@ -3,14 +3,14 @@
 Lists organize multiple items into continuous, vertical text and icon indexes for quick scanning and selection.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { List } from '@spectra/react';
+import { List } from '@winplaybox/react';
 
 export default function BasicListExample() {
   return (
@@ -64,13 +64,13 @@ Official pattern: [List pattern](https://www.w3.org/WAI/ARIA/apg/patterns/listbo
 | :--- | :--- | :--- | :--- |
 | `children` | `ReactNode` | `undefined` | List items rendered inside container. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useKeyboardNavigation`
 Description: Implements roving tabindex and arrow key list item selection.
 
 ```tsx
-import { useKeyboardNavigation } from '@spectra/primitives';
+import { useKeyboardNavigation } from '@winplaybox/primitives';
 
 export function CustomList() {
   const { activeIndex, onKeyDown } = useKeyboardNavigation({ count: 5 });

@@ -3,14 +3,14 @@
 Wraps multiple checkboxes within an accessible fieldset and legend to manage multi-option form state.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { CheckboxGroup } from '@spectra/react';
+import { CheckboxGroup } from '@winplaybox/react';
 
 export default function BasicCheckboxGroupExample() {
   return (
@@ -65,13 +65,13 @@ Official pattern: [Checkbox Group Pattern](https://www.w3.org/WAI/ARIA/apg/patte
 | `value` | `string[]` | `[]` | Array of selected item values. |
 | `onChange` | `(values: string[]) => void` | `undefined` | Change callback. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useControllableState`
 Description: Manages array of selected IDs across controlled and uncontrolled modes.
 
 ```tsx
-import { useControllableState } from '@spectra/primitives';
+import { useControllableState } from '@winplaybox/primitives';
 
 export function CheckboxGroupPrimitive(props) {
   const [selected, setSelected] = useControllableState({ defaultValue: [] });

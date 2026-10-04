@@ -3,14 +3,14 @@
 Interactive frame simulator reproducing native iOS, Android, Windows, and macOS window geometries.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { PlatformChassis } from '@spectra/react';
+import { PlatformChassis } from '@winplaybox/react';
 
 export default function BasicPlatformChassisExample() {
   return (
@@ -63,13 +63,13 @@ Official pattern: [Chassis Simulator](https://www.w3.org/WAI/ARIA/apg/patterns/)
 | `platform` | `'web' \| 'ios' \| 'android' \| 'macos' \| 'windows'` | `'web'` | Target chassis platform. |
 | `children` | `ReactNode` | `undefined` | Component to preview inside chassis. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `usePlatform`
 Description: Extracts platform metadata and geometry dimensions.
 
 ```tsx
-import { usePlatform } from '@spectra/primitives';
+import { usePlatform } from '@winplaybox/primitives';
 
 export function ChassisPrimitive({ children }) {
   const { platform } = usePlatform();

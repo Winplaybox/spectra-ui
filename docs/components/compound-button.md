@@ -3,14 +3,14 @@
 Compound buttons feature a prominent primary action label paired with a secondary descriptive subtitle to guide high-stakes decision points.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { CompoundButton } from '@spectra/react';
+import { CompoundButton } from '@winplaybox/react';
 
 export default function BasicCompoundButtonExample() {
   return (
@@ -70,13 +70,13 @@ Official pattern: [Button Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/butt
 | `icon` | `ReactNode` | `undefined` | Leading icon vector node. |
 | `variant` | `'primary' \| 'secondary' \| 'subtle'` | `'secondary'` | Visual surface styling variant. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useFocusRing`
 Description: Applies visible keyboard focus ring without mouse click outline.
 
 ```tsx
-import { useFocusRing } from '@spectra/primitives';
+import { useFocusRing } from '@winplaybox/primitives';
 
 export function CustomCompoundButton(props) {
   const { isFocusVisible, focusProps } = useFocusRing();

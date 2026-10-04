@@ -3,14 +3,14 @@
 Stack of overlapping user avatars displaying collaborator presence with an overflow counter pill.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { AvatarGroup } from '@spectra/react';
+import { AvatarGroup } from '@winplaybox/react';
 
 export default function BasicAvatarGroupExample() {
   return (
@@ -63,13 +63,13 @@ Official pattern: [Group Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/group
 | `max` | `number` | `4` | Maximum visible avatars before overflow pill. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | Unified avatar dimensions scale. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Extracts surface background color for ring borders.
 
 ```tsx
-import { useTheme } from '@spectra/primitives';
+import { useTheme } from '@winplaybox/primitives';
 
 export function AvatarGroupPrimitive() {
   const { colorScheme } = useTheme();

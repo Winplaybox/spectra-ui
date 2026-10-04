@@ -3,14 +3,14 @@
 Off-canvas sliding overlay panel anchored to the left, right, top, or bottom of the viewport.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Drawer } from '@spectra/react';
+import { Drawer } from '@winplaybox/react';
 
 export default function BasicDrawerExample() {
   return (
@@ -66,13 +66,13 @@ Official pattern: [Modal Dialog Pattern](https://www.w3.org/WAI/ARIA/apg/pattern
 | `onClose` | `() => void` | `undefined` | Close request callback. |
 | `placement` | `'left' \| 'right' \| 'top' \| 'bottom'` | `'right'` | Viewport anchor edge. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useDisclosure`
 Description: Controls open state and binds scroll-lock to document body.
 
 ```tsx
-import { useDisclosure, useScrollLock } from '@spectra/primitives';
+import { useDisclosure, useScrollLock } from '@winplaybox/primitives';
 
 export function DrawerPrimitive() {
   const { isOpen, onClose } = useDisclosure();

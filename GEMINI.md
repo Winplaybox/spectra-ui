@@ -10,7 +10,7 @@
 
 ## 2. Zero Emoji Policy (Strict Memory Rule)
 - **NEVER use emoji characters** (such as 🌐, 🍎, 🤖, 🪟, 🖥️, ⚡, 🍪, ⚠️, 🎨, 💬, 👍, 👎, ✋, etc.) in UI components, headers, tables, documentation cards, badges, notices, or breadcrumbs.
-- **ALWAYS use authentic SVG vector icons** from `@spectra/icons` (or dedicated inline SVGs).
+- **ALWAYS use authentic SVG vector icons** from `@winplaybox/icons` (or dedicated inline SVGs).
 - Emojis are strictly forbidden unless explicitly commanded by the developer.
 
 ## 3. Multi-Platform Selector & Platform Isolation

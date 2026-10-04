@@ -3,14 +3,14 @@
 Hybrid input and popup menu enabling users to filter and select from extensive option lists.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Combobox } from '@spectra/react';
+import { Combobox } from '@winplaybox/react';
 
 export default function BasicComboboxExample() {
   return (
@@ -67,13 +67,13 @@ Official pattern: [Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/co
 | `value` | `string` | `''` | Selected value string. |
 | `placeholder` | `string` | `'Select option...'` | Input placeholder hint. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useListNavigation`
 Description: Controls active item selection and keyboard roaming.
 
 ```tsx
-import { useListNavigation } from '@spectra/primitives';
+import { useListNavigation } from '@winplaybox/primitives';
 
 export function CustomCombobox() {
   const { activeIndex } = useListNavigation({ totalItems: 10 });

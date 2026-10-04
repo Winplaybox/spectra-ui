@@ -3,14 +3,14 @@
 Structured card layout pairing top media imagery or video preview with title, body, and action footer.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { MediaCard } from '@spectra/react';
+import { MediaCard } from '@winplaybox/react';
 
 export default function BasicMediaCardExample() {
   return (
@@ -64,13 +64,13 @@ Official pattern: [Card Surface Pattern](https://www.w3.org/WAI/ARIA/apg/pattern
 | `imageSrc` | `string` | `''` | Header image source URL. |
 | `title` | `string` | `''` | Card title. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useTheme`
 Description: Applies surface token backgrounds and border radii.
 
 ```tsx
-import { useTheme } from '@spectra/primitives';
+import { useTheme } from '@winplaybox/primitives';
 
 export function CustomMediaCard() {
   const { colorScheme } = useTheme();

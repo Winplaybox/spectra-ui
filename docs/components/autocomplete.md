@@ -3,14 +3,14 @@
 Search-driven input with real-time suggestion list, fuzzy filtering, and keyboard navigation.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Autocomplete } from '@spectra/react';
+import { Autocomplete } from '@winplaybox/react';
 
 export default function BasicAutocompleteExample() {
   return (
@@ -63,13 +63,13 @@ Official pattern: [Combobox with Autocomplete Pattern](https://www.w3.org/WAI/AR
 | `suggestions` | `string[]` | `[]` | Array of suggestion strings. |
 | `onSearch` | `(query: string) => void` | `undefined` | Callback fired as user types. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useDebounce`
 Description: Debounces query changes to prevent excessive API invocations.
 
 ```tsx
-import { useDebounce } from '@spectra/primitives';
+import { useDebounce } from '@winplaybox/primitives';
 
 export function AutocompleteDemo() {
   const [val, setVal] = useState('');

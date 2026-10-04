@@ -1,6 +1,6 @@
 // packages/react/src/components/form/Autocomplete.tsx
 import React, { useState, useRef, useEffect, forwardRef } from 'react';
-import { SearchIcon, ChevronDownIcon, CloseIcon } from '@spectra/icons';
+import { SearchIcon, ChevronDownIcon, CloseIcon } from '@winplaybox/icons';
 
 export interface AutocompleteOption {
   value: string;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { ThemeProvider, ThemeProviderProps } from '@spectra/primitives';
-import '@spectra/tokens/css';
+import { ThemeProvider, ThemeProviderProps } from '@winplaybox/primitives';
+import '@winplaybox/tokens/css';
 
 export interface SpectraProviderProps extends ThemeProviderProps {}
 

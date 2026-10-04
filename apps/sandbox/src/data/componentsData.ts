@@ -88,7 +88,7 @@ const CORE_COMPONENTS_DATA: Record<string, ComponentMetadata> = {
     headlessHook: {
       name: 'useButtonProps',
       description: 'Generates accessible ARIA attributes, keydown listeners (Enter/Space), and disabled state handling for custom buttons.',
-      code: `import { useButtonProps } from '@spectra/primitives';
+      code: `import { useButtonProps } from '@winplaybox/primitives';
 
 export function CustomButton({ onClick, disabled, children }) {
   const buttonProps = useButtonProps({ onClick, disabled });
@@ -147,7 +147,7 @@ export function CustomButton({ onClick, disabled, children }) {
     headlessHook: {
       name: 'useId',
       description: 'Generates stable, SSR-safe unique IDs for linking labels (<label htmlFor>) and error messages (<span aria-describedby>) across Web & React Native.',
-      code: `import { useId } from '@spectra/primitives';
+      code: `import { useId } from '@winplaybox/primitives';
 
 export function CustomField({ label, error }) {
   const id = useId('input');
@@ -203,7 +203,7 @@ export function CustomField({ label, error }) {
     headlessHook: {
       name: 'useControllableState',
       description: 'Seamlessly synchronizes controlled vs uncontrolled state for dropdown selection across Web and Mobile Native.',
-      code: `import { useControllableState } from '@spectra/primitives';
+      code: `import { useControllableState } from '@winplaybox/primitives';
 
 export function CustomSelect({ value: controlled, defaultValue = '', onChange }) {
   const [value, setValue] = useControllableState({ value: controlled, defaultValue, onChange });
@@ -254,7 +254,7 @@ export function CustomSelect({ value: controlled, defaultValue = '', onChange })
     headlessHook: {
       name: 'useControllableState',
       description: 'Handles indeterminate and controlled/uncontrolled checked states with full keyboard toggling.',
-      code: `import { useControllableState } from '@spectra/primitives';
+      code: `import { useControllableState } from '@winplaybox/primitives';
 
 export function CustomCheckbox({ checked, defaultChecked, onChange }) {
   const [val, setVal] = useControllableState({ value: checked, defaultValue: defaultChecked, onChange });
@@ -305,7 +305,7 @@ export function CustomCheckbox({ checked, defaultChecked, onChange }) {
     headlessHook: {
       name: 'useControllableState',
       description: 'Synchronizes radio group selection and provides roving tabindex arrow navigation.',
-      code: `import { useControllableState } from '@spectra/primitives';
+      code: `import { useControllableState } from '@winplaybox/primitives';
 
 export function CustomRadioGroup({ value: cVal, defaultValue, onChange, children }) {
   const [active, setActive] = useControllableState({ value: cVal, defaultValue, onChange });
@@ -354,7 +354,7 @@ export function CustomRadioGroup({ value: cVal, defaultValue, onChange, children
     headlessHook: {
       name: 'useControllableState',
       description: 'Manages instant binary boolean transitions with ARIA switch roles.',
-      code: `import { useControllableState } from '@spectra/primitives';
+      code: `import { useControllableState } from '@winplaybox/primitives';
 
 export function CustomSwitch({ checked, onChange }) {
   const [isOn, setIsOn] = useControllableState({ value: checked, defaultValue: false, onChange });
@@ -415,7 +415,7 @@ export function CustomSwitch({ checked, onChange }) {
     headlessHook: {
       name: 'useDisclosure',
       description: 'Manages open/closed states with automatic ID linking between trigger and panel.',
-      code: `import { useDisclosure } from '@spectra/primitives';
+      code: `import { useDisclosure } from '@winplaybox/primitives';
 
 export function CustomAccordionItem({ title, children }) {
   const { isOpen, toggle, getTriggerProps, getPanelProps } = useDisclosure();
@@ -472,7 +472,7 @@ export function CustomAccordionItem({ title, children }) {
     headlessHook: {
       name: 'getInitials',
       description: 'Helper algorithm extracting clean 2-letter uppercase initials from full names.',
-      code: `import { getInitials } from '@spectra/primitives';
+      code: `import { getInitials } from '@winplaybox/primitives';
 
 const initials = getInitials('Alexander Hamilton'); // 'AH'`,
     },
@@ -518,7 +518,7 @@ const initials = getInitials('Alexander Hamilton'); // 'AH'`,
     headlessHook: {
       name: 'useKeyboardNavigation',
       description: 'Implements roving tabindex and arrow key list item selection.',
-      code: `import { useKeyboardNavigation } from '@spectra/primitives';
+      code: `import { useKeyboardNavigation } from '@winplaybox/primitives';
 
 export function CustomList() {
   const { activeIndex, onKeyDown } = useKeyboardNavigation({ count: 5 });
@@ -567,7 +567,7 @@ export function CustomList() {
     headlessHook: {
       name: 'useTheme',
       description: 'Provides active colorScheme and design tokens to render badges matching system palette.',
-      code: `import { useTheme } from '@spectra/primitives';
+      code: `import { useTheme } from '@winplaybox/primitives';
 
 export function CustomBadge({ text }) {
   const { colorScheme } = useTheme();
@@ -616,7 +616,7 @@ export function CustomBadge({ text }) {
     headlessHook: {
       name: 'useOutsideClick',
       description: 'Automatically dismisses floating popovers and tooltips when clicking outside the boundary.',
-      code: `import { useOutsideClick } from '@spectra/primitives';
+      code: `import { useOutsideClick } from '@winplaybox/primitives';
 
 export function CustomTooltip() {
   const ref = useOutsideClick(() => setVisible(false));
@@ -669,7 +669,7 @@ export function CustomTooltip() {
     headlessHook: {
       name: 'useControllableState',
       description: 'Synchronizes active tab state with keyboard focus management and ARIA bindings.',
-      code: `import { useControllableState } from '@spectra/primitives';
+      code: `import { useControllableState } from '@winplaybox/primitives';
 
 export function CustomTabs({ value: cVal, defaultValue = '1', onChange }) {
   const [active, setActive] = useControllableState({ value: cVal, defaultValue, onChange });
@@ -719,7 +719,7 @@ export function CustomTabs({ value: cVal, defaultValue = '1', onChange }) {
     headlessHook: {
       name: 'useTheme',
       description: 'Provides current theme tokens (colors.surface, colors.border) for custom card containers.',
-      code: `import { useTheme } from '@spectra/primitives';
+      code: `import { useTheme } from '@winplaybox/primitives';
 
 export function CustomCard({ children }) {
   const { colorScheme } = useTheme();
@@ -772,7 +772,7 @@ export function CustomCard({ children }) {
     headlessHook: {
       name: 'useDisclosure',
       description: 'Manages modal open/close states, focus trapping, and backdrop click handlers.',
-      code: `import { useDisclosure } from '@spectra/primitives';
+      code: `import { useDisclosure } from '@winplaybox/primitives';
 
 export function CustomModal() {
   const { isOpen, open, close } = useDisclosure();
@@ -833,7 +833,7 @@ export function CustomModal() {
     headlessHook: {
       name: 'useDisclosure',
       description: 'Controls visibility, transition states, and unmount lifecycles for dismissible alerts.',
-      code: `import { useDisclosure } from '@spectra/primitives';
+      code: `import { useDisclosure } from '@winplaybox/primitives';
 
 export function CustomAlert({ message }) {
   const { isOpen, close } = useDisclosure(true);
@@ -882,7 +882,7 @@ export function CustomAlert({ message }) {
     headlessHook: {
       name: 'useReducedMotion',
       description: 'Detects if the user prefers reduced motion and replaces spinner spin with pulsing opacity.',
-      code: `import { useReducedMotion } from '@spectra/primitives';
+      code: `import { useReducedMotion } from '@winplaybox/primitives';
 
 export function AccessibleSpinner() {
   const prefersReduced = useReducedMotion();
@@ -930,7 +930,7 @@ export function AccessibleSpinner() {
     headlessHook: {
       name: 'useTheme',
       description: 'Provides theme-aware shimmer colors adjusting between dark and light modes.',
-      code: `import { useTheme } from '@spectra/primitives';
+      code: `import { useTheme } from '@winplaybox/primitives';
 
 export function CustomSkeleton() {
   const { colorScheme } = useTheme();
@@ -978,7 +978,7 @@ export function CustomSkeleton() {
     headlessHook: {
       name: 'useTheme',
       description: 'Injects design token border colors.',
-      code: `import { useTheme } from '@spectra/primitives';
+      code: `import { useTheme } from '@winplaybox/primitives';
 
 export function ThemedDivider() {
   const { colorScheme } = useTheme();
@@ -1034,7 +1034,7 @@ export function ThemedDivider() {
     headlessHook: {
       name: 'useButtonProps',
       description: 'Generates keyboard and ARIA handlers for interactive chips.',
-      code: `import { useButtonProps } from '@spectra/primitives';
+      code: `import { useButtonProps } from '@winplaybox/primitives';
 
 export function CustomChip({ label, onClick }) {
   const buttonProps = useButtonProps({ onClick });
@@ -1088,7 +1088,7 @@ export function CustomChip({ label, onClick }) {
     headlessHook: {
       name: 'useTheme',
       description: 'Provides theme styling tokens for breadcrumb links and separators.',
-      code: `import { useTheme } from '@spectra/primitives';
+      code: `import { useTheme } from '@winplaybox/primitives';
 
 export function CustomBreadcrumbs({ items }) {
   const { colorScheme } = useTheme();

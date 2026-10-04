@@ -1,6 +1,6 @@
 // packages/react/src/components/form/TextInput.tsx
 import { forwardRef } from 'react';
-import { useFormField } from '@spectra/primitives';
+import { useFormField } from '@winplaybox/primitives';
 import * as styles from './TextInput.css';
 
 export interface TextInputProps extends Omit<React.ComponentPropsWithoutRef<'input'>, 'size'> {

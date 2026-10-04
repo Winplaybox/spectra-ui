@@ -3,14 +3,14 @@
 Text fields let users enter and edit text across forms, search bars, and dialogs with built-in states for focus, error, and validation.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { TextInput } from '@spectra/react';
+import { TextInput } from '@winplaybox/react';
 
 export default function BasicTextInputExample() {
   return (
@@ -72,13 +72,13 @@ Official pattern: [Textbox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tex
 | `leftIcon` | `ReactNode` | `undefined` | Icon displayed on the left side (e.g. search). |
 | `rightIcon` | `ReactNode` | `undefined` | Icon displayed on the right side (e.g. clear, eye). |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useId`
 Description: Generates stable, SSR-safe unique IDs for linking labels (<label htmlFor>) and error messages (<span aria-describedby>) across Web & React Native.
 
 ```tsx
-import { useId } from '@spectra/primitives';
+import { useId } from '@winplaybox/primitives';
 
 export function CustomField({ label, error }) {
   const id = useId('input');

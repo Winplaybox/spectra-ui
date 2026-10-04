@@ -76,7 +76,7 @@ import {
   Stack,
   ColorPicker,
   PlatformChassis,
-} from '@spectra/react';
+} from '@winplaybox/react';
 import {
   CheckIcon,
   CloseIcon,
@@ -92,7 +92,7 @@ import {
   EyeIcon,
   EyeOffIcon,
   CopyIcon,
-} from '@spectra/icons';
+} from '@winplaybox/icons';
 import { ComponentDemoCard } from './ComponentDemoCard';
 
 export interface VariantMeta {
@@ -404,8 +404,8 @@ export const ComponentVariantsShowcase: React.FC<ComponentVariantsShowcaseProps>
 <Button variant="tertiary">Tertiary Action</Button>
 <Button variant="danger">Destructive Action</Button>`}
             webCode={`import React from 'react';
-import { Button } from '@spectra/react';
-import type { ButtonProps } from '@spectra/react';
+import { Button } from '@winplaybox/react';
+import type { ButtonProps } from '@winplaybox/react';
 
 export default function ButtonVariantsDemo(): JSX.Element {
   const handleClick = (variant: string): void => {
@@ -423,8 +423,8 @@ export default function ButtonVariantsDemo(): JSX.Element {
 }`}
             nativeCode={`import React from 'react';
 import { View } from 'react-native';
-import { Button } from '@spectra/react-native';
-import type { ButtonVariant } from '@spectra/react-native';
+import { Button } from '@winplaybox/react-native';
+import type { ButtonVariant } from '@winplaybox/react-native';
 
 export default function NativeButtonVariantsDemo(): JSX.Element {
   const handlePress = (variant: ButtonVariant): void => {
@@ -464,8 +464,8 @@ export default function NativeButtonVariantsDemo(): JSX.Element {
               </div>
             }
             webCode={`import React from 'react';
-import { Button } from '@spectra/react';
-import type { ButtonSize } from '@spectra/react';
+import { Button } from '@winplaybox/react';
+import type { ButtonSize } from '@winplaybox/react';
 
 export default function ButtonSizesDemo(): JSX.Element {
   const sizes: ButtonSize[] = ['sm', 'md', 'lg'];
@@ -482,8 +482,8 @@ export default function ButtonSizesDemo(): JSX.Element {
 }`}
             nativeCode={`import React from 'react';
 import { View } from 'react-native';
-import { Button } from '@spectra/react-native';
-import type { ButtonSize } from '@spectra/react-native';
+import { Button } from '@winplaybox/react-native';
+import type { ButtonSize } from '@winplaybox/react-native';
 
 export default function NativeButtonSizesDemo(): JSX.Element {
   return (
@@ -530,9 +530,9 @@ export default function NativeButtonSizesDemo(): JSX.Element {
               </div>
             }
             webCode={`import React from 'react';
-import { Button } from '@spectra/react';
-import type { ButtonProps } from '@spectra/react';
-import { CheckIcon, SearchIcon, CloseIcon } from '@spectra/icons';
+import { Button } from '@winplaybox/react';
+import type { ButtonProps } from '@winplaybox/react';
+import { CheckIcon, SearchIcon, CloseIcon } from '@winplaybox/icons';
 
 export default function ButtonIconsDemo(): JSX.Element {
   const handleApprove = (e: React.MouseEvent<HTMLButtonElement>): void => {
@@ -553,8 +553,8 @@ export default function ButtonIconsDemo(): JSX.Element {
 }`}
             nativeCode={`import React from 'react';
 import { View } from 'react-native';
-import { Button } from '@spectra/react-native';
-import { CheckIcon, SearchIcon } from '@spectra/icons';
+import { Button } from '@winplaybox/react-native';
+import { CheckIcon, SearchIcon } from '@winplaybox/icons';
 
 export default function NativeButtonIconsDemo(): JSX.Element {
   return (
@@ -592,8 +592,8 @@ export default function NativeButtonIconsDemo(): JSX.Element {
               </div>
             }
             webCode={`import React, { useState } from 'react';
-import { Button } from '@spectra/react';
-import type { ButtonProps } from '@spectra/react';
+import { Button } from '@winplaybox/react';
+import type { ButtonProps } from '@winplaybox/react';
 
 export default function ButtonStatesDemo(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(true);
@@ -611,7 +611,7 @@ export default function ButtonStatesDemo(): JSX.Element {
 }`}
             nativeCode={`import React from 'react';
 import { View } from 'react-native';
-import { Button } from '@spectra/react-native';
+import { Button } from '@winplaybox/react-native';
 
 export default function NativeButtonStatesDemo(): JSX.Element {
   return (
@@ -645,8 +645,8 @@ export default function NativeButtonStatesDemo(): JSX.Element {
               </div>
             }
             webCode={`import React from 'react';
-import { Button } from '@spectra/react';
-import type { ButtonProps } from '@spectra/react';
+import { Button } from '@winplaybox/react';
+import type { ButtonProps } from '@winplaybox/react';
 
 export default function BlockButtonDemo(): JSX.Element {
   return (
@@ -662,7 +662,7 @@ export default function BlockButtonDemo(): JSX.Element {
 }`}
             nativeCode={`import React from 'react';
 import { View } from 'react-native';
-import { Button } from '@spectra/react-native';
+import { Button } from '@winplaybox/react-native';
 
 export default function NativeBlockButtonDemo(): JSX.Element {
   return (
@@ -757,7 +757,7 @@ export default function NativeBlockButtonDemo(): JSX.Element {
               </div>
             }
             webCode={`import React from 'react';
-import { SparklesIcon } from '@spectra/icons';
+import { SparklesIcon } from '@winplaybox/icons';
 
 export default function CompoundButtonDemo(): JSX.Element {
   return (
@@ -884,8 +884,8 @@ export default function NativeCompoundButtonDemo(): JSX.Element {
               </div>
             }
             webCode={`import React, { useState } from 'react';
-import { Button } from '@spectra/react';
-import { ChevronDownIcon, CheckIcon } from '@spectra/icons';
+import { Button } from '@winplaybox/react';
+import { ChevronDownIcon, CheckIcon } from '@winplaybox/icons';
 
 export default function SplitButtonDemo(): JSX.Element {
   const [open, setOpen] = useState(false);
@@ -927,7 +927,7 @@ export default function SplitButtonDemo(): JSX.Element {
 }`}
             nativeCode={`import React from 'react';
 import { View } from 'react-native';
-import { Button } from '@spectra/react-native';
+import { Button } from '@winplaybox/react-native';
 
 export default function NativeSplitButtonDemo(): JSX.Element {
   return (
@@ -1034,7 +1034,7 @@ export default function NativeButtonGroupDemo(): JSX.Element {
                   <AccordionItem value="item-2">
                     <AccordionHeader>Are design tokens shared across platforms?</AccordionHeader>
                     <AccordionPanel>
-                      Yes! The single source of truth in @spectra/tokens compiles to CSS Variables for Web and JavaScript theme dictionaries for React Native StyleSheet.
+                      Yes! The single source of truth in @winplaybox/tokens compiles to CSS Variables for Web and JavaScript theme dictionaries for React Native StyleSheet.
                     </AccordionPanel>
                   </AccordionItem>
                 </Accordion>
@@ -1055,8 +1055,8 @@ export default function NativeButtonGroupDemo(): JSX.Element {
               </div>
             }
             webCode={`import React from 'react';
-import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@spectra/react';
-import type { AccordionProps } from '@spectra/react';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react';
+import type { AccordionProps } from '@winplaybox/react';
 
 export default function SingleAccordionDemo(): JSX.Element {
   return (
@@ -1077,7 +1077,7 @@ export default function SingleAccordionDemo(): JSX.Element {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@spectra/react-native';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react-native';
 
 export default function NativeAccordionDemo(): JSX.Element {
   return (
@@ -1125,8 +1125,8 @@ export default function NativeAccordionDemo(): JSX.Element {
               </div>
             }
             webCode={`import React from 'react';
-import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@spectra/react';
-import type { AccordionProps } from '@spectra/react';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react';
+import type { AccordionProps } from '@winplaybox/react';
 
 export default function MultiAccordionDemo(): JSX.Element {
   const defaultItems: string[] = ['item-1', 'item-2'];
@@ -1145,7 +1145,7 @@ export default function MultiAccordionDemo(): JSX.Element {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@spectra/react-native';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react-native';
 
 export default function NativeMultiAccordionDemo(): JSX.Element {
   return (
@@ -1190,9 +1190,9 @@ export default function NativeMultiAccordionDemo(): JSX.Element {
               </div>
             }
             webCode={`import React, { useState } from 'react';
-import { TextInput } from '@spectra/react';
-import type { TextInputProps } from '@spectra/react';
-import { SearchIcon, CloseIcon } from '@spectra/icons';
+import { TextInput } from '@winplaybox/react';
+import type { TextInputProps } from '@winplaybox/react';
+import { SearchIcon, CloseIcon } from '@winplaybox/icons';
 
 export default function SearchInputDemo(): JSX.Element {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -1218,8 +1218,8 @@ export default function SearchInputDemo(): JSX.Element {
   );
 }`}
             nativeCode={`import React, { useState } from 'react';
-import { TextInput } from '@spectra/react-native';
-import { SearchIcon } from '@spectra/icons';
+import { TextInput } from '@winplaybox/react-native';
+import { SearchIcon } from '@winplaybox/icons';
 
 export default function NativeSearchInputDemo(): JSX.Element {
   const [text, setText] = useState<string>('');
@@ -1261,8 +1261,8 @@ export default function NativeSearchInputDemo(): JSX.Element {
               </div>
             }
             webCode={`import React, { useState } from 'react';
-import { TextInput } from '@spectra/react';
-import type { TextInputProps } from '@spectra/react';
+import { TextInput } from '@winplaybox/react';
+import type { TextInputProps } from '@winplaybox/react';
 
 export default function InputValidationDemo(): JSX.Element {
   const [slug, setSlug] = useState<string>('acme-corp-123');
@@ -1285,7 +1285,7 @@ export default function InputValidationDemo(): JSX.Element {
   );
 }`}
             nativeCode={`import React from 'react';
-import { TextInput } from '@spectra/react-native';
+import { TextInput } from '@winplaybox/react-native';
 
 export default function NativeInputValidationDemo(): JSX.Element {
   return (
@@ -1323,8 +1323,8 @@ export default function NativeInputValidationDemo(): JSX.Element {
               </div>
             }
             webCode={`import React from 'react';
-import { TextInput } from '@spectra/react';
-import type { TextInputProps } from '@spectra/react';
+import { TextInput } from '@winplaybox/react';
+import type { TextInputProps } from '@winplaybox/react';
 
 export default function HelperInputDemo(): JSX.Element {
   return (
@@ -1337,7 +1337,7 @@ export default function HelperInputDemo(): JSX.Element {
   );
 }`}
             nativeCode={`import React from 'react';
-import { TextInput } from '@spectra/react-native';
+import { TextInput } from '@winplaybox/react-native';
 
 export default function NativeHelperInputDemo(): JSX.Element {
   return (
@@ -1397,8 +1397,8 @@ export default function NativeHelperInputDemo(): JSX.Element {
               </div>
             }
             webCode={`import React, { useState } from 'react';
-import { TextInput } from '@spectra/react';
-import { EyeIcon, EyeOffIcon } from '@spectra/icons';
+import { TextInput } from '@winplaybox/react';
+import { EyeIcon, EyeOffIcon } from '@winplaybox/icons';
 
 export default function PasswordInputDemo() {
   const [show, setShow] = useState(false);
@@ -1425,7 +1425,7 @@ export default function PasswordInputDemo() {
   );
 }`}
             nativeCode={`import React, { useState } from 'react';
-import { TextInput } from '@spectra/react-native';
+import { TextInput } from '@winplaybox/react-native';
 
 export default function NativePasswordInputDemo() {
   const [secure, setSecure] = useState(true);
@@ -1487,8 +1487,8 @@ export default function NativePasswordInputDemo() {
               </div>
             }
             webCode={`import React, { useState } from 'react';
-import { TextInput } from '@spectra/react';
-import { SearchIcon, CloseIcon } from '@spectra/icons';
+import { TextInput } from '@winplaybox/react';
+import { SearchIcon, CloseIcon } from '@winplaybox/icons';
 
 export default function ClearableInputDemo(): JSX.Element {
   const [query, setQuery] = useState('Search tokens...');
@@ -1515,7 +1515,7 @@ export default function ClearableInputDemo(): JSX.Element {
   );
 }`}
             nativeCode={`import React, { useState } from 'react';
-import { TextInput } from '@spectra/react-native';
+import { TextInput } from '@winplaybox/react-native';
 
 export default function NativeClearableDemo(): JSX.Element {
   const [val, setVal] = useState('Query');
@@ -1625,7 +1625,7 @@ export default function NativeAdornmentDemo(): JSX.Element {
               </div>
             }
             webCode={`import React, { useState } from 'react';
-import { TextInput } from '@spectra/react';
+import { TextInput } from '@winplaybox/react';
 
 export default function CounterInputDemo(): JSX.Element {
   const [text, setText] = useState('Spectra UI Enterprise Release');
@@ -1692,7 +1692,7 @@ export default function NativeCounterDemo(): JSX.Element {
                 />
               </div>
             }
-            webCode={`import { Select } from '@spectra/react';
+            webCode={`import { Select } from '@winplaybox/react';
 
 export default function SelectDemo() {
   return (
@@ -1708,7 +1708,7 @@ export default function SelectDemo() {
   );
 }`}
             nativeCode={`import React, { useState } from 'react';
-import { Select } from '@spectra/react-native';
+import { Select } from '@winplaybox/react-native';
 
 export default function NativeSelectDemo() {
   const [val, setVal] = useState('us-east');
@@ -1749,7 +1749,7 @@ export default function NativeSelectDemo() {
                 />
               </div>
             }
-            webCode={`import { Select } from '@spectra/react';
+            webCode={`import { Select } from '@winplaybox/react';
 
 export default function SelectStatesDemo() {
   return (
@@ -1761,7 +1761,7 @@ export default function SelectStatesDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Select } from '@spectra/react-native';
+import { Select } from '@winplaybox/react-native';
 
 export default function NativeSelectStatesDemo() {
   return (
@@ -1851,7 +1851,7 @@ export default function GroupedSelectDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Select } from '@spectra/react-native';
+import { Select } from '@winplaybox/react-native';
 
 export default function NativeGroupedSelectDemo() {
   return (
@@ -1894,7 +1894,7 @@ export default function NativeGroupedSelectDemo() {
                 <Badge variant="error">Failed</Badge>
               </div>
             }
-            webCode={`import { Badge } from '@spectra/react';
+            webCode={`import { Badge } from '@winplaybox/react';
 
 export default function BadgeVariantsDemo() {
   return (
@@ -1909,7 +1909,7 @@ export default function BadgeVariantsDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Badge } from '@spectra/react-native';
+import { Badge } from '@winplaybox/react-native';
 
 export default function NativeBadgeVariantsDemo() {
   return (
@@ -1936,7 +1936,7 @@ export default function NativeBadgeVariantsDemo() {
                 <Badge variant="error" dot>Alert</Badge>
               </div>
             }
-            webCode={`import { Badge } from '@spectra/react';
+            webCode={`import { Badge } from '@winplaybox/react';
 
 export default function BadgeDotDemo() {
   return (
@@ -1948,7 +1948,7 @@ export default function BadgeDotDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Badge } from '@spectra/react-native';
+import { Badge } from '@winplaybox/react-native';
 
 export default function NativeBadgeDotDemo() {
   return <Badge variant="success" dot>Operational</Badge>;
@@ -1991,7 +1991,7 @@ export default function NativeBadgeDotDemo() {
                 </Tabs>
               </div>
             }
-            webCode={`import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@spectra/react';
+            webCode={`import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@winplaybox/react';
 
 export default function UnderlineTabsDemo() {
   return (
@@ -2010,7 +2010,7 @@ export default function UnderlineTabsDemo() {
   );
 }`}
             nativeCode={`import React, { useState } from 'react';
-import { Tabs } from '@spectra/react-native';
+import { Tabs } from '@winplaybox/react-native';
 
 export default function NativeTabsDemo() {
   const [idx, setIdx] = useState(0);
@@ -2049,7 +2049,7 @@ export default function NativeTabsDemo() {
                 </Tabs>
               </div>
             }
-            webCode={`import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@spectra/react';
+            webCode={`import { Tabs, TabList, Tab, TabPanels, TabPanel } from '@winplaybox/react';
 
 export default function PillsTabsDemo() {
   return (
@@ -2068,7 +2068,7 @@ export default function PillsTabsDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Tabs } from '@spectra/react-native';
+import { Tabs } from '@winplaybox/react-native';
 
 export default function NativePillsTabsDemo() {
   return <Tabs tabs={['Daily', 'Weekly', 'Monthly']} selectedIndex={0} onTabPress={() => {}} />;
@@ -2158,7 +2158,7 @@ export default function VerticalTabsDemo(): JSX.Element {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Tabs } from '@spectra/react-native';
+import { Tabs } from '@winplaybox/react-native';
 
 export default function NativeVerticalTabsDemo(): JSX.Element {
   return <Tabs tabs={['Profile', 'Security']} selectedIndex={0} onTabPress={() => {}} />;
@@ -2199,7 +2199,7 @@ export default function NativeVerticalTabsDemo(): JSX.Element {
                 <Switch label="Auto-sync" checked={true} />
               </div>
             }
-            webCode={`import { Switch } from '@spectra/react';
+            webCode={`import { Switch } from '@winplaybox/react';
 
 export default function SwitchDemo() {
   return (
@@ -2211,7 +2211,7 @@ export default function SwitchDemo() {
   );
 }`}
             nativeCode={`import React, { useState } from 'react';
-import { Switch } from '@spectra/react-native';
+import { Switch } from '@winplaybox/react-native';
 
 export default function NativeSwitchDemo() {
   const [val, setVal] = useState(true);
@@ -2239,7 +2239,7 @@ export default function NativeSwitchDemo() {
                 <Switch label="Dark Mode Sync" checked={switch3} onChange={setSwitch3} />
               </div>
             }
-            webCode={`import { Switch } from '@spectra/react';
+            webCode={`import { Switch } from '@winplaybox/react';
 
 export default function PreferenceSwitchDemo() {
   return (
@@ -2253,7 +2253,7 @@ export default function PreferenceSwitchDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Switch } from '@spectra/react-native';
+import { Switch } from '@winplaybox/react-native';
 
 export default function NativePreferenceDemo() {
   return <Switch label="Dark Mode Sync" value={true} />;
@@ -2302,7 +2302,7 @@ export default function NativePreferenceDemo() {
               </div>
             }
             webCode={`import React, { useState } from 'react';
-import { Checkbox } from '@spectra/react';
+import { Checkbox } from '@winplaybox/react';
 
 export default function CheckboxDemo() {
   const [checked, setChecked] = useState(true);
@@ -2317,7 +2317,7 @@ export default function CheckboxDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Checkbox } from '@spectra/react-native';
+import { Checkbox } from '@winplaybox/react-native';
 
 export default function NativeCheckboxDemo() {
   return <Checkbox label="Accept Data Policy" value={true} />;
@@ -2368,7 +2368,7 @@ export default function NativeCheckboxDemo() {
               </div>
             }
             webCode={`import React, { useState } from 'react';
-import { Checkbox } from '@spectra/react';
+import { Checkbox } from '@winplaybox/react';
 
 export default function IndeterminateDemo() {
   const [c1, setC1] = useState(true);
@@ -2392,7 +2392,7 @@ export default function IndeterminateDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Checkbox } from '@spectra/react-native';
+import { Checkbox } from '@winplaybox/react-native';
 
 export default function NativeIndeterminateDemo() {
   return <Checkbox label="Select All" indeterminate={true} />;
@@ -2424,7 +2424,7 @@ export default function NativeIndeterminateDemo() {
                 <Checkbox label="Slack Webhook" checked={true} />
               </div>
             }
-            webCode={`import { Checkbox } from '@spectra/react';
+            webCode={`import { Checkbox } from '@winplaybox/react';
 
 export default function CheckboxGroupDemo() {
   return (
@@ -2437,7 +2437,7 @@ export default function CheckboxGroupDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Checkbox } from '@spectra/react-native';
+import { Checkbox } from '@winplaybox/react-native';
 
 export default function NativeCheckboxGroupDemo() {
   return (
@@ -2507,7 +2507,7 @@ export default function NativeCheckboxGroupDemo() {
               </div>
             }
             webCode={`import React, { useState } from 'react';
-import { Checkbox } from '@spectra/react';
+import { Checkbox } from '@winplaybox/react';
 
 export default function CheckboxCardsDemo(): JSX.Element {
   const [selected, setSelected] = useState<string[]>(['standard']);
@@ -2532,7 +2532,7 @@ export default function CheckboxCardsDemo(): JSX.Element {
 }`}
             nativeCode={`import React from 'react';
 import { View } from 'react-native';
-import { Checkbox } from '@spectra/react-native';
+import { Checkbox } from '@winplaybox/react-native';
 
 export default function NativeCheckboxCardsDemo(): JSX.Element {
   return (
@@ -2566,7 +2566,7 @@ export default function NativeCheckboxCardsDemo(): JSX.Element {
                 <Radio value="annual" label="Annual Billing" />
               </div>
             }
-            webCode={`import { RadioGroup, Radio } from '@spectra/react';
+            webCode={`import { RadioGroup, Radio } from '@winplaybox/react';
 
 export default function RadioGroupDemo() {
   return (
@@ -2577,7 +2577,7 @@ export default function RadioGroupDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Radio } from '@spectra/react-native';
+import { Radio } from '@winplaybox/react-native';
 
 export default function NativeRadioDemo() {
   return <Radio value="monthly" label="Monthly Billing" />;
@@ -2601,7 +2601,7 @@ export default function NativeRadioDemo() {
                 <Radio value="right" label="Right" />
               </div>
             }
-            webCode={`import { RadioGroup, Radio } from '@spectra/react';
+            webCode={`import { RadioGroup, Radio } from '@winplaybox/react';
 
 export default function HorizontalRadioDemo() {
   return (
@@ -2613,7 +2613,7 @@ export default function HorizontalRadioDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Radio } from '@spectra/react-native';
+import { Radio } from '@winplaybox/react-native';
 
 export default function NativeHorizontalRadioDemo() {
   return <Radio value="left" label="Left Align" />;
@@ -2719,7 +2719,7 @@ export default function NativeSegmentedRadioDemo(): JSX.Element {
                 <Avatar size="lg" name="Alex Vance" status="away" />
               </div>
             }
-            webCode={`import { Avatar } from '@spectra/react';
+            webCode={`import { Avatar } from '@winplaybox/react';
 
 export default function AvatarSizesDemo() {
   return (
@@ -2733,7 +2733,7 @@ export default function AvatarSizesDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Avatar } from '@spectra/react-native';
+import { Avatar } from '@winplaybox/react-native';
 
 export default function NativeAvatarDemo() {
   return <Avatar size="md" name="Alex Vance" status="online" />;
@@ -2800,7 +2800,7 @@ export default function NativeAvatarDemo() {
                 <Avatar size="md" name="Taylor Swift" status="streaming" />
               </div>
             }
-            webCode={`import { Avatar } from '@spectra/react';
+            webCode={`import { Avatar } from '@winplaybox/react';
 
 export default function AvatarPresenceDemo() {
   return (
@@ -2820,7 +2820,7 @@ export default function AvatarPresenceDemo() {
 }`}
             nativeCode={`import React from 'react';
 import { View } from 'react-native';
-import { Avatar } from '@spectra/react-native';
+import { Avatar } from '@winplaybox/react-native';
 
 export default function NativeAvatarPresenceDemo() {
   return (
@@ -2875,7 +2875,7 @@ export default function NativeAvatarPresenceDemo() {
                 <Avatar size="md" name="John Doe" />
               </div>
             }
-            webCode={`import { Avatar } from '@spectra/react';
+            webCode={`import { Avatar } from '@winplaybox/react';
 
 export default function AvatarStackDemo() {
   return (
@@ -2888,7 +2888,7 @@ export default function AvatarStackDemo() {
 }`}
             nativeCode={`import React from 'react';
 import { View } from 'react-native';
-import { Avatar } from '@spectra/react-native';
+import { Avatar } from '@winplaybox/react-native';
 
 export default function NativeAvatarStackDemo() {
   return (
@@ -2932,7 +2932,7 @@ export default function NativeAvatarStackDemo() {
                 <Avatar name="Kavita Sharma" size="md" status="away" />
               </div>
             }
-            webCode={`import { Avatar } from '@spectra/react';
+            webCode={`import { Avatar } from '@winplaybox/react';
 
 export default function AvatarFallbackDemo() {
   return (
@@ -2946,7 +2946,7 @@ export default function AvatarFallbackDemo() {
 }`}
             nativeCode={`import React from 'react';
 import { View } from 'react-native';
-import { Avatar } from '@spectra/react-native';
+import { Avatar } from '@winplaybox/react-native';
 
 export default function NativeAvatarFallbackDemo() {
   return (
@@ -2989,7 +2989,7 @@ export default function NativeAvatarFallbackDemo() {
               </div>
             }
             webCode={`import React from 'react';
-import { Avatar } from '@spectra/react';
+import { Avatar } from '@winplaybox/react';
 
 export default function PersonaDemo(): JSX.Element {
   return (
@@ -3005,7 +3005,7 @@ export default function PersonaDemo(): JSX.Element {
 }`}
             nativeCode={`import React from 'react';
 import { View, Text } from 'react-native';
-import { Avatar } from '@spectra/react-native';
+import { Avatar } from '@winplaybox/react-native';
 
 export default function NativePersonaDemo(): JSX.Element {
   return (
@@ -3049,7 +3049,7 @@ export default function NativePersonaDemo(): JSX.Element {
                 </Card>
               </div>
             }
-            webCode={`import { Card } from '@spectra/react';
+            webCode={`import { Card } from '@winplaybox/react';
 
 export default function CardVariantsDemo() {
   return (
@@ -3060,7 +3060,7 @@ export default function CardVariantsDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Card, Text } from '@spectra/react-native';
+import { Card, Text } from '@winplaybox/react-native';
 
 export default function NativeCardDemo() {
   return (
@@ -3100,7 +3100,7 @@ export default function NativeCardDemo() {
                 </Card>
               </div>
             }
-            webCode={`import { Card, Badge, Button } from '@spectra/react';
+            webCode={`import { Card, Badge, Button } from '@winplaybox/react';
 
 export default function StructuredCardDemo() {
   return (
@@ -3115,7 +3115,7 @@ export default function StructuredCardDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Card, Button } from '@spectra/react-native';
+import { Card, Button } from '@winplaybox/react-native';
 
 export default function NativeStructuredCardDemo() {
   return (
@@ -3159,7 +3159,7 @@ export default function NativeStructuredCardDemo() {
                 </Card>
               </div>
             }
-            webCode={`import { Card, Badge } from '@spectra/react';
+            webCode={`import { Card, Badge } from '@winplaybox/react';
 
 export default function MetricCardDemo() {
   return (
@@ -3173,7 +3173,7 @@ export default function MetricCardDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Card, Text } from '@spectra/react-native';
+import { Card, Text } from '@winplaybox/react-native';
 
 export default function NativeMetricCardDemo() {
   return (
@@ -3220,7 +3220,7 @@ export default function NativeMetricCardDemo() {
               </div>
             }
             webCode={`import React from 'react';
-import { Card, Badge, Button } from '@spectra/react';
+import { Card, Badge, Button } from '@winplaybox/react';
 
 export default function MediaCardDemo(): JSX.Element {
   return (
@@ -3241,7 +3241,7 @@ export default function MediaCardDemo(): JSX.Element {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Card, Text, Button } from '@spectra/react-native';
+import { Card, Text, Button } from '@winplaybox/react-native';
 
 export default function NativeMediaCardDemo(): JSX.Element {
   return (
@@ -3283,7 +3283,7 @@ export default function NativeMediaCardDemo(): JSX.Element {
                 <Button variant="secondary" size="sm">Native Tooltip Target</Button>
               </div>
             }
-            webCode={`import { Tooltip, Button } from '@spectra/react';
+            webCode={`import { Tooltip, Button } from '@winplaybox/react';
 
 export default function TooltipPlacementsDemo() {
   return (
@@ -3298,7 +3298,7 @@ export default function TooltipPlacementsDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Tooltip, Button } from '@spectra/react-native';
+import { Tooltip, Button } from '@winplaybox/react-native';
 
 export default function NativeTooltipDemo() {
   return (
@@ -3321,8 +3321,8 @@ export default function NativeTooltipDemo() {
             nativePreview={
               <Button variant="secondary" icon={<SearchIcon size={16} />} />
             }
-            webCode={`import { Tooltip, Button } from '@spectra/react';
-import { SearchIcon } from '@spectra/icons';
+            webCode={`import { Tooltip, Button } from '@winplaybox/react';
+import { SearchIcon } from '@winplaybox/icons';
 
 export default function IconTooltipDemo() {
   return (
@@ -3332,8 +3332,8 @@ export default function IconTooltipDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { Button } from '@spectra/react-native';
-import { SearchIcon } from '@spectra/icons';
+import { Button } from '@winplaybox/react-native';
+import { SearchIcon } from '@winplaybox/icons';
 
 export default function NativeIconTooltipDemo() {
   return <Button variant="outline" icon={<SearchIcon size={16} />} />;
@@ -3374,8 +3374,8 @@ export default function NativeIconTooltipDemo() {
                 </List>
               </div>
             }
-            webCode={`import { List, ListItem, ListItemIcon, ListItemText, Badge } from '@spectra/react';
-import { UserIcon } from '@spectra/icons';
+            webCode={`import { List, ListItem, ListItemIcon, ListItemText, Badge } from '@winplaybox/react';
+import { UserIcon } from '@winplaybox/icons';
 
 export default function ListDemo() {
   return (
@@ -3389,7 +3389,7 @@ export default function ListDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { List, ListItem, ListItemText } from '@spectra/react-native';
+import { List, ListItem, ListItemText } from '@winplaybox/react-native';
 
 export default function NativeListDemo() {
   return (
@@ -3435,7 +3435,7 @@ export default function NativeListDemo() {
                 </List>
               </div>
             }
-            webCode={`import { List, ListItem, ListItemText, Avatar, Badge } from '@spectra/react';
+            webCode={`import { List, ListItem, ListItemText, Avatar, Badge } from '@winplaybox/react';
 
 export default function TeamListDemo() {
   return (
@@ -3449,7 +3449,7 @@ export default function TeamListDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { List, ListItem, ListItemText } from '@spectra/react-native';
+import { List, ListItem, ListItemText } from '@winplaybox/react-native';
 
 export default function NativeTeamList() {
   return (
@@ -3489,7 +3489,7 @@ export default function NativeTeamList() {
                 </List>
               </div>
             }
-            webCode={`import { List, ListItem, ListItemText, Switch } from '@spectra/react';
+            webCode={`import { List, ListItem, ListItemText, Switch } from '@winplaybox/react';
 
 export default function SettingsListDemo() {
   const [notifications, setNotifications] = useState(true);
@@ -3504,7 +3504,7 @@ export default function SettingsListDemo() {
   );
 }`}
             nativeCode={`import React from 'react';
-import { List, ListItem, ListItemText, Switch } from '@spectra/react-native';
+import { List, ListItem, ListItemText, Switch } from '@winplaybox/react-native';
 
 export default function NativeSettingsList() {
   return (
@@ -3551,7 +3551,7 @@ export default function NativeSettingsList() {
                 Trigger Native Alert
               </Button>
             }
-            webCode={`import { Dialog, Button } from '@spectra/react';
+            webCode={`import { Dialog, Button } from '@winplaybox/react';
 
 export default function ConfirmDialogDemo() {
   const [open, setOpen] = useState(false);
@@ -3568,7 +3568,7 @@ export default function ConfirmDialogDemo() {
   );
 }`}
             nativeCode={`import React, { useState } from 'react';
-import { Dialog, Button } from '@spectra/react-native';
+import { Dialog, Button } from '@winplaybox/react-native';
 
 export default function NativeDialogDemo() {
   const [open, setOpen] = useState(false);
@@ -3610,7 +3610,7 @@ export default function NativeDialogDemo() {
                 Open Form Sheet
               </Button>
             }
-            webCode={`import { Dialog, Button, TextInput, Select } from '@spectra/react';
+            webCode={`import { Dialog, Button, TextInput, Select } from '@winplaybox/react';
 
 export default function FormDialogDemo() {
   const [open, setOpen] = useState(false);
@@ -3629,7 +3629,7 @@ export default function FormDialogDemo() {
   );
 }`}
             nativeCode={`import React, { useState } from 'react';
-import { Dialog, Button } from '@spectra/react-native';
+import { Dialog, Button } from '@winplaybox/react-native';
 
 export default function NativeFormDialog() {
   return <Button onPress={() => {}}>Open Native Modal</Button>;
@@ -3667,7 +3667,7 @@ export default function NativeFormDialog() {
                 Confirm Native Deletion
               </Button>
             }
-            webCode={`import { Dialog, Button } from '@spectra/react';
+            webCode={`import { Dialog, Button } from '@winplaybox/react';
 
 export default function DangerDialogDemo() {
   const [open, setOpen] = useState(false);
@@ -3686,7 +3686,7 @@ export default function DangerDialogDemo() {
   );
 }`}
             nativeCode={`import React, { useState } from 'react';
-import { Dialog, Button } from '@spectra/react-native';
+import { Dialog, Button } from '@winplaybox/react-native';
 
 export default function NativeDangerDialog() {
   return <Button variant="danger" onPress={() => {}}>Delete Resource</Button>;
@@ -3729,7 +3729,7 @@ export default function NativeDangerDialog() {
 <Alert variant="success" title="Complete">Data synchronized</Alert>
 <Alert variant="warning" title="Caution">Review settings</Alert>
 <Alert variant="danger" title="Error">Operation failed</Alert>`}
-            webCode={`import { Alert } from '@spectra/react';
+            webCode={`import { Alert } from '@winplaybox/react';
 
 export default function AlertVariantsDemo() {
   return (
@@ -3750,7 +3750,7 @@ export default function AlertVariantsDemo() {
   );
 }`}
             nativeCode={`import { View } from 'react-native';
-import { Alert } from '@spectra/react-native';
+import { Alert } from '@winplaybox/react-native';
 
 export default function NativeAlertDemo() {
   return (
@@ -3797,7 +3797,7 @@ export default function NativeAlertDemo() {
   Dismissible message body
 </Alert>`}
             webCode={`import { useState } from 'react';
-import { Alert, Button } from '@spectra/react';
+import { Alert, Button } from '@winplaybox/react';
 
 export default function DismissibleAlertDemo() {
   const [dismissed, setDismissed] = useState(false);
@@ -3817,7 +3817,7 @@ export default function DismissibleAlertDemo() {
     </Alert>
   );
 }`}
-            nativeCode={`import { Alert } from '@spectra/react-native';
+            nativeCode={`import { Alert } from '@winplaybox/react-native';
 
 export default function NativeDismissibleDemo() {
   return (
@@ -3873,8 +3873,8 @@ export default function NativeDismissibleDemo() {
               </div>
             }
             webCode={`import React from 'react';
-import { Alert, Button } from '@spectra/react';
-import { AlertCircleIcon } from '@spectra/icons';
+import { Alert, Button } from '@winplaybox/react';
+import { AlertCircleIcon } from '@winplaybox/icons';
 
 export default function ActionableAlertDemo(): JSX.Element {
   return (
@@ -3892,7 +3892,7 @@ export default function ActionableAlertDemo(): JSX.Element {
 }`}
             nativeCode={`import React from 'react';
 import { View, Text } from 'react-native';
-import { Button } from '@spectra/react-native';
+import { Button } from '@winplaybox/react-native';
 
 export default function NativeActionableAlertDemo(): JSX.Element {
   return (
@@ -3939,7 +3939,7 @@ export default function NativeActionableAlertDemo(): JSX.Element {
             compactCode={`<Spinner size="sm" />
 <Spinner size="md" />
 <Spinner size="lg" />`}
-            webCode={`import { Spinner } from '@spectra/react';
+            webCode={`import { Spinner } from '@winplaybox/react';
 
 export default function SpinnerSizesDemo() {
   return (
@@ -3951,7 +3951,7 @@ export default function SpinnerSizesDemo() {
   );
 }`}
             nativeCode={`import { View } from 'react-native';
-import { Spinner } from '@spectra/react-native';
+import { Spinner } from '@winplaybox/react-native';
 
 export default function NativeSpinnerDemo() {
   return (
@@ -3992,7 +3992,7 @@ export default function NativeSpinnerDemo() {
   <Spinner size="sm" />
   <span>Loading...</span>
 </div>`}
-            webCode={`import { Button, Spinner } from '@spectra/react';
+            webCode={`import { Button, Spinner } from '@winplaybox/react';
 
 export default function InlineSpinnerDemo() {
   return (
@@ -4007,7 +4007,7 @@ export default function InlineSpinnerDemo() {
     </div>
   );
 }`}
-            nativeCode={`import { Button } from '@spectra/react-native';
+            nativeCode={`import { Button } from '@winplaybox/react-native';
 
 export default function NativeInlineLoading() {
   return <Button variant="filled" isLoading>Saving Profile</Button>;
@@ -4050,7 +4050,7 @@ export default function NativeInlineLoading() {
             compactCode={`<Skeleton variant="circular" width={48} height={48} />
 <Skeleton variant="text" width="60%" />
 <Skeleton variant="rounded" width="100%" height={120} />`}
-            webCode={`import { Skeleton } from '@spectra/react';
+            webCode={`import { Skeleton } from '@winplaybox/react';
 
 export default function SkeletonShapesDemo() {
   return (
@@ -4067,7 +4067,7 @@ export default function SkeletonShapesDemo() {
   );
 }`}
             nativeCode={`import { View } from 'react-native';
-import { Skeleton } from '@spectra/react-native';
+import { Skeleton } from '@winplaybox/react-native';
 
 export default function NativeSkeletonDemo() {
   return (
@@ -4138,7 +4138,7 @@ export default function NativeSkeletonDemo() {
   <ProfileCard user={data} />
 )}`}
             webCode={`import { useState } from 'react';
-import { Skeleton, Button, Avatar } from '@spectra/react';
+import { Skeleton, Button, Avatar } from '@winplaybox/react';
 
 export default function InteractiveSkeletonDemo() {
   const [loading, setLoading] = useState(true);
@@ -4158,7 +4158,7 @@ export default function InteractiveSkeletonDemo() {
   );
 }`}
             nativeCode={`import { View } from 'react-native';
-import { Skeleton } from '@spectra/react-native';
+import { Skeleton } from '@winplaybox/react-native';
 
 export default function NativeCardSkeleton() {
   return <Skeleton variant="rounded" width="100%" height={120} />;
@@ -4192,7 +4192,7 @@ export default function NativeCardSkeleton() {
             compactCode={`<Button variant="primary">SSO Login</Button>
 <Divider label="OR" />
 <TextInput placeholder="Email" />`}
-            webCode={`import { Divider, Button, TextInput } from '@spectra/react';
+            webCode={`import { Divider, Button, TextInput } from '@winplaybox/react';
 
 export default function DividerHorizontalDemo() {
   return (
@@ -4205,7 +4205,7 @@ export default function DividerHorizontalDemo() {
   );
 }`}
             nativeCode={`import { View } from 'react-native';
-import { Divider, Button } from '@spectra/react-native';
+import { Divider, Button } from '@winplaybox/react-native';
 
 export default function NativeDividerDemo() {
   return (
@@ -4246,7 +4246,7 @@ export default function NativeDividerDemo() {
   <Divider orientation="vertical" />
   <Button size="sm" variant="tertiary">Paste</Button>
 </div>`}
-            webCode={`import { Divider, Button } from '@spectra/react';
+            webCode={`import { Divider, Button } from '@winplaybox/react';
 
 export default function VerticalDividerDemo() {
   return (
@@ -4259,7 +4259,7 @@ export default function VerticalDividerDemo() {
   );
 }`}
             nativeCode={`import { View } from 'react-native';
-import { Divider, Button } from '@spectra/react-native';
+import { Divider, Button } from '@winplaybox/react-native';
 
 export default function NativeVerticalDivider() {
   return (
@@ -4298,7 +4298,7 @@ export default function NativeVerticalDivider() {
             compactCode={`<Divider variant="solid" />
 <Divider variant="dashed" />
 <Divider variant="dotted" />`}
-            webCode={`import { Divider } from '@spectra/react';
+            webCode={`import { Divider } from '@winplaybox/react';
 
 export default function DividerStylesDemo() {
   return (
@@ -4309,7 +4309,7 @@ export default function DividerStylesDemo() {
     </div>
   );
 }`}
-            nativeCode={`import { Divider } from '@spectra/react-native';
+            nativeCode={`import { Divider } from '@winplaybox/react-native';
 
 export default function NativeDividerStyles() {
   return <Divider />;
@@ -4343,8 +4343,8 @@ export default function NativeDividerStyles() {
             compactCode={`<Chip label="Filled" variant="filled" />
 <Chip label="Outlined" variant="outlined" />
 <Chip label="With Icon" icon={<SparklesIcon size={14} />} />`}
-            webCode={`import { Chip } from '@spectra/react';
-import { SparklesIcon } from '@spectra/icons';
+            webCode={`import { Chip } from '@winplaybox/react';
+import { SparklesIcon } from '@winplaybox/icons';
 
 export default function ChipVariantsDemo() {
   return (
@@ -4356,7 +4356,7 @@ export default function ChipVariantsDemo() {
   );
 }`}
             nativeCode={`import { View } from 'react-native';
-import { Chip } from '@spectra/react-native';
+import { Chip } from '@winplaybox/react-native';
 
 export default function NativeChipDemo() {
   return (
@@ -4411,7 +4411,7 @@ export default function NativeChipDemo() {
   onClick={() => toggleSelection('React')}
 />`}
             webCode={`import { useState } from 'react';
-import { Chip } from '@spectra/react';
+import { Chip } from '@winplaybox/react';
 
 export default function FilterChipsDemo() {
   const [selected, setSelected] = useState(['React', 'TypeScript']);
@@ -4433,7 +4433,7 @@ export default function FilterChipsDemo() {
     </div>
   );
 }`}
-            nativeCode={`import { Chip } from '@spectra/react-native';
+            nativeCode={`import { Chip } from '@winplaybox/react-native';
 
 export default function NativeFilterChips() {
   return <Chip label="Selected Filter" selected onPress={() => {}} />;
@@ -4475,7 +4475,7 @@ export default function NativeFilterChips() {
   onDelete={() => removeTag('Design System')}
 />`}
             webCode={`import { useState } from 'react';
-import { Chip, Button } from '@spectra/react';
+import { Chip, Button } from '@winplaybox/react';
 
 export default function DeletableChipDemo() {
   const [tags, setTags] = useState(['Frontend', 'Backend', 'DevOps']);
@@ -4492,7 +4492,7 @@ export default function DeletableChipDemo() {
     </div>
   );
 }`}
-            nativeCode={`import { Chip } from '@spectra/react-native';
+            nativeCode={`import { Chip } from '@winplaybox/react-native';
 
 export default function NativeDeletableChip() {
   return <Chip label="Removable Item" onDelete={() => {}} />;
@@ -4536,7 +4536,7 @@ export default function NativeDeletableChip() {
     { label: 'Breadcrumbs', isCurrent: true },
   ]}
 />`}
-            webCode={`import { Breadcrumbs } from '@spectra/react';
+            webCode={`import { Breadcrumbs } from '@winplaybox/react';
 
 export default function BreadcrumbsDemo() {
   return (
@@ -4549,7 +4549,7 @@ export default function BreadcrumbsDemo() {
     />
   );
 }`}
-            nativeCode={`import { Breadcrumbs } from '@spectra/react-native';
+            nativeCode={`import { Breadcrumbs } from '@winplaybox/react-native';
 
 export default function NativeBreadcrumbsDemo() {
   return (
@@ -4612,7 +4612,7 @@ export default function NativeBreadcrumbsDemo() {
     { label: 'Docs', isCurrent: true },
   ]}
 />`}
-            webCode={`import { Breadcrumbs } from '@spectra/react';
+            webCode={`import { Breadcrumbs } from '@winplaybox/react';
 
 export default function CustomSeparatorDemo() {
   return (
@@ -4626,7 +4626,7 @@ export default function CustomSeparatorDemo() {
     />
   );
 }`}
-            nativeCode={`import { Breadcrumbs } from '@spectra/react-native';
+            nativeCode={`import { Breadcrumbs } from '@winplaybox/react-native';
 
 export default function NativeCustomSeparator() {
   return (
@@ -4679,7 +4679,7 @@ export default function NativeCustomSeparator() {
     { label: 'Alert.tsx', isCurrent: true },
   ]}
 />`}
-            webCode={`import { Breadcrumbs } from '@spectra/react';
+            webCode={`import { Breadcrumbs } from '@winplaybox/react';
 
 export default function CollapsedBreadcrumbsDemo() {
   return (
@@ -4696,7 +4696,7 @@ export default function CollapsedBreadcrumbsDemo() {
     />
   );
 }`}
-            nativeCode={`import { Breadcrumbs } from '@spectra/react-native';
+            nativeCode={`import { Breadcrumbs } from '@winplaybox/react-native';
 
 export default function NativeCollapsedDemo() {
   return (
@@ -4735,7 +4735,7 @@ export default function NativeCollapsedDemo() {
             }
             nativePreview={<Button variant="primary">Merge Pull Request</Button>}
             webCode={`import React from 'react';
-import { SplitButton } from '@spectra/react';
+import { SplitButton } from '@winplaybox/react';
 
 export default function SplitMergeDemo(): JSX.Element {
   const options = [
@@ -4754,7 +4754,7 @@ export default function SplitMergeDemo(): JSX.Element {
     </SplitButton>
   );
 }`}
-            nativeCode={`import { Button } from '@spectra/react-native';
+            nativeCode={`import { Button } from '@winplaybox/react-native';
 
 export default function NativeSplitDemo() {
   return <Button variant="filled">Merge pull request</Button>;
@@ -4780,7 +4780,7 @@ export default function NativeSplitDemo() {
             }
             nativePreview={<Button variant="secondary">Export Report</Button>}
             webCode={`import React from 'react';
-import { SplitButton } from '@spectra/react';
+import { SplitButton } from '@winplaybox/react';
 
 export default function SplitSecondaryDemo(): JSX.Element {
   return (
@@ -4796,7 +4796,7 @@ export default function SplitSecondaryDemo(): JSX.Element {
     </SplitButton>
   );
 }`}
-            nativeCode={`import { Button } from '@spectra/react-native';
+            nativeCode={`import { Button } from '@winplaybox/react-native';
 
 export default function NativeExportDemo() {
   return <Button variant="outline">Export Report</Button>;
@@ -4816,7 +4816,7 @@ export default function NativeExportDemo() {
             }
             nativePreview={<Button size="md" variant="primary">Split Button</Button>}
             webCode={`import React from 'react';
-import { SplitButton } from '@spectra/react';
+import { SplitButton } from '@winplaybox/react';
 
 export default function SplitSizesDemo(): JSX.Element {
   return (
@@ -4827,7 +4827,7 @@ export default function SplitSizesDemo(): JSX.Element {
     </div>
   );
 }`}
-            nativeCode={`import { Button } from '@spectra/react-native';
+            nativeCode={`import { Button } from '@winplaybox/react-native';
 
 export default function NativeSplitSizesDemo() {
   return <Button size="md">Split Button</Button>;
@@ -4855,7 +4855,7 @@ export default function NativeSplitSizesDemo() {
             }
             nativePreview={<Button variant="primary">Deploy Staging</Button>}
             webCode={`import React from 'react';
-import { CompoundButton } from '@spectra/react';
+import { CompoundButton } from '@winplaybox/react';
 
 export default function CompoundDemo(): JSX.Element {
   return (
@@ -4864,7 +4864,7 @@ export default function CompoundDemo(): JSX.Element {
     </CompoundButton>
   );
 }`}
-            nativeCode={`import { Button } from '@spectra/react-native';
+            nativeCode={`import { Button } from '@winplaybox/react-native';
 
 export default function NativeCompoundDemo() {
   return <Button variant="filled">Deploy Staging</Button>;
@@ -4886,8 +4886,8 @@ export default function NativeCompoundDemo() {
             }
             nativePreview={<Button variant="primary">Run Diagnostics</Button>}
             webCode={`import React from 'react';
-import { CompoundButton } from '@spectra/react';
-import { SparklesIcon } from '@spectra/icons';
+import { CompoundButton } from '@winplaybox/react';
+import { SparklesIcon } from '@winplaybox/icons';
 
 export default function CompoundIconDemo(): JSX.Element {
   return (
@@ -4900,7 +4900,7 @@ export default function CompoundIconDemo(): JSX.Element {
     </CompoundButton>
   );
 }`}
-            nativeCode={`import { Button } from '@spectra/react-native';
+            nativeCode={`import { Button } from '@winplaybox/react-native';
 
 export default function NativeCompoundIconDemo() {
   return <Button variant="filled">Run Diagnostics</Button>;
@@ -4925,7 +4925,7 @@ export default function NativeCompoundIconDemo() {
             }
             nativePreview={<Button variant="secondary">Day | Week | Month</Button>}
             webCode={`import React from 'react';
-import { ButtonGroup, Button } from '@spectra/react';
+import { ButtonGroup, Button } from '@winplaybox/react';
 
 export default function ButtonGroupSegmentedDemo(): JSX.Element {
   return (
@@ -4936,7 +4936,7 @@ export default function ButtonGroupSegmentedDemo(): JSX.Element {
     </ButtonGroup>
   );
 }`}
-            nativeCode={`import { View, Button } from '@spectra/react-native';
+            nativeCode={`import { View, Button } from '@winplaybox/react-native';
 
 export default function NativeButtonGroupDemo() {
   return <Button variant="outline">Intervals</Button>;
@@ -4956,7 +4956,7 @@ export default function NativeButtonGroupDemo() {
             }
             nativePreview={<Button variant="secondary">Vertical Group</Button>}
             webCode={`import React from 'react';
-import { ButtonGroup, Button } from '@spectra/react';
+import { ButtonGroup, Button } from '@winplaybox/react';
 
 export default function ButtonGroupVerticalDemo(): JSX.Element {
   return (
@@ -4967,7 +4967,7 @@ export default function ButtonGroupVerticalDemo(): JSX.Element {
     </ButtonGroup>
   );
 }`}
-            nativeCode={`import { View, Button } from '@spectra/react-native';
+            nativeCode={`import { View, Button } from '@winplaybox/react-native';
 
 export default function NativeVerticalGroupDemo() {
   return <Button size="sm">Vertical Toolbar</Button>;
@@ -4992,8 +4992,8 @@ export default function NativeVerticalGroupDemo() {
             }
             nativePreview={<IconButton icon={<SearchIcon size={18} />} aria-label="Search" />}
             webCode={`import React from 'react';
-import { IconButton } from '@spectra/react';
-import { SearchIcon, CheckIcon, CloseIcon } from '@spectra/icons';
+import { IconButton } from '@winplaybox/react';
+import { SearchIcon, CheckIcon, CloseIcon } from '@winplaybox/icons';
 
 export default function IconButtonShapesDemo(): JSX.Element {
   return (
@@ -5004,7 +5004,7 @@ export default function IconButtonShapesDemo(): JSX.Element {
     </div>
   );
 }`}
-            nativeCode={`import { IconButton } from '@spectra/react-native';
+            nativeCode={`import { IconButton } from '@winplaybox/react-native';
 
 export default function NativeIconButtonDemo() {
   return <IconButton aria-label="Search" />;
@@ -5027,7 +5027,7 @@ export default function NativeIconButtonDemo() {
             }
             nativePreview={<Text>Slider Continuous Demo</Text>}
             webCode={`import React from 'react';
-import { Slider } from '@spectra/react';
+import { Slider } from '@winplaybox/react';
 
 export default function SliderContinuousDemo(): JSX.Element {
   return (
@@ -5052,7 +5052,7 @@ export default function NativeSliderDemo() {
             }
             nativePreview={<Text>Slider Discrete Demo</Text>}
             webCode={`import React from 'react';
-import { Slider } from '@spectra/react';
+import { Slider } from '@winplaybox/react';
 
 export default function SliderSteppedDemo(): JSX.Element {
   return (
@@ -5078,7 +5078,7 @@ export default function NativeSteppedDemo() {
             webPreview={<Rating defaultValue={4} max={5} size="lg" />}
             nativePreview={<Text>Rating: 4/5</Text>}
             webCode={`import React from 'react';
-import { Rating } from '@spectra/react';
+import { Rating } from '@winplaybox/react';
 
 export default function RatingInteractiveDemo(): JSX.Element {
   return <Rating defaultValue={4} max={5} size="lg" />;
@@ -5097,7 +5097,7 @@ export default function NativeRatingDemo() {
             webPreview={<Rating value={5} readOnly size="md" />}
             nativePreview={<Text>5.0 / 5.0</Text>}
             webCode={`import React from 'react';
-import { Rating } from '@spectra/react';
+import { Rating } from '@winplaybox/react';
 
 export default function RatingReadonlyDemo(): JSX.Element {
   return <Rating value={5} readOnly size="md" />;
@@ -5125,7 +5125,7 @@ export default function NativeRatingStaticDemo() {
             }
             nativePreview={<Text>Textarea Counter</Text>}
             webCode={`import React from 'react';
-import { Textarea } from '@spectra/react';
+import { Textarea } from '@winplaybox/react';
 
 export default function TextareaCounterDemo(): JSX.Element {
   return (
@@ -5159,7 +5159,7 @@ export default function NativeTextareaDemo() {
             }
             nativePreview={<Text>Avatar Group (3+)</Text>}
             webCode={`import React from 'react';
-import { AvatarGroup, Avatar } from '@spectra/react';
+import { AvatarGroup, Avatar } from '@winplaybox/react';
 
 export default function AvatarGroupDemo(): JSX.Element {
   return (
@@ -5198,7 +5198,7 @@ export default function NativeAvatarGroupDemo() {
             }
             nativePreview={<Text>Tag Badges</Text>}
             webCode={`import React from 'react';
-import { Tag } from '@spectra/react';
+import { Tag } from '@winplaybox/react';
 
 export default function TagVariantsDemo(): JSX.Element {
   return (
@@ -5259,7 +5259,7 @@ export default function NativeTagDemo() {
             }
             nativePreview={<Text>Data Table</Text>}
             webCode={`import React from 'react';
-import { Table, TableHead, TableBody, TableRow, TableCell, TableHeaderCell, Badge } from '@spectra/react';
+import { Table, TableHead, TableBody, TableRow, TableCell, TableHeaderCell, Badge } from '@winplaybox/react';
 
 export default function TableGridDemo(): JSX.Element {
   return (
@@ -5303,7 +5303,7 @@ export default function NativeTableDemo() {
             }
             nativePreview={<Text>KPI: $428,950 (+18.4%)</Text>}
             webCode={`import React from 'react';
-import { Statistic } from '@spectra/react';
+import { Statistic } from '@winplaybox/react';
 
 export default function StatisticKpiDemo(): JSX.Element {
   return (
@@ -5336,7 +5336,7 @@ export default function NativeStatisticDemo() {
             }
             nativePreview={<Text>Timeline Audit</Text>}
             webCode={`import React from 'react';
-import { Timeline, TimelineItem } from '@spectra/react';
+import { Timeline, TimelineItem } from '@winplaybox/react';
 
 export default function TimelineAuditDemo(): JSX.Element {
   return (
@@ -5370,7 +5370,7 @@ export default function NativeTimelineDemo() {
             }
             nativePreview={<Text>ProgressBar: 80%</Text>}
             webCode={`import React from 'react';
-import { ProgressBar } from '@spectra/react';
+import { ProgressBar } from '@winplaybox/react';
 
 export default function ProgressBarStatesDemo(): JSX.Element {
   return (
@@ -5401,7 +5401,7 @@ export default function NativeProgressDemo() {
             }
             nativePreview={<Text>Toast Notifications</Text>}
             webCode={`import React from 'react';
-import { Toast } from '@spectra/react';
+import { Toast } from '@winplaybox/react';
 
 export default function ToastBannersDemo(): JSX.Element {
   return (
@@ -5427,7 +5427,7 @@ export default function NativeToastDemo() {
             webPreview={<Pagination count={8} defaultPage={3} />}
             nativePreview={<Text>Page 3 of 8</Text>}
             webCode={`import React from 'react';
-import { Pagination } from '@spectra/react';
+import { Pagination } from '@winplaybox/react';
 
 export default function PaginationDemo(): JSX.Element {
   return <Pagination count={8} defaultPage={3} />;
@@ -5462,7 +5462,7 @@ export default function NativePaginationDemo() {
             }
             nativePreview={<Text>Step 2 of 3</Text>}
             webCode={`import React from 'react';
-import { Stepper } from '@spectra/react';
+import { Stepper } from '@winplaybox/react';
 
 export default function StepperFlowDemo(): JSX.Element {
   return (
@@ -5503,8 +5503,8 @@ export default function NativeStepperDemo() {
             }
             nativePreview={<Text>Command Menu</Text>}
             webCode={`import React from 'react';
-import { Menu, MenuItem } from '@spectra/react';
-import { CopyIcon, CloseIcon } from '@spectra/icons';
+import { Menu, MenuItem } from '@winplaybox/react';
+import { CopyIcon, CloseIcon } from '@winplaybox/icons';
 
 export default function MenuFlyoutDemo(): JSX.Element {
   return (
@@ -5550,7 +5550,7 @@ export default function NativeMenuDemo() {
             }
             nativePreview={<Text>Native Box Container</Text>}
             webCode={`import React from 'react';
-import { Box } from '@spectra/react';
+import { Box } from '@winplaybox/react';
 
 export default function BoxDemo(): JSX.Element {
   return (
@@ -5585,7 +5585,7 @@ export default function NativeBoxDemo() {
             }
             nativePreview={<Text>Native Container</Text>}
             webCode={`import React from 'react';
-import { Container } from '@spectra/react';
+import { Container } from '@winplaybox/react';
 
 export default function ContainerDemo(): JSX.Element {
   return (
@@ -5627,7 +5627,7 @@ export default function NativeContainerDemo() {
             }
             nativePreview={<Text>Native Grid</Text>}
             webCode={`import React from 'react';
-import { Grid, Box } from '@spectra/react';
+import { Grid, Box } from '@winplaybox/react';
 
 export default function GridDemo(): JSX.Element {
   return (
@@ -5669,7 +5669,7 @@ export default function NativeGridDemo() {
             }
             nativePreview={<Text>Native Stack</Text>}
             webCode={`import React from 'react';
-import { Stack, Button } from '@spectra/react';
+import { Stack, Button } from '@winplaybox/react';
 
 export default function StackDemo(): JSX.Element {
   return (
@@ -5710,8 +5710,8 @@ export default function NativeStackDemo() {
             }
             nativePreview={<Text>Native BottomNav</Text>}
             webCode={`import React, { useState } from 'react';
-import { BottomNav } from '@spectra/react';
-import { SearchIcon, SparklesIcon, UserIcon } from '@spectra/icons';
+import { BottomNav } from '@winplaybox/react';
+import { SearchIcon, SparklesIcon, UserIcon } from '@winplaybox/icons';
 
 export default function BottomNavDemo(): JSX.Element {
   const [active, setActive] = useState('feed');
@@ -5758,7 +5758,7 @@ export default function NativeBottomNavDemo() {
             }
             nativePreview={<Text>Platform Chassis</Text>}
             webCode={`import React from 'react';
-import { PlatformChassis } from '@spectra/react';
+import { PlatformChassis } from '@winplaybox/react';
 
 export default function ChassisDemo(): JSX.Element {
   return (
@@ -5794,7 +5794,7 @@ export default function NativeChassisDemo() {
             }
             nativePreview={<Text>Color Picker</Text>}
             webCode={`import React, { useState } from 'react';
-import { ColorPicker } from '@spectra/react';
+import { ColorPicker } from '@winplaybox/react';
 
 export default function ColorPickerDemo(): JSX.Element {
   const [color, setColor] = useState('#2563EB');
@@ -5834,7 +5834,7 @@ export default function NativeColorPickerDemo() {
             }
             nativePreview={<Text>Radio Group</Text>}
             webCode={`import React, { useState } from 'react';
-import { RadioGroup, Radio } from '@spectra/react';
+import { RadioGroup, Radio } from '@winplaybox/react';
 
 export default function RadioGroupDemo(): JSX.Element {
   const [val, setVal] = useState('cloud');

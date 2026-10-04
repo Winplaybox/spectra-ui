@@ -10,7 +10,7 @@ import {
   useRTL,
 } from './index';
 
-describe('@spectra/primitives hooks', () => {
+describe('@winplaybox/primitives hooks', () => {
   it('useDisclosure handles open, close, and toggle transitions', () => {
     const { result } = renderHook(() => useDisclosure({ defaultIsOpen: false }));
 

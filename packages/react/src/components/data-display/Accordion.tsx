@@ -1,6 +1,6 @@
 import React, { createContext, useContext, forwardRef } from 'react';
-import { useControllableState, useId } from '@spectra/primitives';
-import { ChevronRightIcon } from '@spectra/icons';
+import { useControllableState, useId } from '@winplaybox/primitives';
+import { ChevronRightIcon } from '@winplaybox/icons';
 import * as styles from './Accordion.css';
 
 interface AccordionContextValue {

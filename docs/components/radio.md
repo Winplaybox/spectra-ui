@@ -3,14 +3,14 @@
 Radio buttons allow users to select exactly one option from a set of mutually exclusive choices that are all visible.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Radio } from '@spectra/react';
+import { Radio } from '@winplaybox/react';
 
 export default function BasicRadioExample() {
   return (
@@ -66,13 +66,13 @@ Official pattern: [Radio Group pattern](https://www.w3.org/WAI/ARIA/apg/patterns
 | `orientation` | `'vertical' \| 'horizontal'` | `'vertical'` | Layout orientation of options in group. |
 | `label` | `ReactNode` | `undefined` | Option text. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useControllableState`
 Description: Synchronizes radio group selection and provides roving tabindex arrow navigation.
 
 ```tsx
-import { useControllableState } from '@spectra/primitives';
+import { useControllableState } from '@winplaybox/primitives';
 
 export function CustomRadioGroup({ value: cVal, defaultValue, onChange, children }) {
   const [active, setActive] = useControllableState({ value: cVal, defaultValue, onChange });

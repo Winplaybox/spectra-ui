@@ -1,4 +1,4 @@
-// @spectra/react-native - WinPlayBox Design System Native Components
+// @winplaybox/react-native - WinPlayBox Design System Native Components
 
 export * from './theme/tokens';
 
@@ -31,4 +31,4 @@ export * from './components/layout/Divider';
 export * from './components/data-display/Chip';
 export * from './components/navigation/Breadcrumbs';
 
-export * from '@spectra/primitives';
+export * from '@winplaybox/primitives';

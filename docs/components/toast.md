@@ -3,14 +3,14 @@
 Ephemeral floating alert notification that auto-dismisses after a calibrated duration timeout.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Toast } from '@spectra/react';
+import { Toast } from '@winplaybox/react';
 
 export default function BasicToastExample() {
   return (
@@ -63,13 +63,13 @@ Official pattern: [Alert / Status Pattern](https://www.w3.org/WAI/ARIA/apg/patte
 | `description` | `string` | `''` | Optional detail message. |
 | `duration` | `number` | `4000` | Auto-dismiss timeout in ms. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useToast`
 Description: Programmatic toast dispatcher with queueing and auto-dismissal.
 
 ```tsx
-import { useToast } from '@spectra/primitives';
+import { useToast } from '@winplaybox/primitives';
 
 export function SaveButton() {
   const { toast } = useToast();

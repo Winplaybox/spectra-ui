@@ -3,14 +3,14 @@
 Tabs organize content across different screens or data views, allowing users to switch between related panels within the same context.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Tabs } from '@spectra/react';
+import { Tabs } from '@winplaybox/react';
 
 export default function BasicTabsExample() {
   return (
@@ -68,13 +68,13 @@ Official pattern: [Tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/)
 | `value` | `string` | `undefined` | Controlled active tab ID. |
 | `defaultValue` | `string` | `''` | Initial active tab ID. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useControllableState`
 Description: Synchronizes active tab state with keyboard focus management and ARIA bindings.
 
 ```tsx
-import { useControllableState } from '@spectra/primitives';
+import { useControllableState } from '@winplaybox/primitives';
 
 export function CustomTabs({ value: cVal, defaultValue = '1', onChange }) {
   const [active, setActive] = useControllableState({ value: cVal, defaultValue, onChange });

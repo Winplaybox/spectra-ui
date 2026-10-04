@@ -3,14 +3,14 @@
 Buttons allow users to trigger actions or events, such as submitting a form, opening a dialog, canceling an operation, or performing a deletion.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Button } from '@spectra/react';
+import { Button } from '@winplaybox/react';
 
 export default function BasicButtonExample() {
   return (
@@ -72,13 +72,13 @@ Official pattern: [Button pattern](https://www.w3.org/WAI/ARIA/apg/patterns/butt
 | `icon` | `ReactNode` | `undefined` | Leading or trailing icon element. |
 | `iconPosition` | `'left' \| 'right'` | `'left'` | Position of the icon relative to button text. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useButtonProps`
 Description: Generates accessible ARIA attributes, keydown listeners (Enter/Space), and disabled state handling for custom buttons.
 
 ```tsx
-import { useButtonProps } from '@spectra/primitives';
+import { useButtonProps } from '@winplaybox/primitives';
 
 export function CustomButton({ onClick, disabled, children }) {
   const buttonProps = useButtonProps({ onClick, disabled });

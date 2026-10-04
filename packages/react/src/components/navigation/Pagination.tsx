@@ -1,6 +1,6 @@
 // packages/react/src/components/navigation/Pagination.tsx
 import React, { forwardRef } from 'react';
-import { ChevronDownIcon } from '@spectra/icons';
+import { ChevronDownIcon } from '@winplaybox/icons';
 
 export interface PaginationProps extends Omit<React.ComponentPropsWithoutRef<'nav'>, 'onChange'> {
   page?: number;

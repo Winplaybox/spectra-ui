@@ -3,14 +3,14 @@
 Star or icon-based rating control supporting partial increments, hover previews, and keyboard selection.
 
 ```bash
-npm install @spectra/react @spectra/icons
+npm install @winplaybox/react @winplaybox/icons
 ```
 
 ## Basic Usage
 
 ```tsx
 import React from 'react';
-import { Rating } from '@spectra/react';
+import { Rating } from '@winplaybox/react';
 
 export default function BasicRatingExample() {
   return (
@@ -64,13 +64,13 @@ Official pattern: [Rating Slider Pattern](https://www.w3.org/WAI/ARIA/apg/patter
 | `value` | `number` | `0` | Current selected rating. |
 | `precision` | `0.5 \| 1` | `1` | Step precision increment. |
 
-## Headless Primitive (`@spectra/primitives`)
+## Headless Primitive (`@winplaybox/primitives`)
 
 Hook: `useControllableState`
 Description: Handles hovered and locked rating scores.
 
 ```tsx
-import { useControllableState } from '@spectra/primitives';
+import { useControllableState } from '@winplaybox/primitives';
 
 export function RatingPrimitive() {
   const [rating, setRating] = useControllableState({ defaultValue: 0 });

@@ -10,7 +10,7 @@ import * as SharpIcons from './sharp';
 import * as TwoToneIcons from './twotone';
 import iconManifest from './manifest.json';
 
-describe('@spectra/icons Library', () => {
+describe('@winplaybox/icons Library', () => {
   it('contains over 12,000 compiled icon components across all shades', () => {
     expect(iconManifest.length).toBeGreaterThan(12000);
   });
