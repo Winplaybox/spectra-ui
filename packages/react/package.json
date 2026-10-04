@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/spectra-ui/spectra-ui.git",
+    "url": "https://github.com/Winplaybox/spectra-ui.git",
     "directory": "packages/react"
   },
   "exports": {

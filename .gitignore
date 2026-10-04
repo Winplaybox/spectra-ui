@@ -11,3 +11,11 @@ dist
 storybook-static
 .vite
 *.zip
+
+*.exe
+*.msi
+scratch/
+__pycache__/
+*.pyc
+dist-packages/
+*.tgz

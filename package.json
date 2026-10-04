@@ -8,6 +8,7 @@
     "build": "pnpm run build:tokens && turbo build",
     "build:tokens": "pnpm --filter @spectra/tokens run build",
     "build:packages": "pnpm run build:tokens",
+    "pack:packages": "node scripts/pack-packages.mjs",
     "release:check": "node scripts/release-check.mjs",
     "check:tokens": "pnpm --filter @spectra/tokens run test:contract",
     "check:lint": "node packages/config/src/check-no-hardcoded-values.mjs",
