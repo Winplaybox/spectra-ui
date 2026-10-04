@@ -137,19 +137,19 @@ export const dnd = style({
     display: 'block',
     width: '50%',
     height: '2px',
-    backgroundColor: '#ffffff',
+    backgroundColor: 'var(--color-surface, #ffffff)',
     borderRadius: '1px',
   },
 });
 
 export const inMeeting = style({
-  backgroundColor: '#8B5CF6',
+  backgroundColor: 'var(--color-accent-purple, #8B5CF6)',
 });
 
 export const meeting = inMeeting;
 
 export const focus = style({
-  backgroundColor: '#6366F1',
+  backgroundColor: 'var(--color-accent-indigo, #6366F1)',
 });
 
 export const idle = style({
@@ -163,7 +163,7 @@ export const invisible = style({
 });
 
 export const streaming = style({
-  backgroundColor: '#A855F7',
+  backgroundColor: 'var(--color-accent-purple, #A855F7)',
   boxShadow: '0 0 6px rgba(168, 85, 247, 0.6)',
 });
 

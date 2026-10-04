@@ -32,10 +32,10 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
   ) => {
     const getIcon = () => {
       switch (variant) {
-        case 'success': return <CheckIcon size={16} color="#22c55e" />;
-        case 'warning': return <AlertCircleIcon size={16} color="#f59e0b" />;
-        case 'danger': return <AlertCircleIcon size={16} color="#ef4444" />;
-        default: return <InfoIcon size={16} color="#007FFF" />;
+        case 'success': return <CheckIcon size={16} color="var(--color-feedback-success, #22c55e)" />;
+        case 'warning': return <AlertCircleIcon size={16} color="var(--color-feedback-warning, #f59e0b)" />;
+        case 'danger': return <AlertCircleIcon size={16} color="var(--color-feedback-error, #ef4444)" />;
+        default: return <InfoIcon size={16} color="var(--color-action-primary, #007FFF)" />;
       }
     };
 

@@ -26,4 +26,7 @@ export default defineConfig({
     port: 3000,
     open: false,
   },
+  build: {
+    target: 'es2022',
+  },
 });
