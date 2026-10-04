@@ -6,7 +6,7 @@
   "type": "module",
   "packageManager": "pnpm@9.15.4",
   "scripts": {
-    "build": "pnpm run build:tokens && turbo build",
+    "build": "pnpm run build:tokens && turbo build && node scripts/copy-dist.mjs",
     "build:tokens": "pnpm --filter @spectra/tokens run build",
     "build:packages": "pnpm run build:tokens",
     "pack:packages": "node scripts/pack-packages.mjs",
