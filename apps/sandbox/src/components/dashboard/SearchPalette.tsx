@@ -7,6 +7,7 @@ import {
   ChevronRightIcon,
   PaletteIcon,
   CubeIcon,
+  AlgoliaLogo,
 } from '@spectra/icons';
 import { navigate } from '../../utils/router';
 
@@ -58,8 +59,7 @@ const QUICK_NAVIGATION_SECTIONS = [
   {
     category: 'ICONS & ASSETS',
     items: [
-      { title: '12,253 Icon Explorer', icon: 'search', path: '/icons' },
-      { title: 'Social Brand Suite', icon: 'sparkles', path: '/icons' },
+      { title: '14,255 Icon Explorer', icon: 'search', path: '/icons' },
     ],
   },
   {
@@ -813,35 +813,31 @@ export const SearchPalette: React.FC<SearchPaletteProps> = ({
             </span>
           </div>
 
-          {/* Official Algolia Branding (Screenshots 1 & 2) */}
+          {/* Official Algolia DocSearch Branding */}
           <a
-            href="https://www.algolia.com"
+            href="https://www.algolia.com/ref/docsearch/?utm_source=winplaybox.in&utm_medium=referral&utm_content=powered_by&utm_campaign=docsearch"
             target="_blank"
             rel="noopener noreferrer"
+            title="Search by Algolia DocSearch"
             style={{
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
-              gap: 6,
+              gap: 8,
               textDecoration: 'none',
-              color: '#94A3B8',
+              color: '#8590A6',
               fontSize: 12,
-              fontWeight: 500,
+              fontWeight: 400,
+              transition: 'opacity 0.15s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.opacity = '0.8';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.opacity = '1';
             }}
           >
-            <span>Powered by</span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#003DFF', fontWeight: 700 }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-                  fill="#003DFF"
-                />
-                <path
-                  d="M12 6v6l4.5 2.25-.75 1.25-5.25-2.6V6h1.5z"
-                  fill="#003DFF"
-                />
-              </svg>
-              <span style={{ color: '#003DFF', fontSize: 13, letterSpacing: '-0.2px' }}>algolia</span>
-            </span>
+            <span style={{ fontSize: 12, color: '#8590A6', letterSpacing: '0.01em' }}>Powered by</span>
+            <AlgoliaLogo width={76} height={18} />
           </a>
         </div>
       </div>

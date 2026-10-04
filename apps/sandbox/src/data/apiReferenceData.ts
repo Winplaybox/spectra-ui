@@ -293,7 +293,7 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
       { name: 'src', type: 'string', defaultValue: 'undefined', description: 'Image source URL.' },
       { name: 'name', type: 'string', defaultValue: 'undefined', description: 'Person name used to compute initials fallback.' },
       { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", defaultValue: "'md'", description: 'Sizing scale from 24px to 64px.' },
-      { name: 'status', type: "'online' | 'busy' | 'away' | 'offline'", defaultValue: 'undefined', description: 'Renders colored presence badge dot.' },
+      { name: 'status', type: "'online' | 'busy' | 'away' | 'dnd' | 'in-meeting' | 'focus' | 'idle' | 'invisible' | 'streaming' | 'offline'", defaultValue: 'undefined', description: 'Renders uncropped corner presence badge dot.' },
       { name: 'variant', type: "'circular' | 'rounded' | 'square'", defaultValue: "'circular'", description: 'Corner curvature geometry.' },
     ],
     cssClasses: [
@@ -308,7 +308,7 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
     nativeProps: [
       { name: 'name', type: 'string', defaultValue: 'undefined', description: 'Native avatar name for fallback.' },
       { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Native dimensions.' },
-      { name: 'status', type: "'online' | 'busy' | 'away'", defaultValue: 'undefined', description: 'Presence indicator.' },
+      { name: 'status', type: "'online' | 'busy' | 'away' | 'dnd' | 'in-meeting' | 'focus' | 'idle' | 'invisible' | 'streaming' | 'offline'", defaultValue: 'undefined', description: 'Presence indicator.' },
     ],
   },
 

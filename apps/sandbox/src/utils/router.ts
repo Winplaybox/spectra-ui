@@ -61,12 +61,15 @@ export function parsePath(rawPath: string): RouteState {
   }
 
   if (segments[0] === 'hooks') {
-    const hookId = segments[1] || 'use-disclosure';
-    return { type: 'hooks', id: hookId, path: `/hooks/${hookId}`, anchor };
+    const rawId = segments[1];
+    if (!rawId || rawId === 'all' || rawId === 'all-hooks') {
+      return { type: 'hooks', id: 'all-hooks', path: '/hooks', anchor };
+    }
+    return { type: 'hooks', id: rawId, path: `/hooks/${rawId}`, anchor };
   }
 
   if (segments[0] === 'icons') {
-    return { type: 'icons', id: segments[1], path: '/icons', anchor };
+    return { type: 'icons', id: 'catalog', path: '/icons', anchor };
   }
 
   // Fallback to overview

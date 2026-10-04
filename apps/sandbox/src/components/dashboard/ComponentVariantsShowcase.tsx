@@ -147,6 +147,7 @@ export const COMPONENT_VARIANTS_MAP: Record<string, VariantMeta[]> = {
   ],
   avatar: [
     { id: 'avatar-scales', title: 'Sizing Scales with Presence Badges' },
+    { id: 'avatar-presence', title: 'Rich Presence Status Badges' },
     { id: 'avatar-stack', title: 'Overlapping Team Avatar Stack' },
     { id: 'avatar-fallback', title: 'Initials & Custom Status Indicator' },
     { id: 'avatar-persona', title: 'Persona Card with Presence & Email' },
@@ -2736,6 +2737,100 @@ import { Avatar } from '@spectra/react-native';
 
 export default function NativeAvatarDemo() {
   return <Avatar size="md" name="Alex Vance" status="online" />;
+}`}
+          />
+
+          <ComponentDemoCard
+            id="avatar-presence"
+            title="Rich Presence Status Badges"
+            description="Comprehensive presence states including active, busy, do-not-disturb (with dash indicator), away, meeting, focus, idle, invisible, and streaming."
+            webPreview={
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, alignItems: 'center' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Avatar size="lg" name="Alex Vance" status="online" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Online</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Avatar size="lg" name="Sarah Connor" status="busy" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Busy</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Avatar size="lg" name="David Miller" status="dnd" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>DND</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Avatar size="lg" name="Elena Rostova" status="away" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Away</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Avatar size="lg" name="Jordan Lee" status="in-meeting" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>In Meeting</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Avatar size="lg" name="Sam Wilson" status="focus" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Focus</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Avatar size="lg" name="Maya Lin" status="idle" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Idle</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Avatar size="lg" name="Chris Pratt" status="invisible" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Invisible</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Avatar size="lg" name="Taylor Swift" status="streaming" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Streaming</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Avatar size="lg" name="Robin Hood" status="offline" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Offline</span>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center' }}>
+                <Avatar size="md" name="Alex Vance" status="online" />
+                <Avatar size="md" name="Sarah Connor" status="busy" />
+                <Avatar size="md" name="David Miller" status="dnd" />
+                <Avatar size="md" name="Elena Rostova" status="away" />
+                <Avatar size="md" name="Jordan Lee" status="in-meeting" />
+                <Avatar size="md" name="Sam Wilson" status="focus" />
+                <Avatar size="md" name="Maya Lin" status="idle" />
+                <Avatar size="md" name="Taylor Swift" status="streaming" />
+              </div>
+            }
+            webCode={`import { Avatar } from '@spectra/react';
+
+export default function AvatarPresenceDemo() {
+  return (
+    <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+      <Avatar size="lg" name="Alex Vance" status="online" />
+      <Avatar size="lg" name="Sarah Connor" status="busy" />
+      <Avatar size="lg" name="David Miller" status="dnd" />
+      <Avatar size="lg" name="Elena Rostova" status="away" />
+      <Avatar size="lg" name="Jordan Lee" status="in-meeting" />
+      <Avatar size="lg" name="Sam Wilson" status="focus" />
+      <Avatar size="lg" name="Maya Lin" status="idle" />
+      <Avatar size="lg" name="Chris Pratt" status="invisible" />
+      <Avatar size="lg" name="Taylor Swift" status="streaming" />
+      <Avatar size="lg" name="Robin Hood" status="offline" />
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { Avatar } from '@spectra/react-native';
+
+export default function NativeAvatarPresenceDemo() {
+  return (
+    <View style={{ flexDirection: 'row', gap: 12 }}>
+      <Avatar size="md" name="Alex Vance" status="online" />
+      <Avatar size="md" name="David Miller" status="dnd" />
+      <Avatar size="md" name="Jordan Lee" status="in-meeting" />
+      <Avatar size="md" name="Taylor Swift" status="streaming" />
+    </View>
+  );
 }`}
           />
 

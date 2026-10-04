@@ -173,6 +173,28 @@ const loaders: Record<string, () => Promise<any>> = {
   'twotone:shopping': () => import('./generated/twotone/shopping'),
   'twotone:social': () => import('./generated/twotone/social'),
   'twotone:toggle': () => import('./generated/twotone/toggle'),
+
+  // Iconly sets
+  'iconly:regular:bold': () => import('./generated/iconly/regular/bold'),
+  'iconly:regular:bulk': () => import('./generated/iconly/regular/bulk'),
+  'iconly:regular:light': () => import('./generated/iconly/regular/light'),
+  'iconly:regular:outline': () => import('./generated/iconly/regular/outline'),
+  'iconly:regular:broken': () => import('./generated/iconly/regular/broken'),
+  'iconly:regular:twotone': () => import('./generated/iconly/regular/twotone'),
+
+  'iconly:sharp:bold': () => import('./generated/iconly/sharp/bold'),
+  'iconly:sharp:bulk': () => import('./generated/iconly/sharp/bulk'),
+  'iconly:sharp:light': () => import('./generated/iconly/sharp/light'),
+  'iconly:sharp:outline': () => import('./generated/iconly/sharp/outline'),
+  'iconly:sharp:broken': () => import('./generated/iconly/sharp/broken'),
+  'iconly:sharp:twotone': () => import('./generated/iconly/sharp/twotone'),
+
+  'iconly:curved:bold': () => import('./generated/iconly/curved/bold'),
+  'iconly:curved:bulk': () => import('./generated/iconly/curved/bulk'),
+  'iconly:curved:light': () => import('./generated/iconly/curved/light'),
+  'iconly:curved:outline': () => import('./generated/iconly/curved/outline'),
+  'iconly:curved:broken': () => import('./generated/iconly/curved/broken'),
+  'iconly:curved:twotone': () => import('./generated/iconly/curved/twotone'),
 };
 
 export interface DynamicIconProps extends IconProps {
@@ -215,6 +237,8 @@ export async function loadIcon(name: string): Promise<React.FC<IconProps> | null
     loaderKey = 'social';
   } else if (meta.style === 'core') {
     loaderKey = 'core';
+  } else if (meta.style === 'iconly') {
+    loaderKey = meta.category || null;
   } else if (['filled', 'outlined', 'rounded', 'sharp', 'twotone'].includes(meta.style)) {
     const cat = (meta.category || 'action').toLowerCase();
     loaderKey = `${meta.style}:${cat}`;

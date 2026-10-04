@@ -1,0 +1,41 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="168" height="26" viewBox="0 0 168 26" role="img" aria-label="Powered by Spectra UI">
+  <title>Powered by Spectra UI</title>
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap');
+      .badge-bg { fill: #FFFFFF; }
+      .badge-border { stroke: #E4E4E7; fill: none; }
+      .label { fill: #71717A; font-family: Inter, system-ui, sans-serif; font-size: 10px; }
+      .wordmark { fill: #18181B; font-family: Inter, system-ui, sans-serif; font-size: 11px; font-weight: 600; letter-spacing: -0.01em; }
+      @media (prefers-color-scheme: dark) {
+        .badge-bg   { fill: #18181B; }
+        .badge-border { stroke: #3F3F46; }
+        .wordmark   { fill: #F4F4F5; }
+      }
+    </style>
+  </defs>
+
+  <!-- Badge pill background -->
+  <rect class="badge-bg" x="0.5" y="0.5" width="167" height="25" rx="9.5" ry="9.5"/>
+  <rect class="badge-border" x="0.5" y="0.5" width="167" height="25" rx="9.5" ry="9.5" stroke-width="1"/>
+
+  <!-- "Powered by" text -->
+  <text class="label" x="10" y="16.9">Powered by</text>
+
+  <!-- Spectra prism / spark glyph (centred at ~x=74, y=13) -->
+  <g transform="translate(68, 4.3) scale(0.92)">
+    <!-- Outer hexagon glow -->
+    <polygon points="7.5,0 15,4.33 15,12.99 7.5,17.32 0,12.99 0,4.33" fill="#2563EB" opacity="0.15"/>
+    <!-- Left face -->
+    <polygon points="7.5,2.5 7.5,8.66 2,11.75 2,5.6" fill="#1D4ED8"/>
+    <!-- Right face -->
+    <polygon points="7.5,2.5 13,5.6 13,11.75 7.5,8.66" fill="#2563EB"/>
+    <!-- Bottom face -->
+    <polygon points="7.5,8.66 13,11.75 7.5,14.82 2,11.75" fill="#3B82F6" opacity="0.75"/>
+    <!-- Highlight spark -->
+    <polygon points="7.5,2.5 11,4.4 9.5,7.5 7.5,6.5" fill="white" opacity="0.55"/>
+  </g>
+
+  <!-- "Spectra UI" wordmark -->
+  <text class="wordmark" x="84.5" y="16.9">Spectra UI</text>
+</svg>

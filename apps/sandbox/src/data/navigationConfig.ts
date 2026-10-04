@@ -333,10 +333,10 @@ export const SIDEBAR_NAVIGATION: NavSection[] = [
     title: 'Icons',
     items: [
       {
-        id: 'icons',
-        name: '12,253 Icons Catalog',
+        id: 'icons-catalog',
+        name: 'Browse Catalog',
         path: '/icons',
-        badge: 'Code-Split',
+        badge: '14,255',
         badgeColor: 'primary',
       },
     ],

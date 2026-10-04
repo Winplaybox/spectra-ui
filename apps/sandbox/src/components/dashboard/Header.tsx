@@ -74,14 +74,16 @@ export const Header: React.FC<HeaderProps> = ({
         }
         break;
       case 'hooks':
-        items.push({ label: 'Hooks', href: '/hooks/use-disclosure' });
-        if (currentRoute.id) {
+        items.push({ label: 'Hooks', href: '/hooks' });
+        if (currentRoute.id && currentRoute.id !== 'all-hooks') {
           items.push({ label: currentRoute.id });
+        } else {
+          items.push({ label: 'All Hooks' });
         }
         break;
       case 'icons':
         items.push({ label: 'Icons', href: '/icons' });
-        items.push({ label: '12,253 Catalog' });
+        items.push({ label: '14,255 Catalog' });
         break;
       default:
         break;

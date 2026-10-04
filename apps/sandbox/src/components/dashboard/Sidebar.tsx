@@ -429,7 +429,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 ? currentRoute.type === 'hooks' && (!currentRoute.id || currentRoute.id === 'all-hooks')
                 : currentRoute.path === item.path ||
                   (item.path.startsWith('/hooks/') && currentRoute.type === 'hooks' && currentRoute.id === item.id) ||
-                  (item.path === '/icons' && currentRoute.type === 'icons');
+                  (currentRoute.type === 'icons' && (item.path.startsWith('/icons') || item.id.startsWith('icons-')));
 
               const isNew = V010_NEW_COMPONENTS.includes(item.id) || item.badge === 'NEW';
               const inPageVariants = isComponent ? COMPONENT_VARIANTS_MAP[item.id] || [] : [];

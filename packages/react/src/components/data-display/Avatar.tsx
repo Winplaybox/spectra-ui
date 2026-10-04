@@ -2,13 +2,26 @@ import React, { useState } from 'react';
 import { UserIcon } from '@spectra/icons';
 import * as styles from './Avatar.css';
 
+export type AvatarStatus =
+  | 'online'
+  | 'offline'
+  | 'busy'
+  | 'away'
+  | 'dnd'
+  | 'in-meeting'
+  | 'meeting'
+  | 'focus'
+  | 'idle'
+  | 'invisible'
+  | 'streaming';
+
 export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
   src?: string;
   alt?: string;
   name?: string;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   shape?: 'circle' | 'square';
-  status?: 'online' | 'offline' | 'busy' | 'away';
+  status?: AvatarStatus;
   className?: string;
 }
 
@@ -18,6 +31,20 @@ function getInitials(name?: string): string {
   if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
 }
+
+const statusClassMap: Record<AvatarStatus, string> = {
+  online: styles.online,
+  offline: styles.offline,
+  busy: styles.busy,
+  away: styles.away,
+  dnd: styles.dnd,
+  'in-meeting': styles.inMeeting,
+  meeting: styles.inMeeting,
+  focus: styles.focus,
+  idle: styles.idle,
+  invisible: styles.invisible,
+  streaming: styles.streaming,
+};
 
 export const Avatar: React.FC<AvatarProps> = ({
   src,
@@ -42,24 +69,26 @@ export const Avatar: React.FC<AvatarProps> = ({
       className={`${styles.avatar} ${styles[shape]} ${styles[size]} ${className || ''}`}
       {...props}
     >
-      {showImage ? (
-        <img
-          src={src}
-          alt=""
-          aria-hidden="true"
-          onError={() => setHasError(true)}
-          className={styles.image}
-        />
-      ) : initials ? (
-        <span>{initials}</span>
-      ) : (
-        <UserIcon size={iconSize} color="currentColor" />
-      )}
+      <div className={styles.inner}>
+        {showImage ? (
+          <img
+            src={src}
+            alt=""
+            aria-hidden="true"
+            onError={() => setHasError(true)}
+            className={styles.image}
+          />
+        ) : initials ? (
+          <span>{initials}</span>
+        ) : (
+          <UserIcon size={iconSize} color="currentColor" />
+        )}
+      </div>
 
       {status && (
         <span
           data-status={status}
-          className={`${styles.statusDot} ${styles[`status${size.charAt(0).toUpperCase() + size.slice(1)}` as keyof typeof styles]} ${styles[status]}`}
+          className={`${styles.statusDot} ${styles[`status${size.charAt(0).toUpperCase() + size.slice(1)}` as keyof typeof styles]} ${statusClassMap[status] || styles.offline}`}
           aria-hidden="true"
         />
       )}

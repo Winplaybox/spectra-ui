@@ -30,11 +30,17 @@ export const WithImage: Story = {
 
 export const WithStatus: Story = {
   render: () => (
-    <div style={{ display: 'flex', gap: '16px' }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
       <Avatar name="Sarah Connor" status="online" />
       <Avatar name="John Doe" status="busy" />
+      <Avatar name="David Miller" status="dnd" />
       <Avatar name="Alex Vance" status="away" />
-      <Avatar name="David Miller" status="offline" />
+      <Avatar name="Jordan Lee" status="in-meeting" />
+      <Avatar name="Sam Wilson" status="focus" />
+      <Avatar name="Maya Lin" status="idle" />
+      <Avatar name="Chris Pratt" status="invisible" />
+      <Avatar name="Taylor Swift" status="streaming" />
+      <Avatar name="Robin Hood" status="offline" />
     </div>
   ),
 };

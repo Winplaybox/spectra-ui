@@ -111,20 +111,20 @@ import { ComponentApiSection } from './ComponentApiSection';
 import { NativeSponsorAd } from './NativeSponsorAd';
 
 // Dynamic Component Resource Pill Icons (Image 2 Benchmark - Zero Emojis)
-const MarkdownPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
-  <svg width={size} height={size} viewBox="0 0 16 16" fill="currentColor" style={{ flexShrink: 0, color: 'var(--color-text-secondary)' }}>
+const MarkdownPillIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="currentColor" style={{ flexShrink: 0, display: 'block', color: 'var(--color-text-secondary)', ...style }}>
     <path fillRule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15V4.15C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.9 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z" />
   </svg>
 );
 
-const FeedbackPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#007FFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+const FeedbackPillIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#007FFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, display: 'block', ...style }}>
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
   </svg>
 );
 
-const PackagePillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#0284c7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+const PackagePillIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#0284c7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, display: 'block', ...style }}>
     <line x1="16.5" y1="9.4" x2="7.5" y2="4.21" />
     <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
     <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
@@ -132,14 +132,14 @@ const PackagePillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
   </svg>
 );
 
-const GitHubPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0, color: 'var(--color-text-secondary)' }}>
+const GitHubPillIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0, display: 'block', color: 'var(--color-text-secondary)', ...style }}>
     <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
   </svg>
 );
 
-const W3CPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#005A9C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+const W3CPillIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#005A9C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, display: 'block', ...style }}>
     <circle cx="12" cy="12" r="10" />
     <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
     <path d="M2 12h20" />
@@ -147,7 +147,7 @@ const W3CPillIcon: React.FC<{ size?: number }> = ({ size = 14 }) => (
 );
 
 const SectionCommentPlusIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, ...style }}>
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, display: 'block', ...style }}>
     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
     <line x1="12" y1="8" x2="12" y2="14" />
     <line x1="9" y1="11" x2="15" y2="11" />
@@ -157,19 +157,19 @@ const SectionCommentPlusIcon: React.FC<{ size?: number; style?: React.CSSPropert
 const SectionCommentIcon = SectionCommentPlusIcon;
 
 const ThumbsUpIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 15, style }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, ...style }}>
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, display: 'block', ...style }}>
     <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
   </svg>
 );
 
 const ThumbsDownIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 15, style }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, ...style }}>
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, display: 'block', ...style }}>
     <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3" />
   </svg>
 );
 
 const HandNoticeIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 18, style }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, ...style }}>
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#D97706" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, display: 'block', ...style }}>
     <path d="M18 11V6a2 2 0 0 0-4 0v5" />
     <path d="M14 10V4a2 2 0 0 0-4 0v7" />
     <path d="M10 10.5V6a2 2 0 0 0-4 0v8" />
@@ -180,7 +180,7 @@ const HandNoticeIcon: React.FC<{ size?: number; style?: React.CSSProperties }> =
 const InfoHandIcon = HandNoticeIcon;
 
 const EditPageIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, ...style }}>
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, display: 'block', ...style }}>
     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
     <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
   </svg>
@@ -370,7 +370,8 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
     feedbackSection
   )}&body=${encodeURIComponent(issueBody)}`;
 
-  const githubDocEditUrl = `https://github.com/Winplaybox/spectra-ui/edit/main/docs/components/${meta.id}.md`;
+  const docRef = currentVersion === 'latest' ? 'main' : currentVersion;
+  const githubDocEditUrl = `https://github.com/Winplaybox/spectra-ui/edit/${docRef}/docs/components/${meta.id}.md`;
 
   const openFeedbackForSection = (sectionName: string) => {
     setFeedbackSection(sectionName);
@@ -471,7 +472,9 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
   const [switchChecked, setSwitchChecked] = useState(true);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [radioValue, setRadioValue] = useState('option-1');
-  const [avatarStatus, setAvatarStatus] = useState<'online' | 'busy' | 'away'>('online');
+  const [avatarStatus, setAvatarStatus] = useState<
+    'online' | 'busy' | 'away' | 'dnd' | 'in-meeting' | 'meeting' | 'focus' | 'idle' | 'invisible' | 'streaming' | 'offline'
+  >('online');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [tabsVariant, setTabsVariant] = useState<'underline' | 'pills'>('underline');
   const [activeTab, setActiveTab] = useState('tab-1');
@@ -2053,36 +2056,86 @@ export const Native${meta.name}Demo = () => {
           </div>
         );
 
-      case 'avatar':
+      case 'avatar': {
+        const statusOptions: {
+          id: 'online' | 'busy' | 'dnd' | 'away' | 'in-meeting' | 'focus' | 'idle' | 'invisible' | 'streaming' | 'offline';
+          label: string;
+          color: string;
+        }[] = [
+          { id: 'online', label: 'Online', color: '#10B981' },
+          { id: 'busy', label: 'Busy', color: '#EF4444' },
+          { id: 'dnd', label: 'DND', color: '#EF4444' },
+          { id: 'away', label: 'Away', color: '#F59E0B' },
+          { id: 'in-meeting', label: 'In Meeting', color: '#8B5CF6' },
+          { id: 'focus', label: 'Focus', color: '#6366F1' },
+          { id: 'idle', label: 'Idle', color: '#F59E0B' },
+          { id: 'invisible', label: 'Invisible', color: '#6B7280' },
+          { id: 'streaming', label: 'Streaming', color: '#A855F7' },
+          { id: 'offline', label: 'Offline', color: '#6B7280' },
+        ];
+
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center' }}>
-            <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-              <Avatar name="Sarah Connor" size="lg" status={avatarStatus} />
-              <Avatar name="Alex Vance" size="md" status={avatarStatus} />
-              <Avatar shape="square" size="md" />
-              <Avatar size="sm" />
+            <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <Avatar name="Sarah Connor" size="xl" status={avatarStatus} />
+              <Avatar name="Alex Vance" size="lg" status={avatarStatus} />
+              <Avatar name="Elena Rostova" size="md" status={avatarStatus} />
+              <Avatar shape="square" name="Bot Agent" size="md" status={avatarStatus} />
+              <Avatar size="sm" status={avatarStatus} />
+              <Avatar size="xs" status={avatarStatus} />
             </div>
-            <div style={{ display: 'flex', gap: 8 }}>
-              {(['online', 'busy', 'away'] as const).map((st) => (
-                <button
-                  key={st}
-                  onClick={() => setAvatarStatus(st)}
-                  style={{
-                    padding: '4px 8px',
-                    borderRadius: 4,
-                    border: '1px solid var(--color-border-subtle)',
-                    backgroundColor: avatarStatus === st ? 'var(--color-action-primary)' : 'transparent',
-                    color: avatarStatus === st ? 'var(--color-text-inverse)' : 'var(--color-text-secondary)',
-                    cursor: 'pointer',
-                    fontSize: 11,
-                  }}
-                >
-                  Status: {st}
-                </button>
-              ))}
+            <div
+              style={{
+                display: 'flex',
+                gap: 6,
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                maxWidth: 680,
+                padding: '8px 12px',
+                borderRadius: 'var(--radius-component-md)',
+                backgroundColor: 'var(--color-surface-raised)',
+                border: '1px solid var(--color-border-subtle)',
+              }}
+            >
+              {statusOptions.map((st) => {
+                const isActive = avatarStatus === st.id;
+                return (
+                  <button
+                    key={st.id}
+                    onClick={() => setAvatarStatus(st.id)}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 6,
+                      padding: '4px 10px',
+                      borderRadius: 4,
+                      border: '1px solid',
+                      borderColor: isActive ? 'var(--color-action-primary)' : 'var(--color-border-subtle)',
+                      backgroundColor: isActive ? 'var(--color-action-primary)' : 'transparent',
+                      color: isActive ? 'var(--color-text-inverse)' : 'var(--color-text-secondary)',
+                      cursor: 'pointer',
+                      fontSize: 11,
+                      fontWeight: isActive ? 600 : 400,
+                      transition: 'all 0.15s ease',
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: 7,
+                        height: 7,
+                        borderRadius: '50%',
+                        backgroundColor: isActive ? 'var(--color-text-inverse)' : st.color,
+                        display: 'inline-block',
+                      }}
+                    />
+                    Status: {st.label}
+                  </button>
+                );
+              })}
             </div>
           </div>
         );
+      }
 
       case 'badge':
         return (
@@ -4477,9 +4530,11 @@ export const Native${meta.name}Demo = () => {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: 8,
               fontSize: 13,
               fontWeight: 500,
+              lineHeight: 1,
               color: 'var(--color-text-secondary)',
               textDecoration: 'none',
               transition: 'color 0.15s ease',
@@ -4491,7 +4546,9 @@ export const Native${meta.name}Demo = () => {
               e.currentTarget.style.color = 'var(--color-text-secondary)';
             }}
           >
-            <EditPageIcon size={14} />
+            <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+              <EditPageIcon size={14} />
+            </span>
             <span>Edit this page</span>
           </a>
 

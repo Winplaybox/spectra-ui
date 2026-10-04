@@ -37,6 +37,10 @@
 ## 6. MUI-Exact Feedback & GitHub Integration
 - Every section heading has a sleek vector `SectionCommentPlusIcon` `[ 💬+ ]` trigger.
 - Clicking `[ 💬+ ]` smoothly scrolls to `#page-feedback`, opens the form, and pre-fills the specific section prompt.
-- "Edit this page" always links directly to the component's markdown document (`https://github.com/Winplaybox/spectra-ui/edit/main/docs/components/${id}.md`).
+- "Edit this page" always links directly to the component's markdown document (`https://github.com/Winplaybox/spectra-ui/edit/${version}/docs/components/${id}.md`), dynamically tracking the active release version selected in the Settings Drawer (defaulting to `main` if on `latest`).
 - "Open an issue instead" dynamically pre-fills GitHub issue template parameters (`template=docs-feedback.yml`, `title=[docs] <Component>: Feedback on "<Section>" section`, `labels=documentation`, `page-url`, `section`, and pre-filled body).
 - Always use `Winplaybox/spectra-ui` as the official repository owner.
+
+## 7. Icon Alignment & Centering Guarantees
+- Whenever vector icons are rendered, ensure they are strictly and flawlessly centered in their container (`display: inline-flex`, `alignItems: 'center'`, `justifyContent: 'center'` on wrappers, and `display: 'block'` or `verticalAlign: 'middle'` on `<svg>`).
+- Prevent baseline misalignment, unwanted font-metric padding, or off-center icon placement across all buttons, links, pills, tabs, headers, and documentation triggers.

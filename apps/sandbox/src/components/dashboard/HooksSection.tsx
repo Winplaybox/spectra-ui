@@ -26,14 +26,14 @@ import {
 } from '@spectra/primitives';
 import { Button, Badge, Card, CardHeader, CardTitle, CardDescription, CardContent, TextInput, Switch, Spinner } from '@spectra/react';
 import { CheckIcon, CloseIcon, CopyIcon, SparklesIcon, AlertCircleIcon, InfoIcon } from '@spectra/icons';
-import { navigate } from '../../utils/router';
 import { HookApiSection } from './HookApiSection';
+import { AllHooksPage } from './AllHooksPage';
 
 interface HooksSectionProps {
   hookId?: string;
 }
 
-export const HooksSection: React.FC<HooksSectionProps> = ({ hookId = 'use-disclosure' }) => {
+const HookDetailSection: React.FC<{ hookId: string }> = ({ hookId }) => {
   const [activeHook, setActiveHook] = useState(hookId);
   const [copied, setCopied] = useState(false);
 
@@ -169,94 +169,8 @@ export const HooksSection: React.FC<HooksSectionProps> = ({ hookId = 'use-disclo
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const hooksList = [
-    { id: 'use-disclosure', name: 'useDisclosure', category: 'State & Interaction', desc: 'Toggle open/close state for modals, tooltips, accordions, and drawers.' },
-    { id: 'use-controllable-state', name: 'useControllableState', category: 'State & Interaction', desc: 'Support both controlled and uncontrolled component props seamlessly.' },
-    { id: 'use-outside-click', name: 'useOutsideClick', category: 'State & Interaction', desc: 'Dismiss dropdowns, drawers, or popovers on pointer click outside target.' },
-    { id: 'use-focus-ring', name: 'useFocusRing', category: 'State & Interaction', desc: 'Differentiate keyboard focus-visible from mouse clicks for clean outlines.' },
-    { id: 'use-debounce', name: 'useDebounce', category: 'State & Interaction', desc: 'Debounce rapid value changes such as search keystrokes.' },
-    { id: 'use-throttle', name: 'useThrottle', category: 'State & Interaction', desc: 'Throttle high-frequency updates such as scroll and pointer movement.' },
-    { id: 'use-hover', name: 'useHover', category: 'State & Interaction', desc: 'Track pointer hover states with automatic event binding.' },
-
-    { id: 'use-color-scheme', name: 'useColorScheme', category: 'Theme & Environment', desc: 'Manage light, dark, and system color mode preferences.' },
-    { id: 'use-media-query', name: 'useMediaQuery', category: 'Theme & Environment', desc: 'Listen to CSS media queries dynamically with zero layout flicker.' },
-    { id: 'use-reduced-motion', name: 'useReducedMotion', category: 'Theme & Environment', desc: 'Detect user preference for reduced motion to disable intense animations.' },
-    { id: 'use-rtl', name: 'useRTL', category: 'Theme & Environment', desc: 'Detect or switch right-to-left document layout flow.' },
-    { id: 'use-platform', name: 'usePlatform', category: 'Theme & Environment', desc: 'Detect client runtime platform (Web, iOS, Android, macOS, Windows).' },
-    { id: 'use-breakpoint', name: 'useBreakpoint', category: 'Theme & Environment', desc: 'Access active responsive breakpoint token synchronized with token grid.' },
-
-    { id: 'use-id', name: 'useId', category: 'Lifecycle & DOM', desc: 'Generate collision-free unique IDs for accessible ARIA labels.' },
-    { id: 'use-event-listener', name: 'useEventListener', category: 'Lifecycle & DOM', desc: 'Declaratively bind event listeners to window or DOM elements.' },
-    { id: 'use-intersection-observer', name: 'useIntersectionObserver', category: 'Lifecycle & DOM', desc: 'Observe DOM element visibility for lazy loading and scroll triggers.' },
-    { id: 'use-element-size', name: 'useElementSize', category: 'Lifecycle & DOM', desc: 'Live bounding width and height measurements via ResizeObserver.' },
-    { id: 'use-window-size', name: 'useWindowSize', category: 'Lifecycle & DOM', desc: 'Track window inner viewport dimensions with debounced resize.' },
-    { id: 'use-scroll-lock', name: 'useScrollLock', category: 'Lifecycle & DOM', desc: 'Lock background body scrolling when modal or drawer is active.' },
-
-    { id: 'use-toast', name: 'useToast', category: 'Utilities & Feedback', desc: 'Queue, trigger, and auto-dismiss floating notification messages.' },
-    { id: 'use-clipboard', name: 'useClipboard', category: 'Utilities & Feedback', desc: 'Copy text to system clipboard with temporary success state.' },
-    { id: 'use-local-storage', name: 'useLocalStorage', category: 'Utilities & Feedback', desc: 'Persist state values in browser localStorage with cross-tab sync.' },
-    { id: 'use-previous', name: 'usePrevious', category: 'Utilities & Feedback', desc: 'Track and compare previous render cycle values.' },
-    { id: 'use-async', name: 'useAsync', category: 'Utilities & Feedback', desc: 'Manage async promise execution, loading flags, and error states.' },
-    { id: 'use-interval', name: 'useInterval', category: 'Utilities & Feedback', desc: 'Declarative setInterval lifecycle management with dynamic delay.' },
-  ];
-
   return (
     <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 32 }}>
-      {/* Header Card */}
-      <Card variant="bordered" style={{ backgroundColor: 'var(--color-surface)', boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}>
-        <CardHeader>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-            <Badge variant="primary">Functional Primitives</Badge>
-            <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>@spectra/primitives</span>
-          </div>
-          <CardTitle>Headless Hooks & State Machines</CardTitle>
-          <CardDescription>
-            Accessibility, keyboard navigation, and core state logic isolated from styling. These headless primitives power all Spectra UI components across Web (React) and Mobile Native (React Native).
-          </CardDescription>
-        </CardHeader>
-      </Card>
-
-      {/* Hook Navigation Bar */}
-      <div
-        style={{
-          display: 'flex',
-          gap: 6,
-          flexWrap: 'wrap',
-          backgroundColor: 'var(--color-surface)',
-          padding: 8,
-          borderRadius: 8,
-          border: '1px solid var(--color-border-default)',
-        }}
-      >
-        {hooksList.map((h) => {
-          const isActive = activeHook === h.id;
-          return (
-            <button
-              key={h.id}
-              onClick={() => {
-                setActiveHook(h.id);
-                navigate(`/hooks/${h.id}`);
-              }}
-              style={{
-                padding: '7px 14px',
-                borderRadius: 6,
-                border: '1px solid',
-                borderColor: isActive ? 'var(--color-action-primary)' : 'transparent',
-                backgroundColor: isActive ? 'var(--color-surface-raised)' : 'transparent',
-                color: isActive ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                fontWeight: isActive ? 700 : 500,
-                fontSize: 13,
-                fontFamily: 'monospace',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
-              }}
-            >
-              {h.name}
-            </button>
-          );
-        })}
-      </div>
-
       {/* ============================================================== */}
       {/* HOOK 1: useDisclosure                                          */}
       {/* ============================================================== */}
@@ -1891,6 +1805,13 @@ export function Ticker() {
       <HookApiSection hookId={activeHook} />
     </div>
   );
+};
+
+export const HooksSection: React.FC<HooksSectionProps> = ({ hookId = 'all-hooks' }) => {
+  if (!hookId || hookId === 'all-hooks' || hookId === 'all') {
+    return <AllHooksPage />;
+  }
+  return <HookDetailSection hookId={hookId} />;
 };
 
 export default HooksSection;

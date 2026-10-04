@@ -146,24 +146,47 @@ export const App: React.FC = () => {
           onCycleAmbientIntensity={cycleAmbientIntensity}
         />
 
-        {/* Dynamic Route Content - Independent Smooth Scroll */}
-        <main
-          id="main-scroll-container"
-          style={{
-            flex: 1,
-            minHeight: 0,
-            padding:
-              currentRoute.type === 'components' &&
+      {/* Global Sleek Scrollbar Styles to match sidebar across all screens */}
+      <style>{`
+        *::-webkit-scrollbar {
+          width: 6px;
+          height: 6px;
+        }
+        *::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        *::-webkit-scrollbar-thumb {
+          background: ${colorScheme === 'dark' ? 'rgba(255, 255, 255, 0.18)' : 'rgba(0, 0, 0, 0.18)'};
+          border-radius: 9999px;
+        }
+        *::-webkit-scrollbar-thumb:hover {
+          background: ${colorScheme === 'dark' ? 'rgba(255, 255, 255, 0.32)' : 'rgba(0, 0, 0, 0.32)'};
+        }
+        * {
+          scrollbar-width: thin;
+          scrollbar-color: ${colorScheme === 'dark' ? 'rgba(255, 255, 255, 0.18) transparent' : 'rgba(0, 0, 0, 0.18) transparent'};
+        }
+      `}</style>
+
+      {/* Dynamic Route Content - Independent Smooth Scroll */}
+      <main
+        id="main-scroll-container"
+        style={{
+          flex: 1,
+          minHeight: 0,
+          padding:
+            (currentRoute.type === 'components' &&
               currentRoute.id &&
               currentRoute.id !== 'all-components' &&
-              currentRoute.id !== 'all'
-                ? 0
-                : '36px 44px',
-            overflowY: 'auto',
-            position: 'relative',
-            zIndex: 1,
-          }}
-        >
+              currentRoute.id !== 'all') ||
+            currentRoute.type === 'icons'
+              ? 0
+              : '36px 44px',
+          overflowY: currentRoute.type === 'icons' ? 'hidden' : 'auto',
+          position: 'relative',
+          zIndex: 1,
+        }}
+      >
           {currentRoute.type === 'overview' && (
             <OverviewSection />
           )}
@@ -206,7 +229,7 @@ export const App: React.FC = () => {
                   }}
                 >
                   <SpinnerIcon size={24} style={{ animation: 'spin 1s linear infinite' }} />
-                  <span>Loading 12,253 Vector Icons...</span>
+                  <span>Loading 14,255 Vector Icons...</span>
                 </div>
               }
             >

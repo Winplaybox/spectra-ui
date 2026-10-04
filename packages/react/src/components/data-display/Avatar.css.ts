@@ -5,14 +5,25 @@ export const avatar = style({
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: 'var(--color-surface-raised)',
   color: 'var(--color-text-primary)',
   fontFamily: 'var(--font-primitive-family-sans, var(--font-family-sans))',
   fontWeight: 'var(--font-primitive-weight-semibold, var(--font-weight-semibold))',
-  overflow: 'hidden',
+  overflow: 'visible',
   userSelect: 'none',
   flexShrink: 0,
+});
+
+export const inner = style({
+  width: '100%',
+  height: '100%',
+  borderRadius: 'inherit',
+  overflow: 'hidden',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: 'var(--color-surface-raised)',
   border: '1px solid var(--color-border-subtle)',
+  boxSizing: 'border-box',
 });
 
 export const circle = style({
@@ -65,45 +76,94 @@ export const statusDot = style({
   insetInlineEnd: 0,
   borderRadius: 'var(--radius-control-full)',
   border: '2px solid var(--color-surface)',
+  boxSizing: 'border-box',
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  zIndex: 1,
+  pointerEvents: 'none',
 });
 
 export const statusXs = style({
-  width: '6px',
-  height: '6px',
+  width: '8px',
+  height: '8px',
+  borderWidth: '1.5px',
 });
 
 export const statusSm = style({
-  width: '8px',
-  height: '8px',
+  width: '10px',
+  height: '10px',
+  borderWidth: '2px',
 });
 
 export const statusMd = style({
-  width: '10px',
-  height: '10px',
+  width: '12px',
+  height: '12px',
+  borderWidth: '2px',
 });
 
 export const statusLg = style({
-  width: '12px',
-  height: '12px',
+  width: '14px',
+  height: '14px',
+  borderWidth: '2px',
 });
 
 export const statusXl = style({
-  width: '14px',
-  height: '14px',
+  width: '18px',
+  height: '18px',
+  borderWidth: '2.5px',
 });
 
 export const online = style({
-  backgroundColor: 'var(--color-feedback-success)',
+  backgroundColor: 'var(--color-feedback-success, #10B981)',
 });
 
 export const offline = style({
-  backgroundColor: 'var(--color-text-muted)',
+  backgroundColor: 'var(--color-text-muted, #6B7280)',
 });
 
 export const busy = style({
-  backgroundColor: 'var(--color-feedback-error)',
+  backgroundColor: 'var(--color-feedback-error, #EF4444)',
 });
 
 export const away = style({
-  backgroundColor: 'var(--color-feedback-warning)',
+  backgroundColor: 'var(--color-feedback-warning, #F59E0B)',
 });
+
+export const dnd = style({
+  backgroundColor: 'var(--color-feedback-error, #EF4444)',
+  '::after': {
+    content: '""',
+    display: 'block',
+    width: '50%',
+    height: '2px',
+    backgroundColor: '#ffffff',
+    borderRadius: '1px',
+  },
+});
+
+export const inMeeting = style({
+  backgroundColor: '#8B5CF6',
+});
+
+export const meeting = inMeeting;
+
+export const focus = style({
+  backgroundColor: '#6366F1',
+});
+
+export const idle = style({
+  backgroundColor: 'var(--color-surface)',
+  boxShadow: 'inset 0 0 0 2.5px var(--color-feedback-warning, #F59E0B)',
+});
+
+export const invisible = style({
+  backgroundColor: 'var(--color-surface)',
+  boxShadow: 'inset 0 0 0 2px var(--color-text-muted, #6B7280)',
+});
+
+export const streaming = style({
+  backgroundColor: '#A855F7',
+  boxShadow: '0 0 6px rgba(168, 85, 247, 0.6)',
+});
+

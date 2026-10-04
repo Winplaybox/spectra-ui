@@ -10,13 +10,26 @@ import {
 import { useTheme } from '@spectra/primitives';
 import { getTokens } from '@spectra/tokens';
 
+export type NativeAvatarStatus =
+  | 'online'
+  | 'offline'
+  | 'busy'
+  | 'away'
+  | 'dnd'
+  | 'in-meeting'
+  | 'meeting'
+  | 'focus'
+  | 'idle'
+  | 'invisible'
+  | 'streaming';
+
 export interface NativeAvatarProps {
   src?: string;
   alt?: string;
   name?: string;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   variant?: 'circle' | 'rounded' | 'square';
-  status?: 'online' | 'offline' | 'busy' | 'away';
+  status?: NativeAvatarStatus;
   testID?: string;
   style?: ViewStyle;
 }
@@ -45,16 +58,16 @@ export const Avatar: React.FC<NativeAvatarProps> = ({
   const getSizeStyles = () => {
     switch (size) {
       case 'xs':
-        return { dim: 24, fontSize: 10, statusDim: 6, statusBorder: 1.5 };
+        return { dim: 24, fontSize: 10, statusDim: 8, statusBorder: 1.5 };
       case 'sm':
-        return { dim: 32, fontSize: 12, statusDim: 8, statusBorder: 2 };
+        return { dim: 32, fontSize: 12, statusDim: 10, statusBorder: 2 };
       case 'lg':
-        return { dim: 48, fontSize: 18, statusDim: 12, statusBorder: 2 };
+        return { dim: 48, fontSize: 18, statusDim: 14, statusBorder: 2 };
       case 'xl':
-        return { dim: 64, fontSize: 24, statusDim: 14, statusBorder: 2.5 };
+        return { dim: 64, fontSize: 24, statusDim: 18, statusBorder: 2.5 };
       case 'md':
       default:
-        return { dim: 40, fontSize: 14, statusDim: 10, statusBorder: 2 };
+        return { dim: 40, fontSize: 14, statusDim: 12, statusBorder: 2 };
     }
   };
 
@@ -73,14 +86,26 @@ export const Avatar: React.FC<NativeAvatarProps> = ({
   const getStatusColor = () => {
     switch (status) {
       case 'online':
-        return tokens['color-semantic-feedback-success'];
+        return tokens['color-semantic-feedback-success'] || '#10B981';
       case 'busy':
-        return tokens['color-semantic-feedback-error'];
+      case 'dnd':
+        return tokens['color-semantic-feedback-error'] || '#EF4444';
       case 'away':
-        return tokens['color-semantic-feedback-warning'];
+        return tokens['color-semantic-feedback-warning'] || '#F59E0B';
+      case 'in-meeting':
+      case 'meeting':
+        return '#8B5CF6';
+      case 'focus':
+        return '#6366F1';
+      case 'idle':
+        return tokens['color-semantic-surface'] || '#1E293B';
+      case 'invisible':
+        return tokens['color-semantic-surface'] || '#1E293B';
+      case 'streaming':
+        return '#A855F7';
       case 'offline':
       default:
-        return tokens['color-semantic-text-muted'];
+        return tokens['color-semantic-text-muted'] || '#6B7280';
     }
   };
 
@@ -149,11 +174,27 @@ export const Avatar: React.FC<NativeAvatarProps> = ({
               height: sizeStyle.statusDim,
               borderRadius: sizeStyle.statusDim / 2,
               borderWidth: sizeStyle.statusBorder,
-              borderColor: tokens['color-semantic-surface'],
+              borderColor:
+                status === 'invisible'
+                  ? tokens['color-semantic-text-muted'] || '#6B7280'
+                  : status === 'idle'
+                  ? tokens['color-semantic-feedback-warning'] || '#F59E0B'
+                  : tokens['color-semantic-surface'] || '#0F172A',
               backgroundColor: getStatusColor(),
             },
           ]}
-        />
+        >
+          {status === 'dnd' && (
+            <View
+              style={{
+                width: sizeStyle.statusDim * 0.5,
+                height: 2,
+                backgroundColor: '#ffffff',
+                borderRadius: 1,
+              }}
+            />
+          )}
+        </View>
       )}
     </View>
   );
@@ -176,5 +217,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     right: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

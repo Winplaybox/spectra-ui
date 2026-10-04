@@ -89,7 +89,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
               margin: '0 0 20px 0',
             }}
           >
-            A fast, accessible, and token-driven design system with clean 2D flat aesthetics, zero runtime CSS overhead, multi-platform React + React Native support, and 12,253 on-demand icons.
+            A fast, accessible, and token-driven design system with clean 2D flat aesthetics, zero runtime CSS overhead, multi-platform React + React Native support, and 14,255 on-demand icons.
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
             <Button variant="primary" size="md" onClick={() => navigate('/components')}>
@@ -201,7 +201,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
             <SparklesIcon size={24} color="#818CF8" />
           </div>
           <h3 style={{ margin: '0 0 6px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
-            12,253 Icons Catalog
+            14,255 Icons Catalog
           </h3>
           <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
             Filled, outlined, rounded, sharp, and two-tone vector icons with category-level code splitting and lazy loading.

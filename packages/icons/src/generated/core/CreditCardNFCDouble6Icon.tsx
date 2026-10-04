@@ -25,7 +25,7 @@ export const CreditCardNFCDouble6Icon: React.FC<IconProps> = ({
 <path d="M14.625 18.4531C15.1696 17.7993 15.5 16.9406 15.5 16C15.5 15.0594 15.1696 14.2007 14.625 13.5469" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeLinecap="round" strokeLinejoin="round"/>
 <path d="M18 12.0715C18 11.4786 17.464 11 16.8 11L6 11V6.5H22V12.2234C22 12.8508 21.464 13.3571 20.8 13.3571H18V12.0715Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
 <mask id="path-8-inside-1_292_164505" fill="white">
-<path d="M19 8H9V9.5H19V8Z"/>
+<path fill={color || 'currentColor'}  d="M19 8H9V9.5H19V8Z"/>
 </mask>
 <path d="M9 8V6.5H7.5V8H9ZM19 8H20.5V6.5H19V8ZM19 9.5V11H20.5V9.5H19ZM9 9.5H7.5V11H9V9.5ZM9 9.5H19V6.5H9V9.5ZM17.5 8V9.5H20.5V8H17.5ZM19 8H9V11H19V8ZM10.5 9.5V8H7.5V9.5H10.5Z" fill={color || 'currentColor'} mask="url(#path-8-inside-1_292_164505)"/>
 <path fillRule="evenodd" clipRule="evenodd" d="M22 6.5H6V3.97222C6 3.43426 6.536 3 7.2 3H20.8C21.464 3 22 3.43426 22 3.97222V6.5Z" stroke={color || 'currentColor'} strokeWidth={strokeWidth ?? 1.5} strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
