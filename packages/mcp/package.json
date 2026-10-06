@@ -1,10 +1,11 @@
 {
   "name": "@winplaybox/mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Spectra UI Design System Model Context Protocol (MCP) Server for Cursor, Claude Desktop, and Antigravity IDE",
   "main": "./src/index.js",
   "bin": {
-    "spectra-mcp": "./src/index.js"
+    "spectra-mcp": "./src/index.js",
+    "mcp": "./src/index.js"
   },
   "publishConfig": {
     "access": "public"
@@ -16,6 +17,7 @@
   },
   "type": "module",
   "scripts": {
+    "build": "node scripts/build-data.mjs",
     "start": "node src/index.js",
     "test": "node scripts/test-mcp.js"
   },

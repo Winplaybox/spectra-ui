@@ -26,7 +26,15 @@ export default defineConfig({
     port: 3000,
     open: false,
   },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'esnext',
+    },
+  },
+  esbuild: {
+    target: 'esnext',
+  },
   build: {
-    target: 'es2022',
+    target: 'esnext',
   },
 });

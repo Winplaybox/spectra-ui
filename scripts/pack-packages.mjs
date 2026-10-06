@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+﻿import fs from 'node:fs';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
 
@@ -26,8 +26,8 @@ for (const pkgRel of PACKAGES) {
   
   console.log(`Packaging ${pkgJson.name}@${pkgJson.version}...`);
   try {
-    // Run npm pack directly inside package directory and move to outDir
-    const output = execSync('npm pack', { cwd: pkgDir, encoding: 'utf-8' }).trim();
+    // Run pnpm pack directly inside package directory to resolve workspace:* references
+    const output = execSync('pnpm pack', { cwd: pkgDir, encoding: 'utf-8' }).trim();
     const tarballName = output.split('\n').pop().trim();
     const sourcePath = path.join(pkgDir, tarballName);
     const targetPath = path.join(outDir, tarballName);

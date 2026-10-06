@@ -1,6 +1,6 @@
 {
   "name": "@winplaybox/react-native",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Styled React Native components for Spectra UI (WinPlayBox Design System)",
   "type": "module",
   "main": "./src/index.ts",
@@ -27,8 +27,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@winplaybox/primitives": "workspace:*",
-    "@winplaybox/tokens": "workspace:*"
+    "@winplaybox/primitives": "^0.1.0",
+    "@winplaybox/tokens": "^0.1.0"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",

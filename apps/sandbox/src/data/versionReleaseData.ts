@@ -10,14 +10,33 @@ export interface VersionRelease {
   gitTagUrl: string;
 }
 
-export const CURRENT_VERSION = 'v0.1.0';
+export const CURRENT_VERSION = 'v0.2.0';
 
 export const RELEASES_DATA: VersionRelease[] = [
   {
-    version: 'v0.1.0',
-    releaseDate: 'Initial Release (In Development)',
-    tag: 'v0.1.0',
+    version: 'v0.2.0',
+    releaseDate: 'October 2026',
+    tag: 'v0.2.0',
     status: 'latest',
+    title: 'Spectra UI v0.2.0 — Universal Cross-Platform Expansion',
+    description:
+      'Major expansion of the Spectra UI design system: universal cross-platform Clipboard engine, native layout primitives, CopyButton components, synchronized MCP server, and isolated platform architectures.',
+    highlights: [
+      'Universal Multi-Platform Clipboard engine (Clipboard & useClipboard) supporting Modern Web, Legacy execCommand, Bare React Native, and Expo.',
+      'New Universal CopyButton component across Web (@winplaybox/react) and Native (@winplaybox/react-native) with authentic SVG vector feedback.',
+      'First-Class React Native Layout & Action Primitives: Box, Grid, ScrollView, Pressable, Image, and SvgIcon.',
+      'Purged anti-pattern raw React Native and third-party re-exports from @winplaybox/react-native for strict design token fidelity.',
+      '@winplaybox/mcp Server synchronization pipeline covering 62 components, 29 hooks, 56 color tokens, and curated vector icons.',
+      'Zero Emoji Policy and strict SVG icon alignment across all documentation and platform chassis.',
+    ],
+    docsUrl: '/',
+    gitTagUrl: 'https://github.com/Winplaybox/spectra-ui/releases/tag/v0.2.0',
+  },
+  {
+    version: 'v0.1.0',
+    releaseDate: 'Initial Release',
+    tag: 'v0.1.0',
+    status: 'legacy',
     title: 'Spectra UI v0.1.0 — Initial Release',
     description:
       'The initial release of the WinPlayBox Spectra UI Design System: 20 multi-platform components across Web and React Native, unified semantic design tokens, 12,253 icons, Algolia search database, and interactive documentation sandbox.',
@@ -30,13 +49,21 @@ export const RELEASES_DATA: VersionRelease[] = [
       'NPM Publishing Ready with dual CJS/ESM exports, TypeScript declarations, and public package access.',
     ],
     docsUrl: '/',
-    gitTagUrl: 'https://github.com/Winplaybox/spectra-ui',
+    gitTagUrl: 'https://github.com/Winplaybox/spectra-ui/releases/tag/v0.1.0',
   },
 ];
 
+export const V020_NEW_COMPONENTS = ['copy-button', 'box', 'grid', 'scroll-view', 'pressable', 'image'];
 export const V010_NEW_COMPONENTS = ['alert', 'spinner', 'skeleton', 'divider', 'chip', 'breadcrumbs'];
 
 export function getComponentReleaseVersion(componentId: string): { version: string; isNew: boolean } {
+  const isV020 = V020_NEW_COMPONENTS.includes(componentId);
+  if (isV020) {
+    return {
+      version: 'v0.2.0',
+      isNew: true,
+    };
+  }
   const isNew = V010_NEW_COMPONENTS.includes(componentId);
   return {
     version: 'v0.1.0',

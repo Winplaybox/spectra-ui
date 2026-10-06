@@ -3,9 +3,25 @@
 All notable changes to the **Spectra UI** monorepo are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-10-06
+
+### Features & Architecture
+- **Universal Multi-Platform Clipboard System**:
+  - Implemented `Clipboard` static utility and `useClipboard` hook in `@winplaybox/primitives` supporting Modern Web (`navigator.clipboard`), Legacy Web fallback (`execCommand`), Bare React Native, Expo, and custom pluggable adapters.
+  - Added `<CopyButton>` component to `@winplaybox/react` and `@winplaybox/react-native` with authentic SVG feedback icons (`CopyIcon` to `CheckIcon`).
+- **First-Class React Native Layout & Interaction Primitives**:
+  - Added token-aware native primitives to `@winplaybox/react-native`: `Box`, `Grid`, `ScrollView`, `Pressable`, `Image`, and `Icon`.
+  - Purged anti-pattern raw React Native and third-party re-exports (`View`, `Image`, `TouchableOpacity`, `AsyncStorage`, `@expo/vector-icons`).
+- **MCP Server Synchronized Registry (`@winplaybox/mcp`)**:
+  - Synchronized registry pipeline covering all 62 components, 29 hooks, 56 color tokens, and curated vector icons.
+  - Added `build: "node scripts/build-data.mjs"` and integrated with Turbo build pipeline.
+- **Design System Guidelines & Compliance**:
+  - Enforced Zero Emoji Policy and SVG vector alignment across all packages.
+  - Upgraded sandbox documentation dashboard with release history and isolated platform architectures.
+
 ---
 
-## [0.1.0] - Initial Release (In Development)
+## [0.1.0] - Initial Release
 
 ### Features & Architecture
 - **20 Multi-Platform Components**:

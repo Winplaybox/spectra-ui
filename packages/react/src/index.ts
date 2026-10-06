@@ -8,6 +8,7 @@ export * from './components/actions/SplitButton';
 export * from './components/actions/CompoundButton';
 export * from './components/actions/ButtonGroup';
 export * from './components/actions/IconButton';
+export * from './components/actions/CopyButton';
 
 // Form
 export * from './components/form/TextInput';

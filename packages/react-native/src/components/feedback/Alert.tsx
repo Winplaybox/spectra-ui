@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Pressable, ViewStyle } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ViewStyle, Alert as RNAlert } from 'react-native';
 import { useTheme } from '@winplaybox/primitives';
 import { getTokens } from '@winplaybox/tokens';
 
@@ -15,7 +15,7 @@ export interface NativeAlertProps {
   style?: ViewStyle;
 }
 
-export const Alert: React.FC<NativeAlertProps> = ({
+const AlertComponent: React.FC<NativeAlertProps> = ({
   severity,
   variant = 'info',
   title,
@@ -85,6 +85,18 @@ export const Alert: React.FC<NativeAlertProps> = ({
     </View>
   );
 };
+
+export interface AlertStatic {
+  alert: typeof RNAlert.alert;
+  prompt?: typeof RNAlert.prompt;
+}
+
+export const Alert: React.FC<NativeAlertProps> & AlertStatic = Object.assign(AlertComponent, {
+  alert: (...args: Parameters<typeof RNAlert.alert>) => RNAlert.alert(...args),
+  prompt: (...args: any[]) => (RNAlert.prompt ? (RNAlert.prompt as any)(...args) : undefined),
+});
+
+export const NativeAlert = RNAlert;
 
 const styles = StyleSheet.create({
   container: {
