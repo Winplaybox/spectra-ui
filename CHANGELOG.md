@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [0.2.0] - 2026-10-06
 
 ### Features & Architecture
+- **Universal Cross-Platform Components (<ListView>, <DatePicker>, <WebViewBox>)**:
+  - Implemented `<ListView>` across Web (`@winplaybox/react`) and Native (`@winplaybox/react-native`) with token border dividers, theme-synchronized pull-to-refresh (`RefreshControl` on Native, accessible status indicator on Web), and empty state fallbacks.
+  - Implemented `<DatePicker>` across Web and Native: native Android dialog (`DateTimePickerAndroid`), iOS bottom modal sheet, Web calendar popover with `<Calendar>`, and authentic vector `CalendarIcon` adhering strictly to the Zero Emoji Policy.
+  - Implemented `<WebViewBox>` containment surface: dynamic resolution of `react-native-webview` (preventing heavy C++ binary bloat in design system core), animated loading progress bar, styled error fallback card with retry, and external browser launcher (`Linking.openURL`).
 - **Universal Multi-Platform Clipboard System**:
   - Implemented `Clipboard` static utility and `useClipboard` hook in `@winplaybox/primitives` supporting Modern Web (`navigator.clipboard`), Legacy Web fallback (`execCommand`), Bare React Native, Expo, and custom pluggable adapters.
   - Added `<CopyButton>` component to `@winplaybox/react` and `@winplaybox/react-native` with authentic SVG feedback icons (`CopyIcon` to `CheckIcon`).
@@ -13,7 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - Added token-aware native primitives to `@winplaybox/react-native`: `Box`, `Grid`, `ScrollView`, `Pressable`, `Image`, and `Icon`.
   - Purged anti-pattern raw React Native and third-party re-exports (`View`, `Image`, `TouchableOpacity`, `AsyncStorage`, `@expo/vector-icons`).
 - **MCP Server Synchronized Registry (`@winplaybox/mcp`)**:
-  - Synchronized registry pipeline covering all 62 components, 29 hooks, 56 color tokens, and curated vector icons.
+  - Synchronized registry pipeline covering all 65 components, 29 hooks, 56 color tokens, and 42 curated vector icons.
   - Added `build: "node scripts/build-data.mjs"` and integrated with Turbo build pipeline.
 - **Design System Guidelines & Compliance**:
   - Enforced Zero Emoji Policy and SVG vector alignment across all packages.

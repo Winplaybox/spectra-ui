@@ -1142,6 +1142,232 @@ export const COMPONENTS = {
     ],
     "recipes": []
   },
+  "list-view": {
+    "id": "list-view",
+    "name": "ListView",
+    "category": "Data Display",
+    "description": "High-performance token-aware list primitive supporting pull-to-refresh, 1px theme dividers, empty states, and virtualized scrolling across Web and Native.",
+    "importStatement": "import { ListView } from '@winplaybox/react';",
+    "nativeImport": "import { ListView } from '@winplaybox/react-native';",
+    "props": [
+      {
+        "name": "data",
+        "type": "readonly T[]",
+        "description": "Array of data items to render."
+      },
+      {
+        "name": "renderItem",
+        "type": "(item: T, index: number) => ReactNode",
+        "required": true,
+        "description": "Item render function."
+      },
+      {
+        "name": "divided",
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "Automatically inserts 1px theme divider lines."
+      },
+      {
+        "name": "padding",
+        "type": "BoxPadding",
+        "description": "Container padding matching Spectra Box tokens."
+      },
+      {
+        "name": "emptyState",
+        "type": "ReactNode",
+        "description": "Custom element rendered when data list is empty."
+      },
+      {
+        "name": "emptyText",
+        "type": "string",
+        "defaultValue": "'No items found'",
+        "description": "Fallback text string when list is empty."
+      },
+      {
+        "name": "refreshing",
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "Active pull-to-refresh spinner status."
+      },
+      {
+        "name": "onRefresh",
+        "type": "() => void",
+        "description": "Trigger callback on pull-to-refresh gesture or button."
+      }
+    ],
+    "nativeProps": [
+      {
+        "name": "data",
+        "type": "Readonly<ArrayLike<T>>",
+        "description": "Native virtualized list items."
+      },
+      {
+        "name": "divided",
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "Theme border separator."
+      }
+    ],
+    "tokens": [
+      "--color-surface",
+      "--color-border-subtle",
+      "--color-text-secondary"
+    ],
+    "recipes": [
+      {
+        "title": "Universal Token-Aware ListView with Refresh",
+        "code": "import { ListView } from '@winplaybox/react';\n\n<ListView\n  data={items}\n  divided\n  refreshing={isRefreshing}\n  onRefresh={handleRefresh}\n  renderItem={(item) => <div style={{ padding: '12px 16px' }}>{item.title}</div>}\n/>"
+      },
+      {
+        "title": "Native Mobile Virtualized ListView",
+        "code": "import { ListView, Text } from '@winplaybox/react-native';\n\n<ListView\n  data={items}\n  divided\n  refreshing={isRefreshing}\n  onRefresh={handleRefresh}\n  renderItem={({ item }) => <Text>{item.title}</Text>}\n/>"
+      }
+    ]
+  },
+  "date-picker": {
+    "id": "date-picker",
+    "name": "DatePicker",
+    "category": "Form",
+    "description": "Cross-platform date and time input control with interactive calendar popovers on Web, native OS dialogs on Android, modal pickers on iOS, and zero emoji vector icons.",
+    "importStatement": "import { DatePicker } from '@winplaybox/react';",
+    "nativeImport": "import { DatePicker } from '@winplaybox/react-native';",
+    "props": [
+      {
+        "name": "value",
+        "type": "Date",
+        "description": "Selected Date value (controlled)."
+      },
+      {
+        "name": "defaultValue",
+        "type": "Date",
+        "description": "Initial Date value (uncontrolled)."
+      },
+      {
+        "name": "onChange",
+        "type": "(date?: Date) => void",
+        "description": "Callback fired when date is picked or cleared."
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "defaultValue": "'Select date...'",
+        "description": "Placeholder label."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "description": "Form field label."
+      },
+      {
+        "name": "error",
+        "type": "string | boolean",
+        "description": "Validation error text or boolean."
+      },
+      {
+        "name": "clearable",
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "Enables quick-clear button."
+      },
+      {
+        "name": "size",
+        "type": "'sm' | 'md' | 'lg'",
+        "defaultValue": "'md'",
+        "description": "Field size scale."
+      }
+    ],
+    "nativeProps": [
+      {
+        "name": "minDate",
+        "type": "Date",
+        "description": "Earliest selectable date."
+      },
+      {
+        "name": "maxDate",
+        "type": "Date",
+        "description": "Latest selectable date."
+      }
+    ],
+    "tokens": [
+      "--color-surface",
+      "--color-border-default",
+      "--color-action-primary"
+    ],
+    "recipes": [
+      {
+        "title": "Universal DatePicker with Label",
+        "code": "import { DatePicker } from '@winplaybox/react';\n\n<DatePicker\n  label=\"Event Date\"\n  value={eventDate}\n  onChange={setEventDate}\n  clearable\n/>"
+      },
+      {
+        "title": "Mobile Native OS DatePicker Trigger",
+        "code": "import { DatePicker } from '@winplaybox/react-native';\n\n<DatePicker\n  label=\"Booking Date\"\n  value={bookingDate}\n  onChange={setBookingDate}\n/>"
+      }
+    ]
+  },
+  "web-view-box": {
+    "id": "web-view-box",
+    "name": "WebViewBox",
+    "category": "Surfaces",
+    "description": "Universal web page containment surface with animated loading progress indicator, styled error fallback card with retry, and zero-crash external browser fallback.",
+    "importStatement": "import { WebViewBox } from '@winplaybox/react';",
+    "nativeImport": "import { WebViewBox } from '@winplaybox/react-native';",
+    "props": [
+      {
+        "name": "source",
+        "type": "{ uri: string } | { html: string }",
+        "required": true,
+        "description": "Target URL or HTML markup."
+      },
+      {
+        "name": "title",
+        "type": "string",
+        "description": "Accessible frame title."
+      },
+      {
+        "name": "showProgressBar",
+        "type": "boolean",
+        "defaultValue": "true",
+        "description": "Top animated loading progress indicator."
+      },
+      {
+        "name": "onLoadStart",
+        "type": "() => void",
+        "description": "Load start event."
+      },
+      {
+        "name": "onLoadEnd",
+        "type": "() => void",
+        "description": "Load completion event."
+      },
+      {
+        "name": "onError",
+        "type": "(error: any) => void",
+        "description": "Load error handler."
+      }
+    ],
+    "nativeProps": [
+      {
+        "name": "webviewStyle",
+        "type": "StyleProp<ViewStyle>",
+        "description": "Inner webview styling."
+      }
+    ],
+    "tokens": [
+      "--color-surface",
+      "--color-action-primary",
+      "--color-border-default"
+    ],
+    "recipes": [
+      {
+        "title": "Responsive Web Frame with Address Header",
+        "code": "import { WebViewBox } from '@winplaybox/react';\n\n<WebViewBox\n  src=\"https://example.com\"\n  title=\"External Article\"\n  showHeader\n  height=\"600px\"\n/>"
+      },
+      {
+        "title": "Native In-App Web Browser with Progress Bar & Error Fallback",
+        "code": "import { WebViewBox } from '@winplaybox/react-native';\n\n<WebViewBox\n  source={{ uri: 'https://news.ycombinator.com' }}\n  title=\"Hacker News\"\n  showProgressBar\n/>"
+      }
+    ]
+  },
   "scroll-view": {
     "id": "scroll-view",
     "name": "ScrollView",

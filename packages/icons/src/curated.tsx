@@ -936,6 +936,33 @@ export const MonitorIcon: React.FC<IconProps> = ({
   </svg>
 );
 
+export const CalendarIcon: React.FC<IconProps> = ({
+  size = 16,
+  color = 'currentColor',
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke={color}
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+    {...props}
+  >
+    <rect x="2" y="3" width="12" height="11" rx="2" />
+    <line x1="5" y1="1.5" x2="5" y2="4.5" />
+    <line x1="11" y1="1.5" x2="11" y2="4.5" />
+    <line x1="2" y1="7" x2="14" y2="7" />
+  </svg>
+);
+
+
 export interface AlgoliaLogoProps extends React.SVGAttributes<SVGElement> {
   width?: number | string;
   height?: number | string;

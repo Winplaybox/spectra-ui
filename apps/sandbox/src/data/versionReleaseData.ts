@@ -24,9 +24,12 @@ export const RELEASES_DATA: VersionRelease[] = [
     highlights: [
       'Universal Multi-Platform Clipboard engine (Clipboard & useClipboard) supporting Modern Web, Legacy execCommand, Bare React Native, and Expo.',
       'New Universal CopyButton component across Web (@winplaybox/react) and Native (@winplaybox/react-native) with authentic SVG vector feedback.',
+      'New Universal ListView component with token dividers, theme-synchronized pull-to-refresh, and empty state fallbacks across Web and Native.',
+      'New Universal DatePicker component with native OS dialogs (Android), modal sheet (iOS), and interactive calendar popover (Web).',
+      'New Universal WebViewBox containment surface with animated loading progress indicator, styled retry card, and zero-crash browser fallback.',
       'First-Class React Native Layout & Action Primitives: Box, Grid, ScrollView, Pressable, Image, and SvgIcon.',
       'Purged anti-pattern raw React Native and third-party re-exports from @winplaybox/react-native for strict design token fidelity.',
-      '@winplaybox/mcp Server synchronization pipeline covering 62 components, 29 hooks, 56 color tokens, and curated vector icons.',
+      '@winplaybox/mcp Server synchronization pipeline covering 65 components, 29 hooks, 56 color tokens, and curated vector icons.',
       'Zero Emoji Policy and strict SVG icon alignment across all documentation and platform chassis.',
     ],
     docsUrl: '/',
@@ -53,7 +56,7 @@ export const RELEASES_DATA: VersionRelease[] = [
   },
 ];
 
-export const V020_NEW_COMPONENTS = ['copy-button', 'box', 'grid', 'scroll-view', 'pressable', 'image'];
+export const V020_NEW_COMPONENTS = ['copy-button', 'box', 'grid', 'scroll-view', 'pressable', 'image', 'list-view', 'date-picker', 'web-view-box'];
 export const V010_NEW_COMPONENTS = ['alert', 'spinner', 'skeleton', 'divider', 'chip', 'breadcrumbs'];
 
 export function getComponentReleaseVersion(componentId: string): { version: string; isNew: boolean } {

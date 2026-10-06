@@ -1,15 +1,15 @@
 import React from 'react';
-import { Text as RNText, TextStyle } from 'react-native';
+import { Text as RNText, TextProps as RNTextProps, TextStyle, StyleProp } from 'react-native';
 import { useTheme } from '@winplaybox/primitives';
 import { getTokens } from '@winplaybox/tokens';
 
-export interface NativeTextProps {
+export interface NativeTextProps extends Omit<RNTextProps, 'style'> {
   children?: React.ReactNode;
   variant?: 'heading' | 'body' | 'label' | 'caption';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   weight?: 'regular' | 'medium' | 'semibold' | 'bold';
   color?: 'primary' | 'secondary' | 'muted' | 'inverse';
-  style?: TextStyle;
+  style?: StyleProp<TextStyle>;
 }
 
 export const Text: React.FC<NativeTextProps> = ({
@@ -18,6 +18,7 @@ export const Text: React.FC<NativeTextProps> = ({
   weight = 'regular',
   color = 'primary',
   style,
+  ...props
 }) => {
   const { colorScheme } = useTheme();
   const tokens = getTokens(colorScheme);
@@ -76,6 +77,7 @@ export const Text: React.FC<NativeTextProps> = ({
         },
         style,
       ]}
+      {...props}
     >
       {children}
     </RNText>

@@ -1802,4 +1802,179 @@ export function ChassisPrimitive({ children }) {
 }`,
     },
   },
+
+  'list-view': {
+    id: 'list-view',
+    name: 'List View',
+    category: 'Data Display',
+    description: 'Universal virtualized list component engineered with token-aware divider lines, built-in pull-to-refresh spinners, and flexible empty state fallbacks across Web and Native.',
+    guidelines: 'Use ListView for large or dynamic collections of structured records, feeds, transactions, and search results where responsive virtualization and pull-to-refresh enhance UX.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/feed/',
+    waiPattern: 'Feed & List Pattern',
+    dos: [
+      'Provide unique and stable keys using keyExtractor or record identifiers.',
+      'Enable divided to visually separate records using Spectra subtle border tokens.',
+      'Always supply emptyText or emptyState for zero-result states.',
+    ],
+    donts: [
+      'Do not nest vertical ListViews inside non-virtualized ScrollViews without fixed heights.',
+      'Avoid placing heavy synchronous calculations inside renderItem.',
+    ],
+    anatomy: [
+      { name: 'Root Container', role: 'Bounded scrollable container with overflow management and token borders.' },
+      { name: 'Refresh Banner', role: 'Theme-synchronized pull-to-refresh spinner with polite ARIA live announcement.' },
+      { name: 'Item Rows', role: 'Individual list item cards or rows with accessible listitem semantics.' },
+      { name: 'Dividers', role: '1px hairline separators utilizing --color-border-subtle.' },
+      { name: 'Empty State', role: 'Centered card rendered when record count is zero.' },
+    ],
+    keyboard: [
+      { key: 'Tab', description: 'Moves focus into interactive items in the list.' },
+      { key: 'Page Up / Page Down', description: 'Scrolls viewport by one page unit.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'ease-in-out',
+      description: 'Smooth fade transitions on pull-to-refresh status changes.',
+    },
+    props: [
+      { name: 'data', type: 'readonly T[]', defaultValue: '[]', description: 'Array of data items to render.' },
+      { name: 'renderItem', type: '(item: T, index: number) => ReactNode', defaultValue: 'undefined', description: 'Render callback for each item.' },
+      { name: 'divided', type: 'boolean', defaultValue: 'true', description: 'Automatically inserts 1px theme dividers.' },
+      { name: 'refreshing', type: 'boolean', defaultValue: 'false', description: 'Active pull-to-refresh indicator status.' },
+      { name: 'onRefresh', type: '() => void', defaultValue: 'undefined', description: 'Pull-to-refresh callback.' },
+      { name: 'emptyText', type: 'string', defaultValue: "'No items found'", description: 'Fallback text when data array is empty.' },
+    ],
+    nativeProps: [
+      { name: 'data', type: 'Readonly<ArrayLike<T>>', defaultValue: 'undefined', description: 'Native FlatList dataset.' },
+      { name: 'renderItem', type: 'ListRenderItem<T>', defaultValue: 'undefined', description: 'Native row renderer.' },
+      { name: 'divided', type: 'boolean', defaultValue: 'true', description: 'Native theme border hairline separator.' },
+      { name: 'refreshing', type: 'boolean', defaultValue: 'false', description: 'Native RefreshControl active state.' },
+      { name: 'onRefresh', type: '() => void', defaultValue: 'undefined', description: 'Native pull-to-refresh callback.' },
+    ],
+    headlessHook: {
+      name: 'useListNavigation',
+      description: 'Enables keyboard arrow-key navigation and roving tabindex across list rows.',
+      code: `import { useListNavigation } from '@winplaybox/primitives';
+
+export function CustomListFeed({ items }) {
+  const { activeIndex, getItemProps } = useListNavigation(items.length);
+  return items.map((item, idx) => <div key={idx} {...getItemProps(idx)}>{item.name}</div>);
+}`,
+    },
+  },
+
+  'date-picker': {
+    id: 'date-picker',
+    name: 'Date Picker',
+    category: 'Form',
+    description: 'Cross-platform date and time input control with interactive calendar popover on Web, native OS dialogs on Android, modal pickers on iOS, and zero emoji vector icons.',
+    guidelines: 'Use DatePicker for forms, scheduling, booking, filters, and deadlines. Provide clear date formatting that conforms to user locale expectations.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/combobox/',
+    waiPattern: 'Combobox & Dialog Pattern',
+    dos: [
+      'Provide clear label and placeholder guidance indicating expected date format.',
+      'Enable clearable on optional dates to allow users to reset their selection.',
+      'Use minDate and maxDate to prevent invalid out-of-range selection.',
+    ],
+    donts: [
+      'Do not rely solely on color to communicate invalid dates; use assistive error messages.',
+      'Never omit accessible labels on date picker trigger elements.',
+    ],
+    anatomy: [
+      { name: 'Trigger Input', role: 'Accessible combobox showing selected date text with calendar vector icon.' },
+      { name: 'Calendar Popover', role: 'Accessible monthly grid dialog with month and year navigation.' },
+      { name: 'Clear Action', role: 'Optional icon button to immediately reset selected date.' },
+      { name: 'Helper / Error Row', role: 'Semantic status text rendered beneath the input.' },
+    ],
+    keyboard: [
+      { key: 'Enter / Space / Down Arrow', description: 'Opens the date picker dialog popover.' },
+      { key: 'Escape', description: 'Closes the calendar dialog without modifying value.' },
+      { key: 'Tab', description: 'Navigates focus within calendar days and navigation controls.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0, 0, 0.2, 1)',
+      description: 'Subtle fade-in and scale elevation on calendar popover open.',
+    },
+    props: [
+      { name: 'value', type: 'Date', defaultValue: 'undefined', description: 'Controlled date value.' },
+      { name: 'defaultValue', type: 'Date', defaultValue: 'undefined', description: 'Uncontrolled initial date.' },
+      { name: 'onChange', type: '(date?: Date) => void', defaultValue: 'undefined', description: 'Selection callback.' },
+      { name: 'placeholder', type: 'string', defaultValue: "'Select date...'", description: 'Placeholder label text.' },
+      { name: 'label', type: 'string', defaultValue: 'undefined', description: 'Form field label.' },
+      { name: 'clearable', type: 'boolean', defaultValue: 'true', description: 'Allows clearing selected date.' },
+      { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Input height and padding scale.' },
+    ],
+    nativeProps: [
+      { name: 'value', type: 'Date', defaultValue: 'undefined', description: 'Native selected date.' },
+      { name: 'onChange', type: '(date?: Date) => void', defaultValue: 'undefined', description: 'Native selection callback.' },
+      { name: 'minDate', type: 'Date', defaultValue: 'undefined', description: 'Minimum selectable date.' },
+      { name: 'maxDate', type: 'Date', defaultValue: 'undefined', description: 'Maximum selectable date.' },
+    ],
+    headlessHook: {
+      name: 'useControllableState',
+      description: 'Seamlessly synchronizes controlled and uncontrolled Date states.',
+      code: `import { useControllableState } from '@winplaybox/primitives';
+
+export function CustomDateInput({ value, defaultValue, onChange }) {
+  const [date, setDate] = useControllableState({ value, defaultValue, onChange });
+  return <button onClick={() => setDate(new Date())}>{date ? date.toDateString() : 'Pick'}</button>;
+}`,
+    },
+  },
+
+  'web-view-box': {
+    id: 'web-view-box',
+    name: 'Web View Box',
+    category: 'Surfaces',
+    description: 'Universal web page containment surface with animated loading progress indicator, styled error fallback card with retry, and zero-crash external browser fallback.',
+    guidelines: 'Use WebViewBox to render sandboxed web previews, external documentation, in-app articles, or HTML content without bundling heavy C++ browser binaries into design system core.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/',
+    waiPattern: 'Frame Landmark Pattern',
+    dos: [
+      'Always supply a descriptive title prop for screen readers.',
+      'Enable showProgressBar to provide clear visual feedback during loading.',
+      'Handle error states gracefully with retry and external browser options.',
+    ],
+    donts: [
+      'Do not embed untrusted scripts without sandbox restrictions.',
+      'Do not display unformatted raw URLs as the primary title.',
+    ],
+    anatomy: [
+      { name: 'Containment Card', role: 'Rounded surface with Spectra border tokens and elevation.' },
+      { name: 'Progress Bar', role: 'Smooth horizontal indicator tracking page load percentage.' },
+      { name: 'Header Toolbar', role: 'Optional bar displaying page title, URL domain, and external launch action.' },
+      { name: 'Web Engine', role: 'Sandboxed iframe (Web) or dynamic react-native-webview bridge (Native).' },
+      { name: 'Error / Fallback Card', role: 'Styled notice card offering retry or external browser launch.' },
+    ],
+    keyboard: [
+      { key: 'Tab', description: 'Navigates focus into frame controls or external link button.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'linear',
+      description: 'Smooth progress bar animation tracking load progress.',
+    },
+    props: [
+      { name: 'src', type: 'string', defaultValue: 'undefined', description: 'Target URL to render inside frame.' },
+      { name: 'title', type: 'string', defaultValue: "'Web View'", description: 'Accessible frame title.' },
+      { name: 'showHeader', type: 'boolean', defaultValue: 'false', description: 'Renders top address / toolbar.' },
+      { name: 'height', type: 'number | string', defaultValue: "'500px'", description: 'Height of the frame container.' },
+    ],
+    nativeProps: [
+      { name: 'source', type: '{ uri: string } | { html: string }', defaultValue: 'undefined', description: 'Native webview source object.' },
+      { name: 'showProgressBar', type: 'boolean', defaultValue: 'true', description: 'Animated top progress bar.' },
+      { name: 'onError', type: '(error: any) => void', defaultValue: 'undefined', description: 'Error event callback.' },
+    ],
+    headlessHook: {
+      name: 'useTheme',
+      description: 'Provides synchronized dark/light color schemes for web view backgrounds.',
+      code: `import { useTheme } from '@winplaybox/primitives';
+
+export function ThemedWebFrame({ url }) {
+  const { colorScheme } = useTheme();
+  return <WebViewBox src={\`\${url}?theme=\${colorScheme}\`} />;
+}`,
+    },
+  },
 };

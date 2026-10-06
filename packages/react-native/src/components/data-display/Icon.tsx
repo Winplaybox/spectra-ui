@@ -218,6 +218,16 @@ export const WarningIcon = createSvgIcon('M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-
 export const PlayCircleIcon = createSvgIcon('M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z', 'PlayCircleIcon');
 export const FilmIcon = createSvgIcon('M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z', 'FilmIcon');
 
+export const BookmarkIcon = createSvgIcon('M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z', 'BookmarkIcon');
+export const BookmarkOutlineIcon = createSvgIcon('M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V5h10v13z', 'BookmarkOutlineIcon');
+export const CalendarIcon = createSvgIcon('M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z', 'CalendarIcon');
+export const NewspaperIcon = createSvgIcon('M20 3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H5c-.55 0-1-.45-1-1V5h16v13c0 .55-.45 1-1 1zm-8-8H6v-2h5v2zm7 4H6v-2h11v2zm0-4h-4v-2h4v2z', 'NewspaperIcon');
+export const GameControllerIcon = createSvgIcon('M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-3c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z', 'GameControllerIcon');
+export const AddIcon = createSvgIcon('M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z', 'AddIcon');
+export const ChevronDownIcon = createSvgIcon('M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z', 'ChevronDownIcon');
+export const CheckmarkIcon = createSvgIcon('M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z', 'CheckmarkIcon');
+export const OptionsIcon = createSvgIcon('M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z', 'OptionsIcon');
+
 // Name registry for dynamic <Icon name="..." /> dispatch
 const iconRegistry: Record<string, React.FC<NativeIconProps>> = {
   // Navigation / Tabs
@@ -283,6 +293,22 @@ const iconRegistry: Record<string, React.FC<NativeIconProps>> = {
   'play-circle-outline': PlayCircleIcon,
   'film-outline': FilmIcon,
   'apps-outline': GridIcon,
+  bookmark: BookmarkIcon,
+  'bookmark-outline': BookmarkOutlineIcon,
+  calendar: CalendarIcon,
+  'calendar-outline': CalendarIcon,
+  newspaper: NewspaperIcon,
+  'newspaper-outline': NewspaperIcon,
+  'game-controller': GameControllerIcon,
+  'game-controller-outline': GameControllerIcon,
+  add: AddIcon,
+  'chevron-down': ChevronDownIcon,
+  checkmark: CheckmarkIcon,
+  options: OptionsIcon,
+  'options-outline': OptionsIcon,
+  earth: GlobeIcon,
+  'earth-outline': GlobeIcon,
+  play: PlayCircleIcon,
 };
 
 /**

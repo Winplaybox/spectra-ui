@@ -4,7 +4,7 @@ import { Button, ButtonVariant, ButtonSize, ButtonProps } from './Button';
 import { useClipboard } from '@winplaybox/primitives';
 import { CopyIcon, CheckIcon } from '@winplaybox/icons';
 
-export interface CopyButtonProps extends Omit<ButtonProps, 'onClick'> {
+export interface CopyButtonProps extends Omit<ButtonProps, 'onClick' | 'onCopy'> {
   /**
    * Text value to be copied to system clipboard.
    */
