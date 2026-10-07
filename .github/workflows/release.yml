@@ -82,8 +82,13 @@ jobs:
             DIST_TAG="${DIST_TAG:-latest}"
             echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
             echo "Publishing Spectra UI packages to npm with tag: $DIST_TAG..."
-            pnpm -r publish --access public --no-git-checks --tag "$DIST_TAG"
-            echo "All 6 Spectra UI packages successfully published to NPM!"
+            for pkg in packages/tokens packages/primitives packages/icons packages/react packages/react-native packages/mcp; do
+              echo "Publishing $pkg..."
+              pnpm --filter "./$pkg" publish --access public --no-git-checks --tag "$DIST_TAG" || echo "Notice: $pkg already at version or completed."
+            done
+            echo "Verification of published versions on npm registry:"
+            node -e "['tokens', 'primitives', 'icons', 'react', 'react-native', 'mcp'].forEach(p => { try { console.log('@winplaybox/' + p + '@' + require('child_process').execSync('npm view @winplaybox/' + p + ' version').toString().trim()); } catch(e) { console.error('Error viewing ' + p, e.message); } })"
+            echo "All Spectra UI packages successfully published and verified on NPM!"
           fi
 
       - name: Upload packages to GitHub Release

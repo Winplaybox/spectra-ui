@@ -9,6 +9,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "src",
+    "svg",
+    "README.md"
+  ],
   "author": "WinPlayBox",
   "license": "MIT",
   "repository": {
