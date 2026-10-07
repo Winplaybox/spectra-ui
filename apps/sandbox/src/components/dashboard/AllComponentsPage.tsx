@@ -18,6 +18,8 @@ import {
   Chip,
   Breadcrumbs,
   Avatar,
+  CopyButton,
+  DatePicker,
 } from '@winplaybox/react';
 import {
   SearchIcon,
@@ -33,7 +35,7 @@ import {
 } from '@winplaybox/icons';
 import { navigate } from '../../utils/router';
 import { COMPONENT_CATEGORIES } from './Sidebar';
-import { V010_NEW_COMPONENTS } from '../../data/versionReleaseData';
+import { V010_NEW_COMPONENTS, V020_NEW_COMPONENTS } from '../../data/versionReleaseData';
 import { COMPONENTS_DATA } from '../../data/componentsData';
 import { useVersion } from '../../context/VersionContext';
 import { usePlatform } from '../../context/PlatformContext';
@@ -293,6 +295,30 @@ const MiniComponentPreview: React.FC<{ componentId: string }> = ({ componentId }
           </div>
         </div>
       );
+    case 'copy-button':
+      return (
+        <CopyButton value="https://spectra-ui.winplaybox.com" label="Copy Link" size="sm" />
+      );
+    case 'date-picker':
+      return (
+        <div style={{ width: '85%' }}>
+          <DatePicker size="sm" placeholder="2026-10-07" />
+        </div>
+      );
+    case 'list-view':
+      return (
+        <div style={{ width: '85%', fontSize: 11, border: '1px solid var(--color-border-subtle)', borderRadius: 6, overflow: 'hidden' }}>
+          <div style={{ padding: '4px 8px', borderBottom: '1px solid var(--color-border-subtle)' }}>Feed Item 1</div>
+          <div style={{ padding: '4px 8px' }}>Feed Item 2</div>
+        </div>
+      );
+    case 'web-view-box':
+      return (
+        <div style={{ width: '85%', padding: '6px 10px', borderRadius: 6, border: '1px solid var(--color-border-subtle)', display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, color: 'var(--color-text-secondary)' }}>
+          <GlobeIcon size={14} color="var(--color-action-primary)" />
+          <span>Web Frame Preview</span>
+        </div>
+      );
     default:
       return <ComponentIcon size={24} style={{ color: 'var(--color-text-muted)' }} />;
   }
@@ -333,7 +359,7 @@ export const AllComponentsPage: React.FC = () => {
         // Tag filter check
         let tagMatch = true;
         if (selectedTag === 'new') {
-          tagMatch = V010_NEW_COMPONENTS.includes(comp.id);
+          tagMatch = V020_NEW_COMPONENTS.includes(comp.id);
         } else if (selectedTag === 'form') {
           tagMatch = cat.id === 'inputs' || cat.id === 'form';
         } else if (selectedTag === 'feedback') {
@@ -350,8 +376,8 @@ export const AllComponentsPage: React.FC = () => {
         matchingComponents = [...matchingComponents].sort((a, b) => b.name.localeCompare(a.name));
       } else if (sortBy === 'newest') {
         matchingComponents = [...matchingComponents].sort((a, b) => {
-          const aNew = V010_NEW_COMPONENTS.includes(a.id);
-          const bNew = V010_NEW_COMPONENTS.includes(b.id);
+          const aNew = V020_NEW_COMPONENTS.includes(a.id);
+          const bNew = V020_NEW_COMPONENTS.includes(b.id);
           if (aNew && !bNew) return -1;
           if (!aNew && bNew) return 1;
           return a.name.localeCompare(b.name);
@@ -615,9 +641,9 @@ export const AllComponentsPage: React.FC = () => {
 
           {[
             { id: 'all', label: `All Components (${allComponentsList.length})` },
-            { id: 'new', label: `New in v0.1.0 (${V010_NEW_COMPONENTS.length})` },
-            { id: 'form', label: 'Form & Input Controls (5)' },
-            { id: 'feedback', label: 'Feedback & Overlays (6)' },
+            { id: 'new', label: `New in v0.2.0 (${V020_NEW_COMPONENTS.length})` },
+            { id: 'form', label: 'Form & Input Controls' },
+            { id: 'feedback', label: 'Feedback & Overlays' },
           ].map((tag) => {
             const isSelected = selectedTag === tag.id;
             return (
@@ -874,7 +900,7 @@ export const AllComponentsPage: React.FC = () => {
               }}
             >
               {cat.components.map((comp) => {
-                const isNew = V010_NEW_COMPONENTS.includes(comp.id);
+                const isNew = V020_NEW_COMPONENTS.includes(comp.id);
                 const data = COMPONENTS_DATA[comp.id];
 
                 return (

@@ -706,6 +706,141 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
       { name: 'separator', type: 'string', defaultValue: "'/'", description: 'Native separator delimiter.' },
     ],
   },
+
+  'copy-button': {
+    componentName: 'CopyButton',
+    exportName: 'CopyButton',
+    importStatement: "import { CopyButton } from '@winplaybox/react';",
+    subpathImport: "import CopyButton from '@winplaybox/react/CopyButton';",
+    nativeImport: "import { CopyButton } from '@winplaybox/react-native';",
+    primitivesImport: "import { useClipboard } from '@winplaybox/primitives';",
+    description: 'One-click clipboard copying trigger with animated icon feedback transitions and configurable timeout.',
+    props: [
+      { name: 'value', type: 'string', defaultValue: "''", required: true, description: 'Text string to copy to the system clipboard.' },
+      { name: 'label', type: 'string', defaultValue: 'undefined', description: 'Idle text label (renders compact icon-only if omitted).' },
+      { name: 'copiedLabel', type: 'string', defaultValue: "'Copied!'", description: 'Text label displayed during the temporary copied state.' },
+      { name: 'timeout', type: 'number', defaultValue: '2000', description: 'Duration in milliseconds to display copied feedback.' },
+      { name: 'variant', type: "'primary' | 'secondary' | 'ghost'", defaultValue: "'secondary'", description: 'Visual button surface appearance.' },
+      { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Sizing scale affecting padding, typography, and icon size.' },
+      { name: 'onCopy', type: '() => void', defaultValue: 'undefined', description: 'Optional callback executed upon successful clipboard write.' },
+    ],
+    cssClasses: [
+      { ruleName: 'root', className: '.spectra-copy-button', description: 'Root button container element.' },
+      { ruleName: 'copied', className: '.spectra-copy-button--copied', description: 'Applied during active copied confirmation state.' },
+      { ruleName: 'icon', className: '.spectra-copy-button__icon', description: 'Wrapper for animated vector icon swap.' },
+      { ruleName: 'label', className: '.spectra-copy-button__label', description: 'Action text label element.' },
+    ],
+    cssVariables: [
+      { variable: '--spectra-copy-button-bg', defaultToken: 'var(--color-surface-subtle)', description: 'Default background fill.' },
+      { variable: '--spectra-copy-button-success', defaultToken: 'var(--color-feedback-success)', description: 'Color token applied during copied state.' },
+    ],
+    nativeProps: [
+      { name: 'value', type: 'string', defaultValue: "''", description: 'Text string copied to native mobile clipboard.' },
+      { name: 'label', type: 'string', defaultValue: 'undefined', description: 'Native text label.' },
+      { name: 'copiedLabel', type: 'string', defaultValue: "'Copied!'", description: 'Native copied confirmation label.' },
+      { name: 'timeout', type: 'number', defaultValue: '2000', description: 'Native confirmation feedback duration.' },
+      { name: 'onCopy', type: '() => void', defaultValue: 'undefined', description: 'Native callback after copying.' },
+    ],
+  },
+
+  'date-picker': {
+    componentName: 'DatePicker',
+    exportName: 'DatePicker',
+    importStatement: "import { DatePicker } from '@winplaybox/react';",
+    subpathImport: "import DatePicker from '@winplaybox/react/DatePicker';",
+    nativeImport: "import { DatePicker } from '@winplaybox/react-native';",
+    description: 'Cross-platform date selection input with accessible popover on Web and native OS dialog integration on mobile.',
+    props: [
+      { name: 'value', type: 'Date', defaultValue: 'undefined', description: 'Controlled date object value.' },
+      { name: 'defaultValue', type: 'Date', defaultValue: 'undefined', description: 'Uncontrolled initial date object value.' },
+      { name: 'onChange', type: '(date?: Date) => void', defaultValue: 'undefined', description: 'Callback fired when selected date changes.' },
+      { name: 'placeholder', type: 'string', defaultValue: "'Select date...'", description: 'Placeholder label rendered when no date is selected.' },
+      { name: 'label', type: 'string', defaultValue: 'undefined', description: 'Form field label text.' },
+      { name: 'clearable', type: 'boolean', defaultValue: 'true', description: 'If true, provides a reset action to clear date.' },
+      { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Input height, padding, and font size.' },
+      { name: 'disabled', type: 'boolean', defaultValue: 'false', description: 'Disables input interaction.' },
+    ],
+    cssClasses: [
+      { ruleName: 'root', className: '.spectra-date-picker', description: 'Root wrapper container.' },
+      { ruleName: 'input', className: '.spectra-date-picker__input', description: 'Trigger input field.' },
+      { ruleName: 'popover', className: '.spectra-date-picker__popover', description: 'Floating calendar dropdown card.' },
+      { ruleName: 'calendar', className: '.spectra-date-picker__calendar', description: 'Calendar month grid container.' },
+    ],
+    cssVariables: [
+      { variable: '--spectra-date-picker-border', defaultToken: 'var(--color-border-subtle)', description: 'Input and popover border token.' },
+      { variable: '--spectra-date-picker-active-bg', defaultToken: 'var(--color-action-primary)', description: 'Selected day pill background.' },
+    ],
+    nativeProps: [
+      { name: 'value', type: 'Date', defaultValue: 'undefined', description: 'Native controlled date value.' },
+      { name: 'onChange', type: '(date?: Date) => void', defaultValue: 'undefined', description: 'Native date change handler.' },
+      { name: 'minDate', type: 'Date', defaultValue: 'undefined', description: 'Minimum selectable date.' },
+      { name: 'maxDate', type: 'Date', defaultValue: 'undefined', description: 'Maximum selectable date.' },
+    ],
+  },
+
+  'list-view': {
+    componentName: 'ListView',
+    exportName: 'ListView',
+    importStatement: "import { ListView } from '@winplaybox/react';",
+    subpathImport: "import ListView from '@winplaybox/react/ListView';",
+    nativeImport: "import { ListView } from '@winplaybox/react-native';",
+    description: 'High-performance list component with token-aware dividers, pull-to-refresh spinners, and empty states.',
+    props: [
+      { name: 'data', type: 'readonly T[]', defaultValue: '[]', required: true, description: 'Array of data records to render in list.' },
+      { name: 'renderItem', type: '(item: T, index: number) => React.ReactNode', defaultValue: 'undefined', required: true, description: 'Render callback for individual items.' },
+      { name: 'divided', type: 'boolean', defaultValue: 'true', description: 'Inserts 1px subtle divider lines between rows.' },
+      { name: 'refreshing', type: 'boolean', defaultValue: 'false', description: 'Whether pull-to-refresh spinner is actively spinning.' },
+      { name: 'onRefresh', type: '() => void', defaultValue: 'undefined', description: 'Pull-to-refresh callback triggered on pull down.' },
+      { name: 'emptyText', type: 'string', defaultValue: "'No items found'", description: 'Fallback text displayed when data array is empty.' },
+    ],
+    cssClasses: [
+      { ruleName: 'root', className: '.spectra-list-view', description: 'Main scrollable list container.' },
+      { ruleName: 'item', className: '.spectra-list-view__item', description: 'Individual row element.' },
+      { ruleName: 'divider', className: '.spectra-list-view__divider', description: 'Hairline divider separator.' },
+      { ruleName: 'empty', className: '.spectra-list-view__empty', description: 'Centered empty state notice.' },
+    ],
+    cssVariables: [
+      { variable: '--spectra-list-view-divider', defaultToken: 'var(--color-border-subtle)', description: 'Divider border color.' },
+      { variable: '--spectra-list-view-hover', defaultToken: 'var(--color-surface-subtle)', description: 'Row hover background.' },
+    ],
+    nativeProps: [
+      { name: 'data', type: 'Readonly<ArrayLike<T>>', defaultValue: 'undefined', description: 'Native FlatList dataset.' },
+      { name: 'renderItem', type: 'ListRenderItem<T>', defaultValue: 'undefined', description: 'Native row renderer.' },
+      { name: 'divided', type: 'boolean', defaultValue: 'true', description: 'Native row separator hairline.' },
+      { name: 'refreshing', type: 'boolean', defaultValue: 'false', description: 'Native RefreshControl active status.' },
+      { name: 'onRefresh', type: '() => void', defaultValue: 'undefined', description: 'Native RefreshControl pull callback.' },
+    ],
+  },
+
+  'web-view-box': {
+    componentName: 'WebViewBox',
+    exportName: 'WebViewBox',
+    importStatement: "import { WebViewBox } from '@winplaybox/react';",
+    subpathImport: "import WebViewBox from '@winplaybox/react/WebViewBox';",
+    nativeImport: "import { WebViewBox } from '@winplaybox/react-native';",
+    description: 'Sandboxed web frame containment surface with loading progress bar, title toolbar, and fallback error handling.',
+    props: [
+      { name: 'src', type: 'string', defaultValue: 'undefined', required: true, description: 'Target URL to render inside the frame.' },
+      { name: 'title', type: 'string', defaultValue: "'Web View'", description: 'Accessible iframe title string.' },
+      { name: 'showHeader', type: 'boolean', defaultValue: 'false', description: 'Renders top title toolbar with domain and external link action.' },
+      { name: 'height', type: 'number | string', defaultValue: "'500px'", description: 'Container frame height dimension.' },
+    ],
+    cssClasses: [
+      { ruleName: 'root', className: '.spectra-web-view-box', description: 'Outer rounded surface container.' },
+      { ruleName: 'header', className: '.spectra-web-view-box__header', description: 'Top address bar and action toolbar.' },
+      { ruleName: 'iframe', className: '.spectra-web-view-box__iframe', description: 'Embedded sandboxed iframe.' },
+      { ruleName: 'progress', className: '.spectra-web-view-box__progress', description: 'Animated load progress bar.' },
+    ],
+    cssVariables: [
+      { variable: '--spectra-web-view-border', defaultToken: 'var(--color-border-subtle)', description: 'Surface border stroke token.' },
+      { variable: '--spectra-web-view-radius', defaultToken: 'var(--radius-component-md)', description: 'Frame corner radius token.' },
+    ],
+    nativeProps: [
+      { name: 'source', type: '{ uri: string } | { html: string }', defaultValue: 'undefined', description: 'Native webview source object.' },
+      { name: 'showProgressBar', type: 'boolean', defaultValue: 'true', description: 'Top animated loading progress indicator.' },
+      { name: 'onError', type: '(error: any) => void', defaultValue: 'undefined', description: 'Native failure callback.' },
+    ],
+  },
 };
 
 export const HOOK_API_DATA: Record<string, HookApiReference> = {

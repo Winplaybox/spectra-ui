@@ -48,6 +48,8 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
       { id: 'slider', name: 'Slider', category: 'Inputs' },
       { id: 'rating', name: 'Rating', category: 'Inputs' },
       { id: 'color-picker', name: 'Color Picker', category: 'Inputs' },
+      { id: 'copy-button', name: 'Copy Button', category: 'Inputs' },
+      { id: 'date-picker', name: 'Date Picker', category: 'Inputs' },
     ],
   },
   {
@@ -68,6 +70,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
       { id: 'timeline', name: 'Timeline', category: 'Data Display' },
       { id: 'statistic', name: 'Statistic', category: 'Data Display' },
       { id: 'calendar', name: 'Calendar', category: 'Data Display' },
+      { id: 'list-view', name: 'List View', category: 'Data Display' },
     ],
   },
   {
@@ -97,6 +100,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
       { id: 'stack', name: 'Stack', category: 'Surfaces' },
       { id: 'paper', name: 'Paper', category: 'Surfaces' },
       { id: 'app-bar', name: 'App Bar', category: 'Surfaces' },
+      { id: 'web-view-box', name: 'Web View Box', category: 'Surfaces' },
     ],
   },
   {
@@ -216,7 +220,7 @@ export const SIDEBAR_NAVIGATION: NavSection[] = [
     id: 'components',
     title: 'Components',
     path: '/components',
-    badge: 58,
+    badge: 62,
     collapsible: true,
     defaultOpen: true,
     items: [
@@ -231,6 +235,7 @@ export const SIDEBAR_NAVIGATION: NavSection[] = [
           { id: 'split-button', name: 'Split Button', path: '/components/split-button' },
           { id: 'button-group', name: 'Button Group', path: '/components/button-group' },
           { id: 'icon-button', name: 'Icon Button', path: '/components/icon-button' },
+          { id: 'copy-button', name: 'Copy Button', path: '/components/copy-button' },
           { id: 'text-input', name: 'TextInput', path: '/components/text-input' },
           { id: 'textarea', name: 'TextArea', path: '/components/textarea' },
           { id: 'select', name: 'Select', path: '/components/select' },
@@ -244,6 +249,7 @@ export const SIDEBAR_NAVIGATION: NavSection[] = [
           { id: 'slider', name: 'Slider', path: '/components/slider' },
           { id: 'rating', name: 'Rating', path: '/components/rating' },
           { id: 'color-picker', name: 'Color Picker', path: '/components/color-picker' },
+          { id: 'date-picker', name: 'Date Picker', path: '/components/date-picker' },
         ],
       },
       {
@@ -265,6 +271,7 @@ export const SIDEBAR_NAVIGATION: NavSection[] = [
           { id: 'timeline', name: 'Timeline', path: '/components/timeline' },
           { id: 'statistic', name: 'Statistic', path: '/components/statistic' },
           { id: 'calendar', name: 'Calendar', path: '/components/calendar' },
+          { id: 'list-view', name: 'List View', path: '/components/list-view' },
         ],
       },
       {
@@ -296,6 +303,7 @@ export const SIDEBAR_NAVIGATION: NavSection[] = [
           { id: 'stack', name: 'Stack', path: '/components/stack' },
           { id: 'paper', name: 'Paper', path: '/components/paper' },
           { id: 'app-bar', name: 'App Bar', path: '/components/app-bar' },
+          { id: 'web-view-box', name: 'Web View Box', path: '/components/web-view-box' },
         ],
       },
       {

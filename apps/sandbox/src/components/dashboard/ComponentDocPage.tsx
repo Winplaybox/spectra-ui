@@ -76,6 +76,10 @@ import {
   ColorPicker,
   PlatformChassis,
   useColorScheme,
+  CopyButton,
+  DatePicker,
+  ListView,
+  WebViewBox,
 } from '@winplaybox/react';
 import type { ChassisPlatform } from '@winplaybox/react';
 import { getComponentReleaseVersion } from '../../data/versionReleaseData';
@@ -208,6 +212,10 @@ const COMPONENT_BUNDLE_SIZES: Record<string, string> = {
   breadcrumbs: '< 1.4 kB',
   tabs: '< 2.9 kB',
   divider: '< 0.7 kB',
+  'copy-button': '< 1.2 kB',
+  'date-picker': '< 2.8 kB',
+  'list-view': '< 1.8 kB',
+  'web-view-box': '< 2.1 kB',
 };
 
 const COMPONENT_WAI_ARIA: Record<string, string> = {
@@ -224,6 +232,10 @@ const COMPONENT_WAI_ARIA: Record<string, string> = {
   breadcrumbs: 'https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/',
   tabs: 'https://www.w3.org/WAI/ARIA/apg/patterns/tabs/',
   list: 'https://www.w3.org/WAI/ARIA/apg/patterns/listbox/',
+  'copy-button': 'https://www.w3.org/WAI/ARIA/apg/patterns/button/',
+  'date-picker': 'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/',
+  'list-view': 'https://www.w3.org/WAI/ARIA/apg/patterns/feed/',
+  'web-view-box': 'https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/',
 };
 
 const getSectionAnchor = (sectionName: string): string => {
@@ -496,6 +508,7 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
   const [pickerColor, setPickerColor] = useState('#2563EB');
   const [chassisPlatform, setChassisPlatform] = useState<ChassisPlatform>('web');
   const [bottomNavTab, setBottomNavTab] = useState('home');
+  const [demoDatePickerVal, setDemoDatePickerVal] = useState<Date | undefined>(new Date());
 
   // Generate clean JSX snippet according to active demo
   const getRawSnippet = (): string => {
@@ -1596,6 +1609,102 @@ export default function RadioGroupDemo(): JSX.Element {
   );
 }`;
 
+      case 'copy-button':
+        return `import React from 'react';
+import { CopyButton } from '@winplaybox/react';
+
+export default function CopyButtonDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+      <CopyButton
+        value="pnpm add @winplaybox/react"
+        label="Copy Installation Command"
+        variant="primary"
+      />
+      <CopyButton
+        value="https://spectra-ui.dev"
+        aria-label="Copy Documentation URL"
+      />
+    </div>
+  );
+}`;
+
+      case 'date-picker':
+        return `import React, { useState } from 'react';
+import { DatePicker } from '@winplaybox/react';
+
+export default function DatePickerDemo(): JSX.Element {
+  const [date, setDate] = useState<Date | undefined>(new Date());
+
+  return (
+    <div style={{ maxWidth: 360, width: '100%', margin: '0 auto' }}>
+      <DatePicker
+        label="Production Release Date"
+        value={date}
+        onChange={setDate}
+        placeholder="Pick target deployment date..."
+        clearable
+      />
+    </div>
+  );
+}`;
+
+      case 'list-view':
+        return `import React from 'react';
+import { ListView } from '@winplaybox/react';
+
+interface ClusterNode {
+  id: string;
+  name: string;
+  region: string;
+  status: string;
+}
+
+const NODES: ClusterNode[] = [
+  { id: '1', name: 'Auth Gateway us-east-1', region: 'Virginia', status: 'Healthy' },
+  { id: '2', name: 'Database Replica eu-west-1', region: 'Ireland', status: 'Healthy' },
+  { id: '3', name: 'Cache Layer ap-south-1', region: 'Mumbai', status: 'Optimal' },
+];
+
+export default function ListViewDemo(): JSX.Element {
+  return (
+    <div style={{ maxWidth: 540, width: '100%', margin: '0 auto' }}>
+      <ListView
+        data={NODES}
+        divided
+        renderItem={(item) => (
+          <div style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 16px' }}>
+            <div>
+              <div style={{ fontWeight: 600 }}>{item.name}</div>
+              <div style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>{item.region}</div>
+            </div>
+            <span style={{ color: 'var(--color-feedback-success)', fontSize: 13, fontWeight: 500 }}>
+              {item.status}
+            </span>
+          </div>
+        )}
+      />
+    </div>
+  );
+}`;
+
+      case 'web-view-box':
+        return `import React from 'react';
+import { WebViewBox } from '@winplaybox/react';
+
+export default function WebViewBoxDemo(): JSX.Element {
+  return (
+    <div style={{ maxWidth: 640, width: '100%', margin: '0 auto' }}>
+      <WebViewBox
+        src="https://spectra-ui.dev"
+        title="Spectra UI Documentation"
+        showHeader
+        height="320px"
+      />
+    </div>
+  );
+}`;
+
       default: {
         const safeName = meta.name.replace(/[\s-]+/g, '');
         return `import React from 'react';
@@ -1824,6 +1933,80 @@ export const NativeBreadcrumbsDemo = () => {
         { label: 'Profile', isCurrent: true },
       ]}
     />
+  );
+};`;
+      case 'copy-button':
+        return `// React Native Mobile Implementation (iOS & Android)
+import React from 'react';
+import { View } from 'react-native';
+import { CopyButton } from '@winplaybox/react-native';
+
+export const NativeCopyButtonDemo = () => {
+  return (
+    <View style={{ gap: 12, width: '100%' }}>
+      <CopyButton
+        value="0x71C6793F2016377756f54c29B"
+        label="Copy Wallet Address"
+      />
+    </View>
+  );
+};`;
+      case 'date-picker':
+        return `// React Native Mobile Implementation (iOS & Android)
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import { DatePicker } from '@winplaybox/react-native';
+
+export const NativeDatePickerDemo = () => {
+  const [date, setDate] = useState<Date | undefined>(new Date());
+  return (
+    <View style={{ width: '100%', padding: 16 }}>
+      <DatePicker
+        label="Target Release Date"
+        value={date}
+        onChange={setDate}
+      />
+    </View>
+  );
+};`;
+      case 'list-view':
+        return `// React Native Mobile Implementation (iOS & Android)
+import React from 'react';
+import { View, Text } from 'react-native';
+import { ListView } from '@winplaybox/react-native';
+
+export const NativeListViewDemo = () => {
+  return (
+    <ListView
+      data={[
+        { id: '1', title: 'Service Alpha', status: 'Active' },
+        { id: '2', title: 'Service Beta', status: 'Optimal' },
+      ]}
+      divided
+      renderItem={({ item }) => (
+        <View style={{ padding: 14 }}>
+          <Text style={{ fontWeight: '600' }}>{item.title}</Text>
+          <Text style={{ fontSize: 12, color: '#888' }}>{item.status}</Text>
+        </View>
+      )}
+    />
+  );
+};`;
+      case 'web-view-box':
+        return `// React Native Mobile Implementation (iOS & Android)
+import React from 'react';
+import { View } from 'react-native';
+import { WebViewBox } from '@winplaybox/react-native';
+
+export const NativeWebViewBoxDemo = () => {
+  return (
+    <View style={{ flex: 1, height: 260 }}>
+      <WebViewBox
+        source={{ uri: 'https://spectra-ui.dev' }}
+        title="In-App Documentation"
+        showHeader
+      />
+    </View>
   );
 };`;
       default:
@@ -3033,6 +3216,76 @@ export const Native${meta.name}Demo = () => {
           </div>
         );
 
+      case 'copy-button':
+        return (
+          <div style={{ display: 'flex', gap: 16, alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <CopyButton
+              value="pnpm add @winplaybox/react"
+              label="Install Command"
+              variant="primary"
+            />
+            <CopyButton
+              value="Spectra UI Universal Tokens"
+              label="Copy Token"
+              variant="secondary"
+            />
+            <CopyButton
+              value="https://github.com/Winplaybox/spectra-ui"
+              aria-label="Copy GitHub Repository Link"
+            />
+          </div>
+        );
+
+      case 'date-picker':
+        return (
+          <div style={{ maxWidth: 360, width: '100%', margin: '0 auto' }}>
+            <DatePicker
+              label="Production Release Date"
+              value={demoDatePickerVal}
+              onChange={setDemoDatePickerVal}
+              placeholder="Pick target deployment date..."
+              clearable
+            />
+          </div>
+        );
+
+      case 'list-view':
+        return (
+          <div style={{ maxWidth: 540, width: '100%', margin: '0 auto' }}>
+            <ListView
+              data={[
+                { id: '1', name: 'Auth Gateway us-east-1', region: 'Virginia', status: 'Healthy' },
+                { id: '2', name: 'Database Replica eu-west-1', region: 'Ireland', status: 'Healthy' },
+                { id: '3', name: 'Cache Layer ap-south-1', region: 'Mumbai', status: 'Optimal' },
+              ]}
+              divided
+              renderItem={(item) => (
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px' }}>
+                  <div>
+                    <div style={{ fontWeight: 600, fontSize: 14 }}>{item.name}</div>
+                    <div style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>{item.region}</div>
+                  </div>
+                  <span style={{ color: 'var(--color-feedback-success, #16a34a)', fontSize: 13, fontWeight: 600 }}>
+                    {item.status}
+                  </span>
+                </div>
+              )}
+            />
+          </div>
+        );
+
+      case 'web-view-box':
+        return (
+          <div style={{ maxWidth: 640, width: '100%', margin: '0 auto' }}>
+            <WebViewBox
+              src="https://spectra-ui.dev"
+              title="Spectra UI Documentation"
+              showHeader
+              height="300px"
+            />
+          </div>
+        );
+
       default:
         return (
           <div style={{ textAlign: 'center', padding: 24 }}>
@@ -3173,6 +3426,51 @@ export const Native${meta.name}Demo = () => {
                 <TabPanel value="2">Saved Articles</TabPanel>
               </TabPanels>
             </Tabs>
+          </div>
+        );
+      case 'copy-button':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
+            <Button variant="primary" style={{ width: '100%' }}>Copy Install Command</Button>
+            <Button variant="secondary" style={{ width: '100%' }}>Copy Contract Hash</Button>
+          </div>
+        );
+      case 'date-picker':
+        return (
+          <div style={{ width: '100%' }}>
+            <DatePicker
+              label="Native Release Schedule"
+              value={demoDatePickerVal}
+              onChange={setDemoDatePickerVal}
+            />
+          </div>
+        );
+      case 'list-view':
+        return (
+          <div style={{ width: '100%' }}>
+            <ListView
+              data={[
+                { id: '1', title: 'Service Alpha', status: 'Healthy' },
+                { id: '2', title: 'Service Beta', status: 'Optimal' },
+              ]}
+              divided
+              renderItem={(item) => (
+                <div style={{ padding: '12px 14px' }}>
+                  <div style={{ fontWeight: 600 }}>{item.title}</div>
+                  <div style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>{item.status}</div>
+                </div>
+              )}
+            />
+          </div>
+        );
+      case 'web-view-box':
+        return (
+          <div style={{ width: '100%' }}>
+            <WebViewBox
+              src="https://example.com"
+              title="Mobile Web Frame"
+              height="220px"
+            />
           </div>
         );
       default:

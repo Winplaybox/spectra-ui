@@ -1977,4 +1977,68 @@ export function ThemedWebFrame({ url }) {
 }`,
     },
   },
+
+  'copy-button': {
+    id: 'copy-button',
+    name: 'Copy Button',
+    category: 'Inputs',
+    description: 'One-click clipboard copying trigger with animated icon feedback transitions (copy to checkmark), configurable timeout, custom labels, and fallback support across all web and mobile platforms.',
+    guidelines: 'Use CopyButton next to code blocks, tokens, shareable URLs, transaction hashes, and API keys. Provide clear visual confirmation when content is successfully copied.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/button/',
+    waiPattern: 'Button Pattern with Live Feedback',
+    dos: [
+      'Provide clear visual feedback (check icon or "Copied!" text) immediately after user clicks.',
+      'Always supply a meaningful aria-label when rendering in icon-only mode.',
+      'Keep copy confirmation state visible for 1.5 to 3 seconds before reverting.',
+    ],
+    donts: [
+      'Do not rely on clipboard actions without visual success confirmation.',
+      'Avoid placing copy buttons in crowded toolbars without adequate tap targets.',
+    ],
+    anatomy: [
+      { name: 'Root Trigger', role: 'Accessible button container with hover, focus, and active states.' },
+      { name: 'Copy Icon', role: 'Vector document copy icon displayed during idle state.' },
+      { name: 'Copied Checkmark', role: 'Vector checkmark icon displayed during copied state.' },
+      { name: 'Label', role: 'Optional text label updating to "Copied!" or custom confirmation.' },
+    ],
+    keyboard: [
+      { key: 'Enter / Space', description: 'Copies target text to system clipboard and triggers feedback.' },
+      { key: 'Tab', description: 'Moves focus to the copy button.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0, 0, 0.2, 1)',
+      description: 'Icon cross-fade and subtle bounce transition on state change.',
+    },
+    props: [
+      { name: 'value', type: 'string', defaultValue: "''", description: 'Text to copy to clipboard.' },
+      { name: 'label', type: 'string', defaultValue: 'undefined', description: 'Idle text label (renders icon-only if omitted).' },
+      { name: 'copiedLabel', type: 'string', defaultValue: "'Copied!'", description: 'Label shown during copied state.' },
+      { name: 'timeout', type: 'number', defaultValue: '2000', description: 'Duration in ms to show copied confirmation.' },
+      { name: 'variant', type: "'primary' | 'secondary' | 'ghost'", defaultValue: "'secondary'", description: 'Visual button variant.' },
+      { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Sizing scale.' },
+      { name: 'onCopy', type: '() => void', defaultValue: 'undefined', description: 'Callback fired after successful copy.' },
+    ],
+    nativeProps: [
+      { name: 'value', type: 'string', defaultValue: "''", description: 'Text value to copy to native clipboard.' },
+      { name: 'label', type: 'string', defaultValue: 'undefined', description: 'Native text label.' },
+      { name: 'copiedLabel', type: 'string', defaultValue: "'Copied!'", description: 'Label shown during copied state.' },
+      { name: 'timeout', type: 'number', defaultValue: '2000', description: 'Feedback duration in ms.' },
+      { name: 'onCopy', type: '() => void', defaultValue: 'undefined', description: 'Callback fired after copying.' },
+    ],
+    headlessHook: {
+      name: 'useClipboard',
+      description: 'Provides cross-platform clipboard copy mechanics and hasCopied state tracking.',
+      code: `import { useClipboard } from '@winplaybox/primitives';
+
+export function CustomCopy({ text }) {
+  const { copy, hasCopied } = useClipboard({ timeout: 2000 });
+  return (
+    <button onClick={() => copy(text)}>
+      {hasCopied ? 'Copied!' : 'Copy'}
+    </button>
+  );
+}`,
+    },
+  },
 };

@@ -76,6 +76,10 @@ import {
   Stack,
   ColorPicker,
   PlatformChassis,
+  CopyButton,
+  DatePicker,
+  ListView,
+  WebViewBox,
 } from '@winplaybox/react';
 import {
   CheckIcon,
@@ -332,6 +336,22 @@ export const COMPONENT_VARIANTS_MAP: Record<string, VariantMeta[]> = {
   'radio-group': [
     { id: 'radio-group-orientations', title: 'Vertical & Horizontal Radio Groups' },
   ],
+  'copy-button': [
+    { id: 'copy-button-variants', title: 'Action Variants & Label Feedback' },
+    { id: 'copy-button-icon-only', title: 'Icon-Only Compact Mode & Sizing' },
+  ],
+  'date-picker': [
+    { id: 'date-picker-basic', title: 'Controlled Date Selection with Popover' },
+    { id: 'date-picker-sizes', title: 'Form Density & Size Scales' },
+  ],
+  'list-view': [
+    { id: 'list-view-divided', title: 'Divided List Items with Token Borders' },
+    { id: 'list-view-empty', title: 'Empty State & Custom Fallback' },
+  ],
+  'web-view-box': [
+    { id: 'web-view-box-sandboxed', title: 'Sandboxed Responsive Frame' },
+    { id: 'web-view-box-header', title: 'Interactive Title & External Action Toolbar' },
+  ],
 };
 
 interface ComponentVariantsShowcaseProps {
@@ -374,6 +394,7 @@ export const ComponentVariantsShowcase: React.FC<ComponentVariantsShowcaseProps>
   const [selectedCardTiers, setSelectedCardTiers] = useState<string[]>(['standard', 'performance']);
   const [segmentedRadio, setSegmentedRadio] = useState('grid');
   const [verticalTab, setVerticalTab] = useState('profile');
+  const [selectedDemoDate, setSelectedDemoDate] = useState<Date | undefined>(new Date());
 
   switch (componentId) {
     case 'button':
@@ -5850,6 +5871,508 @@ export default function RadioGroupDemo(): JSX.Element {
 
 export default function NativeRadioGroupDemo() {
   return <View><Text>Radio Group</Text></View>;
+}`}
+          />
+        </div>
+      );
+
+    case 'copy-button':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          {/* Demo 1: Variants & Feedback */}
+          <ComponentDemoCard
+            id="copy-button-variants"
+            title="Action Variants & Label Feedback"
+            description="CopyButton seamlessly copies text to the system clipboard and transitions smoothly into success confirmation state with zero emoji vector checkmark icons."
+            compactCode={`<CopyButton variant="primary" value="npm i @winplaybox/react" label="Install Command" />
+<CopyButton variant="secondary" value="Spectra UI Design System" label="Copy Brand Token" />
+<CopyButton variant="tertiary" value="export const THEME = 'dark';" label="Copy Code Snippet" />`}
+            webPreview={
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
+                <CopyButton variant="primary" value="npm i @winplaybox/react" label="Install Command" />
+                <CopyButton variant="secondary" value="Spectra UI Design System" label="Copy Brand Token" />
+                <CopyButton variant="tertiary" value="export const THEME = 'dark';" label="Copy Code Snippet" />
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%' }}>
+                <Button variant="primary" style={{ width: '100%' }}>Copy Install Command</Button>
+                <Button variant="secondary" style={{ width: '100%' }}>Copy Brand Token</Button>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { CopyButton } from '@winplaybox/react';
+
+export default function CopyButtonVariantsDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 12 }}>
+      <CopyButton variant="primary" value="npm i @winplaybox/react" label="Install Command" />
+      <CopyButton variant="secondary" value="Spectra UI Design System" label="Copy Brand Token" />
+      <CopyButton variant="tertiary" value="export const THEME = 'dark';" label="Copy Code Snippet" />
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { CopyButton } from '@winplaybox/react-native';
+
+export default function NativeCopyButtonDemo(): JSX.Element {
+  return (
+    <View style={{ gap: 10 }}>
+      <CopyButton value="npm i @winplaybox/react" label="Install Command" />
+    </View>
+  );
+}`}
+          />
+
+          {/* Demo 2: Icon Only & Sizing */}
+          <ComponentDemoCard
+            id="copy-button-icon-only"
+            title="Icon-Only Compact Mode & Sizing"
+            description="When label is omitted, CopyButton renders a compact square action trigger calibrated to sm (32px), md (40px), and lg (48px) scales."
+            compactCode={`<CopyButton size="sm" value="sm-compact-token" aria-label="Copy Small Token" />
+<CopyButton size="md" value="md-standard-token" aria-label="Copy Medium Token" />
+<CopyButton size="lg" value="lg-touch-token" aria-label="Copy Large Token" />`}
+            webPreview={
+              <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+                <CopyButton size="sm" value="sm-compact-token" aria-label="Copy Small Token" />
+                <CopyButton size="md" value="md-standard-token" aria-label="Copy Medium Token" />
+                <CopyButton size="lg" value="lg-touch-token" aria-label="Copy Large Token" />
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
+                <Button size="sm" variant="secondary">sm</Button>
+                <Button size="md" variant="secondary">md</Button>
+                <Button size="lg" variant="secondary">lg</Button>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { CopyButton } from '@winplaybox/react';
+
+export default function CopyButtonSizesDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+      <CopyButton size="sm" value="sm-compact-token" aria-label="Copy Small Token" />
+      <CopyButton size="md" value="md-standard-token" aria-label="Copy Medium Token" />
+      <CopyButton size="lg" value="lg-touch-token" aria-label="Copy Large Token" />
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { CopyButton } from '@winplaybox/react-native';
+
+export default function NativeCopyButtonSizesDemo(): JSX.Element {
+  return (
+    <View style={{ flexDirection: 'row', gap: 12 }}>
+      <CopyButton size="sm" value="0x71C...3aF" />
+      <CopyButton size="md" value="0x71C...3aF" />
+      <CopyButton size="lg" value="0x71C...3aF" />
+    </View>
+  );
+}`}
+          />
+        </div>
+      );
+
+    case 'date-picker':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          {/* Demo 1: Controlled Date Selection */}
+          <ComponentDemoCard
+            id="date-picker-basic"
+            title="Controlled Date Selection with Popover"
+            description="Interactive date picker opening an accessible monthly calendar popover on Web and calling native OS date pickers on iOS and Android."
+            compactCode={`<DatePicker
+  label="Target Milestone"
+  value={selectedDemoDate}
+  onChange={setSelectedDemoDate}
+  placeholder="Select release milestone..."
+/>`}
+            webPreview={
+              <div style={{ maxWidth: 360, width: '100%', margin: '0 auto' }}>
+                <DatePicker
+                  label="Target Milestone"
+                  value={selectedDemoDate}
+                  onChange={setSelectedDemoDate}
+                  placeholder="Select release milestone..."
+                />
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <DatePicker
+                  label="Native Milestone"
+                  value={selectedDemoDate}
+                  onChange={setSelectedDemoDate}
+                />
+              </div>
+            }
+            webCode={`import React, { useState } from 'react';
+import { DatePicker } from '@winplaybox/react';
+
+export default function DatePickerBasicDemo(): JSX.Element {
+  const [date, setDate] = useState<Date | undefined>(new Date());
+
+  return (
+    <div style={{ maxWidth: 360 }}>
+      <DatePicker
+        label="Target Milestone"
+        value={date}
+        onChange={setDate}
+        placeholder="Select release milestone..."
+      />
+    </div>
+  );
+}`}
+            nativeCode={`import React, { useState } from 'react';
+import { View } from 'react-native';
+import { DatePicker } from '@winplaybox/react-native';
+
+export default function NativeDatePickerDemo(): JSX.Element {
+  const [date, setDate] = useState<Date | undefined>(new Date());
+
+  return (
+    <View style={{ padding: 16 }}>
+      <DatePicker
+        label="Release Date"
+        value={date}
+        onChange={setDate}
+      />
+    </View>
+  );
+}`}
+          />
+
+          {/* Demo 2: Size Scales */}
+          <ComponentDemoCard
+            id="date-picker-sizes"
+            title="Form Density & Size Scales"
+            description="Available in sm (compact tables), md (standard forms), and lg (touch-first and hero landing inputs) with theme-aligned padding."
+            compactCode={`<DatePicker size="sm" placeholder="Small (32px)" />
+<DatePicker size="md" placeholder="Medium (40px)" />
+<DatePicker size="lg" placeholder="Large (48px)" />`}
+            webPreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14, maxWidth: 360, width: '100%', margin: '0 auto' }}>
+                <DatePicker size="sm" placeholder="Small (32px) Date" />
+                <DatePicker size="md" placeholder="Medium (40px) Date" />
+                <DatePicker size="lg" placeholder="Large (48px) Date" />
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
+                <DatePicker size="sm" placeholder="Compact Native Date" />
+                <DatePicker size="md" placeholder="Standard Native Date" />
+              </div>
+            }
+            webCode={`import React from 'react';
+import { DatePicker } from '@winplaybox/react';
+
+export default function DatePickerSizesDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 14, maxWidth: 360 }}>
+      <DatePicker size="sm" placeholder="Small (32px) Date" />
+      <DatePicker size="md" placeholder="Medium (40px) Date" />
+      <DatePicker size="lg" placeholder="Large (48px) Date" />
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { DatePicker } from '@winplaybox/react-native';
+
+export default function NativeDatePickerSizesDemo(): JSX.Element {
+  return (
+    <View style={{ gap: 12 }}>
+      <DatePicker size="sm" placeholder="Small Date" />
+      <DatePicker size="md" placeholder="Medium Date" />
+    </View>
+  );
+}`}
+          />
+        </div>
+      );
+
+    case 'list-view':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          {/* Demo 1: Divided List */}
+          <ComponentDemoCard
+            id="list-view-divided"
+            title="Divided List Items with Token Borders"
+            description="ListView renders structured record collections with standardized 1px subtle divider lines and pull-to-refresh capabilities."
+            compactCode={`<ListView
+  data={[
+    { id: '1', title: 'Authentication Service', latency: '24ms', status: 'Healthy' },
+    { id: '2', title: 'PostgreSQL Primary Cluster', latency: '4ms', status: 'Optimal' },
+    { id: '3', title: 'Edge Worker Routing CDN', latency: '12ms', status: 'Active' },
+  ]}
+  divided
+  renderItem={(item) => (
+    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 14px' }}>
+      <span style={{ fontWeight: 600 }}>{item.title}</span>
+      <span style={{ color: 'var(--color-feedback-success)', fontSize: 13 }}>{item.status} ({item.latency})</span>
+    </div>
+  )}
+/>`}
+            webPreview={
+              <div style={{ maxWidth: 520, width: '100%', margin: '0 auto' }}>
+                <ListView
+                  data={[
+                    { id: '1', title: 'Authentication Service', latency: '24ms', status: 'Healthy' },
+                    { id: '2', title: 'PostgreSQL Primary Cluster', latency: '4ms', status: 'Optimal' },
+                    { id: '3', title: 'Edge Worker Routing CDN', latency: '12ms', status: 'Active' },
+                  ]}
+                  divided
+                  renderItem={(item) => (
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px' }}>
+                      <span style={{ fontWeight: 600, fontSize: 14 }}>{item.title}</span>
+                      <span style={{ color: 'var(--color-feedback-success, #16a34a)', fontSize: 13, fontWeight: 500 }}>
+                        {item.status} ({item.latency})
+                      </span>
+                    </div>
+                  )}
+                />
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <ListView
+                  data={[
+                    { id: '1', title: 'Native Worker Node A' },
+                    { id: '2', title: 'Native Worker Node B' },
+                  ]}
+                  divided
+                  renderItem={(item) => (
+                    <div style={{ padding: '12px 14px' }}>
+                      <span style={{ fontWeight: 600 }}>{item.title}</span>
+                    </div>
+                  )}
+                />
+              </div>
+            }
+            webCode={`import React from 'react';
+import { ListView } from '@winplaybox/react';
+
+interface ServiceNode {
+  id: string;
+  title: string;
+  latency: string;
+  status: string;
+}
+
+const NODES: ServiceNode[] = [
+  { id: '1', title: 'Authentication Service', latency: '24ms', status: 'Healthy' },
+  { id: '2', title: 'PostgreSQL Primary Cluster', latency: '4ms', status: 'Optimal' },
+  { id: '3', title: 'Edge Worker Routing CDN', latency: '12ms', status: 'Active' },
+];
+
+export default function ListViewDividedDemo(): JSX.Element {
+  return (
+    <ListView
+      data={NODES}
+      divided
+      renderItem={(item) => (
+        <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 14px' }}>
+          <span>{item.title}</span>
+          <span>{item.status}</span>
+        </div>
+      )}
+    />
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View, Text } from 'react-native';
+import { ListView } from '@winplaybox/react-native';
+
+export default function NativeListViewDemo(): JSX.Element {
+  return (
+    <ListView
+      data={[{ id: '1', name: 'Item Alpha' }, { id: '2', name: 'Item Beta' }]}
+      divided
+      renderItem={({ item }) => (
+        <View style={{ padding: 14 }}>
+          <Text>{item.name}</Text>
+        </View>
+      )}
+    />
+  );
+}`}
+          />
+
+          {/* Demo 2: Empty State */}
+          <ComponentDemoCard
+            id="list-view-empty"
+            title="Empty State & Custom Fallback"
+            description="When the data dataset is empty, ListView renders a centered card fallback utilizing design token typography."
+            compactCode={`<ListView
+  data={[]}
+  emptyText="No cluster services match your current query filter."
+  renderItem={() => null}
+/>`}
+            webPreview={
+              <div style={{ maxWidth: 520, width: '100%', margin: '0 auto' }}>
+                <ListView
+                  data={[]}
+                  emptyText="No cluster services match your current query filter."
+                  renderItem={() => null}
+                />
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <ListView
+                  data={[]}
+                  emptyText="No native records available."
+                  renderItem={() => null}
+                />
+              </div>
+            }
+            webCode={`import React from 'react';
+import { ListView } from '@winplaybox/react';
+
+export default function ListViewEmptyDemo(): JSX.Element {
+  return (
+    <ListView
+      data={[]}
+      emptyText="No cluster services match your current query filter."
+      renderItem={() => null}
+    />
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { ListView } from '@winplaybox/react-native';
+
+export default function NativeListViewEmptyDemo(): JSX.Element {
+  return (
+    <ListView
+      data={[]}
+      emptyText="No records found."
+      renderItem={() => null}
+    />
+  );
+}`}
+          />
+        </div>
+      );
+
+    case 'web-view-box':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          {/* Demo 1: Sandboxed Frame */}
+          <ComponentDemoCard
+            id="web-view-box-sandboxed"
+            title="Sandboxed Responsive Frame"
+            description="WebViewBox provides universal web content encapsulation with built-in loading indicator, zero host crash fallbacks, and token borders."
+            compactCode={`<WebViewBox
+  src="https://example.com"
+  title="Sandboxed Web Frame"
+  height="240px"
+/>`}
+            webPreview={
+              <div style={{ maxWidth: 600, width: '100%', margin: '0 auto' }}>
+                <WebViewBox
+                  src="https://example.com"
+                  title="Sandboxed Web Frame"
+                  height="240px"
+                />
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <WebViewBox
+                  src="https://example.com"
+                  title="Mobile Native Frame"
+                  height="220px"
+                />
+              </div>
+            }
+            webCode={`import React from 'react';
+import { WebViewBox } from '@winplaybox/react';
+
+export default function WebViewBoxSandboxedDemo(): JSX.Element {
+  return (
+    <WebViewBox
+      src="https://example.com"
+      title="Sandboxed Web Frame"
+      height="240px"
+    />
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { WebViewBox } from '@winplaybox/react-native';
+
+export default function NativeWebViewBoxDemo(): JSX.Element {
+  return (
+    <View style={{ flex: 1 }}>
+      <WebViewBox
+        source={{ uri: 'https://example.com' }}
+        title="Mobile Web Frame"
+        height={220}
+      />
+    </View>
+  );
+}`}
+          />
+
+          {/* Demo 2: Header Toolbar */}
+          <ComponentDemoCard
+            id="web-view-box-header"
+            title="Interactive Title & External Action Toolbar"
+            description="Enabling showHeader renders a top toolbar displaying document title, origin host, and an external launch icon action."
+            compactCode={`<WebViewBox
+  src="https://spectra-ui.dev"
+  title="Spectra UI Documentation"
+  showHeader
+  height="260px"
+/>`}
+            webPreview={
+              <div style={{ maxWidth: 600, width: '100%', margin: '0 auto' }}>
+                <WebViewBox
+                  src="https://spectra-ui.dev"
+                  title="Spectra UI Documentation"
+                  showHeader
+                  height="260px"
+                />
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <WebViewBox
+                  src="https://spectra-ui.dev"
+                  title="Spectra UI Documentation"
+                  showHeader
+                  height="240px"
+                />
+              </div>
+            }
+            webCode={`import React from 'react';
+import { WebViewBox } from '@winplaybox/react';
+
+export default function WebViewBoxHeaderDemo(): JSX.Element {
+  return (
+    <WebViewBox
+      src="https://spectra-ui.dev"
+      title="Spectra UI Documentation"
+      showHeader
+      height="260px"
+    />
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { WebViewBox } from '@winplaybox/react-native';
+
+export default function NativeWebViewBoxHeaderDemo(): JSX.Element {
+  return (
+    <WebViewBox
+      source={{ uri: 'https://spectra-ui.dev' }}
+      title="Spectra UI Docs"
+      showHeader
+      height={240}
+    />
+  );
 }`}
           />
         </div>

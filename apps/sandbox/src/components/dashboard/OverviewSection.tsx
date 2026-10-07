@@ -3,6 +3,7 @@ import { Button, Card, Badge } from '@winplaybox/react';
 import { CheckIcon, ExternalLinkIcon, ComponentIcon, PaletteIcon, SparklesIcon } from '@winplaybox/icons';
 import { navigate } from '../../utils/router';
 import { CircuitAnimation } from './CircuitAnimation';
+import { CURRENT_VERSION } from '../../data/versionReleaseData';
 
 export const OverviewSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -68,7 +69,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
             <Badge variant="primary">Design System</Badge>
             <Badge variant="info">Production Ready</Badge>
-            <span style={{ fontSize: 13, color: 'var(--color-text-muted)', fontWeight: 500 }}>Version 0.1.0</span>
+            <span style={{ fontSize: 13, color: 'var(--color-text-muted)', fontWeight: 500 }}>Version {CURRENT_VERSION}</span>
           </div>
           <h1
             style={{
@@ -93,7 +94,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
             <Button variant="primary" size="md" onClick={() => navigate('/components')}>
-              Explore 14 Components
+              Explore 62 Components
             </Button>
             <Button variant="secondary" size="md" onClick={() => navigate('/cross-platform')}>
               Cross-Platform & Pipeline
