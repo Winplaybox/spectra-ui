@@ -201,7 +201,7 @@ export const WebViewBox = forwardRef<HTMLIFrameElement, WebViewBoxProps>(
             height,
             border: 'none',
             display: 'block',
-            backgroundColor: '#ffffff',
+            backgroundColor: 'var(--color-surface, #ffffff)',
             ...style,
           }}
           {...iframeProps}

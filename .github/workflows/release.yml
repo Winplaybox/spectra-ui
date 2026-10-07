@@ -72,18 +72,18 @@ jobs:
       - name: Publish packages to NPM
         if: ${{ (github.event_name == 'release' || github.event_name == 'push' || inputs.publish_npm == true) }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN || secrets.NODE_AUTH_TOKEN }}
         run: |
           if [ -z "$NODE_AUTH_TOKEN" ]; then
-            echo "::warning ::NPM_TOKEN secret is not set in this repository. Skipping npm publish."
-            echo "To enable automated publishing, add NPM_TOKEN to your GitHub repository secrets (Settings > Secrets and variables > Actions)."
+            echo "::error ::NPM_TOKEN or NODE_AUTH_TOKEN secret is not set in this repository. Cannot publish to npm."
+            exit 1
           else
-            echo "🔑 Publishing 6 Spectra UI packages to npm with tag: ${{ inputs.dist_tag || 'latest' }}..."
-            for pkg in dist-packages/*.tgz; do
-              echo "Publishing $pkg..."
-              npm publish "$pkg" --access public --tag "${{ inputs.dist_tag || 'latest' }}" --provenance
-            done
-            echo "🎉 All packages successfully published to NPM!"
+            DIST_TAG="${{ inputs.dist_tag }}"
+            DIST_TAG="${DIST_TAG:-latest}"
+            echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" >> ~/.npmrc
+            echo "Publishing Spectra UI packages to npm with tag: $DIST_TAG..."
+            pnpm -r publish --access public --no-git-checks --tag "$DIST_TAG"
+            echo "All 6 Spectra UI packages successfully published to NPM!"
           fi
 
       - name: Upload packages to GitHub Release
