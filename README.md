@@ -22,12 +22,12 @@ Spectra UI is architected as a modular monorepo. Each package can be installed i
 
 | Package | Version | NPM Registry Link | Directory | Description |
 | :--- | :---: | :--- | :--- | :--- |
-| **`@winplaybox/react`** | `0.1.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/react?style=flat-square)](https://www.npmjs.com/package/@winplaybox/react) | [`packages/react`](packages/react) | 58 production-ready web components with Vanilla Extract zero-runtime styling |
-| **`@winplaybox/tokens`** | `0.1.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/tokens?style=flat-square)](https://www.npmjs.com/package/@winplaybox/tokens) | [`packages/tokens`](packages/tokens) | Multi-tier design token engine compiling to CSS variables, TypeScript, and JSON |
-| **`@winplaybox/icons`** | `0.1.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/icons?style=flat-square)](https://www.npmjs.com/package/@winplaybox/icons) | [`packages/icons`](packages/icons) | 14,200+ accessible SVG vector icons across 7 distinct visual styles |
-| **`@winplaybox/primitives`** | `0.1.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/primitives?style=flat-square)](https://www.npmjs.com/package/@winplaybox/primitives) | [`packages/primitives`](packages/primitives) | 25 headless React state hooks and unstyled behavioral primitives |
-| **`@winplaybox/react-native`** | `0.1.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/react-native?style=flat-square)](https://www.npmjs.com/package/@winplaybox/react-native) | [`packages/react-native`](packages/react-native) | Cross-platform native components tailored for iOS and Android |
-| **`@winplaybox/mcp`** | `0.1.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/mcp?style=flat-square)](https://www.npmjs.com/package/@winplaybox/mcp) | [`packages/mcp`](packages/mcp) | Model Context Protocol server enabling Cursor, Claude, and Antigravity IDE integration |
+| **`@winplaybox/react`** | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/react?style=flat-square)](https://www.npmjs.com/package/@winplaybox/react) | [`packages/react`](packages/react) | 62 production-ready web components with Vanilla Extract zero-runtime styling |
+| **`@winplaybox/tokens`** | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/tokens?style=flat-square)](https://www.npmjs.com/package/@winplaybox/tokens) | [`packages/tokens`](packages/tokens) | Multi-tier design token engine compiling to CSS variables, TypeScript, and JSON |
+| **`@winplaybox/icons`** | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/icons?style=flat-square)](https://www.npmjs.com/package/@winplaybox/icons) | [`packages/icons`](packages/icons) | 14,200+ accessible SVG vector icons across 7 distinct visual styles |
+| **`@winplaybox/primitives`** | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/primitives?style=flat-square)](https://www.npmjs.com/package/@winplaybox/primitives) | [`packages/primitives`](packages/primitives) | 25 headless React state hooks and unstyled behavioral primitives |
+| **`@winplaybox/react-native`** | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/react-native?style=flat-square)](https://www.npmjs.com/package/@winplaybox/react-native) | [`packages/react-native`](packages/react-native) | Cross-platform native components tailored for iOS and Android |
+| **`@winplaybox/mcp`** | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/mcp?style=flat-square)](https://www.npmjs.com/package/@winplaybox/mcp) | [`packages/mcp`](packages/mcp) | Model Context Protocol server enabling Cursor, Claude, and Antigravity IDE integration |
 
 ---
 
