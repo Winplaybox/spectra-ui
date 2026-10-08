@@ -125,9 +125,12 @@ export interface PlatformCompatibilityEntry {
   nativeSnippet: string;
 }
 
+import { toPascalCase } from '@winplaybox/platform-capabilities';
+
 // Generates dedicated platform snippets for a given component
 export function getComponentPlatformData(componentId: string, componentName: string): Record<Platform, PlatformCompatibilityEntry> {
-  const comp = componentName;
+  const comp = toPascalCase(componentName);
+  const actionText = `${componentName} Action`;
 
   return {
     web: {
@@ -148,7 +151,7 @@ export const Web${comp}Example = () => {
       onClick={() => console.log('${comp} activated on Web')}
       aria-label="${comp} control"
     >
-      ${comp} Action
+      ${actionText}
     </${comp}>
   );
 };`,
@@ -159,7 +162,7 @@ export const Web${comp}Example = () => {
   style="--color-bg: var(--color-action-primary); --radius: var(--radius-component-md);"
   aria-label="${comp} control"
 >
-  ${comp} Action
+  ${actionText}
 </button>`,
     },
 
@@ -184,7 +187,7 @@ export const IOS${comp}Example = () => {
       accessibilityLabel="${comp} action"
       hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
     >
-      ${comp} Action
+      ${actionText}
     </${comp}>
   );
 };`,
@@ -195,7 +198,7 @@ import SpectraTokens
 struct IOS${comp}View: View {
   var body: some View {
     Spectra${comp}(
-      title: "${comp} Action",
+      title: "${actionText}",
       variant: .primary,
       size: .medium
     ) {
@@ -229,7 +232,7 @@ export const Android${comp}Example = () => {
       accessibilityRole="${componentId === 'button' ? 'button' : 'none'}"
       accessible={true}
     >
-      ${comp} Action
+      ${actionText}
     </${comp}>
   );
 };`,
@@ -244,7 +247,7 @@ import com.spectra.tokens.SpectraTheme
 @Composable
 fun Android${comp}View() {
   Spectra${comp}(
-    text = "${comp} Action",
+    text = "${actionText}",
     variant = ${comp}Variant.Primary,
     modifier = Modifier.minTouchTarget(48.dp),
     onClick = { println("${comp} tapped in Compose") }
@@ -272,7 +275,7 @@ export const Windows${comp}Example = () => {
       tooltip="${comp} (Press Enter)"
       highContrastSupport={true}
     >
-      ${comp} Action
+      ${actionText}
     </${comp}>
   );
 };`,
@@ -284,7 +287,7 @@ export const Windows${comp}Example = () => {
   xmlns:spectra="using:Spectra.WinUI.Controls">
 
   <spectra:${comp}
-    Content="${comp} Action"
+    Content="${actionText}"
     Variant="Primary"
     KeyboardAccelerator="Ctrl+S"
     Click="On${comp}Click"
@@ -312,7 +315,7 @@ export const MacOS${comp}Example = () => {
       enableHoverVisuals={true}
       tooltip="${comp} (⌘S)"
     >
-      ${comp} Action
+      ${actionText}
     </${comp}>
   );
 };`,
@@ -322,12 +325,12 @@ import SpectraMacOSTokens
 
 struct MacOS${comp}View: View {
   var body: some View {
-    Spectra${comp}("${comp} Action", variant: .primary) {
+    Spectra${comp}("${actionText}", variant: .primary) {
       print("${comp} clicked in macOS")
     }
     .keyboardShortcut("s", modifiers: .command)
     .buttonStyle(SpectraMacButtonStyle())
-    .help("${comp} Action (⌘S)")
+    .help("${actionText} (⌘S)")
   }
 }`,
     },

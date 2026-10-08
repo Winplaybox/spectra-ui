@@ -26,6 +26,8 @@
       "@winplaybox/react/*": ["packages/react/src/*"],
       "@winplaybox/react-native": ["packages/react-native/src"],
       "@winplaybox/react-native/*": ["packages/react-native/src/*"],
+      "@winplaybox/platform-capabilities": ["packages/platform-capabilities/src"],
+      "@winplaybox/platform-capabilities/*": ["packages/platform-capabilities/src/*"],
       "@winplaybox/config": ["packages/config/src"],
       "@winplaybox/spectra-tokens": ["packages/tokens/src", "packages/tokens/dist/ts"],
       "@winplaybox/spectra-primitives": ["packages/primitives/src"],

@@ -63,6 +63,9 @@ importers:
       '@winplaybox/icons':
         specifier: workspace:*
         version: link:../../packages/icons
+      '@winplaybox/platform-capabilities':
+        specifier: workspace:*
+        version: link:../../packages/platform-capabilities
       '@winplaybox/primitives':
         specifier: workspace:*
         version: link:../../packages/primitives
@@ -184,7 +187,13 @@ importers:
         specifier: ^3.2.6
         version: 3.2.7(@types/node@20.19.43)(jiti@2.7.0)(jsdom@23.2.0(bufferutil@4.1.0)(utf-8-validate@6.0.6))(terser@5.51.2)
 
-  packages/mcp: {}
+  packages/mcp:
+    dependencies:
+      '@winplaybox/platform-capabilities':
+        specifier: workspace:*
+        version: link:../platform-capabilities
+
+  packages/platform-capabilities: {}
 
   packages/primitives:
     dependencies:

@@ -1,7 +1,7 @@
 /**
  * Spectra UI MCP Design System Data Registry
  * Auto-generated and synchronized across @winplaybox/react, @winplaybox/react-native,
- * @winplaybox/tokens, @winplaybox/primitives, and @winplaybox/icons.
+ * @winplaybox/tokens, @winplaybox/primitives, @winplaybox/platform-capabilities, and @winplaybox/icons.
  */
 
 export const COMPONENTS = {
@@ -71,7 +71,163 @@ export const COMPONENTS = {
         "title": "Native Mobile Button",
         "code": "import { Button } from '@winplaybox/react-native';\n\n<Button title=\"Confirm Action\" variant=\"primary\" onPress={() => console.log('Confirmed')} />"
       }
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "variants": [
+          "primary",
+          "secondary",
+          "subtle",
+          "danger",
+          "outline"
+        ],
+        "recipes": [
+          "primary-action",
+          "leading-icon",
+          "loading-state",
+          "full-width"
+        ],
+        "states": [
+          "default",
+          "hover",
+          "focus",
+          "active",
+          "disabled",
+          "loading"
+        ],
+        "accessibility": [
+          "role=\"button\"",
+          "aria-busy",
+          "aria-disabled",
+          "focus-visible ring"
+        ],
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "variants": [
+          "primary",
+          "secondary",
+          "subtle",
+          "danger"
+        ],
+        "recipes": [
+          "primary-action",
+          "leading-icon",
+          "loading-state"
+        ],
+        "states": [
+          "default",
+          "pressed",
+          "disabled",
+          "loading"
+        ],
+        "accessibility": [
+          "accessibilityRole=\"button\"",
+          "accessibilityState",
+          "48dp touch target"
+        ],
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "variants": [
+          "primary",
+          "secondary",
+          "subtle",
+          "danger"
+        ],
+        "recipes": [
+          "primary-action",
+          "leading-icon",
+          "loading-state"
+        ],
+        "states": [
+          "default",
+          "pressed",
+          "disabled",
+          "loading"
+        ],
+        "accessibility": [
+          "accessibilityRole=\"button\"",
+          "accessibilityState",
+          "44pt touch target"
+        ],
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "variants": [
+          "primary",
+          "secondary",
+          "subtle",
+          "danger"
+        ],
+        "recipes": [
+          "primary-action",
+          "leading-icon",
+          "loading-state"
+        ],
+        "states": [
+          "default",
+          "hover",
+          "pressed",
+          "focused",
+          "disabled"
+        ],
+        "accessibility": [
+          "UIAutomation Invoke pattern"
+        ],
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "variants": [
+          "primary",
+          "secondary",
+          "subtle",
+          "danger"
+        ],
+        "recipes": [
+          "primary-action",
+          "leading-icon",
+          "loading-state"
+        ],
+        "states": [
+          "default",
+          "hover",
+          "pressed",
+          "focused",
+          "disabled"
+        ],
+        "accessibility": [
+          "NSAccessibilityButtonRole"
+        ],
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Use primary variant for the single main call to action",
+        "Supply accessible labels or text children for screen readers",
+        "Respect platform touch minimums (48dp Android, 44pt iOS)"
+      ],
+      "dont": [
+        "Never place multiple primary buttons adjacent to each other",
+        "Never use emojis in button labels"
+      ]
+    }
   },
   "text-input": {
     "id": "text-input",
@@ -133,7 +289,177 @@ export const COMPONENTS = {
         "title": "Password Field with Reveal Toggle",
         "code": "import React, { useState } from 'react';\nimport { TextInput } from '@winplaybox/react';\nimport { EyeIcon, EyeOffIcon } from '@winplaybox/icons';\n\nexport function PasswordInput() {\n  const [show, setShow] = useState(false);\n  return (\n    <TextInput\n      label=\"Password\"\n      type={show ? 'text' : 'password'}\n      rightAction={\n        <button type=\"button\" onClick={() => setShow(!show)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>\n          {show ? <EyeOffIcon size={16} /> : <EyeIcon size={16} />}\n        </button>\n      }\n    />\n  );\n}"
       }
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "variants": [
+          "outlined",
+          "filled",
+          "standard"
+        ],
+        "recipes": [
+          "basic",
+          "search",
+          "password",
+          "email",
+          "multiline",
+          "select-autocomplete",
+          "prefix-suffix"
+        ],
+        "states": [
+          "default",
+          "hover",
+          "focus",
+          "disabled",
+          "readonly",
+          "error",
+          "success",
+          "loading"
+        ],
+        "accessibility": [
+          "aria-invalid",
+          "aria-describedby",
+          "aria-required",
+          "roving-tabIndex"
+        ],
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "variants": [
+          "outlined",
+          "filled"
+        ],
+        "recipes": [
+          "basic",
+          "search",
+          "password",
+          "email",
+          "multiline"
+        ],
+        "states": [
+          "default",
+          "focused",
+          "disabled",
+          "error"
+        ],
+        "accessibility": [
+          "accessibilityRole=\"none\"",
+          "accessibilityLabel",
+          "48dp touch target"
+        ],
+        "unsupportedRecipes": [
+          "select-autocomplete",
+          "prefix-suffix",
+          "hover-effects"
+        ],
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "variants": [
+          "default",
+          "search"
+        ],
+        "recipes": [
+          "basic",
+          "search",
+          "password",
+          "email",
+          "multiline"
+        ],
+        "states": [
+          "default",
+          "focused",
+          "disabled",
+          "error"
+        ],
+        "accessibility": [
+          "accessibilityTraits=[\"none\"]",
+          "VoiceOver value readout",
+          "44pt touch target"
+        ],
+        "unsupportedRecipes": [
+          "select-autocomplete",
+          "prefix-suffix",
+          "hover-effects"
+        ],
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "variants": [
+          "default",
+          "outlined"
+        ],
+        "recipes": [
+          "basic",
+          "search",
+          "password",
+          "multiline"
+        ],
+        "states": [
+          "default",
+          "hover",
+          "focused",
+          "disabled",
+          "error"
+        ],
+        "accessibility": [
+          "UIAutomation Text pattern",
+          "high-contrast-focus-rect"
+        ],
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "variants": [
+          "default"
+        ],
+        "recipes": [
+          "basic",
+          "search",
+          "password",
+          "multiline"
+        ],
+        "states": [
+          "default",
+          "hover",
+          "focused",
+          "disabled",
+          "error"
+        ],
+        "accessibility": [
+          "NSAccessibilityTextFieldRole",
+          "voiceover-announcement"
+        ],
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Always associate labels with inputs using labelProps / accessibilityLabel",
+        "Use secureTextEntry / type=\"password\" for sensitive credentials",
+        "Provide clear, non-punitive error messages when validation fails",
+        "Configure platform-correct virtual keyboards (e.g. keyboardType=\"email-address\")"
+      ],
+      "dont": [
+        "Never rely solely on placeholder text as a substitute for a field label",
+        "Never show desktop hover indicators on touch-only mobile devices",
+        "Never force web DOM measurement into native TextInput implementations"
+      ]
+    }
   },
   "select": {
     "id": "select",
@@ -149,7 +475,47 @@ export const COMPONENTS = {
       "--spectra-select-border",
       "--spectra-select-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Select accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "checkbox": {
     "id": "checkbox",
@@ -165,7 +531,47 @@ export const COMPONENTS = {
       "--spectra-checkbox-border",
       "--spectra-checkbox-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Checkbox accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "radio": {
     "id": "radio",
@@ -181,7 +587,47 @@ export const COMPONENTS = {
       "--spectra-radio-border",
       "--spectra-radio-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Radio accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "switch": {
     "id": "switch",
@@ -197,7 +643,47 @@ export const COMPONENTS = {
       "--spectra-switch-border",
       "--spectra-switch-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Switch accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "accordion": {
     "id": "accordion",
@@ -213,7 +699,47 @@ export const COMPONENTS = {
       "--spectra-accordion-border",
       "--spectra-accordion-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Accordion accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "avatar": {
     "id": "avatar",
@@ -229,7 +755,47 @@ export const COMPONENTS = {
       "--spectra-avatar-border",
       "--spectra-avatar-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Avatar accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "list": {
     "id": "list",
@@ -245,7 +811,47 @@ export const COMPONENTS = {
       "--spectra-list-border",
       "--spectra-list-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow List accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "badge": {
     "id": "badge",
@@ -261,7 +867,47 @@ export const COMPONENTS = {
       "--spectra-badge-border",
       "--spectra-badge-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Badge accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "tooltip": {
     "id": "tooltip",
@@ -277,7 +923,47 @@ export const COMPONENTS = {
       "--spectra-tooltip-border",
       "--spectra-tooltip-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Tooltip accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "tabs": {
     "id": "tabs",
@@ -293,7 +979,47 @@ export const COMPONENTS = {
       "--spectra-tabs-border",
       "--spectra-tabs-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Tabs accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "card": {
     "id": "card",
@@ -309,7 +1035,47 @@ export const COMPONENTS = {
       "--spectra-card-border",
       "--spectra-card-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Card accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "dialog": {
     "id": "dialog",
@@ -325,7 +1091,48 @@ export const COMPONENTS = {
       "--spectra-dialog-border",
       "--spectra-dialog-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Trap focus inside modal on Web",
+        "Support hardware back and escape dismissal"
+      ],
+      "dont": [
+        "Never create nested modal dialogs"
+      ]
+    }
   },
   "alert": {
     "id": "alert",
@@ -341,7 +1148,47 @@ export const COMPONENTS = {
       "--spectra-alert-border",
       "--spectra-alert-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Alert accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "spinner": {
     "id": "spinner",
@@ -357,7 +1204,47 @@ export const COMPONENTS = {
       "--spectra-spinner-border",
       "--spectra-spinner-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Spinner accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "skeleton": {
     "id": "skeleton",
@@ -373,7 +1260,47 @@ export const COMPONENTS = {
       "--spectra-skeleton-border",
       "--spectra-skeleton-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Skeleton accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "divider": {
     "id": "divider",
@@ -389,7 +1316,47 @@ export const COMPONENTS = {
       "--spectra-divider-border",
       "--spectra-divider-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Divider accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "chip": {
     "id": "chip",
@@ -405,7 +1372,47 @@ export const COMPONENTS = {
       "--spectra-chip-border",
       "--spectra-chip-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Chip accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "breadcrumbs": {
     "id": "breadcrumbs",
@@ -421,7 +1428,47 @@ export const COMPONENTS = {
       "--spectra-breadcrumbs-border",
       "--spectra-breadcrumbs-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Breadcrumbs accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "compound-button": {
     "id": "compound-button",
@@ -437,7 +1484,47 @@ export const COMPONENTS = {
       "--spectra-compound-button-border",
       "--spectra-compound-button-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Compound Button accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "split-button": {
     "id": "split-button",
@@ -453,7 +1540,47 @@ export const COMPONENTS = {
       "--spectra-split-button-border",
       "--spectra-split-button-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Split Button accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "button-group": {
     "id": "button-group",
@@ -469,7 +1596,47 @@ export const COMPONENTS = {
       "--spectra-button-group-border",
       "--spectra-button-group-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Button Group accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "icon-button": {
     "id": "icon-button",
@@ -485,7 +1652,47 @@ export const COMPONENTS = {
       "--spectra-icon-button-border",
       "--spectra-icon-button-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Icon Button accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "textarea": {
     "id": "textarea",
@@ -501,7 +1708,47 @@ export const COMPONENTS = {
       "--spectra-textarea-border",
       "--spectra-textarea-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow TextArea accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "combobox": {
     "id": "combobox",
@@ -517,7 +1764,47 @@ export const COMPONENTS = {
       "--spectra-combobox-border",
       "--spectra-combobox-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Combobox accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "autocomplete": {
     "id": "autocomplete",
@@ -533,7 +1820,47 @@ export const COMPONENTS = {
       "--spectra-autocomplete-border",
       "--spectra-autocomplete-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Autocomplete accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "checkbox-group": {
     "id": "checkbox-group",
@@ -549,7 +1876,47 @@ export const COMPONENTS = {
       "--spectra-checkbox-group-border",
       "--spectra-checkbox-group-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Checkbox Group accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "radio-group": {
     "id": "radio-group",
@@ -565,7 +1932,47 @@ export const COMPONENTS = {
       "--spectra-radio-group-border",
       "--spectra-radio-group-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Radio Group accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "slider": {
     "id": "slider",
@@ -581,7 +1988,47 @@ export const COMPONENTS = {
       "--spectra-slider-border",
       "--spectra-slider-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Slider accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "rating": {
     "id": "rating",
@@ -597,7 +2044,47 @@ export const COMPONENTS = {
       "--spectra-rating-border",
       "--spectra-rating-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Rating accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "color-picker": {
     "id": "color-picker",
@@ -613,7 +2100,47 @@ export const COMPONENTS = {
       "--spectra-color-picker-border",
       "--spectra-color-picker-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Color Picker accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "avatar-group": {
     "id": "avatar-group",
@@ -629,7 +2156,47 @@ export const COMPONENTS = {
       "--spectra-avatar-group-border",
       "--spectra-avatar-group-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Avatar Group accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "table": {
     "id": "table",
@@ -645,7 +2212,47 @@ export const COMPONENTS = {
       "--spectra-table-border",
       "--spectra-table-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Table accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "data-grid": {
     "id": "data-grid",
@@ -661,7 +2268,47 @@ export const COMPONENTS = {
       "--spectra-data-grid-border",
       "--spectra-data-grid-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Data Grid accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "tree-view": {
     "id": "tree-view",
@@ -677,7 +2324,47 @@ export const COMPONENTS = {
       "--spectra-tree-view-border",
       "--spectra-tree-view-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Tree View accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "tag": {
     "id": "tag",
@@ -693,7 +2380,47 @@ export const COMPONENTS = {
       "--spectra-tag-border",
       "--spectra-tag-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Tag accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "timeline": {
     "id": "timeline",
@@ -709,7 +2436,47 @@ export const COMPONENTS = {
       "--spectra-timeline-border",
       "--spectra-timeline-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Timeline accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "statistic": {
     "id": "statistic",
@@ -725,7 +2492,47 @@ export const COMPONENTS = {
       "--spectra-statistic-border",
       "--spectra-statistic-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Statistic accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "calendar": {
     "id": "calendar",
@@ -741,7 +2548,47 @@ export const COMPONENTS = {
       "--spectra-calendar-border",
       "--spectra-calendar-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Calendar accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "drawer": {
     "id": "drawer",
@@ -757,7 +2604,47 @@ export const COMPONENTS = {
       "--spectra-drawer-border",
       "--spectra-drawer-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Drawer accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "popover": {
     "id": "popover",
@@ -773,7 +2660,47 @@ export const COMPONENTS = {
       "--spectra-popover-border",
       "--spectra-popover-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Popover accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "progress-bar": {
     "id": "progress-bar",
@@ -789,7 +2716,47 @@ export const COMPONENTS = {
       "--spectra-progress-bar-border",
       "--spectra-progress-bar-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Progress Bar accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "toast": {
     "id": "toast",
@@ -805,7 +2772,47 @@ export const COMPONENTS = {
       "--spectra-toast-border",
       "--spectra-toast-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Toast accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "media-card": {
     "id": "media-card",
@@ -821,7 +2828,47 @@ export const COMPONENTS = {
       "--spectra-media-card-border",
       "--spectra-media-card-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Media Card accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "box": {
     "id": "box",
@@ -900,7 +2947,47 @@ export const COMPONENTS = {
         "title": "Elevated Card Surface with Box",
         "code": "import { Box, Text } from '@winplaybox/react-native';\n\n<Box padding=\"md\" bg=\"raised\" radius=\"lg\" border>\n  <Text weight=\"bold\">Elevated Box Surface</Text>\n</Box>"
       }
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Box accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "container": {
     "id": "container",
@@ -916,7 +3003,47 @@ export const COMPONENTS = {
       "--spectra-container-border",
       "--spectra-container-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Container accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "grid": {
     "id": "grid",
@@ -980,7 +3107,47 @@ export const COMPONENTS = {
         "title": "Two-Column Responsive Grid",
         "code": "import { Grid, Box, Text } from '@winplaybox/react';\n\n<Grid container spacing={2}>\n  <Grid item xs={6}><Box padding=\"md\" bg=\"subtle\"><Text>Left Column</Text></Box></Grid>\n  <Grid item xs={6}><Box padding=\"md\" bg=\"subtle\"><Text>Right Column</Text></Box></Grid>\n</Grid>"
       }
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Grid accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "stack": {
     "id": "stack",
@@ -996,7 +3163,47 @@ export const COMPONENTS = {
       "--spectra-stack-border",
       "--spectra-stack-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Stack accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "paper": {
     "id": "paper",
@@ -1012,7 +3219,47 @@ export const COMPONENTS = {
       "--spectra-paper-border",
       "--spectra-paper-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Paper accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "app-bar": {
     "id": "app-bar",
@@ -1028,7 +3275,47 @@ export const COMPONENTS = {
       "--spectra-app-bar-border",
       "--spectra-app-bar-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow App Bar accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "pagination": {
     "id": "pagination",
@@ -1044,7 +3331,47 @@ export const COMPONENTS = {
       "--spectra-pagination-border",
       "--spectra-pagination-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Pagination accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "stepper": {
     "id": "stepper",
@@ -1060,7 +3387,47 @@ export const COMPONENTS = {
       "--spectra-stepper-border",
       "--spectra-stepper-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Stepper accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "menu": {
     "id": "menu",
@@ -1076,7 +3443,47 @@ export const COMPONENTS = {
       "--spectra-menu-border",
       "--spectra-menu-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Menu accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "link": {
     "id": "link",
@@ -1092,7 +3499,47 @@ export const COMPONENTS = {
       "--spectra-link-border",
       "--spectra-link-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Link accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "speed-dial": {
     "id": "speed-dial",
@@ -1108,7 +3555,47 @@ export const COMPONENTS = {
       "--spectra-speed-dial-border",
       "--spectra-speed-dial-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Speed Dial accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "bottom-nav": {
     "id": "bottom-nav",
@@ -1124,7 +3611,47 @@ export const COMPONENTS = {
       "--spectra-bottom-nav-border",
       "--spectra-bottom-nav-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Bottom Navigation accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "platform-chassis": {
     "id": "platform-chassis",
@@ -1140,7 +3667,47 @@ export const COMPONENTS = {
       "--spectra-platform-chassis-border",
       "--spectra-platform-chassis-radius"
     ],
-    "recipes": []
+    "recipes": [],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Platform Chassis accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "list-view": {
     "id": "list-view",
@@ -1222,7 +3789,47 @@ export const COMPONENTS = {
         "title": "Native Mobile Virtualized ListView",
         "code": "import { ListView, Text } from '@winplaybox/react-native';\n\n<ListView\n  data={items}\n  divided\n  refreshing={isRefreshing}\n  onRefresh={handleRefresh}\n  renderItem={({ item }) => <Text>{item.title}</Text>}\n/>"
       }
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow ListView accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "date-picker": {
     "id": "date-picker",
@@ -1302,7 +3909,47 @@ export const COMPONENTS = {
         "title": "Mobile Native OS DatePicker Trigger",
         "code": "import { DatePicker } from '@winplaybox/react-native';\n\n<DatePicker\n  label=\"Booking Date\"\n  value={bookingDate}\n  onChange={setBookingDate}\n/>"
       }
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow DatePicker accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "web-view-box": {
     "id": "web-view-box",
@@ -1366,7 +4013,47 @@ export const COMPONENTS = {
         "title": "Native In-App Web Browser with Progress Bar & Error Fallback",
         "code": "import { WebViewBox } from '@winplaybox/react-native';\n\n<WebViewBox\n  source={{ uri: 'https://news.ycombinator.com' }}\n  title=\"Hacker News\"\n  showProgressBar\n/>"
       }
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow WebViewBox accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "copy-button": {
     "id": "copy-button",
@@ -1444,7 +4131,48 @@ export const COMPONENTS = {
         "title": "Mobile Native Copy Button",
         "code": "import { CopyButton } from '@winplaybox/react-native';\n\n<CopyButton value=\"https://spectra-ui.winplaybox.com\" label=\"Copy Share URL\" onCopy={() => console.log('Copied!')} />"
       }
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Provide accessible feedback when text is copied",
+        "Keep default timeout to 2000ms"
+      ],
+      "dont": [
+        "Never copy sensitive credentials without explicit user consent"
+      ]
+    }
   },
   "scroll-view": {
     "id": "scroll-view",
@@ -1486,7 +4214,47 @@ export const COMPONENTS = {
         "title": "Native ScrollView with Theme Sunken Background",
         "code": "import { ScrollView, Stack, Card, Text } from '@winplaybox/react-native';\n\n<ScrollView padding=\"md\" bg=\"sunken\">\n  <Stack gap={12}>\n    <Card><Text>Item 1</Text></Card>\n    <Card><Text>Item 2</Text></Card>\n  </Stack>\n</ScrollView>"
       }
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow ScrollView accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "pressable": {
     "id": "pressable",
@@ -1536,7 +4304,47 @@ export const COMPONENTS = {
         "title": "Raised Touchable Card Surface",
         "code": "import { Pressable, Text } from '@winplaybox/react-native';\n\n<Pressable variant=\"raised\" radius=\"md\" padding=\"md\" onPress={() => console.log('Tapped!')}>\n  <Text weight=\"semibold\">Interactive Native Tile</Text>\n</Pressable>"
       }
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Pressable accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
   },
   "image": {
     "id": "image",
@@ -1591,7 +4399,153 @@ export const COMPONENTS = {
         "title": "Rounded Banner Image with 16:9 Aspect Ratio",
         "code": "import { Image } from '@winplaybox/react-native';\n\n<Image source={{ uri: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809' }} aspectRatio={16 / 9} radius=\"lg\" />"
       }
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Follow Image accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    }
+  },
+  "live-indicator": {
+    "id": "live-indicator",
+    "name": "LiveIndicator",
+    "category": "Feedback",
+    "description": "Subtle real-time status and broadcast indicator with pulse, beacon, and static variants, strictly respecting reduced-motion accessibility across Web, Android, iOS, Windows, and macOS.",
+    "importStatement": "import { LiveIndicator } from '@winplaybox/react';",
+    "nativeImport": "import { LiveIndicator } from '@winplaybox/react-native';",
+    "props": [
+      {
+        "name": "variant",
+        "type": "'pulse' | 'beacon' | 'static'",
+        "defaultValue": "'pulse'",
+        "description": "Animation behavior."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "defaultValue": "'LIVE'",
+        "description": "Accessible status label."
+      },
+      {
+        "name": "status",
+        "type": "'live' | 'recording' | 'offline' | 'idle'",
+        "defaultValue": "'live'",
+        "description": "Semantic status role."
+      },
+      {
+        "name": "size",
+        "type": "'sm' | 'md' | 'lg'",
+        "defaultValue": "'md'",
+        "description": "Indicator density scale."
+      }
+    ],
+    "nativeProps": [
+      {
+        "name": "variant",
+        "type": "'pulse' | 'beacon' | 'static'",
+        "defaultValue": "'pulse'",
+        "description": "Animation behavior."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "defaultValue": "'LIVE'",
+        "description": "Accessible status label."
+      }
+    ],
+    "tokens": [
+      "--color-feedback-danger",
+      "--color-feedback-success",
+      "--color-surface-sunken"
+    ],
+    "recipes": [
+      {
+        "title": "Subtle Pulse Live Status",
+        "code": "import { LiveIndicator } from '@winplaybox/react';\n\n<LiveIndicator variant=\"pulse\" label=\"LIVE\" />"
+      },
+      {
+        "title": "Native Mobile Live Indicator",
+        "code": "import { LiveIndicator } from '@winplaybox/react-native';\n\n<LiveIndicator variant=\"pulse\" label=\"RECORDING\" status=\"recording\" />"
+      }
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    },
+    "bestPractices": {
+      "do": [
+        "Always support prefers-reduced-motion by dampening or stopping animation",
+        "Use aria-live=\"polite\" and role=\"status\" for announcements",
+        "Keep animation subtle — avoid harsh neon glows"
+      ],
+      "dont": [
+        "Never exceed 3 flashes per second (WCAG 2.3.1)",
+        "Never rely purely on color to communicate state"
+      ]
+    }
   }
 };
 
@@ -1607,7 +4561,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Dynamic theme role updates and system preference sync"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-disclosure": {
     "name": "useDisclosure",
@@ -1625,7 +4606,34 @@ export const HOOKS = {
       "aria-expanded",
       "aria-controls",
       "aria-hidden"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-color-scheme": {
     "name": "useColorScheme",
@@ -1638,7 +4646,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "prefers-color-scheme media query synchronization"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-outside-click": {
     "name": "useOutsideClick",
@@ -1649,7 +4684,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Click-away dismiss pattern"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-id": {
     "name": "useId",
@@ -1660,7 +4722,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "aria-labelledby, aria-describedby linking"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-controllable-state": {
     "name": "useControllableState",
@@ -1671,7 +4760,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Standard W3C controlled state pattern"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-focus-trap": {
     "name": "useFocusTrap",
@@ -1682,7 +4798,39 @@ export const HOOKS = {
     ],
     "accessibility": [
       "W3C modal dialog focus trapping"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives",
+        "notes": "Intercepts Tab/Shift+Tab keydown events."
+      },
+      "android": {
+        "platform": "android",
+        "support": "unsupported",
+        "notes": "Android uses Modal native container and TalkBack accessibility hierarchy.",
+        "alternative": "Modal accessibleViewIsModal={true}"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "unsupported",
+        "notes": "iOS VoiceOver uses native modal accessibility container semantics.",
+        "alternative": "Modal accessibilityViewIsModal={true}"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "notes": "XAML / WinUI modal focus scoping."
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "notes": "NSWindow modal session key-view loop."
+      }
+    }
   },
   "use-focus-ring": {
     "name": "useFocusRing",
@@ -1695,7 +4843,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "WCAG 2.1 Focus Visible requirement"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-media-query": {
     "name": "useMediaQuery",
@@ -1706,7 +4881,39 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Responsive layout adaptation"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives",
+        "notes": "CSS window.matchMedia listener."
+      },
+      "android": {
+        "platform": "android",
+        "support": "unsupported",
+        "notes": "Native does not execute CSS media queries.",
+        "alternative": "useWindowDimensions() / useBreakpoint()"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "unsupported",
+        "notes": "Native does not execute CSS media queries.",
+        "alternative": "useWindowDimensions() / useBreakpoint()"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "notes": "useWindowDimensions mapping."
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "notes": "useWindowDimensions mapping."
+      }
+    }
   },
   "use-reduced-motion": {
     "name": "useReducedMotion",
@@ -1717,7 +4924,39 @@ export const HOOKS = {
     ],
     "accessibility": [
       "prefers-reduced-motion vestibular disorder support"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives",
+        "notes": "CSS prefers-reduced-motion query."
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "notes": "AccessibilityInfo.isReduceMotionEnabled listener."
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "notes": "AccessibilityInfo.isReduceMotionEnabled listener."
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "notes": "UISettings.AnimationsEnabled mapping."
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "notes": "NSWorkspace reduceMotion status."
+      }
+    }
   },
   "use-toast": {
     "name": "useToast",
@@ -1729,7 +4968,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "aria-live=\"polite\", role=\"status\""
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-form-field": {
     "name": "useFormField",
@@ -1745,7 +5011,34 @@ export const HOOKS = {
       "aria-invalid",
       "aria-describedby",
       "aria-required"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-list-navigation": {
     "name": "useListNavigation",
@@ -1758,7 +5051,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "W3C Roving Tabindex & ARIA Listbox"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-rtl": {
     "name": "useRTL",
@@ -1770,7 +5090,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "dir=\"rtl\" localization"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-debounce": {
     "name": "useDebounce",
@@ -1781,7 +5128,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Reduces search query churn"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-throttle": {
     "name": "useThrottle",
@@ -1792,7 +5166,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Frame rate stability"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-hover": {
     "name": "useHover",
@@ -1803,7 +5204,39 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Hover interaction"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives",
+        "notes": "Native mouseenter/mouseleave listeners with cleanup."
+      },
+      "android": {
+        "platform": "android",
+        "support": "unsupported",
+        "notes": "Hover is not a primary interaction model on touch devices.",
+        "alternative": "usePressableState / onPressIn"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "unsupported",
+        "notes": "Touch screens do not support physical hover states without external trackpad.",
+        "alternative": "usePressableState / onPressIn"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "notes": "Mouse pointer enter/exit mappings on WinUI controls."
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "notes": "NSView onMouseEnter/onMouseExit trackpad integration."
+      }
+    }
   },
   "use-platform": {
     "name": "usePlatform",
@@ -1816,7 +5249,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Platform specific chassis customization"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-breakpoint": {
     "name": "useBreakpoint",
@@ -1827,7 +5287,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Responsive grid alignment"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-event-listener": {
     "name": "useEventListener",
@@ -1838,7 +5325,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Window and DOM events"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-intersection-observer": {
     "name": "useIntersectionObserver",
@@ -1849,7 +5363,39 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Lazy-loaded asset announcements"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives",
+        "notes": "Browser IntersectionObserver API."
+      },
+      "android": {
+        "platform": "android",
+        "support": "unsupported",
+        "notes": "No browser DOM observer exists in native runtimes.",
+        "alternative": "FlatList onViewableItemsChanged"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "unsupported",
+        "notes": "No browser DOM observer exists in native runtimes.",
+        "alternative": "FlatList onViewableItemsChanged"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "unsupported",
+        "notes": "Use ListView viewable items detection.",
+        "alternative": "ListView onViewableItemsChanged"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "unsupported",
+        "notes": "Use ListView viewable items detection.",
+        "alternative": "ListView onViewableItemsChanged"
+      }
+    }
   },
   "use-element-size": {
     "name": "useElementSize",
@@ -1860,7 +5406,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Dynamic container sizing"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-window-size": {
     "name": "useWindowSize",
@@ -1871,7 +5444,38 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Window scale"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native",
+        "notes": "useWindowDimensions() native hook."
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native",
+        "notes": "useWindowDimensions() native hook."
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "notes": "useWindowDimensions() native hook."
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "notes": "useWindowDimensions() native hook."
+      }
+    }
   },
   "use-scroll-lock": {
     "name": "useScrollLock",
@@ -1882,7 +5486,37 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Prevents background scroll bleed during dialogs"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives",
+        "notes": "Locks document.body.style.overflow."
+      },
+      "android": {
+        "platform": "android",
+        "support": "unsupported",
+        "notes": "Native scroll is managed by ScrollView container boundaries.",
+        "alternative": "ScrollView scrollEnabled={false}"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "unsupported",
+        "notes": "Native scroll is managed by ScrollView container boundaries.",
+        "alternative": "ScrollView scrollEnabled={false}"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-clipboard": {
     "name": "useClipboard",
@@ -1894,7 +5528,39 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Copy confirmation status"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives",
+        "notes": "navigator.clipboard.writeText with fallback."
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "notes": "React Native Clipboard API."
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "notes": "UIPasteboard native integration."
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "native",
+        "implementation": "@winplaybox/react-native-windows",
+        "notes": "Windows DataPackage clipboard."
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "native",
+        "implementation": "@winplaybox/react-native-macos",
+        "notes": "NSPasteboard native integration."
+      }
+    }
   },
   "use-local-storage": {
     "name": "useLocalStorage",
@@ -1905,7 +5571,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "User preference preservation"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-previous": {
     "name": "usePrevious",
@@ -1916,7 +5609,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "State transition diffing"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-async": {
     "name": "useAsync",
@@ -1930,7 +5650,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "aria-busy and error alert signaling"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   },
   "use-interval": {
     "name": "useInterval",
@@ -1941,7 +5688,34 @@ export const HOOKS = {
     ],
     "accessibility": [
       "Controlled timers"
-    ]
+    ],
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
   }
 };
 
@@ -2303,3 +6077,4183 @@ export const ICONS = [
   "AndroidIcon",
   "WindowsIcon"
 ];
+
+export const PLATFORMS = {
+  "web": {
+    "id": "web",
+    "name": "Web",
+    "renderer": "React DOM",
+    "primaryParadigm": "Web / responsive / keyboard / ARIA",
+    "touchStandard": "Flexible / mouse primary",
+    "package": "@winplaybox/react",
+    "primitivesPackage": "@winplaybox/primitives",
+    "features": [
+      "HTML5 Semantic Elements",
+      "WAI-ARIA 1.2",
+      "CSS Media Queries",
+      "Responsive Breakpoints",
+      "Keyboard Navigation (Tab, Space, Enter, Arrows)"
+    ]
+  },
+  "android": {
+    "id": "android",
+    "name": "Android",
+    "renderer": "React Native",
+    "primaryParadigm": "Android / Material-inspired native behavior / TalkBack / hardware back",
+    "touchStandard": "48dp minimum touch target",
+    "package": "@winplaybox/react-native",
+    "primitivesPackage": "@winplaybox/react-native",
+    "features": [
+      "Material Motion Curves",
+      "Touch Ripple Feedback",
+      "Soft Keyboard Integration",
+      "TalkBack Screen Reader",
+      "Hardware Back Handling"
+    ]
+  },
+  "ios": {
+    "id": "ios",
+    "name": "iOS",
+    "renderer": "React Native",
+    "primaryParadigm": "Apple HIG / touch-first / VoiceOver / safe areas / Dynamic Type",
+    "touchStandard": "44pt minimum touch target",
+    "package": "@winplaybox/react-native",
+    "primitivesPackage": "@winplaybox/react-native",
+    "features": [
+      "Smooth Physics Springs",
+      "Active Touch Opacity Feedback",
+      "Safe Area Insets",
+      "VoiceOver Accessibility",
+      "Dynamic Type Scaling"
+    ]
+  },
+  "windows": {
+    "id": "windows",
+    "name": "Windows",
+    "renderer": "React Native Windows",
+    "primaryParadigm": "Windows / WinUI / keyboard + mouse / UIAutomation / high contrast",
+    "touchStandard": "Desktop cursor / 32px standard",
+    "package": "@winplaybox/react-native-windows",
+    "primitivesPackage": "@winplaybox/react-native-windows",
+    "features": [
+      "WinUI Acrylic & Mica Surfaces",
+      "High Contrast Mode",
+      "UIAutomation Accessibility",
+      "Full Keyboard Navigation (Tab, F6, Arrow)",
+      "Mouse Hover States"
+    ]
+  },
+  "macos": {
+    "id": "macos",
+    "name": "macOS",
+    "renderer": "React Native macOS",
+    "primaryParadigm": "macOS / AppKit / mouse + trackpad / keyboard shortcuts / VoiceOver",
+    "touchStandard": "Desktop cursor / 28pt standard",
+    "package": "@winplaybox/react-native-macos",
+    "primitivesPackage": "@winplaybox/react-native-macos",
+    "features": [
+      "AppKit Vibrancy Surfaces",
+      "Native Menu Bar Integration",
+      "NSAccessibility Roles",
+      "Trackpad & Mouse Gestures",
+      "Cmd Keyboard Shortcuts"
+    ]
+  }
+};
+
+export const PLATFORM_CAPABILITIES = {
+  "text-input": {
+    "id": "text-input",
+    "name": "TextInput",
+    "bestPractices": {
+      "do": [
+        "Always associate labels with inputs using labelProps / accessibilityLabel",
+        "Use secureTextEntry / type=\"password\" for sensitive credentials",
+        "Provide clear, non-punitive error messages when validation fails",
+        "Configure platform-correct virtual keyboards (e.g. keyboardType=\"email-address\")"
+      ],
+      "dont": [
+        "Never rely solely on placeholder text as a substitute for a field label",
+        "Never show desktop hover indicators on touch-only mobile devices",
+        "Never force web DOM measurement into native TextInput implementations"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "variants": [
+          "outlined",
+          "filled",
+          "standard"
+        ],
+        "recipes": [
+          "basic",
+          "search",
+          "password",
+          "email",
+          "multiline",
+          "select-autocomplete",
+          "prefix-suffix"
+        ],
+        "states": [
+          "default",
+          "hover",
+          "focus",
+          "disabled",
+          "readonly",
+          "error",
+          "success",
+          "loading"
+        ],
+        "accessibility": [
+          "aria-invalid",
+          "aria-describedby",
+          "aria-required",
+          "roving-tabIndex"
+        ],
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "variants": [
+          "outlined",
+          "filled"
+        ],
+        "recipes": [
+          "basic",
+          "search",
+          "password",
+          "email",
+          "multiline"
+        ],
+        "states": [
+          "default",
+          "focused",
+          "disabled",
+          "error"
+        ],
+        "accessibility": [
+          "accessibilityRole=\"none\"",
+          "accessibilityLabel",
+          "48dp touch target"
+        ],
+        "unsupportedRecipes": [
+          "select-autocomplete",
+          "prefix-suffix",
+          "hover-effects"
+        ],
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "variants": [
+          "default",
+          "search"
+        ],
+        "recipes": [
+          "basic",
+          "search",
+          "password",
+          "email",
+          "multiline"
+        ],
+        "states": [
+          "default",
+          "focused",
+          "disabled",
+          "error"
+        ],
+        "accessibility": [
+          "accessibilityTraits=[\"none\"]",
+          "VoiceOver value readout",
+          "44pt touch target"
+        ],
+        "unsupportedRecipes": [
+          "select-autocomplete",
+          "prefix-suffix",
+          "hover-effects"
+        ],
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "variants": [
+          "default",
+          "outlined"
+        ],
+        "recipes": [
+          "basic",
+          "search",
+          "password",
+          "multiline"
+        ],
+        "states": [
+          "default",
+          "hover",
+          "focused",
+          "disabled",
+          "error"
+        ],
+        "accessibility": [
+          "UIAutomation Text pattern",
+          "high-contrast-focus-rect"
+        ],
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "variants": [
+          "default"
+        ],
+        "recipes": [
+          "basic",
+          "search",
+          "password",
+          "multiline"
+        ],
+        "states": [
+          "default",
+          "hover",
+          "focused",
+          "disabled",
+          "error"
+        ],
+        "accessibility": [
+          "NSAccessibilityTextFieldRole",
+          "voiceover-announcement"
+        ],
+        "testStatus": "verified"
+      }
+    }
+  },
+  "button": {
+    "id": "button",
+    "name": "Button",
+    "bestPractices": {
+      "do": [
+        "Use primary variant for the single main call to action",
+        "Supply accessible labels or text children for screen readers",
+        "Respect platform touch minimums (48dp Android, 44pt iOS)"
+      ],
+      "dont": [
+        "Never place multiple primary buttons adjacent to each other",
+        "Never use emojis in button labels"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "variants": [
+          "primary",
+          "secondary",
+          "subtle",
+          "danger",
+          "outline"
+        ],
+        "recipes": [
+          "primary-action",
+          "leading-icon",
+          "loading-state",
+          "full-width"
+        ],
+        "states": [
+          "default",
+          "hover",
+          "focus",
+          "active",
+          "disabled",
+          "loading"
+        ],
+        "accessibility": [
+          "role=\"button\"",
+          "aria-busy",
+          "aria-disabled",
+          "focus-visible ring"
+        ],
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "variants": [
+          "primary",
+          "secondary",
+          "subtle",
+          "danger"
+        ],
+        "recipes": [
+          "primary-action",
+          "leading-icon",
+          "loading-state"
+        ],
+        "states": [
+          "default",
+          "pressed",
+          "disabled",
+          "loading"
+        ],
+        "accessibility": [
+          "accessibilityRole=\"button\"",
+          "accessibilityState",
+          "48dp touch target"
+        ],
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "variants": [
+          "primary",
+          "secondary",
+          "subtle",
+          "danger"
+        ],
+        "recipes": [
+          "primary-action",
+          "leading-icon",
+          "loading-state"
+        ],
+        "states": [
+          "default",
+          "pressed",
+          "disabled",
+          "loading"
+        ],
+        "accessibility": [
+          "accessibilityRole=\"button\"",
+          "accessibilityState",
+          "44pt touch target"
+        ],
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "variants": [
+          "primary",
+          "secondary",
+          "subtle",
+          "danger"
+        ],
+        "recipes": [
+          "primary-action",
+          "leading-icon",
+          "loading-state"
+        ],
+        "states": [
+          "default",
+          "hover",
+          "pressed",
+          "focused",
+          "disabled"
+        ],
+        "accessibility": [
+          "UIAutomation Invoke pattern"
+        ],
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "variants": [
+          "primary",
+          "secondary",
+          "subtle",
+          "danger"
+        ],
+        "recipes": [
+          "primary-action",
+          "leading-icon",
+          "loading-state"
+        ],
+        "states": [
+          "default",
+          "hover",
+          "pressed",
+          "focused",
+          "disabled"
+        ],
+        "accessibility": [
+          "NSAccessibilityButtonRole"
+        ],
+        "testStatus": "verified"
+      }
+    }
+  },
+  "copy-button": {
+    "id": "copy-button",
+    "name": "CopyButton",
+    "bestPractices": {
+      "do": [
+        "Provide accessible feedback when text is copied",
+        "Keep default timeout to 2000ms"
+      ],
+      "dont": [
+        "Never copy sensitive credentials without explicit user consent"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "live-indicator": {
+    "id": "live-indicator",
+    "name": "LiveIndicator",
+    "bestPractices": {
+      "do": [
+        "Always support prefers-reduced-motion by dampening or stopping animation",
+        "Use aria-live=\"polite\" and role=\"status\" for announcements",
+        "Keep animation subtle — avoid harsh neon glows"
+      ],
+      "dont": [
+        "Never exceed 3 flashes per second (WCAG 2.3.1)",
+        "Never rely purely on color to communicate state"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "dialog": {
+    "id": "dialog",
+    "name": "Dialog",
+    "bestPractices": {
+      "do": [
+        "Trap focus inside modal on Web",
+        "Support hardware back and escape dismissal"
+      ],
+      "dont": [
+        "Never create nested modal dialogs"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "select": {
+    "id": "select",
+    "name": "Select",
+    "bestPractices": {
+      "do": [
+        "Follow Select accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "checkbox": {
+    "id": "checkbox",
+    "name": "Checkbox",
+    "bestPractices": {
+      "do": [
+        "Follow Checkbox accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "radio": {
+    "id": "radio",
+    "name": "Radio",
+    "bestPractices": {
+      "do": [
+        "Follow Radio accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "switch": {
+    "id": "switch",
+    "name": "Switch",
+    "bestPractices": {
+      "do": [
+        "Follow Switch accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "accordion": {
+    "id": "accordion",
+    "name": "Accordion",
+    "bestPractices": {
+      "do": [
+        "Follow Accordion accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "avatar": {
+    "id": "avatar",
+    "name": "Avatar",
+    "bestPractices": {
+      "do": [
+        "Follow Avatar accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "list": {
+    "id": "list",
+    "name": "List",
+    "bestPractices": {
+      "do": [
+        "Follow List accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "badge": {
+    "id": "badge",
+    "name": "Badge",
+    "bestPractices": {
+      "do": [
+        "Follow Badge accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "tooltip": {
+    "id": "tooltip",
+    "name": "Tooltip",
+    "bestPractices": {
+      "do": [
+        "Follow Tooltip accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "tabs": {
+    "id": "tabs",
+    "name": "Tabs",
+    "bestPractices": {
+      "do": [
+        "Follow Tabs accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "card": {
+    "id": "card",
+    "name": "Card",
+    "bestPractices": {
+      "do": [
+        "Follow Card accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "alert": {
+    "id": "alert",
+    "name": "Alert",
+    "bestPractices": {
+      "do": [
+        "Follow Alert accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "spinner": {
+    "id": "spinner",
+    "name": "Spinner",
+    "bestPractices": {
+      "do": [
+        "Follow Spinner accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "skeleton": {
+    "id": "skeleton",
+    "name": "Skeleton",
+    "bestPractices": {
+      "do": [
+        "Follow Skeleton accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "divider": {
+    "id": "divider",
+    "name": "Divider",
+    "bestPractices": {
+      "do": [
+        "Follow Divider accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "chip": {
+    "id": "chip",
+    "name": "Chip",
+    "bestPractices": {
+      "do": [
+        "Follow Chip accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "breadcrumbs": {
+    "id": "breadcrumbs",
+    "name": "Breadcrumbs",
+    "bestPractices": {
+      "do": [
+        "Follow Breadcrumbs accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "compound-button": {
+    "id": "compound-button",
+    "name": "Compound Button",
+    "bestPractices": {
+      "do": [
+        "Follow Compound Button accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "split-button": {
+    "id": "split-button",
+    "name": "Split Button",
+    "bestPractices": {
+      "do": [
+        "Follow Split Button accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "button-group": {
+    "id": "button-group",
+    "name": "Button Group",
+    "bestPractices": {
+      "do": [
+        "Follow Button Group accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "icon-button": {
+    "id": "icon-button",
+    "name": "Icon Button",
+    "bestPractices": {
+      "do": [
+        "Follow Icon Button accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "textarea": {
+    "id": "textarea",
+    "name": "TextArea",
+    "bestPractices": {
+      "do": [
+        "Follow TextArea accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "combobox": {
+    "id": "combobox",
+    "name": "Combobox",
+    "bestPractices": {
+      "do": [
+        "Follow Combobox accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "autocomplete": {
+    "id": "autocomplete",
+    "name": "Autocomplete",
+    "bestPractices": {
+      "do": [
+        "Follow Autocomplete accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "checkbox-group": {
+    "id": "checkbox-group",
+    "name": "Checkbox Group",
+    "bestPractices": {
+      "do": [
+        "Follow Checkbox Group accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "radio-group": {
+    "id": "radio-group",
+    "name": "Radio Group",
+    "bestPractices": {
+      "do": [
+        "Follow Radio Group accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "slider": {
+    "id": "slider",
+    "name": "Slider",
+    "bestPractices": {
+      "do": [
+        "Follow Slider accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "rating": {
+    "id": "rating",
+    "name": "Rating",
+    "bestPractices": {
+      "do": [
+        "Follow Rating accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "color-picker": {
+    "id": "color-picker",
+    "name": "Color Picker",
+    "bestPractices": {
+      "do": [
+        "Follow Color Picker accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "avatar-group": {
+    "id": "avatar-group",
+    "name": "Avatar Group",
+    "bestPractices": {
+      "do": [
+        "Follow Avatar Group accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "table": {
+    "id": "table",
+    "name": "Table",
+    "bestPractices": {
+      "do": [
+        "Follow Table accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "data-grid": {
+    "id": "data-grid",
+    "name": "Data Grid",
+    "bestPractices": {
+      "do": [
+        "Follow Data Grid accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "tree-view": {
+    "id": "tree-view",
+    "name": "Tree View",
+    "bestPractices": {
+      "do": [
+        "Follow Tree View accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "tag": {
+    "id": "tag",
+    "name": "Tag",
+    "bestPractices": {
+      "do": [
+        "Follow Tag accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "timeline": {
+    "id": "timeline",
+    "name": "Timeline",
+    "bestPractices": {
+      "do": [
+        "Follow Timeline accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "statistic": {
+    "id": "statistic",
+    "name": "Statistic",
+    "bestPractices": {
+      "do": [
+        "Follow Statistic accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "calendar": {
+    "id": "calendar",
+    "name": "Calendar",
+    "bestPractices": {
+      "do": [
+        "Follow Calendar accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "drawer": {
+    "id": "drawer",
+    "name": "Drawer",
+    "bestPractices": {
+      "do": [
+        "Follow Drawer accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "popover": {
+    "id": "popover",
+    "name": "Popover",
+    "bestPractices": {
+      "do": [
+        "Follow Popover accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "progress-bar": {
+    "id": "progress-bar",
+    "name": "Progress Bar",
+    "bestPractices": {
+      "do": [
+        "Follow Progress Bar accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "toast": {
+    "id": "toast",
+    "name": "Toast",
+    "bestPractices": {
+      "do": [
+        "Follow Toast accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "media-card": {
+    "id": "media-card",
+    "name": "Media Card",
+    "bestPractices": {
+      "do": [
+        "Follow Media Card accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "box": {
+    "id": "box",
+    "name": "Box",
+    "bestPractices": {
+      "do": [
+        "Follow Box accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "container": {
+    "id": "container",
+    "name": "Container",
+    "bestPractices": {
+      "do": [
+        "Follow Container accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "grid": {
+    "id": "grid",
+    "name": "Grid",
+    "bestPractices": {
+      "do": [
+        "Follow Grid accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "stack": {
+    "id": "stack",
+    "name": "Stack",
+    "bestPractices": {
+      "do": [
+        "Follow Stack accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "paper": {
+    "id": "paper",
+    "name": "Paper",
+    "bestPractices": {
+      "do": [
+        "Follow Paper accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "app-bar": {
+    "id": "app-bar",
+    "name": "App Bar",
+    "bestPractices": {
+      "do": [
+        "Follow App Bar accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "pagination": {
+    "id": "pagination",
+    "name": "Pagination",
+    "bestPractices": {
+      "do": [
+        "Follow Pagination accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "stepper": {
+    "id": "stepper",
+    "name": "Stepper",
+    "bestPractices": {
+      "do": [
+        "Follow Stepper accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "menu": {
+    "id": "menu",
+    "name": "Menu",
+    "bestPractices": {
+      "do": [
+        "Follow Menu accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "link": {
+    "id": "link",
+    "name": "Link",
+    "bestPractices": {
+      "do": [
+        "Follow Link accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "speed-dial": {
+    "id": "speed-dial",
+    "name": "Speed Dial",
+    "bestPractices": {
+      "do": [
+        "Follow Speed Dial accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "bottom-nav": {
+    "id": "bottom-nav",
+    "name": "Bottom Navigation",
+    "bestPractices": {
+      "do": [
+        "Follow Bottom Navigation accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "platform-chassis": {
+    "id": "platform-chassis",
+    "name": "Platform Chassis",
+    "bestPractices": {
+      "do": [
+        "Follow Platform Chassis accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "list-view": {
+    "id": "list-view",
+    "name": "ListView",
+    "bestPractices": {
+      "do": [
+        "Follow ListView accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "date-picker": {
+    "id": "date-picker",
+    "name": "DatePicker",
+    "bestPractices": {
+      "do": [
+        "Follow DatePicker accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "web-view-box": {
+    "id": "web-view-box",
+    "name": "WebViewBox",
+    "bestPractices": {
+      "do": [
+        "Follow WebViewBox accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "scroll-view": {
+    "id": "scroll-view",
+    "name": "ScrollView",
+    "bestPractices": {
+      "do": [
+        "Follow ScrollView accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "pressable": {
+    "id": "pressable",
+    "name": "Pressable",
+    "bestPractices": {
+      "do": [
+        "Follow Pressable accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  },
+  "image": {
+    "id": "image",
+    "name": "Image",
+    "bestPractices": {
+      "do": [
+        "Follow Image accessibility and token guidelines"
+      ],
+      "dont": [
+        "Never use hardcoded CSS colors or emoji icons"
+      ]
+    },
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/react",
+        "testStatus": "verified"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "testStatus": "verified"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "testStatus": "verified"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "testStatus": "verified"
+      }
+    }
+  }
+};
+
+export const HOOKS_CAPABILITIES = {
+  "use-hover": {
+    "id": "use-hover",
+    "name": "useHover",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives",
+        "notes": "Native mouseenter/mouseleave listeners with cleanup."
+      },
+      "android": {
+        "platform": "android",
+        "support": "unsupported",
+        "notes": "Hover is not a primary interaction model on touch devices.",
+        "alternative": "usePressableState / onPressIn"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "unsupported",
+        "notes": "Touch screens do not support physical hover states without external trackpad.",
+        "alternative": "usePressableState / onPressIn"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "notes": "Mouse pointer enter/exit mappings on WinUI controls."
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "notes": "NSView onMouseEnter/onMouseExit trackpad integration."
+      }
+    }
+  },
+  "use-media-query": {
+    "id": "use-media-query",
+    "name": "useMediaQuery",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives",
+        "notes": "CSS window.matchMedia listener."
+      },
+      "android": {
+        "platform": "android",
+        "support": "unsupported",
+        "notes": "Native does not execute CSS media queries.",
+        "alternative": "useWindowDimensions() / useBreakpoint()"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "unsupported",
+        "notes": "Native does not execute CSS media queries.",
+        "alternative": "useWindowDimensions() / useBreakpoint()"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "notes": "useWindowDimensions mapping."
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "notes": "useWindowDimensions mapping."
+      }
+    }
+  },
+  "use-focus-trap": {
+    "id": "use-focus-trap",
+    "name": "useFocusTrap",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives",
+        "notes": "Intercepts Tab/Shift+Tab keydown events."
+      },
+      "android": {
+        "platform": "android",
+        "support": "unsupported",
+        "notes": "Android uses Modal native container and TalkBack accessibility hierarchy.",
+        "alternative": "Modal accessibleViewIsModal={true}"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "unsupported",
+        "notes": "iOS VoiceOver uses native modal accessibility container semantics.",
+        "alternative": "Modal accessibilityViewIsModal={true}"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "notes": "XAML / WinUI modal focus scoping."
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "notes": "NSWindow modal session key-view loop."
+      }
+    }
+  },
+  "use-scroll-lock": {
+    "id": "use-scroll-lock",
+    "name": "useScrollLock",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives",
+        "notes": "Locks document.body.style.overflow."
+      },
+      "android": {
+        "platform": "android",
+        "support": "unsupported",
+        "notes": "Native scroll is managed by ScrollView container boundaries.",
+        "alternative": "ScrollView scrollEnabled={false}"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "unsupported",
+        "notes": "Native scroll is managed by ScrollView container boundaries.",
+        "alternative": "ScrollView scrollEnabled={false}"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-intersection-observer": {
+    "id": "use-intersection-observer",
+    "name": "useIntersectionObserver",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives",
+        "notes": "Browser IntersectionObserver API."
+      },
+      "android": {
+        "platform": "android",
+        "support": "unsupported",
+        "notes": "No browser DOM observer exists in native runtimes.",
+        "alternative": "FlatList onViewableItemsChanged"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "unsupported",
+        "notes": "No browser DOM observer exists in native runtimes.",
+        "alternative": "FlatList onViewableItemsChanged"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "unsupported",
+        "notes": "Use ListView viewable items detection.",
+        "alternative": "ListView onViewableItemsChanged"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "unsupported",
+        "notes": "Use ListView viewable items detection.",
+        "alternative": "ListView onViewableItemsChanged"
+      }
+    }
+  },
+  "use-reduced-motion": {
+    "id": "use-reduced-motion",
+    "name": "useReducedMotion",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives",
+        "notes": "CSS prefers-reduced-motion query."
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "notes": "AccessibilityInfo.isReduceMotionEnabled listener."
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "notes": "AccessibilityInfo.isReduceMotionEnabled listener."
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "notes": "UISettings.AnimationsEnabled mapping."
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "notes": "NSWorkspace reduceMotion status."
+      }
+    }
+  },
+  "use-clipboard": {
+    "id": "use-clipboard",
+    "name": "useClipboard",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives",
+        "notes": "navigator.clipboard.writeText with fallback."
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "notes": "React Native Clipboard API."
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native",
+        "notes": "UIPasteboard native integration."
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "native",
+        "implementation": "@winplaybox/react-native-windows",
+        "notes": "Windows DataPackage clipboard."
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "native",
+        "implementation": "@winplaybox/react-native-macos",
+        "notes": "NSPasteboard native integration."
+      }
+    }
+  },
+  "use-window-size": {
+    "id": "use-window-size",
+    "name": "useWindowSize",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native",
+        "notes": "useWindowDimensions() native hook."
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native",
+        "notes": "useWindowDimensions() native hook."
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows",
+        "notes": "useWindowDimensions() native hook."
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos",
+        "notes": "useWindowDimensions() native hook."
+      }
+    }
+  },
+  "use-theme": {
+    "id": "use-theme",
+    "name": "useTheme",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-disclosure": {
+    "id": "use-disclosure",
+    "name": "useDisclosure",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-color-scheme": {
+    "id": "use-color-scheme",
+    "name": "useColorScheme",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-outside-click": {
+    "id": "use-outside-click",
+    "name": "useOutsideClick",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-id": {
+    "id": "use-id",
+    "name": "useId",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-controllable-state": {
+    "id": "use-controllable-state",
+    "name": "useControllableState",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-focus-ring": {
+    "id": "use-focus-ring",
+    "name": "useFocusRing",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-toast": {
+    "id": "use-toast",
+    "name": "useToast",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-form-field": {
+    "id": "use-form-field",
+    "name": "useFormField",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-list-navigation": {
+    "id": "use-list-navigation",
+    "name": "useListNavigation",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-rtl": {
+    "id": "use-rtl",
+    "name": "useRTL",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-debounce": {
+    "id": "use-debounce",
+    "name": "useDebounce",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-throttle": {
+    "id": "use-throttle",
+    "name": "useThrottle",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-platform": {
+    "id": "use-platform",
+    "name": "usePlatform",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-breakpoint": {
+    "id": "use-breakpoint",
+    "name": "useBreakpoint",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-event-listener": {
+    "id": "use-event-listener",
+    "name": "useEventListener",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-element-size": {
+    "id": "use-element-size",
+    "name": "useElementSize",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-local-storage": {
+    "id": "use-local-storage",
+    "name": "useLocalStorage",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-previous": {
+    "id": "use-previous",
+    "name": "usePrevious",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-async": {
+    "id": "use-async",
+    "name": "useAsync",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  },
+  "use-interval": {
+    "id": "use-interval",
+    "name": "useInterval",
+    "platforms": {
+      "web": {
+        "platform": "web",
+        "support": "native",
+        "implementation": "@winplaybox/primitives"
+      },
+      "android": {
+        "platform": "android",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "ios": {
+        "platform": "ios",
+        "support": "native",
+        "implementation": "@winplaybox/react-native"
+      },
+      "windows": {
+        "platform": "windows",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-windows"
+      },
+      "macos": {
+        "platform": "macos",
+        "support": "adapted",
+        "implementation": "@winplaybox/react-native-macos"
+      }
+    }
+  }
+};

@@ -21,6 +21,9 @@
     "start": "node src/index.js",
     "test": "node scripts/test-mcp.js"
   },
+  "dependencies": {
+    "@winplaybox/platform-capabilities": "workspace:*"
+  },
   "keywords": [
     "spectra-ui",
     "mcp",

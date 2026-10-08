@@ -22,6 +22,7 @@ server.stdout.on('data', (data) => {
       step = 1;
       send({ jsonrpc: '2.0', id: 2, method: 'tools/list', params: {} });
     } else if (step === 1) {
+      console.log('Tools count:', res.result.tools.length);
       console.log('Tools available:', res.result.tools.map((t) => t.name));
       step = 2;
       send({
@@ -29,27 +30,57 @@ server.stdout.on('data', (data) => {
         id: 3,
         method: 'tools/call',
         params: {
-          name: 'spectra_get_component_api',
-          arguments: { component: 'button' }
+          name: 'spectra_get_component_for_platform',
+          arguments: { component: 'TextInput', platform: 'ios' }
         }
       });
     } else if (step === 2) {
       const content = JSON.parse(res.result.content[0].text);
-      console.log('Component API response for Button:', content.name, 'Props:', content.props.length);
+      console.log('TextInput on iOS contract:', content.component, 'Support:', content.support, 'Implementation:', content.implementation);
+      console.log('Unsupported recipes filtered out:', content.unsupportedRecipes);
+      if (content.support !== 'native') throw new Error('Expected native support for TextInput on iOS');
       step = 3;
       send({
         jsonrpc: '2.0',
         id: 4,
         method: 'tools/call',
         params: {
-          name: 'spectra_search_tokens',
-          arguments: { category: 'colors', search: 'sunken', theme: 'dark' }
+          name: 'spectra_get_hook_for_platform',
+          arguments: { hook: 'useHover', platform: 'android' }
         }
       });
     } else if (step === 3) {
-      const tokens = JSON.parse(res.result.content[0].text);
-      console.log('Search Tokens Result:', tokens);
-      console.log('\nAll MCP Server tests PASSED! Exiting.');
+      const hookData = JSON.parse(res.result.content[0].text);
+      console.log('useHover on Android:', hookData.hook, 'Support:', hookData.support, 'Alternative:', hookData.alternative);
+      if (hookData.support !== 'unsupported') throw new Error('Expected useHover to be unsupported on Android touch device');
+      step = 4;
+      send({
+        jsonrpc: '2.0',
+        id: 5,
+        method: 'tools/call',
+        params: {
+          name: 'spectra_get_platform_capabilities',
+          arguments: { platform: 'windows' }
+        }
+      });
+    } else if (step === 4) {
+      const winCaps = JSON.parse(res.result.content[0].text);
+      console.log('Windows Platform Renderer:', winCaps.renderer, 'Primary Paradigm:', winCaps.primaryParadigm);
+      console.log('Supported components count on Windows:', winCaps.supportedComponentsCount);
+      step = 5;
+      send({
+        jsonrpc: '2.0',
+        id: 6,
+        method: 'tools/call',
+        params: {
+          name: 'spectra_get_recipes_for_platform',
+          arguments: { component: 'TextInput', platform: 'android' }
+        }
+      });
+    } else if (step === 5) {
+      const recipesData = JSON.parse(res.result.content[0].text);
+      console.log('Recipes for TextInput on Android:', recipesData.recipesCount, 'recipes');
+      console.log('\nAll Multi-Platform MCP Server tests PASSED! Exiting.');
       server.kill();
       process.exit(0);
     }

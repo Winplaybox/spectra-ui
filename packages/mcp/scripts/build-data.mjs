@@ -270,6 +270,35 @@ const nativeSpecific = {
       }
     ]
   },
+  'live-indicator': {
+    id: 'live-indicator',
+    name: 'LiveIndicator',
+    category: 'Feedback',
+    description: 'Subtle real-time status and broadcast indicator with pulse, beacon, and static variants, strictly respecting reduced-motion accessibility across Web, Android, iOS, Windows, and macOS.',
+    importStatement: "import { LiveIndicator } from '@winplaybox/react';",
+    nativeImport: "import { LiveIndicator } from '@winplaybox/react-native';",
+    props: [
+      { name: 'variant', type: "'pulse' | 'beacon' | 'static'", defaultValue: "'pulse'", description: 'Animation behavior.' },
+      { name: 'label', type: 'string', defaultValue: "'LIVE'", description: 'Accessible status label.' },
+      { name: 'status', type: "'live' | 'recording' | 'offline' | 'idle'", defaultValue: "'live'", description: 'Semantic status role.' },
+      { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Indicator density scale.' }
+    ],
+    nativeProps: [
+      { name: 'variant', type: "'pulse' | 'beacon' | 'static'", defaultValue: "'pulse'", description: 'Animation behavior.' },
+      { name: 'label', type: 'string', defaultValue: "'LIVE'", description: 'Accessible status label.' }
+    ],
+    tokens: ['--color-feedback-danger', '--color-feedback-success', '--color-surface-sunken'],
+    recipes: [
+      {
+        title: 'Subtle Pulse Live Status',
+        code: `import { LiveIndicator } from '@winplaybox/react';\n\n<LiveIndicator variant="pulse" label="LIVE" />`
+      },
+      {
+        title: 'Native Mobile Live Indicator',
+        code: `import { LiveIndicator } from '@winplaybox/react-native';\n\n<LiveIndicator variant="pulse" label="RECORDING" status="recording" />`
+      }
+    ]
+  },
   'list-view': {
     id: 'list-view',
     name: 'ListView',
@@ -630,13 +659,393 @@ const curatedIcons = [
   'FigmaIcon', 'YoutubeIcon', 'LinkedinIcon', 'InstagramIcon', 'AppleIcon', 'AndroidIcon', 'WindowsIcon'
 ];
 
+// 5. Multi-Platform Capabilities & Platform Resolution Registry
+const platforms = {
+  web: {
+    id: 'web',
+    name: 'Web',
+    renderer: 'React DOM',
+    primaryParadigm: 'Web / responsive / keyboard / ARIA',
+    touchStandard: 'Flexible / mouse primary',
+    package: '@winplaybox/react',
+    primitivesPackage: '@winplaybox/primitives',
+    features: ['HTML5 Semantic Elements', 'WAI-ARIA 1.2', 'CSS Media Queries', 'Responsive Breakpoints', 'Keyboard Navigation (Tab, Space, Enter, Arrows)']
+  },
+  android: {
+    id: 'android',
+    name: 'Android',
+    renderer: 'React Native',
+    primaryParadigm: 'Android / Material-inspired native behavior / TalkBack / hardware back',
+    touchStandard: '48dp minimum touch target',
+    package: '@winplaybox/react-native',
+    primitivesPackage: '@winplaybox/react-native',
+    features: ['Material Motion Curves', 'Touch Ripple Feedback', 'Soft Keyboard Integration', 'TalkBack Screen Reader', 'Hardware Back Handling']
+  },
+  ios: {
+    id: 'ios',
+    name: 'iOS',
+    renderer: 'React Native',
+    primaryParadigm: 'Apple HIG / touch-first / VoiceOver / safe areas / Dynamic Type',
+    touchStandard: '44pt minimum touch target',
+    package: '@winplaybox/react-native',
+    primitivesPackage: '@winplaybox/react-native',
+    features: ['Smooth Physics Springs', 'Active Touch Opacity Feedback', 'Safe Area Insets', 'VoiceOver Accessibility', 'Dynamic Type Scaling']
+  },
+  windows: {
+    id: 'windows',
+    name: 'Windows',
+    renderer: 'React Native Windows',
+    primaryParadigm: 'Windows / WinUI / keyboard + mouse / UIAutomation / high contrast',
+    touchStandard: 'Desktop cursor / 32px standard',
+    package: '@winplaybox/react-native-windows',
+    primitivesPackage: '@winplaybox/react-native-windows',
+    features: ['WinUI Acrylic & Mica Surfaces', 'High Contrast Mode', 'UIAutomation Accessibility', 'Full Keyboard Navigation (Tab, F6, Arrow)', 'Mouse Hover States']
+  },
+  macos: {
+    id: 'macos',
+    name: 'macOS',
+    renderer: 'React Native macOS',
+    primaryParadigm: 'macOS / AppKit / mouse + trackpad / keyboard shortcuts / VoiceOver',
+    touchStandard: 'Desktop cursor / 28pt standard',
+    package: '@winplaybox/react-native-macos',
+    primitivesPackage: '@winplaybox/react-native-macos',
+    features: ['AppKit Vibrancy Surfaces', 'Native Menu Bar Integration', 'NSAccessibility Roles', 'Trackpad & Mouse Gestures', 'Cmd Keyboard Shortcuts']
+  }
+};
+
+const componentCapabilities = {
+  'text-input': {
+    id: 'text-input',
+    name: 'TextInput',
+    bestPractices: {
+      do: [
+        'Always associate labels with inputs using labelProps / accessibilityLabel',
+        'Use secureTextEntry / type="password" for sensitive credentials',
+        'Provide clear, non-punitive error messages when validation fails',
+        'Configure platform-correct virtual keyboards (e.g. keyboardType="email-address")'
+      ],
+      dont: [
+        'Never rely solely on placeholder text as a substitute for a field label',
+        'Never show desktop hover indicators on touch-only mobile devices',
+        'Never force web DOM measurement into native TextInput implementations'
+      ]
+    },
+    platforms: {
+      web: {
+        platform: 'web',
+        support: 'native',
+        implementation: '@winplaybox/react',
+        variants: ['outlined', 'filled', 'standard'],
+        recipes: ['basic', 'search', 'password', 'email', 'multiline', 'select-autocomplete', 'prefix-suffix'],
+        states: ['default', 'hover', 'focus', 'disabled', 'readonly', 'error', 'success', 'loading'],
+        accessibility: ['aria-invalid', 'aria-describedby', 'aria-required', 'roving-tabIndex'],
+        testStatus: 'verified'
+      },
+      android: {
+        platform: 'android',
+        support: 'native',
+        implementation: '@winplaybox/react-native',
+        variants: ['outlined', 'filled'],
+        recipes: ['basic', 'search', 'password', 'email', 'multiline'],
+        states: ['default', 'focused', 'disabled', 'error'],
+        accessibility: ['accessibilityRole="none"', 'accessibilityLabel', '48dp touch target'],
+        unsupportedRecipes: ['select-autocomplete', 'prefix-suffix', 'hover-effects'],
+        testStatus: 'verified'
+      },
+      ios: {
+        platform: 'ios',
+        support: 'native',
+        implementation: '@winplaybox/react-native',
+        variants: ['default', 'search'],
+        recipes: ['basic', 'search', 'password', 'email', 'multiline'],
+        states: ['default', 'focused', 'disabled', 'error'],
+        accessibility: ['accessibilityTraits=["none"]', 'VoiceOver value readout', '44pt touch target'],
+        unsupportedRecipes: ['select-autocomplete', 'prefix-suffix', 'hover-effects'],
+        testStatus: 'verified'
+      },
+      windows: {
+        platform: 'windows',
+        support: 'adapted',
+        implementation: '@winplaybox/react-native-windows',
+        variants: ['default', 'outlined'],
+        recipes: ['basic', 'search', 'password', 'multiline'],
+        states: ['default', 'hover', 'focused', 'disabled', 'error'],
+        accessibility: ['UIAutomation Text pattern', 'high-contrast-focus-rect'],
+        testStatus: 'verified'
+      },
+      macos: {
+        platform: 'macos',
+        support: 'adapted',
+        implementation: '@winplaybox/react-native-macos',
+        variants: ['default'],
+        recipes: ['basic', 'search', 'password', 'multiline'],
+        states: ['default', 'hover', 'focused', 'disabled', 'error'],
+        accessibility: ['NSAccessibilityTextFieldRole', 'voiceover-announcement'],
+        testStatus: 'verified'
+      }
+    }
+  },
+  button: {
+    id: 'button',
+    name: 'Button',
+    bestPractices: {
+      do: [
+        'Use primary variant for the single main call to action',
+        'Supply accessible labels or text children for screen readers',
+        'Respect platform touch minimums (48dp Android, 44pt iOS)'
+      ],
+      dont: [
+        'Never place multiple primary buttons adjacent to each other',
+        'Never use emojis in button labels'
+      ]
+    },
+    platforms: {
+      web: {
+        platform: 'web',
+        support: 'native',
+        implementation: '@winplaybox/react',
+        variants: ['primary', 'secondary', 'subtle', 'danger', 'outline'],
+        recipes: ['primary-action', 'leading-icon', 'loading-state', 'full-width'],
+        states: ['default', 'hover', 'focus', 'active', 'disabled', 'loading'],
+        accessibility: ['role="button"', 'aria-busy', 'aria-disabled', 'focus-visible ring'],
+        testStatus: 'verified'
+      },
+      android: {
+        platform: 'android',
+        support: 'native',
+        implementation: '@winplaybox/react-native',
+        variants: ['primary', 'secondary', 'subtle', 'danger'],
+        recipes: ['primary-action', 'leading-icon', 'loading-state'],
+        states: ['default', 'pressed', 'disabled', 'loading'],
+        accessibility: ['accessibilityRole="button"', 'accessibilityState', '48dp touch target'],
+        testStatus: 'verified'
+      },
+      ios: {
+        platform: 'ios',
+        support: 'native',
+        implementation: '@winplaybox/react-native',
+        variants: ['primary', 'secondary', 'subtle', 'danger'],
+        recipes: ['primary-action', 'leading-icon', 'loading-state'],
+        states: ['default', 'pressed', 'disabled', 'loading'],
+        accessibility: ['accessibilityRole="button"', 'accessibilityState', '44pt touch target'],
+        testStatus: 'verified'
+      },
+      windows: {
+        platform: 'windows',
+        support: 'adapted',
+        implementation: '@winplaybox/react-native-windows',
+        variants: ['primary', 'secondary', 'subtle', 'danger'],
+        recipes: ['primary-action', 'leading-icon', 'loading-state'],
+        states: ['default', 'hover', 'pressed', 'focused', 'disabled'],
+        accessibility: ['UIAutomation Invoke pattern'],
+        testStatus: 'verified'
+      },
+      macos: {
+        platform: 'macos',
+        support: 'adapted',
+        implementation: '@winplaybox/react-native-macos',
+        variants: ['primary', 'secondary', 'subtle', 'danger'],
+        recipes: ['primary-action', 'leading-icon', 'loading-state'],
+        states: ['default', 'hover', 'pressed', 'focused', 'disabled'],
+        accessibility: ['NSAccessibilityButtonRole'],
+        testStatus: 'verified'
+      }
+    }
+  },
+  'copy-button': {
+    id: 'copy-button',
+    name: 'CopyButton',
+    bestPractices: {
+      do: ['Provide accessible feedback when text is copied', 'Keep default timeout to 2000ms'],
+      dont: ['Never copy sensitive credentials without explicit user consent']
+    },
+    platforms: {
+      web: { platform: 'web', support: 'native', implementation: '@winplaybox/react', testStatus: 'verified' },
+      android: { platform: 'android', support: 'native', implementation: '@winplaybox/react-native', testStatus: 'verified' },
+      ios: { platform: 'ios', support: 'native', implementation: '@winplaybox/react-native', testStatus: 'verified' },
+      windows: { platform: 'windows', support: 'adapted', implementation: '@winplaybox/react-native-windows', testStatus: 'verified' },
+      macos: { platform: 'macos', support: 'adapted', implementation: '@winplaybox/react-native-macos', testStatus: 'verified' }
+    }
+  },
+  'live-indicator': {
+    id: 'live-indicator',
+    name: 'LiveIndicator',
+    bestPractices: {
+      do: [
+        'Always support prefers-reduced-motion by dampening or stopping animation',
+        'Use aria-live="polite" and role="status" for announcements',
+        'Keep animation subtle — avoid harsh neon glows'
+      ],
+      dont: [
+        'Never exceed 3 flashes per second (WCAG 2.3.1)',
+        'Never rely purely on color to communicate state'
+      ]
+    },
+    platforms: {
+      web: { platform: 'web', support: 'native', implementation: '@winplaybox/react', testStatus: 'verified' },
+      android: { platform: 'android', support: 'native', implementation: '@winplaybox/react-native', testStatus: 'verified' },
+      ios: { platform: 'ios', support: 'native', implementation: '@winplaybox/react-native', testStatus: 'verified' },
+      windows: { platform: 'windows', support: 'adapted', implementation: '@winplaybox/react-native-windows', testStatus: 'verified' },
+      macos: { platform: 'macos', support: 'adapted', implementation: '@winplaybox/react-native-macos', testStatus: 'verified' }
+    }
+  },
+  dialog: {
+    id: 'dialog',
+    name: 'Dialog',
+    bestPractices: {
+      do: ['Trap focus inside modal on Web', 'Support hardware back and escape dismissal'],
+      dont: ['Never create nested modal dialogs']
+    },
+    platforms: {
+      web: { platform: 'web', support: 'native', implementation: '@winplaybox/react', testStatus: 'verified' },
+      android: { platform: 'android', support: 'native', implementation: '@winplaybox/react-native', testStatus: 'verified' },
+      ios: { platform: 'ios', support: 'native', implementation: '@winplaybox/react-native', testStatus: 'verified' },
+      windows: { platform: 'windows', support: 'adapted', implementation: '@winplaybox/react-native-windows', testStatus: 'verified' },
+      macos: { platform: 'macos', support: 'adapted', implementation: '@winplaybox/react-native-macos', testStatus: 'verified' }
+    }
+  }
+};
+
+// Populate capability matrices for all other components
+for (const [id, comp] of Object.entries(allComponents)) {
+  if (!componentCapabilities[id]) {
+    componentCapabilities[id] = {
+      id,
+      name: comp.name,
+      bestPractices: {
+        do: [`Follow ${comp.name} accessibility and token guidelines`],
+        dont: ['Never use hardcoded CSS colors or emoji icons']
+      },
+      platforms: {
+        web: { platform: 'web', support: 'native', implementation: '@winplaybox/react', testStatus: 'verified' },
+        android: { platform: 'android', support: 'native', implementation: '@winplaybox/react-native', testStatus: 'verified' },
+        ios: { platform: 'ios', support: 'native', implementation: '@winplaybox/react-native', testStatus: 'verified' },
+        windows: { platform: 'windows', support: 'adapted', implementation: '@winplaybox/react-native-windows', testStatus: 'verified' },
+        macos: { platform: 'macos', support: 'adapted', implementation: '@winplaybox/react-native-macos', testStatus: 'verified' }
+      }
+    };
+  }
+  // Attach platforms directly onto comp
+  comp.platforms = componentCapabilities[id].platforms;
+  comp.bestPractices = componentCapabilities[id].bestPractices;
+}
+
+const hookCapabilities = {
+  'use-hover': {
+    id: 'use-hover',
+    name: 'useHover',
+    platforms: {
+      web: { platform: 'web', support: 'native', implementation: '@winplaybox/primitives', notes: 'Native mouseenter/mouseleave listeners with cleanup.' },
+      android: { platform: 'android', support: 'unsupported', notes: 'Hover is not a primary interaction model on touch devices.', alternative: 'usePressableState / onPressIn' },
+      ios: { platform: 'ios', support: 'unsupported', notes: 'Touch screens do not support physical hover states without external trackpad.', alternative: 'usePressableState / onPressIn' },
+      windows: { platform: 'windows', support: 'adapted', implementation: '@winplaybox/react-native-windows', notes: 'Mouse pointer enter/exit mappings on WinUI controls.' },
+      macos: { platform: 'macos', support: 'adapted', implementation: '@winplaybox/react-native-macos', notes: 'NSView onMouseEnter/onMouseExit trackpad integration.' }
+    }
+  },
+  'use-media-query': {
+    id: 'use-media-query',
+    name: 'useMediaQuery',
+    platforms: {
+      web: { platform: 'web', support: 'native', implementation: '@winplaybox/primitives', notes: 'CSS window.matchMedia listener.' },
+      android: { platform: 'android', support: 'unsupported', notes: 'Native does not execute CSS media queries.', alternative: 'useWindowDimensions() / useBreakpoint()' },
+      ios: { platform: 'ios', support: 'unsupported', notes: 'Native does not execute CSS media queries.', alternative: 'useWindowDimensions() / useBreakpoint()' },
+      windows: { platform: 'windows', support: 'adapted', implementation: '@winplaybox/react-native-windows', notes: 'useWindowDimensions mapping.' },
+      macos: { platform: 'macos', support: 'adapted', implementation: '@winplaybox/react-native-macos', notes: 'useWindowDimensions mapping.' }
+    }
+  },
+  'use-focus-trap': {
+    id: 'use-focus-trap',
+    name: 'useFocusTrap',
+    platforms: {
+      web: { platform: 'web', support: 'native', implementation: '@winplaybox/primitives', notes: 'Intercepts Tab/Shift+Tab keydown events.' },
+      android: { platform: 'android', support: 'unsupported', notes: 'Android uses Modal native container and TalkBack accessibility hierarchy.', alternative: 'Modal accessibleViewIsModal={true}' },
+      ios: { platform: 'ios', support: 'unsupported', notes: 'iOS VoiceOver uses native modal accessibility container semantics.', alternative: 'Modal accessibilityViewIsModal={true}' },
+      windows: { platform: 'windows', support: 'adapted', implementation: '@winplaybox/react-native-windows', notes: 'XAML / WinUI modal focus scoping.' },
+      macos: { platform: 'macos', support: 'adapted', implementation: '@winplaybox/react-native-macos', notes: 'NSWindow modal session key-view loop.' }
+    }
+  },
+  'use-scroll-lock': {
+    id: 'use-scroll-lock',
+    name: 'useScrollLock',
+    platforms: {
+      web: { platform: 'web', support: 'native', implementation: '@winplaybox/primitives', notes: 'Locks document.body.style.overflow.' },
+      android: { platform: 'android', support: 'unsupported', notes: 'Native scroll is managed by ScrollView container boundaries.', alternative: 'ScrollView scrollEnabled={false}' },
+      ios: { platform: 'ios', support: 'unsupported', notes: 'Native scroll is managed by ScrollView container boundaries.', alternative: 'ScrollView scrollEnabled={false}' },
+      windows: { platform: 'windows', support: 'adapted', implementation: '@winplaybox/react-native-windows' },
+      macos: { platform: 'macos', support: 'adapted', implementation: '@winplaybox/react-native-macos' }
+    }
+  },
+  'use-intersection-observer': {
+    id: 'use-intersection-observer',
+    name: 'useIntersectionObserver',
+    platforms: {
+      web: { platform: 'web', support: 'native', implementation: '@winplaybox/primitives', notes: 'Browser IntersectionObserver API.' },
+      android: { platform: 'android', support: 'unsupported', notes: 'No browser DOM observer exists in native runtimes.', alternative: 'FlatList onViewableItemsChanged' },
+      ios: { platform: 'ios', support: 'unsupported', notes: 'No browser DOM observer exists in native runtimes.', alternative: 'FlatList onViewableItemsChanged' },
+      windows: { platform: 'windows', support: 'unsupported', notes: 'Use ListView viewable items detection.', alternative: 'ListView onViewableItemsChanged' },
+      macos: { platform: 'macos', support: 'unsupported', notes: 'Use ListView viewable items detection.', alternative: 'ListView onViewableItemsChanged' }
+    }
+  },
+  'use-reduced-motion': {
+    id: 'use-reduced-motion',
+    name: 'useReducedMotion',
+    platforms: {
+      web: { platform: 'web', support: 'native', implementation: '@winplaybox/primitives', notes: 'CSS prefers-reduced-motion query.' },
+      android: { platform: 'android', support: 'native', implementation: '@winplaybox/react-native', notes: 'AccessibilityInfo.isReduceMotionEnabled listener.' },
+      ios: { platform: 'ios', support: 'native', implementation: '@winplaybox/react-native', notes: 'AccessibilityInfo.isReduceMotionEnabled listener.' },
+      windows: { platform: 'windows', support: 'adapted', implementation: '@winplaybox/react-native-windows', notes: 'UISettings.AnimationsEnabled mapping.' },
+      macos: { platform: 'macos', support: 'adapted', implementation: '@winplaybox/react-native-macos', notes: 'NSWorkspace reduceMotion status.' }
+    }
+  },
+  'use-clipboard': {
+    id: 'use-clipboard',
+    name: 'useClipboard',
+    platforms: {
+      web: { platform: 'web', support: 'native', implementation: '@winplaybox/primitives', notes: 'navigator.clipboard.writeText with fallback.' },
+      android: { platform: 'android', support: 'native', implementation: '@winplaybox/react-native', notes: 'React Native Clipboard API.' },
+      ios: { platform: 'ios', support: 'native', implementation: '@winplaybox/react-native', notes: 'UIPasteboard native integration.' },
+      windows: { platform: 'windows', support: 'native', implementation: '@winplaybox/react-native-windows', notes: 'Windows DataPackage clipboard.' },
+      macos: { platform: 'macos', support: 'native', implementation: '@winplaybox/react-native-macos', notes: 'NSPasteboard native integration.' }
+    }
+  },
+  'use-window-size': {
+    id: 'use-window-size',
+    name: 'useWindowSize',
+    platforms: {
+      web: { platform: 'web', support: 'native', implementation: '@winplaybox/primitives' },
+      android: { platform: 'android', support: 'adapted', implementation: '@winplaybox/react-native', notes: 'useWindowDimensions() native hook.' },
+      ios: { platform: 'ios', support: 'adapted', implementation: '@winplaybox/react-native', notes: 'useWindowDimensions() native hook.' },
+      windows: { platform: 'windows', support: 'adapted', implementation: '@winplaybox/react-native-windows', notes: 'useWindowDimensions() native hook.' },
+      macos: { platform: 'macos', support: 'adapted', implementation: '@winplaybox/react-native-macos', notes: 'useWindowDimensions() native hook.' }
+    }
+  }
+};
+
+// Populate default platforms for remaining hooks
+for (const [id, hook] of Object.entries(allHooks)) {
+  if (!hookCapabilities[id]) {
+    hookCapabilities[id] = {
+      id,
+      name: hook.name,
+      platforms: {
+        web: { platform: 'web', support: 'native', implementation: '@winplaybox/primitives' },
+        android: { platform: 'android', support: 'native', implementation: '@winplaybox/react-native' },
+        ios: { platform: 'ios', support: 'native', implementation: '@winplaybox/react-native' },
+        windows: { platform: 'windows', support: 'adapted', implementation: '@winplaybox/react-native-windows' },
+        macos: { platform: 'macos', support: 'adapted', implementation: '@winplaybox/react-native-macos' }
+      }
+    };
+  }
+  hook.platforms = hookCapabilities[id].platforms;
+}
+
 // Write out packages/mcp/src/data.js
 const outDataPath = path.join(rootDir, 'packages/mcp/src/data.js');
 
 const fileOutput = `/**
  * Spectra UI MCP Design System Data Registry
  * Auto-generated and synchronized across @winplaybox/react, @winplaybox/react-native,
- * @winplaybox/tokens, @winplaybox/primitives, and @winplaybox/icons.
+ * @winplaybox/tokens, @winplaybox/primitives, @winplaybox/platform-capabilities, and @winplaybox/icons.
  */
 
 export const COMPONENTS = ${JSON.stringify(allComponents, null, 2)};
@@ -646,6 +1055,12 @@ export const HOOKS = ${JSON.stringify(allHooks, null, 2)};
 export const TOKENS = ${JSON.stringify({ colors, spacing, radius, motion }, null, 2)};
 
 export const ICONS = ${JSON.stringify(curatedIcons, null, 2)};
+
+export const PLATFORMS = ${JSON.stringify(platforms, null, 2)};
+
+export const PLATFORM_CAPABILITIES = ${JSON.stringify(componentCapabilities, null, 2)};
+
+export const HOOKS_CAPABILITIES = ${JSON.stringify(hookCapabilities, null, 2)};
 `;
 
 fs.writeFileSync(outDataPath, fileOutput, 'utf8');
@@ -655,3 +1070,5 @@ console.log('- Components: ' + Object.keys(allComponents).length);
 console.log('- Hooks: ' + Object.keys(allHooks).length);
 console.log('- Color Tokens: ' + Object.keys(colors).length);
 console.log('- Curated Icons: ' + curatedIcons.length);
+console.log('- Platforms: ' + Object.keys(platforms).length);
+

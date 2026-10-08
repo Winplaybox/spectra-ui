@@ -27,8 +27,12 @@ export const Chip: React.FC<NativeChipProps> = ({
 
   const isClickable = !!onPress;
 
-  const content = (
-    <View
+  const Component: any = isClickable ? Pressable : View;
+
+  return (
+    <Component
+      accessibilityRole={isClickable ? 'button' : undefined}
+      onPress={onPress}
       style={[
         styles.chip,
         {
@@ -75,18 +79,8 @@ export const Chip: React.FC<NativeChipProps> = ({
           </Text>
         </Pressable>
       )}
-    </View>
+    </Component>
   );
-
-  if (isClickable) {
-    return (
-      <Pressable accessibilityRole="button" onPress={onPress}>
-        {content}
-      </Pressable>
-    );
-  }
-
-  return content;
 };
 
 const styles = StyleSheet.create({

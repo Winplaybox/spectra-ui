@@ -63,7 +63,7 @@ const AlertComponent: React.FC<NativeAlertProps> = ({
             {title}
           </Text>
         ) : null}
-        {typeof children === 'string' ? (
+        {children && (typeof children === 'string' || typeof children === 'number' || Array.isArray(children)) ? (
           <Text style={[styles.description, { color: tokens['color-semantic-text-secondary'] }]}>
             {children}
           </Text>

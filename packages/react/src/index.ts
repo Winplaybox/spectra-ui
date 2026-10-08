@@ -55,6 +55,7 @@ export * from './components/feedback/ProgressBar';
 export * from './components/feedback/Toast';
 export * from './components/feedback/Drawer';
 export * from './components/feedback/ErrorBoundary';
+export * from './components/feedback/LiveIndicator';
 
 // Data Display
 export * from './components/data-display/Avatar';

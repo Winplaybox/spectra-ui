@@ -136,7 +136,7 @@ export const Badge: React.FC<NativeBadgeProps> = ({
           ]}
         />
       )}
-      {typeof children === 'string' ? (
+      {typeof children === 'string' || typeof children === 'number' ? (
         <Text
           style={[
             styles.text,

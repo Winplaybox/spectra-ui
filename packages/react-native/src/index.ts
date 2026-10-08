@@ -87,6 +87,7 @@ export * from './components/feedback/Alert';
 export * from './components/feedback/Spinner';
 export * from './components/feedback/Skeleton';
 export * from './components/feedback/ErrorBoundary';
+export * from './components/feedback/LiveIndicator';
 
 // Headless UI hooks & logic
 export * from '@winplaybox/primitives';

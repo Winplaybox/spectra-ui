@@ -6,11 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "type-check": "tsc --noEmit",
     "preview": "vite preview"
   },
   "dependencies": {
     "@codesandbox/sdk": "^2.4.2",
     "@winplaybox/icons": "workspace:*",
+    "@winplaybox/platform-capabilities": "workspace:*",
     "@winplaybox/primitives": "workspace:*",
     "@winplaybox/react": "workspace:*",
     "@winplaybox/tokens": "workspace:*",
