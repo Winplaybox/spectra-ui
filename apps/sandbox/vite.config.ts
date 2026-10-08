@@ -20,6 +20,7 @@ export default defineConfig({
       '@winplaybox/icons/dynamic': path.resolve(__dirname, '../../packages/icons/src/dynamic.ts'),
       '@winplaybox/icons': path.resolve(__dirname, '../../packages/icons/src'),
       '@winplaybox/react': path.resolve(__dirname, '../../packages/react/src'),
+      '@winplaybox/platform-capabilities': path.resolve(__dirname, '../../packages/platform-capabilities/src'),
     },
   },
   server: {
@@ -27,6 +28,7 @@ export default defineConfig({
     open: false,
   },
   optimizeDeps: {
+    exclude: ['@react-native-clipboard/clipboard', 'expo-clipboard', 'react-native'],
     esbuildOptions: {
       target: 'esnext',
     },

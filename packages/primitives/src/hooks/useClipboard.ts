@@ -18,27 +18,23 @@ export function setClipboardAdapter(adapter: ClipboardAdapter | null): void {
 
 /**
  * Dynamically resolves native clipboard modules in React Native / Expo runtimes.
+ * Strictly guarded so Web bundlers (Vite/Webpack) do not attempt to pre-bundle native dependencies.
  */
 function getNativeClipboard(): any {
-  try {
-    // 1. @react-native-clipboard/clipboard (Standard community package)
-    const mod = require('@react-native-clipboard/clipboard');
-    return mod.default || mod;
-  } catch (_) {
-    try {
-      // 2. expo-clipboard (Expo ecosystem)
-      return require('expo-clipboard');
-    } catch (_) {
-      try {
-        // 3. react-native legacy Clipboard
-        const rn = require('react-native');
-        return rn.Clipboard;
-      } catch (_) {
-        return null;
-      }
-    }
+  // If running in browser DOM runtime, native modules are never available
+  if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    return null;
   }
+
+  try {
+    if (typeof globalThis !== 'undefined' && (globalThis as any).__spectra_clipboard) {
+      return (globalThis as any).__spectra_clipboard;
+    }
+  } catch (_) {}
+
+  return null;
 }
+
 
 /**
  * Universal cross-platform Clipboard manager.
