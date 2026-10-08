@@ -6,7 +6,7 @@ export function useOutsideClick<T extends HTMLElement = HTMLElement>(
   enabled: boolean = true
 ) {
   useEffect(() => {
-    if (!enabled) return;
+    if (!enabled || typeof document === 'undefined') return;
 
     const listener = (event: MouseEvent | TouchEvent) => {
       const el = ref.current;

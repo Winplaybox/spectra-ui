@@ -1,6 +1,7 @@
 // @winplaybox/react-native - WinPlayBox Design System Native Components
 
 export * from './theme/tokens';
+export * from './provider/SpectraProvider';
 
 // Actions
 export * from './components/actions/Button';
@@ -30,13 +31,38 @@ export * from './components/layout/Divider';
 export * from './components/layout/Grid';
 export * from './components/layout/ScrollView';
 
-// React Native Core Utilities (Single Source of Truth)
+// React Native Core Utilities & System Bridges (Single Source of Truth)
 export {
+  View,
+  Animated,
+  Easing,
   StyleSheet,
   FlatList,
   RefreshControl,
   Modal,
+  Dimensions,
+  useWindowDimensions,
+  BackHandler,
+  AppState,
+  Share,
+  Linking,
+  NativeModules,
+  Platform,
+  Appearance,
+  Keyboard,
+  KeyboardAvoidingView,
+  PixelRatio,
+  PanResponder,
+  useColorScheme as useSystemColorScheme,
 } from 'react-native';
+
+// System & Device Hooks
+export * from './hooks/useBackHandler';
+export * from './hooks/useAppState';
+export * from './hooks/useDimensions';
+
+// Persistence & Enterprise Storage
+export * from './storage';
 
 // Data Display
 export * from './components/data-display/Avatar';
@@ -60,6 +86,7 @@ export * from './components/feedback/Badge';
 export * from './components/feedback/Alert';
 export * from './components/feedback/Spinner';
 export * from './components/feedback/Skeleton';
+export * from './components/feedback/ErrorBoundary';
 
 // Headless UI hooks & logic
 export * from '@winplaybox/primitives';

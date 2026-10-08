@@ -33,3 +33,5 @@ export * from './hooks/useLocalStorage';
 export * from './hooks/usePrevious';
 export * from './hooks/useAsync';
 export * from './hooks/useInterval';
+export * from './hooks/useErrorBoundary';
+export * from './context/ErrorBoundaryContext';

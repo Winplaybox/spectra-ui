@@ -22,6 +22,8 @@ try {
   // Graceful fallback when react-native-webview native module is not installed
 }
 
+export const WebView = RNWebView;
+
 export interface NativeWebViewBoxProps {
   /**
    * The web page source specification (URL object or HTML string).

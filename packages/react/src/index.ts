@@ -54,6 +54,7 @@ export * from './components/feedback/Skeleton';
 export * from './components/feedback/ProgressBar';
 export * from './components/feedback/Toast';
 export * from './components/feedback/Drawer';
+export * from './components/feedback/ErrorBoundary';
 
 // Data Display
 export * from './components/data-display/Avatar';

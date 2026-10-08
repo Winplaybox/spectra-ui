@@ -8,6 +8,7 @@ import {
   ThemeProvider,
   useTheme,
   useRTL,
+  useErrorBoundary,
 } from './index';
 
 describe('@winplaybox/primitives hooks', () => {
@@ -161,4 +162,11 @@ describe('@winplaybox/primitives hooks', () => {
 
     setClipboardAdapter(null);
   });
+
+  it('useErrorBoundary provides showBoundary and resetBoundary interfaces', () => {
+    const { result } = renderHook(() => useErrorBoundary());
+    expect(typeof result.current.showBoundary).toBe('function');
+    expect(typeof result.current.resetBoundary).toBe('function');
+  });
 });
+

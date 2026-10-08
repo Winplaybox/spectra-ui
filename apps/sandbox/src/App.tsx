@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useColorScheme } from '@winplaybox/react';
+import { useColorScheme, ErrorBoundary } from '@winplaybox/react';
 import { Sidebar } from './components/dashboard/Sidebar';
 import { Header } from './components/dashboard/Header';
 import { OverviewSection } from './components/dashboard/OverviewSection';
@@ -187,6 +187,12 @@ export const App: React.FC = () => {
           zIndex: 1,
         }}
       >
+        <ErrorBoundary
+          level="screen"
+          resetKeys={[currentRoute.path, currentRoute.id, currentRoute.type]}
+          title={`Error loading ${currentRoute.id || currentRoute.type || 'screen'}`}
+          description="Spectra UI caught an unhandled screen rendering error. You can click 'Try again' or navigate to another component from the sidebar."
+        >
           {currentRoute.type === 'overview' && (
             <OverviewSection />
           )}
@@ -236,7 +242,8 @@ export const App: React.FC = () => {
               <IconExplorer />
             </React.Suspense>
           )}
-        </main>
+        </ErrorBoundary>
+      </main>
       </div>
 
       {/* Search Modal */}

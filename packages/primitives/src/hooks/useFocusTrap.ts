@@ -4,7 +4,7 @@ export function useFocusTrap(isActive: boolean = true) {
   const containerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (!isActive) return;
+    if (!isActive || typeof document === 'undefined') return;
 
     const container = containerRef.current;
     if (!container) return;

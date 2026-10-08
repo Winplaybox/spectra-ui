@@ -1,22 +1,21 @@
 import React from 'react';
 import { ThemeProvider, ThemeProviderProps } from '@winplaybox/primitives';
-import { ErrorBoundary, ErrorBoundaryProps } from '../components/feedback/ErrorBoundary';
-import '@winplaybox/tokens/css';
+import { ErrorBoundary, NativeErrorBoundaryProps } from '../components/feedback/ErrorBoundary';
 
-export interface SpectraProviderProps extends ThemeProviderProps {
+export interface NativeSpectraProviderProps extends ThemeProviderProps {
   /**
    * Root ErrorBoundary protection. Enabled by default (true).
-   * Prevents unhandled component exceptions from crashing the application or showing a white screen.
+   * Prevents unhandled component exceptions from crashing the mobile screen or entire app.
    * Can be configured with custom ErrorBoundary options or disabled with false.
    */
-  errorBoundary?: boolean | Omit<ErrorBoundaryProps, 'children'>;
+  errorBoundary?: boolean | Omit<NativeErrorBoundaryProps, 'children'>;
 }
 
 /**
- * SpectraProvider - Root context provider for Spectra UI components.
- * Configures the active style pack, theme attributes, and provides automated ErrorBoundary shielding.
+ * SpectraProvider - Root context provider for Spectra UI Native components.
+ * Configures theme context, active colorScheme, and provides automated ErrorBoundary shielding.
  */
-export const SpectraProvider: React.FC<SpectraProviderProps> = ({
+export const SpectraProvider: React.FC<NativeSpectraProviderProps> = ({
   children,
   defaultPack = 'minimal',
   defaultColorScheme = 'light',
@@ -27,7 +26,7 @@ export const SpectraProvider: React.FC<SpectraProviderProps> = ({
     <ErrorBoundary
       level="app"
       title="Application Error"
-      description="Spectra UI caught an unhandled rendering error. The application recovered to prevent a crash."
+      description="Spectra UI Native caught an unhandled rendering error. The screen was preserved to prevent a crash."
       {...(typeof errorBoundary === 'object' ? errorBoundary : {})}
     >
       {children}

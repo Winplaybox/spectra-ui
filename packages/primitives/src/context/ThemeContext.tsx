@@ -120,18 +120,21 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   }, []);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    try {
-      window.localStorage?.setItem('spectra-color-scheme', colorScheme);
-    } catch {
-      // Ignore
+    if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+      try {
+        window.localStorage?.setItem('spectra-color-scheme', colorScheme);
+      } catch {
+        // Ignore
+      }
     }
 
-    // Set dataset on root element for CSS variables
-    const root = document.documentElement;
-    root?.setAttribute('data-pack', pack);
-    root?.setAttribute('data-mode', colorScheme);
-    root?.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+    // Set dataset on root element for CSS variables (Web browser environments only)
+    if (typeof document !== 'undefined' && document.documentElement) {
+      const root = document.documentElement;
+      root.setAttribute('data-pack', pack);
+      root.setAttribute('data-mode', colorScheme);
+      root.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+    }
   }, [pack, colorScheme, isRTL]);
 
   const isDark = colorScheme === 'dark';

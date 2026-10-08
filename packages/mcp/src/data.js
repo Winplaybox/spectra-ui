@@ -1368,6 +1368,84 @@ export const COMPONENTS = {
       }
     ]
   },
+  "copy-button": {
+    "id": "copy-button",
+    "name": "CopyButton",
+    "category": "Actions",
+    "description": "Universal cross-platform clipboard trigger button with automatic icon feedback (CopyIcon to CheckIcon), customizable labels, and multi-platform support across Web, iOS, Android, and Desktop.",
+    "importStatement": "import { CopyButton } from '@winplaybox/react';",
+    "nativeImport": "import { CopyButton } from '@winplaybox/react-native';",
+    "props": [
+      {
+        "name": "value",
+        "type": "string",
+        "required": true,
+        "description": "Text content copied to system clipboard."
+      },
+      {
+        "name": "label",
+        "type": "string",
+        "defaultValue": "'Copy'",
+        "description": "Resting label text."
+      },
+      {
+        "name": "copiedLabel",
+        "type": "string",
+        "defaultValue": "'Copied!'",
+        "description": "Success state label text."
+      },
+      {
+        "name": "timeout",
+        "type": "number",
+        "defaultValue": "2000",
+        "description": "Duration in ms before resetting copied state."
+      },
+      {
+        "name": "iconOnly",
+        "type": "boolean",
+        "defaultValue": "false",
+        "description": "Renders icon without text."
+      },
+      {
+        "name": "variant",
+        "type": "'primary' | 'secondary' | 'subtle' | 'outline'",
+        "defaultValue": "'secondary'",
+        "description": "Button visual style."
+      },
+      {
+        "name": "onCopy",
+        "type": "(value: string) => void",
+        "description": "Callback fired on copy."
+      }
+    ],
+    "nativeProps": [
+      {
+        "name": "value",
+        "type": "string",
+        "required": true,
+        "description": "Target string"
+      },
+      {
+        "name": "onCopy",
+        "type": "(value: string) => void",
+        "description": "Success callback"
+      }
+    ],
+    "tokens": [
+      "--color-action-primary",
+      "--color-feedback-success"
+    ],
+    "recipes": [
+      {
+        "title": "Universal Copy Link Trigger",
+        "code": "import { CopyButton } from '@winplaybox/react';\n\n<CopyButton value=\"https://spectra-ui.winplaybox.com\" label=\"Copy Link\" />"
+      },
+      {
+        "title": "Mobile Native Copy Button",
+        "code": "import { CopyButton } from '@winplaybox/react-native';\n\n<CopyButton value=\"https://spectra-ui.winplaybox.com\" label=\"Copy Share URL\" onCopy={() => console.log('Copied!')} />"
+      }
+    ]
+  },
   "scroll-view": {
     "id": "scroll-view",
     "name": "ScrollView",
@@ -1512,84 +1590,6 @@ export const COMPONENTS = {
       {
         "title": "Rounded Banner Image with 16:9 Aspect Ratio",
         "code": "import { Image } from '@winplaybox/react-native';\n\n<Image source={{ uri: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809' }} aspectRatio={16 / 9} radius=\"lg\" />"
-      }
-    ]
-  },
-  "copy-button": {
-    "id": "copy-button",
-    "name": "CopyButton",
-    "category": "Actions",
-    "description": "Universal cross-platform clipboard trigger button with automatic icon feedback (CopyIcon to CheckIcon), customizable labels, and multi-platform support across Web, iOS, Android, and Desktop.",
-    "importStatement": "import { CopyButton } from '@winplaybox/react';",
-    "nativeImport": "import { CopyButton } from '@winplaybox/react-native';",
-    "props": [
-      {
-        "name": "value",
-        "type": "string",
-        "required": true,
-        "description": "Text content copied to system clipboard."
-      },
-      {
-        "name": "label",
-        "type": "string",
-        "defaultValue": "'Copy'",
-        "description": "Resting label text."
-      },
-      {
-        "name": "copiedLabel",
-        "type": "string",
-        "defaultValue": "'Copied!'",
-        "description": "Success state label text."
-      },
-      {
-        "name": "timeout",
-        "type": "number",
-        "defaultValue": "2000",
-        "description": "Duration in ms before resetting copied state."
-      },
-      {
-        "name": "iconOnly",
-        "type": "boolean",
-        "defaultValue": "false",
-        "description": "Renders icon without text."
-      },
-      {
-        "name": "variant",
-        "type": "'primary' | 'secondary' | 'subtle' | 'outline'",
-        "defaultValue": "'secondary'",
-        "description": "Button visual style."
-      },
-      {
-        "name": "onCopy",
-        "type": "(value: string) => void",
-        "description": "Callback fired on copy."
-      }
-    ],
-    "nativeProps": [
-      {
-        "name": "value",
-        "type": "string",
-        "required": true,
-        "description": "Target string"
-      },
-      {
-        "name": "onCopy",
-        "type": "(value: string) => void",
-        "description": "Success callback"
-      }
-    ],
-    "tokens": [
-      "--color-action-primary",
-      "--color-feedback-success"
-    ],
-    "recipes": [
-      {
-        "title": "Universal Copy Link Trigger",
-        "code": "import { CopyButton } from '@winplaybox/react';\n\n<CopyButton value=\"https://spectra-ui.winplaybox.com\" label=\"Copy Link\" />"
-      },
-      {
-        "title": "Mobile Native Copy Button",
-        "code": "import { CopyButton } from '@winplaybox/react-native';\n\n<CopyButton value=\"https://spectra-ui.winplaybox.com\" label=\"Copy Share URL\" onCopy={() => console.log('Copied!')} />"
       }
     ]
   }

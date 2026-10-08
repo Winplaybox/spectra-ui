@@ -57,11 +57,23 @@ export const StyleSheet = {
   flatten: (style: any) => style,
 };
 
+export const Platform = {
+  OS: 'ios',
+  select: (obj: any) => obj.ios || obj.default,
+};
+
+export const Pressable = React.forwardRef<any, any>(({ children, onPress, style, ...props }, ref) =>
+  React.createElement('button', { ref, onClick: onPress, style: typeof style === 'function' ? style({ pressed: false }) : style, ...props }, children)
+);
+Pressable.displayName = 'Pressable';
+
 export default {
   View,
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  Pressable,
+  Platform,
   Modal,
   ScrollView,
   FlatList,
