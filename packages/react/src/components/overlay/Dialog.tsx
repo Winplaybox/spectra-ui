@@ -1,5 +1,5 @@
 // packages/react/src/components/overlay/Dialog.tsx
-import React, { forwardRef, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useId, useOutsideClick } from '@winplaybox/primitives';
 import { CloseIcon } from '@winplaybox/icons';
 import * as styles from './Dialog.css';

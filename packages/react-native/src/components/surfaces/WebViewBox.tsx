@@ -4,7 +4,6 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  ActivityIndicator,
   Linking,
   ViewStyle,
   StyleProp,
@@ -18,7 +17,7 @@ let RNWebView: any = null;
 try {
   const mod = require('react-native-webview');
   RNWebView = mod.WebView || mod.default || mod;
-} catch (e) {
+} catch {
   // Graceful fallback when react-native-webview native module is not installed
 }
 

@@ -20,7 +20,7 @@ export const TouchableWithoutFeedback = React.forwardRef<any, any>(({ children, 
 );
 TouchableWithoutFeedback.displayName = 'TouchableWithoutFeedback';
 
-export const Modal = ({ visible, children, onRequestClose, ...props }: any) =>
+export const Modal = ({ visible, children, onRequestClose: _onRequestClose, ...props }: any) =>
   visible ? React.createElement('div', { 'data-modal': true, ...props }, children) : null;
 
 export const ScrollView = React.forwardRef<any, any>(({ children, ...props }, ref) =>

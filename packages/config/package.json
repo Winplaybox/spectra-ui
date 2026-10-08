@@ -3,11 +3,9 @@
   "version": "0.1.0",
   "description": "Shared configuration and lint rules for Spectra UI",
   "type": "module",
-  "main": "./src/index.js",
+  "main": "./src/check-no-hardcoded-values.mjs",
   "exports": {
-    ".": "./src/index.js",
-    "./eslint": "./src/eslint/index.js",
-    "./tsconfig": "./tsconfig.json"
+    ".": "./src/check-no-hardcoded-values.mjs"
   },
   "scripts": {
     "test": "node src/check-no-hardcoded-values.mjs"

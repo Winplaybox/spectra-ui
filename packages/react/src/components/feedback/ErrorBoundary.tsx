@@ -300,12 +300,6 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
         error: null,
         showTrace: false,
       });
-    } else {
-      this.state = {
-        hasError: false,
-        error: null,
-        showTrace: false,
-      };
     }
   };
 
@@ -316,12 +310,6 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
         hasError: true,
         error: err,
       });
-    } else {
-      this.state = {
-        ...this.state,
-        hasError: true,
-        error: err,
-      };
     }
   };
 

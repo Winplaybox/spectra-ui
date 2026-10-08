@@ -17,7 +17,7 @@ export interface NativeGridProps {
 export const Grid: React.FC<NativeGridProps> = ({
   children,
   container = false,
-  item = false,
+  item: _item = false,
   spacing = 2,
   xs = 12,
   style,

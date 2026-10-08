@@ -18,7 +18,7 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
       width,
       height,
       borderRadius,
-      animation = 'wave',
+      animation: _animation = 'wave',
       style: customStyle,
       className,
       ...rest

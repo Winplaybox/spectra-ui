@@ -6,14 +6,12 @@ import { getTokens } from '@winplaybox/tokens';
 // Safe dynamic resolution of react-native-svg
 let SvgComponent: any = null;
 let PathComponent: any = null;
-let GComponent: any = null;
 
 try {
   const rns = require('react-native-svg');
   SvgComponent = rns.Svg || rns.default;
   PathComponent = rns.Path;
-  GComponent = rns.G;
-} catch (e) {
+} catch {
   // Graceful fallback when react-native-svg is mock or not yet linked
 }
 

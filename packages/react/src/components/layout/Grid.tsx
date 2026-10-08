@@ -21,7 +21,7 @@ export const Grid = forwardRef<HTMLDivElement, GridProps>(
     {
       children,
       container = false,
-      item = false,
+      item: _item = false,
       spacing = 2,
       xs = 12,
       className,

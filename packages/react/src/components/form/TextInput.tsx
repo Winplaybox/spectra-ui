@@ -45,9 +45,6 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     const effectiveRightIcon = rightIcon || (icon && iconPosition === 'right' ? icon : null);
 
     const {
-      labelId,
-      errorId,
-      descriptionId,
       hasError,
       errorText,
       labelProps,

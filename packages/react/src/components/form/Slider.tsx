@@ -1,5 +1,5 @@
 // packages/react/src/components/form/Slider.tsx
-import React, { useState, useRef, useEffect, forwardRef } from 'react';
+import React, { useState, useRef, forwardRef } from 'react';
 
 export interface SliderProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange'> {
   value?: number;

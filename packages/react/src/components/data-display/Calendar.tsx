@@ -26,8 +26,8 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
       value: controlledValue,
       defaultValue,
       onChange,
-      minDate,
-      maxDate,
+      minDate: _minDate,
+      maxDate: _maxDate,
       className,
       style,
       ...rest

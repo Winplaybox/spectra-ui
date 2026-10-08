@@ -54,7 +54,7 @@ export const Clipboard = {
       try {
         await customAdapter.setString(text);
         return true;
-      } catch (e) {
+      } catch {
         return false;
       }
     }

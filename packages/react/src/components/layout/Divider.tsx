@@ -17,7 +17,7 @@ export const Divider = forwardRef<any, DividerProps>(
       variant = 'solid',
       spacing = 'md',
       label,
-      labelPosition = 'center',
+      labelPosition: _labelPosition = 'center',
       children,
       className,
       style: customStyle,

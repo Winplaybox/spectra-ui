@@ -22,7 +22,7 @@ try {
   const mod = require('@react-native-community/datetimepicker');
   RNDateTimePicker = mod.default || mod;
   RNDateTimePickerAndroid = mod.DateTimePickerAndroid;
-} catch (e) {
+} catch {
   // Graceful fallback when native community picker is not linked
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { IconProps } from './types';
-import { parseIconName, ResolvedIconMeta } from './registry';
+import { parseIconName } from './registry';
 import {
   CheckIcon,
   CloseIcon,

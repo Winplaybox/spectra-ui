@@ -35,10 +35,16 @@
   "author": "WinPlayBox",
   "license": "MIT",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/node": "^20.0.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "prettier": "^3.0.0",
     "turbo": "^2.9.14",
     "typescript": "^5.0.0",
+    "typescript-eslint": "^8.71.1",
     "vitest": "^3.2.6"
   },
   "pnpm": {

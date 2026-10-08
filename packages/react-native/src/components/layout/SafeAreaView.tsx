@@ -18,7 +18,7 @@ try {
   rnUseSafeAreaFrame = safeAreaContext.useSafeAreaFrame;
   ContextSafeAreaView = safeAreaContext.SafeAreaView;
   rnInitialWindowMetrics = safeAreaContext.initialWindowMetrics;
-} catch (e) {
+} catch {
   // Graceful fallback for non-native test environments
 }
 

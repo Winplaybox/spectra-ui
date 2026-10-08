@@ -11,7 +11,7 @@ let nativeStorage: any = null;
 try {
   const mod = require('@react-native-async-storage/async-storage');
   nativeStorage = mod.default || mod;
-} catch (e) {
+} catch {
   // Graceful fallback to memory storage
 }
 

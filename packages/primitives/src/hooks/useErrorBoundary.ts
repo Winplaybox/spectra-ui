@@ -1,7 +1,7 @@
 import { useContext, useState, useCallback } from 'react';
 import { ErrorBoundaryContext, ErrorBoundaryContextValue } from '../context/ErrorBoundaryContext';
 
-export interface UseErrorBoundaryReturn extends ErrorBoundaryContextValue {}
+export type UseErrorBoundaryReturn = ErrorBoundaryContextValue;
 
 /**
  * useErrorBoundary - Primitives hook allowing functional components to imperatively

@@ -49,7 +49,7 @@ export interface ResolvedIconMeta {
 }
 
 export function parseIconName(rawName: string): ResolvedIconMeta {
-  let name = rawName.trim();
+  const name = rawName.trim();
 
   // If kebab-case id like "iconly-regular-bold-arrow-right-circle"
   if (name.startsWith('iconly-')) {

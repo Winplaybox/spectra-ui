@@ -88,7 +88,7 @@ export const ListView = forwardRef(function ListView<T>(
     emptyState,
     emptyText = 'No items found',
     refreshing = false,
-    onRefresh,
+    onRefresh: _onRefresh,
     ListHeaderComponent,
     ListFooterComponent,
     maxHeight,

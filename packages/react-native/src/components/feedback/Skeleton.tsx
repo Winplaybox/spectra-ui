@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Animated, StyleSheet, ViewStyle } from 'react-native';
+import { Animated, ViewStyle } from 'react-native';
 import { useTheme } from '@winplaybox/primitives';
 import { getTokens } from '@winplaybox/tokens';
 

@@ -20,14 +20,14 @@
 
 Spectra UI is architected as a modular monorepo. Each package can be installed independently or consumed together as a unified system:
 
-| Package | Version | NPM Registry Link | Directory | Description |
-| :--- | :---: | :--- | :--- | :--- |
-| **`@winplaybox/react`** | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/react?style=flat-square)](https://www.npmjs.com/package/@winplaybox/react) | [`packages/react`](packages/react) | 62 production-ready web components with Vanilla Extract zero-runtime styling |
-| **`@winplaybox/tokens`** | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/tokens?style=flat-square)](https://www.npmjs.com/package/@winplaybox/tokens) | [`packages/tokens`](packages/tokens) | Multi-tier design token engine compiling to CSS variables, TypeScript, and JSON |
-| **`@winplaybox/icons`** | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/icons?style=flat-square)](https://www.npmjs.com/package/@winplaybox/icons) | [`packages/icons`](packages/icons) | 14,200+ accessible SVG vector icons across 7 distinct visual styles |
-| **`@winplaybox/primitives`** | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/primitives?style=flat-square)](https://www.npmjs.com/package/@winplaybox/primitives) | [`packages/primitives`](packages/primitives) | 25 headless React state hooks and unstyled behavioral primitives |
-| **`@winplaybox/react-native`** | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/react-native?style=flat-square)](https://www.npmjs.com/package/@winplaybox/react-native) | [`packages/react-native`](packages/react-native) | Cross-platform native components tailored for iOS and Android |
-| **`@winplaybox/mcp`** | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/mcp?style=flat-square)](https://www.npmjs.com/package/@winplaybox/mcp) | [`packages/mcp`](packages/mcp) | Model Context Protocol server enabling Cursor, Claude, and Antigravity IDE integration |
+| Package                        | Version | NPM Registry Link                                                                                                                         | Directory                                        | Description                                                                            |
+| :----------------------------- | :-----: | :---------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------- | :------------------------------------------------------------------------------------- |
+| **`@winplaybox/react`**        | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/react?style=flat-square)](https://www.npmjs.com/package/@winplaybox/react)               | [`packages/react`](packages/react)               | 62 production-ready web components with Vanilla Extract zero-runtime styling           |
+| **`@winplaybox/tokens`**       | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/tokens?style=flat-square)](https://www.npmjs.com/package/@winplaybox/tokens)             | [`packages/tokens`](packages/tokens)             | Multi-tier design token engine compiling to CSS variables, TypeScript, and JSON        |
+| **`@winplaybox/icons`**        | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/icons?style=flat-square)](https://www.npmjs.com/package/@winplaybox/icons)               | [`packages/icons`](packages/icons)               | 14,200+ accessible SVG vector icons across 7 distinct visual styles                    |
+| **`@winplaybox/primitives`**   | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/primitives?style=flat-square)](https://www.npmjs.com/package/@winplaybox/primitives)     | [`packages/primitives`](packages/primitives)     | 25 headless React state hooks and unstyled behavioral primitives                       |
+| **`@winplaybox/react-native`** | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/react-native?style=flat-square)](https://www.npmjs.com/package/@winplaybox/react-native) | [`packages/react-native`](packages/react-native) | Cross-platform native components tailored for iOS and Android                          |
+| **`@winplaybox/mcp`**          | `0.2.0` | [![npm](https://img.shields.io/npm/v/@winplaybox/mcp?style=flat-square)](https://www.npmjs.com/package/@winplaybox/mcp)                   | [`packages/mcp`](packages/mcp)                   | Model Context Protocol server enabling Cursor, Claude, and Antigravity IDE integration |
 
 ---
 
@@ -60,15 +60,21 @@ Import tokens in your root stylesheet or entry file:
 
 ```css
 /* styles.css or index.css */
-@import '@winplaybox/tokens/tokens.css';
+@import "@winplaybox/tokens/tokens.css";
 ```
 
 Use components inside your React application:
 
 ```tsx
-import React from 'react';
-import { SpectraProvider, Button, Card, TextInput, Badge } from '@winplaybox/react';
-import { SearchIcon } from '@winplaybox/icons';
+import React from "react";
+import {
+  SpectraProvider,
+  Button,
+  Card,
+  TextInput,
+  Badge,
+} from "@winplaybox/react";
+import { SearchIcon } from "@winplaybox/icons";
 
 export function App() {
   return (
@@ -98,9 +104,9 @@ pnpm add @winplaybox/react-native @winplaybox/tokens @winplaybox/primitives
 ```
 
 ```tsx
-import React from 'react';
-import { View } from 'react-native';
-import { Button, Card, Text } from '@winplaybox/react-native';
+import React from "react";
+import { View } from "react-native";
+import { Button, Card, Text } from "@winplaybox/react-native";
 
 export function MobileScreen() {
   return (
@@ -141,18 +147,18 @@ Now your AI assistant can inspect exact props, tokens, verified recipes, and ico
 
 ---
 
-## Component Catalog (58 Web Components)
+## Component Catalog (62 Web Components)
 
-The `@winplaybox/react` library provides 58 enterprise components organized into 8 functional categories:
+The `@winplaybox/react` library provides 62 enterprise components organized into 8 functional categories:
 
-- **Actions**: `Button`, `IconButton`, `ButtonGroup`, `SplitButton`
-- **Data Display**: `Avatar`, `AvatarGroup`, `Badge`, `Calendar`, `Chip`, `List`, `Statistic`, `Table`, `Tag`, `Timeline`, `TreeView`
-- **Feedback**: `Alert`, `Drawer`, `ProgressBar`, `Skeleton`, `Spinner`, `Toast`
-- **Form**: `Autocomplete`, `Checkbox`, `CheckboxGroup`, `ColorPicker`, `Radio`, `Rating`, `Select`, `Slider`, `Switch`, `Textarea`, `TextInput`
+- **Actions**: `Button`, `IconButton`, `ButtonGroup`, `SplitButton`, `CompoundButton`, `CopyButton`
+- **Data Display**: `Avatar`, `AvatarGroup`, `Badge`, `Calendar`, `Chip`, `List`, `ListView`, `Statistic`, `Table`, `Tag`, `Timeline`, `TreeView`
+- **Feedback**: `Alert`, `Drawer`, `ProgressBar`, `Skeleton`, `Spinner`, `Toast`, `ErrorBoundary`
+- **Form**: `Autocomplete`, `Checkbox`, `CheckboxGroup`, `ColorPicker`, `DatePicker`, `Radio`, `Rating`, `Select`, `Slider`, `Switch`, `Textarea`, `TextInput`
 - **Layout**: `Box`, `Container`, `Divider`, `Grid`, `Stack`, `Text`
 - **Navigation**: `AppBar`, `Breadcrumbs`, `Link`, `Menu`, `Pagination`, `PlatformChassis`, `SpeedDial`, `Stepper`, `Tabs`
 - **Overlay**: `Dialog`, `Popover`, `Tooltip`
-- **Surfaces**: `Card`, `MediaCard`, `Paper`
+- **Surfaces**: `Card`, `MediaCard`, `Paper`, `WebViewBox`
 
 ---
 
@@ -160,11 +166,11 @@ The `@winplaybox/react` library provides 58 enterprise components organized into
 
 Available via `@winplaybox/primitives` (or exported via `@winplaybox/react`):
 
-- **State & Disclosure**: `useDisclosure`, `useControllableState`, `useToggle`, `usePrevious`
-- **Environment & Theme**: `useTheme`, `useColorScheme`, `usePlatform`, `useReducedMotion`, `useRTL`
-- **DOM & Sizing**: `useClickOutside`, `useEventListener`, `useIntersectionObserver`, `useScrollLock`, `useWindowSize`, `useMediaQuery`
-- **Performance & Async**: `useDebounce`, `useThrottle`, `useInterval`, `useTimeout`, `useAsync`, `useFetch`
-- **Storage & Input**: `useLocalStorage`, `useClipboard`, `useHover`, `useToast`
+- **State & Disclosure**: `useDisclosure`, `useControllableState`, `usePrevious`, `useErrorBoundary`
+- **Environment & Theme**: `useTheme`, `useColorScheme`, `usePlatform`, `useBreakpoint`, `useReducedMotion`, `useRTL`
+- **DOM & Sizing**: `useOutsideClick`, `useEventListener`, `useIntersectionObserver`, `useScrollLock`, `useWindowSize`, `useElementSize`, `useMediaQuery`, `useFocusTrap`, `useFocusRing`, `useId`
+- **Performance & Async**: `useDebounce`, `useThrottle`, `useInterval`, `useAsync`
+- **Storage & Input**: `useLocalStorage`, `useClipboard`, `useHover`, `useToast`, `useFormField`
 
 ---
 

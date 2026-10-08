@@ -17,8 +17,8 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(
   (
     {
       children,
-      striped = false,
-      hoverable = true,
+      striped: _striped = false,
+      hoverable: _hoverable = true,
       dense = false,
       bordered = true,
       className,

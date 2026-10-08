@@ -1,6 +1,6 @@
 // packages/react/src/components/actions/CopyButton.tsx
 import React, { forwardRef } from 'react';
-import { Button, ButtonVariant, ButtonSize, ButtonProps } from './Button';
+import { Button, ButtonProps } from './Button';
 import { useClipboard } from '@winplaybox/primitives';
 import { CopyIcon, CheckIcon } from '@winplaybox/icons';
 

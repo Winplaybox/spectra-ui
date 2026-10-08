@@ -188,12 +188,6 @@ export class ErrorBoundary extends Component<NativeErrorBoundaryProps, NativeErr
         error: null,
         expanded: false,
       });
-    } else {
-      this.state = {
-        hasError: false,
-        error: null,
-        expanded: false,
-      };
     }
   };
 
@@ -204,12 +198,6 @@ export class ErrorBoundary extends Component<NativeErrorBoundaryProps, NativeErr
         hasError: true,
         error: err,
       });
-    } else {
-      this.state = {
-        ...this.state,
-        hasError: true,
-        error: err,
-      };
     }
   };
 

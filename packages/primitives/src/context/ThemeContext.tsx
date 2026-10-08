@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 export type ColorScheme = 'light' | 'dark';
 export type ThemeMode = 'light' | 'dark' | 'system';
@@ -30,7 +30,7 @@ export interface ThemeProviderProps {
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
   defaultPack = 'minimal',
-  defaultColorScheme = 'light',
+  defaultColorScheme: _defaultColorScheme = 'light',
   defaultMode = 'system',
   defaultRTL = false,
 }) => {

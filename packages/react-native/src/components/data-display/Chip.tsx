@@ -15,8 +15,8 @@ export interface NativeChipProps {
 
 export const Chip: React.FC<NativeChipProps> = ({
   label,
-  variant = 'filled',
-  size = 'md',
+  variant: _variant = 'filled',
+  size: _size = 'md',
   selected = false,
   onPress,
   onDelete,
