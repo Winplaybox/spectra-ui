@@ -220,12 +220,16 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(
                 padding: 2,
                 cursor: 'pointer',
                 color: 'var(--color-text-muted)',
-                display: 'flex',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               <ChevronDownIcon
                 size={14}
                 style={{
+                  display: 'block',
+                  verticalAlign: 'middle',
                   transform: isOpen ? 'rotate(180deg)' : 'none',
                   transition: 'transform 0.15s ease',
                 }}
@@ -282,7 +286,7 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(
                       cursor: opt.disabled ? 'not-allowed' : 'pointer',
                       fontSize: 13,
                       backgroundColor: isHighlighted
-                        ? 'var(--color-surface-raised)'
+                        ? 'var(--color-surface-hover, rgba(128, 128, 128, 0.12))'
                         : 'transparent',
                       color: opt.disabled
                         ? 'var(--color-text-muted)'
@@ -312,4 +316,3 @@ export const Autocomplete = forwardRef<HTMLDivElement, AutocompleteProps>(
 );
 
 Autocomplete.displayName = 'Autocomplete';
-export const Combobox = Autocomplete;

@@ -6,6 +6,8 @@
       "surface-elevated": { "value": "#FFFFFF" },
       "surface-overlay": { "value": "rgba(0, 0, 0, 0.7)" },
       "surface-sunken": { "value": "#F1F5F9" },
+      "surface-hover": { "value": "rgba(0, 0, 0, 0.05)" },
+      "surface-active": { "value": "rgba(0, 0, 0, 0.08)" },
       "border": {
         "default": { "value": "#E5E7EB" },
         "subtle": { "value": "#F3F4F6" },

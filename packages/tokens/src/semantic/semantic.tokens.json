@@ -21,6 +21,14 @@
         "value": "{color.primitive.gray.100}",
         "description": "Sunken recessed surface (code blocks, wells)"
       },
+      "surface-hover": {
+        "value": "{color.primitive.gray.100}",
+        "description": "Subtle surface hover state"
+      },
+      "surface-active": {
+        "value": "{color.primitive.gray.200}",
+        "description": "Subtle surface active or pressed state"
+      },
       "border": {
         "default": {
           "value": "{color.primitive.gray.200}",

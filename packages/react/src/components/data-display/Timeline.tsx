@@ -1,5 +1,6 @@
-// packages/react/src/components/data-display/Timeline.tsx
 import React, { forwardRef, ReactNode } from 'react';
+import { Stack } from '../layout/Stack';
+import { Text } from '../layout/Text';
 
 export interface TimelineItemProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
   title: ReactNode;
@@ -79,23 +80,23 @@ export const TimelineItem = forwardRef<HTMLDivElement, TimelineItemProps>(
         </div>
 
         {/* Content body */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontWeight: 600, fontSize: 13, color: 'var(--color-text-primary)' }}>
+        <Stack direction="column" gap="xs" style={{ flex: 1 }}>
+          <Stack direction="row" justify="between" align="center">
+            <Text as="span" size="sm" weight="semibold" color="primary">
               {title}
-            </span>
+            </Text>
             {timestamp && (
-              <span style={{ fontSize: 11, color: 'var(--color-text-muted)', fontVariantNumeric: 'tabular-nums' }}>
+              <Text as="span" size="xs" color="muted" style={{ fontVariantNumeric: 'tabular-nums' }}>
                 {timestamp}
-              </span>
+              </Text>
             )}
-          </div>
+          </Stack>
           {description && (
-            <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
+            <Text as="span" size="xs" color="secondary" style={{ lineHeight: 1.4 }}>
               {description}
-            </div>
+            </Text>
           )}
-        </div>
+        </Stack>
       </div>
     );
   }

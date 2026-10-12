@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Badge, Card, Tabs, TabList, Tab } from '@winplaybox/react';
+import { Badge, Card, Tabs, TabList, Tab, Text } from '@winplaybox/react';
 import {
   CheckIcon,
   CopyIcon,
@@ -125,7 +125,9 @@ const styles = StyleSheet.create({
           <Badge variant="primary">Installation & Setup</Badge>
           <span style={{ fontSize: 13, color: 'var(--color-text-muted)', fontWeight: 500 }}>Cross-Platform Architecture</span>
         </div>
-        <h1
+        <Text
+          as="h1"
+          variant="heading"
           style={{
             fontSize: 34,
             fontWeight: 800,
@@ -135,8 +137,9 @@ const styles = StyleSheet.create({
           }}
         >
           Installing Spectra UI
-        </h1>
-        <p
+        </Text>
+        <Text
+          as="p"
           style={{
             fontSize: 16,
             lineHeight: 1.6,
@@ -148,7 +151,7 @@ const styles = StyleSheet.create({
           Spectra UI provides dedicated, optimized packages for both <strong>Web (React DOM)</strong> and{' '}
           <strong>Mobile Native (iOS & Android via Expo / React Native)</strong>, sharing the exact same design
           tokens and icon architecture.
-        </p>
+        </Text>
       </Card>
 
       {/* 2. Target Platform Selector Card */}
@@ -197,9 +200,9 @@ const styles = StyleSheet.create({
         }}
       >
         <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border-subtle)', backgroundColor: 'var(--color-surface-raised)' }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+          <Text as="h2" variant="heading" style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
             1. Install Packages
-          </h2>
+          </Text>
         </div>
         <div>
           {/* Package Manager Tabs */}
@@ -272,15 +275,15 @@ const styles = StyleSheet.create({
           padding: 24,
         }}
       >
-        <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 16px 0', color: 'var(--color-text-primary)' }}>
+        <Text as="h2" variant="heading" style={{ fontSize: 20, fontWeight: 700, margin: '0 0 16px 0', color: 'var(--color-text-primary)' }}>
           2. Code Integration
-        </h2>
+        </Text>
 
         {platformTarget !== 'native' && (
           <div style={{ marginBottom: 24 }}>
-            <h3 style={{ fontSize: 15, fontWeight: 600, margin: '0 0 8px 0', color: 'var(--color-text-secondary)' }}>
+            <Text as="h3" variant="heading" style={{ fontSize: 15, fontWeight: 600, margin: '0 0 8px 0', color: 'var(--color-text-secondary)' }}>
               Web Setup: Root Provider & Tokens
-            </h3>
+            </Text>
             <div
               style={{
                 border: '1px solid var(--color-border-default)',
@@ -329,9 +332,9 @@ const styles = StyleSheet.create({
 
         {(platformTarget === 'native' || platformTarget === 'all') && (
           <div>
-            <h3 style={{ fontSize: 15, fontWeight: 600, margin: '0 0 8px 0', color: 'var(--color-text-secondary)' }}>
+            <Text as="h3" variant="heading" style={{ fontSize: 15, fontWeight: 600, margin: '0 0 8px 0', color: 'var(--color-text-secondary)' }}>
               Mobile Native Setup: React Native & Expo
-            </h3>
+            </Text>
             <div
               style={{
                 border: '1px solid var(--color-border-default)',
@@ -390,12 +393,12 @@ const styles = StyleSheet.create({
             boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
           }}
         >
-          <h2 style={{ fontSize: 20, fontWeight: 700, margin: '0 0 6px 0', color: 'var(--color-text-primary)' }}>
+          <Text as="h2" variant="heading" style={{ fontSize: 20, fontWeight: 700, margin: '0 0 6px 0', color: 'var(--color-text-primary)' }}>
             3. Realtime Testing & Interactive Sandboxes
-          </h2>
-          <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.6 }}>
+          </Text>
+          <Text as="p" style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.6 }}>
             You can test, inspect, and demo Spectra UI components in realtime using live sandboxes:
-          </p>
+          </Text>
         </Card>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
@@ -403,12 +406,12 @@ const styles = StyleSheet.create({
           <Card variant="bordered" style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 10, backgroundColor: 'var(--color-surface)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <SmartphoneIcon size={20} color="var(--color-action-primary)" />
-              <h4 style={{ margin: 0, fontSize: 15, fontWeight: 700 }}>Expo Snack (Mobile Native)</h4>
+              <Text as="h4" variant="heading" style={{ margin: 0, fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)' }}>Expo Snack (Mobile Native)</Text>
             </div>
-            <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+            <Text as="p" style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
               Run components directly on real iOS or Android devices via the Expo Go app (by scanning a QR code) or inside
               the web simulator without any local environment setup.
-            </p>
+            </Text>
             <div style={{ marginTop: 'auto', paddingTop: 6 }}>
               <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-action-primary)' }}>
                 Integrated in every demo card toolbar (Cube icon)
@@ -420,11 +423,11 @@ const styles = StyleSheet.create({
           <Card variant="bordered" style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 10, backgroundColor: 'var(--color-surface)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <SmartphoneIcon size={20} color="var(--color-semantic-success, #16A34A)" />
-              <h4 style={{ margin: 0, fontSize: 15, fontWeight: 700 }}>Spectra Mobile Simulator</h4>
+              <Text as="h4" variant="heading" style={{ margin: 0, fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)' }}>Spectra Mobile Simulator</Text>
             </div>
-            <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+            <Text as="p" style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
               Switch any component page to <strong>Mobile Native</strong> mode to view live components inside an interactive phone frame with 44pt touch-target inspection.
-            </p>
+            </Text>
             <div style={{ marginTop: 'auto', paddingTop: 6 }}>
               <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-semantic-success, #16A34A)' }}>
                 Active right here on every component page
@@ -436,11 +439,11 @@ const styles = StyleSheet.create({
           <Card variant="bordered" style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 10, backgroundColor: 'var(--color-surface)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <LightningIcon size={20} color="#F59E0B" />
-              <h4 style={{ margin: 0, fontSize: 15, fontWeight: 700 }}>StackBlitz & CodeSandbox (Web)</h4>
+              <Text as="h4" variant="heading" style={{ margin: 0, fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)' }}>StackBlitz & CodeSandbox (Web)</Text>
             </div>
-            <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+            <Text as="p" style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
               Every component demo card provides direct one-click buttons to spin up isolated web sandboxes with instant hot module reloading.
-            </p>
+            </Text>
             <div style={{ marginTop: 'auto', paddingTop: 6 }}>
               <span style={{ fontSize: 12, fontWeight: 600, color: '#F59E0B' }}>
                 Instant one-click toolbar buttons (Lightning & Cube icons)

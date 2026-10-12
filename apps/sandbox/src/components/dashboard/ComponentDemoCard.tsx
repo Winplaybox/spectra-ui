@@ -17,7 +17,7 @@ import { openInCodeSandbox, openInStackBlitz, openInExpoSnack, toJavaScript } fr
 import { compileAndRender } from '../../utils/liveCompiler';
 import { useVersion } from '../../context/VersionContext';
 import { usePlatform } from '../../context/PlatformContext';
-import { useColorScheme } from '@winplaybox/react';
+import { useColorScheme, Text } from '@winplaybox/react';
 import { EditableCodeBlock } from './EditableCodeBlock';
 import { EditInChatModal } from './EditInChatModal';
 
@@ -134,9 +134,9 @@ export interface ComponentDemoCardProps {
   title: string;
   description: string;
   webPreview: React.ReactNode;
-  nativePreview: React.ReactNode;
+  nativePreview?: React.ReactNode;
   webCode: string;
-  nativeCode: string;
+  nativeCode?: string;
   compactCode?: string;
   componentId?: string;
 }
@@ -155,6 +155,8 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
   const { currentVersion, getGitHubUrl } = useVersion();
   const { currentPlatform } = usePlatform();
   const platform = currentPlatform === 'web' ? 'web' : 'native';
+  const effectiveNativePreview = nativePreview ?? webPreview;
+  const effectiveNativeCode = nativeCode ?? webCode;
   const [codeLang, setCodeLang] = useState<'ts' | 'js'>('ts');
   const [isExpanded, setIsExpanded] = useState(false);
   const [editedFullCodeTs, setEditedFullCodeTs] = useState<string | null>(null);
@@ -173,7 +175,7 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
   const menuRef = useRef<HTMLDivElement>(null);
 
   // Compute base code
-  const activeRawCode = platform === 'web' ? webCode : nativeCode;
+  const activeRawCode = platform === 'web' ? webCode : effectiveNativeCode;
   const defaultFullCodeTs = activeRawCode;
   const defaultFullCodeJs = toJavaScript(activeRawCode);
   const currentFullCode = codeLang === 'ts'
@@ -335,18 +337,19 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
     <div
       id={id}
       style={{
-        borderRadius: 'var(--radius-component-md)',
+        borderRadius: 'var(--radius-component-md, 8px)',
         border: '1px solid var(--color-border-default)',
         backgroundColor: 'var(--color-surface)',
         overflow: 'hidden',
         scrollMarginTop: 80,
-        boxShadow: 'var(--elevation-raised)',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02)',
+        transition: 'box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
       }}
     >
-      {/* Header Bar */}
+      {/* Header Bar: Fluent 2 CardHeader */}
       <div
         style={{
-          padding: '16px 20px',
+          padding: '14px 20px',
           borderBottom: '1px solid var(--color-border-subtle)',
           backgroundColor: 'var(--color-surface-raised)',
           display: 'flex',
@@ -358,9 +361,9 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
       >
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+            <Text as="h3" variant="heading" style={{ margin: 0, fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)' }}>
               {title}
-            </h3>
+            </Text>
             <a
               href={`#${id}`}
               style={{
@@ -485,13 +488,13 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
             </div>
             <LiveErrorBoundary
               fallbackKey={`${currentDisplayCode}-${demoKey}`}
-              fallbackElement={nativePreview}
+              fallbackElement={effectiveNativePreview}
               onReset={handleResetDemo}
             >
               {isCodeModified && (DynamicComponent || lastValidComponentRef.current) ? (
                 React.createElement(DynamicComponent || lastValidComponentRef.current!)
               ) : (
-                nativePreview
+                effectiveNativePreview
               )}
             </LiveErrorBoundary>
           </div>

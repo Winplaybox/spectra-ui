@@ -44,3 +44,42 @@
 ## 7. Icon Alignment & Centering Guarantees
 - Whenever vector icons are rendered, ensure they are strictly and flawlessly centered in their container (`display: inline-flex`, `alignItems: 'center'`, `justifyContent: 'center'` on wrappers, and `display: 'block'` or `verticalAlign: 'middle'` on `<svg>`).
 - Prevent baseline misalignment, unwanted font-metric padding, or off-center icon placement across all buttons, links, pills, tabs, headers, and documentation triggers.
+
+## 8. Global Platform Context Architecture (Permanent Mandate)
+- **Platform Selection is Global State, Not Component Metadata**:
+  The user first selects their platform from the global sidebar selector (`[ [icon] Platform v ]`). Once selected, the **entire documentation context changes** to that platform:
+  - Sidebar navigation & catalog
+  - Component pages, variants, states, recipes, props, hooks, playground, and API
+- **Unsupported Capabilities Disappear**:
+  Unsupported components, hooks, variants, recipes, and props MUST NOT appear in that platform's catalog or sidebar.
+  Do not render them, do not show disabled cards, and do not show "Coming soon" clutter.
+  Unsupported capabilities belong ONLY on the dedicated Architecture Support Matrix (`/cross-platform`).
+- **Platform Filtering Happens Before Rendering**:
+  Documentation and playground resolve `selectedPlatform + capabilityRegistry` before rendering navigation, demos, or code examples.
+
+## 9. Deep Production Recipe Gallery (MUI & Fluent Benchmark)
+- Components must never stop at a single superficial preview.
+- Mature components must expose comprehensive, realistic production recipes (e.g. for TextInput: 27 recipes covering basic, outlined, filled, standard, sizes, helper text, error, success, required, disabled, readonly, leading icon, trailing icon, clear button, prefix, suffix, character counter, multiline, autosize, search, password, email, number, select, loading, async validation, and form integration).
+- Recipes are platform-filtered: only verified recipes supported on the active platform appear.
+
+## 10. 4-Layer Architecture & Verified Platform Implementation (MUI & Fluent Benchmark)
+- **Stop Treating "Native" as an Implementation or Platform**:
+  - "Native" is NOT a platform. Product platforms are: `Web`, `Android`, `iOS`, `Windows`, `macOS`.
+  - React Native is an implementation technology. Android and iOS are product platforms.
+  - Never label user-facing components `NativeTextInput`, `NativeButton`, or render fake `Native <Component>` demo mockups.
+- **The 4-Layer Architecture**:
+  1. **Layer 1 — Semantic**: Universal component definition (`TextInput`, `Button`, `Checkbox`, `Dialog`, `Select`, `Tabs`, `Tooltip`).
+  2. **Layer 2 — Platform Contract**: Capability contract per platform (`Web`, `Android`, `iOS`, `Windows`, `macOS`).
+  3. **Layer 3 — Verified Actual Implementation**: Real UI + real platform-correct behavior (Web: `@winplaybox/react`; Android: `@winplaybox/react-native` with 48dp touch targets and Android keyboard; iOS: `@winplaybox/react-native` with Apple HIG 44pt touch targets and Dynamic Type; Windows & macOS: native adapters).
+  4. **Layer 4 — Progressive Documentation & Playground**: Platform -> Verified Implementation -> Capabilities -> Progressive Examples -> Functional Playground.
+- **Dual Status Gates (Implementation vs Documentation)**:
+  - `implementationStatus`: `'planned' | 'experimental' | 'partial' | 'stable' | 'deprecated' | 'unsupported'`
+  - `documentationStatus`: `'missing' | 'basic' | 'complete' | 'verified'`
+  - A component only appears in the active platform's normal production catalog when `implementation === 'stable'` AND `documentation === 'verified'`.
+  - Fake "Native <Component>" placeholders are treated as **implementation failures**. Incomplete components must remain outside the production catalog until verified.
+- **Component Decomposition**:
+  - Do not stuff all input kinds into `TextInput`. Separate distinct components: `TextInput`, `TextArea`, `SearchInput`, `Select`, `Combobox`, `Autocomplete`, `NumberInput`, `PasswordInput`.
+  - Decompose underneath: `TextInput ├── TextInputBase ├── Field ├── Label ├── HelperText ├── ValidationMessage ├── InputAffix └── platform adapter`.
+  - MUI progressive disclosure: Overview -> Basic -> Outlined -> Filled -> Helper Text -> Error -> Disabled -> Leading Icon -> Trailing Action -> Multiline -> Keyboard Types -> Form Integration -> Validation -> Accessibility -> Best Practices -> Platform API.
+
+

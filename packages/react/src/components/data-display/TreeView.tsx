@@ -79,7 +79,7 @@ export const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
             }}
             onMouseEnter={(e) => {
               if (!isSelected) {
-                e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
+                e.currentTarget.style.backgroundColor = 'var(--color-surface-hover, rgba(128, 128, 128, 0.12))';
               }
             }}
             onMouseLeave={(e) => {
@@ -94,13 +94,14 @@ export const TreeView = forwardRef<HTMLDivElement, TreeViewProps>(
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
+                  justifyContent: 'center',
                   color: isSelected ? 'inherit' : 'var(--color-text-muted)',
                   transform: isExpanded ? 'none' : 'rotate(-90deg)',
                   transition: 'transform 0.15s ease',
                   flexShrink: 0,
                 }}
               >
-                <ChevronDownIcon size={14} />
+                <ChevronDownIcon size={14} style={{ display: 'block', verticalAlign: 'middle' }} />
               </span>
             ) : (
               <span style={{ width: 14, flexShrink: 0 }} />

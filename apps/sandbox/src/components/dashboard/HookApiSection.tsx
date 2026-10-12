@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card } from '@winplaybox/react';
+import { Card, Text } from '@winplaybox/react';
 import { CopyIcon, CheckIcon, CodeIcon, SparklesIcon, InfoIcon } from '@winplaybox/icons';
 import { HOOK_API_DATA, HookApiReference } from '../../data/apiReferenceData';
 
@@ -53,7 +53,9 @@ export const HookApiSection: React.FC<HookApiSectionProps> = ({ hookId }) => {
           </span>
         </div>
 
-        <h3
+        <Text
+          as="h3"
+          variant="heading"
           style={{
             fontSize: 22,
             fontWeight: 800,
@@ -63,10 +65,10 @@ export const HookApiSection: React.FC<HookApiSectionProps> = ({ hookId }) => {
           }}
         >
           {hookData.hookName} API
-        </h3>
-        <p style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
+        </Text>
+        <Text as="p" style={{ fontSize: 14, color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.5 }}>
           {hookData.description}
-        </p>
+        </Text>
       </div>
 
       {/* 1. Import Statement Card */}
@@ -212,9 +214,9 @@ export const HookApiSection: React.FC<HookApiSectionProps> = ({ hookId }) => {
               borderBottom: '1px solid var(--color-border-default)',
             }}
           >
-            <h4 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+            <Text variant="heading-sm" weight="bold">
               Parameters ({hookData.parameters.length})
-            </h4>
+            </Text>
           </div>
 
           <div style={{ overflowX: 'auto' }}>
@@ -296,9 +298,9 @@ export const HookApiSection: React.FC<HookApiSectionProps> = ({ hookId }) => {
               borderBottom: '1px solid var(--color-border-default)',
             }}
           >
-            <h4 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+            <Text variant="heading-sm" weight="bold">
               Return Values ({hookData.returnValues.length})
-            </h4>
+            </Text>
           </div>
 
           <div style={{ overflowX: 'auto' }}>
@@ -369,9 +371,9 @@ export const HookApiSection: React.FC<HookApiSectionProps> = ({ hookId }) => {
               borderBottom: '1px solid var(--color-border-default)',
             }}
           >
-            <h4 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+            <Text variant="heading-sm" weight="bold">
               Accessibility & ARIA Bindings
-            </h4>
+            </Text>
           </div>
 
           <div style={{ overflowX: 'auto' }}>

@@ -132,3 +132,49 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
 );
 
 Tag.displayName = 'Tag';
+
+export interface InteractionTagProps extends TagProps {
+  selected?: boolean;
+}
+
+export const InteractionTag = forwardRef<HTMLSpanElement, InteractionTagProps>(
+  ({ selected = false, style, ...props }, ref) => {
+    return (
+      <Tag
+        ref={ref}
+        style={{
+          cursor: 'pointer',
+          outline: selected ? '2px solid var(--color-action-primary, #007FFF)' : undefined,
+          outlineOffset: 1,
+          ...style,
+        }}
+        {...props}
+      />
+    );
+  }
+);
+InteractionTag.displayName = 'InteractionTag';
+
+export const TagGroup: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  children,
+  style,
+  ...props
+}) => {
+  return (
+    <div
+      role="group"
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        gap: 8,
+        ...style,
+      }}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
+TagGroup.displayName = 'TagGroup';
+

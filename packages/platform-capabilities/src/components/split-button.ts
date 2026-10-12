@@ -1,0 +1,86 @@
+// packages/platform-capabilities/src/components/split-button.ts
+import { ComponentCapability } from '../types';
+
+export const splitButtonCapability: ComponentCapability = {
+  id: 'split-button',
+  name: 'SplitButton',
+  displayName: 'Split Button',
+  category: 'Actions',
+  description: 'Dual-action trigger combining a default single-click primary action with an attached secondary chevron dropdown button revealing alternative actions.',
+  slots: [
+    { name: 'primary-action', description: 'Main click target executing default operation', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
+    { name: 'dropdown-action', description: 'Chevron trigger opening options menu or action sheet', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
+  ],
+  recipes: [
+    { id: 'git-merge', title: 'Git Merge Commit Options', description: 'Primary merge button paired with rebase and squash merge dropdown.', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
+    { id: 'export-options', title: 'Document Export / Download', description: 'Save as PDF default with CSV and Markdown format options.', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
+  ],
+  bestPractices: {
+    do: [
+      'Assign the most common action as the primary click trigger',
+      'Provide clear accessibility labels for both the primary and chevron actions',
+      'Ensure 48dp minimum touch bounds on Android and 44pt on iOS',
+    ],
+    dont: [
+      'Never use split buttons when only one option is available',
+      'Avoid tiny chevron touch areas that cause mis-taps on mobile devices',
+    ],
+  },
+  platforms: {
+    web: {
+      platform: 'web',
+      support: 'native',
+      implementation: '@winplaybox/react',
+      variants: ['primary', 'secondary', 'tertiary', 'danger'],
+      recipes: ['git-merge', 'export-options'],
+      states: ['default', 'hover', 'focus', 'active', 'disabled', 'loading'],
+      interactions: ['mouse-click', 'keyboard-enter', 'keyboard-space'],
+      accessibility: ['role="group"', 'aria-haspopup="menu"', 'aria-expanded'],
+      testStatus: 'verified',
+    },
+    android: {
+      platform: 'android',
+      support: 'native',
+      implementation: '@winplaybox/react-native',
+      variants: ['primary', 'secondary', 'tertiary', 'danger'],
+      recipes: ['git-merge', 'export-options'],
+      states: ['default', 'pressed', 'disabled', 'loading'],
+      interactions: ['touch-tap', 'android-ripple', '48dp-touch-target'],
+      accessibility: ['accessibilityRole="button"', 'accessibilityLabel="Additional Options"'],
+      testStatus: 'verified',
+    },
+    ios: {
+      platform: 'ios',
+      support: 'native',
+      implementation: '@winplaybox/react-native',
+      variants: ['primary', 'secondary', 'tertiary', 'danger'],
+      recipes: ['git-merge', 'export-options'],
+      states: ['default', 'pressed', 'disabled', 'loading'],
+      interactions: ['touch-tap', 'opacity-feedback', '44pt-touch-target'],
+      accessibility: ['accessibilityRole="button"', 'accessibilityLabel="Additional Options"'],
+      testStatus: 'verified',
+    },
+    windows: {
+      platform: 'windows',
+      support: 'unsupported',
+      implementation: 'Coming Soon',
+      variants: [],
+      recipes: [],
+      states: [],
+      interactions: [],
+      accessibility: [],
+      testStatus: 'untested',
+    },
+    macos: {
+      platform: 'macos',
+      support: 'unsupported',
+      implementation: 'Coming Soon',
+      variants: [],
+      recipes: [],
+      states: [],
+      interactions: [],
+      accessibility: [],
+      testStatus: 'untested',
+    },
+  },
+};

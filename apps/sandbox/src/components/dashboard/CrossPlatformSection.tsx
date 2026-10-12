@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Badge, Button, Tabs, TabList, Tab, Card } from '@winplaybox/react';
+import { Badge, Button, Tabs, TabList, Tab, Card, Text } from '@winplaybox/react';
 import { CheckIcon, PaletteIcon, SparklesIcon, SmartphoneIcon } from '@winplaybox/icons';
 import { CircuitAnimation } from './CircuitAnimation';
 import { PlatformCompatibilityMatrix } from './PlatformCompatibilityMatrix';
@@ -167,7 +167,9 @@ export const MacOSLoginScreen = () => {
           <Badge variant="primary">Architecture</Badge>
           <span style={{ fontSize: 13, color: 'var(--color-text-muted)', fontWeight: 500 }}>Universal Design System</span>
         </div>
-        <h1
+        <Text
+          as="h1"
+          variant="heading"
           style={{
             fontSize: 34,
             fontWeight: 800,
@@ -177,8 +179,9 @@ export const MacOSLoginScreen = () => {
           }}
         >
           Cross-Platform: Web & Mobile Native
-        </h1>
-        <p
+        </Text>
+        <Text
+          as="p"
           style={{
             fontSize: 16,
             lineHeight: 1.6,
@@ -188,7 +191,7 @@ export const MacOSLoginScreen = () => {
           }}
         >
           Spectra UI is engineered from the ground up as a universal design system. The exact same token contract and headless primitives power both responsive web applications and native iOS/Android mobile apps.
-        </p>
+        </Text>
       </Card>
 
       {/* 2. 3 Pillars of Cross-Platform Architecture */}
@@ -211,12 +214,12 @@ export const MacOSLoginScreen = () => {
           <div style={{ marginBottom: 12 }}>
             <PaletteIcon size={26} color="var(--color-action-primary)" />
           </div>
-          <h3 style={{ margin: '0 0 8px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+          <Text as="h3" variant="heading" style={{ margin: '0 0 8px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
             1. Universal Tokens
-          </h3>
-          <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+          </Text>
+          <Text as="p" style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
             <code>@winplaybox/tokens</code> compiles into CSS custom variables for Web and strictly typed JavaScript objects for React Native <code>StyleSheet</code>.
-          </p>
+          </Text>
         </Card>
 
         <Card
@@ -231,12 +234,12 @@ export const MacOSLoginScreen = () => {
           <div style={{ marginBottom: 12 }}>
             <SparklesIcon size={26} color="#818CF8" />
           </div>
-          <h3 style={{ margin: '0 0 8px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+          <Text as="h3" variant="heading" style={{ margin: '0 0 8px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
             2. Shared Headless Logic
-          </h3>
-          <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+          </Text>
+          <Text as="p" style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
             <code>@winplaybox/primitives</code> houses state machines (controllable state, disclosure, focus) without any DOM assumptions, executing identically on Node, Web, and React Native runtimes.
-          </p>
+          </Text>
         </Card>
 
         <Card
@@ -251,12 +254,12 @@ export const MacOSLoginScreen = () => {
           <div style={{ marginBottom: 12 }}>
             <SmartphoneIcon size={26} color="var(--color-semantic-success, #16A34A)" />
           </div>
-          <h3 style={{ margin: '0 0 8px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+          <Text as="h3" variant="heading" style={{ margin: '0 0 8px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
             3. Identical API Surface
-          </h3>
-          <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+          </Text>
+          <Text as="p" style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
             Both <code>@winplaybox/react</code> and <code>@winplaybox/react-native</code> expose matching component signatures, reducing context switching across frontend and mobile teams.
-          </p>
+          </Text>
         </Card>
       </div>
 
@@ -283,14 +286,14 @@ export const MacOSLoginScreen = () => {
               NETWORK CIRCUIT PULSE
             </span>
           </div>
-          <h3 style={{ fontSize: 20, fontWeight: 800, margin: '0 0 8px 0', color: 'var(--color-text-primary)' }}>
+          <Text as="h3" variant="heading" style={{ fontSize: 20, fontWeight: 800, margin: '0 0 8px 0', color: 'var(--color-text-primary)' }}>
             Real-Time Token & Component Stream
-          </h3>
-          <p style={{ fontSize: 13.5, color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.6 }}>
+          </Text>
+          <Text as="p" style={{ fontSize: 13.5, color: 'var(--color-text-secondary)', margin: 0, lineHeight: 1.6 }}>
             The animated circuit traces below visualize the continuous data flow between the core token engine,
             shared headless state machines, and universal runtime outputs across Web (CSS custom variables) and
             Mobile Native (StyleSheet objects).
-          </p>
+          </Text>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
@@ -323,9 +326,9 @@ export const MacOSLoginScreen = () => {
           }}
         >
           <div>
-            <h2 style={{ fontSize: 20, fontWeight: 800, margin: 0, color: 'var(--color-text-primary)', letterSpacing: '-0.015em' }}>
+            <Text as="h2" variant="heading" style={{ fontSize: 20, fontWeight: 800, margin: 0, color: 'var(--color-text-primary)', letterSpacing: '-0.015em' }}>
               Unified Component Code Comparison
-            </h2>
+            </Text>
             <span style={{ fontSize: 12.5, color: 'var(--color-text-muted)', marginTop: 2, display: 'block' }}>
               Zero mental tax: import identically across web and mobile native targets
             </span>

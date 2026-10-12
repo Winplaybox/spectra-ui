@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, Button, Switch, Badge, Card } from '@winplaybox/react';
+import { Dialog, Button, Switch, Badge, Card, Text } from '@winplaybox/react';
 import { CheckIcon, CloseIcon, SettingsIcon } from '@winplaybox/icons';
 
 interface CookiePreferencesModalProps {
@@ -78,7 +78,9 @@ export const CookiePreferencesModal: React.FC<CookiePreferencesModalProps> = ({ 
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
               <SettingsIcon size={20} color="var(--color-action-primary)" />
-              <h2
+              <Text
+                as="h2"
+                variant="heading"
                 style={{
                   fontSize: 20,
                   fontWeight: 800,
@@ -88,7 +90,7 @@ export const CookiePreferencesModal: React.FC<CookiePreferencesModalProps> = ({ 
                 }}
               >
                 Cookie & Privacy Preferences
-              </h2>
+              </Text>
             </div>
             <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
               Spectra UI respects your privacy. Customize your cookie settings for our documentation,

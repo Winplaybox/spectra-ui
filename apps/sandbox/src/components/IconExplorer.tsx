@@ -21,6 +21,7 @@ import {
   Tab,
   useToast,
   useColorScheme,
+  Text,
 } from '@winplaybox/react';
 
 // ============================================================================
@@ -1905,9 +1906,9 @@ export const IconExplorer: React.FC<IconExplorerProps> = ({ screen = 'catalog' }
           >
             {/* Drawer Header: Icon Name & Reset/Close */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <h2 style={{ fontSize: 20, fontWeight: 600, margin: 0, color: isDark ? '#FFFFFF' : '#0F172A' }}>
+              <Text as="h2" variant="heading" style={{ fontSize: 20, fontWeight: 600, margin: 0, color: isDark ? '#FFFFFF' : '#0F172A' }}>
                 {selectedIcon.name || selectedIcon.componentName.replace(/Icon$/, '')}
-              </h2>
+              </Text>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <IconButton
                   variant="tertiary"

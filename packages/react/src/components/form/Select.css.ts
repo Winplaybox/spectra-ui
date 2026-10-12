@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { style, globalStyle } from '@vanilla-extract/css';
 
 export const wrapper = style({
   display: 'flex',
@@ -51,6 +51,11 @@ export const select = style({
   },
 });
 
+globalStyle(`${select} option`, {
+  backgroundColor: 'var(--color-surface, #ffffff)',
+  color: 'var(--color-text-primary, #18181b)',
+});
+
 export const sm = style({
   paddingBlock: 'var(--space-component-padding-xs)',
   paddingInlineStart: 'var(--space-component-padding-sm)',
@@ -71,12 +76,21 @@ export const lg = style({
 
 export const icon = style({
   position: 'absolute',
-  insetInlineEnd: 'var(--space-component-padding-sm)',
+  top: '50%',
+  transform: 'translateY(-50%)',
+  insetInlineEnd: 'var(--space-component-padding-md, 12px)',
   pointerEvents: 'none',
   color: 'var(--color-text-muted)',
-  display: 'flex',
+  display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
+  lineHeight: 1,
+});
+
+globalStyle(`${icon} svg`, {
+  display: 'block',
+  verticalAlign: 'middle',
+  flexShrink: 0,
 });
 
 export const description = style({

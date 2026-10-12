@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Text } from '@winplaybox/react';
 import { SparklesIcon, CloseIcon, CopyIcon, CheckIcon, ExternalLinkIcon } from '@winplaybox/icons';
 
 interface EditInChatModalProps {
@@ -175,12 +176,12 @@ Please provide the updated, clean runnable code for Spectra UI.`;
               <SparklesIcon size={18} />
             </div>
             <div>
-              <h3 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#F8FAFC' }}>
+              <Text as="h3" variant="heading" style={{ margin: 0, fontSize: 16, fontWeight: 700, color: '#F8FAFC' }}>
                 Edit with AI / Chat
-              </h3>
-              <p style={{ margin: '2px 0 0 0', fontSize: 12, color: '#94A3B8' }}>
+              </Text>
+              <Text as="p" style={{ margin: '2px 0 0 0', fontSize: 12, color: '#94A3B8' }}>
                 Prompt changes for <strong style={{ color: '#E2E8F0' }}>{title}</strong> ({language.toUpperCase()})
-              </p>
+              </Text>
             </div>
           </div>
 

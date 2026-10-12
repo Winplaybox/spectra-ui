@@ -9,7 +9,7 @@ export interface TextInputProps extends Omit<React.ComponentPropsWithoutRef<'inp
   error?: string;
   required?: boolean;
   size?: 'sm' | 'md' | 'lg';
-  variant?: 'default' | 'filled' | 'outlined';
+  variant?: 'default' | 'filled' | 'outlined' | 'standard';
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   icon?: React.ReactNode;
@@ -61,7 +61,13 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     });
 
     const variantStyle =
-      variant === 'filled' ? styles.filled : variant === 'outlined' ? styles.outlined : styles.defaultVariant;
+      variant === 'filled'
+        ? styles.filled
+        : variant === 'outlined'
+        ? styles.outlined
+        : variant === 'standard'
+        ? styles.standard
+        : styles.defaultVariant;
 
     const inputClass = [
       styles.input,

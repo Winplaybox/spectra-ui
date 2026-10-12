@@ -24,7 +24,7 @@ import {
   useAsync,
   useInterval,
 } from '@winplaybox/primitives';
-import { Button, Badge, Card, CardHeader, CardTitle, CardDescription, CardContent, TextInput, Switch, Spinner } from '@winplaybox/react';
+import { Button, Badge, Card, CardHeader, CardTitle, CardDescription, CardContent, TextInput, Switch, Spinner, Text, Stack } from '@winplaybox/react';
 import { CheckIcon, CloseIcon, CopyIcon, SparklesIcon, AlertCircleIcon, InfoIcon } from '@winplaybox/icons';
 import { HookApiSection } from './HookApiSection';
 import { AllHooksPage } from './AllHooksPage';
@@ -401,12 +401,14 @@ export function CustomInput({ value, defaultValue, onChange }) {
                         maxWidth: 320,
                       }}
                     >
-                      <h4 style={{ margin: '0 0 8px 0', fontSize: 15, color: 'var(--color-text-primary)' }}>
-                        Active Popover Menu
-                      </h4>
-                      <p style={{ margin: '0 0 12px 0', fontSize: 13, color: 'var(--color-text-secondary)' }}>
-                        Click anywhere outside this box to automatically dismiss it!
-                      </p>
+                      <Stack gap="xs" align="center" style={{ marginBottom: 12 }}>
+                        <Text variant="heading-sm" weight="semibold">
+                          Active Popover Menu
+                        </Text>
+                        <Text variant="body-sm" color="secondary">
+                          Click anywhere outside this box to automatically dismiss it!
+                        </Text>
+                      </Stack>
                       <Badge variant="success">Listening to Outside Clicks</Badge>
                     </div>
                   )}

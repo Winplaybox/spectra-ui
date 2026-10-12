@@ -7,6 +7,8 @@ import { InstallationSection } from './components/dashboard/InstallationSection'
 import { CrossPlatformSection } from './components/dashboard/CrossPlatformSection';
 import { TokensSection } from './components/dashboard/TokensSection';
 import { MotionSection } from './components/dashboard/MotionSection';
+import { UtilitiesSection } from './components/dashboard/UtilitiesSection';
+import { GuidesSection } from './components/dashboard/GuidesSection';
 import { ComponentsSection } from './components/dashboard/ComponentsSection';
 import { HooksSection } from './components/dashboard/HooksSection';
 import { SearchPalette } from './components/dashboard/SearchPalette';
@@ -66,6 +68,11 @@ export const App: React.FC = () => {
         cycleAmbientIntensity();
       }
 
+      // Escape to close mobile menu
+      if (e.key === 'Escape') {
+        setIsMobileSidebarOpen(false);
+      }
+
       // Quick numbers
       if (e.key === '1') navigate('/overview');
       if (e.key === '2') navigate('/installation');
@@ -76,7 +83,7 @@ export const App: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [colorScheme, setColorScheme]);
+  }, [colorScheme, setColorScheme, isMobileSidebarOpen]);
 
   // Always reset scroll to top on screen/route transition, or smooth-scroll to target anchor
   useEffect(() => {
@@ -84,16 +91,17 @@ export const App: React.FC = () => {
     if (!container) return;
 
     if (currentRoute.anchor) {
-      requestAnimationFrame(() => {
+      const scrollTimer = setTimeout(() => {
         const el = document.getElementById(currentRoute.anchor!);
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      });
+      }, 50);
+      return () => clearTimeout(scrollTimer);
     } else {
       container.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     }
-  }, [currentRoute.path, currentRoute.id, currentRoute.type]);
+  }, [currentRoute.path, currentRoute.id, currentRoute.type, currentRoute.anchor]);
 
   return (
     <div
@@ -114,6 +122,23 @@ export const App: React.FC = () => {
         enabled={ambientIntensity !== 'off'}
         intensity={ambientIntensity !== 'off' ? ambientIntensity : 'balanced'}
       />
+
+      {/* Mobile Drawer Scrim Backdrop (Microsoft Fluent 2 NavDrawer Pattern) */}
+      {isMobileSidebarOpen && (
+        <div
+          onClick={() => setIsMobileSidebarOpen(false)}
+          aria-hidden="true"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.45)',
+            backdropFilter: 'blur(3px)',
+            WebkitBackdropFilter: 'blur(3px)',
+            zIndex: 49,
+            cursor: 'pointer',
+          }}
+        />
+      )}
 
       {/* Navigation Sidebar */}
       <Sidebar
@@ -148,6 +173,10 @@ export const App: React.FC = () => {
 
       {/* Global Sleek Scrollbar Styles to match sidebar across all screens */}
       <style>{`
+        svg {
+          display: block;
+          vertical-align: middle;
+        }
         *::-webkit-scrollbar {
           width: 6px;
           height: 6px;
@@ -165,6 +194,49 @@ export const App: React.FC = () => {
         * {
           scrollbar-width: thin;
           scrollbar-color: ${colorScheme === 'dark' ? 'rgba(255, 255, 255, 0.18) transparent' : 'rgba(0, 0, 0, 0.18) transparent'};
+        }
+        .desktop-sidebar {
+          width: 260px !important;
+          transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+        @media (max-width: 900px) {
+          .desktop-sidebar {
+            position: fixed !important;
+            left: 0 !important;
+            top: 0 !important;
+            bottom: 0 !important;
+            width: 280px !important;
+            max-width: 85vw !important;
+            transform: translateX(-100%) !important;
+            z-index: 100 !important;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.4) !important;
+          }
+          .desktop-sidebar.mobile-open {
+            transform: translateX(0) !important;
+          }
+          .mobile-menu-btn {
+            display: inline-flex !important;
+          }
+          .doc-right-toc {
+            display: none !important;
+          }
+          #main-scroll-container {
+            padding: 16px !important;
+          }
+          .doc-middle-content {
+            padding: 16px 14px 60px 14px !important;
+          }
+          .responsive-hero-header {
+            padding: 20px 16px !important;
+          }
+        }
+        @media (min-width: 901px) and (max-width: 1280px) {
+          .doc-right-toc {
+            display: none !important;
+          }
+          .doc-middle-content {
+            padding: 24px 24px 80px 24px !important;
+          }
         }
       `}</style>
 
@@ -206,7 +278,19 @@ export const App: React.FC = () => {
           )}
 
           {currentRoute.type === 'tokens' && currentRoute.id === 'motion' && (
-            <MotionSection />
+            <MotionSection motionId="tokens" />
+          )}
+
+          {currentRoute.type === 'motion' && (
+            <MotionSection motionId={currentRoute.id} />
+          )}
+
+          {currentRoute.type === 'utilities' && (
+            <UtilitiesSection utilityId={currentRoute.id} />
+          )}
+
+          {currentRoute.type === 'guides' && (
+            <GuidesSection guideId={currentRoute.id} />
           )}
 
           {currentRoute.type === 'tokens' && currentRoute.id !== 'motion' && (

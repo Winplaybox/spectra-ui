@@ -67,11 +67,76 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
 
 Card.displayName = 'Card';
 
-export const CardHeader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, children, ...props }) => (
-  <div className={`${styles.header} ${className || ''}`} {...props}>
-    {children}
-  </div>
+export interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Leading avatar, icon, or media slot */
+  image?: React.ReactNode;
+  /** Primary title or heading slot */
+  header?: React.ReactNode;
+  /** Secondary subtitle or description slot */
+  description?: React.ReactNode;
+  /** Trailing action button or menu slot */
+  action?: React.ReactNode;
+}
+
+export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
+  ({ className, children, image, header, description, action, style, ...props }, ref) => {
+    if (image || header || description || action) {
+      return (
+        <div
+          ref={ref}
+          className={`${styles.header} ${className || ''}`}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--space-component-gap-sm, 12px)',
+            ...style,
+          }}
+          {...props}
+        >
+          {image && (
+            <div style={{ display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>
+              {image}
+            </div>
+          )}
+          {(header || description) && (
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 2,
+                minWidth: 0,
+                flex: 1,
+              }}
+            >
+              {header}
+              {description}
+            </div>
+          )}
+          {action && (
+            <div
+              style={{
+                marginLeft: 'auto',
+                display: 'inline-flex',
+                alignItems: 'center',
+                flexShrink: 0,
+              }}
+            >
+              {action}
+            </div>
+          )}
+          {children}
+        </div>
+      );
+    }
+
+    return (
+      <div ref={ref} className={`${styles.header} ${className || ''}`} style={style} {...props}>
+        {children}
+      </div>
+    );
+  }
 );
+CardHeader.displayName = 'CardHeader';
 
 export const CardTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ className, children, ...props }) => (
   <h3 className={`${styles.title} ${className || ''}`} {...props}>
@@ -96,3 +161,19 @@ export const CardFooter: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ cla
     {children}
   </div>
 );
+
+export const CardPreview: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, children, style, ...props }) => (
+  <div
+    className={className}
+    style={{
+      borderRadius: 'calc(var(--radius-component-md, 8px) - 2px)',
+      overflow: 'hidden',
+      marginBottom: 12,
+      ...style,
+    }}
+    {...props}
+  >
+    {children}
+  </div>
+);
+

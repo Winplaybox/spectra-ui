@@ -1,0 +1,85 @@
+// packages/platform-capabilities/src/components/button-group.ts
+import { ComponentCapability } from '../types';
+
+export const buttonGroupCapability: ComponentCapability = {
+  id: 'button-group',
+  name: 'ButtonGroup',
+  displayName: 'Button Group',
+  category: 'Actions',
+  description: 'Horizontally or vertically groups related buttons with shared borders and unified outer corner radii.',
+  slots: [
+    { name: 'buttons', description: 'Collection of Button components', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
+  ],
+  recipes: [
+    { id: 'segmented', title: 'Segmented Attached Mode', description: 'Connected action buttons sharing intermediate borders.', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
+    { id: 'vertical', title: 'Vertical Toolbar Orientation', description: 'Stacked button layout optimized for sidebar and mobile drawers.', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
+  ],
+  bestPractices: {
+    do: [
+      'Group functionally related actions together (e.g. alignment: left, center, right)',
+      'Use role="toolbar" or accessibilityRole="toolbar" for keyboard and screen reader accessibility',
+      'Keep visual variant consistent across all buttons in the group',
+    ],
+    dont: [
+      'Avoid mixing different button heights or sizes within a single group',
+      'Do not place unrelated destination links inside an action button group',
+    ],
+  },
+  platforms: {
+    web: {
+      platform: 'web',
+      support: 'native',
+      implementation: '@winplaybox/react',
+      variants: ['primary', 'secondary', 'tertiary'],
+      recipes: ['segmented', 'vertical'],
+      states: ['default', 'hover', 'focus', 'active', 'disabled'],
+      interactions: ['mouse-click', 'keyboard-arrows'],
+      accessibility: ['role="toolbar"', 'aria-label'],
+      testStatus: 'verified',
+    },
+    android: {
+      platform: 'android',
+      support: 'native',
+      implementation: '@winplaybox/react-native',
+      variants: ['primary', 'secondary', 'tertiary'],
+      recipes: ['segmented', 'vertical'],
+      states: ['default', 'pressed', 'disabled'],
+      interactions: ['touch-tap', 'android-ripple'],
+      accessibility: ['accessibilityRole="toolbar"'],
+      testStatus: 'verified',
+    },
+    ios: {
+      platform: 'ios',
+      support: 'native',
+      implementation: '@winplaybox/react-native',
+      variants: ['primary', 'secondary', 'tertiary'],
+      recipes: ['segmented', 'vertical'],
+      states: ['default', 'pressed', 'disabled'],
+      interactions: ['touch-tap', 'opacity-feedback'],
+      accessibility: ['accessibilityRole="toolbar"'],
+      testStatus: 'verified',
+    },
+    windows: {
+      platform: 'windows',
+      support: 'unsupported',
+      implementation: 'Coming Soon',
+      variants: [],
+      recipes: [],
+      states: [],
+      interactions: [],
+      accessibility: [],
+      testStatus: 'untested',
+    },
+    macos: {
+      platform: 'macos',
+      support: 'unsupported',
+      implementation: 'Coming Soon',
+      variants: [],
+      recipes: [],
+      states: [],
+      interactions: [],
+      accessibility: [],
+      testStatus: 'untested',
+    },
+  },
+};

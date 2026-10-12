@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Button } from '@winplaybox/react';
+import { Card, Button, Text, Stack } from '@winplaybox/react';
 import { ExternalLinkIcon, SparklesIcon, CloseIcon } from '@winplaybox/icons';
 
 export type AdFormat = 'cover' | 'responsive' | 'classic';
@@ -339,30 +339,28 @@ export const NativeSponsorAd: React.FC<NativeSponsorAdProps> = ({
             </button>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            <h4
+          <Stack direction="column" gap="xs">
+            <Text
               style={{
                 fontSize: 16,
                 fontWeight: 800,
-                margin: 0,
                 letterSpacing: '-0.01em',
                 color: '#FFFFFF',
               }}
             >
               Tell a story & drive engagement
-            </h4>
-            <p
+            </Text>
+            <Text
               style={{
                 fontSize: 12,
                 lineHeight: 1.5,
                 color: 'rgba(255, 255, 255, 0.9)',
-                margin: 0,
               }}
             >
               Cover is a high-impact native ad with rich visuals, your brand’s story, and a clear
               call-to-action. Viewers interact with the creative, not just glance past it.
-            </p>
-          </div>
+            </Text>
+          </Stack>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 4 }}>
             <button

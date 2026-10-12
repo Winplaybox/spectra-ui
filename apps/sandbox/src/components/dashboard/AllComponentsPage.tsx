@@ -20,6 +20,9 @@ import {
   Avatar,
   CopyButton,
   DatePicker,
+  Text,
+  Stack,
+  Box,
 } from '@winplaybox/react';
 import {
   SearchIcon,
@@ -34,7 +37,7 @@ import {
   ExternalLinkIcon,
 } from '@winplaybox/icons';
 import { navigate } from '../../utils/router';
-import { COMPONENT_CATEGORIES } from './Sidebar';
+import { getComponentCategoriesForPlatform } from '../../data/navigationConfig';
 import { V010_NEW_COMPONENTS, V020_NEW_COMPONENTS } from '../../data/versionReleaseData';
 import { COMPONENTS_DATA } from '../../data/componentsData';
 import { useVersion } from '../../context/VersionContext';
@@ -329,20 +332,24 @@ export const AllComponentsPage: React.FC = () => {
   const { currentPlatform, setPlatform } = usePlatform();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  const [selectedPlatform, setSelectedPlatform] = useState<Platform | 'all'>('all');
   const [selectedTag, setSelectedTag] = useState<'all' | 'new' | 'form' | 'feedback'>('all');
   const [sortBy, setSortBy] = useState<'category' | 'name-asc' | 'name-desc' | 'newest'>('category');
 
-  // Total components count
+  // Dynamic platform-first categories strictly filtered for active platform
+  const platformCategories = useMemo(() => {
+    return getComponentCategoriesForPlatform(currentPlatform);
+  }, [currentPlatform]);
+
+  // Total components count for current platform
   const allComponentsList = useMemo(() => {
-    return COMPONENT_CATEGORIES.flatMap((cat) => cat.components);
-  }, []);
+    return platformCategories.flatMap((cat) => cat.components);
+  }, [platformCategories]);
 
   // Filtered and Sorted categories
   const filteredCategories = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
 
-    return COMPONENT_CATEGORIES.map((cat) => {
+    return platformCategories.map((cat) => {
       // Category filter check
       if (selectedCategory !== 'all' && cat.id !== selectedCategory) {
         return { ...cat, components: [] };
@@ -371,7 +378,7 @@ export const AllComponentsPage: React.FC = () => {
 
       // Sorting within categories
       if (sortBy === 'name-asc') {
-        matchingComponents = [...matchingComponents].sort((a, b) => a.name.localeCompare(b.name));
+        matchingComponents = [...matchingComponents].sort((a, b) => a.name.localeCompare(a.name));
       } else if (sortBy === 'name-desc') {
         matchingComponents = [...matchingComponents].sort((a, b) => b.name.localeCompare(a.name));
       } else if (sortBy === 'newest') {
@@ -389,7 +396,7 @@ export const AllComponentsPage: React.FC = () => {
         components: matchingComponents,
       };
     }).filter((cat) => cat.components.length > 0);
-  }, [searchQuery, selectedCategory, selectedTag, sortBy]);
+  }, [platformCategories, searchQuery, selectedCategory, selectedTag, sortBy]);
 
   const totalMatches = useMemo(() => {
     return filteredCategories.reduce((acc, cat) => acc + cat.components.length, 0);
@@ -418,7 +425,9 @@ export const AllComponentsPage: React.FC = () => {
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-            <h1
+            <Text
+              as="h1"
+              variant="heading"
               style={{
                 fontSize: 34,
                 fontWeight: 800,
@@ -428,7 +437,7 @@ export const AllComponentsPage: React.FC = () => {
               }}
             >
               All Components
-            </h1>
+            </Text>
             <span
               style={{
                 fontSize: 12,
@@ -441,7 +450,7 @@ export const AllComponentsPage: React.FC = () => {
                 letterSpacing: '0.02em',
               }}
             >
-              {allComponentsList.length} Components
+              {allComponentsList.length} Verified Components on {PLATFORMS[currentPlatform]?.name || currentPlatform}
             </span>
             <span
               style={{
@@ -693,23 +702,17 @@ export const AllComponentsPage: React.FC = () => {
           </span>
 
           {[
-            { id: 'all', label: 'All Platforms (5)', platform: null },
             { id: 'web', label: 'Web (React 19)', platform: 'web' },
-            { id: 'ios', label: 'iOS (Swift/RN)', platform: 'ios' },
             { id: 'android', label: 'Android (Compose/RN)', platform: 'android' },
+            { id: 'ios', label: 'iOS (Swift/RN)', platform: 'ios' },
             { id: 'windows', label: 'Windows (WinUI 3)', platform: 'windows' },
             { id: 'macos', label: 'macOS (Sequoia)', platform: 'macos' },
           ].map((p) => {
-            const isSelected = selectedPlatform === p.id;
+            const isSelected = currentPlatform === p.id;
             return (
               <button
                 key={p.id}
-                onClick={() => {
-                  setSelectedPlatform(p.id as any);
-                  if (p.id !== 'all') {
-                    setPlatform(p.id as any);
-                  }
-                }}
+                onClick={() => setPlatform(p.id as any)}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -726,11 +729,7 @@ export const AllComponentsPage: React.FC = () => {
                   transition: 'all 0.12s ease',
                 }}
               >
-                {p.platform ? (
-                  <PlatformIcon platform={p.platform as any} size={13} color={isSelected ? 'var(--color-action-primary)' : 'var(--color-text-secondary)'} />
-                ) : (
-                  <SparklesIcon size={13} color={isSelected ? 'var(--color-action-primary)' : 'var(--color-text-secondary)'} />
-                )}
+                <PlatformIcon platform={p.platform as any} size={13} color={isSelected ? 'var(--color-action-primary)' : 'var(--color-text-secondary)'} />
                 <span>{p.label}</span>
               </button>
             );
@@ -780,7 +779,7 @@ export const AllComponentsPage: React.FC = () => {
             All ({allComponentsList.length})
           </button>
 
-          {COMPONENT_CATEGORIES.map((cat) => {
+          {platformCategories.map((cat) => {
             const isSelected = selectedCategory === cat.id;
             return (
               <button
@@ -818,12 +817,12 @@ export const AllComponentsPage: React.FC = () => {
           }}
         >
           <SearchIcon size={36} style={{ color: 'var(--color-text-muted)', marginBottom: 12 }} />
-          <h3 style={{ fontSize: 18, fontWeight: 700, margin: '0 0 8px 0' }}>
+          <Text as="h3" variant="heading" style={{ fontSize: 18, fontWeight: 700, margin: '0 0 8px 0', color: 'var(--color-text-primary)' }}>
             No components match "{searchQuery}"
-          </h3>
-          <p style={{ color: 'var(--color-text-muted)', fontSize: 14, margin: '0 0 16px 0' }}>
+          </Text>
+          <Text as="p" style={{ color: 'var(--color-text-muted)', fontSize: 14, margin: '0 0 16px 0' }}>
             Try searching for a different keyword or reset the category filters.
-          </p>
+          </Text>
           <Button
             variant="secondary"
             size="sm"
@@ -854,7 +853,9 @@ export const AllComponentsPage: React.FC = () => {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <h2
+                <Text
+                  as="h2"
+                  variant="heading"
                   style={{
                     fontSize: 18,
                     fontWeight: 800,
@@ -864,7 +865,7 @@ export const AllComponentsPage: React.FC = () => {
                   }}
                 >
                   {cat.name}
-                </h2>
+                </Text>
                 <span
                   style={{
                     fontSize: 11,
@@ -918,23 +919,23 @@ export const AllComponentsPage: React.FC = () => {
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
-                      borderRadius: 12,
+                      borderRadius: 10,
                       border: '1px solid var(--color-border-default)',
                       backgroundColor: 'var(--color-surface)',
                       overflow: 'hidden',
                       cursor: 'pointer',
                       transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+                      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02)',
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateY(-3px)';
-                      e.currentTarget.style.borderColor = 'var(--color-action-primary)';
-                      e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 127, 255, 0.12)';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.borderColor = 'var(--color-border-strong)';
+                      e.currentTarget.style.boxShadow = '0 6px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = 'none';
                       e.currentTarget.style.borderColor = 'var(--color-border-default)';
-                      e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.04)';
+                      e.currentTarget.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02)';
                     }}
                   >
                     {/* Live Miniature Visual Preview Area */}
@@ -964,7 +965,9 @@ export const AllComponentsPage: React.FC = () => {
                           gap: 8,
                         }}
                       >
-                        <h3
+                        <Text
+                          as="h3"
+                          variant="heading"
                           style={{
                             fontSize: 16,
                             fontWeight: 700,
@@ -980,7 +983,7 @@ export const AllComponentsPage: React.FC = () => {
                             size={13}
                             style={{ color: 'var(--color-text-muted)', opacity: 0.7 }}
                           />
-                        </h3>
+                        </Text>
 
                         {isNew && (
                           <span

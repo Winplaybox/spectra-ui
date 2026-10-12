@@ -26,6 +26,9 @@ import {
   NavLeafItem,
   ComponentCategory,
   ComponentItem,
+  getNavigationForPlatform,
+  getComponentCategoriesForPlatform,
+  getHookCategoriesForPlatform,
 } from '../../data/navigationConfig';
 
 export { COMPONENT_CATEGORIES };
@@ -43,6 +46,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
   const [platformDropdownOpen, setPlatformDropdownOpen] = useState(false);
   const platformDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Dynamic platform-first navigation tree strictly filtered for active platform
+  const platformNavigation = React.useMemo(() => {
+    return getNavigationForPlatform(currentPlatform);
+  }, [currentPlatform]);
+
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -85,7 +94,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   useEffect(() => {
     if (currentRoute.type === 'components' && currentRoute.id) {
       const activeCat = COMPONENT_CATEGORIES.find((cat) =>
-        cat.components.some((c) => c.id === currentRoute.id)
+        cat.components.some((c) => c.id === currentRoute.id || c.children?.some((sub) => sub.id === currentRoute.id))
       );
       if (activeCat) {
         setExpandedCategories((prev) => ({ ...prev, [activeCat.id]: true }));
@@ -97,6 +106,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
       if (activeHookCat) {
         setExpandedCategories((prev) => ({ ...prev, [activeHookCat.id]: true }));
       }
+    } else if (currentRoute.type === 'motion') {
+      setExpandedSections((prev) => ({ ...prev, 'motion-section': true }));
+    } else if (currentRoute.type === 'utilities') {
+      setExpandedSections((prev) => ({ ...prev, 'utilities-section': true }));
+    } else if (currentRoute.type === 'guides') {
+      setExpandedSections((prev) => ({ ...prev, 'architecture-guides': true }));
     }
   }, [currentRoute]);
 
@@ -118,17 +133,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   const handleAnchorClick = (e: React.MouseEvent, compId: string, anchorId: string) => {
     e.preventDefault();
-    if (currentRoute.type !== 'components' || currentRoute.id !== compId) {
-      navigate(`/components/${compId}#${anchorId}`);
+    if (compId.startsWith('motion')) {
+      navigate(`/motion/${anchorId}`);
+    } else if (compId.startsWith('util')) {
+      navigate(`/utilities/${anchorId}`);
+    } else if (compId.startsWith('guide')) {
+      navigate(`/guides/${anchorId}`);
     } else {
-      window.location.hash = anchorId;
-      const el = document.getElementById(anchorId);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
+      navigate(`/components/${compId}#${anchorId}`);
     }
     onCloseMobile();
   };
+
 
   const handleLinkClick = (e: React.MouseEvent, path: string) => {
     e.preventDefault();
@@ -165,10 +181,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
       )}
 
       <aside
+        className={`desktop-sidebar ${isOpenMobile ? 'mobile-open' : ''}`}
         style={{
-          width: 280,
+          width: 260,
           flexShrink: 0,
-          borderRight: '1px solid var(--color-border-default)',
+          borderRight: '1px solid var(--color-border-subtle)',
           backgroundColor: colorScheme === 'dark' ? 'rgba(9, 13, 22, 0.94)' : 'rgba(255, 255, 255, 0.96)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
@@ -178,15 +195,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
           position: 'sticky',
           top: 0,
           zIndex: 50,
-          transform: isOpenMobile ? 'translateX(0)' : undefined,
-          transition: 'transform 0.2s ease',
+          transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
-        {/* Brand Header */}
+        {/* Brand Header: Fluent 2 App Lockup */}
         <div
           style={{
-            padding: '20px 20px 16px 20px',
-            borderBottom: '1px solid var(--color-border-default)',
+            height: 48,
+            minHeight: 48,
+            padding: '0 16px',
+            borderBottom: '1px solid var(--color-border-subtle)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -199,23 +217,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: 12,
+              gap: 10,
               textDecoration: 'none',
               color: 'inherit',
             }}
           >
             <div
               style={{
-                width: 34,
-                height: 34,
-                borderRadius: 4,
+                width: 28,
+                height: 28,
+                borderRadius: 6,
                 backgroundColor: 'var(--color-action-primary)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#FFFFFF',
                 fontWeight: 800,
-                fontSize: 16,
+                fontSize: 14,
+                boxShadow: '0 2px 6px rgba(0, 127, 255, 0.25)',
               }}
             >
               S
@@ -224,32 +243,32 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <div
                 style={{
                   fontWeight: 700,
-                  fontSize: 16,
-                  letterSpacing: '-0.02em',
+                  fontSize: 14,
+                  letterSpacing: '-0.01em',
                   color: 'var(--color-text-primary)',
+                  lineHeight: 1.2,
                 }}
               >
                 Spectra UI
               </div>
               <div
                 style={{
-                  fontSize: 11,
+                  fontSize: 10,
                   color: 'var(--color-text-muted)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
-                  fontWeight: 600,
+                  letterSpacing: '0.02em',
+                  fontWeight: 500,
                 }}
               >
-                Design System
+                Fluent 2 Multi-Platform
               </div>
             </div>
           </a>
 
           <span
             style={{
-              fontSize: 11,
+              fontSize: 10,
               fontWeight: 600,
-              padding: '2px 6px',
+              padding: '1px 6px',
               backgroundColor: 'var(--color-surface-raised)',
               border: '1px solid var(--color-border-subtle)',
               borderRadius: 4,
@@ -315,10 +334,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
             >
               {allPlatforms.map((p) => {
                 const isCurrent = currentPlatform === p.id;
+                const isComingSoon = p.id === 'windows' || p.id === 'macos';
                 return (
                   <button
                     key={p.id}
+                    disabled={isComingSoon}
                     onClick={() => {
+                      if (isComingSoon) return;
                       setPlatform(p.id);
                       setPlatformDropdownOpen(false);
                     }}
@@ -331,8 +353,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       borderRadius: 6,
                       border: 'none',
                       backgroundColor: isCurrent ? 'rgba(0, 127, 255, 0.1)' : 'transparent',
-                      color: isCurrent ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                      cursor: 'pointer',
+                      color: isComingSoon
+                        ? 'var(--color-text-muted)'
+                        : isCurrent
+                        ? 'var(--color-action-primary)'
+                        : 'var(--color-text-primary)',
+                      cursor: isComingSoon ? 'not-allowed' : 'pointer',
+                      opacity: isComingSoon ? 0.6 : 1,
                       fontSize: 13,
                       fontWeight: isCurrent ? 700 : 500,
                       textAlign: 'left',
@@ -348,10 +375,35 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       <PlatformIcon
                         platform={p.id}
                         size={15}
-                        color={isCurrent ? 'var(--color-action-primary)' : 'var(--color-text-muted)'}
+                        color={
+                          isComingSoon
+                            ? 'var(--color-text-muted)'
+                            : isCurrent
+                            ? 'var(--color-action-primary)'
+                            : 'var(--color-text-muted)'
+                        }
                       />
                       <span>{p.name}</span>
                     </div>
+
+                    {isComingSoon && (
+                      <span
+                        style={{
+                          fontSize: 10,
+                          fontWeight: 600,
+                          padding: '2px 6px',
+                          borderRadius: 4,
+                          backgroundColor:
+                            colorScheme === 'dark'
+                              ? 'rgba(255, 255, 255, 0.08)'
+                              : 'rgba(0, 0, 0, 0.05)',
+                          color: 'var(--color-text-muted)',
+                          letterSpacing: '0.02em',
+                        }}
+                      >
+                        Coming soon
+                      </span>
+                    )}
                   </button>
                 );
               })}
@@ -414,25 +466,58 @@ export const Sidebar: React.FC<SidebarProps> = ({
             scrollbarColor: colorScheme === 'dark' ? 'rgba(255, 255, 255, 0.18) transparent' : 'rgba(0, 0, 0, 0.18) transparent',
           }}
         >
-          {/* Dynamic Data-Driven Navigation Generated from navigationConfig.ts */}
-          {SIDEBAR_NAVIGATION.map((section) => {
+          {/* Dynamic Platform-First Navigation Generated from navigationConfig.ts */}
+          {platformNavigation.map((section) => {
             const isCollapsible = section.collapsible;
             const isOpen = isCollapsible ? (expandedSections[section.id] ?? section.defaultOpen ?? true) : true;
 
             const renderLeafItem = (item: NavLeafItem, isCategoryChild = false) => {
               const isComponent = item.path.startsWith('/components/') && item.id !== 'all-components';
-              const active = isComponent
+              const inPageVariants = isComponent ? COMPONENT_VARIANTS_MAP[item.id] || [] : [];
+              const isNew = V020_NEW_COMPONENTS.includes(item.id) || V010_NEW_COMPONENTS.includes(item.id) || item.badge === 'NEW';
+
+              // Determine if any child of this item is active
+              const activeChild = item.children?.find((child) => {
+                if (child.path.includes('#')) {
+                  const [base, anchor] = child.path.split('#');
+                  const matchesBase = currentRoute.path === base || (currentRoute.type === 'motion' && base === '/motion') || (currentRoute.type === 'utilities' && base === '/utilities') || (currentRoute.type === 'guides' && base === '/guides');
+                  return matchesBase && (currentHash === anchor || currentRoute.anchor === anchor);
+                }
+                return currentRoute.path === child.path;
+              });
+
+              const isItemActive = isComponent
                 ? isComponentActive(item.id)
                 : item.id === 'all-components'
                 ? isAllComponentsActive
                 : item.id === 'all-hooks'
                 ? currentRoute.type === 'hooks' && (!currentRoute.id || currentRoute.id === 'all-hooks')
-                : currentRoute.path === item.path ||
-                  (item.path.startsWith('/hooks/') && currentRoute.type === 'hooks' && currentRoute.id === item.id) ||
-                  (currentRoute.type === 'icons' && (item.path.startsWith('/icons') || item.id.startsWith('icons-')));
+                : (item.path.startsWith('/hooks/') && currentRoute.type === 'hooks' && currentRoute.id === item.id)
+                ? true
+                : (currentRoute.type === 'icons' && (item.path.startsWith('/icons') || item.id.startsWith('icons-')))
+                ? true
+                : (currentRoute.type === 'tokens' && item.path.startsWith('/tokens/') && currentRoute.id === item.id)
+                ? true
+                : item.path.includes('#')
+                ? (() => {
+                    const [itemBase, itemAnchor] = item.path.split('#');
+                    const isBaseMatch =
+                      currentRoute.path === itemBase ||
+                      (currentRoute.type === 'motion' && itemBase === '/motion') ||
+                      (currentRoute.type === 'utilities' && itemBase === '/utilities') ||
+                      (currentRoute.type === 'guides' && itemBase === '/guides');
+                    const activeAnchor = currentRoute.anchor || currentHash;
+                    if (!activeAnchor && isBaseMatch) {
+                      if (itemBase === '/guides' && itemAnchor === 'responsive-ui') return true;
+                      if (itemBase === '/motion' && itemAnchor === 'atoms') return true;
+                      if (itemBase === '/utilities' && itemAnchor === 'createCSSRuleFromTheme') return true;
+                    }
+                    return isBaseMatch && activeAnchor === itemAnchor;
+                  })()
+                : currentRoute.path === item.path;
 
-              const isNew = V020_NEW_COMPONENTS.includes(item.id) || V010_NEW_COMPONENTS.includes(item.id) || item.badge === 'NEW';
-              const inPageVariants = isComponent ? COMPONENT_VARIANTS_MAP[item.id] || [] : [];
+              // If a child is active, parent shouldn't steal the active blue background
+              const isParentHighlighted = isItemActive && !activeChild;
 
               return (
                 <div key={item.id} style={{ display: 'flex', flexDirection: 'column' }}>
@@ -440,32 +525,47 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     href={item.path}
                     onClick={(e) => handleLinkClick(e, item.path)}
                     style={{
+                      position: 'relative',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      padding: '6px 10px',
-                      borderRadius: 6,
+                      minHeight: 34,
+                      padding: '6px 10px 6px 14px',
+                      borderRadius: 4,
                       fontSize: item.isMonospace ? 12.5 : 13,
                       fontFamily: item.isMonospace ? 'var(--font-mono, monospace)' : 'inherit',
                       textDecoration: 'none',
-                      fontWeight: active ? 600 : 400,
-                      backgroundColor: active
+                      fontWeight: isParentHighlighted ? 600 : 400,
+                      backgroundColor: isParentHighlighted
                         ? colorScheme === 'dark'
-                          ? 'rgba(0, 127, 255, 0.18)'
-                          : 'rgba(0, 127, 255, 0.09)'
+                          ? 'rgba(0, 127, 255, 0.16)'
+                          : 'rgba(0, 127, 255, 0.08)'
                         : 'transparent',
-                      color: active ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
-                      borderLeft: active ? '3px solid var(--color-action-primary)' : '3px solid transparent',
-                      transition: 'background-color 0.12s ease',
-                      marginBottom: item.id === 'all-components' ? 4 : 0,
+                      color: isParentHighlighted ? 'var(--color-action-primary)' : 'var(--color-text-primary)',
+                      transition: 'background-color 0.12s ease, color 0.12s ease',
+                      marginBottom: item.id === 'all-components' ? 4 : 2,
                     }}
                     onMouseEnter={(e) => {
-                      if (!active) e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
+                      if (!isParentHighlighted) e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
                     }}
                     onMouseLeave={(e) => {
-                      if (!active) e.currentTarget.style.backgroundColor = 'transparent';
+                      if (!isParentHighlighted) e.currentTarget.style.backgroundColor = 'transparent';
                     }}
                   >
+                    {/* Microsoft Fluent 2 Inset Active Selection Indicator Pill */}
+                    {isParentHighlighted && (
+                      <span
+                        style={{
+                          position: 'absolute',
+                          left: 0,
+                          top: 6,
+                          bottom: 6,
+                          width: 3,
+                          borderRadius: 2,
+                          backgroundColor: 'var(--color-action-primary)',
+                        }}
+                      />
+                    )}
                     <span>{item.name}</span>
                     {isNew ? (
                       <span
@@ -504,8 +604,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     ) : null}
                   </a>
 
-                  {/* In-page variant deep links for active component */}
-                  {active && inPageVariants.length > 0 && (
+                  {/* Child Sub-Navigation (for sections like Motion, with clean tree styling) */}
+                  {item.children && item.children.length > 0 && isItemActive ? (
                     <div
                       style={{
                         marginLeft: 12,
@@ -513,47 +613,129 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         borderLeft: '1px solid var(--color-border-subtle)',
                         display: 'flex',
                         flexDirection: 'column',
-                        gap: 1,
+                        gap: 2,
                         marginTop: 2,
                         marginBottom: 4,
                       }}
                     >
-                      {inPageVariants.map((v) => {
-                        const isAnchorActive = currentHash === v.id;
+                      {item.children.map((child) => {
+                        let isChildActive = false;
+                        if (child.path.includes('#')) {
+                          const [base, anchor] = child.path.split('#');
+                          const matchesBase = currentRoute.path === base || (currentRoute.type === 'motion' && base === '/motion') || (currentRoute.type === 'utilities' && base === '/utilities') || (currentRoute.type === 'guides' && base === '/guides');
+                          isChildActive = matchesBase && (currentHash === anchor || currentRoute.anchor === anchor);
+                        } else {
+                          isChildActive = currentRoute.path === child.path;
+                        }
+
                         return (
                           <a
-                            key={v.id}
-                            href={`/components/${item.id}#${v.id}`}
-                            onClick={(e) => handleAnchorClick(e, item.id, v.id)}
+                            key={child.id}
+                            href={child.path}
+                            onClick={(e) => {
+                              if (child.path.includes('#')) {
+                                const [base, anchor] = child.path.split('#');
+                                if (currentRoute.path === base || currentRoute.id === item.id || currentRoute.type === 'motion' || currentRoute.type === 'utilities' || currentRoute.type === 'guides') {
+                                  e.preventDefault();
+                                  handleAnchorClick(e, item.id, anchor);
+                                  return;
+                                }
+                              }
+                              handleLinkClick(e, child.path);
+                            }}
                             style={{
-                              display: 'block',
-                              padding: '4px 6px',
-                              fontSize: 11.5,
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: 8,
+                              padding: '4px 8px',
+                              fontSize: 12,
                               borderRadius: 4,
                               textDecoration: 'none',
-                              color: isAnchorActive
+                              color: isChildActive
                                 ? 'var(--color-action-primary)'
                                 : 'var(--color-text-secondary)',
-                              fontWeight: isAnchorActive ? 600 : 400,
-                              backgroundColor: isAnchorActive
-                                ? 'var(--color-surface-raised)'
+                              fontWeight: isChildActive ? 600 : 400,
+                              backgroundColor: isChildActive
+                                ? colorScheme === 'dark'
+                                  ? 'rgba(0, 127, 255, 0.15)'
+                                  : 'rgba(0, 127, 255, 0.08)'
                                 : 'transparent',
-                              whiteSpace: 'nowrap',
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              transition: 'color 0.1s ease',
+                              transition: 'all 0.1s ease',
                             }}
-                            title={v.title}
+                            onMouseEnter={(e) => {
+                              if (!isChildActive) e.currentTarget.style.color = 'var(--color-action-primary)';
+                            }}
+                            onMouseLeave={(e) => {
+                              if (!isChildActive) e.currentTarget.style.color = 'var(--color-text-secondary)';
+                            }}
                           >
-                            {v.title}
+                            <span
+                              style={{
+                                width: 4,
+                                height: 4,
+                                borderRadius: '50%',
+                                backgroundColor: isChildActive ? 'var(--color-action-primary)' : 'var(--color-border-subtle)',
+                                flexShrink: 0,
+                              }}
+                            />
+                            <span>{child.name}</span>
                           </a>
                         );
                       })}
                     </div>
+                  ) : (
+                    /* In-page variant deep links for active component */
+                    isParentHighlighted && inPageVariants.length > 0 && (
+                      <div
+                        style={{
+                          marginLeft: 12,
+                          paddingLeft: 8,
+                          borderLeft: '1px solid var(--color-border-subtle)',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          gap: 1,
+                          marginTop: 2,
+                          marginBottom: 4,
+                        }}
+                      >
+                        {inPageVariants.map((v) => {
+                          const isAnchorActive = currentHash === v.id || currentRoute.anchor === v.id;
+                          return (
+                            <a
+                              key={v.id}
+                              href={`/components/${item.id}#${v.id}`}
+                              onClick={(e) => handleAnchorClick(e, item.id, v.id)}
+                              style={{
+                                display: 'block',
+                                padding: '4px 6px',
+                                fontSize: 11.5,
+                                borderRadius: 4,
+                                textDecoration: 'none',
+                                color: isAnchorActive
+                                  ? 'var(--color-action-primary)'
+                                  : 'var(--color-text-secondary)',
+                                fontWeight: isAnchorActive ? 600 : 400,
+                                backgroundColor: isAnchorActive
+                                  ? 'var(--color-surface-raised)'
+                                  : 'transparent',
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                transition: 'color 0.1s ease',
+                              }}
+                              title={v.title}
+                            >
+                              {v.title}
+                            </a>
+                          );
+                        })}
+                      </div>
+                    )
                   )}
                 </div>
               );
             };
+
 
             return (
               <div key={section.id}>

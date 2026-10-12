@@ -1,6 +1,9 @@
 // packages/react/src/components/surfaces/MediaCard.tsx
 import React, { forwardRef, ReactNode } from 'react';
 import { Card } from './Card';
+import { Stack } from '../layout/Stack';
+import { Box } from '../layout/Box';
+import { Text } from '../layout/Text';
 
 export interface MediaCardProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
   media?: ReactNode;
@@ -48,7 +51,7 @@ export const MediaCard = forwardRef<HTMLDivElement, MediaCardProps>(
       >
         {/* Media header slot */}
         {media && (
-          <div
+          <Box
             style={{
               width: '100%',
               height: mediaHeight,
@@ -60,37 +63,37 @@ export const MediaCard = forwardRef<HTMLDivElement, MediaCardProps>(
             }}
           >
             {media}
-          </div>
+          </Box>
         )}
 
         {/* Content body */}
-        <div style={{ padding: '18px 20px', display: 'flex', flexDirection: 'column', gap: 10, flex: 1 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
-            <div>
-              <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--color-text-primary)' }}>
+        <Stack direction="column" gap="sm" style={{ padding: '18px 20px', flex: 1 }}>
+          <Stack direction="row" justify="between" align="start" gap="sm">
+            <Stack direction="column" gap="xs">
+              <Text variant="heading" size="md" weight="bold" color="primary">
                 {title}
-              </div>
+              </Text>
               {subtitle && (
-                <div style={{ fontSize: 13, color: 'var(--color-text-muted)', marginTop: 2 }}>
+                <Text variant="body" size="sm" color="muted">
                   {subtitle}
-                </div>
+                </Text>
               )}
-            </div>
-            {badge && <div style={{ flexShrink: 0 }}>{badge}</div>}
-          </div>
+            </Stack>
+            {badge && <Box style={{ flexShrink: 0 }}>{badge}</Box>}
+          </Stack>
 
           {children && (
-            <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+            <Text variant="body" size="sm" color="secondary" style={{ lineHeight: 1.5 }}>
               {children}
-            </div>
+            </Text>
           )}
 
           {actions && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 'auto', paddingTop: 8 }}>
+            <Stack direction="row" align="center" gap="sm" style={{ marginTop: 'auto', paddingTop: 8 }}>
               {actions}
-            </div>
+            </Stack>
           )}
-        </div>
+        </Stack>
       </Card>
     );
   }

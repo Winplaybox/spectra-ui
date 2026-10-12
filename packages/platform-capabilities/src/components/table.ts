@@ -1,0 +1,87 @@
+// packages/platform-capabilities/src/components/table.ts
+import { ComponentCapability } from '../types';
+
+export const tableCapability: ComponentCapability = {
+  id: 'table',
+  name: 'Table',
+  displayName: 'Adaptive Table',
+  category: 'Data Display',
+  description: 'Enterprise adaptive tabular data presenter: Fluent 2 DataGrid on Web, Material 3 Data Table on Android, and Inset Grouped Table on iOS.',
+  slots: [
+    { name: 'columns', description: 'Table column configurations and cell formatters', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
+    { name: 'header', description: 'Table header and sort indicators', platforms: ['web', 'android', 'windows', 'macos'] },
+    { name: 'pagination', description: 'Record range and page navigation controls', platforms: ['web', 'windows', 'macos'] },
+  ],
+  recipes: [
+    { id: 'standard', title: 'Dense Data Records', description: 'Compact records with sorting, selection, and formatted cells.', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
+    { id: 'adaptive', title: 'Adaptive Mobile Hierarchy', description: 'Automatically morphs from multi-column grid on desktop to grouped rows on iOS and scrollable card on Android.', platforms: ['web', 'android', 'ios'] },
+  ],
+  bestPractices: {
+    do: [
+      'Use dense density for data-intensive enterprise tables',
+      'Provide clear column header titles and semantic alignments',
+      'On mobile, use adaptive inset grouped rows or horizontal cards rather than cramped columns',
+    ],
+    dont: [
+      'Avoid placing more than 4 fixed columns without horizontal scrolling on mobile viewports',
+      'Never omit keyExtractor or row keys',
+    ],
+  },
+  platforms: {
+    web: {
+      platform: 'web',
+      support: 'native',
+      implementation: '@winplaybox/react',
+      variants: ['striped', 'bordered', 'hoverable', 'dense'],
+      recipes: ['standard', 'adaptive'],
+      states: ['default', 'hover', 'selected'],
+      interactions: ['sort-click', 'row-select', 'column-resize'],
+      accessibility: ['role="table"', 'aria-colindex', 'aria-rowindex'],
+      testStatus: 'verified',
+    },
+    android: {
+      platform: 'android',
+      support: 'native',
+      implementation: '@winplaybox/react-native',
+      variants: ['adaptive', 'standard'],
+      recipes: ['standard', 'adaptive'],
+      states: ['default', 'pressed'],
+      interactions: ['touch-tap', 'horizontal-scroll'],
+      accessibility: ['accessibilityRole="summary"'],
+      testStatus: 'verified',
+    },
+    ios: {
+      platform: 'ios',
+      support: 'native',
+      implementation: '@winplaybox/react-native',
+      variants: ['insetGrouped', 'adaptive'],
+      recipes: ['standard', 'adaptive'],
+      states: ['default', 'pressed'],
+      interactions: ['touch-tap', 'disclosure-nav'],
+      accessibility: ['accessibilityRole="summary"'],
+      testStatus: 'verified',
+    },
+    windows: {
+      platform: 'windows',
+      support: 'unsupported',
+      implementation: 'Coming Soon',
+      variants: [],
+      recipes: [],
+      states: [],
+      interactions: [],
+      accessibility: [],
+      testStatus: 'untested',
+    },
+    macos: {
+      platform: 'macos',
+      support: 'unsupported',
+      implementation: 'Coming Soon',
+      variants: [],
+      recipes: [],
+      states: [],
+      interactions: [],
+      accessibility: [],
+      testStatus: 'untested',
+    },
+  },
+};

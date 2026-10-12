@@ -80,6 +80,18 @@ export const outlined = style({
   },
 });
 
+export const standard = style({
+  border: 'none',
+  borderBottom: '2px solid var(--color-border-default)',
+  borderRadius: 0,
+  backgroundColor: 'transparent',
+  paddingInline: 'var(--space-component-padding-xs)',
+  ':focus': {
+    borderBottomColor: 'var(--color-action-primary)',
+    boxShadow: 'none',
+  },
+});
+
 export const sm = style({
   paddingBlock: 'var(--space-component-padding-xs)',
   paddingInline: 'var(--space-component-padding-sm)',
@@ -112,15 +124,17 @@ export const icon = style({
   alignItems: 'center',
   justifyContent: 'center',
   color: 'var(--color-text-muted)',
-  pointerEvents: 'none',
+  zIndex: 2,
 });
 
 export const iconLeft = style({
   insetInlineStart: 'var(--space-component-padding-sm)',
+  pointerEvents: 'none',
 });
 
 export const iconRight = style({
   insetInlineEnd: 'var(--space-component-padding-sm)',
+  pointerEvents: 'auto',
 });
 
 export const errorInput = style({

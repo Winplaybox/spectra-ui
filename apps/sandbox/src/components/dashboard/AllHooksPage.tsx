@@ -18,6 +18,10 @@ import {
   CodeIcon,
 } from '@winplaybox/icons';
 import { navigate } from '../../utils/router';
+import { usePlatform } from '../../context/PlatformContext';
+import { PLATFORMS } from '../../data/platformData';
+import { PlatformIcon } from './PlatformIcon';
+import { getHook } from '@winplaybox/platform-capabilities';
 
 export interface HookItem {
   id: string;
@@ -247,11 +251,17 @@ const CATEGORIES = [
 ] as const;
 
 export const AllHooksPage: React.FC = () => {
+  const { currentPlatform, setPlatform } = usePlatform();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
+  // Dynamic platform-first hook list strictly filtered for active platform
+  const platformHooks = useMemo(() => {
+    return ALL_HOOKS.filter((hook) => getHook(hook.id, currentPlatform) !== undefined);
+  }, [currentPlatform]);
+
   const filteredHooks = useMemo(() => {
-    return ALL_HOOKS.filter((hook) => {
+    return platformHooks.filter((hook) => {
       const matchesCategory =
         selectedCategory === 'All' || hook.category === selectedCategory;
       const q = searchQuery.toLowerCase().trim();
@@ -263,15 +273,15 @@ export const AllHooksPage: React.FC = () => {
         hook.signature.toLowerCase().includes(q);
       return matchesCategory && matchesSearch;
     });
-  }, [searchQuery, selectedCategory]);
+  }, [platformHooks, searchQuery, selectedCategory]);
 
   const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = { All: ALL_HOOKS.length };
-    ALL_HOOKS.forEach((h) => {
+    const counts: Record<string, number> = { All: platformHooks.length };
+    platformHooks.forEach((h) => {
       counts[h.category] = (counts[h.category] || 0) + 1;
     });
     return counts;
-  }, []);
+  }, [platformHooks]);
 
   return (
     <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 32 }}>
@@ -321,7 +331,7 @@ export const AllHooksPage: React.FC = () => {
                 }}
               />
               <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-primary)' }}>
-                25 Headless Hooks
+                {platformHooks.length} Headless Hooks ({PLATFORMS[currentPlatform]?.name || currentPlatform})
               </span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -382,7 +392,7 @@ export const AllHooksPage: React.FC = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <div style={{ flex: 1 }}>
             <TextInput
-              placeholder="Search 25 hooks by name, category, or description..."
+              placeholder={`Search ${platformHooks.length} hooks for ${PLATFORMS[currentPlatform]?.name || currentPlatform}...`}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               leftIcon={<SearchIcon size={16} />}
@@ -400,6 +410,49 @@ export const AllHooksPage: React.FC = () => {
               Clear
             </Button>
           )}
+        </div>
+
+        {/* Platform Switcher Pills */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: '0.04em',
+              color: 'var(--color-text-muted)',
+              marginRight: 4,
+            }}
+          >
+            Platform:
+          </span>
+          {Object.values(PLATFORMS).map((p) => {
+            const isSelected = currentPlatform === p.id;
+            return (
+              <button
+                key={p.id}
+                onClick={() => setPlatform(p.id)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  padding: '5px 11px',
+                  borderRadius: 6,
+                  border: '1px solid',
+                  borderColor: isSelected ? 'var(--color-action-primary)' : 'var(--color-border-default)',
+                  backgroundColor: isSelected ? 'rgba(0, 127, 255, 0.12)' : 'var(--color-surface-raised)',
+                  color: isSelected ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontSize: 12,
+                  fontWeight: isSelected ? 700 : 500,
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                <PlatformIcon platform={p.id} size={13} color={isSelected ? 'var(--color-action-primary)' : 'var(--color-text-secondary)'} />
+                <span>{p.name}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Category Pills */}

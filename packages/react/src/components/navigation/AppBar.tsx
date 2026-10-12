@@ -1,5 +1,6 @@
 // packages/react/src/components/navigation/AppBar.tsx
 import React, { forwardRef, ReactNode } from 'react';
+import { Stack } from '../layout/Stack';
 
 export interface AppBarProps extends React.ComponentPropsWithoutRef<'header'> {
   brand?: ReactNode;
@@ -45,9 +46,9 @@ export const AppBar = forwardRef<HTMLElement, AppBarProps>(
         }}
         {...rest}
       >
-        {brand && <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>{brand}</div>}
-        {children && <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>{children}</div>}
-        {actions && <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>{actions}</div>}
+        {brand && <Stack direction="row" align="center" gap="md">{brand}</Stack>}
+        {children && <Stack direction="row" align="center" gap="lg">{children}</Stack>}
+        {actions && <Stack direction="row" align="center" gap="sm">{actions}</Stack>}
       </header>
     );
   }

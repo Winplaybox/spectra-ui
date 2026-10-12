@@ -1,6 +1,6 @@
 // packages/react/src/components/data-display/Calendar.tsx
 import React, { useState, forwardRef } from 'react';
-import { ChevronDownIcon } from '@winplaybox/icons';
+import { ChevronLeftIcon, ChevronRightIcon } from '@winplaybox/icons';
 
 export interface CalendarProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'onChange' | 'defaultValue'> {
   value?: Date;
@@ -128,7 +128,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
                 borderRadius: 4,
               }}
             >
-              <ChevronDownIcon size={14} style={{ transform: 'rotate(90deg)' }} />
+              <ChevronLeftIcon size={14} style={{ display: 'block', verticalAlign: 'middle' }} />
             </button>
             <button
               type="button"
@@ -137,7 +137,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
               style={{
                 width: 24,
                 height: 24,
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 background: 'transparent',
@@ -147,7 +147,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
                 borderRadius: 4,
               }}
             >
-              <ChevronDownIcon size={14} style={{ transform: 'rotate(-90deg)' }} />
+              <ChevronRightIcon size={14} style={{ display: 'block', verticalAlign: 'middle' }} />
             </button>
           </div>
         </div>
@@ -225,7 +225,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(
                 }}
                 onMouseEnter={(e) => {
                   if (!selected) {
-                    e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface-hover, rgba(128, 128, 128, 0.12))';
                   }
                 }}
                 onMouseLeave={(e) => {

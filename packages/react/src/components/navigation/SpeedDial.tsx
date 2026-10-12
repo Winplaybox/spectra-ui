@@ -119,6 +119,13 @@ export const SpeedDial = forwardRef<HTMLDivElement, SpeedDialProps>(
                     alignItems: 'center',
                     justifyContent: 'center',
                     cursor: 'pointer',
+                    transition: 'background-color 0.12s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface-hover, rgba(128, 128, 128, 0.15))';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface-elevated)';
                   }}
                 >
                   {act.icon}

@@ -95,11 +95,13 @@ export const Header: React.FC<HeaderProps> = ({
     <>
       <header
         style={{
-          borderBottom: '1px solid var(--color-border-default)',
+          height: 48,
+          minHeight: 48,
+          borderBottom: '1px solid var(--color-border-subtle)',
           backgroundColor: colorScheme === 'dark' ? 'rgba(9, 13, 22, 0.94)' : 'rgba(255, 255, 255, 0.96)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          padding: '12px 28px',
+          padding: '0 24px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -178,9 +180,9 @@ export const Header: React.FC<HeaderProps> = ({
           </nav>
         </div>
 
-        {/* Global Controls: Focused and Decluttered */}
+        {/* Global Controls: Microsoft Fluent 2 CommandBar */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          {/* Search trigger (Ctrl+K) */}
+          {/* Fluent 2 SearchBox trigger (Ctrl+K) */}
           <button
             onClick={onOpenSearch}
             title="Search documentation (Ctrl+K)"
@@ -188,14 +190,23 @@ export const Header: React.FC<HeaderProps> = ({
               display: 'flex',
               alignItems: 'center',
               gap: 8,
-              padding: '6px 12px',
-              borderRadius: 6,
+              height: 32,
+              padding: '0 12px',
+              borderRadius: 4,
               border: '1px solid var(--color-border-default)',
-              backgroundColor: 'var(--color-surface-raised)',
+              backgroundColor: colorScheme === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)',
               color: 'var(--color-text-muted)',
               cursor: 'pointer',
               fontSize: 12,
               transition: 'all 0.15s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = 'var(--color-border-strong)';
+              e.currentTarget.style.backgroundColor = colorScheme === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.05)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'var(--color-border-default)';
+              e.currentTarget.style.backgroundColor = colorScheme === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.03)';
             }}
           >
             <SearchIcon size={14} />

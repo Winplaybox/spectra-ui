@@ -4,8 +4,10 @@ export * from './provider/SpectraProvider';
 
 // Actions
 export * from './components/actions/Button';
-export * from './components/actions/SplitButton';
 export * from './components/actions/CompoundButton';
+export * from './components/actions/MenuButton';
+export * from './components/actions/SplitButton';
+export * from './components/actions/ToggleButton';
 export * from './components/actions/ButtonGroup';
 export * from './components/actions/IconButton';
 export * from './components/actions/CopyButton';
@@ -18,6 +20,12 @@ export * from './components/form/Checkbox';
 export * from './components/form/CheckboxGroup';
 export * from './components/form/Radio';
 export * from './components/form/Select';
+export * from './components/form/Combobox';
+export * from './components/form/SearchBox';
+export * from './components/form/NumberInput';
+export * from './components/form/Field';
+export * from './components/form/Label';
+export * from './components/form/InfoLabel';
 export * from './components/form/Slider';
 export * from './components/form/Rating';
 export * from './components/form/Autocomplete';
@@ -26,6 +34,7 @@ export * from './components/form/DatePicker';
 
 // Navigation
 export * from './components/navigation/Tabs';
+export * from './components/navigation/Breadcrumb';
 export * from './components/navigation/Breadcrumbs';
 export * from './components/navigation/Pagination';
 export * from './components/navigation/Stepper';
@@ -34,15 +43,19 @@ export * from './components/navigation/AppBar';
 export * from './components/navigation/Link';
 export * from './components/navigation/SpeedDial';
 export * from './components/navigation/PlatformChassis';
+export * from './components/navigation/Overflow';
 
 // Surfaces
 export * from './components/surfaces/Card';
 export * from './components/surfaces/MediaCard';
 export * from './components/surfaces/Paper';
 export * from './components/surfaces/WebViewBox';
+export * from './components/surfaces/Portal';
+
 
 // Overlay
 export * from './components/overlay/Dialog';
+export * from './components/overlay/BottomSheet';
 export * from './components/overlay/Tooltip';
 export * from './components/overlay/Popover';
 
@@ -70,6 +83,8 @@ export * from './components/data-display/TreeView';
 export * from './components/data-display/Statistic';
 export * from './components/data-display/Timeline';
 export * from './components/data-display/Calendar';
+export * from './components/data-display/Carousel';
+
 
 // Layout
 export * from './components/layout/Stack';

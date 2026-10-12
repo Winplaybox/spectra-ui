@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, Badge } from '@winplaybox/react';
+import { Button, Card, Badge, Text } from '@winplaybox/react';
 import { CheckIcon, ExternalLinkIcon, ComponentIcon, PaletteIcon, SparklesIcon } from '@winplaybox/icons';
 import { navigate } from '../../utils/router';
 import { CircuitAnimation } from './CircuitAnimation';
@@ -71,7 +71,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
             <Badge variant="info">Production Ready</Badge>
             <span style={{ fontSize: 13, color: 'var(--color-text-muted)', fontWeight: 500 }}>Version {CURRENT_VERSION}</span>
           </div>
-          <h1
+          <Text
+            as="h1"
+            variant="heading"
             style={{
               fontSize: 36,
               fontWeight: 800,
@@ -81,8 +83,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
             }}
           >
             Spectra UI Documentation
-          </h1>
-          <p
+          </Text>
+          <Text
+            as="p"
             style={{
               fontSize: 16,
               lineHeight: 1.6,
@@ -91,7 +94,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
             }}
           >
             A fast, accessible, and token-driven design system with clean 2D flat aesthetics, zero runtime CSS overhead, multi-platform React + React Native support, and 14,255 on-demand icons.
-          </p>
+          </Text>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
             <Button variant="primary" size="md" onClick={() => navigate('/components')}>
               Explore 62 Components
@@ -155,12 +158,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
           <div style={{ marginBottom: 12 }}>
             <ComponentIcon size={24} color="var(--color-action-primary)" />
           </div>
-          <h3 style={{ margin: '0 0 6px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+          <Text as="h3" variant="heading" style={{ margin: '0 0 6px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
             14 Core Components
-          </h3>
-          <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+          </Text>
+          <Text as="p" style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
             Buttons, Accordion, Inputs, Dialogs, and Badges with live interactive prop controls and CodeSandbox integration.
-          </p>
+          </Text>
         </Card>
 
         <Card
@@ -178,12 +181,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
           <div style={{ marginBottom: 12 }}>
             <PaletteIcon size={24} color="var(--color-action-primary)" />
           </div>
-          <h3 style={{ margin: '0 0 6px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+          <Text as="h3" variant="heading" style={{ margin: '0 0 6px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
             Flat Design Tokens
-          </h3>
-          <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+          </Text>
+          <Text as="p" style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
             Curated Flat UI color swatches, 4px modular spacing scale, and typography ladder with one-click CSS variable copy.
-          </p>
+          </Text>
         </Card>
 
         <Card
@@ -201,12 +204,12 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
           <div style={{ marginBottom: 12 }}>
             <SparklesIcon size={24} color="#818CF8" />
           </div>
-          <h3 style={{ margin: '0 0 6px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+          <Text as="h3" variant="heading" style={{ margin: '0 0 6px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
             14,255 Icons Catalog
-          </h3>
-          <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+          </Text>
+          <Text as="p" style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
             Filled, outlined, rounded, sharp, and two-tone vector icons with category-level code splitting and lazy loading.
-          </p>
+          </Text>
         </Card>
       </div>
 
@@ -227,7 +230,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
             borderBottom: '1px solid var(--color-border-subtle)',
           }}
         >
-          <h2
+          <Text
+            as="h2"
+            variant="heading"
             style={{
               fontSize: 20,
               fontWeight: 800,
@@ -237,7 +242,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
             }}
           >
             Quick Start Installation
-          </h2>
+          </Text>
         </div>
 
         <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -330,7 +335,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
           }}
         >
           <div>
-            <h2
+            <Text
+              as="h2"
+              variant="heading"
               style={{
                 fontSize: 20,
                 fontWeight: 800,
@@ -340,7 +347,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(<App />);`;
               }}
             >
               Core Components Directory
-            </h2>
+            </Text>
             <span style={{ fontSize: 13, color: 'var(--color-text-muted)', marginTop: 2, display: 'block' }}>
               14 foundation components with interactive controls, code generation, and mobile simulation
             </span>

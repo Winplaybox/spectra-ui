@@ -27,6 +27,21 @@ const config: StorybookConfig = {
       '@winplaybox/icons': path.resolve(__dirname, '../../../packages/icons/src'),
       '@winplaybox/react': path.resolve(__dirname, '../../../packages/react/src'),
     };
+    config.build = {
+      ...(config.build || {}),
+      target: 'esnext',
+    };
+    config.esbuild = {
+      ...(config.esbuild || {}),
+      target: 'esnext',
+    };
+    config.optimizeDeps = {
+      ...(config.optimizeDeps || {}),
+      esbuildOptions: {
+        ...(config.optimizeDeps?.esbuildOptions || {}),
+        target: 'esnext',
+      },
+    };
     return config;
   },
 };

@@ -1,0 +1,87 @@
+// packages/platform-capabilities/src/components/compound-button.ts
+import { ComponentCapability } from '../types';
+
+export const compoundButtonCapability: ComponentCapability = {
+  id: 'compound-button',
+  name: 'CompoundButton',
+  displayName: 'Compound Button',
+  category: 'Actions',
+  description: 'Rich card-style action button featuring an icon, prominent headline, and secondary descriptive body text.',
+  slots: [
+    { name: 'icon', description: 'Prominent vector icon depicting the action', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
+    { name: 'title', description: 'Primary action title text', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
+    { name: 'description', description: 'Secondary descriptive text clarifying outcome', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
+  ],
+  recipes: [
+    { id: 'standard', title: 'Feature Onboarding Action', description: 'Prominent headline paired with secondary outcome summary.', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
+    { id: 'settings-option', title: 'Settings Option Selection', description: 'Interactive card button for account and security configurations.', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
+  ],
+  bestPractices: {
+    do: [
+      'Use compound buttons when users need additional explanatory context before deciding',
+      'Keep title concise and description under two lines',
+      'Ensure 48dp minimum touch bounds on Android and 44pt on iOS',
+    ],
+    dont: [
+      'Do not overload with paragraphs of copy',
+      'Never omit the title',
+    ],
+  },
+  platforms: {
+    web: {
+      platform: 'web',
+      support: 'native',
+      implementation: '@winplaybox/react',
+      variants: ['primary', 'secondary', 'subtle'],
+      recipes: ['standard', 'settings-option'],
+      states: ['default', 'hover', 'focus', 'active', 'disabled'],
+      interactions: ['mouse-click', 'keyboard-enter'],
+      accessibility: ['role="button"', 'aria-label'],
+      testStatus: 'verified',
+    },
+    android: {
+      platform: 'android',
+      support: 'native',
+      implementation: '@winplaybox/react-native',
+      variants: ['primary', 'secondary', 'subtle'],
+      recipes: ['standard', 'settings-option'],
+      states: ['default', 'pressed', 'disabled'],
+      interactions: ['touch-tap', 'android-ripple'],
+      accessibility: ['accessibilityRole="button"'],
+      testStatus: 'verified',
+    },
+    ios: {
+      platform: 'ios',
+      support: 'native',
+      implementation: '@winplaybox/react-native',
+      variants: ['primary', 'secondary', 'subtle'],
+      recipes: ['standard', 'settings-option'],
+      states: ['default', 'pressed', 'disabled'],
+      interactions: ['touch-tap', 'opacity-feedback'],
+      accessibility: ['accessibilityRole="button"'],
+      testStatus: 'verified',
+    },
+    windows: {
+      platform: 'windows',
+      support: 'unsupported',
+      implementation: 'Coming Soon',
+      variants: [],
+      recipes: [],
+      states: [],
+      interactions: [],
+      accessibility: [],
+      testStatus: 'untested',
+    },
+    macos: {
+      platform: 'macos',
+      support: 'unsupported',
+      implementation: 'Coming Soon',
+      variants: [],
+      recipes: [],
+      states: [],
+      interactions: [],
+      accessibility: [],
+      testStatus: 'untested',
+    },
+  },
+};

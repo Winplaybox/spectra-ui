@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card } from '@winplaybox/react';
+import { Card, Text } from '@winplaybox/react';
 import { ExternalLinkIcon, CheckIcon, SmartphoneIcon } from '@winplaybox/icons';
 import { openInExpoSnack, openInReactNativeSandbox } from '../../utils/sandbox';
 
@@ -50,13 +50,13 @@ export const MobileSimulator: React.FC<MobileSimulatorProps> = ({
         }}
       >
         <div>
-          <h3 style={{ margin: '0 0 4px 0', fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)', display: 'flex', alignItems: 'center', gap: 6 }}>
+          <Text as="h3" variant="heading" style={{ margin: '0 0 4px 0', fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)', display: 'flex', alignItems: 'center', gap: 6 }}>
             <SmartphoneIcon size={18} color="var(--color-action-primary)" />
             <span>Mobile Native Simulator ({componentName})</span>
-          </h3>
-          <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)' }}>
+          </Text>
+          <Text as="p" style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)' }}>
             Pre-rendered React Native ergonomics optimized for Apple Human Interface & Google Material 3.
-          </p>
+          </Text>
         </div>
 
         {/* Device Controls */}
@@ -392,9 +392,9 @@ export const MobileSimulator: React.FC<MobileSimulatorProps> = ({
             padding: 24,
           }}
         >
-          <h3 style={{ fontSize: 18, fontWeight: 700, margin: '0 0 16px 0', color: 'var(--color-text-primary)' }}>
+          <Text as="h3" variant="heading" style={{ fontSize: 18, fontWeight: 700, margin: '0 0 16px 0', color: 'var(--color-text-primary)' }}>
             Mobile Native Architecture & Touch Guidelines
-          </h3>
+          </Text>
           <div
             style={{
               display: 'grid',
@@ -464,9 +464,9 @@ export const MobileSimulator: React.FC<MobileSimulatorProps> = ({
               backgroundColor: 'var(--color-surface-raised)',
             }}
           >
-            <h3 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+            <Text as="h3" variant="heading" style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
               React Native Props & API Reference
-            </h3>
+            </Text>
           </div>
           <div style={{ overflowX: 'auto', backgroundColor: 'var(--color-surface)' }}>
             <table

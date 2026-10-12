@@ -5,6 +5,10 @@ export * from './provider/SpectraProvider';
 
 // Actions
 export * from './components/actions/Button';
+export * from './components/actions/ButtonGroup';
+export * from './components/actions/SplitButton';
+export * from './components/actions/CompoundButton';
+export * from './components/actions/IconButton';
 export * from './components/actions/Pressable';
 export * from './components/actions/CopyButton';
 
@@ -72,6 +76,7 @@ export * from './components/data-display/Accordion';
 export * from './components/data-display/Chip';
 export * from './components/data-display/Image';
 export * from './components/data-display/Icon';
+export * from './components/data-display/Table';
 
 // Navigation
 export * from './components/navigation/Breadcrumbs';

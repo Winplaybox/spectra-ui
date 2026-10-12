@@ -3,6 +3,8 @@ import {
   Button,
   SplitButton,
   CompoundButton,
+  MenuButton,
+  ToggleButton,
   ButtonGroup,
   IconButton,
   TextInput,
@@ -15,13 +17,27 @@ import {
   Switch,
   Slider,
   Rating,
+  RatingDisplay,
   Autocomplete,
   Combobox,
   Badge,
+  CounterBadge,
+  PresenceBadge,
   Tag,
+  InteractionTag,
+  TagGroup,
   Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+  CardPreview,
   MediaCard,
   Paper,
+  Portal,
+  Carousel,
+  CarouselNav,
   Tabs,
   TabList,
   Tab,
@@ -60,11 +76,16 @@ import {
   Skeleton,
   Divider,
   Chip,
+  Breadcrumb,
   Breadcrumbs,
+  BreadcrumbItem,
+  BreadcrumbButton,
+  BreadcrumbDivider,
   Pagination,
   Stepper,
   Menu,
   MenuItem,
+  MenuGrid,
   AppBar,
   BottomNav,
   Link,
@@ -73,6 +94,7 @@ import {
   Grid,
   Container,
   Stack,
+  Text,
   ColorPicker,
   PlatformChassis,
   useColorScheme,
@@ -80,6 +102,12 @@ import {
   DatePicker,
   ListView,
   WebViewBox,
+  LiveIndicator,
+  Field,
+  Label,
+  InfoLabel,
+  SearchBox,
+  NumberInput,
 } from '@winplaybox/react';
 import type { ChassisPlatform } from '@winplaybox/react';
 import { getComponentReleaseVersion } from '../../data/versionReleaseData';
@@ -100,6 +128,8 @@ import {
   SmartphoneIcon,
   ComponentIcon,
   SparklesIcon,
+  CubeIcon,
+  FocusTargetIcon,
 } from '@winplaybox/icons';
 import { openInCodeSandbox, openInStackBlitz, openInNewTab, toJavaScript } from '../../utils/sandbox';
 import { compileAndRender } from '../../utils/liveCompiler';
@@ -108,13 +138,45 @@ import { MobileSimulator } from './MobileSimulator';
 import { PlatformChassisViewer } from './PlatformChassisViewer';
 import { PlatformIcon } from './PlatformIcon';
 import { usePlatform } from '../../context/PlatformContext';
-import { Platform } from '../../data/platformData';
+import { Platform, PLATFORMS } from '../../data/platformData';
+import { isPlatformSupported, getComponentPlatformCapability } from '@winplaybox/platform-capabilities';
 import { ComponentMetadata, COMPONENTS_DATA } from '../../data/componentsData';
 import { ComponentVariantsShowcase, COMPONENT_VARIANTS_MAP } from './ComponentVariantsShowcase';
 import { ComponentApiSection } from './ComponentApiSection';
 import { NativeSponsorAd } from './NativeSponsorAd';
+import {
+  getComponentStorybookUrl,
+  getComponentFigmaUrl,
+  getComponentFluentUsageUrl,
+  getComponent7Pillars,
+} from '../../data/componentResources';
 
-// Dynamic Component Resource Pill Icons (Image 2 Benchmark - Zero Emojis)
+// Dynamic Component Resource Pill Icons (Fluent 2 & Benchmark - Authentic Vectors, Zero Emojis)
+const StorybookPillIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, display: 'block', ...style }}>
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M17.65 2.11C18.42 2.22 19 2.87 19 3.65v16.7c0 .78-.58 1.43-1.35 1.54l-11 1.57A1.5 1.5 0 0 1 4.5 22V2c0-.9.78-1.6 1.67-1.47l11.48 1.58ZM7 5.5v13l9-1.28V4.22L7 5.5Z"
+      fill="#FF4785"
+    />
+    <path
+      d="M9.8 11.2c-.44-.22-.72-.6-.72-1.07 0-.75.67-1.33 1.56-1.33.72 0 1.34.38 1.58.96.1.25.37.38.62.29.25-.1.38-.37.29-.62-.35-.86-1.26-1.43-2.49-1.43-1.4 0-2.4 1-2.4 2.13 0 .78.48 1.43 1.25 1.8l1.32.65c.65.32.96.7.96 1.22 0 .82-.7 1.45-1.7 1.45-.88 0-1.63-.48-1.89-1.2-.08-.25-.36-.4-.62-.32-.26.09-.4.36-.31.62.38 1.05 1.44 1.7 2.82 1.7 1.55 0 2.54-1 2.54-2.25 0-.85-.5-1.5-1.38-1.92l-1.62-.73Z"
+      fill="#FF4785"
+    />
+  </svg>
+);
+
+const FigmaPillIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
+  <svg width={size} height={size} viewBox="0 0 38 57" fill="none" style={{ flexShrink: 0, display: 'block', ...style }}>
+    <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/>
+    <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"/>
+    <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"/>
+    <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"/>
+    <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"/>
+  </svg>
+);
+
 const MarkdownPillIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
   <svg width={size} height={size} viewBox="0 0 16 16" fill="currentColor" style={{ flexShrink: 0, display: 'block', color: 'var(--color-text-secondary)', ...style }}>
     <path fillRule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15V4.15C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.9 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z" />
@@ -133,6 +195,15 @@ const PackagePillIcon: React.FC<{ size?: number; style?: React.CSSProperties }> 
     <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
     <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
     <line x1="12" y1="22.08" x2="12" y2="12" />
+  </svg>
+);
+
+const FluentLogoIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 20, style }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, display: 'block', ...style }}>
+    <rect x="2" y="2" width="9" height="9" rx="2" fill="#0078D4" />
+    <rect x="13" y="2" width="9" height="9" rx="2" fill="#2B88D8" />
+    <rect x="2" y="13" width="9" height="9" rx="2" fill="#005A9E" />
+    <rect x="13" y="13" width="9" height="9" rx="2" fill="#0078D4" />
   </svg>
 );
 
@@ -169,6 +240,13 @@ const ThumbsUpIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = (
 const ThumbsDownIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 15, style }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, display: 'block', ...style }}>
     <path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3" />
+  </svg>
+);
+
+const EyeOffIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 16, style }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, display: 'block', ...style }}>
+    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+    <line x1="1" y1="1" x2="23" y2="23" />
   </svg>
 );
 
@@ -209,6 +287,7 @@ const COMPONENT_BUNDLE_SIZES: Record<string, string> = {
   alert: '< 1.7 kB',
   spinner: '< 0.9 kB',
   skeleton: '< 1.1 kB',
+  breadcrumb: '< 1.4 kB',
   breadcrumbs: '< 1.4 kB',
   tabs: '< 2.9 kB',
   divider: '< 0.7 kB',
@@ -229,6 +308,7 @@ const COMPONENT_WAI_ARIA: Record<string, string> = {
   dialog: 'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/',
   tooltip: 'https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/',
   alert: 'https://www.w3.org/WAI/ARIA/apg/patterns/alert/',
+  breadcrumb: 'https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/',
   breadcrumbs: 'https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/',
   tabs: 'https://www.w3.org/WAI/ARIA/apg/patterns/tabs/',
   list: 'https://www.w3.org/WAI/ARIA/apg/patterns/listbox/',
@@ -346,7 +426,11 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
   const meta = COMPONENTS_DATA[componentId] || COMPONENTS_DATA['button'];
   const releaseInfo = getComponentReleaseVersion(meta.id);
   const { currentVersion, getGitHubUrl } = useVersion();
-  const { currentPlatform, metadata: platformMeta } = usePlatform();
+  const { currentPlatform, metadata: platformMeta, setPlatform } = usePlatform();
+  const ALL_PLATFORMS: Platform[] = ['web', 'android', 'ios', 'windows', 'macos'];
+  const supportedPlatforms = ALL_PLATFORMS.filter((p) => isPlatformSupported(meta.id, p));
+  const isCurrentSupported = isPlatformSupported(meta.id, currentPlatform);
+  const activeCap = getComponentPlatformCapability(meta.id, currentPlatform);
   const { colorScheme } = useColorScheme();
   const platformMode = currentPlatform;
   const [isMarkdownModalOpen, setIsMarkdownModalOpen] = useState(false);
@@ -357,9 +441,15 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
   const [customPlaygroundCodeJs, setCustomPlaygroundCodeJs] = useState<string | null>(null);
   const customPlaygroundCode = playgroundLang === 'ts' ? customPlaygroundCodeTs : customPlaygroundCodeJs;
   const [copied, setCopied] = useState(false);
-  const [activeResourceModal, setActiveResourceModal] = useState<'react' | 'native' | 'tokens' | null>(null);
   const [activeSection, setActiveSection] = useState<string>('playground');
+  const [overflowSandboxWidth, setOverflowSandboxWidth] = useState<number>(440);
+  const [playgroundViewportWidth, setPlaygroundViewportWidth] = useState<'100%' | '768px' | '480px' | '360px'>('100%');
+  const [activeResourceModal, setActiveResourceModal] = useState<'react' | 'tokens' | 'native' | null>(null);
   const variants = COMPONENT_VARIANTS_MAP[meta.id] || [];
+  const pillarsData = getComponent7Pillars(meta.id, meta);
+  const storybookUrl = getComponentStorybookUrl(meta.id);
+  const figmaUrl = getComponentFigmaUrl(meta.id);
+  const fluentUsageUrl = getComponentFluentUsageUrl(meta.id);
 
   // Documentation Page Feedback & Edit State
   const [feedbackFormOpen, setFeedbackFormOpen] = useState(false);
@@ -419,7 +509,13 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
       'playground',
       'usage-variants',
       ...variants.map((v) => v.id),
+      'types',
+      'behavior',
+      'layout',
+      'content',
+      'accessibility',
       'resources',
+      'quick-guides',
       'anatomy',
       'motion',
       'guidelines',
@@ -485,8 +581,13 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [radioValue, setRadioValue] = useState('option-1');
   const [avatarStatus, setAvatarStatus] = useState<
-    'online' | 'busy' | 'away' | 'dnd' | 'in-meeting' | 'meeting' | 'focus' | 'idle' | 'invisible' | 'streaming' | 'offline'
-  >('online');
+    'available' | 'busy' | 'away' | 'dnd' | 'out-of-office' | 'offline'
+  >('available');
+  const [avatarSize, setAvatarSize] = useState<number>(48);
+  const [avatarShape, setAvatarShape] = useState<'circular' | 'square'>('circular');
+  const [avatarColor, setAvatarColor] = useState<'neutral' | 'brand' | 'colorful'>('colorful');
+  const [avatarActive, setAvatarActive] = useState<'active' | 'unset'>('unset');
+  const [avatarOof, setAvatarOof] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [tabsVariant, setTabsVariant] = useState<'underline' | 'pills'>('underline');
   const [activeTab, setActiveTab] = useState('tab-1');
@@ -509,6 +610,28 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
   const [chassisPlatform, setChassisPlatform] = useState<ChassisPlatform>('web');
   const [bottomNavTab, setBottomNavTab] = useState('home');
   const [demoDatePickerVal, setDemoDatePickerVal] = useState<Date | undefined>(new Date());
+  const [accSize, setAccSize] = useState<'small' | 'medium' | 'large' | 'extra-large'>('medium');
+  const [accIconPos, setAccIconPos] = useState<'start' | 'end'>('start');
+  const [accMultiple, setAccMultiple] = useState(false);
+  const [accCollapsible, setAccCollapsible] = useState(true);
+
+  // Badge Interactive Demo State
+  const [badgeAppearance, setBadgeAppearance] = useState<'filled' | 'ghost' | 'outline' | 'tint'>('filled');
+  const [badgeColor, setBadgeColor] = useState<
+    'brand' | 'danger' | 'important' | 'informative' | 'severe' | 'subtle' | 'success' | 'warning'
+  >('brand');
+  const [badgeShape, setBadgeShape] = useState<'rounded' | 'circular' | 'square'>('rounded');
+  const [badgeSize, setBadgeSize] = useState<
+    'tiny' | 'extra-small' | 'small' | 'medium' | 'large' | 'extra-large'
+  >('medium');
+  const [badgeDot, setBadgeDot] = useState(false);
+  const [badgeWithIcon, setBadgeWithIcon] = useState(false);
+
+  // Sub-component demo states
+  const [togglePressed, setTogglePressed] = useState(false);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [tagSelected, setTagSelected] = useState(true);
+  const [portalMounted, setPortalMounted] = useState(false);
 
   // Generate clean JSX snippet according to active demo
   const getRawSnippet = (): string => {
@@ -520,32 +643,39 @@ import type { AccordionProps } from '@winplaybox/react';
 
 export default function AccordionDemo(): JSX.Element {
   return (
-    <Accordion defaultValue="item-1">
+    <Accordion
+      size="${accSize}"
+      expandIconPosition="${accIconPos}"
+      multiple={${accMultiple}}
+      collapsible={${accCollapsible}}
+      defaultOpenItems={['item-1']}
+    >
       <AccordionItem value="item-1">
-        <AccordionHeader>Accordion Header 1</AccordionHeader>
+        <AccordionHeader>How does Spectra UI achieve zero layout jank?</AccordionHeader>
         <AccordionPanel>
-          Accordions decrease cognitive load by letting people choose which sections
-          of content they see, like questions in an FAQ.
+          Accordions decrease cognitive load by letting people choose which sections of content
+          they see, like questions in an FAQ.
         </AccordionPanel>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionHeader>Accordion Header 2</AccordionHeader>
+        <AccordionHeader>Can I use these tokens in React Native?</AccordionHeader>
         <AccordionPanel>
-          Never put information that is required for the current task inside an accordion.
+          Yes! @winplaybox/tokens compiles to strictly typed JavaScript objects that plug directly
+          into React Native StyleSheet.
         </AccordionPanel>
       </AccordionItem>
       <AccordionItem value="item-3">
-        <AccordionHeader>Accordion Header 3</AccordionHeader>
+        <AccordionHeader>What is the W3C WAI compliance tier?</AccordionHeader>
         <AccordionPanel>
-          Consider a treatment that gives it more prominence when critical.
+          All components adhere strictly to WCAG 2.1 AA and W3C WAI-ARIA APG patterns.
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
   );
-}`;
+};`;
       case 'button':
         return `import React from 'react';
-import { Button } from '@winplaybox/react';
+import { Stack, Button } from '@winplaybox/react';
 import type { ButtonProps } from '@winplaybox/react';
 import { CheckIcon } from '@winplaybox/icons';
 
@@ -555,7 +685,7 @@ export default function ButtonDemo(): JSX.Element {
   };
 
   return (
-    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+    <Stack direction="row" gap="md" align="center">
       <Button
         variant="${btnVariant}"
         size="${btnSize}"
@@ -568,9 +698,295 @@ export default function ButtonDemo(): JSX.Element {
       <Button variant="secondary" size="${btnSize}">
         Cancel
       </Button>
+    </Stack>
+  );
+}`;
+
+      case 'compound-button':
+        return `import React from 'react';
+import { Stack, CompoundButton } from '@winplaybox/react';
+import { SparklesIcon } from '@winplaybox/icons';
+
+export default function CompoundButtonDemo(): JSX.Element {
+  return (
+    <Stack direction="row" gap="md" wrap>
+      <CompoundButton
+        variant="primary"
+        icon={<SparklesIcon size={20} />}
+        secondaryContent="Automated build with hermes compiler"
+      >
+        Deploy Production
+      </CompoundButton>
+      <CompoundButton
+        variant="secondary"
+        secondaryContent="Create isolated PR deployment branch"
+      >
+        Preview Environment
+      </CompoundButton>
+    </Stack>
+  );
+}`;
+
+      case 'split-button':
+        return `import React, { useState } from 'react';
+import { SplitButton } from '@winplaybox/react';
+
+export default function SplitButtonDemo(): JSX.Element {
+  const [selected, setSelected] = useState('Create a merge commit');
+
+  return (
+    <SplitButton
+      options={[
+        { label: 'Create a merge commit', onClick: () => setSelected('Create a merge commit') },
+        { label: 'Squash and merge', onClick: () => setSelected('Squash and merge') },
+        { label: 'Rebase and merge', onClick: () => setSelected('Rebase and merge') },
+      ]}
+      onClick={() => console.log('Action triggered:', selected)}
+    >
+      {selected}
+    </SplitButton>
+  );
+}`;
+
+      case 'menu-button':
+        return `import React from 'react';
+import { MenuButton, Menu, MenuItem } from '@winplaybox/react';
+import { ChevronDownIcon } from '@winplaybox/icons';
+
+export default function MenuButtonDemo(): JSX.Element {
+  return (
+    <Menu>
+      <MenuButton variant="primary" icon={<ChevronDownIcon size={16} />}>
+        Actions Menu
+      </MenuButton>
+      <MenuItem onSelect={() => console.log('Export')}>Export Dataset</MenuItem>
+      <MenuItem onSelect={() => console.log('Duplicate')}>Duplicate Workflow</MenuItem>
+      <MenuItem danger onSelect={() => console.log('Delete')}>Delete Workspace</MenuItem>
+    </Menu>
+  );
+}`;
+
+      case 'toggle-button':
+        return `import React, { useState } from 'react';
+import { ToggleButton } from '@winplaybox/react';
+import { CheckIcon } from '@winplaybox/icons';
+
+export default function ToggleButtonDemo(): JSX.Element {
+  const [checked, setChecked] = useState(false);
+
+  return (
+    <ToggleButton
+      checked={checked}
+      onToggle={setChecked}
+      icon={checked ? <CheckIcon size={16} /> : undefined}
+    >
+      {checked ? 'Muted' : 'Unmuted'}
+    </ToggleButton>
+  );
+}`;
+
+      case 'card-header':
+        return `import React from 'react';
+import { Card, CardHeader, CardTitle, CardDescription, Badge } from '@winplaybox/react';
+
+export default function CardHeaderDemo(): JSX.Element {
+  return (
+    <Card style={{ maxWidth: 460, width: '100%' }}>
+      <CardHeader
+        header={<CardTitle>Cluster Node Alpha</CardTitle>}
+        description={<CardDescription>Region: us-east-1 (N. Virginia)</CardDescription>}
+        action={<Badge variant="success">Healthy</Badge>}
+      />
+    </Card>
+  );
+}`;
+
+      case 'card-footer':
+        return `import React from 'react';
+import { Card, CardContent, CardFooter, Button } from '@winplaybox/react';
+
+export default function CardFooterDemo(): JSX.Element {
+  return (
+    <Card style={{ maxWidth: 460, width: '100%', padding: '20px 24px' }}>
+      <CardContent style={{ marginBottom: 16 }}>
+        Confirm deployment of container revisions to production nodes.
+      </CardContent>
+      <CardFooter>
+        <Button variant="secondary" onClick={() => console.log('Cancelled')}>Cancel</Button>
+        <Button variant="primary" onClick={() => console.log('Confirmed')}>Deploy Now</Button>
+      </CardFooter>
+    </Card>
+  );
+}`;
+
+      case 'card-preview':
+        return `import React from 'react';
+import { Card, CardPreview, CardContent, CardTitle, CardDescription, Box, Text } from '@winplaybox/react';
+
+export default function CardPreviewDemo(): JSX.Element {
+  return (
+    <Card style={{ maxWidth: 360, width: '100%' }}>
+      <CardPreview>
+        <Box style={{ height: 160, background: 'linear-gradient(135deg, var(--color-action-primary) 0%, #6366f1 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Text weight="bold" color="inverse">Visual Media Showcase</Text>
+        </Box>
+      </CardPreview>
+      <CardContent style={{ padding: 16 }}>
+        <CardTitle>Spectra UI Media Surface</CardTitle>
+        <CardDescription>CardPreview mounts edge-to-edge banners.</CardDescription>
+      </CardContent>
+    </Card>
+  );
+}`;
+
+      case 'carousel':
+        return `import React from 'react';
+import { Carousel } from '@winplaybox/react';
+
+export default function CarouselDemo(): JSX.Element {
+  const slides = [
+    { title: 'Multi-Platform Consistency', desc: 'One design language across Web, iOS, Android, macOS, and Windows' },
+    { title: 'WCAG 2.1 AA Compliance', desc: 'Accessible roving tabindex, high-contrast, screen-reader verified' },
+    { title: 'Sub-15 kB Tree Shaking', desc: 'Optimized ES modules for instant startup performance' },
+  ];
+
+  return (
+    <Carousel autoPlay={false}>
+      {slides.map((s, idx) => (
+        <Box key={idx} style={{ padding: 40, textAlign: 'center', backgroundColor: 'var(--color-surface-raised)', borderRadius: 12 }}>
+          <Stack spacing={8} align="center">
+            <Text variant="heading-md" weight="bold">{s.title}</Text>
+            <Text variant="body-sm" color="secondary">{s.desc}</Text>
+          </Stack>
+        </Box>
+      ))}
+    </Carousel>
+  );
+}`;
+
+      case 'carousel-nav':
+        return `import React, { useState } from 'react';
+import { Stack, CarouselNav } from '@winplaybox/react';
+
+export default function CarouselNavDemo(): JSX.Element {
+  const [index, setIndex] = useState(0);
+
+  return (
+    <Stack direction="column" gap="md" align="center">
+      <div style={{ fontSize: 14 }}>Slide {index + 1} of 5 Active</div>
+      <CarouselNav
+        total={5}
+        current={index}
+        onSelect={setIndex}
+      />
+    </Stack>
+  );
+}`;
+
+      case 'interaction-tag':
+        return `import React, { useState } from 'react';
+import { Stack, InteractionTag } from '@winplaybox/react';
+import { SparklesIcon } from '@winplaybox/icons';
+
+export default function InteractionTagDemo(): JSX.Element {
+  const [selected, setSelected] = useState(true);
+
+  return (
+    <Stack direction="row" gap="sm">
+      <InteractionTag
+        selected={selected}
+        icon={<SparklesIcon size={14} />}
+        closable
+        onClose={() => setSelected(false)}
+      >
+        TypeScript 5.8
+      </InteractionTag>
+    </Stack>
+  );
+}`;
+
+      case 'tag-group':
+        return `import React from 'react';
+import { TagGroup, InteractionTag } from '@winplaybox/react';
+
+export default function TagGroupDemo(): JSX.Element {
+  const tags = ['React', 'TypeScript', 'WebAssembly', 'Node.js'];
+
+  return (
+    <TagGroup>
+      {tags.map((t) => (
+        <InteractionTag key={t} closable>
+          {t}
+        </InteractionTag>
+      ))}
+    </TagGroup>
+  );
+}`;
+
+      case 'rating-display':
+        return `import React from 'react';
+import { Stack, RatingDisplay } from '@winplaybox/react';
+
+export default function RatingDisplayDemo(): JSX.Element {
+  return (
+    <Stack direction="column" gap="md">
+      <RatingDisplay value={4.8} max={5} size="lg" />
+      <RatingDisplay value={3.5} max={5} size="md" />
+    </Stack>
+  );
+}`;
+
+      case 'menu-grid':
+        return `import React from 'react';
+import { MenuGrid, MenuItem } from '@winplaybox/react';
+import { GlobeIcon, SparklesIcon, CubeIcon, FocusTargetIcon } from '@winplaybox/icons';
+
+export default function MenuGridDemo(): JSX.Element {
+  return (
+    <MenuGrid columns={2}>
+      <MenuItem icon={<GlobeIcon size={16} />}>CDN Endpoints</MenuItem>
+      <MenuItem icon={<SparklesIcon size={16} />}>AI Copilot</MenuItem>
+      <MenuItem icon={<CubeIcon size={16} />}>Database Clusters</MenuItem>
+      <MenuItem icon={<FocusTargetIcon size={16} />}>Identity & Access</MenuItem>
+    </MenuGrid>
+  );
+};`;
+
+      case 'portal-mount':
+        return `import React, { useState } from 'react';
+import { Portal, Button } from '@winplaybox/react';
+
+export default function PortalMountDemo(): JSX.Element {
+  const [mounted, setMounted] = useState(false);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <Button variant="primary" onClick={() => setMounted(!mounted)}>
+        {mounted ? 'Unmount Teleported Overlay' : 'Mount to document.body via Portal'}
+      </Button>
+      {mounted && (
+        <Portal>
+          <div
+            style={{
+              position: 'fixed',
+              bottom: 24,
+              right: 24,
+              padding: '16px 20px',
+              backgroundColor: 'var(--color-surface-elevated)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+              borderRadius: 12,
+              border: '1px solid var(--color-border-subtle)',
+              zIndex: 9999,
+            }}
+          >
+            Teleported directly to document.body!
+          </div>
+        </Portal>
+      )}
     </div>
   );
 }`;
+
       case 'text-input':
         return `import React, { useState } from 'react';
 import { TextInput } from '@winplaybox/react';
@@ -685,30 +1101,59 @@ export default function SwitchDemo(): JSX.Element {
 }`;
       case 'avatar':
         return `import React from 'react';
-import { Avatar } from '@winplaybox/react';
+import { Avatar, AvatarGroup } from '@winplaybox/react';
 import type { AvatarProps } from '@winplaybox/react';
 
 export default function AvatarDemo(): JSX.Element {
   return (
-    <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-      <Avatar name="Sarah Connor" status="online" size="md" />
-      <Avatar name="John Doe" status="busy" size="md" />
-      <Avatar shape="square" size="md" />
+    <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+      <Avatar
+        name="Sarah Connor"
+        size={${avatarSize}}
+        shape="${avatarShape}"
+        color="${avatarColor}"
+        status="${avatarStatus}"
+        outOfOffice={${avatarOof}}
+        active="${avatarActive}"
+      />
+      <Avatar
+        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150"
+        name="Elena Rostova"
+        size={${avatarSize}}
+        shape="${avatarShape}"
+        status="${avatarStatus}"
+      />
+      <AvatarGroup max={3} size={${avatarSize}}>
+        <Avatar name="Alex Vance" color="colorful" />
+        <Avatar name="David Miller" color="colorful" />
+        <Avatar name="Sam Wilson" color="colorful" />
+        <Avatar name="Robin Hood" color="colorful" />
+      </AvatarGroup>
     </div>
   );
 }`;
       case 'badge':
         return `import React from 'react';
-import { Badge } from '@winplaybox/react';
+import { Badge, CounterBadge, PresenceBadge } from '@winplaybox/react';
 import type { BadgeProps } from '@winplaybox/react';
+import { SparklesIcon } from '@winplaybox/icons';
 
 export default function BadgeDemo(): JSX.Element {
   return (
-    <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-      <Badge variant="primary">New Feature</Badge>
-      <Badge variant="success" dot>Operational</Badge>
-      <Badge variant="warning">In Review</Badge>
-      <Badge variant="error">High Priority</Badge>
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+      <Badge
+        appearance="${badgeAppearance}"
+        color="${badgeColor}"
+        shape="${badgeShape}"
+        size="${badgeSize}"
+        dot={${badgeDot}}
+        ${badgeWithIcon ? 'icon={<SparklesIcon size={12} />}' : ''}
+      >
+        Badge Preview
+      </Badge>
+      <CounterBadge count={42} appearance="${badgeAppearance}" color="${badgeColor}" />
+      <CounterBadge count={128} overflowCount={99} color="danger" />
+      <PresenceBadge status="available" size="${badgeSize === 'tiny' ? 'small' : badgeSize}" />
     </div>
   );
 }`;
@@ -755,11 +1200,13 @@ import type { CardProps } from '@winplaybox/react';
 export default function CardDemo(): JSX.Element {
   return (
     <Card variant="bordered" padding="md">
-      <h3 style={{ margin: '0 0 8px 0' }}>Workspace Telemetry</h3>
-      <p style={{ margin: '0 0 16px 0', color: 'var(--color-text-secondary)' }}>
-        Active monitor running across 14 clusters with 99.99% SLA.
-      </p>
-      <Button variant="primary">Manage Cluster</Button>
+      <Stack spacing={8}>
+        <Text variant="heading-sm" weight="semibold">Workspace Telemetry</Text>
+        <Text variant="body-sm" color="secondary" style={{ marginBottom: 12 }}>
+          Active monitor running across 14 clusters with 99.99% SLA.
+        </Text>
+        <Button variant="primary">Manage Cluster</Button>
+      </Stack>
     </Card>
   );
 }`;
@@ -901,42 +1348,21 @@ export default function ChipDemo(): JSX.Element {
     </div>
   );
 }`;
+      case 'breadcrumb':
       case 'breadcrumbs':
         return `import React from 'react';
-import { Breadcrumbs } from '@winplaybox/react';
-import type { BreadcrumbsProps } from '@winplaybox/react';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbButton, BreadcrumbDivider } from '@winplaybox/react';
 
-export default function BreadcrumbsDemo(): JSX.Element {
+export default function BreadcrumbDemo(): JSX.Element {
   return (
-    <Breadcrumbs
+    <Breadcrumb
       items={[
         { label: 'Home', href: '/' },
         { label: 'Design System', href: '/tokens' },
         { label: 'Components', href: '/components' },
-        { label: 'Breadcrumbs', isCurrent: true },
+        { label: 'Breadcrumb', isCurrent: true },
       ]}
     />
-  );
-}`;
-      case 'split-button':
-        return `import React from 'react';
-import { SplitButton } from '@winplaybox/react';
-
-export default function SplitButtonDemo(): JSX.Element {
-  const options = [
-    { label: 'Create a merge commit', onClick: () => console.log('Merge commit') },
-    { label: 'Squash and merge', onClick: () => console.log('Squash merge') },
-    { label: 'Rebase and merge', onClick: () => console.log('Rebase merge') },
-  ];
-
-  return (
-    <SplitButton
-      variant="primary"
-      options={options}
-      onClick={() => console.log('Primary merge triggered')}
-    >
-      Merge Pull Request
-    </SplitButton>
   );
 }`;
 
@@ -1111,16 +1537,16 @@ export default function AvatarGroupDemo(): JSX.Element {
 
       case 'tag':
         return `import React from 'react';
-import { Tag } from '@winplaybox/react';
+import { Stack, Tag } from '@winplaybox/react';
 
 export default function TagDemo(): JSX.Element {
   return (
-    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+    <Stack direction="row" gap="sm" wrap>
       <Tag variant="primary">v1.0.0</Tag>
       <Tag variant="success" closable onClose={() => console.log('Closed')}>Active Node</Tag>
       <Tag variant="warning">High Memory</Tag>
       <Tag variant="danger">Critical</Tag>
-    </div>
+    </Stack>
   );
 }`;
 
@@ -1478,10 +1904,12 @@ export default function BoxDemo(): JSX.Element {
         textAlign: 'center',
       }}
     >
-      <h4 style={{ margin: '0 0 8px', fontSize: 16, fontWeight: 700 }}>Polymorphic Box Surface</h4>
-      <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)' }}>
-        Adapts seamlessly to any HTML semantic element while inheriting design token variables.
-      </p>
+      <Stack spacing={4} align="center">
+        <Text variant="heading-sm" weight="bold">Polymorphic Box Surface</Text>
+        <Text variant="body-sm" color="secondary">
+          Adapts seamlessly to any HTML semantic element while inheriting design token variables.
+        </Text>
+      </Stack>
     </Box>
   );
 }`;
@@ -1493,8 +1921,10 @@ import { Container } from '@winplaybox/react';
 export default function ContainerDemo(): JSX.Element {
   return (
     <Container size="md" style={{ padding: 24, textAlign: 'center' }}>
-      <h3>Responsive Viewport Container</h3>
-      <p>Centers content with responsive horizontal constraints calibrated to token scales.</p>
+      <Stack spacing={6} align="center">
+        <Text variant="heading-md" weight="semibold">Responsive Viewport Container</Text>
+        <Text variant="body-sm" color="secondary">Centers content with responsive horizontal constraints calibrated to token scales.</Text>
+      </Stack>
     </Container>
   );
 }`;
@@ -1565,11 +1995,11 @@ export default function PlatformChassisDemo(): JSX.Element {
 
   return (
     <PlatformChassis platform={platform} title="Spectra UI Frame">
-      <div style={{ padding: 20, textAlign: 'center' }}>
-        <h3>Platform Chassis Simulator</h3>
-        <p>Preview components inside authentic OS titlebars and viewport frames.</p>
+      <Stack spacing={8} align="center" style={{ padding: 20 }}>
+        <Text variant="heading-sm" weight="semibold">Platform Chassis Simulator</Text>
+        <Text variant="body-sm" color="secondary">Preview components inside authentic OS titlebars and viewport frames.</Text>
         <Button variant="primary">Simulated Action</Button>
-      </div>
+      </Stack>
     </PlatformChassis>
   );
 }`;
@@ -1705,6 +2135,304 @@ export default function WebViewBoxDemo(): JSX.Element {
   );
 }`;
 
+      case 'status-indicator':
+        return `import React from 'react';
+import { LiveIndicator } from '@winplaybox/react';
+
+export default function StatusIndicatorDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
+      <LiveIndicator status="online" variant="pulse" label="Available" />
+      <LiveIndicator status="busy" variant="static" label="Busy" />
+      <LiveIndicator status="connecting" variant="beacon" label="Syncing" />
+      <LiveIndicator status="offline" variant="static" label="Offline" />
+    </div>
+  );
+}`;
+
+      case 'field':
+        return `import React from 'react';
+import { Field, TextInput } from '@winplaybox/react';
+
+export default function FieldDemo(): JSX.Element {
+  return (
+    <Field
+      label="Production Cluster Host"
+      required
+      hint="Fully qualified domain name or IP address"
+      info="Used by Envoy ingress proxy to route inbound traffic"
+    >
+      <TextInput placeholder="e.g. k8s-node-alpha.internal" />
+    </Field>
+  );
+}`;
+
+      case 'search-box':
+        return `import React, { useState } from 'react';
+import { SearchBox } from '@winplaybox/react';
+
+export default function SearchBoxDemo(): JSX.Element {
+  const [query, setQuery] = useState('');
+
+  return (
+    <SearchBox
+      value={query}
+      onChangeValue={setQuery}
+      onClear={() => setQuery('')}
+      placeholder="Search repositories, commits, and packages..."
+      fullWidth
+    />
+  );
+}`;
+
+      case 'spin-button':
+        return `import React, { useState } from 'react';
+import { NumberInput } from '@winplaybox/react';
+
+export default function SpinButtonDemo(): JSX.Element {
+  const [val, setVal] = useState(3);
+
+  return (
+    <NumberInput
+      label="Replica Instance Count"
+      value={val}
+      onChange={setVal}
+      min={1}
+      max={16}
+      step={1}
+      description="Autoscaling node instances between 1 and 16"
+    />
+  );
+}`;
+
+      case 'info-label':
+        return `import React from 'react';
+import { Stack, TextInput, InfoLabel } from '@winplaybox/react';
+
+export default function InfoLabelDemo(): JSX.Element {
+  return (
+    <Stack direction="column" gap="sm" style={{ maxWidth: 400, width: '100%' }}>
+      <InfoLabel
+        htmlFor="deployment-region"
+        info="Direct AWS data center location where computing units run"
+        required
+      >
+        Deployment Region
+      </InfoLabel>
+      <TextInput id="deployment-region" defaultValue="us-east-1 (N. Virginia)" />
+    </Stack>
+  );
+}`;
+
+      case 'label':
+        return `import React from 'react';
+import { Stack, TextInput, Label } from '@winplaybox/react';
+
+export default function LabelDemo(): JSX.Element {
+  return (
+    <Stack direction="column" gap="sm" style={{ maxWidth: 400, width: '100%' }}>
+      <Label htmlFor="service-acc" required>
+        Service Account Identifier
+      </Label>
+      <TextInput id="service-acc" placeholder="svc-alpha-pipeline" />
+    </Stack>
+  );
+}`;
+
+      case 'persona':
+        return `import React from 'react';
+import { Stack, Box, Avatar, LiveIndicator } from '@winplaybox/react';
+
+export default function PersonaDemo(): JSX.Element {
+  return (
+    <Box style={{ maxWidth: 440, width: '100%' }}>
+      <Stack direction="row" gap="md" align="center" style={{ padding: '14px 18px', borderRadius: 10, backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-subtle)' }}>
+        <div style={{ position: 'relative' }}>
+          <Avatar name="Sarah Connor" size="lg" />
+          <span style={{ position: 'absolute', bottom: -2, right: -2 }}>
+            <LiveIndicator status="online" variant="pulse" size="sm" label={null} />
+          </span>
+        </div>
+        <Stack direction="column" gap="xs">
+          <span style={{ fontSize: 14, fontWeight: 700 }}>Sarah Connor</span>
+          <span style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>Principal Platform Architect</span>
+          <span style={{ fontSize: 11, color: 'var(--color-action-primary)' }}>sarah.c@winplaybox.in</span>
+        </Stack>
+      </Stack>
+    </Box>
+  );
+}`;
+
+      case 'teaching-popover':
+        return `import React from 'react';
+import { Stack, Box, Button, Badge } from '@winplaybox/react';
+
+export default function TeachingPopoverDemo(): JSX.Element {
+  return (
+    <Box style={{ maxWidth: 360, padding: 20, borderRadius: 12, border: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-elevated)' }}>
+      <Stack direction="row" justify="between" align="center" style={{ marginBottom: 8, width: '100%' }}>
+        <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--color-action-primary)' }}>Step 1 of 3</span>
+        <Badge variant="info">New</Badge>
+      </Stack>
+      <Stack spacing={4} style={{ marginBottom: 16 }}>
+        <Text variant="heading-sm" weight="bold">Multi-Platform Token Engine</Text>
+        <Text variant="body-sm" color="secondary" style={{ lineHeight: 1.5 }}>
+          Theme tokens automatically adapt between Web, iOS, Android, macOS, and Windows.
+        </Text>
+      </Stack>
+      <Stack direction="row" justify="between" style={{ width: '100%' }}>
+        <Button size="sm" variant="secondary">Skip</Button>
+        <Button size="sm" variant="primary">Next Step</Button>
+      </Stack>
+    </Box>
+  );
+}`;
+
+      case 'tag-picker':
+        return `import React from 'react';
+import { Stack, TagGroup, InteractionTag, SearchBox } from '@winplaybox/react';
+
+export default function TagPickerDemo(): JSX.Element {
+  return (
+    <Stack direction="column" gap="sm" style={{ maxWidth: 440, width: '100%' }}>
+      <TagGroup>
+        {['Production', 'v0.2.0', 'Zero-Jank', 'WCAG-AA'].map((tag) => (
+          <InteractionTag key={tag} closable>
+            {tag}
+          </InteractionTag>
+        ))}
+      </TagGroup>
+      <SearchBox size="sm" placeholder="Search & add tags..." fullWidth />
+    </Stack>
+  );
+}`;
+
+      case 'time-picker':
+        return `import React from 'react';
+import { Stack, Box, TextInput, Badge } from '@winplaybox/react';
+
+export default function TimePickerDemo(): JSX.Element {
+  return (
+    <Box style={{ maxWidth: 300, width: '100%' }}>
+      <Stack direction="row" gap="sm" align="center">
+        <TextInput defaultValue="14:30" type="time" style={{ width: 140 }} />
+        <Badge variant="info">UTC +05:30</Badge>
+      </Stack>
+    </Box>
+  );
+}`;
+
+      case 'toolbar':
+        return `import React from 'react';
+import { Stack, Box, ButtonGroup, Button, IconButton } from '@winplaybox/react';
+import { SearchIcon, InfoIcon } from '@winplaybox/icons';
+
+export default function ToolbarDemo(): JSX.Element {
+  return (
+    <Box style={{ maxWidth: 520, width: '100%' }}>
+      <Stack role="toolbar" direction="row" gap="sm" align="center" style={{ padding: 8, borderRadius: 8, backgroundColor: 'var(--color-surface-raised)' }}>
+        <ButtonGroup variant="secondary">
+          <Button size="sm">File</Button>
+          <Button size="sm">Edit</Button>
+          <Button size="sm">View</Button>
+        </ButtonGroup>
+        <IconButton size="sm" aria-label="Search" icon={<SearchIcon size={14} />} />
+        <IconButton size="sm" aria-label="Info" icon={<InfoIcon size={14} />} />
+        <Button size="sm" variant="primary" style={{ marginLeft: 'auto' }}>Publish</Button>
+      </Stack>
+    </Box>
+  );
+}`;
+
+      case 'overflow':
+        return `import React from 'react';
+import { Overflow, OverflowItem, OverflowMenu, Button, Box } from '@winplaybox/react';
+
+export default function OverflowDemo(): JSX.Element {
+  const items = Array.from({ length: 8 }, (_, i) => ({
+    id: \`item-\${i}\`,
+    label: \`Item \${i}\`,
+  }));
+
+  const itemLabels = Object.fromEntries(items.map((i) => [i.id, i.label]));
+
+  return (
+    <Box
+      style={{
+        border: '2px solid var(--color-action-primary)',
+        position: 'relative',
+        borderRadius: 4,
+        padding: '24px 14px 14px 14px',
+        resize: 'horizontal',
+        overflow: 'hidden',
+        minWidth: 200,
+        maxWidth: 560,
+      }}
+    >
+      <div
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          backgroundColor: 'var(--color-action-primary)',
+          color: '#FFFFFF',
+          padding: '2px 8px',
+          fontSize: 11,
+          fontWeight: 700,
+          letterSpacing: '0.04em',
+        }}
+      >
+        Resizable Area
+      </div>
+      <Overflow minimumVisible={1}>
+        {items.map((item) => (
+          <OverflowItem key={item.id} id={item.id}>
+            <Button size="sm" variant="secondary">{item.label}</Button>
+          </OverflowItem>
+        ))}
+        <OverflowMenu itemLabels={itemLabels} />
+      </Overflow>
+    </Box>
+  );
+}`;
+
+      case 'image':
+        return `import React from 'react';
+import { Box, Stack } from '@winplaybox/react';
+
+export default function ImageDemo(): JSX.Element {
+  return (
+    <Box style={{ maxWidth: 440, width: '100%', height: 200, borderRadius: 12, backgroundColor: 'var(--color-surface-raised)' }}>
+      <Stack align="center" justify="center" style={{ width: '100%', height: '100%' }}>
+        <span style={{ fontWeight: 700 }}>Responsive Image Surface</span>
+      </Stack>
+    </Box>
+  );
+}`;
+
+      case 'portal':
+        return `import React, { useState } from 'react';
+import { Button, Portal } from '@winplaybox/react';
+
+export default function PortalDemo(): JSX.Element {
+  const [mounted, setMounted] = useState(false);
+
+  return (
+    <div>
+      <Button variant="primary" onClick={() => setMounted(!mounted)}>
+        {mounted ? 'Unmount Teleported Overlay' : 'Mount to document.body via Portal'}
+      </Button>
+      {mounted && (
+        <Portal>
+          <div style={{ position: 'fixed', bottom: 24, right: 24, padding: 16, backgroundColor: 'var(--color-surface-elevated)', borderRadius: 12 }}>
+            Teleported directly to document.body!
+          </div>
+        </Portal>
+      )}
+    </div>
+  );
+}`;
+
       default: {
         const safeName = meta.name.replace(/[\s-]+/g, '');
         return `import React from 'react';
@@ -1712,10 +2440,12 @@ import { ${safeName} } from '@winplaybox/react';
 
 export default function ${safeName}Demo(): JSX.Element {
   return (
-    <div style={{ padding: 24, textAlign: 'center' }}>
-      <h3>${meta.name}</h3>
-      <p>${meta.description}</p>
-    </div>
+    <Box style={{ padding: 24, textAlign: 'center' }}>
+      <Stack spacing={6} align="center">
+        <Text variant="heading-sm" weight="semibold">${meta.name}</Text>
+        <Text variant="body-sm" color="secondary">${meta.description}</Text>
+      </Stack>
+    </Box>
   );
 }`;
       }
@@ -1919,6 +2649,7 @@ export const NativeChipDemo = () => {
     </View>
   );
 };`;
+      case 'breadcrumb':
       case 'breadcrumbs':
         return `// React Native Mobile Implementation (iOS & Android)
 import React from 'react';
@@ -2041,8 +2772,8 @@ export const Native${meta.name}Demo = () => {
     switch (meta.id) {
       case 'button':
         return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center' }}>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
+          <Stack direction="column" gap="lg" align="center">
+            <Stack direction="row" gap="md" wrap justify="center" align="center">
               <Button
                 variant={btnVariant}
                 size={btnSize}
@@ -2060,7 +2791,7 @@ export const Native${meta.name}Demo = () => {
               <Button variant="danger" size={btnSize}>
                 Danger
               </Button>
-            </div>
+            </Stack>
 
             {/* Quick interactive props pill controls */}
             <div
@@ -2133,6 +2864,226 @@ export const Native${meta.name}Demo = () => {
                 {btnLoading ? 'Loading: On' : 'Loading: Off'}
               </button>
             </div>
+          </Stack>
+        );
+
+      case 'compound-button':
+        return (
+          <Stack direction="column" gap="md" align="center">
+            <Stack direction="row" gap="md" wrap justify="center">
+              <CompoundButton
+                variant="primary"
+                icon={<SparklesIcon size={20} />}
+                secondaryContent="Automated build with hermes compiler"
+              >
+                Deploy Production
+              </CompoundButton>
+              <CompoundButton
+                variant="secondary"
+                secondaryContent="Create isolated PR deployment branch"
+              >
+                Preview Environment
+              </CompoundButton>
+            </Stack>
+          </Stack>
+        );
+
+      case 'split-button':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
+            <SplitButton
+              options={[
+                { label: 'Create a merge commit', onClick: () => setSplitSelected('Create a merge commit') },
+                { label: 'Squash and merge', onClick: () => setSplitSelected('Squash and merge') },
+                { label: 'Rebase and merge', onClick: () => setSplitSelected('Rebase and merge') },
+              ]}
+              onClick={() => setSplitToast(`Executed: ${splitSelected}`)}
+            >
+              {splitSelected}
+            </SplitButton>
+            {splitToast && (
+              <Badge variant="success">{splitToast}</Badge>
+            )}
+          </div>
+        );
+
+      case 'menu-button':
+        return (
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Menu>
+              <MenuButton variant="primary" icon={<ChevronDownIcon size={16} />}>
+                Actions Menu
+              </MenuButton>
+              <MenuItem onSelect={() => setSplitToast('Dataset exported')}>Export Dataset</MenuItem>
+              <MenuItem onSelect={() => setSplitToast('Workflow duplicated')}>Duplicate Workflow</MenuItem>
+              <MenuItem danger onSelect={() => setSplitToast('Deleted')}>Delete Workspace</MenuItem>
+            </Menu>
+          </div>
+        );
+
+      case 'toggle-button':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center' }}>
+            <ToggleButton
+              checked={togglePressed}
+              onToggle={setTogglePressed}
+              icon={togglePressed ? <CheckIcon size={16} /> : undefined}
+            >
+              {togglePressed ? 'Muted' : 'Unmuted'}
+            </ToggleButton>
+            <span style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>
+              State: <strong>{togglePressed ? 'Pressed (Active)' : 'Unpressed (Default)'}</strong>
+            </span>
+          </div>
+        );
+
+      case 'card-header':
+        return (
+          <Box style={{ maxWidth: 460, width: '100%', margin: '0 auto' }}>
+            <Card style={{ width: '100%' }}>
+              <CardHeader
+                header={<CardTitle>Cluster Node Alpha</CardTitle>}
+                description={<CardDescription>Region: us-east-1 (N. Virginia)</CardDescription>}
+                action={<Badge variant="success">Healthy</Badge>}
+              />
+            </Card>
+          </Box>
+        );
+
+      case 'card-footer':
+        return (
+          <Box style={{ maxWidth: 460, width: '100%', margin: '0 auto' }}>
+            <Card style={{ width: '100%', padding: '20px 24px' }}>
+              <CardContent style={{ marginBottom: 16 }}>
+                Confirm deployment of container revisions to production nodes.
+              </CardContent>
+              <CardFooter>
+                <Button variant="secondary" onClick={() => setSplitToast('Deployment cancelled')}>Cancel</Button>
+                <Button variant="primary" onClick={() => setSplitToast('Deployment confirmed')}>Deploy Now</Button>
+              </CardFooter>
+            </Card>
+          </Box>
+        );
+
+      case 'card-preview':
+        return (
+          <Box style={{ maxWidth: 360, width: '100%', margin: '0 auto' }}>
+            <Card style={{ width: '100%' }}>
+              <CardPreview>
+                <Box style={{ height: 160, background: 'linear-gradient(135deg, var(--color-action-primary) 0%, #6366f1 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Text weight="bold" color="inverse">Visual Media Showcase</Text>
+                </Box>
+              </CardPreview>
+              <CardContent style={{ padding: 16 }}>
+                <CardTitle>Spectra UI Media Surface</CardTitle>
+                <CardDescription>CardPreview mounts edge-to-edge banners.</CardDescription>
+              </CardContent>
+            </Card>
+          </Box>
+        );
+
+      case 'carousel':
+        return (
+          <div style={{ maxWidth: 500, width: '100%', margin: '0 auto' }}>
+            <Carousel autoPlay={false}>
+              {[
+                { title: 'Multi-Platform Consistency', desc: 'One design language across Web, iOS, Android, macOS, and Windows' },
+                { title: 'WCAG 2.1 AA Compliance', desc: 'Accessible roving tabindex, high-contrast, screen-reader verified' },
+                { title: 'Sub-15 kB Tree Shaking', desc: 'Optimized ES modules for instant startup performance' },
+              ].map((s, idx) => (
+                <div key={idx} style={{ padding: 40, textAlign: 'center', backgroundColor: 'var(--color-surface-raised)', borderRadius: 12 }}>
+                  <Text as="h3" variant="heading" style={{ margin: '0 0 8px 0', fontSize: 20 }}>{s.title}</Text>
+                  <Text as="p" style={{ margin: 0, color: 'var(--color-text-secondary)', fontSize: 14 }}>{s.desc}</Text>
+                </div>
+              ))}
+            </Carousel>
+          </div>
+        );
+
+      case 'carousel-nav':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
+            <div style={{ fontSize: 14 }}>Slide {carouselIndex + 1} of 5 Active</div>
+            <CarouselNav
+              total={5}
+              current={carouselIndex}
+              onSelect={setCarouselIndex}
+            />
+          </div>
+        );
+
+      case 'interaction-tag':
+        return (
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
+            <InteractionTag
+              selected={tagSelected}
+              icon={<SparklesIcon size={14} />}
+              closable
+              onClose={() => setTagSelected(false)}
+            >
+              TypeScript 5.8
+            </InteractionTag>
+          </div>
+        );
+
+      case 'tag-group':
+        return (
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <TagGroup>
+              {['React', 'TypeScript', 'WebAssembly', 'Node.js'].map((t) => (
+                <InteractionTag key={t} closable>
+                  {t}
+                </InteractionTag>
+              ))}
+            </TagGroup>
+          </div>
+        );
+
+      case 'rating-display':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center' }}>
+            <RatingDisplay value={4.8} max={5} size="lg" />
+            <RatingDisplay value={3.5} max={5} size="md" />
+          </div>
+        );
+
+      case 'menu-grid':
+        return (
+          <div style={{ maxWidth: 440, width: '100%', margin: '0 auto' }}>
+            <MenuGrid columns={2}>
+              <MenuItem icon={<GlobeIcon size={16} />}>CDN Endpoints</MenuItem>
+              <MenuItem icon={<SparklesIcon size={16} />}>AI Copilot</MenuItem>
+              <MenuItem icon={<CubeIcon size={16} />}>Database Clusters</MenuItem>
+              <MenuItem icon={<FocusTargetIcon size={16} />}>Identity & Access</MenuItem>
+            </MenuGrid>
+          </div>
+        );
+
+      case 'portal-mount':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center' }}>
+            <Button variant="primary" onClick={() => setPortalMounted(!portalMounted)}>
+              {portalMounted ? 'Unmount Teleported Overlay' : 'Mount to document.body via Portal'}
+            </Button>
+            {portalMounted && (
+              <Portal>
+                <div
+                  style={{
+                    position: 'fixed',
+                    bottom: 24,
+                    right: 24,
+                    padding: '16px 20px',
+                    backgroundColor: 'var(--color-surface-elevated)',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+                    borderRadius: 12,
+                    border: '1px solid var(--color-border-subtle)',
+                    zIndex: 9999,
+                  }}
+                >
+                  Teleported directly to document.body!
+                </div>
+              </Portal>
+            )}
           </div>
         );
 
@@ -2213,8 +3164,94 @@ export const Native${meta.name}Demo = () => {
 
       case 'accordion':
         return (
-          <div style={{ maxWidth: 560, width: '100%', margin: '0 auto' }}>
-            <Accordion defaultValue="item-1">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 560, width: '100%', margin: '0 auto' }}>
+            <div
+              style={{
+                display: 'flex',
+                gap: 8,
+                flexWrap: 'wrap',
+                padding: '8px 12px',
+                borderRadius: 'var(--radius-component-md, 8px)',
+                backgroundColor: 'var(--color-surface-raised, rgba(0,0,0,0.03))',
+                border: '1px solid var(--color-border-subtle, #edebe9)',
+                fontSize: 12,
+              }}
+            >
+              <span style={{ fontWeight: 600, color: 'var(--color-text-muted, #707070)', alignSelf: 'center' }}>Size:</span>
+              {(['small', 'medium', 'large', 'extra-large'] as const).map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => setAccSize(s)}
+                  style={{
+                    padding: '3px 8px',
+                    borderRadius: 4,
+                    border: '1px solid',
+                    borderColor: accSize === s ? 'var(--color-action-primary, #0078d4)' : 'var(--color-border-subtle, #edebe9)',
+                    backgroundColor: accSize === s ? 'var(--color-action-primary, #0078d4)' : 'transparent',
+                    color: accSize === s ? '#ffffff' : 'var(--color-text-primary, #242424)',
+                    cursor: 'pointer',
+                    fontSize: 11,
+                    fontWeight: accSize === s ? 600 : 400,
+                  }}
+                >
+                  {s}
+                </button>
+              ))}
+
+              <span style={{ width: 1, backgroundColor: 'var(--color-border-subtle, #edebe9)', margin: '0 4px' }} />
+
+              <span style={{ fontWeight: 600, color: 'var(--color-text-muted, #707070)', alignSelf: 'center' }}>Icon:</span>
+              {(['start', 'end'] as const).map((pos) => (
+                <button
+                  key={pos}
+                  type="button"
+                  onClick={() => setAccIconPos(pos)}
+                  style={{
+                    padding: '3px 8px',
+                    borderRadius: 4,
+                    border: '1px solid',
+                    borderColor: accIconPos === pos ? 'var(--color-action-primary, #0078d4)' : 'var(--color-border-subtle, #edebe9)',
+                    backgroundColor: accIconPos === pos ? 'var(--color-action-primary, #0078d4)' : 'transparent',
+                    color: accIconPos === pos ? '#ffffff' : 'var(--color-text-primary, #242424)',
+                    cursor: 'pointer',
+                    fontSize: 11,
+                    fontWeight: accIconPos === pos ? 600 : 400,
+                  }}
+                >
+                  {pos}
+                </button>
+              ))}
+
+              <span style={{ width: 1, backgroundColor: 'var(--color-border-subtle, #edebe9)', margin: '0 4px' }} />
+
+              <button
+                type="button"
+                onClick={() => setAccMultiple(!accMultiple)}
+                style={{
+                  padding: '3px 8px',
+                  borderRadius: 4,
+                  border: '1px solid',
+                  borderColor: accMultiple ? 'var(--color-action-primary, #0078d4)' : 'var(--color-border-subtle, #edebe9)',
+                  backgroundColor: accMultiple ? 'var(--color-action-primary, #0078d4)' : 'transparent',
+                  color: accMultiple ? '#ffffff' : 'var(--color-text-primary, #242424)',
+                  cursor: 'pointer',
+                  fontSize: 11,
+                  fontWeight: accMultiple ? 600 : 400,
+                }}
+              >
+                {accMultiple ? 'Multiple: On' : 'Multiple: Off'}
+              </button>
+            </div>
+
+            <Accordion
+              key={`${accSize}-${accIconPos}-${accMultiple}-${accCollapsible}`}
+              size={accSize}
+              expandIconPosition={accIconPos}
+              multiple={accMultiple}
+              collapsible={accCollapsible}
+              defaultOpenItems={['item-1']}
+            >
               <AccordionItem value="item-1">
                 <AccordionHeader>How does Spectra UI achieve zero layout jank?</AccordionHeader>
                 <AccordionPanel>
@@ -2240,33 +3277,195 @@ export const Native${meta.name}Demo = () => {
         );
 
       case 'avatar': {
-        const statusOptions: {
-          id: 'online' | 'busy' | 'dnd' | 'away' | 'in-meeting' | 'focus' | 'idle' | 'invisible' | 'streaming' | 'offline';
+        const presenceOptions: {
+          id: 'available' | 'busy' | 'away' | 'dnd' | 'out-of-office' | 'offline';
           label: string;
           color: string;
         }[] = [
-          { id: 'online', label: 'Online', color: '#10B981' },
-          { id: 'busy', label: 'Busy', color: '#EF4444' },
-          { id: 'dnd', label: 'DND', color: '#EF4444' },
-          { id: 'away', label: 'Away', color: '#F59E0B' },
-          { id: 'in-meeting', label: 'In Meeting', color: '#8B5CF6' },
-          { id: 'focus', label: 'Focus', color: '#6366F1' },
-          { id: 'idle', label: 'Idle', color: '#F59E0B' },
-          { id: 'invisible', label: 'Invisible', color: '#6B7280' },
-          { id: 'streaming', label: 'Streaming', color: '#A855F7' },
-          { id: 'offline', label: 'Offline', color: '#6B7280' },
+          { id: 'available', label: 'Available', color: '#16A34A' },
+          { id: 'busy', label: 'Busy', color: '#DC2626' },
+          { id: 'away', label: 'Away', color: '#D97706' },
+          { id: 'dnd', label: 'DND', color: '#DC2626' },
+          { id: 'out-of-office', label: 'Out of Office', color: '#7C3AED' },
+          { id: 'offline', label: 'Offline', color: '#71717A' },
         ];
 
         return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center' }}>
-            <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <Avatar name="Sarah Connor" size="xl" status={avatarStatus} />
-              <Avatar name="Alex Vance" size="lg" status={avatarStatus} />
-              <Avatar name="Elena Rostova" size="md" status={avatarStatus} />
-              <Avatar shape="square" name="Bot Agent" size="md" status={avatarStatus} />
-              <Avatar size="sm" status={avatarStatus} />
-              <Avatar size="xs" status={avatarStatus} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center', width: '100%' }}>
+            {/* Control Bar */}
+            <div
+              style={{
+                display: 'flex',
+                gap: 8,
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                alignItems: 'center',
+                padding: '10px 14px',
+                borderRadius: 'var(--radius-component-md, 8px)',
+                backgroundColor: 'var(--color-surface-raised, rgba(0,0,0,0.03))',
+                border: '1px solid var(--color-border-subtle, #edebe9)',
+                fontSize: 12,
+                maxWidth: 720,
+                width: '100%',
+              }}
+            >
+              {/* Size Selectors */}
+              <span style={{ fontWeight: 600, color: 'var(--color-text-muted, #71717A)' }}>Size:</span>
+              {[24, 32, 40, 48, 56, 64].map((s) => (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => setAvatarSize(s)}
+                  style={{
+                    padding: '3px 8px',
+                    borderRadius: 4,
+                    border: '1px solid',
+                    borderColor: avatarSize === s ? 'var(--color-action-primary, #2563EB)' : 'var(--color-border-subtle, #edebe9)',
+                    backgroundColor: avatarSize === s ? 'var(--color-action-primary, #2563EB)' : 'transparent',
+                    color: avatarSize === s ? '#ffffff' : 'var(--color-text-primary, #242424)',
+                    cursor: 'pointer',
+                    fontSize: 11,
+                    fontWeight: avatarSize === s ? 600 : 400,
+                  }}
+                >
+                  {s}px
+                </button>
+              ))}
+
+              <span style={{ width: 1, height: 16, backgroundColor: 'var(--color-border-subtle, #edebe9)', margin: '0 4px' }} />
+
+              {/* Shape Selectors */}
+              <span style={{ fontWeight: 600, color: 'var(--color-text-muted, #71717A)' }}>Shape:</span>
+              {(['circular', 'square'] as const).map((sh) => (
+                <button
+                  key={sh}
+                  type="button"
+                  onClick={() => setAvatarShape(sh)}
+                  style={{
+                    padding: '3px 8px',
+                    borderRadius: 4,
+                    border: '1px solid',
+                    borderColor: avatarShape === sh ? 'var(--color-action-primary, #2563EB)' : 'var(--color-border-subtle, #edebe9)',
+                    backgroundColor: avatarShape === sh ? 'var(--color-action-primary, #2563EB)' : 'transparent',
+                    color: avatarShape === sh ? '#ffffff' : 'var(--color-text-primary, #242424)',
+                    cursor: 'pointer',
+                    fontSize: 11,
+                    fontWeight: avatarShape === sh ? 600 : 400,
+                  }}
+                >
+                  {sh}
+                </button>
+              ))}
+
+              <span style={{ width: 1, height: 16, backgroundColor: 'var(--color-border-subtle, #edebe9)', margin: '0 4px' }} />
+
+              {/* Color Selectors */}
+              <span style={{ fontWeight: 600, color: 'var(--color-text-muted, #71717A)' }}>Color:</span>
+              {(['colorful', 'brand', 'neutral'] as const).map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setAvatarColor(c)}
+                  style={{
+                    padding: '3px 8px',
+                    borderRadius: 4,
+                    border: '1px solid',
+                    borderColor: avatarColor === c ? 'var(--color-action-primary, #2563EB)' : 'var(--color-border-subtle, #edebe9)',
+                    backgroundColor: avatarColor === c ? 'var(--color-action-primary, #2563EB)' : 'transparent',
+                    color: avatarColor === c ? '#ffffff' : 'var(--color-text-primary, #242424)',
+                    cursor: 'pointer',
+                    fontSize: 11,
+                    fontWeight: avatarColor === c ? 600 : 400,
+                  }}
+                >
+                  {c}
+                </button>
+              ))}
+
+              <span style={{ width: 1, height: 16, backgroundColor: 'var(--color-border-subtle, #edebe9)', margin: '0 4px' }} />
+
+              {/* Active Halo Toggle */}
+              <button
+                type="button"
+                onClick={() => setAvatarActive(avatarActive === 'active' ? 'unset' : 'active')}
+                style={{
+                  padding: '3px 8px',
+                  borderRadius: 4,
+                  border: '1px solid',
+                  borderColor: avatarActive === 'active' ? 'var(--color-action-primary, #2563EB)' : 'var(--color-border-subtle, #edebe9)',
+                  backgroundColor: avatarActive === 'active' ? 'var(--color-action-primary, #2563EB)' : 'transparent',
+                  color: avatarActive === 'active' ? '#ffffff' : 'var(--color-text-primary, #242424)',
+                  cursor: 'pointer',
+                  fontSize: 11,
+                  fontWeight: avatarActive === 'active' ? 600 : 400,
+                }}
+              >
+                {avatarActive === 'active' ? 'Active Ring: On' : 'Active Ring: Off'}
+              </button>
+
+              {/* OOF Modifier Toggle */}
+              <button
+                type="button"
+                onClick={() => setAvatarOof(!avatarOof)}
+                style={{
+                  padding: '3px 8px',
+                  borderRadius: 4,
+                  border: '1px solid',
+                  borderColor: avatarOof ? '#7C3AED' : 'var(--color-border-subtle, #edebe9)',
+                  backgroundColor: avatarOof ? '#7C3AED' : 'transparent',
+                  color: avatarOof ? '#ffffff' : 'var(--color-text-primary, #242424)',
+                  cursor: 'pointer',
+                  fontSize: 11,
+                  fontWeight: avatarOof ? 600 : 400,
+                }}
+              >
+                {avatarOof ? 'OOF: Yes' : 'OOF: No'}
+              </button>
             </div>
+
+            {/* Live Interactive Preview */}
+            <div style={{ display: 'flex', gap: 20, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center', padding: '16px 0' }}>
+              <Avatar
+                name="Sarah Connor"
+                size={avatarSize as any}
+                shape={avatarShape}
+                color={avatarColor}
+                status={avatarStatus}
+                outOfOffice={avatarOof}
+                active={avatarActive}
+              />
+              <Avatar
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150"
+                name="Elena Rostova"
+                size={avatarSize as any}
+                shape={avatarShape}
+                status={avatarStatus}
+                outOfOffice={avatarOof}
+              />
+              <Avatar
+                name="Alex Vance"
+                size={avatarSize as any}
+                shape={avatarShape}
+                color="colorful"
+                status={avatarStatus}
+                outOfOffice={avatarOof}
+              />
+              <Avatar
+                shape="square"
+                name="Bot Agent"
+                size={avatarSize as any}
+                color="brand"
+                status={avatarStatus}
+              />
+              <AvatarGroup max={3} size={avatarSize as any}>
+                <Avatar name="David Miller" color="colorful" />
+                <Avatar name="Sam Wilson" color="colorful" />
+                <Avatar name="Robin Hood" color="colorful" />
+                <Avatar name="Jordan Lee" color="colorful" />
+              </AvatarGroup>
+            </div>
+
+            {/* Presence Status Selectors */}
             <div
               style={{
                 display: 'flex',
@@ -2275,12 +3474,12 @@ export const Native${meta.name}Demo = () => {
                 justifyContent: 'center',
                 maxWidth: 680,
                 padding: '8px 12px',
-                borderRadius: 'var(--radius-component-md)',
-                backgroundColor: 'var(--color-surface-raised)',
-                border: '1px solid var(--color-border-subtle)',
+                borderRadius: 'var(--radius-component-md, 8px)',
+                backgroundColor: 'var(--color-surface-raised, rgba(0,0,0,0.03))',
+                border: '1px solid var(--color-border-subtle, #edebe9)',
               }}
             >
-              {statusOptions.map((st) => {
+              {presenceOptions.map((st) => {
                 const isActive = avatarStatus === st.id;
                 return (
                   <button
@@ -2293,9 +3492,9 @@ export const Native${meta.name}Demo = () => {
                       padding: '4px 10px',
                       borderRadius: 4,
                       border: '1px solid',
-                      borderColor: isActive ? 'var(--color-action-primary)' : 'var(--color-border-subtle)',
-                      backgroundColor: isActive ? 'var(--color-action-primary)' : 'transparent',
-                      color: isActive ? 'var(--color-text-inverse)' : 'var(--color-text-secondary)',
+                      borderColor: isActive ? 'var(--color-action-primary, #2563EB)' : 'var(--color-border-subtle, #edebe9)',
+                      backgroundColor: isActive ? 'var(--color-action-primary, #2563EB)' : 'transparent',
+                      color: isActive ? '#ffffff' : 'var(--color-text-secondary, #3F3F46)',
                       cursor: 'pointer',
                       fontSize: 11,
                       fontWeight: isActive ? 600 : 400,
@@ -2307,7 +3506,7 @@ export const Native${meta.name}Demo = () => {
                         width: 7,
                         height: 7,
                         borderRadius: '50%',
-                        backgroundColor: isActive ? 'var(--color-text-inverse)' : st.color,
+                        backgroundColor: isActive ? '#ffffff' : st.color,
                         display: 'inline-block',
                       }}
                     />
@@ -2320,17 +3519,230 @@ export const Native${meta.name}Demo = () => {
         );
       }
 
-      case 'badge':
+      case 'badge': {
+        const starIcon = (
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 1.5l2.1 4.3 4.7.7-3.4 3.3.8 4.7L8 12.2l-4.2 2.3.8-4.7-3.4-3.3 4.7-.7L8 1.5z" />
+          </svg>
+        );
+
         return (
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }}>
-            <Badge variant="default">Default</Badge>
-            <Badge variant="primary">Primary</Badge>
-            <Badge variant="success" dot>Operational</Badge>
-            <Badge variant="warning">Pending</Badge>
-            <Badge variant="error">High Risk</Badge>
-            <Badge variant="info">v2.4.0</Badge>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'center', width: '100%' }}>
+            {/* Interactive Controls Toolbar */}
+            <div
+              style={{
+                display: 'flex',
+                gap: 8,
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 12,
+                padding: '6px 12px',
+                borderRadius: 'var(--radius-component-md, 8px)',
+                backgroundColor: 'var(--color-surface-raised, rgba(0,0,0,0.03))',
+                border: '1px solid var(--color-border-subtle, #edebe9)',
+              }}
+            >
+              {/* Appearance */}
+              <span style={{ fontWeight: 600, color: 'var(--color-text-muted, #71717A)' }}>Appearance:</span>
+              {(['filled', 'ghost', 'outline', 'tint'] as const).map((app) => (
+                <button
+                  key={app}
+                  type="button"
+                  onClick={() => setBadgeAppearance(app)}
+                  style={{
+                    padding: '3px 8px',
+                    borderRadius: 4,
+                    border: '1px solid',
+                    borderColor: badgeAppearance === app ? 'var(--color-action-primary, #2563EB)' : 'var(--color-border-subtle, #edebe9)',
+                    backgroundColor: badgeAppearance === app ? 'var(--color-action-primary, #2563EB)' : 'transparent',
+                    color: badgeAppearance === app ? '#ffffff' : 'var(--color-text-primary, #242424)',
+                    cursor: 'pointer',
+                    fontSize: 11,
+                    fontWeight: badgeAppearance === app ? 600 : 400,
+                  }}
+                >
+                  {app}
+                </button>
+              ))}
+
+              <span style={{ width: 1, height: 16, backgroundColor: 'var(--color-border-subtle, #edebe9)', margin: '0 4px' }} />
+
+              {/* Shape */}
+              <span style={{ fontWeight: 600, color: 'var(--color-text-muted, #71717A)' }}>Shape:</span>
+              {(['rounded', 'circular', 'square'] as const).map((shp) => (
+                <button
+                  key={shp}
+                  type="button"
+                  onClick={() => setBadgeShape(shp)}
+                  style={{
+                    padding: '3px 8px',
+                    borderRadius: 4,
+                    border: '1px solid',
+                    borderColor: badgeShape === shp ? 'var(--color-action-primary, #2563EB)' : 'var(--color-border-subtle, #edebe9)',
+                    backgroundColor: badgeShape === shp ? 'var(--color-action-primary, #2563EB)' : 'transparent',
+                    color: badgeShape === shp ? '#ffffff' : 'var(--color-text-primary, #242424)',
+                    cursor: 'pointer',
+                    fontSize: 11,
+                    fontWeight: badgeShape === shp ? 600 : 400,
+                  }}
+                >
+                  {shp}
+                </button>
+              ))}
+
+              <span style={{ width: 1, height: 16, backgroundColor: 'var(--color-border-subtle, #edebe9)', margin: '0 4px' }} />
+
+              {/* Size */}
+              <span style={{ fontWeight: 600, color: 'var(--color-text-muted, #71717A)' }}>Size:</span>
+              {(['tiny', 'extra-small', 'small', 'medium', 'large', 'extra-large'] as const).map((sz) => (
+                <button
+                  key={sz}
+                  type="button"
+                  onClick={() => setBadgeSize(sz)}
+                  style={{
+                    padding: '3px 8px',
+                    borderRadius: 4,
+                    border: '1px solid',
+                    borderColor: badgeSize === sz ? 'var(--color-action-primary, #2563EB)' : 'var(--color-border-subtle, #edebe9)',
+                    backgroundColor: badgeSize === sz ? 'var(--color-action-primary, #2563EB)' : 'transparent',
+                    color: badgeSize === sz ? '#ffffff' : 'var(--color-text-primary, #242424)',
+                    cursor: 'pointer',
+                    fontSize: 11,
+                    fontWeight: badgeSize === sz ? 600 : 400,
+                  }}
+                >
+                  {sz === 'extra-small' ? 'XS' : sz === 'extra-large' ? 'XL' : sz}
+                </button>
+              ))}
+
+              <span style={{ width: 1, height: 16, backgroundColor: 'var(--color-border-subtle, #edebe9)', margin: '0 4px' }} />
+
+              {/* Dot & Icon Toggles */}
+              <button
+                type="button"
+                onClick={() => setBadgeDot(!badgeDot)}
+                style={{
+                  padding: '3px 8px',
+                  borderRadius: 4,
+                  border: '1px solid',
+                  borderColor: badgeDot ? 'var(--color-action-primary, #2563EB)' : 'var(--color-border-subtle, #edebe9)',
+                  backgroundColor: badgeDot ? 'var(--color-action-primary, #2563EB)' : 'transparent',
+                  color: badgeDot ? '#ffffff' : 'var(--color-text-primary, #242424)',
+                  cursor: 'pointer',
+                  fontSize: 11,
+                  fontWeight: badgeDot ? 600 : 400,
+                }}
+              >
+                {badgeDot ? 'Dot: On' : 'Dot: Off'}
+              </button>
+              <button
+                type="button"
+                onClick={() => setBadgeWithIcon(!badgeWithIcon)}
+                style={{
+                  padding: '3px 8px',
+                  borderRadius: 4,
+                  border: '1px solid',
+                  borderColor: badgeWithIcon ? 'var(--color-action-primary, #2563EB)' : 'var(--color-border-subtle, #edebe9)',
+                  backgroundColor: badgeWithIcon ? 'var(--color-action-primary, #2563EB)' : 'transparent',
+                  color: badgeWithIcon ? '#ffffff' : 'var(--color-text-primary, #242424)',
+                  cursor: 'pointer',
+                  fontSize: 11,
+                  fontWeight: badgeWithIcon ? 600 : 400,
+                }}
+              >
+                {badgeWithIcon ? 'Icon: On' : 'Icon: Off'}
+              </button>
+            </div>
+
+            {/* Color Palette Selector Bar */}
+            <div
+              style={{
+                display: 'flex',
+                gap: 6,
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                padding: '6px 10px',
+                borderRadius: 'var(--radius-component-md, 8px)',
+                backgroundColor: 'var(--color-surface-raised, rgba(0,0,0,0.03))',
+                border: '1px solid var(--color-border-subtle, #edebe9)',
+              }}
+            >
+              {(['brand', 'danger', 'important', 'informative', 'severe', 'subtle', 'success', 'warning'] as const).map((c) => {
+                const isActive = badgeColor === c;
+                return (
+                  <button
+                    key={c}
+                    type="button"
+                    onClick={() => setBadgeColor(c)}
+                    style={{
+                      padding: '3px 8px',
+                      borderRadius: 4,
+                      border: '1px solid',
+                      borderColor: isActive ? 'var(--color-action-primary, #2563EB)' : 'var(--color-border-subtle, #edebe9)',
+                      backgroundColor: isActive ? 'var(--color-action-primary, #2563EB)' : 'transparent',
+                      color: isActive ? '#ffffff' : 'var(--color-text-primary, #242424)',
+                      cursor: 'pointer',
+                      fontSize: 11,
+                      fontWeight: isActive ? 600 : 400,
+                      textTransform: 'capitalize',
+                    }}
+                  >
+                    {c}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Live Interactive Preview */}
+            <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center', padding: '16px 0' }}>
+              <Badge
+                appearance={badgeAppearance}
+                color={badgeColor}
+                shape={badgeShape}
+                size={badgeSize}
+                dot={badgeDot}
+                icon={badgeWithIcon ? starIcon : undefined}
+              >
+                {badgeSize === 'tiny' ? undefined : 'Live Badge'}
+              </Badge>
+
+              <CounterBadge
+                count={24}
+                appearance={badgeAppearance}
+                color={badgeColor}
+                shape={badgeShape}
+                size={badgeSize}
+              />
+
+              <CounterBadge
+                count={150}
+                overflowCount={99}
+                appearance={badgeAppearance}
+                color="danger"
+                shape={badgeShape}
+                size={badgeSize}
+              />
+
+              <PresenceBadge
+                status="available"
+                size={badgeSize === 'tiny' ? 'small' : badgeSize}
+              />
+
+              <PresenceBadge
+                status="busy"
+                size={badgeSize === 'tiny' ? 'small' : badgeSize}
+              />
+
+              <PresenceBadge
+                status="out-of-office"
+                outOfOffice
+                size={badgeSize === 'tiny' ? 'small' : badgeSize}
+              />
+            </div>
           </div>
         );
+      }
 
       case 'tooltip':
         return (
@@ -2406,21 +3818,21 @@ export const Native${meta.name}Demo = () => {
 
       case 'card':
         return (
-          <div style={{ maxWidth: 440, width: '100%', margin: '0 auto' }}>
+          <Box style={{ maxWidth: 440, width: '100%', margin: '0 auto' }}>
             <Card variant="bordered" padding="md">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                <h4 style={{ margin: 0, fontSize: 16, fontWeight: 700 }}>Cluster Deployment #28</h4>
+              <Stack direction="row" justify="between" align="center" style={{ marginBottom: 12 }}>
+                <Text variant="heading-sm" weight="semibold">Cluster Deployment #28</Text>
                 <Badge variant="success" dot>Active</Badge>
-              </div>
-              <p style={{ margin: '0 0 16px 0', fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+              </Stack>
+              <Text variant="body-sm" color="secondary" style={{ marginBottom: 16, lineHeight: 1.5 }}>
                 Telemetry verified across 24 edge nodes. Zero latency regressions detected in the last 24h.
-              </p>
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+              </Text>
+              <Stack direction="row" justify="end" align="center" gap="xs">
                 <Button variant="secondary" size="sm">Logs</Button>
                 <Button variant="primary" size="sm">Configure</Button>
-              </div>
+              </Stack>
             </Card>
-          </div>
+          </Box>
         );
 
       case 'list':
@@ -2451,10 +3863,10 @@ export const Native${meta.name}Demo = () => {
             </Button>
             <Dialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)}>
               <div style={{ padding: 24 }}>
-                <h3 style={{ margin: '0 0 12px 0', fontSize: 18 }}>Confirm System Update</h3>
-                <p style={{ margin: '0 0 20px 0', color: 'var(--color-text-secondary)', fontSize: 14, lineHeight: 1.5 }}>
+                <Text as="h3" variant="heading" style={{ margin: '0 0 12px 0', fontSize: 18 }}>Confirm System Update</Text>
+                <Text as="p" style={{ margin: '0 0 20px 0', color: 'var(--color-text-secondary)', fontSize: 14, lineHeight: 1.5 }}>
                   Are you sure you want to deploy the new design system tokens across all workspaces?
-                </p>
+                </Text>
                 <div style={{ display: 'flex', gap: 12, justifyContent: 'flex-end' }}>
                   <Button variant="secondary" onClick={() => setIsDialogOpen(false)}>
                     Cancel
@@ -2522,14 +3934,15 @@ export const Native${meta.name}Demo = () => {
           </div>
         );
 
+      case 'breadcrumb':
       case 'breadcrumbs':
         return (
-          <Breadcrumbs
+          <Breadcrumb
             items={[
               { label: 'Home', href: '#' },
               { label: 'Design System', href: '#' },
               { label: 'Components', href: '#' },
-              { label: 'Breadcrumbs', isCurrent: true },
+              { label: 'Breadcrumb', isCurrent: true },
             ]}
           />
         );
@@ -3091,10 +4504,12 @@ export const Native${meta.name}Demo = () => {
                 maxWidth: 420,
               }}
             >
-              <h4 style={{ margin: '0 0 8px', fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)' }}>Polymorphic Box Surface</h4>
-              <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-                Serves as the foundational structural container adapting to any HTML semantic element.
-              </p>
+              <Stack gap="xs" align="center">
+                <Text variant="heading-sm" weight="bold">Polymorphic Box Surface</Text>
+                <Text variant="body-sm" color="secondary" style={{ lineHeight: 1.5 }}>
+                  Serves as the foundational structural container adapting to any HTML semantic element.
+                </Text>
+              </Stack>
             </Box>
           </div>
         );
@@ -3193,13 +4608,13 @@ export const Native${meta.name}Demo = () => {
               ))}
             </div>
             <PlatformChassis platform={chassisPlatform} title={`Spectra UI on ${chassisPlatform.toUpperCase()}`}>
-              <div style={{ textAlign: 'center', padding: 16 }}>
-                <h4 style={{ margin: '0 0 8px', fontSize: 15, color: 'var(--color-text-primary)' }}>Native Chassis Surface</h4>
-                <p style={{ margin: '0 0 12px', fontSize: 12, color: 'var(--color-text-secondary)' }}>
+              <Stack gap="sm" align="center" style={{ padding: 16 }}>
+                <Text variant="heading-sm" weight="semibold">Native Chassis Surface</Text>
+                <Text variant="body-xs" color="secondary" style={{ marginBottom: 4 }}>
                   Faithfully renders platform-authentic titlebars, status indicators, and viewports.
-                </p>
+                </Text>
                 <Button size="sm" variant="primary">Trigger Action</Button>
-              </div>
+              </Stack>
             </PlatformChassis>
           </div>
         );
@@ -3286,22 +4701,402 @@ export const Native${meta.name}Demo = () => {
           </div>
         );
 
+      case 'status-indicator':
+        return (
+          <Stack direction="column" gap="lg" align="center" style={{ width: '100%' }}>
+            <Stack direction="row" gap="lg" align="center" wrap justify="center">
+              <LiveIndicator status="online" variant="pulse" label="Available" />
+              <LiveIndicator status="busy" variant="static" label="Busy (DND)" />
+              <LiveIndicator status="connecting" variant="beacon" label="Connecting..." />
+              <LiveIndicator status="offline" variant="static" label="Offline" />
+            </Stack>
+            <Box style={{ backgroundColor: 'var(--color-surface-raised)', padding: '12px 20px', borderRadius: 8 }}>
+              <Stack direction="row" gap="md" align="center">
+                <LiveIndicator status="online" variant="pulse" size="sm" label="System Node" />
+                <LiveIndicator status="connecting" variant="beacon" size="md" label="● LIVE BROADCAST" />
+                <LiveIndicator status="busy" variant="pulse" size="lg" label="Incident Active" />
+              </Stack>
+            </Box>
+          </Stack>
+        );
+
+      case 'field':
+        return (
+          <Box style={{ maxWidth: 420, width: '100%', margin: '0 auto' }}>
+            <Field
+              label="Production Cluster Host"
+              required
+              hint="Fully qualified domain name or IP address"
+              info="Used by Envoy ingress proxy to route inbound traffic"
+            >
+              <TextInput placeholder="e.g. k8s-node-alpha.internal" />
+            </Field>
+          </Box>
+        );
+
+      case 'search-box':
+        return (
+          <Stack direction="column" gap="md" style={{ maxWidth: 420, width: '100%', margin: '0 auto' }}>
+            <SearchBox placeholder="Search repositories, commits, and packages..." fullWidth />
+            <Stack direction="row" gap="sm">
+              <SearchBox size="sm" placeholder="Filter tags..." />
+              <SearchBox size="md" placeholder="Search members..." />
+            </Stack>
+          </Stack>
+        );
+
+      case 'spin-button':
+        return (
+          <Box style={{ maxWidth: 320, width: '100%', margin: '0 auto' }}>
+            <NumberInput
+              label="Replica Instance Count"
+              defaultValue={3}
+              min={1}
+              max={16}
+              step={1}
+              description="Autoscaling node instances between 1 and 16"
+            />
+          </Box>
+        );
+
+      case 'info-label':
+        return (
+          <Stack direction="column" gap="sm" style={{ maxWidth: 400, width: '100%', margin: '0 auto' }}>
+            <InfoLabel
+              htmlFor="deploy-region"
+              info="Direct AWS data center location where computing units run"
+              required
+            >
+              Deployment Region
+            </InfoLabel>
+            <TextInput id="deploy-region" defaultValue="us-east-1 (N. Virginia)" />
+          </Stack>
+        );
+
+      case 'label':
+        return (
+          <Stack direction="column" gap="sm" style={{ maxWidth: 400, width: '100%', margin: '0 auto' }}>
+            <Label htmlFor="label-demo-input" required>
+              Service Account Identifier
+            </Label>
+            <TextInput id="label-demo-input" placeholder="svc-alpha-pipeline" />
+          </Stack>
+        );
+
+      case 'persona':
+        return (
+          <Box style={{ maxWidth: 440, width: '100%', margin: '0 auto' }}>
+            <Stack direction="row" gap="md" align="center" style={{ padding: '14px 18px', borderRadius: 10, backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-subtle)' }}>
+              <div style={{ position: 'relative' }}>
+                <Avatar name="Sarah Connor" size="lg" />
+                <span style={{ position: 'absolute', bottom: -2, right: -2 }}>
+                  <LiveIndicator status="online" variant="pulse" size="sm" label={null} />
+                </span>
+              </div>
+              <Stack direction="column" gap="xs">
+                <span style={{ fontSize: 14, fontWeight: 700 }}>Sarah Connor</span>
+                <span style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>Principal Platform Architect</span>
+                <span style={{ fontSize: 11, color: 'var(--color-action-primary)', marginTop: 2 }}>sarah.c@winplaybox.in</span>
+              </Stack>
+            </Stack>
+          </Box>
+        );
+
+      case 'teaching-popover':
+        return (
+          <Box style={{ maxWidth: 360, width: '100%', margin: '0 auto', padding: '20px 24px', borderRadius: 12, backgroundColor: 'var(--color-surface-elevated)', border: '1px solid var(--color-border-default)', boxShadow: '0 8px 32px rgba(0,0,0,0.12)' }}>
+            <Stack direction="row" justify="between" align="center" style={{ marginBottom: 8, width: '100%' }}>
+              <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--color-action-primary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Feature Tour · Step 1 of 3</span>
+              <Badge variant="primary">New</Badge>
+            </Stack>
+            <Stack gap="xs" style={{ marginBottom: 16 }}>
+              <Text variant="heading-sm" weight="bold">Multi-Platform Token Engine</Text>
+              <Text variant="body-sm" color="secondary" style={{ lineHeight: 1.5 }}>
+                Theme tokens now automatically adapt between Web, iOS, Android, macOS, and Windows with zero runtime overhead.
+              </Text>
+            </Stack>
+            <Stack direction="row" justify="between" align="center" style={{ width: '100%' }}>
+              <Button size="sm" variant="secondary">Skip Tour</Button>
+              <Button size="sm" variant="primary">Next Step</Button>
+            </Stack>
+          </Box>
+        );
+
+      case 'tag-picker':
+        return (
+          <Stack direction="column" gap="sm" style={{ maxWidth: 440, width: '100%', margin: '0 auto' }}>
+            <label style={{ fontSize: 13, fontWeight: 600 }}>Assigned Release Tags</label>
+            <Box style={{ padding: 12, borderRadius: 8, backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-subtle)' }}>
+              <TagGroup>
+                {['Production', 'v0.2.0', 'Zero-Jank', 'WCAG-AA'].map((tag) => (
+                  <InteractionTag key={tag} closable onClose={() => {}}>
+                    {tag}
+                  </InteractionTag>
+                ))}
+              </TagGroup>
+            </Box>
+            <SearchBox size="sm" placeholder="Search & add tags..." fullWidth />
+          </Stack>
+        );
+
+      case 'time-picker':
+        return (
+          <Stack direction="column" gap="sm" style={{ maxWidth: 360, width: '100%', margin: '0 auto' }}>
+            <label style={{ fontSize: 13, fontWeight: 600 }}>Scheduled Execution Time</label>
+            <Stack direction="row" gap="sm" align="center">
+              <TextInput defaultValue="14:30" type="time" style={{ width: 140 }} />
+              <Badge variant="info">UTC +05:30</Badge>
+            </Stack>
+          </Stack>
+        );
+
+      case 'toolbar':
+        return (
+          <Box style={{ maxWidth: 560, width: '100%', margin: '0 auto' }}>
+            <Stack
+              role="toolbar"
+              aria-label="Document editing toolbar"
+              direction="row"
+              gap="sm"
+              align="center"
+              wrap
+              style={{
+                padding: '8px 12px',
+                borderRadius: 8,
+                backgroundColor: 'var(--color-surface-raised)',
+                border: '1px solid var(--color-border-subtle)',
+              }}
+            >
+              <ButtonGroup variant="secondary">
+                <Button size="sm">File</Button>
+                <Button size="sm">Edit</Button>
+                <Button size="sm">View</Button>
+              </ButtonGroup>
+              <div style={{ width: 1, height: 24, backgroundColor: 'var(--color-border-subtle)', margin: '0 4px' }} />
+              <IconButton size="sm" aria-label="Search" icon={<SearchIcon size={14} />} />
+              <IconButton size="sm" aria-label="Info" icon={<InfoIcon size={14} />} />
+              <div style={{ marginLeft: 'auto' }}>
+                <Button size="sm" variant="primary">Publish</Button>
+              </div>
+            </Stack>
+          </Box>
+        );
+
+      case 'overflow': {
+        const allItems = Array.from({ length: 8 }, (_, i) => ({
+          id: `item-${i}`,
+          label: `Item ${i}`,
+        }));
+
+        let visibleCount = 6;
+        if (overflowSandboxWidth < 260) visibleCount = 1;
+        else if (overflowSandboxWidth < 340) visibleCount = 2;
+        else if (overflowSandboxWidth < 420) visibleCount = 4;
+        else if (overflowSandboxWidth < 520) visibleCount = 5;
+        else if (overflowSandboxWidth < 620) visibleCount = 6;
+        else visibleCount = 8;
+
+        const visibleItems = allItems.slice(0, visibleCount);
+        const overflowItems = allItems.slice(visibleCount);
+
+        return (
+          <Stack direction="column" gap="md" align="center" style={{ width: '100%', maxWidth: 640 }}>
+            {/* Interactive Resizer Controls Toolbar */}
+            <Stack
+              direction="row"
+              align="center"
+              justify="between"
+              style={{
+                width: '100%',
+                padding: '8px 14px',
+                backgroundColor: 'var(--color-surface-raised)',
+                borderRadius: 8,
+                border: '1px solid var(--color-border-subtle)',
+                flexWrap: 'wrap',
+                gap: 10,
+              }}
+            >
+              <Stack direction="row" align="center" gap="xs">
+                <Text size="xs" weight="semibold" color="muted">Width:</Text>
+                <input
+                  type="range"
+                  min={220}
+                  max={680}
+                  step={10}
+                  value={overflowSandboxWidth}
+                  onChange={(e) => setOverflowSandboxWidth(Number(e.target.value))}
+                  style={{ width: 130, cursor: 'ew-resize' }}
+                />
+                <Text size="xs" weight="bold" color="primary" style={{ fontVariantNumeric: 'tabular-nums', width: 44 }}>
+                  {overflowSandboxWidth}px
+                </Text>
+              </Stack>
+              <Stack direction="row" align="center" gap="xs">
+                {[
+                  { label: 'Full', val: 660 },
+                  { label: 'Medium', val: 500 },
+                  { label: 'Mobile', val: 360 },
+                  { label: 'Compact', val: 240 },
+                ].map((preset) => (
+                  <Button
+                    key={preset.label}
+                    size="sm"
+                    variant={overflowSandboxWidth === preset.val ? 'primary' : 'secondary'}
+                    onClick={() => setOverflowSandboxWidth(preset.val)}
+                  >
+                    {preset.label}
+                  </Button>
+                ))}
+              </Stack>
+            </Stack>
+
+            {/* Fluent UI Resizable Area Container (Image 4 Benchmark) */}
+            <Box
+              style={{
+                width: overflowSandboxWidth,
+                maxWidth: '100%',
+                minWidth: 200,
+                resize: 'horizontal',
+                overflow: 'hidden',
+                position: 'relative',
+                transition: 'width 0.12s ease',
+                padding: '26px 14px 14px 14px',
+                borderRadius: 4,
+                backgroundColor: 'var(--color-surface)',
+                border: '2px solid #0078D4',
+                boxShadow: '0 2px 14px rgba(0, 120, 212, 0.12)',
+              }}
+            >
+              {/* Attached Resizable Area Top-Left Tab */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  backgroundColor: '#0078D4',
+                  color: '#FFFFFF',
+                  padding: '2px 8px',
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: '0.04em',
+                  userSelect: 'none',
+                }}
+              >
+                Resizable Area
+              </div>
+
+              <Stack direction="row" gap="xs" align="center" justify="between" style={{ width: '100%' }}>
+                <Stack direction="row" gap="xs" align="center" style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
+                  {visibleItems.map((item) => (
+                    <Button
+                      key={item.id}
+                      size="sm"
+                      variant="secondary"
+                      style={{
+                        flexShrink: 0,
+                        borderRadius: 4,
+                        border: '1px solid var(--color-border-default)',
+                      }}
+                    >
+                      {item.label}
+                    </Button>
+                  ))}
+                </Stack>
+                {overflowItems.length > 0 && (
+                  <Menu>
+                    <MenuButton
+                      size="sm"
+                      variant="secondary"
+                      style={{
+                        flexShrink: 0,
+                        borderRadius: 4,
+                        fontWeight: 600,
+                        backgroundColor: 'var(--color-surface-raised)',
+                        border: '1px solid var(--color-border-default)',
+                      }}
+                    >
+                      +{overflowItems.length} {overflowItems.length === 1 ? 'item' : 'items'}
+                    </MenuButton>
+                    {overflowItems.map((item) => (
+                      <MenuItem key={item.id}>{item.label}</MenuItem>
+                    ))}
+                  </Menu>
+                )}
+              </Stack>
+            </Box>
+
+            <Stack direction="row" align="center" gap="xs">
+              <Badge variant="primary" size="sm">↔ Resizable</Badge>
+              <Text size="xs" color="muted">
+                Drag the bottom-right corner or use width presets to test dynamic item overflow collapse.
+              </Text>
+            </Stack>
+          </Stack>
+        );
+      }
+
+      case 'image':
+        return (
+          <Box style={{ maxWidth: 440, width: '100%', margin: '0 auto', textAlign: 'center' }}>
+            <Box style={{ width: '100%', height: 200, borderRadius: 12, overflow: 'hidden', backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-subtle)', background: 'linear-gradient(135deg, rgba(2,132,199,0.1) 0%, rgba(99,102,241,0.1) 100%)' }}>
+              <Stack align="center" justify="center" style={{ width: '100%', height: '100%' }}>
+                <Box style={{ width: 56, height: 56, borderRadius: 14, backgroundColor: 'var(--color-action-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#FFF', fontWeight: 800, fontSize: 20, marginBottom: 10 }}>
+                  SP
+                </Box>
+                <span style={{ fontWeight: 700, fontSize: 15 }}>Responsive Image Surface</span>
+                <span style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginTop: 4 }}>Optimized multi-DPI asset with lazy loading</span>
+              </Stack>
+            </Box>
+          </Box>
+        );
+
+      case 'portal':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center' }}>
+            <Button variant="primary" onClick={() => setPortalMounted(!portalMounted)}>
+              {portalMounted ? 'Unmount Teleported Overlay' : 'Mount to document.body via Portal'}
+            </Button>
+            {portalMounted && (
+              <Portal>
+                <div
+                  style={{
+                    position: 'fixed',
+                    bottom: 24,
+                    right: 24,
+                    padding: '16px 20px',
+                    backgroundColor: 'var(--color-surface-elevated)',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+                    borderRadius: 12,
+                    border: '1px solid var(--color-border-subtle)',
+                    zIndex: 9999,
+                  }}
+                >
+                  Teleported directly to document.body!
+                </div>
+              </Portal>
+            )}
+          </div>
+        );
+
       default:
         return (
-          <div style={{ textAlign: 'center', padding: 24 }}>
-            <Button variant="primary">{meta.name} Action</Button>
-          </div>
+          <Box style={{ textAlign: 'center', padding: 28, borderRadius: 12, backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-subtle)' }}>
+            <Stack gap="xs" align="center">
+              <Text variant="heading-sm" weight="semibold">{meta.name}</Text>
+              <Text variant="body-sm" color="secondary">{meta.description}</Text>
+            </Stack>
+          </Box>
         );
     }
   };
 
-  // Render Mobile Simulator Component
+  // Render Platform-Correct Simulator Component
   const renderNativePreview = () => {
     switch (meta.id) {
       case 'alert':
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%' }}>
-            <Alert variant="info" title="Native Alert">Running on iOS and Android</Alert>
+            <Alert variant="info" title="System Notice">Platform-appropriate feedback indicator</Alert>
             <Alert variant="success" title="Success">Saved to local state</Alert>
           </div>
         );
@@ -3336,17 +5131,18 @@ export const Native${meta.name}Demo = () => {
       case 'chip':
         return (
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            <Chip label="React Native" variant="filled" selected />
-            <Chip label="Hermes" variant="outlined" />
+            <Chip label="Mobile Platform" variant="filled" selected />
+            <Chip label="Hermes Engine" variant="outlined" />
           </div>
         );
 
+      case 'breadcrumb':
       case 'breadcrumbs':
         return (
           <Breadcrumbs
             items={[
-              { label: 'Mobile' },
               { label: 'Settings' },
+              { label: 'Account' },
               { label: 'Profile', isCurrent: true },
             ]}
           />
@@ -3355,20 +5151,96 @@ export const Native${meta.name}Demo = () => {
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%' }}>
             <Button variant="primary" size="md" style={{ width: '100%' }}>
-              Native Filled Button
+              Primary Action
             </Button>
             <Button variant="secondary" size="md" style={{ width: '100%' }}>
-              Native Secondary
+              Secondary Action
             </Button>
             <Button variant="tertiary" size="md" style={{ width: '100%' }}>
-              Native Plain Action
+              Plain Action
             </Button>
+          </div>
+        );
+
+      case 'split-button':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%' }}>
+            <SplitButton
+              variant="primary"
+              options={[
+                { label: 'Rebase and merge', onClick: () => {} },
+                { label: 'Squash and merge', onClick: () => {} },
+              ]}
+              onClick={() => {}}
+            >
+              Merge Pull Request
+            </SplitButton>
+            <SplitButton
+              variant="secondary"
+              options={[
+                { label: 'Export as CSV', onClick: () => {} },
+                { label: 'Export as Markdown', onClick: () => {} },
+              ]}
+              onClick={() => {}}
+            >
+              Export Report
+            </SplitButton>
+          </div>
+        );
+
+      case 'button-group':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%', alignItems: 'center' }}>
+            <ButtonGroup orientation="horizontal" style={{ width: '100%' }}>
+              <Button variant="secondary" size="md" style={{ flex: 1 }}>Grid</Button>
+              <Button variant="primary" size="md" style={{ flex: 1 }}>List</Button>
+              <Button variant="secondary" size="md" style={{ flex: 1 }}>Map</Button>
+            </ButtonGroup>
+            <ButtonGroup orientation="horizontal" style={{ width: '100%' }}>
+              <Button variant="secondary" size="sm" style={{ flex: 1 }}>Day</Button>
+              <Button variant="secondary" size="sm" style={{ flex: 1 }}>Week</Button>
+              <Button variant="primary" size="sm" style={{ flex: 1 }}>Month</Button>
+              <Button variant="secondary" size="sm" style={{ flex: 1 }}>Year</Button>
+            </ButtonGroup>
+          </div>
+        );
+
+      case 'compound-button':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
+            <CompoundButton
+              subtitle="Secure access using hardware biometric vault"
+              icon={<SparklesIcon size={20} />}
+              variant="secondary"
+              style={{ width: '100%' }}
+            >
+              Biometric Authentication
+            </CompoundButton>
+            <CompoundButton
+              subtitle="End-to-end encrypted backup to replica cluster"
+              icon={<SearchIcon size={20} />}
+              variant="primary"
+              style={{ width: '100%' }}
+            >
+              Cloud Synchronization
+            </CompoundButton>
           </div>
         );
       case 'text-input':
         return (
-          <div style={{ width: '100%' }}>
-            <TextInput label="Mobile Search" placeholder="Type query..." leftIcon={<SearchIcon size={16} />} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%' }}>
+            <TextInput
+              label={currentPlatform === 'android' ? 'Search (Material 3 · 48dp)' : 'Search (Apple HIG · 44pt)'}
+              placeholder="Search stories, documents..."
+              leftIcon={<SearchIcon size={16} />}
+              description={currentPlatform === 'android' ? 'Elevation shadow and TalkBack accessibility' : 'Dynamic Type scale and VoiceOver traits'}
+            />
+            <TextInput
+              label="Account Password"
+              type="password"
+              placeholder="Enter secure password"
+              rightIcon={<EyeOffIcon size={16} />}
+            />
           </div>
         );
       case 'switch':
@@ -3383,8 +5255,8 @@ export const Native${meta.name}Demo = () => {
           <div style={{ width: '100%' }}>
             <Accordion defaultValue="item-1">
               <AccordionItem value="item-1">
-                <AccordionHeader>Native Accordion Header</AccordionHeader>
-                <AccordionPanel>LayoutAnimation fluid expansion on iOS and Android.</AccordionPanel>
+                <AccordionHeader>Collapsible Section Header</AccordionHeader>
+                <AccordionPanel>Smooth layout animation and fluid expansion.</AccordionPanel>
               </AccordionItem>
             </Accordion>
           </div>
@@ -3407,10 +5279,12 @@ export const Native${meta.name}Demo = () => {
       case 'card':
         return (
           <Card variant="bordered" style={{ width: '100%' }}>
-            <h4 style={{ margin: '0 0 4px 0', fontSize: 15 }}>Native Mobile Card</h4>
-            <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)' }}>
-              Card surface running on React Native with native border styling.
-            </p>
+            <Stack gap="xs">
+              <Text variant="heading-sm" weight="semibold">Content Card</Text>
+              <Text variant="body-sm" color="secondary">
+                Responsive surface with token styling and interactive elevation.
+              </Text>
+            </Stack>
           </Card>
         );
       case 'tabs':
@@ -3428,6 +5302,40 @@ export const Native${meta.name}Demo = () => {
             </Tabs>
           </div>
         );
+      case 'table':
+        return (
+          <div style={{ width: '100%' }}>
+            <Table
+              striped
+              dense
+            >
+              <TableHead>
+                <TableRow>
+                  <TableHeaderCell>Service</TableHeaderCell>
+                  <TableHeaderCell>Region</TableHeaderCell>
+                  <TableHeaderCell>Latency</TableHeaderCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell style={{ fontWeight: 600 }}>API Gateway</TableCell>
+                  <TableCell>us-east</TableCell>
+                  <TableCell style={{ color: 'var(--color-feedback-success)' }}>24ms</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell style={{ fontWeight: 600 }}>Auth Engine</TableCell>
+                  <TableCell>eu-west</TableCell>
+                  <TableCell style={{ color: 'var(--color-feedback-success)' }}>38ms</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell style={{ fontWeight: 600 }}>DB Cluster</TableCell>
+                  <TableCell>ap-south</TableCell>
+                  <TableCell style={{ color: 'var(--color-feedback-warning)' }}>92ms</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+        );
       case 'copy-button':
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
@@ -3439,7 +5347,7 @@ export const Native${meta.name}Demo = () => {
         return (
           <div style={{ width: '100%' }}>
             <DatePicker
-              label="Native Release Schedule"
+              label="Release Schedule"
               value={demoDatePickerVal}
               onChange={setDemoDatePickerVal}
             />
@@ -3473,11 +5381,71 @@ export const Native${meta.name}Demo = () => {
             />
           </div>
         );
+      case 'icon-button':
+        return (
+          <div style={{ display: 'flex', gap: 16, alignItems: 'center', justifyContent: 'center' }}>
+            <IconButton aria-label="Search" icon={<SearchIcon size={18} />} variant="primary" />
+            <IconButton aria-label="Copy" icon={<CopyIcon size={18} />} variant="secondary" />
+            <IconButton aria-label="Sparkles" icon={<SparklesIcon size={18} />} variant="tertiary" />
+          </div>
+        );
+      case 'checkbox':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%' }}>
+            <Checkbox label="Enable Push Notifications" checked={true} />
+            <Checkbox label="Sync Analytics Data" checked={false} />
+          </div>
+        );
+      case 'radio':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%' }}>
+            <Radio label="Production Server" name="mobile-env" value="prod" checked={true} />
+            <Radio label="Staging Sandbox" name="mobile-env" value="staging" checked={false} />
+          </div>
+        );
+      case 'select':
+        return (
+          <div style={{ width: '100%' }}>
+            <Select
+              label="Select Deployment Region"
+              options={[
+                { label: 'US-East (Virginia)', value: 'us-east' },
+                { label: 'EU-West (Frankfurt)', value: 'eu-west' },
+                { label: 'AP-South (Mumbai)', value: 'ap-south' },
+              ]}
+              defaultValue="us-east"
+            />
+          </div>
+        );
+      case 'bottom-sheet':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%', alignItems: 'center' }}>
+            <Button variant="primary" style={{ width: '100%' }}>Open Action Sheet</Button>
+            <span style={{ fontSize: 12, color: 'var(--color-text-secondary)', textAlign: 'center' }}>
+              Modal bottom sheet with drag handles and velocity snap points
+            </span>
+          </div>
+        );
+      case 'live-indicator':
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14, alignItems: 'center' }}>
+            <LiveIndicator variant="pulse" label="LIVE FEED" />
+            <LiveIndicator variant="beacon" label="EDGE REPLICA" />
+          </div>
+        );
       default:
         return (
-          <Button variant="primary" style={{ width: '100%' }}>
-            Native {meta.name}
-          </Button>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, padding: '32px 16px', textAlign: 'center' }}>
+            <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+              {meta.name} is not available on {platformMeta.name}
+            </div>
+            <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', maxWidth: 280, lineHeight: 1.5 }}>
+              This component is exclusive to other platform architectures.
+            </div>
+            <Button size="sm" variant="secondary" onClick={() => setPlatform('web')}>
+              Switch to Web
+            </Button>
+          </div>
         );
     }
   };
@@ -3526,18 +5494,21 @@ export const Native${meta.name}Demo = () => {
               margin: '0 0 14px 0',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-              <h1
+            <Stack direction="row" align="center" gap="md" wrap>
+              <Text
+                as="h1"
+                variant="heading"
+                size="xl"
+                weight="bold"
                 style={{
                   fontSize: 36,
-                  fontWeight: 800,
                   letterSpacing: '-0.025em',
                   margin: 0,
                   color: 'var(--color-text-primary)',
                 }}
               >
                 {meta.name}
-              </h1>
+              </Text>
 
               {releaseInfo.isNew ? (
                 <span
@@ -3569,8 +5540,10 @@ export const Native${meta.name}Demo = () => {
                   {currentVersion}
                 </span>
               )}
-            </div>
+            </Stack>
 
+            {/* Source code link hidden per user request */}
+            {false && (
             <a
               href={getGitHubUrl(meta.id, platformMode)}
               target="_blank"
@@ -3594,6 +5567,7 @@ export const Native${meta.name}Demo = () => {
               <span>View the source on GitHub</span>
               <ExternalLinkIcon size={13} />
             </a>
+            )}
           </div>
 
           <p
@@ -3608,7 +5582,7 @@ export const Native${meta.name}Demo = () => {
             {meta.description}
           </p>
 
-          {/* Dynamic Resource Pills Row (Image 2 Benchmark - Zero Emojis) */}
+          {/* Dynamic Resource Pills Row (Zero Emojis) */}
           <div
             style={{
               display: 'flex',
@@ -3715,129 +5689,263 @@ export const Native${meta.name}Demo = () => {
               <span>Bundle size {COMPONENT_BUNDLE_SIZES[meta.id] || '< 2.0 kB'}</span>
             </a>
 
-            {/* 4. Source */}
-            <a
-              href={getGitHubUrl(meta.id, platformMode)}
-              target="_blank"
-              rel="noreferrer"
-              title="View source code on GitHub"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
-                fontSize: 12,
-                fontWeight: 600,
-                color: 'var(--color-text-secondary)',
-                backgroundColor: 'var(--color-surface)',
-                border: '1px solid var(--color-border-default)',
-                borderRadius: 20,
-                padding: '5px 12px',
-                textDecoration: 'none',
-                transition: 'all 0.12s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-action-primary)';
-                e.currentTarget.style.color = 'var(--color-action-primary)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-border-default)';
-                e.currentTarget.style.color = 'var(--color-text-secondary)';
-              }}
-            >
-              <GitHubPillIcon size={14} />
-              <span>Source</span>
-            </a>
-
-            {/* 5. WAI-ARIA */}
-            {COMPONENT_WAI_ARIA[meta.id] && (
-              <a
-                href={COMPONENT_WAI_ARIA[meta.id]}
-                target="_blank"
-                rel="noreferrer"
-                title="W3C WAI-ARIA Authoring Practices Guide"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  fontSize: 12,
-                  fontWeight: 600,
-                  color: 'var(--color-text-secondary)',
-                  backgroundColor: 'var(--color-surface)',
-                  border: '1px solid var(--color-border-default)',
-                  borderRadius: 20,
-                  padding: '5px 12px',
-                  textDecoration: 'none',
-                  transition: 'all 0.12s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-action-primary)';
-                  e.currentTarget.style.color = 'var(--color-action-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'var(--color-border-default)';
-                  e.currentTarget.style.color = 'var(--color-text-secondary)';
-                }}
-              >
-                <W3CPillIcon size={14} />
-                <span>WAI-ARIA</span>
-              </a>
+            {/* Storybook, Source, and WAI-ARIA pills hidden per user specification */}
+            {false && (
+              <>
+                <a href={getComponentStorybookUrl(meta.id)}>Storybook</a>
+                <a href={getGitHubUrl(meta.id, platformMode)}>Source</a>
+                {COMPONENT_WAI_ARIA[meta.id] && <a href={COMPONENT_WAI_ARIA[meta.id]}>WAI-ARIA</a>}
+              </>
             )}
           </div>
 
-          {/* Active Platform Banner (Strict Platform Isolation) */}
+          {/* Platform Availability & Capability Enforcement */}
           <div
             style={{
               marginTop: 16,
               display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              padding: '10px 14px',
-              borderRadius: 8,
+              flexDirection: 'column',
+              gap: 12,
+              padding: '14px 16px',
+              borderRadius: 10,
               backgroundColor: 'var(--color-surface-raised)',
               border: '1px solid var(--color-border-subtle)',
-              flexWrap: 'wrap',
-              gap: 8,
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <PlatformIcon platform={currentPlatform} size={18} color="var(--color-action-primary)" />
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-text-primary)' }}>
-                  {platformMeta.name} Platform Environment
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--color-text-muted)' }}>
+                  Available on:
                 </span>
-                <span
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 700,
-                    padding: '1px 6px',
-                    borderRadius: 4,
-                    backgroundColor: 'rgba(0, 127, 255, 0.12)',
-                    color: 'var(--color-action-primary)',
-                    border: '1px solid rgba(0, 127, 255, 0.25)',
-                  }}
-                >
-                  {platformMeta.badge}
+                {supportedPlatforms.map((p) => {
+                  const isCurrent = currentPlatform === p;
+                  const isComingSoon = p === 'windows' || p === 'macos';
+                  return (
+                    <button
+                      key={p}
+                      disabled={isComingSoon}
+                      onClick={() => {
+                        if (isComingSoon) return;
+                        setPlatform(p);
+                      }}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 6,
+                        padding: '4px 10px',
+                        borderRadius: 6,
+                        border: '1px solid',
+                        borderColor: isCurrent ? 'var(--color-action-primary)' : 'var(--color-border-default)',
+                        backgroundColor: isCurrent ? 'rgba(0, 127, 255, 0.12)' : 'var(--color-surface)',
+                        color: isComingSoon
+                          ? 'var(--color-text-muted)'
+                          : isCurrent
+                          ? 'var(--color-action-primary)'
+                          : 'var(--color-text-secondary)',
+                        fontSize: 12,
+                        fontWeight: isCurrent ? 700 : 500,
+                        cursor: isComingSoon ? 'not-allowed' : 'pointer',
+                        opacity: isComingSoon ? 0.6 : 1,
+                        transition: 'all 0.12s ease',
+                      }}
+                    >
+                      <PlatformIcon
+                        platform={p}
+                        size={13}
+                        color={
+                          isComingSoon
+                            ? 'var(--color-text-muted)'
+                            : isCurrent
+                            ? 'var(--color-action-primary)'
+                            : 'var(--color-text-muted)'
+                        }
+                      />
+                      <span>{PLATFORMS[p]?.name || p}</span>
+                      {isComingSoon && (
+                        <span style={{ fontSize: 10, color: 'var(--color-text-muted)', marginLeft: 2, fontWeight: 500 }}>
+                          Coming soon
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <PlatformIcon platform={currentPlatform} size={15} color="var(--color-action-primary)" />
+                <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                  Active Context: {platformMeta.name}
                 </span>
               </div>
             </div>
-            <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>
-              Showing isolated {platformMeta.name} documentation & syntax. Switch target platform in the sidebar dropdown.
-            </span>
+
+            {/* Platform Capabilities & Limitations Summary */}
+            {activeCap && (activeCap.supportedCapabilities || activeCap.unsupportedCapabilities) && (
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  flexWrap: 'wrap',
+                  paddingTop: 10,
+                  borderTop: '1px solid var(--color-border-subtle)',
+                }}
+              >
+                <span style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--color-text-muted)', marginRight: 2 }}>
+                  {platformMeta.name} Capabilities:
+                </span>
+                {activeCap.supportedCapabilities?.map((c) => (
+                  <span
+                    key={c}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 4,
+                      fontSize: 11,
+                      fontWeight: 600,
+                      padding: '2px 8px',
+                      borderRadius: 4,
+                      backgroundColor: 'rgba(16, 185, 129, 0.12)',
+                      color: '#10B981',
+                      border: '1px solid rgba(16, 185, 129, 0.25)',
+                    }}
+                  >
+                    <CheckIcon size={11} />
+                    <span>{c}</span>
+                  </span>
+                ))}
+                {activeCap.unsupportedCapabilities?.map((c) => (
+                  <span
+                    key={c}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 4,
+                      fontSize: 11,
+                      fontWeight: 500,
+                      padding: '2px 8px',
+                      borderRadius: 4,
+                      backgroundColor: 'rgba(239, 68, 68, 0.08)',
+                      color: '#EF4444',
+                      border: '1px solid rgba(239, 68, 68, 0.2)',
+                    }}
+                  >
+                    <CloseIcon size={11} />
+                    <span>{c}</span>
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         </Card>
+
+      {/* Platform Support Verification Gate */}
+      {!isCurrentSupported ? (
+        <Card
+          variant="bordered"
+          style={{
+            backgroundColor: 'var(--color-surface)',
+            padding: '36px 32px',
+            borderRadius: 16,
+            border: '1px solid var(--color-border-subtle)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 16,
+            textAlign: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <div
+            style={{
+              width: 48,
+              height: 48,
+              borderRadius: '50%',
+              backgroundColor: 'rgba(239, 68, 68, 0.1)',
+              color: '#EF4444',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <AlertCircleIcon size={26} />
+          </div>
+          <Text as="h2" variant="heading" style={{ fontSize: 22, fontWeight: 800, margin: 0, color: 'var(--color-text-primary)' }}>
+            {meta.name} is not available on {platformMeta.name}
+          </Text>
+          <Text as="p" style={{ fontSize: 14, color: 'var(--color-text-secondary)', maxWidth: 600, lineHeight: 1.6, margin: 0 }}>
+            Under Spectra UI Architectural Rule 1 & Rule 43 (Capability & Recipe Enforcement), capabilities that are not implemented or verified natively on {platformMeta.name} are hidden and never faked with non-native shims.
+          </Text>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
+            <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-muted)' }}>
+              Switch to a verified platform:
+            </span>
+            {supportedPlatforms.map((p) => (
+              <button
+                key={p}
+                onClick={() => setPlatform(p)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  padding: '6px 14px',
+                  borderRadius: 6,
+                  border: '1px solid var(--color-border-default)',
+                  backgroundColor: 'var(--color-surface-raised)',
+                  color: 'var(--color-action-primary)',
+                  fontSize: 13,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  transition: 'all 0.12s ease',
+                }}
+              >
+                <PlatformIcon platform={p} size={14} color="var(--color-action-primary)" />
+                <span>{PLATFORMS[p]?.name || p}</span>
+              </button>
+            ))}
+          </div>
+        </Card>
+      ) : (
+        <>
 
       {/* 3. PLATFORM VIEW: Web Mode */}
       {platformMode === 'web' && (
         <>
           {/* 1. Primary Demo Section: Basic <Component> */}
           <div id="playground" style={{ display: 'flex', flexDirection: 'column', gap: 14, scrollMarginTop: 80 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)', letterSpacing: '-0.01em' }}>
+                <Text
+                  as="h2"
+                  variant="heading"
+                  size="lg"
+                  weight="bold"
+                  style={{ fontSize: 22, margin: 0, letterSpacing: '-0.01em' }}
+                >
                   Basic {meta.name}
-                </h2>
+                </Text>
                 <a href="#playground" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
               </div>
+
+              {/* Viewport Resizer Toolbar for all components */}
+              <Stack direction="row" align="center" gap="xs" style={{ flexWrap: 'wrap' }}>
+                <Text size="xs" color="muted" weight="semibold">Viewport:</Text>
+                {[
+                  { label: 'Full', val: '100%' as const },
+                  { label: 'Tablet (768px)', val: '768px' as const },
+                  { label: 'Mobile (480px)', val: '480px' as const },
+                  { label: 'Compact (360px)', val: '360px' as const },
+                ].map((vp) => (
+                  <Button
+                    key={vp.label}
+                    size="sm"
+                    variant={playgroundViewportWidth === vp.val ? 'primary' : 'secondary'}
+                    onClick={() => setPlaygroundViewportWidth(vp.val)}
+                  >
+                    {vp.label}
+                  </Button>
+                ))}
+              </Stack>
+
               <button
                 type="button"
                 onClick={() => openFeedbackForSection(`Basic ${meta.name}`)}
@@ -3884,7 +5992,7 @@ export const Native${meta.name}Demo = () => {
                 transition: 'background-color 0.2s ease',
               }}
             >
-              {/* Live Preview Area */}
+              {/* Live Preview Area with Responsive Viewport Wrapper */}
               <div
                 style={{
                   padding: '48px 32px',
@@ -3892,13 +6000,26 @@ export const Native${meta.name}Demo = () => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   minHeight: 200,
+                  overflowX: 'auto',
                 }}
               >
-                {customPlaygroundCode !== null && DynamicPlaygroundComp ? (
-                  React.createElement(DynamicPlaygroundComp)
-                ) : (
-                  renderComponentPreview()
-                )}
+                <div
+                  style={{
+                    width: playgroundViewportWidth,
+                    maxWidth: '100%',
+                    transition: 'width 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: '0 auto',
+                  }}
+                >
+                  {customPlaygroundCode !== null && DynamicPlaygroundComp ? (
+                    React.createElement(DynamicPlaygroundComp)
+                  ) : (
+                    renderComponentPreview()
+                  )}
+                </div>
               </div>
 
               {/* Bottom Action Bar */}
@@ -4040,8 +6161,19 @@ export const Native${meta.name}Demo = () => {
             <ComponentVariantsShowcase componentId={meta.id} />
           </div>
 
-          {/* Resources Section */}
-          <div id="resources" style={{ scrollMarginTop: 80 }}>
+          {/* =========================================================================
+              SPECTRA UI ENTERPRISE 7 PILLARS ARCHITECTURE
+              1. Types: Visual appearances, shapes, density sizing scales, and composite subtypes.
+              2. Behavior: Interactive state machine (hover, focus, pressed, disabled, disabledFocusable, loading, error).
+              3. Layout: 4px grid spacing tokens, responsive density, inline vs full-width block expansion, anatomy & motion.
+              4. Content: Action-oriented verbs, single-line labeling, capitalization rules, and Dos & Don'ts.
+              5. Accessibility: WCAG 2.1 AA compliance, WAI-ARIA APG patterns, double-ring focus visible indicators, and keyboard navigation.
+              6. Resources: Direct Storybook interactive canvas URLs, Figma Community design specs, Fluent 2 usage, and WAI-ARIA patterns.
+              7. Quick Guides: Production code recipes, tree-shakeable imports, and minimizing bundle size.
+              ========================================================================= */}
+
+          {/* PILLAR 1: Types & Hierarchy */}
+          <div id="types" style={{ scrollMarginTop: 80 }}>
             <Card
               variant="bordered"
               style={{
@@ -4051,21 +6183,36 @@ export const Native${meta.name}Demo = () => {
                 borderRadius: 12,
                 display: 'flex',
                 flexDirection: 'column',
-                gap: 16,
+                gap: 20,
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                    Resources & Quick Guides
-                  </h2>
-                  <a href="#resources" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <Text as="h2" variant="heading" style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                    1. Types & Visual Hierarchy
+                  </Text>
+                  <a href="#types" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+                  <span
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.04em',
+                      padding: '2px 8px',
+                      borderRadius: 12,
+                      backgroundColor: 'rgba(0, 127, 255, 0.08)',
+                      color: 'var(--color-action-primary, #0078D4)',
+                      border: '1px solid rgba(0, 127, 255, 0.2)',
+                    }}
+                  >
+                    Fluent 2 Specification
+                  </span>
                 </div>
                 <button
                   type="button"
-                  onClick={() => openFeedbackForSection('Resources & Quick Guides')}
-                  title="Give feedback on Resources & Quick Guides"
-                  aria-label="Give feedback on Resources & Quick Guides"
+                  onClick={() => openFeedbackForSection('1. Types & Hierarchy')}
+                  title="Give feedback on Types & Hierarchy"
+                  aria-label="Give feedback on Types & Hierarchy"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -4094,229 +6241,108 @@ export const Native${meta.name}Demo = () => {
                 </button>
               </div>
 
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-                gap: 16,
-              }}
-            >
-              {/* Card 1: React Guidance */}
-              <div
-                onClick={() => setActiveResourceModal('react')}
-                style={{
-                  padding: '20px',
-                  borderRadius: 'var(--radius-component-md)',
-                  border: '1px solid var(--color-border-default)',
-                  backgroundColor: 'var(--color-surface-raised)',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  minHeight: 110,
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <svg width="32" height="32" viewBox="-11.5 -10.23174 23 20.46348" fill="none">
-                    <circle cx="0" cy="0" r="2.05" fill="var(--color-action-primary)" />
-                    <g stroke="var(--color-action-primary)" strokeWidth="1" fill="none">
-                      <ellipse rx="11" ry="4.2" />
-                      <ellipse rx="11" ry="4.2" transform="rotate(60)" />
-                      <ellipse rx="11" ry="4.2" transform="rotate(120)" />
-                    </g>
-                  </svg>
-                  <ExternalLinkIcon size={16} color="var(--color-text-muted)" />
-                </div>
-                <div>
-                  <div style={{ fontWeight: 600, fontSize: 14 }}>{meta.name} Web Component</div>
-                  <div style={{ fontSize: 12, color: 'var(--color-text-muted)', marginTop: 2 }}>React guidance</div>
-                </div>
-              </div>
+              <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: 'var(--color-text-secondary)' }}>
+                {pillarsData.types.overview}
+              </p>
 
-              {/* Card 2: Design Tokens Guidance */}
               <div
-                onClick={() => setActiveResourceModal('tokens')}
                 style={{
-                  padding: '20px',
-                  borderRadius: 'var(--radius-component-md)',
-                  border: '1px solid var(--color-border-default)',
-                  backgroundColor: 'var(--color-surface-raised)',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  minHeight: 110,
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: 14,
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-action-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 2a7 7 0 0 0 0 14v6" />
-                    <line x1="12" y1="8" x2="12.01" y2="8" />
-                    <line x1="16" y1="12" x2="16.01" y2="12" />
-                  </svg>
-                  <ExternalLinkIcon size={16} color="var(--color-text-muted)" />
-                </div>
-                <div>
-                  <div style={{ fontWeight: 600, fontSize: 14 }}>{meta.name} Design Tokens</div>
-                  <div style={{ fontSize: 12, color: 'var(--color-text-muted)', marginTop: 2 }}>CSS variables & theme integration</div>
-                </div>
-              </div>
-
-              {/* Card 3: WAI Guidance */}
-              <a
-                href={meta.waiUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  padding: '20px',
-                  borderRadius: 'var(--radius-component-md)',
-                  border: '1px solid var(--color-border-default)',
-                  backgroundColor: 'var(--color-surface-raised)',
-                  textDecoration: 'none',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  minHeight: 110,
-                  color: 'inherit',
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                {pillarsData.types.items.map((item) => (
                   <div
+                    key={item.name}
                     style={{
-                      width: 32,
-                      height: 32,
-                      borderRadius: 16,
-                      backgroundColor: 'var(--color-action-primary)',
+                      padding: '16px',
+                      borderRadius: 'var(--radius-component-md, 8px)',
+                      backgroundColor: 'var(--color-surface-raised)',
+                      border: '1px solid var(--color-border-subtle)',
                       display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--color-text-inverse)',
-                      fontWeight: 700,
-                      fontSize: 10,
+                      flexDirection: 'column',
+                      gap: 6,
                     }}
                   >
-                    WAI
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 700, fontSize: 14, color: 'var(--color-text-primary)' }}>
+                        {item.name}
+                      </span>
+                      {item.badge && (
+                        <span
+                          style={{
+                            fontSize: 10,
+                            fontWeight: 700,
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.04em',
+                            padding: '2px 6px',
+                            borderRadius: 4,
+                            backgroundColor: 'var(--color-surface)',
+                            color: 'var(--color-text-muted)',
+                            border: '1px solid var(--color-border-default)',
+                          }}
+                        >
+                          {item.badge}
+                        </span>
+                      )}
+                    </div>
+                    <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+                      {item.description}
+                    </span>
                   </div>
-                  <ExternalLinkIcon size={16} color="var(--color-text-muted)" />
-                </div>
-                <div>
-                  <div style={{ fontWeight: 600, fontSize: 14 }}>{meta.waiPattern}</div>
-                  <div style={{ fontSize: 12, color: 'var(--color-text-muted)', marginTop: 2 }}>WAI guidance</div>
-                </div>
-              </a>
-            </div>
-          </Card>
-        </div>
-
-          {/* Component Anatomy & Slots */}
-          <div id="anatomy" style={{ scrollMarginTop: 80 }}>
-            <Card
-              variant="bordered"
-              style={{
-                backgroundColor: 'var(--color-surface)',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
-                overflow: 'hidden',
-              }}
-            >
-              <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                    Anatomy & Slots
-                  </h2>
-                  <a href="#anatomy" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => openFeedbackForSection('Anatomy & Slots')}
-                  title="Give feedback on Anatomy & Slots"
-                  aria-label="Give feedback on Anatomy & Slots"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: 26,
-                    height: 26,
-                    borderRadius: 6,
-                    border: '1px solid var(--color-border-subtle)',
-                    backgroundColor: 'var(--color-surface)',
-                    color: 'var(--color-text-muted)',
-                    cursor: 'pointer',
-                    transition: 'all 0.12s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = 'var(--color-action-primary)';
-                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
-                    e.currentTarget.style.backgroundColor = 'rgba(0, 127, 255, 0.08)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = 'var(--color-text-muted)';
-                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
-                    e.currentTarget.style.backgroundColor = 'var(--color-surface)';
-                  }}
-                >
-                  <SectionCommentPlusIcon size={14} />
-                </button>
-              </div>
-              <div style={{ overflowX: 'auto', backgroundColor: 'var(--color-surface)' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13, backgroundColor: 'var(--color-surface)' }}>
-                  <thead>
-                    <tr style={{ backgroundColor: 'var(--color-surface-raised)', borderBottom: '1px solid var(--color-border-default)' }}>
-                      <th style={{ padding: '12px 20px', fontWeight: 600 }}>Part / Slot</th>
-                      <th style={{ padding: '12px 20px', fontWeight: 600 }}>Description & Semantic Role</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {meta.anatomy.map((part, idx) => (
-                      <tr
-                        key={part.name}
-                        style={{
-                          backgroundColor: idx % 2 === 0 ? 'var(--color-surface)' : 'var(--color-surface-raised)',
-                          borderBottom: idx === meta.anatomy.length - 1 ? 'none' : '1px solid var(--color-border-subtle)',
-                        }}
-                      >
-                        <td style={{ padding: '12px 20px', fontWeight: 600, fontFamily: 'monospace', color: 'var(--color-action-primary)' }}>
-                          {part.name}
-                        </td>
-                        <td style={{ padding: '12px 20px', color: 'var(--color-text-secondary)' }}>
-                          {part.role}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                ))}
               </div>
             </Card>
           </div>
 
-          {/* Motion & Transition Specification */}
-          <div id="motion" style={{ scrollMarginTop: 80 }}>
+          {/* PILLAR 2: Interactive Behavior & State Machine */}
+          <div id="behavior" style={{ scrollMarginTop: 80 }}>
             <Card
               variant="bordered"
               style={{
                 backgroundColor: 'var(--color-surface)',
                 boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
-                padding: 24,
+                padding: '24px',
+                borderRadius: 12,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 20,
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, flexWrap: 'wrap', gap: 8 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                    Motion, Micro-interactions & Timing
-                  </h2>
-                  <a href="#motion" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <Text as="h2" variant="heading" style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                    2. Interactive Behavior & State Machine
+                  </Text>
+                  <a href="#behavior" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+                  <span
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.04em',
+                      padding: '2px 8px',
+                      borderRadius: 12,
+                      backgroundColor: 'rgba(16, 185, 129, 0.08)',
+                      color: '#10B981',
+                      border: '1px solid rgba(16, 185, 129, 0.25)',
+                    }}
+                  >
+                    State Machine Guaranteed
+                  </span>
                 </div>
                 <button
                   type="button"
-                  onClick={() => openFeedbackForSection('Motion & Transitions')}
-                  title="Give feedback on Motion & Transitions"
-                  aria-label="Give feedback on Motion & Transitions"
+                  onClick={() => openFeedbackForSection('2. Interactive Behavior')}
+                  title="Give feedback on Interactive Behavior"
+                  aria-label="Give feedback on Interactive Behavior"
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    width: 26,
-                    height: 26,
+                    width: 28,
+                    height: 28,
                     borderRadius: 6,
                     border: '1px solid var(--color-border-subtle)',
                     backgroundColor: 'var(--color-surface)',
@@ -4338,204 +6364,1182 @@ export const Native${meta.name}Demo = () => {
                   <SectionCommentPlusIcon size={14} />
                 </button>
               </div>
-              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 16 }}>
-                <div style={{ padding: '8px 16px', borderRadius: 'var(--radius-component-md, 6px)', backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-default)' }}>
-                  <span style={{ color: 'var(--color-text-muted)', fontSize: 12 }}>Duration: </span>
-                  <strong style={{ fontFamily: 'monospace', color: 'var(--color-action-primary)' }}>{meta.motion.duration}</strong>
-                </div>
-                <div style={{ padding: '8px 16px', borderRadius: 'var(--radius-component-md, 6px)', backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-default)' }}>
-                  <span style={{ color: 'var(--color-text-muted)', fontSize: 12 }}>Easing Curve: </span>
-                  <strong style={{ fontFamily: 'monospace', color: 'var(--color-text-primary)' }}>{meta.motion.easing}</strong>
-                </div>
-              </div>
-              <p style={{ margin: 0, color: 'var(--color-text-secondary)', lineHeight: 1.6, fontSize: 14 }}>
-                {meta.motion.description}
+
+              <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: 'var(--color-text-secondary)' }}>
+                {pillarsData.behavior.overview}
               </p>
-            </Card>
-          </div>
 
-          {/* Visual Dos and Don'ts Cards */}
-          <div id="guidelines" style={{ scrollMarginTop: 80 }}>
-            <Card
-              variant="bordered"
-              style={{
-                backgroundColor: 'var(--color-surface)',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
-                padding: 24,
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, flexWrap: 'wrap', gap: 8 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                    Usage Guidelines (Dos and Don'ts)
-                  </h2>
-                  <a href="#guidelines" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => openFeedbackForSection('Usage Guidelines')}
-                  title="Give feedback on Usage Guidelines"
-                  aria-label="Give feedback on Usage Guidelines"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: 26,
-                    height: 26,
-                    borderRadius: 6,
-                    border: '1px solid var(--color-border-subtle)',
-                    backgroundColor: 'var(--color-surface)',
-                    color: 'var(--color-text-muted)',
-                    cursor: 'pointer',
-                    transition: 'all 0.12s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = 'var(--color-action-primary)';
-                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
-                    e.currentTarget.style.backgroundColor = 'rgba(0, 127, 255, 0.08)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = 'var(--color-text-muted)';
-                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
-                    e.currentTarget.style.backgroundColor = 'var(--color-surface)';
-                  }}
-                >
-                  <SectionCommentPlusIcon size={14} />
-                </button>
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
-                {/* DO Card */}
-                <div
-                  style={{
-                    padding: 20,
-                    borderRadius: 'var(--radius-component-md, 8px)',
-                    border: '1.5px solid var(--color-semantic-success, #16A34A)',
-                    backgroundColor: 'var(--color-surface-raised)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 12,
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--color-semantic-success, #16A34A)', fontWeight: 700, fontSize: 15 }}>
-                    <CheckIcon size={16} color="currentColor" />
-                    <span>RECOMMENDED (DO)</span>
-                  </div>
-                  <ul style={{ margin: 0, paddingLeft: 20, color: 'var(--color-text-secondary)', fontSize: 13, lineHeight: 1.7 }}>
-                    {meta.dos.map((d, i) => (
-                      <li key={i}>{d}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* DON'T Card */}
-                <div
-                  style={{
-                    padding: 20,
-                    borderRadius: 'var(--radius-component-md, 8px)',
-                    border: '1.5px solid var(--color-semantic-error, #DC2626)',
-                    backgroundColor: 'var(--color-surface-raised)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 12,
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--color-semantic-error, #DC2626)', fontWeight: 700, fontSize: 15 }}>
-                    <CloseIcon size={16} color="currentColor" />
-                    <span>AVOID (DON'T)</span>
-                  </div>
-                  <ul style={{ margin: 0, paddingLeft: 20, color: 'var(--color-text-secondary)', fontSize: 13, lineHeight: 1.7 }}>
-                    {meta.donts.map((d, i) => (
-                      <li key={i}>{d}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </Card>
-          </div>
-
-          {/* Keyboard Navigation & ARIA Table */}
-          <div id="keyboard" style={{ scrollMarginTop: 80 }}>
-            <Card
-              variant="bordered"
-              style={{
-                backgroundColor: 'var(--color-surface)',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
-                overflow: 'hidden',
-              }}
-            >
-              <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <h2 style={{ fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                    Keyboard Navigation & ARIA Behavior
-                  </h2>
-                  <a href="#keyboard" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => openFeedbackForSection('Keyboard Navigation & ARIA')}
-                  title="Give feedback on Keyboard Navigation"
-                  aria-label="Give feedback on Keyboard Navigation"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: 26,
-                    height: 26,
-                    borderRadius: 6,
-                    border: '1px solid var(--color-border-subtle)',
-                    backgroundColor: 'var(--color-surface)',
-                    color: 'var(--color-text-muted)',
-                    cursor: 'pointer',
-                    transition: 'all 0.12s ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = 'var(--color-action-primary)';
-                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
-                    e.currentTarget.style.backgroundColor = 'rgba(0, 127, 255, 0.08)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = 'var(--color-text-muted)';
-                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
-                    e.currentTarget.style.backgroundColor = 'var(--color-surface)';
-                  }}
-                >
-                  <SectionCommentPlusIcon size={14} />
-                </button>
-              </div>
-              <div style={{ overflowX: 'auto', backgroundColor: 'var(--color-surface)' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13, backgroundColor: 'var(--color-surface)' }}>
-                  <thead>
-                    <tr style={{ backgroundColor: 'var(--color-surface-raised)', borderBottom: '1px solid var(--color-border-default)' }}>
-                      <th style={{ padding: '12px 20px', fontWeight: 600 }}>Key</th>
-                      <th style={{ padding: '12px 20px', fontWeight: 600 }}>Action & Focus Behavior</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {meta.keyboard.map((k, idx) => (
-                      <tr
-                        key={k.key}
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: 14,
+                }}
+              >
+                {pillarsData.behavior.states.map((st) => (
+                  <div
+                    key={st.name}
+                    style={{
+                      padding: '16px',
+                      borderRadius: 'var(--radius-component-md, 8px)',
+                      backgroundColor: 'var(--color-surface-raised)',
+                      border: '1px solid var(--color-border-subtle)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 6,
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 700, fontSize: 14, color: 'var(--color-text-primary)' }}>
+                        {st.name}
+                      </span>
+                      <span
                         style={{
-                          backgroundColor: idx % 2 === 0 ? 'var(--color-surface)' : 'var(--color-surface-raised)',
-                          borderBottom: idx === meta.keyboard.length - 1 ? 'none' : '1px solid var(--color-border-subtle)',
+                          fontSize: 10,
+                          fontWeight: 600,
+                          fontFamily: 'monospace',
+                          padding: '2px 6px',
+                          borderRadius: 4,
+                          backgroundColor: 'var(--color-surface)',
+                          color: 'var(--color-action-primary)',
+                          border: '1px solid var(--color-border-subtle)',
                         }}
                       >
-                        <td style={{ padding: '12px 20px', fontWeight: 600, width: 200 }}>
-                          <kbd style={{ padding: '3px 8px', borderRadius: 4, border: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface)', fontSize: 12 }}>
-                            {k.key}
-                          </kbd>
-                        </td>
-                        <td style={{ padding: '12px 20px', color: 'var(--color-text-secondary)' }}>
-                          {k.description}
-                        </td>
+                        150ms ease
+                      </span>
+                    </div>
+                    <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+                      {st.description}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
+
+          {/* PILLAR 3: Layout, Density, Anatomy & Motion */}
+          <div id="layout" style={{ scrollMarginTop: 80, display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <Card
+              variant="bordered"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                padding: '24px',
+                borderRadius: 12,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 20,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <Text as="h2" variant="heading" style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                    3. Layout, Density & Grid Scales
+                  </Text>
+                  <a href="#layout" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+                  <span
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.04em',
+                      padding: '2px 8px',
+                      borderRadius: 12,
+                      backgroundColor: 'rgba(217, 119, 6, 0.08)',
+                      color: '#D97706',
+                      border: '1px solid rgba(217, 119, 6, 0.25)',
+                    }}
+                  >
+                    4px Design Token Grid
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => openFeedbackForSection('3. Layout & Density')}
+                  title="Give feedback on Layout & Density"
+                  aria-label="Give feedback on Layout & Density"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 28,
+                    height: 28,
+                    borderRadius: 6,
+                    border: '1px solid var(--color-border-subtle)',
+                    backgroundColor: 'var(--color-surface)',
+                    color: 'var(--color-text-muted)',
+                    cursor: 'pointer',
+                    transition: 'all 0.12s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--color-action-primary)';
+                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                    e.currentTarget.style.backgroundColor = 'rgba(0, 127, 255, 0.08)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--color-text-muted)';
+                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface)';
+                  }}
+                >
+                  <SectionCommentPlusIcon size={14} />
+                </button>
+              </div>
+
+              <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: 'var(--color-text-secondary)' }}>
+                {pillarsData.layout.overview}
+              </p>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: 14,
+                }}
+              >
+                {pillarsData.layout.rules.map((rule) => (
+                  <div
+                    key={rule.title}
+                    style={{
+                      padding: '16px',
+                      borderRadius: 'var(--radius-component-md, 8px)',
+                      backgroundColor: 'var(--color-surface-raised)',
+                      border: '1px solid var(--color-border-subtle)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 6,
+                    }}
+                  >
+                    <span style={{ fontWeight: 700, fontSize: 14, color: 'var(--color-text-primary)' }}>
+                      {rule.title}
+                    </span>
+                    <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+                      {rule.description}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            {/* Component Anatomy & Slots */}
+            <div id="anatomy" style={{ scrollMarginTop: 80 }}>
+              <Card
+                variant="bordered"
+                style={{
+                  backgroundColor: 'var(--color-surface)',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                  overflow: 'hidden',
+                }}
+              >
+                <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <Text as="h3" variant="heading" style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                      Anatomy & Slots Specification
+                    </Text>
+                    <a href="#anatomy" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => openFeedbackForSection('Anatomy & Slots')}
+                    title="Give feedback on Anatomy & Slots"
+                    aria-label="Give feedback on Anatomy & Slots"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: 26,
+                      height: 26,
+                      borderRadius: 6,
+                      border: '1px solid var(--color-border-subtle)',
+                      backgroundColor: 'var(--color-surface)',
+                      color: 'var(--color-text-muted)',
+                      cursor: 'pointer',
+                      transition: 'all 0.12s ease',
+                    }}
+                  >
+                    <SectionCommentPlusIcon size={14} />
+                  </button>
+                </div>
+                <div style={{ overflowX: 'auto', backgroundColor: 'var(--color-surface)' }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13, backgroundColor: 'var(--color-surface)' }}>
+                    <thead>
+                      <tr style={{ backgroundColor: 'var(--color-surface-raised)', borderBottom: '1px solid var(--color-border-default)' }}>
+                        <th style={{ padding: '12px 20px', fontWeight: 600 }}>Part / Slot</th>
+                        <th style={{ padding: '12px 20px', fontWeight: 600 }}>Description & Semantic Role</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {meta.anatomy.map((part, idx) => (
+                        <tr
+                          key={part.name}
+                          style={{
+                            backgroundColor: idx % 2 === 0 ? 'var(--color-surface)' : 'var(--color-surface-raised)',
+                            borderBottom: idx === meta.anatomy.length - 1 ? 'none' : '1px solid var(--color-border-subtle)',
+                          }}
+                        >
+                          <td style={{ padding: '12px 20px', fontWeight: 600, fontFamily: 'monospace', color: 'var(--color-action-primary)' }}>
+                            {part.name}
+                          </td>
+                          <td style={{ padding: '12px 20px', color: 'var(--color-text-secondary)' }}>
+                            {part.role}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </Card>
+            </div>
+
+            {/* Motion & Transition Specification */}
+            <div id="motion" style={{ scrollMarginTop: 80 }}>
+              <Card
+                variant="bordered"
+                style={{
+                  backgroundColor: 'var(--color-surface)',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                  padding: 24,
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, flexWrap: 'wrap', gap: 8 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <Text as="h3" variant="heading" style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                      Motion, Micro-interactions & Timing
+                    </Text>
+                    <a href="#motion" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => openFeedbackForSection('Motion & Transitions')}
+                    title="Give feedback on Motion & Transitions"
+                    aria-label="Give feedback on Motion & Transitions"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: 26,
+                      height: 26,
+                      borderRadius: 6,
+                      border: '1px solid var(--color-border-subtle)',
+                      backgroundColor: 'var(--color-surface)',
+                      color: 'var(--color-text-muted)',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <SectionCommentPlusIcon size={14} />
+                  </button>
+                </div>
+                <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 16 }}>
+                  <div style={{ padding: '8px 16px', borderRadius: 'var(--radius-component-md, 6px)', backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-default)' }}>
+                    <span style={{ color: 'var(--color-text-muted)', fontSize: 12 }}>Duration: </span>
+                    <strong style={{ fontFamily: 'monospace', color: 'var(--color-action-primary)' }}>{meta.motion.duration}</strong>
+                  </div>
+                  <div style={{ padding: '8px 16px', borderRadius: 'var(--radius-component-md, 6px)', backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-default)' }}>
+                    <span style={{ color: 'var(--color-text-muted)', fontSize: 12 }}>Easing Curve: </span>
+                    <strong style={{ fontFamily: 'monospace', color: 'var(--color-text-primary)' }}>{meta.motion.easing}</strong>
+                  </div>
+                </div>
+                <p style={{ margin: 0, color: 'var(--color-text-secondary)', lineHeight: 1.6, fontSize: 14 }}>
+                  {meta.motion.description}
+                </p>
+              </Card>
+            </div>
+          </div>
+
+          {/* PILLAR 4: Content Strategy & Labeling Guidelines */}
+          <div id="content" style={{ scrollMarginTop: 80, display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <Card
+              variant="bordered"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                padding: '24px',
+                borderRadius: 12,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 20,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <Text as="h2" variant="heading" style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                    4. Content Strategy & Labeling Guidelines
+                  </Text>
+                  <a href="#content" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+                  <span
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.04em',
+                      padding: '2px 8px',
+                      borderRadius: 12,
+                      backgroundColor: 'rgba(124, 58, 237, 0.08)',
+                      color: '#7C3AED',
+                      border: '1px solid rgba(124, 58, 237, 0.25)',
+                    }}
+                  >
+                    Editorial Standards
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => openFeedbackForSection('4. Content Strategy')}
+                  title="Give feedback on Content Strategy"
+                  aria-label="Give feedback on Content Strategy"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 28,
+                    height: 28,
+                    borderRadius: 6,
+                    border: '1px solid var(--color-border-subtle)',
+                    backgroundColor: 'var(--color-surface)',
+                    color: 'var(--color-text-muted)',
+                    cursor: 'pointer',
+                    transition: 'all 0.12s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--color-action-primary)';
+                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                    e.currentTarget.style.backgroundColor = 'rgba(0, 127, 255, 0.08)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--color-text-muted)';
+                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface)';
+                  }}
+                >
+                  <SectionCommentPlusIcon size={14} />
+                </button>
+              </div>
+
+              <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: 'var(--color-text-secondary)' }}>
+                {pillarsData.content.overview}
+              </p>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: 14,
+                }}
+              >
+                {pillarsData.content.guidelines.map((guide) => (
+                  <div
+                    key={guide.title}
+                    style={{
+                      padding: '16px',
+                      borderRadius: 'var(--radius-component-md, 8px)',
+                      backgroundColor: 'var(--color-surface-raised)',
+                      border: '1px solid var(--color-border-subtle)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 6,
+                    }}
+                  >
+                    <span style={{ fontWeight: 700, fontSize: 14, color: 'var(--color-text-primary)' }}>
+                      {guide.title}
+                    </span>
+                    <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+                      {guide.description}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            {/* Visual Dos and Don'ts Cards */}
+            <div id="guidelines" style={{ scrollMarginTop: 80 }}>
+              <Card
+                variant="bordered"
+                style={{
+                  backgroundColor: 'var(--color-surface)',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                  padding: 24,
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, flexWrap: 'wrap', gap: 8 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <Text as="h3" variant="heading" style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                      Usage Guidelines (Dos and Don'ts)
+                    </Text>
+                    <a href="#guidelines" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => openFeedbackForSection('Usage Guidelines')}
+                    title="Give feedback on Usage Guidelines"
+                    aria-label="Give feedback on Usage Guidelines"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: 26,
+                      height: 26,
+                      borderRadius: 6,
+                      border: '1px solid var(--color-border-subtle)',
+                      backgroundColor: 'var(--color-surface)',
+                      color: 'var(--color-text-muted)',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <SectionCommentPlusIcon size={14} />
+                  </button>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
+                  {/* DO Card */}
+                  <div
+                    style={{
+                      padding: 20,
+                      borderRadius: 'var(--radius-component-md, 8px)',
+                      border: '1.5px solid var(--color-semantic-success, #16A34A)',
+                      backgroundColor: 'var(--color-surface-raised)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 12,
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--color-semantic-success, #16A34A)', fontWeight: 700, fontSize: 15 }}>
+                      <CheckIcon size={16} color="currentColor" />
+                      <span>RECOMMENDED (DO)</span>
+                    </div>
+                    <ul style={{ margin: 0, paddingLeft: 20, color: 'var(--color-text-secondary)', fontSize: 13, lineHeight: 1.7 }}>
+                      {meta.dos.map((d, i) => (
+                        <li key={i}>{d}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* DON'T Card */}
+                  <div
+                    style={{
+                      padding: 20,
+                      borderRadius: 'var(--radius-component-md, 8px)',
+                      border: '1.5px solid var(--color-semantic-error, #DC2626)',
+                      backgroundColor: 'var(--color-surface-raised)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 12,
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--color-semantic-error, #DC2626)', fontWeight: 700, fontSize: 15 }}>
+                      <CloseIcon size={16} color="currentColor" />
+                      <span>AVOID (DON'T)</span>
+                    </div>
+                    <ul style={{ margin: 0, paddingLeft: 20, color: 'var(--color-text-secondary)', fontSize: 13, lineHeight: 1.7 }}>
+                      {meta.donts.map((d, i) => (
+                        <li key={i}>{d}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+
+          {/* PILLAR 5: Accessibility & WAI-ARIA Specifications */}
+          <div id="accessibility" style={{ scrollMarginTop: 80, display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <Card
+              variant="bordered"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                padding: '24px',
+                borderRadius: 12,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 20,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <Text as="h2" variant="heading" style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                    5. Accessibility & ARIA Specifications
+                  </Text>
+                  <a href="#accessibility" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+                  <span
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.04em',
+                      padding: '2px 8px',
+                      borderRadius: 12,
+                      backgroundColor: 'rgba(16, 185, 129, 0.08)',
+                      color: '#10B981',
+                      border: '1px solid rgba(16, 185, 129, 0.25)',
+                    }}
+                  >
+                    WCAG 2.1 AA Compliant
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => openFeedbackForSection('5. Accessibility & ARIA')}
+                  title="Give feedback on Accessibility & ARIA"
+                  aria-label="Give feedback on Accessibility & ARIA"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 28,
+                    height: 28,
+                    borderRadius: 6,
+                    border: '1px solid var(--color-border-subtle)',
+                    backgroundColor: 'var(--color-surface)',
+                    color: 'var(--color-text-muted)',
+                    cursor: 'pointer',
+                    transition: 'all 0.12s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--color-action-primary)';
+                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                    e.currentTarget.style.backgroundColor = 'rgba(0, 127, 255, 0.08)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--color-text-muted)';
+                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface)';
+                  }}
+                >
+                  <SectionCommentPlusIcon size={14} />
+                </button>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+                <div style={{ padding: '6px 12px', borderRadius: 6, backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-default)', fontSize: 13 }}>
+                  <span style={{ color: 'var(--color-text-muted)', marginRight: 6 }}>Semantic Role:</span>
+                  <code style={{ color: 'var(--color-action-primary)', fontWeight: 700 }}>role="{pillarsData.accessibility.role}"</code>
+                </div>
+                <div style={{ padding: '6px 12px', borderRadius: 6, backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-default)', fontSize: 13 }}>
+                  <span style={{ color: 'var(--color-text-muted)', marginRight: 6 }}>Focus Indicator:</span>
+                  <strong style={{ color: 'var(--color-text-primary)' }}>Double-Ring (3:1 Contrast Ratio)</strong>
+                </div>
+              </div>
+
+              <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: 'var(--color-text-secondary)' }}>
+                {pillarsData.accessibility.wcagNotes}
+              </p>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gap: 14,
+                }}
+              >
+                {pillarsData.accessibility.ariaAttributes.map((attr) => (
+                  <div
+                    key={attr.attribute}
+                    style={{
+                      padding: '16px',
+                      borderRadius: 'var(--radius-component-md, 8px)',
+                      backgroundColor: 'var(--color-surface-raised)',
+                      border: '1px solid var(--color-border-subtle)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 6,
+                    }}
+                  >
+                    <code style={{ fontWeight: 700, fontSize: 13, color: 'var(--color-action-primary)' }}>
+                      {attr.attribute}
+                    </code>
+                    <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+                      {attr.description}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            {/* Keyboard Navigation & ARIA Table */}
+            <div id="keyboard" style={{ scrollMarginTop: 80 }}>
+              <Card
+                variant="bordered"
+                style={{
+                  backgroundColor: 'var(--color-surface)',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                  overflow: 'hidden',
+                }}
+              >
+                <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <Text as="h3" variant="heading" style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                      Keyboard Navigation & Focus Traversal
+                    </Text>
+                    <a href="#keyboard" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => openFeedbackForSection('Keyboard Navigation & ARIA')}
+                    title="Give feedback on Keyboard Navigation"
+                    aria-label="Give feedback on Keyboard Navigation"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: 26,
+                      height: 26,
+                      borderRadius: 6,
+                      border: '1px solid var(--color-border-subtle)',
+                      backgroundColor: 'var(--color-surface)',
+                      color: 'var(--color-text-muted)',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <SectionCommentPlusIcon size={14} />
+                  </button>
+                </div>
+                <div style={{ overflowX: 'auto', backgroundColor: 'var(--color-surface)' }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13, backgroundColor: 'var(--color-surface)' }}>
+                    <thead>
+                      <tr style={{ backgroundColor: 'var(--color-surface-raised)', borderBottom: '1px solid var(--color-border-default)' }}>
+                        <th style={{ padding: '12px 20px', fontWeight: 600 }}>Key</th>
+                        <th style={{ padding: '12px 20px', fontWeight: 600 }}>Action & Focus Behavior</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {meta.keyboard.map((k, idx) => (
+                        <tr
+                          key={k.key}
+                          style={{
+                            backgroundColor: idx % 2 === 0 ? 'var(--color-surface)' : 'var(--color-surface-raised)',
+                            borderBottom: idx === meta.keyboard.length - 1 ? 'none' : '1px solid var(--color-border-subtle)',
+                          }}
+                        >
+                          <td style={{ padding: '12px 20px', fontWeight: 600, width: 200 }}>
+                            <kbd style={{ padding: '3px 8px', borderRadius: 4, border: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface)', fontSize: 12 }}>
+                              {k.key}
+                            </kbd>
+                          </td>
+                          <td style={{ padding: '12px 20px', color: 'var(--color-text-secondary)' }}>
+                            {k.description}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </Card>
+            </div>
+          </div>
+
+          {/* PILLAR 6: Resources & Storybook Integration - Hidden per user specification */}
+          {false && (
+          <div id="resources" style={{ scrollMarginTop: 80 }}>
+            <Card
+              variant="bordered"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                padding: '24px',
+                borderRadius: 12,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 20,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <Text as="h2" variant="heading" style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                    6. Resources & Multi-Platform Specs
+                  </Text>
+                  <a href="#resources" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+                  <span
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.04em',
+                      padding: '2px 8px',
+                      borderRadius: 12,
+                      backgroundColor: 'rgba(255, 71, 133, 0.08)',
+                      color: '#FF4785',
+                      border: '1px solid rgba(255, 71, 133, 0.25)',
+                    }}
+                  >
+                    Storybook Linked
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => openFeedbackForSection('6. Resources & Storybook')}
+                  title="Give feedback on Resources & Storybook"
+                  aria-label="Give feedback on Resources & Storybook"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 28,
+                    height: 28,
+                    borderRadius: 6,
+                    border: '1px solid var(--color-border-subtle)',
+                    backgroundColor: 'var(--color-surface)',
+                    color: 'var(--color-text-muted)',
+                    cursor: 'pointer',
+                    transition: 'all 0.12s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--color-action-primary)';
+                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                    e.currentTarget.style.backgroundColor = 'rgba(0, 127, 255, 0.08)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--color-text-muted)';
+                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface)';
+                  }}
+                >
+                  <SectionCommentPlusIcon size={14} />
+                </button>
+              </div>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+                  gap: 16,
+                }}
+              >
+                {/* 1. Official Storybook Live Interactive Canvas */}
+                <a
+                  href={storybookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    padding: '20px',
+                    borderRadius: 'var(--radius-component-md, 8px)',
+                    border: '1.5px solid rgba(255, 71, 133, 0.3)',
+                    backgroundColor: 'var(--color-surface-raised)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    minHeight: 120,
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    transition: 'all 0.15s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = '#FF4785';
+                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(255, 71, 133, 0.15)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'rgba(255, 71, 133, 0.3)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <StorybookPillIcon size={24} />
+                      <span
+                        style={{
+                          fontSize: 10,
+                          fontWeight: 700,
+                          padding: '2px 6px',
+                          borderRadius: 4,
+                          backgroundColor: '#FF4785',
+                          color: '#ffffff',
+                          letterSpacing: '0.04em',
+                        }}
+                      >
+                        STORYBOOK LIVE
+                      </span>
+                    </div>
+                    <ExternalLinkIcon size={16} color="var(--color-text-muted)" />
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: 15, color: 'var(--color-text-primary)' }}>
+                      {meta.name} Storybook Canvas
+                    </div>
+                    <div style={{ fontSize: 12, color: 'var(--color-text-muted)', marginTop: 4 }}>
+                      Interactive isolated canvas & component story matrix
+                    </div>
+                  </div>
+                </a>
+
+                {/* 2. Spectra UI Component Source Code */}
+                <a
+                  href={getGitHubUrl(meta.id, platformMode)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    padding: '20px',
+                    borderRadius: 'var(--radius-component-md, 8px)',
+                    border: '1.5px solid var(--color-border-default)',
+                    backgroundColor: 'var(--color-surface-raised)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    minHeight: 120,
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    transition: 'all 0.15s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 127, 255, 0.12)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-border-default)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-action-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="16 18 22 12 16 6" />
+                        <polyline points="8 6 2 12 8 18" />
+                      </svg>
+                      <span
+                        style={{
+                          fontSize: 10,
+                          fontWeight: 700,
+                          padding: '2px 6px',
+                          borderRadius: 4,
+                          backgroundColor: 'var(--color-surface)',
+                          color: 'var(--color-text-primary)',
+                          border: '1px solid var(--color-border-subtle)',
+                          letterSpacing: '0.04em',
+                        }}
+                      >
+                        GITHUB REPO
+                      </span>
+                    </div>
+                    <ExternalLinkIcon size={16} color="var(--color-text-muted)" />
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: 15, color: 'var(--color-text-primary)' }}>
+                      {meta.name} Source Code
+                    </div>
+                    <div style={{ fontSize: 12, color: 'var(--color-text-muted)', marginTop: 4 }}>
+                      @winplaybox/react implementation & TypeScript source
+                    </div>
+                  </div>
+                </a>
+
+                {/* 3. W3C ARIA APG Accessibility Pattern */}
+                <a
+                  href={meta.waiUrl || 'https://www.w3.org/WAI/ARIA/apg/patterns/'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    padding: '20px',
+                    borderRadius: 'var(--radius-component-md, 8px)',
+                    border: '1px solid var(--color-border-default)',
+                    backgroundColor: 'var(--color-surface-raised)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    minHeight: 120,
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    transition: 'all 0.15s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-border-default)';
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <span
+                        style={{
+                          fontSize: 11,
+                          fontWeight: 800,
+                          color: 'var(--color-action-primary)',
+                          backgroundColor: 'rgba(0, 127, 255, 0.1)',
+                          padding: '2px 8px',
+                          borderRadius: 4,
+                        }}
+                      >
+                        W3C APG
+                      </span>
+                    </div>
+                    <ExternalLinkIcon size={16} color="var(--color-text-muted)" />
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: 15, color: 'var(--color-text-primary)' }}>
+                      {meta.name} Accessible Pattern
+                    </div>
+                    <div style={{ fontSize: 12, color: 'var(--color-text-muted)', marginTop: 4 }}>
+                      WCAG 2.1 AA keyboard navigation & WAI-ARIA contract
+                    </div>
+                  </div>
+                </a>
+
+                {/* 4. React Component Guidance */}
+                <div
+                  onClick={() => setActiveResourceModal('react')}
+                  style={{
+                    padding: '20px',
+                    borderRadius: 'var(--radius-component-md, 8px)',
+                    border: '1px solid var(--color-border-default)',
+                    backgroundColor: 'var(--color-surface-raised)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    minHeight: 120,
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <svg width="28" height="28" viewBox="-11.5 -10.23174 23 20.46348" fill="none">
+                      <circle cx="0" cy="0" r="2.05" fill="var(--color-action-primary)" />
+                      <g stroke="var(--color-action-primary)" strokeWidth="1" fill="none">
+                        <ellipse rx="11" ry="4.2" />
+                        <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+                        <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+                      </g>
+                    </svg>
+                    <ExternalLinkIcon size={16} color="var(--color-text-muted)" />
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: 15, color: 'var(--color-text-primary)' }}>
+                      {meta.name} Web Component
+                    </div>
+                    <div style={{ fontSize: 12, color: 'var(--color-text-muted)', marginTop: 4 }}>
+                      React guidance & programmatic API
+                    </div>
+                  </div>
+                </div>
+
+                {/* 5. Design Tokens Guidance */}
+                <div
+                  onClick={() => setActiveResourceModal('tokens')}
+                  style={{
+                    padding: '20px',
+                    borderRadius: 'var(--radius-component-md, 8px)',
+                    border: '1px solid var(--color-border-default)',
+                    backgroundColor: 'var(--color-surface-raised)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    minHeight: 120,
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-action-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 2a7 7 0 0 0 0 14v6" />
+                      <line x1="12" y1="8" x2="12.01" y2="8" />
+                      <line x1="16" y1="12" x2="16.01" y2="12" />
+                    </svg>
+                    <ExternalLinkIcon size={16} color="var(--color-text-muted)" />
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: 15, color: 'var(--color-text-primary)' }}>
+                      {meta.name} Design Tokens
+                    </div>
+                    <div style={{ fontSize: 12, color: 'var(--color-text-muted)', marginTop: 4 }}>
+                      CSS variables & theme integration
+                    </div>
+                  </div>
+                </div>
+
+                {/* 6. WAI-ARIA Guidance */}
+                <a
+                  href={meta.waiUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    padding: '20px',
+                    borderRadius: 'var(--radius-component-md, 8px)',
+                    border: '1px solid var(--color-border-default)',
+                    backgroundColor: 'var(--color-surface-raised)',
+                    textDecoration: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    minHeight: 120,
+                    color: 'inherit',
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <div
+                      style={{
+                        width: 28,
+                        height: 28,
+                        borderRadius: 14,
+                        backgroundColor: 'var(--color-action-primary)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'var(--color-text-inverse, #ffffff)',
+                        fontWeight: 700,
+                        fontSize: 10,
+                      }}
+                    >
+                      WAI
+                    </div>
+                    <ExternalLinkIcon size={16} color="var(--color-text-muted)" />
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: 15, color: 'var(--color-text-primary)' }}>
+                      {meta.waiPattern}
+                    </div>
+                    <div style={{ fontSize: 12, color: 'var(--color-text-muted)', marginTop: 4 }}>
+                      W3C Authoring Practices Guide
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </Card>
+          </div>
+          )}
+
+          {/* PILLAR 7: Quick Guides & Production Recipes */}
+          <div id="quick-guides" style={{ scrollMarginTop: 80 }}>
+            <Card
+              variant="bordered"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                padding: '24px',
+                borderRadius: 12,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 20,
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <Text as="h2" variant="heading" style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                    6. Quick Guides & Production Recipes
+                  </Text>
+                  <a href="#quick-guides" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 16 }} title="Direct link to this section">#</a>
+                  <span
+                    style={{
+                      fontSize: 11,
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.04em',
+                      padding: '2px 8px',
+                      borderRadius: 12,
+                      backgroundColor: 'rgba(2, 132, 199, 0.08)',
+                      color: '#0284c7',
+                      border: '1px solid rgba(2, 132, 199, 0.25)',
+                    }}
+                  >
+                    Tree-Shakeable
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => openFeedbackForSection('6. Quick Guides')}
+                  title="Give feedback on Quick Guides"
+                  aria-label="Give feedback on Quick Guides"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: 28,
+                    height: 28,
+                    borderRadius: 6,
+                    border: '1px solid var(--color-border-subtle)',
+                    backgroundColor: 'var(--color-surface)',
+                    color: 'var(--color-text-muted)',
+                    cursor: 'pointer',
+                    transition: 'all 0.12s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--color-action-primary)';
+                    e.currentTarget.style.borderColor = 'var(--color-action-primary)';
+                    e.currentTarget.style.backgroundColor = 'rgba(0, 127, 255, 0.08)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--color-text-muted)';
+                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface)';
+                  }}
+                >
+                  <SectionCommentPlusIcon size={14} />
+                </button>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                {pillarsData.quickGuides.map((guide, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      padding: '18px 20px',
+                      borderRadius: 'var(--radius-component-md, 8px)',
+                      backgroundColor: 'var(--color-surface-raised)',
+                      border: '1px solid var(--color-border-subtle)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 10,
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <span style={{ fontWeight: 700, fontSize: 15, color: 'var(--color-text-primary)' }}>
+                        {guide.title}
+                      </span>
+                    </div>
+                    <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+                      {guide.description}
+                    </span>
+                    {guide.codeSnippet && (
+                      <div
+                        style={{
+                          position: 'relative',
+                          marginTop: 6,
+                          borderRadius: 6,
+                          overflow: 'hidden',
+                          border: '1px solid var(--color-border-default)',
+                          backgroundColor: '#0F172A',
+                          color: '#E2E8F0',
+                          padding: '12px 16px',
+                          fontSize: 12,
+                          fontFamily: 'monospace',
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        <pre style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                          <code>{guide.codeSnippet}</code>
+                        </pre>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            navigator.clipboard.writeText(guide.codeSnippet!);
+                          }}
+                          title="Copy recipe code"
+                          style={{
+                            position: 'absolute',
+                            top: 8,
+                            right: 8,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 4,
+                            padding: '3px 8px',
+                            borderRadius: 4,
+                            border: '1px solid rgba(255,255,255,0.2)',
+                            backgroundColor: 'rgba(255,255,255,0.1)',
+                            color: '#ffffff',
+                            cursor: 'pointer',
+                            fontSize: 11,
+                          }}
+                        >
+                          <CopyIcon size={12} />
+                          <span>Copy</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ))}
               </div>
             </Card>
           </div>
 
           {/* Comprehensive API Reference: Props, CSS Classes, Design Tokens, Native Mobile API */}
+          <ComponentApiSection componentId={meta.id} />
           <ComponentApiSection componentId={meta.id} />
         </>
       )}
@@ -4563,9 +7567,9 @@ export const Native${meta.name}Demo = () => {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
-                <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                  Apple iOS Usage Recipes & Variations
-                </h2>
+                <Text as="h2" variant="heading" style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                  Apple iOS Recipes & Interactive Variations
+                </Text>
                 <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>
                   Apple HIG 44pt Touch Targets · Swift & React Native
                 </span>
@@ -4599,9 +7603,9 @@ export const Native${meta.name}Demo = () => {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
-                <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                  Google Android Usage Recipes & Variations
-                </h2>
+                <Text as="h2" variant="heading" style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                  Google Android Recipes & Interactive Variations
+                </Text>
                 <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>
                   Material 3 48dp Touch Targets · Kotlin & React Native
                 </span>
@@ -4635,9 +7639,9 @@ export const Native${meta.name}Demo = () => {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
-                <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                  Microsoft Windows Usage Recipes & Variations
-                </h2>
+                <Text as="h2" variant="heading" style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                  Microsoft Windows Recipes & Interactive Variations
+                </Text>
                 <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>
                   WinUI 3 · Acrylic/Mica · C# XAML & React Native for Windows
                 </span>
@@ -4671,9 +7675,9 @@ export const Native${meta.name}Demo = () => {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
-                <h2 style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
-                  Apple macOS Usage Recipes & Variations
-                </h2>
+                <Text as="h2" variant="heading" style={{ fontSize: 22, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+                  Apple macOS Recipes & Interactive Variations
+                </Text>
                 <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>
                   macOS Sequoia · AppKit / SwiftUI · React Native for macOS
                 </span>
@@ -4682,6 +7686,8 @@ export const Native${meta.name}Demo = () => {
             <ComponentVariantsShowcase componentId={meta.id} />
           </div>
         </div>
+      )}
+        </>
       )}
 
 
@@ -4693,13 +7699,13 @@ export const Native${meta.name}Demo = () => {
           onClose={() => setActiveResourceModal(null)}
         >
           <div style={{ padding: 24 }}>
-            <h3 style={{ margin: '0 0 12px', fontSize: 18 }}>
+            <Text as="h3" variant="heading" style={{ margin: '0 0 12px', fontSize: 18, color: 'var(--color-text-primary)' }}>
               {activeResourceModal === 'react'
                 ? `${meta.name} — Web React Guidance`
                 : activeResourceModal === 'tokens'
                 ? `${meta.name} — Design Tokens & CSS Variables`
                 : `${meta.name} — Mobile Native Guidance`}
-            </h3>
+            </Text>
             <p style={{ color: 'var(--color-text-secondary)', fontSize: 14, margin: '0 0 16px' }}>
               {activeResourceModal === 'react'
                 ? `Import directly from @winplaybox/react for Web applications:`
@@ -4747,9 +7753,9 @@ export const Native${meta.name}Demo = () => {
           onClose={() => setIsMarkdownModalOpen(false)}
         >
           <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 14 }}>
-            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+            <Text as="h3" variant="heading" style={{ margin: 0, fontSize: 18, fontWeight: 700, color: 'var(--color-text-primary)' }}>
               {meta.name} Documentation (Markdown)
-            </h3>
+            </Text>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
               <span style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>
                 Raw GitHub-compatible documentation markdown for {meta.name}
@@ -5095,6 +8101,7 @@ export const Native${meta.name}Demo = () => {
 
       {/* Sticky Table of Contents (Card Pattern Touching Corner Right Side) */}
       <div
+        className="doc-right-toc"
         style={{
           width: 250,
           position: 'sticky',
@@ -5226,129 +8233,254 @@ export const Native${meta.name}Demo = () => {
 
           {platformMode === 'web' && (
             <>
-              {/* Section: Resources */}
+              {/* Pillar 1: Types & Hierarchy */}
               <a
-                href="#resources"
-                onClick={(e) => scrollToSection(e, 'resources')}
+                href="#types"
+                onClick={(e) => scrollToSection(e, 'types')}
                 style={{
                   display: 'block',
                   padding: '6px 0 6px 14px',
                   marginLeft: -1,
-                  borderLeft: activeSection === 'resources' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
-                  color: activeSection === 'resources' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-                  fontWeight: activeSection === 'resources' ? 600 : 400,
+                  borderLeft: activeSection === 'types' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
+                  color: activeSection === 'types' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontWeight: activeSection === 'types' ? 600 : 400,
                   textDecoration: 'none',
                   fontSize: 13,
                   transition: 'all 0.12s ease',
                 }}
                 onMouseEnter={(e) => {
-                  if (activeSection !== 'resources') e.currentTarget.style.color = 'var(--color-text-primary)';
+                  if (activeSection !== 'types') e.currentTarget.style.color = 'var(--color-text-primary)';
                 }}
                 onMouseLeave={(e) => {
-                  if (activeSection !== 'resources') e.currentTarget.style.color = 'var(--color-text-secondary)';
+                  if (activeSection !== 'types') e.currentTarget.style.color = 'var(--color-text-secondary)';
                 }}
               >
-                Resources
+                1. Types & Hierarchy
               </a>
 
-              {/* Section: Anatomy */}
+              {/* Pillar 2: Interactive Behavior */}
+              <a
+                href="#behavior"
+                onClick={(e) => scrollToSection(e, 'behavior')}
+                style={{
+                  display: 'block',
+                  padding: '6px 0 6px 14px',
+                  marginLeft: -1,
+                  borderLeft: activeSection === 'behavior' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
+                  color: activeSection === 'behavior' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontWeight: activeSection === 'behavior' ? 600 : 400,
+                  textDecoration: 'none',
+                  fontSize: 13,
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (activeSection !== 'behavior') e.currentTarget.style.color = 'var(--color-text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  if (activeSection !== 'behavior') e.currentTarget.style.color = 'var(--color-text-secondary)';
+                }}
+              >
+                2. Interactive Behavior
+              </a>
+
+              {/* Pillar 3: Layout & Density */}
+              <a
+                href="#layout"
+                onClick={(e) => scrollToSection(e, 'layout')}
+                style={{
+                  display: 'block',
+                  padding: '6px 0 6px 14px',
+                  marginLeft: -1,
+                  borderLeft: activeSection === 'layout' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
+                  color: activeSection === 'layout' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontWeight: activeSection === 'layout' ? 600 : 400,
+                  textDecoration: 'none',
+                  fontSize: 13,
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (activeSection !== 'layout') e.currentTarget.style.color = 'var(--color-text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  if (activeSection !== 'layout') e.currentTarget.style.color = 'var(--color-text-secondary)';
+                }}
+              >
+                3. Layout & Density
+              </a>
+
+              {/* Sub-item: Anatomy & Slots */}
               <a
                 href="#anatomy"
                 onClick={(e) => scrollToSection(e, 'anatomy')}
                 style={{
                   display: 'block',
-                  padding: '6px 0 6px 14px',
+                  padding: '3px 0 3px 26px',
                   marginLeft: -1,
                   borderLeft: activeSection === 'anatomy' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
-                  color: activeSection === 'anatomy' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  color: activeSection === 'anatomy' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
                   fontWeight: activeSection === 'anatomy' ? 600 : 400,
                   textDecoration: 'none',
-                  fontSize: 13,
+                  fontSize: 12,
                   transition: 'all 0.12s ease',
                 }}
                 onMouseEnter={(e) => {
                   if (activeSection !== 'anatomy') e.currentTarget.style.color = 'var(--color-text-primary)';
                 }}
                 onMouseLeave={(e) => {
-                  if (activeSection !== 'anatomy') e.currentTarget.style.color = 'var(--color-text-secondary)';
+                  if (activeSection !== 'anatomy') e.currentTarget.style.color = 'var(--color-text-muted)';
                 }}
               >
                 Anatomy & Slots
               </a>
 
-              {/* Section: Motion */}
+              {/* Sub-item: Motion & Timing */}
               <a
                 href="#motion"
                 onClick={(e) => scrollToSection(e, 'motion')}
                 style={{
                   display: 'block',
-                  padding: '6px 0 6px 14px',
+                  padding: '3px 0 3px 26px',
                   marginLeft: -1,
                   borderLeft: activeSection === 'motion' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
-                  color: activeSection === 'motion' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  color: activeSection === 'motion' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
                   fontWeight: activeSection === 'motion' ? 600 : 400,
                   textDecoration: 'none',
-                  fontSize: 13,
+                  fontSize: 12,
                   transition: 'all 0.12s ease',
                 }}
                 onMouseEnter={(e) => {
                   if (activeSection !== 'motion') e.currentTarget.style.color = 'var(--color-text-primary)';
                 }}
                 onMouseLeave={(e) => {
-                  if (activeSection !== 'motion') e.currentTarget.style.color = 'var(--color-text-secondary)';
+                  if (activeSection !== 'motion') e.currentTarget.style.color = 'var(--color-text-muted)';
                 }}
               >
-                Motion & Effects
+                Motion & Timing
               </a>
 
-              {/* Section: Guidelines */}
+              {/* Pillar 4: Content Guidelines */}
+              <a
+                href="#content"
+                onClick={(e) => scrollToSection(e, 'content')}
+                style={{
+                  display: 'block',
+                  padding: '6px 0 6px 14px',
+                  marginLeft: -1,
+                  borderLeft: activeSection === 'content' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
+                  color: activeSection === 'content' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontWeight: activeSection === 'content' ? 600 : 400,
+                  textDecoration: 'none',
+                  fontSize: 13,
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (activeSection !== 'content') e.currentTarget.style.color = 'var(--color-text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  if (activeSection !== 'content') e.currentTarget.style.color = 'var(--color-text-secondary)';
+                }}
+              >
+                4. Content Guidelines
+              </a>
+
+              {/* Sub-item: Dos & Don'ts */}
               <a
                 href="#guidelines"
                 onClick={(e) => scrollToSection(e, 'guidelines')}
                 style={{
                   display: 'block',
-                  padding: '6px 0 6px 14px',
+                  padding: '3px 0 3px 26px',
                   marginLeft: -1,
                   borderLeft: activeSection === 'guidelines' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
-                  color: activeSection === 'guidelines' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  color: activeSection === 'guidelines' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
                   fontWeight: activeSection === 'guidelines' ? 600 : 400,
                   textDecoration: 'none',
-                  fontSize: 13,
+                  fontSize: 12,
                   transition: 'all 0.12s ease',
                 }}
                 onMouseEnter={(e) => {
                   if (activeSection !== 'guidelines') e.currentTarget.style.color = 'var(--color-text-primary)';
                 }}
                 onMouseLeave={(e) => {
-                  if (activeSection !== 'guidelines') e.currentTarget.style.color = 'var(--color-text-secondary)';
+                  if (activeSection !== 'guidelines') e.currentTarget.style.color = 'var(--color-text-muted)';
                 }}
               >
-                Guidelines (Dos & Don'ts)
+                Dos & Don'ts
               </a>
 
-              {/* Section: Keyboard */}
+              {/* Pillar 5: Accessibility & ARIA */}
+              <a
+                href="#accessibility"
+                onClick={(e) => scrollToSection(e, 'accessibility')}
+                style={{
+                  display: 'block',
+                  padding: '6px 0 6px 14px',
+                  marginLeft: -1,
+                  borderLeft: activeSection === 'accessibility' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
+                  color: activeSection === 'accessibility' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontWeight: activeSection === 'accessibility' ? 600 : 400,
+                  textDecoration: 'none',
+                  fontSize: 13,
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (activeSection !== 'accessibility') e.currentTarget.style.color = 'var(--color-text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  if (activeSection !== 'accessibility') e.currentTarget.style.color = 'var(--color-text-secondary)';
+                }}
+              >
+                5. Accessibility & ARIA
+              </a>
+
+              {/* Sub-item: Keyboard Navigation */}
               <a
                 href="#keyboard"
                 onClick={(e) => scrollToSection(e, 'keyboard')}
                 style={{
                   display: 'block',
-                  padding: '6px 0 6px 14px',
+                  padding: '3px 0 3px 26px',
                   marginLeft: -1,
                   borderLeft: activeSection === 'keyboard' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
-                  color: activeSection === 'keyboard' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  color: activeSection === 'keyboard' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
                   fontWeight: activeSection === 'keyboard' ? 600 : 400,
                   textDecoration: 'none',
-                  fontSize: 13,
+                  fontSize: 12,
                   transition: 'all 0.12s ease',
                 }}
                 onMouseEnter={(e) => {
                   if (activeSection !== 'keyboard') e.currentTarget.style.color = 'var(--color-text-primary)';
                 }}
                 onMouseLeave={(e) => {
-                  if (activeSection !== 'keyboard') e.currentTarget.style.color = 'var(--color-text-secondary)';
+                  if (activeSection !== 'keyboard') e.currentTarget.style.color = 'var(--color-text-muted)';
                 }}
               >
-                Keyboard & ARIA
+                Keyboard Navigation
+              </a>
+
+              {/* Pillar 7: Quick Guides */}
+              <a
+                href="#quick-guides"
+                onClick={(e) => scrollToSection(e, 'quick-guides')}
+                style={{
+                  display: 'block',
+                  padding: '6px 0 6px 14px',
+                  marginLeft: -1,
+                  borderLeft: activeSection === 'quick-guides' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
+                  color: activeSection === 'quick-guides' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                  fontWeight: activeSection === 'quick-guides' ? 600 : 400,
+                  textDecoration: 'none',
+                  fontSize: 13,
+                  transition: 'all 0.12s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (activeSection !== 'quick-guides') e.currentTarget.style.color = 'var(--color-text-primary)';
+                }}
+                onMouseLeave={(e) => {
+                  if (activeSection !== 'quick-guides') e.currentTarget.style.color = 'var(--color-text-secondary)';
+                }}
+              >
+                6. Quick Guides
               </a>
 
               {/* Section: API Reference */}
@@ -5377,6 +8509,7 @@ export const Native${meta.name}Demo = () => {
               </a>
             </>
           )}
+
         </nav>
 
       {/* Developer Native Sponsor Ad Unit */}

@@ -1,6 +1,7 @@
-// packages/react/src/components/navigation/Stepper.tsx
 import React, { forwardRef, ReactNode } from 'react';
 import { CheckIcon } from '@winplaybox/icons';
+import { Stack } from '../layout/Stack';
+import { Text } from '../layout/Text';
 
 export interface StepItem {
   title: ReactNode;
@@ -94,24 +95,21 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
                 </div>
 
                 {/* Step Label */}
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <span
-                    style={{
-                      fontSize: 13,
-                      fontWeight: isCurrent ? 700 : 500,
-                      color: isCurrent || isCompleted
-                        ? 'var(--color-text-primary)'
-                        : 'var(--color-text-muted)',
-                    }}
+                <Stack direction="column" gap="xs">
+                  <Text
+                    as="span"
+                    size="sm"
+                    weight={isCurrent ? 'bold' : 'medium'}
+                    color={isCurrent || isCompleted ? 'primary' : 'muted'}
                   >
                     {step.title}
-                  </span>
+                  </Text>
                   {step.description && (
-                    <span style={{ fontSize: 11, color: 'var(--color-text-muted)' }}>
+                    <Text as="span" size="xs" color="muted">
                       {step.description}
-                    </span>
+                    </Text>
                   )}
-                </div>
+                </Stack>
               </div>
 
               {/* Connecting line */}

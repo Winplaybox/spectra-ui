@@ -49,7 +49,7 @@ export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
           cursor: disabled ? 'not-allowed' : 'pointer',
           borderRadius: 4,
           textAlign: 'left',
-          transition: 'background-color 0.12s ease',
+          transition: 'background-color 0.12s ease, color 0.12s ease',
           outline: 'none',
           ...style,
         }}
@@ -57,11 +57,19 @@ export const MenuItem = forwardRef<HTMLButtonElement, MenuItemProps>(
           if (!disabled) {
             e.currentTarget.style.backgroundColor = danger
               ? 'var(--color-feedback-danger-light, rgba(239, 68, 68, 0.12))'
-              : 'var(--color-surface-raised)';
+              : 'var(--color-surface-hover, rgba(128, 128, 128, 0.12))';
+            if (!danger) {
+              e.currentTarget.style.color = 'var(--color-text-primary)';
+            }
           }
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.backgroundColor = 'transparent';
+          e.currentTarget.style.color = disabled
+            ? 'var(--color-text-muted)'
+            : danger
+            ? 'var(--color-feedback-danger)'
+            : 'var(--color-text-primary)';
         }}
         {...rest}
       >
@@ -113,3 +121,35 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
   }
 );
 Menu.displayName = 'Menu';
+
+export interface MenuGridProps extends React.ComponentPropsWithoutRef<'div'> {
+  columns?: number;
+}
+
+export const MenuGrid = forwardRef<HTMLDivElement, MenuGridProps>(
+  ({ children, columns = 3, className, style, ...rest }, ref) => {
+    return (
+      <div
+        ref={ref}
+        role="menu"
+        className={className}
+        style={{
+          display: 'grid',
+          gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+          gap: 4,
+          padding: 6,
+          borderRadius: 'var(--radius-component-md, 8px)',
+          backgroundColor: 'var(--color-surface-elevated)',
+          border: '1px solid var(--color-border-default)',
+          boxShadow: 'var(--shadow-lg, 0 10px 25px -5px rgba(0, 0, 0, 0.15))',
+          ...style,
+        }}
+        {...rest}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+MenuGrid.displayName = 'MenuGrid';
+

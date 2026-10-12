@@ -3,6 +3,8 @@ import {
   Button,
   SplitButton,
   CompoundButton,
+  MenuButton,
+  ToggleButton,
   ButtonGroup,
   IconButton,
   TextInput,
@@ -18,8 +20,18 @@ import {
   Autocomplete,
   Combobox,
   Badge,
+  CounterBadge,
+  PresenceBadge,
   Tag,
+  InteractionTag,
+  TagGroup,
   Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+  CardPreview,
   MediaCard,
   Paper,
   Tabs,
@@ -60,11 +72,16 @@ import {
   Skeleton,
   Divider,
   Chip,
+  Breadcrumb,
   Breadcrumbs,
+  BreadcrumbItem,
+  BreadcrumbButton,
+  BreadcrumbDivider,
   Pagination,
   Stepper,
   Menu,
   MenuItem,
+  MenuGrid,
   AppBar,
   BottomNav,
   Link,
@@ -80,6 +97,10 @@ import {
   DatePicker,
   ListView,
   WebViewBox,
+  Carousel,
+  CarouselNav,
+  RatingDisplay,
+  Portal,
 } from '@winplaybox/react';
 import {
   CheckIcon,
@@ -89,6 +110,12 @@ import {
   InfoIcon,
   UserIcon,
   ChevronDownIcon,
+  ChevronRightIcon,
+  MoreHorizontalIcon,
+  HomeIcon,
+  FolderIcon,
+  FileTextIcon,
+  SettingsIcon,
   PlusIcon,
   MinusIcon,
   ExternalLinkIcon,
@@ -98,6 +125,7 @@ import {
   CopyIcon,
 } from '@winplaybox/icons';
 import { ComponentDemoCard } from './ComponentDemoCard';
+import { TextInputRecipeGallery } from './TextInputRecipeGallery';
 
 export interface VariantMeta {
   id: string;
@@ -106,23 +134,64 @@ export interface VariantMeta {
 
 export const COMPONENT_VARIANTS_MAP: Record<string, VariantMeta[]> = {
   button: [
-    { id: 'button-variants', title: 'Visual Variants & Hierarchy' },
-    { id: 'button-sizes', title: 'Sizing Scale & Density' },
-    { id: 'button-icons', title: 'Leading & Trailing Icons' },
-    { id: 'button-states', title: 'Loading & Disabled States' },
-    { id: 'button-block', title: 'Full-Width Block Layout' },
-    { id: 'button-compound', title: 'Compound Button (Spectra Pattern)' },
-    { id: 'button-split', title: 'Split Button with Action Flyout' },
-    { id: 'button-group', title: 'Segmented Attached Button Group' },
+    { id: 'button-appearances', title: '01 Visual Appearances (Primary, Secondary, Outline, Subtle, Transparent)' },
+    { id: 'button-sizes', title: '02 Sizing Scale (Small 24px, Medium 32px, Large 40px)' },
+    { id: 'button-shapes', title: '03 Silhouettes & Geometries (Rounded, Circular, Square)' },
+    { id: 'button-icons', title: '04 Authentic Vector Icons & Icon-Only' },
+    { id: 'button-compound', title: '05 CompoundButton (Headline + Subtitle Context)' },
+    { id: 'button-menu', title: '06 MenuButton (Chevron Contextual Flyout Dropdown)' },
+    { id: 'button-split', title: '07 SplitButton (Dual Segment Primary & Dropdown)' },
+    { id: 'button-toggle', title: '08 ToggleButton (Pressed State & Pin Toggle)' },
+    { id: 'button-states', title: '09 Loading & DisabledFocusable States' },
+    { id: 'button-block', title: '10 Responsive Full-Width Block Layout' },
+  ],
+  'compound-button': [
+    { id: 'compound-basic', title: '01 CompoundButton Headline + Subtitle' },
+    { id: 'compound-appearances', title: '02 Visual Appearances (Primary, Secondary, Outline, Subtle)' },
+    { id: 'compound-icons', title: '03 Vector Icon Integration' },
+  ],
+  'menu-button': [
+    { id: 'menu-button-basic', title: '01 MenuButton Flyout Dropdown' },
+    { id: 'menu-button-appearances', title: '02 Visual Appearances (Primary, Secondary, Outline)' },
+    { id: 'menu-button-sizes', title: '03 Sizing Scale (Small, Medium, Large)' },
+  ],
+  'split-button': [
+    { id: 'split-button-basic', title: '01 SplitButton Action Flyout' },
+    { id: 'split-button-appearances', title: '02 Visual Appearances (Primary, Secondary)' },
+  ],
+  'toggle-button': [
+    { id: 'toggle-button-basic', title: '01 ToggleButton Checked State' },
+    { id: 'toggle-button-appearances', title: '02 Visual Appearances (Primary, Secondary, Subtle)' },
+    { id: 'toggle-button-icons', title: '03 Pin & Bookmark Toggle' },
   ],
   'text-input': [
-    { id: 'input-icons', title: 'Contextual Vector Icons' },
-    { id: 'input-validation', title: 'Validation & Error States' },
-    { id: 'input-helper', title: 'Helper Text & Description' },
-    { id: 'input-password', title: 'Password Reveal with Visibility Toggle' },
-    { id: 'input-clearable', title: 'Clearable Search Input with Reset' },
-    { id: 'input-adornments', title: 'Prefix & Suffix Currency/Domain Adornments' },
-    { id: 'input-counter', title: 'Live Character Counter & Length Limit' },
+    { id: 'input-basic', title: '01 Basic Text Field' },
+    { id: 'input-outlined', title: '02 Outlined Variant' },
+    { id: 'input-filled', title: '03 Filled Variant' },
+    { id: 'input-standard', title: '04 Standard Underline Variant' },
+    { id: 'input-sizes', title: '05 Sizing Scale (Sm, Md, Lg)' },
+    { id: 'input-helper', title: '06 Helper Text & Description' },
+    { id: 'input-error', title: '07 Error Validation State' },
+    { id: 'input-success', title: '08 Success State' },
+    { id: 'input-required', title: '09 Required Field' },
+    { id: 'input-disabled', title: '10 Disabled State' },
+    { id: 'input-readonly', title: '11 Read-Only State' },
+    { id: 'input-leading-icon', title: '12 Leading Vector Icon' },
+    { id: 'input-trailing-icon', title: '13 Trailing Action Icon' },
+    { id: 'input-clear', title: '14 Instant Clear Button' },
+    { id: 'input-prefix', title: '15 Prefix Adornment' },
+    { id: 'input-suffix', title: '16 Suffix Adornment' },
+    { id: 'input-counter', title: '17 Live Character Counter' },
+    { id: 'input-multiline', title: '18 Multiline Text Area' },
+    { id: 'input-autosize', title: '19 Auto-Resizing Multiline' },
+    { id: 'input-search', title: '20 Search Field with Reset' },
+    { id: 'input-password-recipe', title: '21 Password Field with Toggle' },
+    { id: 'input-email', title: '22 Email Address Field' },
+    { id: 'input-number', title: '23 Numeric Quantity Input' },
+    { id: 'input-select-recipe', title: '24 Select Combobox Recipe' },
+    { id: 'input-loading', title: '25 Loading Search State' },
+    { id: 'input-async', title: '26 Async Validation State' },
+    { id: 'input-form-integration', title: '27 Complete Form Integration' },
   ],
   select: [
     { id: 'select-basic', title: 'Standard Selection Dropdown' },
@@ -146,19 +215,34 @@ export const COMPONENT_VARIANTS_MAP: Record<string, VariantMeta[]> = {
     { id: 'switch-panel', title: 'Settings Row Preference Panel' },
   ],
   accordion: [
-    { id: 'accordion-single', title: 'Single Expansion (FAQ Pattern)' },
-    { id: 'accordion-multiple', title: 'Simultaneous Multi-Panel Expansion' },
+    { id: 'accordion-basic', title: '01 Default Accordion (Collapsible FAQ)' },
+    { id: 'accordion-multiple', title: '02 Simultaneous Multi-Panel Expansion' },
+    { id: 'accordion-sizes', title: '03 Sizing Scale & Density (Sm, Md, Lg, XL)' },
+    { id: 'accordion-icon-position', title: '04 Expand Icon Position (Start vs End)' },
+    { id: 'accordion-disabled', title: '05 Disabled Section State' },
+    { id: 'accordion-inline-actions', title: '06 Inline Actions & Badges in Header' },
+    { id: 'accordion-controlled', title: '07 Controlled State Management (openItems)' },
+    { id: 'accordion-custom-icon', title: '08 Custom Expand Icon & Context Icons' },
   ],
   avatar: [
-    { id: 'avatar-scales', title: 'Sizing Scales with Presence Badges' },
-    { id: 'avatar-presence', title: 'Rich Presence Status Badges' },
-    { id: 'avatar-stack', title: 'Overlapping Team Avatar Stack' },
-    { id: 'avatar-fallback', title: 'Initials & Custom Status Indicator' },
-    { id: 'avatar-persona', title: 'Persona Card with Presence & Email' },
+    { id: 'avatar-basic', title: '01 Default Initials Avatar' },
+    { id: 'avatar-image', title: '02 Profile Image with Fallback' },
+    { id: 'avatar-sizes', title: '03 Discrete Sizing Scale (16px to 128px)' },
+    { id: 'avatar-shapes', title: '04 Circular vs Square Silhouettes' },
+    { id: 'avatar-presence', title: '05 Real-Time Status & Presence Badges' },
+    { id: 'avatar-colorful', title: '06 Algorithmic Colorful Palette' },
+    { id: 'avatar-active', title: '07 Active Halo Ring (Speaker / Live)' },
+    { id: 'avatar-group', title: '08 AvatarGroup & Collaborator Stack' },
   ],
   badge: [
-    { id: 'badge-variants', title: 'All Semantic Status Variants' },
-    { id: 'badge-dots', title: 'Status Dot Indicators' },
+    { id: 'badge-basic', title: '01 Appearances (Filled, Ghost, Outline, Tint)' },
+    { id: 'badge-colors', title: '02 Semantic Palette Colors' },
+    { id: 'badge-sizes', title: '03 Discrete Sizing Scale (Tiny to Extra-Large)' },
+    { id: 'badge-shapes', title: '04 Silhouettes (Rounded, Circular, Square)' },
+    { id: 'badge-icons', title: '05 Authentic Vector Icons & Status Dots' },
+    { id: 'badge-counter', title: '06 CounterBadge & Numeric Overflow (99+)' },
+    { id: 'badge-presence', title: '07 PresenceBadge & Out-of-Office Halos' },
+    { id: 'badge-in-context', title: '08 Contextual Integrations (Buttons, Avatars, Cards)' },
   ],
   tabs: [
     { id: 'tabs-underline', title: 'Underline Navigation Style' },
@@ -208,19 +292,25 @@ export const COMPONENT_VARIANTS_MAP: Record<string, VariantMeta[]> = {
     { id: 'chip-filters', title: 'Selectable Filter Chips Set' },
     { id: 'chip-deletable', title: 'Deletable Tag Badges' },
   ],
+  breadcrumb: [
+    { id: 'breadcrumb-basic', title: '01 Default Path Hierarchy' },
+    { id: 'breadcrumb-sizes', title: '02 Discrete Sizing Scale (Small, Medium, Large)' },
+    { id: 'breadcrumb-dividers', title: '03 Chevron & Slash Delimiters' },
+    { id: 'breadcrumb-with-icons', title: '04 Vector Icons per Crumb' },
+    { id: 'breadcrumb-overflow', title: '05 Responsive Overflow Menu' },
+    { id: 'breadcrumb-current-page', title: '06 Current Page Differentiation' },
+    { id: 'breadcrumb-non-interactive', title: '07 Non-interactive File Path Pattern' },
+    { id: 'breadcrumb-in-context', title: '08 Contextual Header Wayfinding' },
+  ],
   breadcrumbs: [
-    { id: 'breadcrumbs-basic', title: 'Standard Breadcrumb Trail' },
-    { id: 'breadcrumbs-custom', title: 'Custom Separator Nodes' },
-    { id: 'breadcrumbs-collapsed', title: 'Max Items with Collapsed Ellipsis' },
-  ],
-  'split-button': [
-    { id: 'split-button-merge', title: 'Primary Split Button (Git Merge Flow)' },
-    { id: 'split-button-secondary', title: 'Secondary Export & Download Split' },
-    { id: 'split-button-sizes', title: 'Density & Sizing Hierarchy' },
-  ],
-  'compound-button': [
-    { id: 'compound-button-variants', title: 'Action Hierarchy (Primary, Secondary)' },
-    { id: 'compound-button-icons', title: 'Contextual Feature Icon Badges' },
+    { id: 'breadcrumb-basic', title: '01 Default Path Hierarchy' },
+    { id: 'breadcrumb-sizes', title: '02 Discrete Sizing Scale (Small, Medium, Large)' },
+    { id: 'breadcrumb-dividers', title: '03 Chevron & Slash Delimiters' },
+    { id: 'breadcrumb-with-icons', title: '04 Vector Icons per Crumb' },
+    { id: 'breadcrumb-overflow', title: '05 Responsive Overflow Menu' },
+    { id: 'breadcrumb-current-page', title: '06 Current Page Differentiation' },
+    { id: 'breadcrumb-non-interactive', title: '07 Non-interactive File Path Pattern' },
+    { id: 'breadcrumb-in-context', title: '08 Contextual Header Wayfinding' },
   ],
   'button-group': [
     { id: 'button-group-segmented', title: 'Segmented Attached Mode' },
@@ -352,7 +442,53 @@ export const COMPONENT_VARIANTS_MAP: Record<string, VariantMeta[]> = {
     { id: 'web-view-box-sandboxed', title: 'Sandboxed Responsive Frame' },
     { id: 'web-view-box-header', title: 'Interactive Title & External Action Toolbar' },
   ],
+  'card-header': [
+    { id: 'card-header-basic', title: '01 Avatar & Title Header' },
+    { id: 'card-header-actions', title: '02 Contextual Action Slots' },
+  ],
+  'card-footer': [
+    { id: 'card-footer-actions', title: '01 Dual Action Layout' },
+    { id: 'card-footer-metadata', title: '02 Timestamp & Author Metadata' },
+  ],
+  'card-preview': [
+    { id: 'card-preview-banner', title: '01 Full-Bleed Media Banner' },
+    { id: 'card-preview-interactive', title: '02 Clickable Image Overlay' },
+  ],
+  carousel: [
+    { id: 'carousel-slides', title: '01 Interactive Multi-Card Slides' },
+    { id: 'carousel-autoplay', title: '02 Timed Auto-Advancing Stage' },
+  ],
+  'carousel-nav': [
+    { id: 'carousel-nav-dots', title: '01 Expanding Pill Dots' },
+    { id: 'carousel-nav-numbered', title: '02 Numeric Slide Stepper' },
+  ],
+  'interaction-tag': [
+    { id: 'interaction-tag-states', title: '01 Selected & Unselected States' },
+    { id: 'interaction-tag-dismissible', title: '02 Dismissible Close Action' },
+  ],
+  'tag-group': [
+    { id: 'tag-group-flow', title: '01 Responsive Horizontal Flow' },
+    { id: 'tag-group-categories', title: '02 Categorized Multi-Row Tagset' },
+  ],
+  'rating-display': [
+    { id: 'rating-display-compact', title: '01 Compact Stars & Score' },
+    { id: 'rating-display-large', title: '02 High-Density Metric Card' },
+  ],
+  'menu-grid': [
+    { id: 'menu-grid-3col', title: '01 3-Column Tool Launcher Grid' },
+    { id: 'menu-grid-swatches', title: '02 Color Swatch Selector Grid' },
+  ],
+  'portal-mount': [
+    { id: 'portal-mount-custom', title: '01 Custom DOM Container Target' },
+    { id: 'portal-mount-body', title: '02 Default Document Body Mount' },
+  ],
+  overflow: [
+    { id: 'overflow-toolbar', title: '01 Horizontal Action Toolbar (Dynamic Collapse)' },
+    { id: 'overflow-priority', title: '02 Priority-Weighted Pinning (High-Priority Actions)' },
+    { id: 'overflow-tabs', title: '03 Tab Navigation with Overflow Menu' },
+  ],
 };
+
 
 interface ComponentVariantsShowcaseProps {
   componentId: string;
@@ -395,116 +531,111 @@ export const ComponentVariantsShowcase: React.FC<ComponentVariantsShowcaseProps>
   const [segmentedRadio, setSegmentedRadio] = useState('grid');
   const [verticalTab, setVerticalTab] = useState('profile');
   const [selectedDemoDate, setSelectedDemoDate] = useState<Date | undefined>(new Date());
+  const [controlledOpenSections, setControlledOpenSections] = useState<string[]>(['section-1']);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isPinned, setIsPinned] = useState(true);
+  const [overflowDemoWidth1, setOverflowDemoWidth1] = useState(480);
+  const [overflowDemoWidth2, setOverflowDemoWidth2] = useState(380);
+  const [overflowDemoWidth3, setOverflowDemoWidth3] = useState(440);
 
   switch (componentId) {
     case 'button':
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
-          {/* Demo 1: Visual Variants */}
+          {/* Demo 1: Fluent 2 Visual Appearances */}
           <ComponentDemoCard
-            id="button-variants"
-            title="Visual Variants & Hierarchy"
-            description="Use Primary for the main call to action, Secondary for secondary actions, Tertiary for low-emphasis, and Danger for destructive actions."
+            id="button-appearances"
+            title="01 Visual Appearances (Fluent 2 Hierarchy)"
+            description="Conforming to Microsoft Fluent 2 Web design language, Spectra provides five discrete appearance tiers: Primary (brand emphasized call-to-action), Secondary (standard neutral baseline), Outline (transparent canvas with subtle border), Subtle (minimalist text action with hover highlight), and Transparent (borderless accent trigger)."
+            compactCode={`<Button appearance="primary">Primary Action</Button>
+<Button appearance="secondary">Secondary Action</Button>
+<Button appearance="outline">Outline Action</Button>
+<Button appearance="subtle">Subtle Action</Button>
+<Button appearance="transparent">Transparent Action</Button>`}
             webPreview={
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
-                <Button variant="primary">Primary Action</Button>
-                <Button variant="secondary">Secondary Action</Button>
-                <Button variant="tertiary">Tertiary Action</Button>
-                <Button variant="danger">Destructive Action</Button>
+                <Button appearance="primary">Primary Action</Button>
+                <Button appearance="secondary">Secondary Action</Button>
+                <Button appearance="outline">Outline Action</Button>
+                <Button appearance="subtle">Subtle Action</Button>
+                <Button appearance="transparent">Transparent Action</Button>
               </div>
             }
             nativePreview={
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%' }}>
-                <Button variant="primary" style={{ width: '100%' }}>Filled Primary</Button>
-                <Button variant="secondary" style={{ width: '100%' }}>Outlined Secondary</Button>
-                <Button variant="danger" style={{ width: '100%' }}>Destructive</Button>
+                <Button appearance="primary" style={{ width: '100%' }}>Filled Primary</Button>
+                <Button appearance="outline" style={{ width: '100%' }}>Outlined Secondary</Button>
+                <Button appearance="secondary" style={{ width: '100%' }}>Tinted Action</Button>
+                <Button appearance="subtle" style={{ width: '100%' }}>Plain Action</Button>
               </div>
             }
-            compactCode={`<Button variant="primary">Primary Action</Button>
-<Button variant="secondary">Secondary Action</Button>
-<Button variant="tertiary">Tertiary Action</Button>
-<Button variant="danger">Destructive Action</Button>`}
             webCode={`import React from 'react';
 import { Button } from '@winplaybox/react';
-import type { ButtonProps } from '@winplaybox/react';
 
-export default function ButtonVariantsDemo(): JSX.Element {
-  const handleClick = (variant: string): void => {
-    console.log(\`Clicked \${variant}\`);
-  };
-
+export default function ButtonAppearancesDemo(): JSX.Element {
   return (
-    <div style={{ display: 'flex', gap: 12 }}>
-      <Button variant="primary" onClick={(): void => handleClick('primary')}>Primary Action</Button>
-      <Button variant="secondary" onClick={(): void => handleClick('secondary')}>Secondary Action</Button>
-      <Button variant="tertiary" onClick={(): void => handleClick('tertiary')}>Tertiary Action</Button>
-      <Button variant="danger" onClick={(): void => handleClick('danger')}>Destructive Action</Button>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+      <Button appearance="primary">Primary Action</Button>
+      <Button appearance="secondary">Secondary Action</Button>
+      <Button appearance="outline">Outline Action</Button>
+      <Button appearance="subtle">Subtle Action</Button>
+      <Button appearance="transparent">Transparent Action</Button>
     </div>
   );
 }`}
             nativeCode={`import React from 'react';
 import { View } from 'react-native';
 import { Button } from '@winplaybox/react-native';
-import type { ButtonVariant } from '@winplaybox/react-native';
 
-export default function NativeButtonVariantsDemo(): JSX.Element {
-  const handlePress = (variant: ButtonVariant): void => {
-    console.log(\`Pressed \${variant}\`);
-  };
-
+export default function NativeButtonAppearancesDemo(): JSX.Element {
   return (
     <View style={{ gap: 10 }}>
-      <Button variant="filled" onPress={(): void => handlePress('filled')}>Filled Primary</Button>
-      <Button variant="outline" onPress={(): void => handlePress('outline')}>Outlined Secondary</Button>
-      <Button variant="danger" onPress={(): void => handlePress('danger')}>Destructive</Button>
+      <Button variant="filled">Filled Primary</Button>
+      <Button variant="outline">Outlined Secondary</Button>
+      <Button variant="tinted">Tinted Action</Button>
+      <Button variant="plain">Plain Action</Button>
     </View>
   );
 }`}
           />
 
-          {/* Demo 2: Sizing Scale */}
+          {/* Demo 2: Sizing Scale & Density */}
           <ComponentDemoCard
             id="button-sizes"
-            title="Sizing Scale & Density"
-            description="Three standardized sizes: Small (sm: 32px) for dense data tables, Medium (md: 40px) for standard UI, and Large (lg: 48px) for mobile and hero screens."
-            compactCode={`<Button size="sm">Small</Button>
-<Button size="md">Medium</Button>
-<Button size="lg">Large</Button>`}
+            title="02 Sizing Scale & Density"
+            description="Three standardized density scales: Small (sm: 24px) for dense data grids and compact toolbars, Medium (md: 32px) as the web desktop baseline, and Large (lg: 40px) for prominent primary workflows."
+            compactCode={`<Button appearance="primary" size="sm">Small (24px)</Button>
+<Button appearance="primary" size="md">Medium (32px)</Button>
+<Button appearance="primary" size="lg">Large (40px)</Button>`}
             webPreview={
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
-                <Button variant="primary" size="sm">Small (sm)</Button>
-                <Button variant="primary" size="md">Medium (md)</Button>
-                <Button variant="primary" size="lg">Large (lg)</Button>
+                <Button appearance="primary" size="sm">Small (24px)</Button>
+                <Button appearance="primary" size="md">Medium (32px)</Button>
+                <Button appearance="primary" size="lg">Large (40px)</Button>
               </div>
             }
             nativePreview={
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%' }}>
-                <Button variant="primary" size="sm" style={{ width: '100%' }}>Native Small (36pt)</Button>
-                <Button variant="primary" size="md" style={{ width: '100%' }}>Native Medium (44pt)</Button>
-                <Button variant="primary" size="lg" style={{ width: '100%' }}>Native Large (52pt)</Button>
+                <Button size="sm" style={{ width: '100%' }}>Native Small (36pt)</Button>
+                <Button size="md" style={{ width: '100%' }}>Native Medium (44pt Apple HIG)</Button>
+                <Button size="lg" style={{ width: '100%' }}>Native Large (52pt Android 48dp)</Button>
               </div>
             }
             webCode={`import React from 'react';
 import { Button } from '@winplaybox/react';
-import type { ButtonSize } from '@winplaybox/react';
 
 export default function ButtonSizesDemo(): JSX.Element {
-  const sizes: ButtonSize[] = ['sm', 'md', 'lg'];
-
   return (
     <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-      {sizes.map((sz: ButtonSize): JSX.Element => (
-        <Button key={sz} size={sz}>
-          Size {sz.toUpperCase()}
-        </Button>
-      ))}
+      <Button appearance="primary" size="sm">Small (24px)</Button>
+      <Button appearance="primary" size="md">Medium (32px)</Button>
+      <Button appearance="primary" size="lg">Large (40px)</Button>
     </div>
   );
 }`}
             nativeCode={`import React from 'react';
 import { View } from 'react-native';
 import { Button } from '@winplaybox/react-native';
-import type { ButtonSize } from '@winplaybox/react-native';
 
 export default function NativeButtonSizesDemo(): JSX.Element {
   return (
@@ -517,58 +648,102 @@ export default function NativeButtonSizesDemo(): JSX.Element {
 }`}
           />
 
-          {/* Demo 3: With Icons */}
+          {/* Demo 3: Shapes & Silhouettes */}
           <ComponentDemoCard
-            id="button-icons"
-            title="Buttons with Leading, Trailing & Standalone Icons"
-            description="Enhance cognitive recognition by pairing clear vector icons with text, or use icon-only buttons with accessible labels."
-            compactCode={`<Button variant="primary" icon={<CheckIcon size={16} />}>
-  Approve Order
-</Button>
-<Button variant="secondary" icon={<SearchIcon size={16} />} iconPosition="right">
-  Search Logs
-</Button>
-<Button variant="secondary" icon={<CloseIcon size={16} />} aria-label="Dismiss alert" />`}
+            id="button-shapes"
+            title="03 Silhouettes & Geometries (Rounded, Circular, Square)"
+            description="Fluent 2 supports three shape geometries: Rounded (default 6px border radius), Circular (full pill radius or circle), and Square (0px radius for strict docked boundaries)."
+            compactCode={`<Button appearance="secondary" shape="rounded">Rounded (6px)</Button>
+<Button appearance="secondary" shape="circular">Circular (Pill)</Button>
+<Button appearance="secondary" shape="square">Square (0px)</Button>
+<Button appearance="primary" shape="circular" icon={<SparklesIcon size={16} />} aria-label="AI Assist" />`}
             webPreview={
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
-                <Button variant="primary" icon={<CheckIcon size={16} />}>
-                  Approve Order
-                </Button>
-                <Button variant="secondary" icon={<SearchIcon size={16} />} iconPosition="right">
-                  Search Logs
-                </Button>
-                <Button variant="secondary" icon={<CloseIcon size={16} />} aria-label="Dismiss alert" />
+                <Button appearance="secondary" shape="rounded">Rounded (6px)</Button>
+                <Button appearance="secondary" shape="circular">Circular (Pill)</Button>
+                <Button appearance="secondary" shape="square">Square (0px)</Button>
+                <Button appearance="primary" shape="circular" icon={<SparklesIcon size={16} />} aria-label="AI Assist" />
               </div>
             }
             nativePreview={
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%' }}>
-                <Button variant="primary" icon={<CheckIcon size={16} />} style={{ width: '100%' }}>
+                <Button appearance="outline" style={{ borderRadius: 6 }}>Rounded (6px)</Button>
+                <Button appearance="outline" style={{ borderRadius: 999 }}>Circular (Pill)</Button>
+                <Button appearance="outline" style={{ borderRadius: 0 }}>Square (0px)</Button>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Button } from '@winplaybox/react';
+import { SparklesIcon } from '@winplaybox/icons';
+
+export default function ButtonShapesDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+      <Button appearance="secondary" shape="rounded">Rounded</Button>
+      <Button appearance="secondary" shape="circular">Circular</Button>
+      <Button appearance="secondary" shape="square">Square</Button>
+      <Button appearance="primary" shape="circular" icon={<SparklesIcon size={16} />} aria-label="AI Assist" />
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { Button } from '@winplaybox/react-native';
+
+export default function NativeButtonShapesDemo(): JSX.Element {
+  return (
+    <View style={{ gap: 10 }}>
+      <Button variant="outline" style={{ borderRadius: 6 }}>Rounded</Button>
+      <Button variant="outline" style={{ borderRadius: 999 }}>Circular</Button>
+      <Button variant="outline" style={{ borderRadius: 0 }}>Square</Button>
+    </View>
+  );
+}`}
+          />
+
+          {/* Demo 4: Authentic Vector Icons */}
+          <ComponentDemoCard
+            id="button-icons"
+            title="04 Authentic Vector Icons & Icon-Only Actions"
+            description="Pair buttons with authentic vector SVG icons from @winplaybox/icons for rapid visual comprehension. Icon-only buttons must declare an accessible aria-label (WCAG 2.1 AA)."
+            compactCode={`<Button appearance="primary" icon={<CheckIcon size={16} />}>Approve Order</Button>
+<Button appearance="secondary" icon={<SearchIcon size={16} />} iconPosition="right">Search Logs</Button>
+<Button appearance="subtle" icon={<SettingsIcon size={16} />} aria-label="System Settings" />`}
+            webPreview={
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
+                <Button appearance="primary" icon={<CheckIcon size={16} />}>
                   Approve Order
                 </Button>
-                <Button variant="secondary" icon={<SearchIcon size={16} />} style={{ width: '100%' }}>
+                <Button appearance="secondary" icon={<SearchIcon size={16} />} iconPosition="right">
+                  Search Logs
+                </Button>
+                <Button appearance="subtle" icon={<SettingsIcon size={16} />} aria-label="System Settings" />
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%' }}>
+                <Button appearance="primary" icon={<CheckIcon size={16} />} style={{ width: '100%' }}>
+                  Approve Order
+                </Button>
+                <Button appearance="outline" icon={<SearchIcon size={16} />} style={{ width: '100%' }}>
                   Search Logs
                 </Button>
               </div>
             }
             webCode={`import React from 'react';
 import { Button } from '@winplaybox/react';
-import type { ButtonProps } from '@winplaybox/react';
-import { CheckIcon, SearchIcon, CloseIcon } from '@winplaybox/icons';
+import { CheckIcon, SearchIcon, SettingsIcon } from '@winplaybox/icons';
 
 export default function ButtonIconsDemo(): JSX.Element {
-  const handleApprove = (e: React.MouseEvent<HTMLButtonElement>): void => {
-    console.log('Approved', e);
-  };
-
   return (
-    <div style={{ display: 'flex', gap: 12 }}>
-      <Button variant="primary" icon={<CheckIcon size={16} />} onClick={handleApprove}>
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+      <Button appearance="primary" icon={<CheckIcon size={16} />}>
         Approve Order
       </Button>
-      <Button variant="secondary" icon={<SearchIcon size={16} />} iconPosition="right">
+      <Button appearance="secondary" icon={<SearchIcon size={16} />} iconPosition="right">
         Search Logs
       </Button>
-      <Button variant="secondary" icon={<CloseIcon size={16} />} aria-label="Dismiss alert" />
+      <Button appearance="subtle" icon={<SettingsIcon size={16} />} aria-label="System Settings" />
     </div>
   );
 }`}
@@ -587,45 +762,388 @@ export default function NativeButtonIconsDemo(): JSX.Element {
 }`}
           />
 
-          {/* Demo 4: Loading & Disabled States */}
+          {/* Demo 5: CompoundButton */}
+          <ComponentDemoCard
+            id="button-compound"
+            title="05 CompoundButton (Headline + Subtitle Context)"
+            description="Fluent 2 CompoundButton features a bold primary headline action paired with a descriptive secondary subtitle. Essential for high-stakes onboarding, tier selection, and configuration choices where buttons must not wrap single-line labels."
+            compactCode={`<CompoundButton
+  appearance="primary"
+  icon={<SparklesIcon size={20} />}
+  secondaryContent="Create a collaborative design repository with tokens"
+>
+  New Workspace
+</CompoundButton>
+<CompoundButton
+  appearance="secondary"
+  icon={<ExternalLinkIcon size={20} />}
+  secondaryContent="Sync variables and design tokens from Figma styles"
+>
+  Import Figma
+</CompoundButton>`}
+            webPreview={
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                <CompoundButton
+                  appearance="primary"
+                  icon={<SparklesIcon size={20} />}
+                  secondaryContent="Create a collaborative design repository with tokens"
+                >
+                  New Workspace
+                </CompoundButton>
+                <CompoundButton
+                  appearance="secondary"
+                  icon={<ExternalLinkIcon size={20} />}
+                  secondaryContent="Sync variables and design tokens from Figma styles"
+                >
+                  Import Figma
+                </CompoundButton>
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%', gap: 10, display: 'flex', flexDirection: 'column' }}>
+                <Button variant="secondary" style={{ width: '100%', padding: '14px 16px' }}>
+                  New Workspace (Collaborative design repo)
+                </Button>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { CompoundButton } from '@winplaybox/react';
+import { SparklesIcon, ExternalLinkIcon } from '@winplaybox/icons';
+
+export default function CompoundButtonDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+      <CompoundButton
+        appearance="primary"
+        icon={<SparklesIcon size={20} />}
+        secondaryContent="Create a collaborative design repository with tokens"
+      >
+        New Workspace
+      </CompoundButton>
+      <CompoundButton
+        appearance="secondary"
+        icon={<ExternalLinkIcon size={20} />}
+        secondaryContent="Sync variables and design tokens from Figma styles"
+      >
+        Import Figma
+      </CompoundButton>
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+
+export default function NativeCompoundButtonDemo(): JSX.Element {
+  return (
+    <TouchableOpacity style={{ padding: 16, borderRadius: 12, borderWidth: 1, borderColor: '#E2E8F0' }}>
+      <Text style={{ fontWeight: '600', fontSize: 16 }}>New Workspace</Text>
+      <Text style={{ fontSize: 13, color: '#64748B', marginTop: 4 }}>Create a collaborative design repository</Text>
+    </TouchableOpacity>
+  );
+}`}
+          />
+
+          {/* Demo 6: MenuButton */}
+          <ComponentDemoCard
+            id="button-menu"
+            title="06 MenuButton (Chevron Contextual Flyout Dropdown)"
+            description="MenuButton combines a button label with an integrated chevron vector indicator that expands an accessible flyout menu on click or ArrowDown keyboard press."
+            compactCode={`<MenuButton
+  appearance="secondary"
+  menuItems={[
+    { id: 'csv', label: 'Export as CSV' },
+    { id: 'pdf', label: 'Export as PDF' },
+    { id: 'json', label: 'Export as JSON' },
+  ]}
+>
+  Export Report
+</MenuButton>
+<MenuButton
+  appearance="primary"
+  icon={<PlusIcon size={16} />}
+  menuItems={[
+    { id: 'repo', label: 'New Repository' },
+    { id: 'gist', label: 'New Gist' },
+    { id: 'org', label: 'New Organization' },
+  ]}
+>
+  Create New
+</MenuButton>`}
+            webPreview={
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
+                <MenuButton
+                  appearance="secondary"
+                  menuItems={[
+                    { id: 'csv', label: 'Export as CSV' },
+                    { id: 'pdf', label: 'Export as PDF' },
+                    { id: 'json', label: 'Export as JSON' },
+                  ]}
+                >
+                  Export Report
+                </MenuButton>
+                <MenuButton
+                  appearance="primary"
+                  icon={<PlusIcon size={16} />}
+                  menuItems={[
+                    { id: 'repo', label: 'New Repository' },
+                    { id: 'gist', label: 'New Gist' },
+                    { id: 'org', label: 'New Organization' },
+                  ]}
+                >
+                  Create New
+                </MenuButton>
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <Button appearance="outline" icon={<ChevronDownIcon size={16} />} style={{ width: '100%' }}>
+                  Export Report
+                </Button>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { MenuButton } from '@winplaybox/react';
+import { PlusIcon } from '@winplaybox/icons';
+
+export default function MenuButtonDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 16 }}>
+      <MenuButton
+        appearance="secondary"
+        menuItems={[
+          { id: 'csv', label: 'Export as CSV' },
+          { id: 'pdf', label: 'Export as PDF' },
+          { id: 'json', label: 'Export as JSON' },
+        ]}
+      >
+        Export Report
+      </MenuButton>
+      <MenuButton
+        appearance="primary"
+        icon={<PlusIcon size={16} />}
+        menuItems={[
+          { id: 'repo', label: 'New Repository' },
+          { id: 'gist', label: 'New Gist' },
+        ]}
+      >
+        Create New
+      </MenuButton>
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { Button } from '@winplaybox/react-native';
+
+export default function NativeMenuButtonDemo(): JSX.Element {
+  return (
+    <View style={{ width: '100%' }}>
+      <Button variant="outline">Export Report</Button>
+    </View>
+  );
+}`}
+          />
+
+          {/* Demo 7: SplitButton */}
+          <ComponentDemoCard
+            id="button-split"
+            title="07 SplitButton (Dual Segment Primary & Dropdown)"
+            description="Combines a default single-click primary action with a secondary chevron button that reveals alternative execution choices without altering the default execution path."
+            compactCode={`<SplitButton
+  appearance="primary"
+  options={[
+    { label: 'Create merge commit', onClick: () => setSplitAction('Create merge commit') },
+    { label: 'Squash and merge', onClick: () => setSplitAction('Squash and merge') },
+    { label: 'Rebase and merge', onClick: () => setSplitAction('Rebase and merge') },
+  ]}
+>
+  {splitAction}
+</SplitButton>`}
+            webPreview={
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
+                <SplitButton
+                  appearance="primary"
+                  options={[
+                    { label: 'Create merge commit', onClick: () => setSplitAction('Create merge commit') },
+                    { label: 'Squash and merge', onClick: () => setSplitAction('Squash and merge') },
+                    { label: 'Rebase and merge', onClick: () => setSplitAction('Rebase and merge') },
+                  ]}
+                >
+                  {splitAction}
+                </SplitButton>
+                <SplitButton
+                  appearance="secondary"
+                  options={[
+                    { label: 'Save and Close' },
+                    { label: 'Save and Duplicate' },
+                  ]}
+                >
+                  Save Changes
+                </SplitButton>
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <Button appearance="primary" style={{ width: '100%' }}>
+                  {splitAction}
+                </Button>
+              </div>
+            }
+            webCode={`import React, { useState } from 'react';
+import { SplitButton } from '@winplaybox/react';
+
+export default function SplitButtonDemo(): JSX.Element {
+  const [action, setAction] = useState('Create merge commit');
+
+  return (
+    <SplitButton
+      appearance="primary"
+      options={[
+        { label: 'Create merge commit', onClick: () => setAction('Create merge commit') },
+        { label: 'Squash and merge', onClick: () => setAction('Squash and merge') },
+        { label: 'Rebase and merge', onClick: () => setAction('Rebase and merge') },
+      ]}
+    >
+      {action}
+    </SplitButton>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { Button } from '@winplaybox/react-native';
+
+export default function NativeSplitButtonDemo(): JSX.Element {
+  return (
+    <View style={{ width: '100%' }}>
+      <Button variant="filled">Create merge commit</Button>
+    </View>
+  );
+}`}
+          />
+
+          {/* Demo 8: ToggleButton */}
+          <ComponentDemoCard
+            id="button-toggle"
+            title="08 ToggleButton (Pressed State & Pin Toggle)"
+            description="A two-state button that toggles between pressed (active) and unpressed (default), maintaining accessible aria-pressed='true|false' semantics."
+            compactCode={`<ToggleButton
+  appearance="secondary"
+  checked={isPinned}
+  onToggle={(checked) => setIsPinned(checked)}
+  icon={<CheckIcon size={16} />}
+>
+  {isPinned ? 'Pinned to Sidebar' : 'Pin to Sidebar'}
+</ToggleButton>
+<ToggleButton
+  appearance="subtle"
+  checked={isBookmarked}
+  onToggle={(checked) => setIsBookmarked(checked)}
+  icon={<SparklesIcon size={16} />}
+>
+  {isBookmarked ? 'Bookmarked' : 'Add Bookmark'}
+</ToggleButton>`}
+            webPreview={
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
+                <ToggleButton
+                  appearance="secondary"
+                  checked={isPinned}
+                  onToggle={(checked) => setIsPinned(checked)}
+                  icon={<CheckIcon size={16} />}
+                >
+                  {isPinned ? 'Pinned to Sidebar' : 'Pin to Sidebar'}
+                </ToggleButton>
+                <ToggleButton
+                  appearance="subtle"
+                  checked={isBookmarked}
+                  onToggle={(checked) => setIsBookmarked(checked)}
+                  icon={<SparklesIcon size={16} />}
+                >
+                  {isBookmarked ? 'Bookmarked' : 'Add Bookmark'}
+                </ToggleButton>
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <Button appearance="outline">{isPinned ? 'Pinned' : 'Pin'}</Button>
+              </div>
+            }
+            webCode={`import React, { useState } from 'react';
+import { ToggleButton } from '@winplaybox/react';
+import { CheckIcon } from '@winplaybox/icons';
+
+export default function ToggleButtonDemo(): JSX.Element {
+  const [pinned, setPinned] = useState(true);
+
+  return (
+    <ToggleButton
+      appearance="secondary"
+      checked={pinned}
+      onToggle={(checked) => setPinned(checked)}
+      icon={<CheckIcon size={16} />}
+    >
+      {pinned ? 'Pinned to Sidebar' : 'Pin to Sidebar'}
+    </ToggleButton>
+  );
+}`}
+            nativeCode={`import React, { useState } from 'react';
+import { View } from 'react-native';
+import { Button } from '@winplaybox/react-native';
+
+export default function NativeToggleButtonDemo(): JSX.Element {
+  const [pinned, setPinned] = useState(true);
+  return (
+    <View style={{ width: '100%' }}>
+      <Button variant="outline">{pinned ? 'Pinned' : 'Pin'}</Button>
+    </View>
+  );
+}`}
+          />
+
+          {/* Demo 9: Loading & DisabledFocusable States */}
           <ComponentDemoCard
             id="button-states"
-            title="Asynchronous Loading & Disabled States"
-            description="Prevent duplicate submissions by displaying an integrated spinner while keeping layout dimensions intact."
+            title="09 Asynchronous Loading & DisabledFocusable States"
+            description="Display inline animated spinners with aria-busy='true' during async operations. Use disabledFocusable to keep disabled buttons in keyboard tab order while announcing aria-disabled='true' to assistive technologies."
+            compactCode={`<Button appearance="primary" isLoading>Deploying Cluster...</Button>
+<Button appearance="secondary" disabled>Disabled Action</Button>
+<Button appearance="outline" disabledFocusable>Disabled (Focusable)</Button>`}
             webPreview={
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
-                <Button variant="primary" isLoading>
+                <Button appearance="primary" isLoading>
                   Deploying Cluster...
                 </Button>
-                <Button variant="secondary" disabled>
+                <Button appearance="secondary" disabled>
                   Disabled Action
+                </Button>
+                <Button appearance="outline" disabledFocusable>
+                  Disabled (Focusable)
                 </Button>
               </div>
             }
             nativePreview={
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%' }}>
-                <Button variant="primary" isLoading style={{ width: '100%' }}>
+                <Button appearance="primary" isLoading style={{ width: '100%' }}>
                   Deploying Cluster...
                 </Button>
-                <Button variant="secondary" disabled style={{ width: '100%' }}>
+                <Button appearance="outline" disabled style={{ width: '100%' }}>
                   Disabled Action
                 </Button>
               </div>
             }
-            webCode={`import React, { useState } from 'react';
+            webCode={`import React from 'react';
 import { Button } from '@winplaybox/react';
-import type { ButtonProps } from '@winplaybox/react';
 
 export default function ButtonStatesDemo(): JSX.Element {
-  const [loading, setLoading] = useState<boolean>(true);
-
   return (
-    <div style={{ display: 'flex', gap: 12 }}>
-      <Button variant="primary" isLoading={loading} onClick={(): void => setLoading(!loading)}>
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+      <Button appearance="primary" isLoading>
         Deploying Cluster...
       </Button>
-      <Button variant="secondary" disabled>
+      <Button appearance="secondary" disabled>
         Disabled Action
+      </Button>
+      <Button appearance="outline" disabledFocusable>
+        Disabled (Focusable)
       </Button>
     </div>
   );
@@ -644,38 +1162,39 @@ export default function NativeButtonStatesDemo(): JSX.Element {
 }`}
           />
 
-          {/* Demo 5: Full Width Block Layout */}
+          {/* Demo 10: Full-Width Block Layout */}
           <ComponentDemoCard
             id="button-block"
-            title="Full-Width Block Layout"
-            description="Expand buttons across the full container width for mobile viewport actions and modal bottom sheets."
+            title="10 Responsive Full-Width Block Layout"
+            description="Expand buttons across the full container width with fullWidth={true} for responsive mobile viewports, confirmation modals, and bottom sheets."
+            compactCode={`<Button appearance="primary" fullWidth>Continue to Payment</Button>
+<Button appearance="secondary" fullWidth>Save for Later</Button>`}
             webPreview={
               <div style={{ width: '100%', maxWidth: 360, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <Button variant="primary" style={{ width: '100%' }}>
+                <Button appearance="primary" fullWidth>
                   Continue to Payment
                 </Button>
-                <Button variant="secondary" style={{ width: '100%' }}>
+                <Button appearance="secondary" fullWidth>
                   Save for Later
                 </Button>
               </div>
             }
             nativePreview={
               <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                <Button variant="primary" style={{ width: '100%' }}>Continue to Checkout</Button>
-                <Button variant="secondary" style={{ width: '100%' }}>Cancel</Button>
+                <Button appearance="primary" style={{ width: '100%' }}>Continue to Checkout</Button>
+                <Button appearance="outline" style={{ width: '100%' }}>Cancel</Button>
               </div>
             }
             webCode={`import React from 'react';
 import { Button } from '@winplaybox/react';
-import type { ButtonProps } from '@winplaybox/react';
 
 export default function BlockButtonDemo(): JSX.Element {
   return (
     <div style={{ width: '100%', maxWidth: 360, display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <Button variant="primary" style={{ width: '100%' }}>
+      <Button appearance="primary" fullWidth>
         Continue to Payment
       </Button>
-      <Button variant="secondary" style={{ width: '100%' }}>
+      <Button appearance="secondary" fullWidth>
         Save for Later
       </Button>
     </div>
@@ -694,117 +1213,61 @@ export default function NativeBlockButtonDemo(): JSX.Element {
   );
 }`}
           />
+        </div>
+      );
 
-          {/* Demo 6: Compound Button (Spectra Pattern) */}
+    case 'compound-button':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
           <ComponentDemoCard
-            id="button-compound"
-            title="Compound Button (Spectra Pattern)"
-            description="Features a prominent primary label accompanied by a secondary descriptive subtitle, ideal for high-impact onboarding and choice actions."
+            id="compound-basic"
+            title="01 CompoundButton Headline + Subtitle"
+            description="Prominent action button pairing a bold headline with explanatory secondary copy for onboarding and configuration decisions."
+            compactCode={`<CompoundButton
+  appearance="primary"
+  icon={<SparklesIcon size={20} />}
+  secondaryContent="Create a collaborative design repository with tokens"
+>
+  New Workspace
+</CompoundButton>`}
             webPreview={
               <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-                <button
-                  type="button"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: 14,
-                    padding: '16px 20px',
-                    borderRadius: 12,
-                    border: '1px solid var(--color-border-subtle)',
-                    background: 'var(--color-surface-elevated)',
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    transition: 'all 0.2s ease',
-                    boxShadow: 'var(--shadow-sm)',
-                    maxWidth: 320,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--color-primary)';
-                    e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
-                    e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-                  }}
+                <CompoundButton
+                  appearance="primary"
+                  icon={<SparklesIcon size={20} />}
+                  secondaryContent="Create a collaborative design repository with tokens"
                 >
-                  <div style={{ padding: 8, borderRadius: 8, background: 'var(--color-primary-subtle)', color: 'var(--color-primary)', display: 'flex' }}>
-                    <SparklesIcon size={20} />
-                  </div>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--color-text-primary)' }}>New Workspace</div>
-                    <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', marginTop: 2 }}>Create a collaborative design repository with tokens</div>
-                  </div>
-                </button>
-                <button
-                  type="button"
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: 14,
-                    padding: '16px 20px',
-                    borderRadius: 12,
-                    border: '1px solid var(--color-border-subtle)',
-                    background: 'var(--color-surface-elevated)',
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    transition: 'all 0.2s ease',
-                    boxShadow: 'var(--shadow-sm)',
-                    maxWidth: 320,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--color-primary)';
-                    e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
-                    e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-                  }}
+                  New Workspace
+                </CompoundButton>
+                <CompoundButton
+                  appearance="secondary"
+                  icon={<ExternalLinkIcon size={20} />}
+                  secondaryContent="Sync variables and design tokens from Figma styles"
                 >
-                  <div style={{ padding: 8, borderRadius: 8, background: 'var(--color-surface-hover)', color: 'var(--color-text-secondary)', display: 'flex' }}>
-                    <ExternalLinkIcon size={20} />
-                  </div>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--color-text-primary)' }}>Import Figma</div>
-                    <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', marginTop: 2 }}>Sync variables and design tokens from Figma styles</div>
-                  </div>
-                </button>
+                  Import Figma
+                </CompoundButton>
               </div>
             }
             nativePreview={
-              <div style={{ width: '100%', gap: 10, display: 'flex', flexDirection: 'column' }}>
+              <div style={{ width: '100%' }}>
                 <Button variant="secondary" style={{ width: '100%', padding: '14px 16px' }}>
-                  New Workspace (Collaborative design repo)
+                  New Workspace
                 </Button>
               </div>
             }
             webCode={`import React from 'react';
+import { CompoundButton } from '@winplaybox/react';
 import { SparklesIcon } from '@winplaybox/icons';
 
 export default function CompoundButtonDemo(): JSX.Element {
   return (
-    <button
-      type="button"
-      className="spectra-compound-button"
-      style={{
-        display: 'flex',
-        alignItems: 'flex-start',
-        gap: 14,
-        padding: '16px 20px',
-        borderRadius: 12,
-        border: '1px solid var(--color-border-subtle)',
-        background: 'var(--color-surface-elevated)',
-        cursor: 'pointer',
-        textAlign: 'left',
-      }}
+    <CompoundButton
+      appearance="primary"
+      icon={<SparklesIcon size={20} />}
+      secondaryContent="Create a collaborative design repository with tokens"
     >
-      <div style={{ padding: 8, borderRadius: 8, background: 'var(--color-primary-subtle)', color: 'var(--color-primary)' }}>
-        <SparklesIcon size={20} />
-      </div>
-      <div>
-        <div style={{ fontWeight: 600, fontSize: '0.95rem' }}>New Workspace</div>
-        <div style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)' }}>Create a collaborative design repository</div>
-      </div>
-    </button>
+      New Workspace
+    </CompoundButton>
   );
 }`}
             nativeCode={`import React from 'react';
@@ -819,218 +1282,405 @@ export default function NativeCompoundButtonDemo(): JSX.Element {
   );
 }`}
           />
-
-          {/* Demo 7: Split Button with Action Flyout */}
           <ComponentDemoCard
-            id="button-split"
-            title="Split Button with Action Flyout"
-            description="Combines a default single-click primary action with a secondary chevron button that reveals alternative execution choices."
+            id="compound-appearances"
+            title="02 Visual Appearances"
+            description="CompoundButton supports Fluent 2 appearances: Primary, Secondary, Outline, and Subtle."
+            compactCode={`<CompoundButton appearance="outline" secondaryContent="Review deployment parameters">Deploy Staging</CompoundButton>`}
             webPreview={
-              <div style={{ position: 'relative', display: 'inline-flex' }}>
-                <div style={{ display: 'inline-flex', borderRadius: 8, overflow: 'hidden', boxShadow: 'var(--shadow-sm)' }}>
-                  <Button variant="primary" style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}>
-                    {splitAction}
-                  </Button>
-                  <button
-                    type="button"
-                    onClick={() => setSplitMenuOpen(!splitMenuOpen)}
-                    aria-label="Toggle actions"
-                    style={{
-                      border: 'none',
-                      background: 'var(--color-primary-hover, #1d4ed8)',
-                      color: '#ffffff',
-                      padding: '0 10px',
-                      cursor: 'pointer',
-                      borderLeft: '1px solid rgba(255,255,255,0.2)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <ChevronDownIcon size={16} />
-                  </button>
-                </div>
-                {splitMenuOpen && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '100%',
-                      right: 0,
-                      marginTop: 6,
-                      background: 'var(--color-surface-elevated)',
-                      border: '1px solid var(--color-border-subtle)',
-                      borderRadius: 8,
-                      boxShadow: 'var(--shadow-lg)',
-                      zIndex: 100,
-                      minWidth: 200,
-                      overflow: 'hidden',
-                    }}
-                  >
-                    {['Create merge commit', 'Squash and merge', 'Rebase and merge'].map((action) => (
-                      <button
-                        key={action}
-                        type="button"
-                        onClick={() => {
-                          setSplitAction(action);
-                          setSplitMenuOpen(false);
-                        }}
-                        style={{
-                          width: '100%',
-                          padding: '10px 14px',
-                          border: 'none',
-                          background: splitAction === action ? 'var(--color-primary-subtle)' : 'transparent',
-                          color: splitAction === action ? 'var(--color-primary)' : 'var(--color-text-primary)',
-                          fontWeight: splitAction === action ? 600 : 400,
-                          fontSize: '0.875rem',
-                          textAlign: 'left',
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                        }}
-                      >
-                        <span>{action}</span>
-                        {splitAction === action && <CheckIcon size={14} />}
-                      </button>
-                    ))}
-                  </div>
-                )}
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                <CompoundButton appearance="outline" secondaryContent="Review deployment parameters">
+                  Deploy Staging
+                </CompoundButton>
+                <CompoundButton appearance="subtle" secondaryContent="Revert to last stable commit">
+                  Rollback Version
+                </CompoundButton>
               </div>
             }
-            nativePreview={
-              <div style={{ width: '100%' }}>
-                <Button variant="primary" style={{ width: '100%' }}>
+            nativePreview={<div style={{ width: '100%' }}><Button appearance="outline">Deploy Staging</Button></div>}
+            webCode={`import React from 'react';
+import { CompoundButton } from '@winplaybox/react';
+
+export default function CompoundAppearancesDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 16 }}>
+      <CompoundButton appearance="outline" secondaryContent="Review deployment parameters">
+        Deploy Staging
+      </CompoundButton>
+      <CompoundButton appearance="subtle" secondaryContent="Revert to last stable commit">
+        Rollback Version
+      </CompoundButton>
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';`}
+          />
+          <ComponentDemoCard
+            id="compound-icons"
+            title="03 Vector Icon Integration"
+            description="Integrate authentic vector icons from @winplaybox/icons to establish instant visual hierarchy."
+            compactCode={`<CompoundButton appearance="primary" icon={<SettingsIcon size={20} />} secondaryContent="Configure organization secrets and SSO">Security Settings</CompoundButton>`}
+            webPreview={
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                <CompoundButton appearance="primary" icon={<SettingsIcon size={20} />} secondaryContent="Configure organization secrets and SSO">
+                  Security Settings
+                </CompoundButton>
+              </div>
+            }
+            nativePreview={<div style={{ width: '100%' }}><Button appearance="primary">Security Settings</Button></div>}
+            webCode={`import React from 'react';
+import { CompoundButton } from '@winplaybox/react';
+import { SettingsIcon } from '@winplaybox/icons';
+
+export default function CompoundIconsDemo(): JSX.Element {
+  return (
+    <CompoundButton appearance="primary" icon={<SettingsIcon size={20} />} secondaryContent="Configure organization secrets and SSO">
+      Security Settings
+    </CompoundButton>
+  );
+}`}
+            nativeCode={`import React from 'react';`}
+          />
+        </div>
+      );
+
+    case 'menu-button':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="menu-button-basic"
+            title="01 MenuButton Flyout Dropdown"
+            description="MenuButton features an integrated chevron vector indicator that expands an accessible flyout menu with keyboard navigation."
+            compactCode={`<MenuButton
+  appearance="secondary"
+  menuItems={[
+    { id: 'csv', label: 'Export as CSV' },
+    { id: 'pdf', label: 'Export as PDF' },
+    { id: 'json', label: 'Export as JSON' },
+  ]}
+>
+  Export Report
+</MenuButton>`}
+            webPreview={
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                <MenuButton
+                  appearance="secondary"
+                  menuItems={[
+                    { id: 'csv', label: 'Export as CSV' },
+                    { id: 'pdf', label: 'Export as PDF' },
+                    { id: 'json', label: 'Export as JSON' },
+                  ]}
+                >
+                  Export Report
+                </MenuButton>
+                <MenuButton
+                  appearance="primary"
+                  icon={<PlusIcon size={16} />}
+                  menuItems={[
+                    { id: 'repo', label: 'New Repository' },
+                    { id: 'gist', label: 'New Gist' },
+                    { id: 'org', label: 'New Organization' },
+                  ]}
+                >
+                  Create New
+                </MenuButton>
+              </div>
+            }
+            nativePreview={<div style={{ width: '100%' }}><Button appearance="outline">Export Report</Button></div>}
+            webCode={`import React from 'react';
+import { MenuButton } from '@winplaybox/react';
+
+export default function MenuButtonDemo(): JSX.Element {
+  return (
+    <MenuButton
+      appearance="secondary"
+      menuItems={[
+        { id: 'csv', label: 'Export as CSV' },
+        { id: 'pdf', label: 'Export as PDF' },
+        { id: 'json', label: 'Export as JSON' },
+      ]}
+    >
+      Export Report
+    </MenuButton>
+  );
+}`}
+            nativeCode={`import React from 'react';`}
+          />
+          <ComponentDemoCard
+            id="menu-button-appearances"
+            title="02 Visual Appearances (Primary, Secondary, Outline)"
+            description="Apply Fluent 2 appearance tiers to menu buttons according to surrounding interface hierarchy."
+            compactCode={`<MenuButton appearance="primary" menuItems={[{ id: '1', label: 'Option 1' }]}>Primary Menu</MenuButton>
+<MenuButton appearance="outline" menuItems={[{ id: '1', label: 'Option 1' }]}>Outline Menu</MenuButton>`}
+            webPreview={
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                <MenuButton appearance="primary" menuItems={[{ id: '1', label: 'Publish to Staging' }, { id: '2', label: 'Publish to Production' }]}>
+                  Publish
+                </MenuButton>
+                <MenuButton appearance="outline" menuItems={[{ id: '1', label: 'Archive Project' }, { id: '2', label: 'Delete Project' }]}>
+                  Manage
+                </MenuButton>
+              </div>
+            }
+            nativePreview={<div style={{ width: '100%' }}><Button appearance="primary">Publish</Button></div>}
+            webCode={`import React from 'react';
+import { MenuButton } from '@winplaybox/react';
+
+export default function MenuButtonAppearancesDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 16 }}>
+      <MenuButton appearance="primary" menuItems={[{ id: '1', label: 'Publish to Staging' }]}>
+        Publish
+      </MenuButton>
+      <MenuButton appearance="outline" menuItems={[{ id: '1', label: 'Archive' }]}>
+        Manage
+      </MenuButton>
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';`}
+          />
+          <ComponentDemoCard
+            id="menu-button-sizes"
+            title="03 Sizing Scale (Small, Medium, Large)"
+            description="Small (24px) for compact toolbars, Medium (32px) standard, and Large (40px) prominent triggers."
+            compactCode={`<MenuButton size="sm" menuItems={[{ id: '1', label: 'Item 1' }]}>Small</MenuButton>
+<MenuButton size="md" menuItems={[{ id: '1', label: 'Item 1' }]}>Medium</MenuButton>
+<MenuButton size="lg" menuItems={[{ id: '1', label: 'Item 1' }]}>Large</MenuButton>`}
+            webPreview={
+              <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+                <MenuButton size="sm" menuItems={[{ id: '1', label: 'Item 1' }]}>Small (24px)</MenuButton>
+                <MenuButton size="md" menuItems={[{ id: '1', label: 'Item 1' }]}>Medium (32px)</MenuButton>
+                <MenuButton size="lg" menuItems={[{ id: '1', label: 'Item 1' }]}>Large (40px)</MenuButton>
+              </div>
+            }
+            nativePreview={<div style={{ width: '100%' }}><Button size="md">Medium</Button></div>}
+            webCode={`import React from 'react';
+import { MenuButton } from '@winplaybox/react';
+
+export default function MenuButtonSizesDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+      <MenuButton size="sm" menuItems={[{ id: '1', label: 'Item 1' }]}>Small</MenuButton>
+      <MenuButton size="md" menuItems={[{ id: '1', label: 'Item 1' }]}>Medium</MenuButton>
+      <MenuButton size="lg" menuItems={[{ id: '1', label: 'Item 1' }]}>Large</MenuButton>
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';`}
+          />
+        </div>
+      );
+
+    case 'split-button':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="split-button-basic"
+            title="01 SplitButton Action Flyout"
+            description="Combines a primary single-click action with a secondary chevron button revealing alternative actions."
+            compactCode={`<SplitButton
+  appearance="primary"
+  options={[
+    { label: 'Create merge commit', onClick: () => setSplitAction('Create merge commit') },
+    { label: 'Squash and merge', onClick: () => setSplitAction('Squash and merge') },
+    { label: 'Rebase and merge', onClick: () => setSplitAction('Rebase and merge') },
+  ]}
+>
+  {splitAction}
+</SplitButton>`}
+            webPreview={
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                <SplitButton
+                  appearance="primary"
+                  options={[
+                    { label: 'Create merge commit', onClick: () => setSplitAction('Create merge commit') },
+                    { label: 'Squash and merge', onClick: () => setSplitAction('Squash and merge') },
+                    { label: 'Rebase and merge', onClick: () => setSplitAction('Rebase and merge') },
+                  ]}
+                >
                   {splitAction}
-                </Button>
+                </SplitButton>
               </div>
             }
+            nativePreview={<div style={{ width: '100%' }}><Button appearance="primary">{splitAction}</Button></div>}
             webCode={`import React, { useState } from 'react';
-import { Button } from '@winplaybox/react';
-import { ChevronDownIcon, CheckIcon } from '@winplaybox/icons';
+import { SplitButton } from '@winplaybox/react';
 
 export default function SplitButtonDemo(): JSX.Element {
-  const [open, setOpen] = useState(false);
   const [action, setAction] = useState('Create merge commit');
 
   return (
-    <div style={{ position: 'relative', display: 'inline-flex' }}>
-      <div style={{ display: 'inline-flex', borderRadius: 8, overflow: 'hidden' }}>
-        <Button variant="primary" style={{ borderTopRightRadius: 0, borderBottomRightRadius: 0 }}>
-          {action}
-        </Button>
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle actions"
-          style={{
-            border: 'none',
-            background: 'var(--color-primary-hover)',
-            color: '#fff',
-            padding: '0 10px',
-            cursor: 'pointer',
-            borderLeft: '1px solid rgba(255,255,255,0.2)',
-          }}
-        >
-          <ChevronDownIcon size={16} />
-        </button>
-      </div>
-      {open && (
-        <div style={{ position: 'absolute', top: '100%', right: 0, marginTop: 6, background: '#fff', borderRadius: 8, boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}>
-          {['Create merge commit', 'Squash and merge', 'Rebase and merge'].map((item) => (
-            <button key={item} onClick={() => { setAction(item); setOpen(false); }}>
-              {item}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
+    <SplitButton
+      appearance="primary"
+      options={[
+        { label: 'Create merge commit', onClick: () => setAction('Create merge commit') },
+        { label: 'Squash and merge', onClick: () => setAction('Squash and merge') },
+      ]}
+    >
+      {action}
+    </SplitButton>
   );
 }`}
-            nativeCode={`import React from 'react';
-import { View } from 'react-native';
-import { Button } from '@winplaybox/react-native';
-
-export default function NativeSplitButtonDemo(): JSX.Element {
-  return (
-    <View style={{ width: '100%' }}>
-      <Button variant="filled">Create merge commit</Button>
-    </View>
-  );
-}`}
+            nativeCode={`import React from 'react';`}
           />
-
-          {/* Demo 8: Segmented Attached Button Group */}
           <ComponentDemoCard
-            id="button-group"
-            title="Segmented Attached Button Group"
-            description="Horizontally groups related button triggers with unified border radius and shared outer bounds (Spectra ButtonGroup)."
+            id="split-button-appearances"
+            title="02 Visual Appearances (Primary, Secondary)"
+            description="SplitButton supports Primary for prominent actions and Secondary for standard workflows."
+            compactCode={`<SplitButton appearance="secondary" options={[{ label: 'Save and Close' }]}>Save Changes</SplitButton>`}
             webPreview={
-              <div style={{ display: 'inline-flex', borderRadius: 8, border: '1px solid var(--color-border-subtle)', overflow: 'hidden', background: 'var(--color-surface-subtle)' }}>
-                {(['day', 'week', 'month'] as const).map((period, idx) => (
-                  <button
-                    key={period}
-                    type="button"
-                    onClick={() => setButtonGroupVal(period)}
-                    style={{
-                      border: 'none',
-                      padding: '8px 18px',
-                      background: buttonGroupVal === period ? 'var(--color-surface-elevated)' : 'transparent',
-                      color: buttonGroupVal === period ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
-                      fontWeight: buttonGroupVal === period ? 600 : 500,
-                      fontSize: '0.875rem',
-                      cursor: 'pointer',
-                      borderLeft: idx > 0 ? '1px solid var(--color-border-subtle)' : 'none',
-                      boxShadow: buttonGroupVal === period ? 'var(--shadow-sm)' : 'none',
-                      transition: 'all 0.15s ease',
-                      textTransform: 'capitalize',
-                    }}
-                  >
-                    {period}
-                  </button>
-                ))}
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                <SplitButton appearance="primary" options={[{ label: 'Deploy & Restart' }]}>
+                  Deploy
+                </SplitButton>
+                <SplitButton appearance="secondary" options={[{ label: 'Save and Close' }, { label: 'Save and Duplicate' }]}>
+                  Save Changes
+                </SplitButton>
               </div>
             }
-            nativePreview={
-              <div style={{ width: '100%' }}>
-                <Button variant="secondary">Active: {buttonGroupVal.toUpperCase()}</Button>
-              </div>
-            }
-            webCode={`import React, { useState } from 'react';
+            nativePreview={<div style={{ width: '100%' }}><Button appearance="outline">Save Changes</Button></div>}
+            webCode={`import React from 'react';
+import { SplitButton } from '@winplaybox/react';
 
-export default function ButtonGroupDemo(): JSX.Element {
-  const [period, setPeriod] = useState<'day' | 'week' | 'month'>('week');
-
+export default function SplitAppearancesDemo(): JSX.Element {
   return (
-    <div style={{ display: 'inline-flex', borderRadius: 8, border: '1px solid var(--color-border-subtle)', overflow: 'hidden' }}>
-      {(['day', 'week', 'month'] as const).map((item, idx) => (
-        <button
-          key={item}
-          type="button"
-          onClick={() => setPeriod(item)}
-          style={{
-            border: 'none',
-            padding: '8px 18px',
-            background: period === item ? 'var(--color-surface-elevated)' : 'transparent',
-            borderLeft: idx > 0 ? '1px solid var(--color-border-subtle)' : 'none',
-            cursor: 'pointer',
-          }}
-        >
-          {item}
-        </button>
-      ))}
+    <div style={{ display: 'flex', gap: 16 }}>
+      <SplitButton appearance="primary" options={[{ label: 'Deploy & Restart' }]}>Deploy</SplitButton>
+      <SplitButton appearance="secondary" options={[{ label: 'Save and Close' }]}>Save Changes</SplitButton>
     </div>
   );
 }`}
-            nativeCode={`import React from 'react';
-import { View, Text } from 'react-native';
+            nativeCode={`import React from 'react';`}
+          />
+        </div>
+      );
 
-export default function NativeButtonGroupDemo(): JSX.Element {
+    case 'toggle-button':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          <ComponentDemoCard
+            id="toggle-button-basic"
+            title="01 ToggleButton Checked State"
+            description="Two-state action button with accessible aria-pressed semantics for toggling binary application states."
+            compactCode={`<ToggleButton
+  appearance="secondary"
+  checked={isPinned}
+  onToggle={(checked) => setIsPinned(checked)}
+  icon={<CheckIcon size={16} />}
+>
+  {isPinned ? 'Pinned to Sidebar' : 'Pin to Sidebar'}
+</ToggleButton>`}
+            webPreview={
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                <ToggleButton
+                  appearance="secondary"
+                  checked={isPinned}
+                  onToggle={(checked) => setIsPinned(checked)}
+                  icon={<CheckIcon size={16} />}
+                >
+                  {isPinned ? 'Pinned to Sidebar' : 'Pin to Sidebar'}
+                </ToggleButton>
+              </div>
+            }
+            nativePreview={<div style={{ width: '100%' }}><Button appearance="outline">{isPinned ? 'Pinned' : 'Pin'}</Button></div>}
+            webCode={`import React, { useState } from 'react';
+import { ToggleButton } from '@winplaybox/react';
+import { CheckIcon } from '@winplaybox/icons';
+
+export default function ToggleButtonDemo(): JSX.Element {
+  const [pinned, setPinned] = useState(true);
+
   return (
-    <View style={{ flexDirection: 'row', borderRadius: 8, borderWidth: 1, borderColor: '#E2E8F0' }}>
-      <Text style={{ padding: 10 }}>Week</Text>
-    </View>
+    <ToggleButton
+      appearance="secondary"
+      checked={pinned}
+      onToggle={(checked) => setPinned(checked)}
+      icon={<CheckIcon size={16} />}
+    >
+      {pinned ? 'Pinned to Sidebar' : 'Pin to Sidebar'}
+    </ToggleButton>
   );
 }`}
+            nativeCode={`import React from 'react';`}
+          />
+          <ComponentDemoCard
+            id="toggle-button-appearances"
+            title="02 Visual Appearances (Primary, Secondary, Subtle)"
+            description="Supports Fluent 2 appearances with distinct active pressed background and border contrast."
+            compactCode={`<ToggleButton appearance="primary" checked={true}>Primary Toggle</ToggleButton>
+<ToggleButton appearance="subtle" checked={true}>Subtle Toggle</ToggleButton>`}
+            webPreview={
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                <ToggleButton appearance="primary" defaultChecked>
+                  Primary Pressed
+                </ToggleButton>
+                <ToggleButton appearance="secondary" defaultChecked>
+                  Secondary Pressed
+                </ToggleButton>
+                <ToggleButton appearance="subtle" defaultChecked>
+                  Subtle Pressed
+                </ToggleButton>
+              </div>
+            }
+            nativePreview={<div style={{ width: '100%' }}><Button appearance="primary">Active</Button></div>}
+            webCode={`import React from 'react';
+import { ToggleButton } from '@winplaybox/react';
+
+export default function ToggleAppearancesDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 16 }}>
+      <ToggleButton appearance="primary" defaultChecked>Primary Pressed</ToggleButton>
+      <ToggleButton appearance="secondary" defaultChecked>Secondary Pressed</ToggleButton>
+      <ToggleButton appearance="subtle" defaultChecked>Subtle Pressed</ToggleButton>
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';`}
+          />
+          <ComponentDemoCard
+            id="toggle-button-icons"
+            title="03 Pin & Bookmark Toggle"
+            description="Pair with authentic vector icons to convey state changes cleanly."
+            compactCode={`<ToggleButton
+  appearance="subtle"
+  checked={isBookmarked}
+  onToggle={(checked) => setIsBookmarked(checked)}
+  icon={<SparklesIcon size={16} />}
+>
+  {isBookmarked ? 'Bookmarked' : 'Add Bookmark'}
+</ToggleButton>`}
+            webPreview={
+              <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+                <ToggleButton
+                  appearance="subtle"
+                  checked={isBookmarked}
+                  onToggle={(checked) => setIsBookmarked(checked)}
+                  icon={<SparklesIcon size={16} />}
+                >
+                  {isBookmarked ? 'Bookmarked' : 'Add Bookmark'}
+                </ToggleButton>
+              </div>
+            }
+            nativePreview={<div style={{ width: '100%' }}><Button appearance="subtle">Bookmark</Button></div>}
+            webCode={`import React, { useState } from 'react';
+import { ToggleButton } from '@winplaybox/react';
+import { SparklesIcon } from '@winplaybox/icons';
+
+export default function BookmarkToggleDemo(): JSX.Element {
+  const [bookmarked, setBookmarked] = useState(false);
+  return (
+    <ToggleButton
+      appearance="subtle"
+      checked={bookmarked}
+      onToggle={(checked) => setBookmarked(checked)}
+      icon={<SparklesIcon size={16} />}
+    >
+      {bookmarked ? 'Bookmarked' : 'Add Bookmark'}
+    </ToggleButton>
+  );
+}`}
+            nativeCode={`import React from 'react';`}
           />
         </div>
       );
@@ -1038,24 +1688,30 @@ export default function NativeButtonGroupDemo(): JSX.Element {
     case 'accordion':
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
-          {/* Demo 1: Single Collapse Accordion */}
+          {/* Demo 1: Default Accordion */}
           <ComponentDemoCard
-            id="accordion-single"
-            title="Single Expansion (FAQ Pattern)"
-            description="Opening an accordion section automatically collapses any previously open panel to minimize vertical screen clutter."
+            id="accordion-basic"
+            title="01 Default Accordion (Collapsible FAQ)"
+            description="Basic single-panel expansion where opening any panel collapses others. By default, collapsible={true} allows users to toggle open panels closed."
             webPreview={
-              <div style={{ maxWidth: 480, width: '100%' }}>
-                <Accordion defaultValue="item-1">
-                  <AccordionItem value="item-1">
-                    <AccordionHeader>What platforms does Spectra UI support?</AccordionHeader>
+              <div style={{ maxWidth: 560, width: '100%' }}>
+                <Accordion defaultOpenItems={['faq-1']}>
+                  <AccordionItem value="faq-1">
+                    <AccordionHeader>How does Spectra UI guarantee design token synchronization?</AccordionHeader>
                     <AccordionPanel>
-                      Spectra UI supports Web (React 18 & 19, Next.js, Vite) and Mobile Native (React Native, iOS, and Android).
+                      Spectra UI token primitives compile to CSS custom variables for Web React DOM and typed JavaScript dictionaries for React Native, ensuring zero design drift across platforms.
                     </AccordionPanel>
                   </AccordionItem>
-                  <AccordionItem value="item-2">
-                    <AccordionHeader>Are design tokens shared across platforms?</AccordionHeader>
+                  <AccordionItem value="faq-2">
+                    <AccordionHeader>Can I use this with Server-Side Rendering (Next.js / Astro)?</AccordionHeader>
                     <AccordionPanel>
-                      Yes! The single source of truth in @winplaybox/tokens compiles to CSS Variables for Web and JavaScript theme dictionaries for React Native StyleSheet.
+                      Yes. All components are built with SSR-safe hydration hooks, zero unguarded browser window globals, and compile cleanly in React 18 &amp; 19 Server Components.
+                    </AccordionPanel>
+                  </AccordionItem>
+                  <AccordionItem value="faq-3">
+                    <AccordionHeader>What is the accessibility compliance standard?</AccordionHeader>
+                    <AccordionPanel>
+                      Every component satisfies WCAG 2.1 AA and W3C WAI-ARIA APG patterns, including roving tabindex and keyboard navigation.
                     </AccordionPanel>
                   </AccordionItem>
                 </Accordion>
@@ -1063,35 +1719,40 @@ export default function NativeButtonGroupDemo(): JSX.Element {
             }
             nativePreview={
               <div style={{ width: '100%' }}>
-                <Accordion defaultValue="item-1">
-                  <AccordionItem value="item-1">
-                    <AccordionHeader>Native FAQ Item 1</AccordionHeader>
-                    <AccordionPanel>LayoutAnimation fluid transition on native mobile.</AccordionPanel>
+                <Accordion defaultOpenItems={['faq-1']}>
+                  <AccordionItem value="faq-1">
+                    <AccordionHeader>How does Spectra UI synchronize tokens?</AccordionHeader>
+                    <AccordionPanel>Tokens power React Native StyleSheet directly.</AccordionPanel>
                   </AccordionItem>
-                  <AccordionItem value="item-2">
-                    <AccordionHeader>Native FAQ Item 2</AccordionHeader>
-                    <AccordionPanel>44pt touch targets with accessibilityState.</AccordionPanel>
+                  <AccordionItem value="faq-2">
+                    <AccordionHeader>Is React Native supported?</AccordionHeader>
+                    <AccordionPanel>Native iOS (44pt) and Android (48dp) touch targets.</AccordionPanel>
                   </AccordionItem>
                 </Accordion>
               </div>
             }
             webCode={`import React from 'react';
 import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react';
-import type { AccordionProps } from '@winplaybox/react';
 
-export default function SingleAccordionDemo(): JSX.Element {
+export default function DefaultAccordionDemo(): JSX.Element {
   return (
-    <Accordion defaultValue="item-1">
-      <AccordionItem value="item-1">
-        <AccordionHeader>What platforms does Spectra UI support?</AccordionHeader>
+    <Accordion defaultOpenItems={['faq-1']}>
+      <AccordionItem value="faq-1">
+        <AccordionHeader>How does Spectra UI guarantee design token synchronization?</AccordionHeader>
         <AccordionPanel>
-          Spectra UI supports Web (React 18 & 19, Next.js, Vite) and Mobile Native (iOS & Android).
+          Spectra UI token primitives compile to CSS custom variables for Web React DOM and typed JavaScript dictionaries for React Native, ensuring zero design drift across platforms.
         </AccordionPanel>
       </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionHeader>Are design tokens shared across platforms?</AccordionHeader>
+      <AccordionItem value="faq-2">
+        <AccordionHeader>Can I use this with Server-Side Rendering (Next.js / Astro)?</AccordionHeader>
         <AccordionPanel>
-          Yes! The same tokens power CSS variables and React Native StyleSheet.
+          Yes. All components are built with SSR-safe hydration hooks, zero unguarded browser window globals, and compile cleanly in React 18 & 19 Server Components.
+        </AccordionPanel>
+      </AccordionItem>
+      <AccordionItem value="faq-3">
+        <AccordionHeader>What is the accessibility compliance standard?</AccordionHeader>
+        <AccordionPanel>
+          Every component satisfies WCAG 2.1 AA and W3C WAI-ARIA APG patterns, including roving tabindex and keyboard navigation.
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
@@ -1100,67 +1761,88 @@ export default function SingleAccordionDemo(): JSX.Element {
             nativeCode={`import React from 'react';
 import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react-native';
 
-export default function NativeAccordionDemo(): JSX.Element {
+export default function NativeDefaultAccordionDemo(): JSX.Element {
   return (
-    <Accordion defaultValue="item-1">
-      <AccordionItem value="item-1">
-        <AccordionHeader>Native FAQ Item 1</AccordionHeader>
-        <AccordionPanel>LayoutAnimation fluid transition on native mobile.</AccordionPanel>
+    <Accordion defaultOpenItems={['faq-1']}>
+      <AccordionItem value="faq-1">
+        <AccordionHeader>How does Spectra UI synchronize tokens?</AccordionHeader>
+        <AccordionPanel>Tokens power React Native StyleSheet directly.</AccordionPanel>
+      </AccordionItem>
+      <AccordionItem value="faq-2">
+        <AccordionHeader>Is React Native supported?</AccordionHeader>
+        <AccordionPanel>Native iOS (44pt) and Android (48dp) touch targets.</AccordionPanel>
       </AccordionItem>
     </Accordion>
   );
 }`}
           />
 
-          {/* Demo 2: Multiple Expanded Panels */}
+          {/* Demo 2: Multiple Expansion */}
           <ComponentDemoCard
             id="accordion-multiple"
-            title="Simultaneous Multi-Panel Expansion"
-            description="With multiple={true}, users can open as many panels as they need simultaneously to compare documentation sections."
+            title="02 Simultaneous Multi-Panel Expansion"
+            description="With multiple={true}, users can keep several sections open at once to cross-reference technical details or multi-step configuration panels."
             webPreview={
-              <div style={{ maxWidth: 480, width: '100%' }}>
-                <Accordion multiple defaultValue={['item-1', 'item-2']}>
-                  <AccordionItem value="item-1">
-                    <AccordionHeader>Section 1: Authentication Config</AccordionHeader>
-                    <AccordionPanel>OAuth 2.0 and API token configuration parameters.</AccordionPanel>
+              <div style={{ maxWidth: 560, width: '100%' }}>
+                <Accordion multiple defaultOpenItems={['cfg-1', 'cfg-2']}>
+                  <AccordionItem value="cfg-1">
+                    <AccordionHeader>01 Cluster Architecture</AccordionHeader>
+                    <AccordionPanel>
+                      Running 3 regional active-active nodes with automated failover and health telemetry.
+                    </AccordionPanel>
                   </AccordionItem>
-                  <AccordionItem value="item-2">
-                    <AccordionHeader>Section 2: Database Replicas</AccordionHeader>
-                    <AccordionPanel>3 read-replicas distributed across eu-west and us-east.</AccordionPanel>
+                  <AccordionItem value="cfg-2">
+                    <AccordionHeader>02 Networking &amp; Ingress</AccordionHeader>
+                    <AccordionPanel>
+                      TLS 1.3 termination with mutual authentication and rate-limiting enabled across public endpoints.
+                    </AccordionPanel>
+                  </AccordionItem>
+                  <AccordionItem value="cfg-3">
+                    <AccordionHeader>03 Storage &amp; Persistent Volumes</AccordionHeader>
+                    <AccordionPanel>
+                      NVMe-backed SSD storage classes with automated snapshot schedules every 6 hours.
+                    </AccordionPanel>
                   </AccordionItem>
                 </Accordion>
               </div>
             }
             nativePreview={
               <div style={{ width: '100%' }}>
-                <Accordion multiple defaultValue={['item-1', 'item-2']}>
-                  <AccordionItem value="item-1">
-                    <AccordionHeader>Native Section 1</AccordionHeader>
-                    <AccordionPanel>Simultaneously open native panel 1.</AccordionPanel>
+                <Accordion multiple defaultOpenItems={['cfg-1', 'cfg-2']}>
+                  <AccordionItem value="cfg-1">
+                    <AccordionHeader>01 Cluster Architecture</AccordionHeader>
+                    <AccordionPanel>Active nodes with automated failover.</AccordionPanel>
                   </AccordionItem>
-                  <AccordionItem value="item-2">
-                    <AccordionHeader>Native Section 2</AccordionHeader>
-                    <AccordionPanel>Simultaneously open native panel 2.</AccordionPanel>
+                  <AccordionItem value="cfg-2">
+                    <AccordionHeader>02 Networking &amp; Ingress</AccordionHeader>
+                    <AccordionPanel>TLS 1.3 termination enabled.</AccordionPanel>
                   </AccordionItem>
                 </Accordion>
               </div>
             }
             webCode={`import React from 'react';
 import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react';
-import type { AccordionProps } from '@winplaybox/react';
 
 export default function MultiAccordionDemo(): JSX.Element {
-  const defaultItems: string[] = ['item-1', 'item-2'];
-
   return (
-    <Accordion multiple defaultValue={defaultItems}>
-      <AccordionItem value="item-1">
-        <AccordionHeader>Section 1: Authentication Config</AccordionHeader>
-        <AccordionPanel>OAuth 2.0 and API token configuration parameters.</AccordionPanel>
+    <Accordion multiple defaultOpenItems={['cfg-1', 'cfg-2']}>
+      <AccordionItem value="cfg-1">
+        <AccordionHeader>01 Cluster Architecture</AccordionHeader>
+        <AccordionPanel>
+          Running 3 regional active-active nodes with automated failover and health telemetry.
+        </AccordionPanel>
       </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionHeader>Section 2: Database Replicas</AccordionHeader>
-        <AccordionPanel>3 read-replicas distributed across eu-west and us-east.</AccordionPanel>
+      <AccordionItem value="cfg-2">
+        <AccordionHeader>02 Networking & Ingress</AccordionHeader>
+        <AccordionPanel>
+          TLS 1.3 termination with mutual authentication and rate-limiting enabled across public endpoints.
+        </AccordionPanel>
+      </AccordionItem>
+      <AccordionItem value="cfg-3">
+        <AccordionHeader>03 Storage & Persistent Volumes</AccordionHeader>
+        <AccordionPanel>
+          NVMe-backed SSD storage classes with automated snapshot schedules every 6 hours.
+        </AccordionPanel>
       </AccordionItem>
     </Accordion>
   );
@@ -1170,10 +1852,667 @@ import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winp
 
 export default function NativeMultiAccordionDemo(): JSX.Element {
   return (
-    <Accordion multiple defaultValue={['item-1', 'item-2']}>
+    <Accordion multiple defaultOpenItems={['cfg-1', 'cfg-2']}>
+      <AccordionItem value="cfg-1">
+        <AccordionHeader>01 Cluster Architecture</AccordionHeader>
+        <AccordionPanel>Active nodes with automated failover.</AccordionPanel>
+      </AccordionItem>
+      <AccordionItem value="cfg-2">
+        <AccordionHeader>02 Networking & Ingress</AccordionHeader>
+        <AccordionPanel>TLS 1.3 termination enabled.</AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  );
+}`}
+          />
+
+          {/* Demo 3: Sizing Scale */}
+          <ComponentDemoCard
+            id="accordion-sizes"
+            title="03 Sizing Scale & Density (Sm, Md, Lg, XL)"
+            description="Choose from 4 sizing densities: Small (32px) for high-density toolbars/sidebars, Medium (40px) default, Large (48px) for forms, and Extra Large (56px) for hero FAQ sections."
+            webPreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 560, width: '100%' }}>
+                <div>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: 6, display: 'block' }}>
+                    Small Density (size="small" · 32px height)
+                  </span>
+                  <Accordion size="small" defaultOpenItems={['sm-1']}>
+                    <AccordionItem value="sm-1">
+                      <AccordionHeader>System Properties (Small)</AccordionHeader>
+                      <AccordionPanel>Memory: 16 GB · Kernel: Darwin 23.4.0</AccordionPanel>
+                    </AccordionItem>
+                  </Accordion>
+                </div>
+
+                <div>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: 6, display: 'block' }}>
+                    Medium Density (size="medium" · 40px height — Default)
+                  </span>
+                  <Accordion size="medium" defaultOpenItems={['md-1']}>
+                    <AccordionItem value="md-1">
+                      <AccordionHeader>Security &amp; Compliance (Medium)</AccordionHeader>
+                      <AccordionPanel>SOC 2 Type II certified with end-to-end audit logging.</AccordionPanel>
+                    </AccordionItem>
+                  </Accordion>
+                </div>
+
+                <div>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: 6, display: 'block' }}>
+                    Large Density (size="large" · 48px height)
+                  </span>
+                  <Accordion size="large" defaultOpenItems={['lg-1']}>
+                    <AccordionItem value="lg-1">
+                      <AccordionHeader>Billing &amp; Subscription (Large)</AccordionHeader>
+                      <AccordionPanel>Enterprise tier plan renewing on November 1st.</AccordionPanel>
+                    </AccordionItem>
+                  </Accordion>
+                </div>
+
+                <div>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: 6, display: 'block' }}>
+                    Extra Large Density (size="extra-large" · 56px height)
+                  </span>
+                  <Accordion size="extra-large" defaultOpenItems={['xl-1']}>
+                    <AccordionItem value="xl-1">
+                      <AccordionHeader>Frequently Asked Questions (Hero)</AccordionHeader>
+                      <AccordionPanel>Prominent hero typography suitable for landing page disclosure.</AccordionPanel>
+                    </AccordionItem>
+                  </Accordion>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
+                <Accordion size="small" defaultOpenItems={['sm-1']}>
+                  <AccordionItem value="sm-1">
+                    <AccordionHeader>Small Density (36pt)</AccordionHeader>
+                    <AccordionPanel>Compact mobile sidebar item.</AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
+                <Accordion size="medium" defaultOpenItems={['md-1']}>
+                  <AccordionItem value="md-1">
+                    <AccordionHeader>Medium Density (44pt Apple HIG)</AccordionHeader>
+                    <AccordionPanel>Standard touch target.</AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react';
+
+export default function AccordionSizesDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      {/* Small (32px) */}
+      <Accordion size="small">
+        <AccordionItem value="sm">
+          <AccordionHeader>Small Density (32px)</AccordionHeader>
+          <AccordionPanel>Ideal for sidebars and dense lists.</AccordionPanel>
+        </AccordionItem>
+      </Accordion>
+
+      {/* Medium (40px) */}
+      <Accordion size="medium" defaultOpenItems={['md']}>
+        <AccordionHeader>Medium Density (40px — Default)</AccordionHeader>
+        <AccordionPanel>Standard design system baseline.</AccordionPanel>
+      </Accordion>
+
+      {/* Large (48px) */}
+      <Accordion size="large">
+        <AccordionItem value="lg">
+          <AccordionHeader>Large Density (48px)</AccordionHeader>
+          <AccordionPanel>Comfortable touch and form spacing.</AccordionPanel>
+        </AccordionItem>
+      </Accordion>
+
+      {/* Extra Large (56px) */}
+      <Accordion size="extra-large">
+        <AccordionItem value="xl">
+          <AccordionHeader>Extra Large Density (56px)</AccordionHeader>
+          <AccordionPanel>Prominent hero FAQ sections.</AccordionPanel>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react-native';
+
+export default function NativeAccordionSizesDemo(): JSX.Element {
+  return (
+    <Accordion size="medium" defaultOpenItems={['md']}>
+      <AccordionItem value="md">
+        <AccordionHeader>Medium Density (44pt touch target)</AccordionHeader>
+        <AccordionPanel>Native layout measurement.</AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  );
+}`}
+          />
+
+          {/* Demo 4: Expand Icon Position */}
+          <ComponentDemoCard
+            id="accordion-icon-position"
+            title="04 Expand Icon Position (Start vs End)"
+            description="Position the expand chevron at the leading edge (expandIconPosition='start', standard outline disclosure) or the trailing edge (expandIconPosition='end', mobile card convention)."
+            webPreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 560, width: '100%' }}>
+                <div>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: 8, display: 'block' }}>
+                    Leading Icon Position (expandIconPosition="start" — Default)
+                  </span>
+                  <Accordion expandIconPosition="start" defaultOpenItems={['start-1']}>
+                    <AccordionItem value="start-1">
+                      <AccordionHeader>Leading Chevron (Start)</AccordionHeader>
+                      <AccordionPanel>
+                        The chevron sits to the left of the header text and rotates 90 degrees downward when open.
+                      </AccordionPanel>
+                    </AccordionItem>
+                    <AccordionItem value="start-2">
+                      <AccordionHeader>Collapsed Start Section</AccordionHeader>
+                      <AccordionPanel>Collapsed content details.</AccordionPanel>
+                    </AccordionItem>
+                  </Accordion>
+                </div>
+
+                <div>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-muted)', marginBottom: 8, display: 'block' }}>
+                    Trailing Icon Position (expandIconPosition="end")
+                  </span>
+                  <Accordion expandIconPosition="end" defaultOpenItems={['end-1']}>
+                    <AccordionItem value="end-1">
+                      <AccordionHeader>Trailing Chevron (End)</AccordionHeader>
+                      <AccordionPanel>
+                        The chevron is pushed to the far right of the container and rotates 180 degrees upward when open.
+                      </AccordionPanel>
+                    </AccordionItem>
+                    <AccordionItem value="end-2">
+                      <AccordionHeader>Collapsed End Section</AccordionHeader>
+                      <AccordionPanel>Collapsed content details.</AccordionPanel>
+                    </AccordionItem>
+                  </Accordion>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <Accordion expandIconPosition="end" defaultOpenItems={['end-1']}>
+                  <AccordionItem value="end-1">
+                    <AccordionHeader>Trailing Chevron Native</AccordionHeader>
+                    <AccordionPanel>Matches iOS grouped table disclosure indicators.</AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react';
+
+export default function ExpandIconPositionDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      {/* Leading (Start) */}
+      <Accordion expandIconPosition="start" defaultOpenItems={['start-1']}>
+        <AccordionItem value="start-1">
+          <AccordionHeader>Leading Chevron (Start)</AccordionHeader>
+          <AccordionPanel>Chevron sits to the left of header text.</AccordionPanel>
+        </AccordionItem>
+      </Accordion>
+
+      {/* Trailing (End) */}
+      <Accordion expandIconPosition="end" defaultOpenItems={['end-1']}>
+        <AccordionItem value="end-1">
+          <AccordionHeader>Trailing Chevron (End)</AccordionHeader>
+          <AccordionPanel>Chevron aligns to the right margin.</AccordionPanel>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react-native';
+
+export default function NativeIconPositionDemo(): JSX.Element {
+  return (
+    <Accordion expandIconPosition="end" defaultOpenItems={['item-1']}>
       <AccordionItem value="item-1">
-        <AccordionHeader>Native Section 1</AccordionHeader>
-        <AccordionPanel>Simultaneously open native panel 1.</AccordionPanel>
+        <AccordionHeader>Trailing Indicator</AccordionHeader>
+        <AccordionPanel>Standard mobile table view disclosure.</AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  );
+}`}
+          />
+
+          {/* Demo 5: Disabled Section State */}
+          <ComponentDemoCard
+            id="accordion-disabled"
+            title="05 Disabled Section State"
+            description="Individual items can be incapacitated with disabled={true}. Disabled headers cannot receive keyboard focus, appear with muted opacity, and ignore pointer events."
+            webPreview={
+              <div style={{ maxWidth: 560, width: '100%' }}>
+                <Accordion defaultOpenItems={['sec-1']}>
+                  <AccordionItem value="sec-1">
+                    <AccordionHeader>Basic Workspace Settings (Available)</AccordionHeader>
+                    <AccordionPanel>
+                      General preferences, notification thresholds, and team naming configurations.
+                    </AccordionPanel>
+                  </AccordionItem>
+                  <AccordionItem value="sec-2" disabled>
+                    <AccordionHeader>
+                      Custom Domain Routing (Enterprise Only)
+                    </AccordionHeader>
+                    <AccordionPanel>
+                      This section is disabled and cannot be toggled by the user.
+                    </AccordionPanel>
+                  </AccordionItem>
+                  <AccordionItem value="sec-3">
+                    <AccordionHeader>API Keys &amp; Webhooks (Available)</AccordionHeader>
+                    <AccordionPanel>
+                      Manage production credentials and dispatch outgoing event payloads.
+                    </AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <Accordion defaultOpenItems={['sec-1']}>
+                  <AccordionItem value="sec-1">
+                    <AccordionHeader>Active Section</AccordionHeader>
+                    <AccordionPanel>Available native panel.</AccordionPanel>
+                  </AccordionItem>
+                  <AccordionItem value="sec-2" disabled>
+                    <AccordionHeader>Disabled Section</AccordionHeader>
+                    <AccordionPanel>Disabled panel.</AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react';
+
+export default function DisabledAccordionDemo(): JSX.Element {
+  return (
+    <Accordion defaultOpenItems={['sec-1']}>
+      <AccordionItem value="sec-1">
+        <AccordionHeader>Active Section</AccordionHeader>
+        <AccordionPanel>Available configuration details.</AccordionPanel>
+      </AccordionItem>
+      <AccordionItem value="sec-2" disabled>
+        <AccordionHeader>Enterprise Only (Disabled)</AccordionHeader>
+        <AccordionPanel>Disabled content cannot be opened.</AccordionPanel>
+      </AccordionItem>
+      <AccordionItem value="sec-3">
+        <AccordionHeader>API Credentials</AccordionHeader>
+        <AccordionPanel>Manage developer access keys.</AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react-native';
+
+export default function NativeDisabledAccordionDemo(): JSX.Element {
+  return (
+    <Accordion defaultOpenItems={['sec-1']}>
+      <AccordionItem value="sec-1">
+        <AccordionHeader>Active Native Item</AccordionHeader>
+        <AccordionPanel>Active panel content.</AccordionPanel>
+      </AccordionItem>
+      <AccordionItem value="sec-2" disabled>
+        <AccordionHeader>Disabled Native Item</AccordionHeader>
+        <AccordionPanel>Muted disabled styling.</AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  );
+}`}
+          />
+
+          {/* Demo 6: Inline Actions & Badges in Header */}
+          <ComponentDemoCard
+            id="accordion-inline-actions"
+            title="06 Inline Actions & Badges in Header"
+            description="Utilize the inlineAction slot to render status badges, counter pills, or auxiliary action buttons directly inside the header without triggering section collapse."
+            webPreview={
+              <div style={{ maxWidth: 560, width: '100%' }}>
+                <Accordion expandIconPosition="end" defaultOpenItems={['stage-1']}>
+                  <AccordionItem value="stage-1">
+                    <AccordionHeader
+                      inlineAction={
+                        <Badge variant="success" dot>
+                          Operational
+                        </Badge>
+                      }
+                    >
+                      Auth &amp; Session Broker
+                    </AccordionHeader>
+                    <AccordionPanel>
+                      All authentication endpoints responding with 18ms average latency across 3 regions.
+                    </AccordionPanel>
+                  </AccordionItem>
+                  <AccordionItem value="stage-2">
+                    <AccordionHeader
+                      inlineAction={
+                        <Badge variant="warning">
+                          4 Deprecated
+                        </Badge>
+                      }
+                    >
+                      API Microservices
+                    </AccordionHeader>
+                    <AccordionPanel>
+                      Migrate legacy REST v1 routes to GraphQL before the next major release milestone.
+                    </AccordionPanel>
+                  </AccordionItem>
+                  <AccordionItem value="stage-3">
+                    <AccordionHeader
+                      inlineAction={
+                        <span style={{ fontSize: 11, color: 'var(--color-text-muted)', fontWeight: 500 }}>
+                          Updated 5m ago
+                        </span>
+                      }
+                    >
+                      Payment Processing Gateway
+                    </AccordionHeader>
+                    <AccordionPanel>
+                      Stripe webhook handler running with 99.99% successful delivery verification.
+                    </AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <Accordion expandIconPosition="end" defaultOpenItems={['stage-1']}>
+                  <AccordionItem value="stage-1">
+                    <AccordionHeader inlineAction={<Badge variant="success">Online</Badge>}>
+                      Mobile Services
+                    </AccordionHeader>
+                    <AccordionPanel>Native inline status badge.</AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel, Badge } from '@winplaybox/react';
+
+export default function InlineActionAccordionDemo(): JSX.Element {
+  return (
+    <Accordion expandIconPosition="end" defaultOpenItems={['stage-1']}>
+      <AccordionItem value="stage-1">
+        <AccordionHeader
+          inlineAction={<Badge variant="success" dot>Operational</Badge>}
+        >
+          Auth & Session Broker
+        </AccordionHeader>
+        <AccordionPanel>
+          All authentication endpoints responding within 18ms latency.
+        </AccordionPanel>
+      </AccordionItem>
+
+      <AccordionItem value="stage-2">
+        <AccordionHeader
+          inlineAction={<Badge variant="warning">4 Deprecated</Badge>}
+        >
+          API Microservices
+        </AccordionHeader>
+        <AccordionPanel>
+          Migrate legacy endpoints before next release.
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react-native';
+
+export default function NativeInlineActionAccordionDemo(): JSX.Element {
+  return (
+    <Accordion expandIconPosition="end" defaultOpenItems={['stage-1']}>
+      <AccordionItem value="stage-1">
+        <AccordionHeader>Service Status</AccordionHeader>
+        <AccordionPanel>Operational metrics.</AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  );
+}`}
+          />
+
+          {/* Demo 7: Controlled State Management */}
+          <ComponentDemoCard
+            id="accordion-controlled"
+            title="07 Controlled State Management (openItems)"
+            description="Programmatically govern open items via openItems and the onToggle event handler, enabling external triggers like 'Expand All' and 'Collapse All'."
+            webPreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, maxWidth: 560, width: '100%' }}>
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => setControlledOpenSections(['section-1', 'section-2', 'section-3'])}
+                  >
+                    Expand All
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => setControlledOpenSections([])}
+                  >
+                    Collapse All
+                  </Button>
+                  <Button
+                    variant={controlledOpenSections.includes('section-2') ? 'primary' : 'secondary'}
+                    size="sm"
+                    onClick={() => {
+                      setControlledOpenSections((prev) =>
+                        prev.includes('section-2') ? prev.filter((s) => s !== 'section-2') : [...prev, 'section-2']
+                      );
+                    }}
+                  >
+                    Toggle Section 2
+                  </Button>
+                  <span style={{ fontSize: 12, color: 'var(--color-text-muted)', alignSelf: 'center', marginLeft: 'auto' }}>
+                    Open count: <strong>{controlledOpenSections.length}</strong>
+                  </span>
+                </div>
+
+                <Accordion
+                  multiple
+                  openItems={controlledOpenSections}
+                  onToggle={(_e, data) => setControlledOpenSections(data.openItems)}
+                >
+                  <AccordionItem value="section-1">
+                    <AccordionHeader>Section 1: Database Migration Scripts</AccordionHeader>
+                    <AccordionPanel>
+                      PostgreSQL 16 migration schema applied across primary and standby clusters.
+                    </AccordionPanel>
+                  </AccordionItem>
+                  <AccordionItem value="section-2">
+                    <AccordionHeader>Section 2: Edge CDN Cache Invalidation</AccordionHeader>
+                    <AccordionPanel>
+                      Purged global cache tags across 140 points of presence in under 150ms.
+                    </AccordionPanel>
+                  </AccordionItem>
+                  <AccordionItem value="section-3">
+                    <AccordionHeader>Section 3: Audit Trail Log Stream</AccordionHeader>
+                    <AccordionPanel>
+                      Encrypted audit trail ingested into Elasticsearch cluster with 30-day retention.
+                    </AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <Accordion multiple defaultOpenItems={['section-1']}>
+                  <AccordionItem value="section-1">
+                    <AccordionHeader>Controlled Native Section 1</AccordionHeader>
+                    <AccordionPanel>Native controlled open state.</AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            }
+            webCode={`import React, { useState } from 'react';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel, Button } from '@winplaybox/react';
+
+export default function ControlledAccordionDemo(): JSX.Element {
+  const [openItems, setOpenItems] = useState<string[]>(['section-1']);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div style={{ display: 'flex', gap: 8 }}>
+        <Button size="sm" onClick={() => setOpenItems(['section-1', 'section-2', 'section-3'])}>
+          Expand All
+        </Button>
+        <Button size="sm" onClick={() => setOpenItems([])}>
+          Collapse All
+        </Button>
+      </div>
+
+      <Accordion
+        multiple
+        openItems={openItems}
+        onToggle={(_e, data) => setOpenItems(data.openItems)}
+      >
+        <AccordionItem value="section-1">
+          <AccordionHeader>Section 1: Database Migration</AccordionHeader>
+          <AccordionPanel>PostgreSQL 16 migration schema applied.</AccordionPanel>
+        </AccordionItem>
+        <AccordionItem value="section-2">
+          <AccordionHeader>Section 2: CDN Invalidation</AccordionHeader>
+          <AccordionPanel>Purged global cache tags.</AccordionPanel>
+        </AccordionItem>
+        <AccordionItem value="section-3">
+          <AccordionHeader>Section 3: Audit Trail Logs</AccordionHeader>
+          <AccordionPanel>Encrypted audit trail ingested.</AccordionPanel>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  );
+}`}
+            nativeCode={`import React, { useState } from 'react';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react-native';
+
+export default function NativeControlledAccordionDemo(): JSX.Element {
+  const [openItems, setOpenItems] = useState(['section-1']);
+
+  return (
+    <Accordion
+      multiple
+      openItems={openItems}
+      onToggle={(_e, data) => setOpenItems(data.openItems)}
+    >
+      <AccordionItem value="section-1">
+        <AccordionHeader>Controlled Native Item</AccordionHeader>
+        <AccordionPanel>Programmatically bound panel.</AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  );
+}`}
+          />
+
+          {/* Demo 8: Custom Expand Icon & Context Icons */}
+          <ComponentDemoCard
+            id="accordion-custom-icon"
+            title="08 Custom Expand Icon & Context Icons"
+            description="Override the default chevron with custom expand icons (such as Plus/Minus) or pair headers with contextual leading icons for visual scanning."
+            webPreview={
+              <div style={{ maxWidth: 560, width: '100%' }}>
+                <Accordion defaultOpenItems={['icon-1']}>
+                  <AccordionItem value="icon-1">
+                    <AccordionHeader
+                      icon={<SparklesIcon size={16} color="var(--color-primary)" />}
+                      expandIcon={<PlusIcon size={16} />}
+                    >
+                      AI Model Fine-Tuning Pipeline
+                    </AccordionHeader>
+                    <AccordionPanel>
+                      Contextual vector icon on the left paired with a custom expand trigger icon.
+                    </AccordionPanel>
+                  </AccordionItem>
+                  <AccordionItem value="icon-2">
+                    <AccordionHeader
+                      icon={<SearchIcon size={16} />}
+                      expandIcon={<PlusIcon size={16} />}
+                    >
+                      Semantic Vector Search Index
+                    </AccordionHeader>
+                    <AccordionPanel>
+                      Index query latency benchmarked at 4ms using HNSW graphs.
+                    </AccordionPanel>
+                  </AccordionItem>
+                  <AccordionItem value="icon-3">
+                    <AccordionHeader
+                      icon={<CheckIcon size={16} color="var(--color-feedback-success, #22c55e)" />}
+                      expandIcon={<PlusIcon size={16} />}
+                    >
+                      Automated Verification Suite
+                    </AccordionHeader>
+                    <AccordionPanel>
+                      1,420 unit tests passing with 100% platform capability coverage.
+                    </AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            }
+            nativePreview={
+              <div style={{ width: '100%' }}>
+                <Accordion defaultOpenItems={['icon-1']}>
+                  <AccordionItem value="icon-1">
+                    <AccordionHeader icon={<SparklesIcon size={16} />}>
+                      Native Contextual Header
+                    </AccordionHeader>
+                    <AccordionPanel>Contextual vector icon rendered on mobile.</AccordionPanel>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react';
+import { SparklesIcon, SearchIcon, CheckIcon, PlusIcon } from '@winplaybox/icons';
+
+export default function CustomIconAccordionDemo(): JSX.Element {
+  return (
+    <Accordion defaultOpenItems={['icon-1']}>
+      <AccordionItem value="icon-1">
+        <AccordionHeader
+          icon={<SparklesIcon size={16} />}
+          expandIcon={<PlusIcon size={16} />}
+        >
+          AI Model Fine-Tuning Pipeline
+        </AccordionHeader>
+        <AccordionPanel>
+          Custom leading contextual icon and custom expand indicator.
+        </AccordionPanel>
+      </AccordionItem>
+
+      <AccordionItem value="icon-2">
+        <AccordionHeader
+          icon={<SearchIcon size={16} />}
+          expandIcon={<PlusIcon size={16} />}
+        >
+          Semantic Vector Search Index
+        </AccordionHeader>
+        <AccordionPanel>
+          Index query latency benchmarked at 4ms.
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { Accordion, AccordionItem, AccordionHeader, AccordionPanel } from '@winplaybox/react-native';
+import { SparklesIcon } from '@winplaybox/icons';
+
+export default function NativeCustomIconAccordionDemo(): JSX.Element {
+  return (
+    <Accordion defaultOpenItems={['icon-1']}>
+      <AccordionItem value="icon-1">
+        <AccordionHeader icon={<SparklesIcon size={16} />}>
+          AI Pipeline
+        </AccordionHeader>
+        <AccordionPanel>Mobile icon support.</AccordionPanel>
       </AccordionItem>
     </Accordion>
   );
@@ -1182,501 +2521,508 @@ export default function NativeMultiAccordionDemo(): JSX.Element {
         </div>
       );
 
-    case 'text-input':
+    case 'avatar':
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
-          {/* Demo 1: Input with Left and Right Icons */}
+          {/* Demo 1: Default Initials Avatar */}
           <ComponentDemoCard
-            id="input-icons"
-            title="Search Field with Contextual Vector Icons"
-            description="Add a leading search icon to indicate field intent, and a trailing clear button for immediate input clearing."
+            id="avatar-basic"
+            title="01 Default Initials Avatar"
+            description="Standard avatar displaying 1-2 character monogram derived automatically from the user name with contrast-guaranteed text."
             webPreview={
-              <div style={{ maxWidth: 400, width: '100%' }}>
-                <TextInput
-                  label="Search Components"
-                  placeholder="Filter by name (e.g. Button, Dialog)..."
-                  leftIcon={<SearchIcon size={16} />}
-                  rightIcon={<CloseIcon size={16} />}
-                  description="Press Esc to clear search field"
-                />
+              <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+                <Avatar name="Josef Müller-Brockmann" size={48} />
+                <Avatar name="Elena Rostova" size={48} />
+                <Avatar name="Alexander Hamilton" size={48} />
+                <Avatar name="Spectra" size={48} />
               </div>
             }
             nativePreview={
-              <div style={{ width: '100%' }}>
-                <TextInput
-                  label="Mobile Search"
-                  placeholder="Type query..."
-                  leftIcon={<SearchIcon size={16} />}
-                />
-              </div>
-            }
-            webCode={`import React, { useState } from 'react';
-import { TextInput } from '@winplaybox/react';
-import type { TextInputProps } from '@winplaybox/react';
-import { SearchIcon, CloseIcon } from '@winplaybox/icons';
-
-export default function SearchInputDemo(): JSX.Element {
-  const [searchTerm, setSearchTerm] = useState<string>('');
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleClear = (): void => {
-    setSearchTerm('');
-  };
-
-  return (
-    <TextInput
-      label="Search Components"
-      placeholder="Filter by name..."
-      value={searchTerm}
-      onChange={handleChange}
-      leftIcon={<SearchIcon size={16} />}
-      rightIcon={<CloseIcon size={16} onClick={handleClear} />}
-      description="Press Esc to clear"
-    />
-  );
-}`}
-            nativeCode={`import React, { useState } from 'react';
-import { TextInput } from '@winplaybox/react-native';
-import { SearchIcon } from '@winplaybox/icons';
-
-export default function NativeSearchInputDemo(): JSX.Element {
-  const [text, setText] = useState<string>('');
-
-  return (
-    <TextInput
-      label="Mobile Search"
-      placeholder="Type query..."
-      value={text}
-      onChangeText={(val: string): void => setText(val)}
-      leftIcon={<SearchIcon size={16} />}
-      keyboardType="web-search"
-    />
-  );
-}`}
-          />
-
-          {/* Demo 2: Validation & Error States */}
-          <ComponentDemoCard
-            id="input-validation"
-            title="Validation & Error State"
-            description="When user validation fails, display a prominent 2D danger border and an accessible inline error linked via aria-describedby."
-            webPreview={
-              <div style={{ maxWidth: 400, width: '100%' }}>
-                <TextInput
-                  label="Organization Slug"
-                  defaultValue="acme-corp-123"
-                  error="This slug is already taken by another enterprise account."
-                />
-              </div>
-            }
-            nativePreview={
-              <div style={{ width: '100%' }}>
-                <TextInput
-                  label="Organization Slug"
-                  defaultValue="acme-corp"
-                  error="Slug is already taken."
-                />
-              </div>
-            }
-            webCode={`import React, { useState } from 'react';
-import { TextInput } from '@winplaybox/react';
-import type { TextInputProps } from '@winplaybox/react';
-
-export default function InputValidationDemo(): JSX.Element {
-  const [slug, setSlug] = useState<string>('acme-corp-123');
-  const [errorMsg, setErrorMsg] = useState<string>('This slug is already taken.');
-
-  const handleSlugChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setSlug(e.target.value);
-    if (e.target.value.length >= 3) {
-      setErrorMsg('');
-    }
-  };
-
-  return (
-    <TextInput
-      label="Organization Slug"
-      value={slug}
-      onChange={handleSlugChange}
-      error={errorMsg || undefined}
-    />
-  );
-}`}
-            nativeCode={`import React from 'react';
-import { TextInput } from '@winplaybox/react-native';
-
-export default function NativeInputValidationDemo(): JSX.Element {
-  return (
-    <TextInput
-      label="Organization Slug"
-      defaultValue="acme-corp"
-      error="Slug is already taken."
-    />
-  );
-}`}
-          />
-
-          {/* Demo 3: Helper text & Disabled */}
-          <ComponentDemoCard
-            id="input-helper"
-            title="Helper Text & Disabled Read-Only State"
-            description="Display contextual hints beneath the field, or lock values against editing using the disabled attribute."
-            webPreview={
-              <div style={{ maxWidth: 400, width: '100%', display: 'flex', flexDirection: 'column', gap: 16 }}>
-                <TextInput
-                  label="API Endpoint Base URL"
-                  defaultValue="https://api.spectra-ui.dev/v1"
-                  description="Configured automatically based on active workspace region"
-                  disabled
-                />
-              </div>
-            }
-            nativePreview={
-              <div style={{ width: '100%' }}>
-                <TextInput
-                  label="API Endpoint"
-                  defaultValue="https://api.spectra-ui.dev"
-                  disabled
-                />
+              <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+                <Avatar name="Josef Müller-Brockmann" size={48} />
+                <Avatar name="Elena Rostova" size={48} />
+                <Avatar name="Alexander Hamilton" size={48} />
               </div>
             }
             webCode={`import React from 'react';
-import { TextInput } from '@winplaybox/react';
-import type { TextInputProps } from '@winplaybox/react';
+import { Avatar } from '@winplaybox/react';
 
-export default function HelperInputDemo(): JSX.Element {
+export default function BasicAvatarDemo(): JSX.Element {
   return (
-    <TextInput
-      label="API Endpoint Base URL"
-      defaultValue="https://api.spectra-ui.dev/v1"
-      description="Configured automatically based on active workspace"
-      disabled
-    />
-  );
-}`}
-            nativeCode={`import React from 'react';
-import { TextInput } from '@winplaybox/react-native';
-
-export default function NativeHelperInputDemo(): JSX.Element {
-  return (
-    <TextInput
-      label="API Endpoint"
-      defaultValue="https://api.spectra-ui.dev"
-      editable={false}
-    />
-  );
-}`}
-          />
-
-          {/* Demo 4: Password Input with Visibility Toggle */}
-          <ComponentDemoCard
-            id="input-password"
-            title="Password Reveal with Visibility Toggle"
-            description="Toggle input security mask to reveal or hide sensitive credentials with accessible state labeling."
-            webPreview={
-              <div style={{ maxWidth: 400, width: '100%' }}>
-                <TextInput
-                  label="Master Access Token"
-                  type={showPassword ? 'text' : 'password'}
-                  value={passwordValue}
-                  onChange={(e) => setPasswordValue(e.target.value)}
-                  rightIcon={
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                        padding: 0,
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'var(--color-text-secondary)',
-                      }}
-                      title={showPassword ? 'Hide password' : 'Show password'}
-                      aria-label={showPassword ? 'Hide password' : 'Show password'}
-                    >
-                      {showPassword ? <EyeOffIcon size={16} /> : <EyeIcon size={16} />}
-                    </button>
-                  }
-                  description="Click the eye icon to toggle token visibility"
-                />
-              </div>
-            }
-            nativePreview={
-              <div style={{ width: '100%' }}>
-                <TextInput
-                  label="Mobile Token"
-                  type={showPassword ? 'text' : 'password'}
-                  value={passwordValue}
-                  onChange={(e) => setPasswordValue(e.target.value)}
-                />
-              </div>
-            }
-            webCode={`import React, { useState } from 'react';
-import { TextInput } from '@winplaybox/react';
-import { EyeIcon, EyeOffIcon } from '@winplaybox/icons';
-
-export default function PasswordInputDemo() {
-  const [show, setShow] = useState(false);
-  const [value, setValue] = useState('SpectraUI#2026');
-
-  return (
-    <TextInput
-      label="Master Access Token"
-      type={show ? 'text' : 'password'}
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      rightIcon={
-        <button
-          type="button"
-          onClick={() => setShow(!show)}
-          aria-label={show ? 'Hide password' : 'Show password'}
-          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-        >
-          {show ? <EyeOffIcon size={16} /> : <EyeIcon size={16} />}
-        </button>
-      }
-      description="Click the eye icon to toggle visibility"
-    />
-  );
-}`}
-            nativeCode={`import React, { useState } from 'react';
-import { TextInput } from '@winplaybox/react-native';
-
-export default function NativePasswordInputDemo() {
-  const [secure, setSecure] = useState(true);
-  return (
-    <TextInput
-      label="Mobile Token"
-      secureTextEntry={secure}
-      defaultValue="SpectraUI#2026"
-    />
-  );
-}`}
-          />
-
-          {/* Demo 5: Clearable Search Input with Reset */}
-          <ComponentDemoCard
-            id="input-clearable"
-            title="Clearable Search Input with Reset"
-            description="Displays a trailing dismiss icon when text is entered to provide one-click clearing for filter fields."
-            webPreview={
-              <div style={{ maxWidth: 400, width: '100%' }}>
-                <TextInput
-                  label="Clearable Query Field"
-                  value={clearableText}
-                  onChange={(e) => setClearableText(e.target.value)}
-                  leftIcon={<SearchIcon size={16} />}
-                  rightIcon={
-                    clearableText ? (
-                      <button
-                        type="button"
-                        onClick={() => setClearableText('')}
-                        aria-label="Clear text"
-                        style={{
-                          background: 'none',
-                          border: 'none',
-                          padding: 0,
-                          cursor: 'pointer',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          color: 'var(--color-text-secondary)',
-                        }}
-                      >
-                        <CloseIcon size={14} />
-                      </button>
-                    ) : undefined
-                  }
-                  description={clearableText ? 'Click cross icon to reset search value' : 'Type to see the clear reset button appear'}
-                />
-              </div>
-            }
-            nativePreview={
-              <div style={{ width: '100%' }}>
-                <TextInput
-                  label="Mobile Search"
-                  value={clearableText}
-                  onChange={(e) => setClearableText(e.target.value)}
-                  placeholder="Clearable input..."
-                />
-              </div>
-            }
-            webCode={`import React, { useState } from 'react';
-import { TextInput } from '@winplaybox/react';
-import { SearchIcon, CloseIcon } from '@winplaybox/icons';
-
-export default function ClearableInputDemo(): JSX.Element {
-  const [query, setQuery] = useState('Search tokens...');
-
-  return (
-    <TextInput
-      label="Search Field"
-      value={query}
-      onChange={(e) => setQuery(e.target.value)}
-      leftIcon={<SearchIcon size={16} />}
-      rightIcon={
-        query ? (
-          <button
-            type="button"
-            onClick={() => setQuery('')}
-            aria-label="Clear text"
-            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-          >
-            <CloseIcon size={14} />
-          </button>
-        ) : undefined
-      }
-    />
-  );
-}`}
-            nativeCode={`import React, { useState } from 'react';
-import { TextInput } from '@winplaybox/react-native';
-
-export default function NativeClearableDemo(): JSX.Element {
-  const [val, setVal] = useState('Query');
-  return <TextInput label="Search" value={val} onChangeText={setVal} />;
-}`}
-          />
-
-          {/* Demo 6: Prefix & Suffix Currency/Domain Adornments */}
-          <ComponentDemoCard
-            id="input-adornments"
-            title="Prefix & Suffix Currency/Domain Adornments"
-            description="Fix visually locked prefixes (currencies, domain protocols) and suffixes (metric units, top-level domains) around the editable text area."
-            webPreview={
-              <div style={{ maxWidth: 400, width: '100%', display: 'flex', flexDirection: 'column', gap: 16 }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 6 }}>
-                    Enterprise Monthly Budget
-                  </label>
-                  <div style={{ display: 'flex', alignItems: 'center', borderRadius: 8, border: '1px solid var(--color-border-subtle)', background: 'var(--color-surface-elevated)', overflow: 'hidden' }}>
-                    <span style={{ padding: '8px 12px', background: 'var(--color-surface-subtle)', color: 'var(--color-text-secondary)', fontSize: '0.875rem', fontWeight: 600, borderRight: '1px solid var(--color-border-subtle)' }}>
-                      $
-                    </span>
-                    <input
-                      type="text"
-                      value={adornmentPrice}
-                      onChange={(e) => setAdornmentPrice(e.target.value)}
-                      style={{
-                        flex: 1,
-                        border: 'none',
-                        outline: 'none',
-                        padding: '10px 12px',
-                        fontSize: '0.875rem',
-                        background: 'transparent',
-                        color: 'var(--color-text-primary)',
-                      }}
-                      aria-label="Price in USD"
-                    />
-                    <span style={{ padding: '8px 12px', background: 'var(--color-surface-subtle)', color: 'var(--color-text-secondary)', fontSize: '0.82rem', borderLeft: '1px solid var(--color-border-subtle)' }}>
-                      USD / mo
-                    </span>
-                  </div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', marginTop: 4 }}>Fixed tier allocation for production cluster</div>
-                </div>
-              </div>
-            }
-            nativePreview={
-              <div style={{ width: '100%' }}>
-                <TextInput label="Budget ($ USD)" value={adornmentPrice} onChange={(e) => setAdornmentPrice(e.target.value)} />
-              </div>
-            }
-            webCode={`import React, { useState } from 'react';
-
-export default function AdornmentInputDemo(): JSX.Element {
-  const [val, setVal] = useState('249.00');
-
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', borderRadius: 8, border: '1px solid #E2E8F0', overflow: 'hidden' }}>
-      <span style={{ padding: '8px 12px', background: '#F8FAFC', fontWeight: 600 }}>$</span>
-      <input
-        type="text"
-        value={val}
-        onChange={(e) => setVal(e.target.value)}
-        style={{ flex: 1, border: 'none', padding: '10px 12px' }}
-      />
-      <span style={{ padding: '8px 12px', background: '#F8FAFC', fontSize: 13 }}>USD / mo</span>
+    <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+      <Avatar name="Josef Müller-Brockmann" size={48} />
+      <Avatar name="Elena Rostova" size={48} />
+      <Avatar name="Alexander Hamilton" size={48} />
+      <Avatar name="Spectra" size={48} />
     </div>
   );
 }`}
             nativeCode={`import React from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View } from 'react-native';
+import { Avatar } from '@winplaybox/react-native';
 
-export default function NativeAdornmentDemo(): JSX.Element {
+export default function NativeBasicAvatarDemo(): JSX.Element {
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderRadius: 8 }}>
-      <Text style={{ padding: 10 }}>$</Text>
-      <TextInput style={{ flex: 1 }} defaultValue="249.00" />
-      <Text style={{ padding: 10 }}>USD</Text>
+    <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+      <Avatar name="Josef Müller-Brockmann" size={48} />
+      <Avatar name="Elena Rostova" size={48} />
     </View>
   );
 }`}
           />
 
-          {/* Demo 7: Live Character Counter & Length Limit */}
+          {/* Demo 2: Profile Image with Fallback */}
           <ComponentDemoCard
-            id="input-counter"
-            title="Live Character Counter & Length Limit"
-            description="Real-time character counting provides immediate feedback to users as they approach input boundary restrictions."
+            id="avatar-image"
+            title="02 Profile Image with Fallback"
+            description="High-fidelity portrait photos with automatic fallback to monogram initials upon network failure or broken source URL."
             webPreview={
-              <div style={{ maxWidth: 400, width: '100%' }}>
-                <TextInput
-                  label="Release Milestone Title"
-                  value={counterText}
-                  maxLength={60}
-                  onChange={(e) => setCounterText(e.target.value)}
-                  description={`${counterText.length} / 60 characters used`}
+              <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+                <Avatar
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150"
+                  name="Elena Rostova"
+                  size={48}
+                />
+                <Avatar
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150"
+                  name="David Miller"
+                  size={48}
+                />
+                <Avatar
+                  src="https://invalid-broken-url.com/missing.jpg"
+                  name="Alice Smith"
+                  size={48}
                 />
               </div>
             }
             nativePreview={
-              <div style={{ width: '100%' }}>
-                <TextInput
-                  label="Milestone Title"
-                  value={counterText}
-                  maxLength={60}
-                  onChange={(e) => setCounterText(e.target.value)}
+              <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+                <Avatar
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150"
+                  name="Elena Rostova"
+                  size={48}
                 />
               </div>
             }
-            webCode={`import React, { useState } from 'react';
-import { TextInput } from '@winplaybox/react';
+            webCode={`import React from 'react';
+import { Avatar } from '@winplaybox/react';
 
-export default function CounterInputDemo(): JSX.Element {
-  const [text, setText] = useState('Spectra UI Enterprise Release');
-  const MAX = 60;
-
+export default function ImageAvatarDemo(): JSX.Element {
   return (
-    <TextInput
-      label="Release Milestone Title"
-      value={text}
-      maxLength={MAX}
-      onChange={(e) => setText(e.target.value)}
-      description={\`\${text.length} / \${MAX} characters used\`}
-    />
+    <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+      <Avatar
+        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150"
+        name="Elena Rostova"
+        size={48}
+      />
+      {/* Graceful fallback to initials on error */}
+      <Avatar
+        src="https://invalid-broken-url.com/missing.jpg"
+        name="Alice Smith"
+        size={48}
+      />
+    </div>
   );
 }`}
-            nativeCode={`import React, { useState } from 'react';
-import { TextInput, View, Text } from 'react-native';
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { Avatar } from '@winplaybox/react-native';
 
-export default function NativeCounterDemo(): JSX.Element {
-  const [text, setText] = useState('');
+export default function NativeImageAvatarDemo(): JSX.Element {
   return (
-    <View>
-      <TextInput maxLength={60} value={text} onChangeText={setText} />
-      <Text>{text.length} / 60</Text>
+    <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+      <Avatar
+        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150"
+        name="Elena Rostova"
+        size={48}
+      />
     </View>
+  );
+}`}
+          />
+
+          {/* Demo 3: Discrete Sizing Scale */}
+          <ComponentDemoCard
+            id="avatar-sizes"
+            title="03 Discrete Sizing Scale (16px to 128px)"
+            description="14 discrete pixel steps matching token typography and touch targets, from micro inline presence (16px) to hero profiles (128px)."
+            webPreview={
+              <div style={{ display: 'flex', gap: 14, alignItems: 'flex-end', flexWrap: 'wrap' }}>
+                {[16, 20, 24, 28, 32, 36, 40, 48, 56, 64, 72, 96].map((s) => (
+                  <div key={s} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                    <Avatar size={s as any} name={`User ${s}`} />
+                    <span style={{ fontSize: 10, color: 'var(--color-text-muted, #71717A)' }}>{s}px</span>
+                  </div>
+                ))}
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+                <Avatar size={24} name="Small" />
+                <Avatar size={40} name="Medium" />
+                <Avatar size={56} name="Large" />
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Avatar } from '@winplaybox/react';
+
+export default function AvatarSizesDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+      <Avatar size={24} name="Micro Item" />
+      <Avatar size={32} name="Toolbar Item" />
+      <Avatar size={40} name="Standard Default" />
+      <Avatar size={48} name="Prominent Card" />
+      <Avatar size={64} name="Hero Profile" />
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { Avatar } from '@winplaybox/react-native';
+
+export default function NativeAvatarSizesDemo(): JSX.Element {
+  return (
+    <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center' }}>
+      <Avatar size={24} name="Small" />
+      <Avatar size={40} name="Medium" />
+      <Avatar size={56} name="Large" />
+    </View>
+  );
+}`}
+          />
+
+          {/* Demo 4: Circular vs Square Silhouettes */}
+          <ComponentDemoCard
+            id="avatar-shapes"
+            title="04 Circular vs Square Silhouettes"
+            description="Circular shape (default) represents individual humans; soft rounded square represents channels, teams, and automation bots."
+            webPreview={
+              <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Avatar shape="circular" size={48} name="Elena Rostova" />
+                  <span style={{ fontSize: 12, color: 'var(--color-text-secondary, #3F3F46)' }}>
+                    Circular (Individual)
+                  </span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Avatar shape="square" size={48} name="DevOps Automation Bot" />
+                  <span style={{ fontSize: 12, color: 'var(--color-text-secondary, #3F3F46)' }}>
+                    Square (Bot / Team)
+                  </span>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+                <Avatar shape="circular" size={48} name="Elena Rostova" />
+                <Avatar shape="square" size={48} name="Bot" />
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Avatar } from '@winplaybox/react';
+
+export default function AvatarShapesDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 24 }}>
+      <Avatar shape="circular" size={48} name="Elena Rostova" />
+      <Avatar shape="square" size={48} name="DevOps Automation Bot" />
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { Avatar } from '@winplaybox/react-native';
+
+export default function NativeAvatarShapesDemo(): JSX.Element {
+  return (
+    <View style={{ flexDirection: 'row', gap: 16 }}>
+      <Avatar shape="circular" size={48} name="User" />
+      <Avatar shape="square" size={48} name="Bot" />
+    </View>
+  );
+}`}
+          />
+
+          {/* Demo 5: Real-Time Status & Presence Badges */}
+          <ComponentDemoCard
+            id="avatar-presence"
+            title="05 Real-Time Status & Presence Badges"
+            description="Activity state dots with tokenized high-contrast outlines: available, busy, away, do-not-disturb, out-of-office, and offline."
+            webPreview={
+              <div style={{ display: 'flex', gap: 20, alignItems: 'center', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                  <Avatar name="Sarah Connor" status="available" size={48} />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-muted, #71717A)' }}>Available</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                  <Avatar name="John Doe" status="busy" size={48} />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-muted, #71717A)' }}>Busy</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                  <Avatar name="Alex Vance" status="away" size={48} />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-muted, #71717A)' }}>Away</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                  <Avatar name="David Miller" status="dnd" size={48} />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-muted, #71717A)' }}>DND</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                  <Avatar name="Elena Rostova" status="out-of-office" size={48} />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-muted, #71717A)' }}>OOF</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                  <Avatar name="Robin Hood" status="offline" size={48} />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-muted, #71717A)' }}>Offline</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                  <Avatar name="Alice OOF" status="available" outOfOffice size={48} />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-muted, #71717A)' }}>Available+OOF</span>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+                <Avatar name="Sarah" status="available" size={48} />
+                <Avatar name="John" status="busy" size={48} />
+                <Avatar name="Alex" status="away" size={48} />
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Avatar } from '@winplaybox/react';
+
+export default function PresenceAvatarDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+      <Avatar name="Sarah Connor" status="available" size={48} />
+      <Avatar name="John Doe" status="busy" size={48} />
+      <Avatar name="Alex Vance" status="away" size={48} />
+      <Avatar name="David Miller" status="dnd" size={48} />
+      <Avatar name="Elena Rostova" status="out-of-office" size={48} />
+      <Avatar name="Robin Hood" status="offline" size={48} />
+      {/* Out of Office halo modifier */}
+      <Avatar name="Alice OOF" status="available" outOfOffice size={48} />
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { Avatar } from '@winplaybox/react-native';
+
+export default function NativePresenceAvatarDemo(): JSX.Element {
+  return (
+    <View style={{ flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+      <Avatar name="Sarah" status="available" size={48} />
+      <Avatar name="John" status="busy" size={48} />
+    </View>
+  );
+}`}
+          />
+
+          {/* Demo 6: Algorithmic Colorful Palette */}
+          <ComponentDemoCard
+            id="avatar-colorful"
+            title="06 Algorithmic Colorful Palette"
+            description="Automatic color hashing (color='colorful') maps any user name deterministically to accessible, high-contrast hue pairs for instant visual differentiation."
+            webPreview={
+              <div style={{ display: 'flex', gap: 14, alignItems: 'center', flexWrap: 'wrap' }}>
+                {[
+                  'Alice Sky',
+                  'Bob Cranberry',
+                  'Carol Gold',
+                  'David Forest',
+                  'Eva Purple',
+                  'Frank Pink',
+                  'Grace Indigo',
+                  'Henry Teal',
+                ].map((nm) => (
+                  <div key={nm} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                    <Avatar name={nm} color="colorful" size={48} />
+                    <span style={{ fontSize: 10, color: 'var(--color-text-muted, #71717A)' }}>{nm.split(' ')[0]}</span>
+                  </div>
+                ))}
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+                <Avatar name="Alice Sky" color="colorful" size={48} />
+                <Avatar name="Bob Cranberry" color="colorful" size={48} />
+                <Avatar name="Carol Gold" color="colorful" size={48} />
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Avatar } from '@winplaybox/react';
+
+export default function ColorfulAvatarDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+      <Avatar name="Alice Sky" color="colorful" size={48} />
+      <Avatar name="Bob Cranberry" color="colorful" size={48} />
+      <Avatar name="Carol Gold" color="colorful" size={48} />
+      <Avatar name="David Forest" color="colorful" size={48} />
+      <Avatar name="Eva Purple" color="colorful" size={48} />
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { Avatar } from '@winplaybox/react-native';
+
+export default function NativeColorfulAvatarDemo(): JSX.Element {
+  return (
+    <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center' }}>
+      <Avatar name="Alice Sky" color="colorful" size={48} />
+      <Avatar name="Bob Cranberry" color="colorful" size={48} />
+    </View>
+  );
+}`}
+          />
+
+          {/* Demo 7: Active Halo Ring */}
+          <ComponentDemoCard
+            id="avatar-active"
+            title="07 Active Halo Ring (Speaker / Live)"
+            description="Outset active focus ring (active='active') highlights an active speaker in audio/video calls or elevated room participants."
+            webPreview={
+              <div style={{ display: 'flex', gap: 28, alignItems: 'center' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Avatar name="Sarah Connor" size={48} active="active" activeAppearance="ring" status="available" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary, #3F3F46)' }}>Active Ring</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Avatar name="Alex Vance" size={48} active="active" activeAppearance="ring-shadow" status="busy" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary, #3F3F46)' }}>Ring + Shadow</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Avatar name="David Miller" size={48} active="inactive" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary, #3F3F46)' }}>Inactive</span>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
+                <Avatar name="Sarah" size={48} active="active" status="available" />
+                <Avatar name="Alex" size={48} active="inactive" />
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Avatar } from '@winplaybox/react';
+
+export default function ActiveAvatarDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
+      {/* Active speaker ring */}
+      <Avatar
+        name="Sarah Connor"
+        size={48}
+        active="active"
+        activeAppearance="ring"
+        status="available"
+      />
+      {/* Active speaker with ambient glow */}
+      <Avatar
+        name="Alex Vance"
+        size={48}
+        active="active"
+        activeAppearance="ring-shadow"
+        status="busy"
+      />
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { View } from 'react-native';
+import { Avatar } from '@winplaybox/react-native';
+
+export default function NativeActiveAvatarDemo(): JSX.Element {
+  return (
+    <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center' }}>
+      <Avatar name="Sarah" size={48} active="active" status="available" />
+    </View>
+  );
+}`}
+          />
+
+          {/* Demo 8: AvatarGroup & Collaborator Stack */}
+          <ComponentDemoCard
+            id="avatar-group"
+            title="08 AvatarGroup & Collaborator Stack"
+            description="Overlapping collaborator stack with automatic overflow count (+N), custom max limit, and layout modes."
+            webPreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                <div>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-muted, #71717A)', marginBottom: 8 }}>
+                    Stack Mode (Max 4 of 6)
+                  </div>
+                  <AvatarGroup max={4} size={40}>
+                    <Avatar name="Sarah Connor" color="colorful" />
+                    <Avatar name="John Doe" color="colorful" />
+                    <Avatar name="Alex Vance" color="colorful" />
+                    <Avatar name="David Miller" color="colorful" />
+                    <Avatar name="Elena Rostova" color="colorful" />
+                    <Avatar name="Sam Wilson" color="colorful" />
+                  </AvatarGroup>
+                </div>
+
+                <div>
+                  <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-muted, #71717A)', marginBottom: 8 }}>
+                    Spread Mode (Spaced Items)
+                  </div>
+                  <AvatarGroup max={5} size={36} layout="spread">
+                    <Avatar name="Sarah Connor" color="colorful" />
+                    <Avatar name="John Doe" color="colorful" />
+                    <Avatar name="Alex Vance" color="colorful" />
+                    <Avatar name="David Miller" color="colorful" />
+                  </AvatarGroup>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <AvatarGroup max={3} size={40}>
+                <Avatar name="Sarah" color="colorful" />
+                <Avatar name="John" color="colorful" />
+                <Avatar name="Alex" color="colorful" />
+                <Avatar name="David" color="colorful" />
+              </AvatarGroup>
+            }
+            webCode={`import React from 'react';
+import { Avatar, AvatarGroup } from '@winplaybox/react';
+
+export default function AvatarGroupDemo(): JSX.Element {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      {/* Overlapping stack with +2 overflow */}
+      <AvatarGroup max={4} size={40}>
+        <Avatar name="Sarah Connor" color="colorful" />
+        <Avatar name="John Doe" color="colorful" />
+        <Avatar name="Alex Vance" color="colorful" />
+        <Avatar name="David Miller" color="colorful" />
+        <Avatar name="Elena Rostova" color="colorful" />
+        <Avatar name="Sam Wilson" color="colorful" />
+      </AvatarGroup>
+    </div>
+  );
+}`}
+            nativeCode={`import React from 'react';
+import { Avatar, AvatarGroup } from '@winplaybox/react-native';
+
+export default function NativeAvatarGroupDemo(): JSX.Element {
+  return (
+    <AvatarGroup max={3} size={40}>
+      <Avatar name="Sarah" color="colorful" />
+      <Avatar name="John" color="colorful" />
+      <Avatar name="Alex" color="colorful" />
+      <Avatar name="David" color="colorful" />
+    </AvatarGroup>
   );
 }`}
           />
         </div>
       );
+
+    case 'text-input':
+      return <TextInputRecipeGallery />;
+
 
     case 'select':
       return (
@@ -2131,17 +3477,17 @@ export default function NativePillsTabsDemo() {
                     </button>
                   ))}
                 </div>
-                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <h4 style={{ margin: '0 0 8px 0', fontSize: '1rem', color: 'var(--color-text-primary)' }}>
+                <Stack direction="column" justify="center" style={{ flex: 1 }}>
+                  <Text variant="heading-sm" weight="semibold" style={{ marginBottom: 8 }}>
                     {verticalTab === 'profile' && 'User Identity & Organization Details'}
                     {verticalTab === 'security' && 'Hardware Security Keys & Multi-Factor Auth'}
                     {verticalTab === 'billing' && 'Enterprise Subscriptions & Invoicing'}
                     {verticalTab === 'api' && 'Scoped Production API Access Tokens'}
-                  </h4>
-                  <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
+                  </Text>
+                  <Text variant="body-sm" color="secondary" style={{ lineHeight: 1.5 }}>
                     Manage domain permissions and configure environment variables synchronized with Spectra UI tokens.
-                  </p>
-                </div>
+                  </Text>
+                </Stack>
               </div>
             }
             nativePreview={
@@ -2265,10 +3611,10 @@ export default function NativeSwitchDemo() {
 export default function PreferenceSwitchDemo() {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <div>
-        <h4>Dark Mode Sync</h4>
-        <p>Match OS theme</p>
-      </div>
+      <Stack spacing={2}>
+        <Text weight="semibold">Dark Mode Sync</Text>
+        <Text variant="body-xs" color="secondary">Match OS theme</Text>
+      </Stack>
       <Switch checked={true} onChange={() => {}} />
     </div>
   );
@@ -3043,6 +4389,532 @@ export default function NativePersonaDemo(): JSX.Element {
         </div>
       );
 
+    case 'badge': {
+      const starIcon = (
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 1.5l2.1 4.3 4.7.7-3.4 3.3.8 4.7L8 12.2l-4.2 2.3.8-4.7-3.4-3.3 4.7-.7L8 1.5z" />
+        </svg>
+      );
+      const bellIcon = (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+        </svg>
+      );
+
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          {/* Recipe 1: Appearances */}
+          <ComponentDemoCard
+            id="badge-basic"
+            title="01 Appearances (Filled, Ghost, Outline, Tint)"
+            description="Badges support four distinct appearances to communicate visual emphasis: filled (high prominence), tint (soft background), outline (subtle perimeter), and ghost (minimal text-only)."
+            webPreview={
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'center' }}>
+                  <Badge appearance="filled" color="brand">Filled</Badge>
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Filled (Default)</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'center' }}>
+                  <Badge appearance="tint" color="brand">Tint</Badge>
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Tint</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'center' }}>
+                  <Badge appearance="outline" color="brand">Outline</Badge>
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Outline</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'center' }}>
+                  <Badge appearance="ghost" color="brand">Ghost</Badge>
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Ghost</span>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', flexDirection: 'row', gap: 12 }}>
+                <Badge appearance="filled">Filled</Badge>
+                <Badge appearance="outline">Outline</Badge>
+              </div>
+            }
+            webCode={`import { Badge } from '@winplaybox/react';
+
+export default function BadgeAppearancesDemo() {
+  return (
+    <div style={{ display: 'flex', gap: 12 }}>
+      <Badge appearance="filled" color="brand">Filled</Badge>
+      <Badge appearance="tint" color="brand">Tint</Badge>
+      <Badge appearance="outline" color="brand">Outline</Badge>
+      <Badge appearance="ghost" color="brand">Ghost</Badge>
+    </div>
+  );
+}`}
+            nativeCode={`import { Badge } from '@winplaybox/react-native';
+
+export default function NativeBadgeAppearancesDemo() {
+  return (
+    <View style={{ flexDirection: 'row', gap: 8 }}>
+      <Badge variant="filled">Filled</Badge>
+      <Badge variant="outline">Outline</Badge>
+    </View>
+  );
+}`}
+          />
+
+          {/* Recipe 2: Semantic Colors */}
+          <ComponentDemoCard
+            id="badge-colors"
+            title="02 Semantic Palette Colors"
+            description="Eight curated semantic colors for intent communication: brand (primary), danger (critical/error), important (high-contrast neutral), informative (guidance), severe (urgent warning), subtle (secondary), success (completed), and warning (caution)."
+            webPreview={
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
+                <Badge color="brand">Brand</Badge>
+                <Badge color="danger">Danger</Badge>
+                <Badge color="important">Important</Badge>
+                <Badge color="informative">Informative</Badge>
+                <Badge color="severe">Severe</Badge>
+                <Badge color="subtle">Subtle</Badge>
+                <Badge color="success">Success</Badge>
+                <Badge color="warning">Warning</Badge>
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
+                <Badge color="brand">Brand</Badge>
+                <Badge color="danger">Danger</Badge>
+                <Badge color="success">Success</Badge>
+                <Badge color="warning">Warning</Badge>
+              </div>
+            }
+            webCode={`import { Badge } from '@winplaybox/react';
+
+export default function BadgeColorsDemo() {
+  return (
+    <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+      <Badge color="brand">Brand</Badge>
+      <Badge color="danger">Danger</Badge>
+      <Badge color="important">Important</Badge>
+      <Badge color="informative">Informative</Badge>
+      <Badge color="severe">Severe</Badge>
+      <Badge color="subtle">Subtle</Badge>
+      <Badge color="success">Success</Badge>
+      <Badge color="warning">Warning</Badge>
+    </div>
+  );
+}`}
+            nativeCode={`import { Badge } from '@winplaybox/react-native';
+
+export default function NativeBadgeColorsDemo() {
+  return (
+    <View style={{ flexDirection: 'row', gap: 8 }}>
+      <Badge color="brand">Brand</Badge>
+      <Badge color="danger">Danger</Badge>
+      <Badge color="success">Success</Badge>
+    </View>
+  );
+}`}
+          />
+
+          {/* Recipe 3: Discrete Sizing Scale */}
+          <ComponentDemoCard
+            id="badge-sizes"
+            title="03 Discrete Sizing Scale (Tiny to Extra-Large)"
+            description="Six discrete sizing steps: tiny (6px notification dot), extra-small (16px), small (20px), medium (24px default), large (28px), and extra-large (32px)."
+            webPreview={
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Badge size="tiny" color="danger" aria-label="Notification dot" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Tiny (6px)</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Badge size="extra-small" color="brand">16px</Badge>
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Extra Small</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Badge size="small" color="brand">20px</Badge>
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Small</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Badge size="medium" color="brand">24px</Badge>
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Medium (Default)</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Badge size="large" color="brand">28px</Badge>
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Large</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Badge size="extra-large" color="brand">32px</Badge>
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Extra Large</span>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                <Badge size="sm">Small</Badge>
+                <Badge size="md">Medium</Badge>
+                <Badge size="lg">Large</Badge>
+              </div>
+            }
+            webCode={`import { Badge } from '@winplaybox/react';
+
+export default function BadgeSizesDemo() {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      <Badge size="tiny" color="danger" aria-label="Unread alert" />
+      <Badge size="extra-small" color="brand">Extra Small</Badge>
+      <Badge size="small" color="brand">Small</Badge>
+      <Badge size="medium" color="brand">Medium</Badge>
+      <Badge size="large" color="brand">Large</Badge>
+      <Badge size="extra-large" color="brand">Extra Large</Badge>
+    </div>
+  );
+}`}
+            nativeCode={`import { Badge } from '@winplaybox/react-native';
+
+export default function NativeBadgeSizesDemo() {
+  return (
+    <View style={{ flexDirection: 'row', gap: 8 }}>
+      <Badge size="sm">Small</Badge>
+      <Badge size="md">Medium</Badge>
+      <Badge size="lg">Large</Badge>
+    </View>
+  );
+}`}
+          />
+
+          {/* Recipe 4: Shapes */}
+          <ComponentDemoCard
+            id="badge-shapes"
+            title="04 Silhouettes (Rounded, Circular, Square)"
+            description="Geometries tailored for different UI layouts: rounded (4px radius, standard), circular (pill capsule or circle, optimal for counts and icons), and square (0px radius)."
+            webPreview={
+              <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Badge shape="rounded" color="brand">Rounded</Badge>
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Rounded (Default)</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Badge shape="circular" color="brand">Circular Pill</Badge>
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Circular</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <Badge shape="square" color="brand">Square</Badge>
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Square</span>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+                <Badge shape="rounded">Rounded</Badge>
+                <Badge shape="circular">Circular</Badge>
+              </div>
+            }
+            webCode={`import { Badge } from '@winplaybox/react';
+
+export default function BadgeShapesDemo() {
+  return (
+    <div style={{ display: 'flex', gap: 12 }}>
+      <Badge shape="rounded" color="brand">Rounded</Badge>
+      <Badge shape="circular" color="brand">Circular</Badge>
+      <Badge shape="square" color="brand">Square</Badge>
+    </div>
+  );
+}`}
+            nativeCode={`import { Badge } from '@winplaybox/react-native';
+
+export default function NativeBadgeShapesDemo() {
+  return (
+    <View style={{ flexDirection: 'row', gap: 8 }}>
+      <Badge shape="rounded">Rounded</Badge>
+      <Badge shape="circular">Circular</Badge>
+    </View>
+  );
+}`}
+          />
+
+          {/* Recipe 5: Authentic Vector Icons & Status Dots */}
+          <ComponentDemoCard
+            id="badge-icons"
+            title="05 Authentic Vector Icons & Status Dots"
+            description="Support for authentic leading or trailing vector icons and dot prefixes without emojis."
+            webPreview={
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center' }}>
+                <Badge icon={starIcon} iconPosition="before" color="brand">Featured Tier</Badge>
+                <Badge icon={<CheckIcon size={12} />} iconPosition="after" color="success">Verified</Badge>
+                <Badge dot color="warning">Pending Review</Badge>
+                <Badge dot color="danger">Build Failed</Badge>
+                <Badge dot color="informative">Syncing</Badge>
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+                <Badge dot color="success">Online</Badge>
+                <Badge dot color="danger">Failed</Badge>
+              </div>
+            }
+            webCode={`import { Badge } from '@winplaybox/react';
+import { CheckIcon } from '@winplaybox/icons';
+
+export default function BadgeIconsDemo() {
+  return (
+    <div style={{ display: 'flex', gap: 12 }}>
+      <Badge icon={<CheckIcon size={12} />} color="success">Verified</Badge>
+      <Badge dot color="warning">Pending Review</Badge>
+      <Badge dot color="danger">Build Failed</Badge>
+    </div>
+  );
+}`}
+            nativeCode={`import { Badge } from '@winplaybox/react-native';
+
+export default function NativeBadgeIconsDemo() {
+  return (
+    <View style={{ flexDirection: 'row', gap: 8 }}>
+      <Badge dot color="success">Online</Badge>
+      <Badge dot color="danger">Failed</Badge>
+    </View>
+  );
+}`}
+          />
+
+          {/* Recipe 6: CounterBadge & Numeric Overflow */}
+          <ComponentDemoCard
+            id="badge-counter"
+            title="06 CounterBadge & Numeric Overflow (99+)"
+            description="Specialized CounterBadge for notifications, unread messages, and metric counts with automatic 99+ formatting and zero suppression."
+            webPreview={
+              <div style={{ display: 'flex', gap: 20, alignItems: 'center', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <CounterBadge count={3} color="brand" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Low (3)</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <CounterBadge count={42} color="important" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Medium (42)</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <CounterBadge count={128} overflowCount={99} color="danger" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Overflow (99+)</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <CounterBadge count={0} showZero color="subtle" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>showZero (0)</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <CounterBadge count={0} dot color="brand" aria-label="New alerts" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>dot mode on zero</span>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+                <CounterBadge count={5} />
+                <CounterBadge count={120} overflowCount={99} />
+              </div>
+            }
+            webCode={`import { CounterBadge } from '@winplaybox/react';
+
+export default function CounterBadgeDemo() {
+  return (
+    <div style={{ display: 'flex', gap: 12 }}>
+      <CounterBadge count={3} color="brand" />
+      <CounterBadge count={42} color="important" />
+      <CounterBadge count={128} overflowCount={99} color="danger" />
+      <CounterBadge count={0} showZero color="subtle" />
+      <CounterBadge count={0} dot color="brand" aria-label="New alerts" />
+    </div>
+  );
+}`}
+            nativeCode={`import { CounterBadge } from '@winplaybox/react-native';
+
+export default function NativeCounterBadgeDemo() {
+  return (
+    <View style={{ flexDirection: 'row', gap: 8 }}>
+      <CounterBadge count={5} />
+      <CounterBadge count={120} overflowCount={99} />
+    </View>
+  );
+}`}
+          />
+
+          {/* Recipe 7: PresenceBadge & Out-of-Office Halos */}
+          <ComponentDemoCard
+            id="badge-presence"
+            title="07 PresenceBadge & Out-of-Office Halos"
+            description="Presence badges communicate live user availability with authentic vector glyphs: available (check), busy (circle), away (clock), dnd (minus), offline (slash), and out-of-office."
+            webPreview={
+              <div style={{ display: 'flex', gap: 20, alignItems: 'center', flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <PresenceBadge status="available" size="medium" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Available</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <PresenceBadge status="busy" size="medium" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Busy</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <PresenceBadge status="away" size="medium" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Away</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <PresenceBadge status="dnd" size="medium" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>DND</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <PresenceBadge status="offline" size="medium" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Offline</span>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                  <PresenceBadge status="out-of-office" outOfOffice size="medium" />
+                  <span style={{ fontSize: 11, color: 'var(--color-text-secondary)' }}>Out of Office</span>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+                <PresenceBadge status="available" />
+                <PresenceBadge status="busy" />
+                <PresenceBadge status="away" />
+              </div>
+            }
+            webCode={`import { PresenceBadge } from '@winplaybox/react';
+
+export default function PresenceBadgeDemo() {
+  return (
+    <div style={{ display: 'flex', gap: 16 }}>
+      <PresenceBadge status="available" />
+      <PresenceBadge status="busy" />
+      <PresenceBadge status="away" />
+      <PresenceBadge status="dnd" />
+      <PresenceBadge status="offline" />
+      <PresenceBadge status="out-of-office" outOfOffice />
+    </div>
+  );
+}`}
+            nativeCode={`import { PresenceBadge } from '@winplaybox/react-native';
+
+export default function NativePresenceBadgeDemo() {
+  return (
+    <View style={{ flexDirection: 'row', gap: 8 }}>
+      <PresenceBadge status="available" />
+      <PresenceBadge status="busy" />
+    </View>
+  );
+}`}
+          />
+
+          {/* Recipe 8: Contextual Integrations */}
+          <ComponentDemoCard
+            id="badge-in-context"
+            title="08 Contextual Integrations (Buttons, Avatars, Cards)"
+            description="Badges anchored to buttons for notification tallies, table rows for process statuses, and avatar corners for presence indication."
+            webPreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 20, width: '100%', maxWidth: 480 }}>
+                {/* Bell with counter badge */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                  <div style={{ position: 'relative', display: 'inline-flex' }}>
+                    <button
+                      type="button"
+                      style={{
+                        padding: 10,
+                        borderRadius: 8,
+                        border: '1px solid var(--color-border-subtle, #edebe9)',
+                        backgroundColor: 'var(--color-surface-base, #ffffff)',
+                        color: 'var(--color-text-primary, #242424)',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                      aria-label="Notifications"
+                    >
+                      {bellIcon}
+                    </button>
+                    <span style={{ position: 'absolute', top: -6, right: -8 }}>
+                      <CounterBadge count={14} color="danger" size="small" />
+                    </span>
+                  </div>
+
+                  {/* Avatar with PresenceBadge */}
+                  <div style={{ position: 'relative', display: 'inline-flex' }}>
+                    <Avatar name="Sarah Connor" size={48} />
+                    <span style={{ position: 'absolute', bottom: -2, right: -2 }}>
+                      <PresenceBadge status="available" size="small" />
+                    </span>
+                  </div>
+
+                  {/* Status chip */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', border: '1px solid var(--color-border-subtle, #edebe9)', borderRadius: 8 }}>
+                    <span style={{ fontSize: 13, fontWeight: 500 }}>Production Cluster</span>
+                    <Badge color="success" size="small">Healthy</Badge>
+                  </div>
+                </div>
+
+                {/* Table row simulation */}
+                <div style={{ border: '1px solid var(--color-border-subtle, #edebe9)', borderRadius: 8, overflow: 'hidden' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 14px', borderBottom: '1px solid var(--color-border-subtle, #edebe9)', backgroundColor: 'var(--color-surface-raised, #fafafa)', fontSize: 12, fontWeight: 600 }}>
+                    <span>Deploy Job</span>
+                    <span>Status</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', borderBottom: '1px solid var(--color-border-subtle, #edebe9)', fontSize: 13 }}>
+                    <span>pipeline-prod-us-east-1</span>
+                    <Badge color="success" size="small" appearance="tint">Active</Badge>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', borderBottom: '1px solid var(--color-border-subtle, #edebe9)', fontSize: 13 }}>
+                    <span>cache-invalidation-worker</span>
+                    <Badge color="warning" size="small" appearance="tint">Pending</Badge>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', fontSize: 13 }}>
+                    <span>telemetry-stream-v2</span>
+                    <Badge color="danger" size="small" appearance="tint">Failed</Badge>
+                  </div>
+                </div>
+              </div>
+            }
+            nativePreview={
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+                <Avatar name="Sarah Connor" size="md" />
+                <Badge color="success" size="sm">Active</Badge>
+              </div>
+            }
+            webCode={`import { CounterBadge, PresenceBadge, Badge, Avatar } from '@winplaybox/react';
+
+export default function BadgeInContextDemo() {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+      {/* Icon with CounterBadge */}
+      <div style={{ position: 'relative' }}>
+        <button className="icon-btn">🔔</button>
+        <span style={{ position: 'absolute', top: -6, right: -8 }}>
+          <CounterBadge count={14} color="danger" size="small" />
+        </span>
+      </div>
+
+      {/* Avatar with PresenceBadge */}
+      <div style={{ position: 'relative' }}>
+        <Avatar name="Sarah Connor" size={48} />
+        <span style={{ position: 'absolute', bottom: -2, right: -2 }}>
+          <PresenceBadge status="available" size="small" />
+        </span>
+      </div>
+
+      {/* Status Badge */}
+      <Badge color="success" appearance="tint">Active</Badge>
+    </div>
+  );
+}`}
+            nativeCode={`import { Badge, Avatar } from '@winplaybox/react-native';
+
+export default function NativeBadgeInContextDemo() {
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+      <Avatar name="Sarah Connor" size="md" />
+      <Badge color="success" size="sm">Active</Badge>
+    </View>
+  );
+}`}
+          />
+        </div>
+      );
+    }
+
     case 'card':
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
@@ -3051,32 +4923,38 @@ export default function NativePersonaDemo(): JSX.Element {
             title="Surface Variants (Bordered, Elevated)"
             description="Encapsulate related actions and stats within unified surface containers."
             webPreview={
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, width: '100%', maxWidth: 520 }}>
+              <Box style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, width: '100%', maxWidth: 520 }}>
                 <Card variant="bordered" padding="md">
-                  <h4 style={{ margin: '0 0 6px 0', fontSize: 15 }}>Bordered Card</h4>
-                  <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)' }}>Clean 2D perimeter border.</p>
+                  <Stack gap="xs">
+                    <Text variant="heading-sm" weight="semibold">Bordered Card</Text>
+                    <Text variant="body-sm" color="secondary">Clean 2D perimeter border.</Text>
+                  </Stack>
                 </Card>
                 <Card variant="elevated" padding="md">
-                  <h4 style={{ margin: '0 0 6px 0', fontSize: 15 }}>Elevated Card</h4>
-                  <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)' }}>Subtle elevation shadow.</p>
+                  <Stack gap="xs">
+                    <Text variant="heading-sm" weight="semibold">Elevated Card</Text>
+                    <Text variant="body-sm" color="secondary">Subtle elevation shadow.</Text>
+                  </Stack>
                 </Card>
-              </div>
+              </Box>
             }
             nativePreview={
               <div style={{ width: '100%' }}>
                 <Card variant="bordered" style={{ width: '100%' }}>
-                  <h4 style={{ margin: '0 0 4px 0', fontSize: 15 }}>Native Bordered Card</h4>
-                  <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)' }}>Zero-overhead Hermes styling.</p>
+                  <Text variant="heading-sm" weight="semibold">Native Bordered Card</Text>
+                  <Text variant="body-sm" color="secondary">Zero-overhead Hermes styling.</Text>
                 </Card>
               </div>
             }
-            webCode={`import { Card } from '@winplaybox/react';
+            webCode={`import { Card, Stack, Text } from '@winplaybox/react';
 
 export default function CardVariantsDemo() {
   return (
     <Card variant="bordered" padding="md">
-      <h4>Bordered Surface</h4>
-      <p>Clean 2D perimeter border.</p>
+      <Stack spacing={4}>
+        <Text variant="heading-sm" weight="semibold">Bordered Surface</Text>
+        <Text variant="body-sm" color="secondary">Clean 2D perimeter border.</Text>
+      </Stack>
     </Card>
   );
 }`}
@@ -3097,41 +4975,46 @@ export default function NativeCardDemo() {
             title="Structured Action Card"
             description="Compose header, metrics badges, and bottom action buttons inside a card container."
             webPreview={
-              <div style={{ maxWidth: 440, width: '100%' }}>
+              <Box style={{ maxWidth: 440, width: '100%' }}>
                 <Card variant="bordered" padding="md">
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                    <h4 style={{ margin: 0, fontSize: 15 }}>Cluster Deployment</h4>
+                  <Stack direction="row" justify="between" align="center" style={{ marginBottom: 8 }}>
+                    <Text variant="heading-sm" weight="semibold">Cluster Deployment</Text>
                     <Badge variant="success" dot>Operational</Badge>
-                  </div>
-                  <p style={{ margin: '0 0 16px 0', fontSize: 13, color: 'var(--color-text-secondary)' }}>
+                  </Stack>
+                  <Text variant="body-sm" color="secondary" style={{ marginBottom: 16 }}>
                     Healthy state verified across all 12 worker nodes.
-                  </p>
-                  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+                  </Text>
+                  <Stack direction="row" justify="end" align="center" gap="xs">
                     <Button variant="secondary" size="sm">Logs</Button>
                     <Button variant="primary" size="sm">Deploy</Button>
-                  </div>
+                  </Stack>
                 </Card>
-              </div>
+              </Box>
             }
             nativePreview={
               <div style={{ width: '100%' }}>
                 <Card variant="bordered">
-                  <h4 style={{ margin: '0 0 4px 0' }}>Native Cluster</h4>
+                  <Text variant="heading-sm" weight="semibold">Native Cluster</Text>
                   <Button variant="primary" size="sm" style={{ marginTop: 8 }}>Deploy</Button>
                 </Card>
               </div>
             }
-            webCode={`import { Card, Badge, Button } from '@winplaybox/react';
+            webCode={`import { Card, Badge, Button, Stack, Text } from '@winplaybox/react';
 
 export default function StructuredCardDemo() {
   return (
     <Card variant="bordered" padding="md">
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <h4>Cluster Deployment</h4>
+      <Stack direction="row" justify="between" align="center" style={{ marginBottom: 8 }}>
+        <Text variant="heading-sm" weight="semibold">Cluster Deployment</Text>
         <Badge variant="success" dot>Operational</Badge>
-      </div>
-      <p>Healthy state across nodes.</p>
-      <Button variant="primary" size="sm">Deploy</Button>
+      </Stack>
+      <Text variant="body-sm" color="secondary" style={{ marginBottom: 16 }}>
+        Healthy state across nodes.
+      </Text>
+      <Stack direction="row" justify="end" gap="xs">
+        <Button variant="secondary" size="sm">Logs</Button>
+        <Button variant="primary" size="sm">Deploy</Button>
+      </Stack>
     </Card>
   );
 }`}
@@ -3152,44 +5035,45 @@ export default function NativeStructuredCardDemo() {
             title="KPI Analytics & Metrics Card"
             description="Display key performance indicators, percentage growth trends, and secondary metadata inside a compact card."
             webPreview={
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, width: '100%', maxWidth: 520 }}>
+              <Box style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, width: '100%', maxWidth: 520 }}>
                 <Card variant="bordered" padding="md">
-                  <div style={{ fontSize: 12, color: 'var(--color-text-muted)', marginBottom: 4 }}>Monthly Active Users</div>
-                  <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
-                    <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--color-text-primary)' }}>128,450</div>
+                  <Text size="xs" color="muted" style={{ marginBottom: 4 }}>Monthly Active Users</Text>
+                  <Stack direction="row" justify="between" style={{ alignItems: 'baseline' }}>
+                    <Text size="2xl" weight="bold">128,450</Text>
                     <Badge variant="success">+14.2%</Badge>
-                  </div>
-                  <div style={{ fontSize: 11, color: 'var(--color-text-secondary)', marginTop: 6 }}>vs. 112,400 last month</div>
+                  </Stack>
+                  <Text size="xs" color="secondary" style={{ marginTop: 6 }}>vs. 112,400 last month</Text>
                 </Card>
 
                 <Card variant="bordered" padding="md">
-                  <div style={{ fontSize: 12, color: 'var(--color-text-muted)', marginBottom: 4 }}>API Error Rate</div>
-                  <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
-                    <div style={{ fontSize: 24, fontWeight: 800, color: 'var(--color-text-primary)' }}>0.018%</div>
+                  <Text size="xs" color="muted" style={{ marginBottom: 4 }}>API Error Rate</Text>
+                  <Stack direction="row" justify="between" style={{ alignItems: 'baseline' }}>
+                    <Text size="2xl" weight="bold">0.018%</Text>
                     <Badge variant="info">Healthy</Badge>
-                  </div>
-                  <div style={{ fontSize: 11, color: 'var(--color-text-secondary)', marginTop: 6 }}>99.98% SLA maintained</div>
+                  </Stack>
+                  <Text size="xs" color="secondary" style={{ marginTop: 6 }}>99.98% SLA maintained</Text>
                 </Card>
-              </div>
+              </Box>
             }
             nativePreview={
               <div style={{ width: '100%' }}>
                 <Card variant="bordered">
-                  <div style={{ fontSize: 20, fontWeight: 700 }}>128,450 MAU</div>
-                  <div style={{ fontSize: 12, color: '#16A34A' }}>+14.2% Growth</div>
+                  <Text size="xl" weight="bold">128,450 MAU</Text>
+                  <Text size="xs" color="success">+14.2% Growth</Text>
                 </Card>
               </div>
             }
-            webCode={`import { Card, Badge } from '@winplaybox/react';
+            webCode={`import { Card, Badge, Stack, Text } from '@winplaybox/react';
 
 export default function MetricCardDemo() {
   return (
     <Card variant="bordered" padding="md">
-      <div style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>Monthly Active Users</div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-        <span style={{ fontSize: 24, fontWeight: 800 }}>128,450</span>
+      <Text size="xs" color="muted" style={{ marginBottom: 4 }}>Monthly Active Users</Text>
+      <Stack direction="row" align="baseline" justify="between">
+        <Text size="2xl" weight="bold">128,450</Text>
         <Badge variant="success">+14.2%</Badge>
-      </div>
+      </Stack>
+      <Text size="xs" color="secondary" style={{ marginTop: 6 }}>vs. 112,400 last month</Text>
     </Card>
   );
 }`}
@@ -3248,11 +5132,11 @@ export default function MediaCardDemo(): JSX.Element {
     <Card variant="bordered" style={{ overflow: 'hidden', padding: 0 }}>
       <div style={{ height: 120, background: 'var(--color-surface-raised)' }} />
       <div style={{ padding: 18 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <h4>Spectra UI v1.0</h4>
+        <Stack direction="row" justify="between" align="center">
+          <Text variant="heading-sm" weight="semibold">Spectra UI v1.0</Text>
           <Badge variant="info">Production</Badge>
-        </div>
-        <p>Comprehensive cross-platform component library.</p>
+        </Stack>
+        <Text variant="body-sm" color="secondary" style={{ margin: '8px 0 12px' }}>Comprehensive cross-platform component library.</Text>
         <div style={{ display: 'flex', gap: 8 }}>
           <Button variant="primary" size="sm">Explore Tokens</Button>
           <Button variant="secondary" size="sm">Changelog</Button>
@@ -3555,10 +5439,10 @@ export default function NativeSettingsList() {
                 </Button>
                 <Dialog isOpen={dialogOpen} onClose={() => setDialogOpen(false)}>
                   <div style={{ padding: 24 }}>
-                    <h3 style={{ margin: '0 0 8px 0', fontSize: 18 }}>Confirm Token Deployment</h3>
-                    <p style={{ margin: '0 0 20px 0', color: 'var(--color-text-secondary)', fontSize: 14 }}>
+                    <Text as="h3" variant="heading" style={{ margin: '0 0 8px 0', fontSize: 18, color: 'var(--color-text-primary)' }}>Confirm Token Deployment</Text>
+                    <Text as="p" style={{ margin: '0 0 20px 0', color: 'var(--color-text-secondary)', fontSize: 14 }}>
                       Are you sure you want to push these tokens to production?
-                    </p>
+                    </Text>
                     <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
                       <Button variant="secondary" onClick={() => setDialogOpen(false)}>Cancel</Button>
                       <Button variant="primary" onClick={() => setDialogOpen(false)}>Deploy Now</Button>
@@ -3572,7 +5456,7 @@ export default function NativeSettingsList() {
                 Trigger Native Alert
               </Button>
             }
-            webCode={`import { Dialog, Button } from '@winplaybox/react';
+            webCode={`import { Dialog, Button, Text } from '@winplaybox/react';
 
 export default function ConfirmDialogDemo() {
   const [open, setOpen] = useState(false);
@@ -3581,7 +5465,7 @@ export default function ConfirmDialogDemo() {
       <Button onClick={() => setOpen(true)}>Open Dialog</Button>
       <Dialog isOpen={open} onClose={() => setOpen(false)}>
         <div style={{ padding: 24 }}>
-          <h3>Confirm Action</h3>
+          <Text as="h3" variant="heading">Confirm Action</Text>
           <Button onClick={() => setOpen(false)}>Close</Button>
         </div>
       </Dialog>
@@ -3608,7 +5492,7 @@ export default function NativeDialogDemo() {
                 </Button>
                 <Dialog isOpen={formDialogOpen} onClose={() => setFormDialogOpen(false)}>
                   <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 16, minWidth: 320 }}>
-                    <h3 style={{ margin: 0, fontSize: 18 }}>New Spectra Project</h3>
+                    <Text as="h3" variant="heading" style={{ margin: 0, fontSize: 18, color: 'var(--color-text-primary)' }}>New Spectra Project</Text>
                     <TextInput label="Project Name" placeholder="e.g. Acme Dashboard" defaultValue="Spectra Cloud" />
                     <Select
                       label="Deployment Region"
@@ -3631,7 +5515,7 @@ export default function NativeDialogDemo() {
                 Open Form Sheet
               </Button>
             }
-            webCode={`import { Dialog, Button, TextInput, Select } from '@winplaybox/react';
+            webCode={`import { Dialog, Button, TextInput, Select, Text } from '@winplaybox/react';
 
 export default function FormDialogDemo() {
   const [open, setOpen] = useState(false);
@@ -3641,7 +5525,7 @@ export default function FormDialogDemo() {
       <Button onClick={() => setOpen(true)}>New Project</Button>
       <Dialog isOpen={open} onClose={() => setOpen(false)}>
         <div style={{ padding: 24 }}>
-          <h3>New Project</h3>
+          <Text as="h3" variant="heading">New Project</Text>
           <TextInput label="Name" placeholder="Project Name" />
           <Button onClick={() => setOpen(false)}>Save</Button>
         </div>
@@ -3670,11 +5554,11 @@ export default function NativeFormDialog() {
                   <div style={{ padding: 24 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: 'var(--color-feedback-error)', marginBottom: 8 }}>
                       <AlertCircleIcon size={20} />
-                      <h3 style={{ margin: 0, fontSize: 18 }}>Permanently Delete Database?</h3>
+                      <Text as="h3" variant="heading" style={{ margin: 0, fontSize: 18, color: 'var(--color-feedback-error)' }}>Permanently Delete Database?</Text>
                     </div>
-                    <p style={{ margin: '0 0 20px 0', color: 'var(--color-text-secondary)', fontSize: 14, lineHeight: 1.5 }}>
+                    <Text as="p" style={{ margin: '0 0 20px 0', color: 'var(--color-text-secondary)', fontSize: 14, lineHeight: 1.5 }}>
                       This action cannot be undone. All 14 tables and replica snapshots will be purged immediately.
-                    </p>
+                    </Text>
                     <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
                       <Button variant="secondary" onClick={() => setDeleteDialogOpen(false)}>Cancel</Button>
                       <Button variant="danger" onClick={() => setDeleteDialogOpen(false)}>Yes, Delete Database</Button>
@@ -3688,7 +5572,7 @@ export default function NativeFormDialog() {
                 Confirm Native Deletion
               </Button>
             }
-            webCode={`import { Dialog, Button } from '@winplaybox/react';
+            webCode={`import { Dialog, Button, Text } from '@winplaybox/react';
 
 export default function DangerDialogDemo() {
   const [open, setOpen] = useState(false);
@@ -3698,8 +5582,8 @@ export default function DangerDialogDemo() {
       <Button variant="danger" onClick={() => setOpen(true)}>Delete</Button>
       <Dialog isOpen={open} onClose={() => setOpen(false)}>
         <div style={{ padding: 24 }}>
-          <h3>Delete Database?</h3>
-          <p>This action cannot be undone.</p>
+          <Text as="h3" variant="heading">Delete Database?</Text>
+          <Text as="p">This action cannot be undone.</Text>
           <Button variant="danger" onClick={() => setOpen(false)}>Delete</Button>
         </div>
       </Dialog>
@@ -3902,10 +5786,10 @@ export default function ActionableAlertDemo(): JSX.Element {
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 16, border: '1px solid #ef4444', borderRadius: 10, background: 'rgba(239,68,68,0.08)' }}>
       <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
         <AlertCircleIcon size={20} color="#dc2626" />
-        <div>
-          <h4>Storage Limit Exceeded</h4>
-          <p>You have utilized 98.4% of your CDN cache.</p>
-        </div>
+        <Stack spacing={2}>
+          <Text weight="bold">Storage Limit Exceeded</Text>
+          <Text variant="body-xs" color="secondary">You have utilized 98.4% of your CDN cache.</Text>
+        </Stack>
       </div>
       <Button variant="danger" size="sm">Upgrade Tier</Button>
     </div>
@@ -4170,10 +6054,10 @@ export default function InteractiveSkeletonDemo() {
       {loading ? (
         <Skeleton variant="rounded" width={320} height={140} />
       ) : (
-        <div className="profile-card">
+        <Stack direction="row" gap="sm" align="center" className="profile-card">
           <Avatar name="Sarah Connor" />
-          <h4>Sarah Connor</h4>
-        </div>
+          <Text weight="bold">Sarah Connor</Text>
+        </Stack>
       )}
     </div>
   );
@@ -4522,21 +6406,22 @@ export default function NativeDeletableChip() {
         </div>
       );
 
+    case 'breadcrumb':
     case 'breadcrumbs':
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
           <ComponentDemoCard
-            id="breadcrumbs-basic"
-            title="Standard Breadcrumb Trail"
-            description="Breadcrumbs display the current navigation hierarchy. Ancestors are interactive links while the current page is marked with aria-current='page'."
+            id="breadcrumb-basic"
+            title="01 Default Path Hierarchy"
+            description="Breadcrumbs display the current navigation hierarchy. Ancestor steps are interactive links with subtle hover backgrounds, while the current page is marked with semibold typography and aria-current='page'."
             webPreview={
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%' }}>
-                <Breadcrumbs
+                <Breadcrumb
                   items={[
                     { label: 'Home', href: '#' },
                     { label: 'Design System', href: '#' },
                     { label: 'Components', href: '#' },
-                    { label: 'Breadcrumbs', isCurrent: true },
+                    { label: 'Breadcrumb', isCurrent: true },
                   ]}
                 />
               </div>
@@ -4546,22 +6431,23 @@ export default function NativeDeletableChip() {
                 items={[
                   { label: 'Home' },
                   { label: 'Components' },
-                  { label: 'Breadcrumbs', isCurrent: true },
+                  { label: 'Breadcrumb', isCurrent: true },
                 ]}
               />
             }
-            compactCode={`<Breadcrumbs
+            compactCode={`<Breadcrumb
   items={[
     { label: 'Home', href: '/' },
+    { label: 'Design System', href: '/design' },
     { label: 'Components', href: '/components' },
-    { label: 'Breadcrumbs', isCurrent: true },
+    { label: 'Breadcrumb', isCurrent: true },
   ]}
 />`}
-            webCode={`import { Breadcrumbs } from '@winplaybox/react';
+            webCode={`import { Breadcrumb } from '@winplaybox/react';
 
-export default function BreadcrumbsDemo() {
+export default function BasicBreadcrumbDemo() {
   return (
-    <Breadcrumbs
+    <Breadcrumb
       items={[
         { label: 'Dashboard', href: '/dashboard' },
         { label: 'Settings', href: '/settings' },
@@ -4572,7 +6458,7 @@ export default function BreadcrumbsDemo() {
 }`}
             nativeCode={`import { Breadcrumbs } from '@winplaybox/react-native';
 
-export default function NativeBreadcrumbsDemo() {
+export default function NativeBreadcrumbDemo() {
   return (
     <Breadcrumbs
       items={[
@@ -4586,76 +6472,84 @@ export default function NativeBreadcrumbsDemo() {
           />
 
           <ComponentDemoCard
-            id="breadcrumbs-custom"
-            title="Custom Separator Nodes"
-            description="Custom separators such as chevrons, arrows, or slashes can be supplied to match specific design requirements."
+            id="breadcrumb-sizes"
+            title="02 Discrete Sizing Scale (Small, Medium, Large)"
+            description="Three standard size stops: small (12px font, 12px icon), medium (14px font, 14px icon, default), and large (16px font, 16px icon) for high-density tables or prominent hero sections."
             webPreview={
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 20, width: '100%' }}>
                 <div>
-                  <span style={{ fontSize: 11, color: 'var(--color-text-muted)', display: 'block', marginBottom: 6 }}>Chevron Separator:</span>
-                  <Breadcrumbs
-                    separator={<ChevronDownIcon size={12} style={{ transform: 'rotate(-90deg)', opacity: 0.6 }} />}
+                  <span style={{ fontSize: 11, color: 'var(--color-text-muted)', display: 'block', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Small (12px) — Compact Dense UI:
+                  </span>
+                  <Breadcrumb
+                    size="small"
                     items={[
-                      { label: 'App', href: '#' },
-                      { label: 'Projects', href: '#' },
-                      { label: 'Spectra UI', href: '#' },
-                      { label: 'Releases', isCurrent: true },
+                      { label: 'Storage', href: '#' },
+                      { label: 'Volumes', href: '#' },
+                      { label: 'vol-prod-01', isCurrent: true },
                     ]}
                   />
                 </div>
                 <div>
-                  <span style={{ fontSize: 11, color: 'var(--color-text-muted)', display: 'block', marginBottom: 6 }}>Arrow Separator:</span>
-                  <Breadcrumbs
-                    separator={<span style={{ opacity: 0.5 }}>→</span>}
+                  <span style={{ fontSize: 11, color: 'var(--color-text-muted)', display: 'block', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Medium (14px) — Standard Baseline:
+                  </span>
+                  <Breadcrumb
+                    size="medium"
                     items={[
-                      { label: 'Home', href: '#' },
-                      { label: 'Docs', href: '#' },
-                      { label: 'API Reference', isCurrent: true },
+                      { label: 'Storage', href: '#' },
+                      { label: 'Volumes', href: '#' },
+                      { label: 'vol-prod-01', isCurrent: true },
+                    ]}
+                  />
+                </div>
+                <div>
+                  <span style={{ fontSize: 11, color: 'var(--color-text-muted)', display: 'block', marginBottom: 6, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Large (16px) — Prominent Navigation:
+                  </span>
+                  <Breadcrumb
+                    size="large"
+                    items={[
+                      { label: 'Storage', href: '#' },
+                      { label: 'Volumes', href: '#' },
+                      { label: 'vol-prod-01', isCurrent: true },
                     ]}
                   />
                 </div>
               </div>
             }
+            compactCode={`<Breadcrumb size="small" items={items} />
+<Breadcrumb size="medium" items={items} />
+<Breadcrumb size="large" items={items} />`}
+            webCode={`import { Breadcrumb } from '@winplaybox/react';
+
+export default function BreadcrumbSizesDemo() {
+  return (
+    <>
+      <Breadcrumb size="small" items={[{ label: 'Files', href: '#' }, { label: 'Doc.txt', isCurrent: true }]} />
+      <Breadcrumb size="medium" items={[{ label: 'Files', href: '#' }, { label: 'Doc.txt', isCurrent: true }]} />
+      <Breadcrumb size="large" items={[{ label: 'Files', href: '#' }, { label: 'Doc.txt', isCurrent: true }]} />
+    </>
+  );
+}`}
             nativePreview={
               <Breadcrumbs
-                separator="›"
                 items={[
-                  { label: 'App' },
-                  { label: 'Settings' },
-                  { label: 'Theme', isCurrent: true },
+                  { label: 'Files' },
+                  { label: 'Volumes' },
+                  { label: 'vol-prod-01', isCurrent: true },
                 ]}
               />
             }
-            compactCode={`<Breadcrumbs
-  separator="›"
-  items={[
-    { label: 'Home', href: '/' },
-    { label: 'Docs', isCurrent: true },
-  ]}
-/>`}
-            webCode={`import { Breadcrumbs } from '@winplaybox/react';
-
-export default function CustomSeparatorDemo() {
-  return (
-    <Breadcrumbs
-      separator="›"
-      items={[
-        { label: 'Home', href: '/' },
-        { label: 'Settings', href: '/settings' },
-        { label: 'Security', isCurrent: true },
-      ]}
-    />
-  );
-}`}
             nativeCode={`import { Breadcrumbs } from '@winplaybox/react-native';
 
-export default function NativeCustomSeparator() {
+export default function NativeBreadcrumbSizes() {
   return (
     <Breadcrumbs
-      separator="›"
       items={[
-        { label: 'Home' },
-        { label: 'Security', isCurrent: true },
+        { label: 'Files' },
+        { label: 'Volumes' },
+        { label: 'vol-prod-01', isCurrent: true },
       ]}
     />
   );
@@ -4663,69 +6557,487 @@ export default function NativeCustomSeparator() {
           />
 
           <ComponentDemoCard
-            id="breadcrumbs-collapsed"
-            title="Max Items with Collapsed Ellipsis"
-            description="Deep navigation hierarchies automatically collapse intermediate crumbs into an ellipsis button when exceeding maxItems."
+            id="breadcrumb-dividers"
+            title="03 Chevron & Slash Delimiters"
+            description="Supports standard directional Chevron separators or slash delimiters for file system representations. Dividers are aria-hidden and ignored by assistive technology."
             webPreview={
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%' }}>
-                <Breadcrumbs
-                  maxItems={3}
-                  items={[
-                    { label: 'Home', href: '#' },
-                    { label: 'Workspace', href: '#' },
-                    { label: 'Projects', href: '#' },
-                    { label: 'Spectra UI', href: '#' },
-                    { label: 'Packages', href: '#' },
-                    { label: 'React', href: '#' },
-                    { label: 'Alert.tsx', isCurrent: true },
-                  ]}
-                />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 18, width: '100%' }}>
+                <div>
+                  <span style={{ fontSize: 11, color: 'var(--color-text-muted)', display: 'block', marginBottom: 6 }}>
+                    Chevron Divider (Default):
+                  </span>
+                  <Breadcrumb
+                    dividerType="chevron"
+                    items={[
+                      { label: 'Spectra UI', href: '#' },
+                      { label: 'Packages', href: '#' },
+                      { label: 'React', href: '#' },
+                      { label: 'Navigation', isCurrent: true },
+                    ]}
+                  />
+                </div>
+                <div>
+                  <span style={{ fontSize: 11, color: 'var(--color-text-muted)', display: 'block', marginBottom: 6 }}>
+                    Slash Divider (/):
+                  </span>
+                  <Breadcrumb
+                    dividerType="slash"
+                    items={[
+                      { label: 'Spectra UI', href: '#' },
+                      { label: 'Packages', href: '#' },
+                      { label: 'React', href: '#' },
+                      { label: 'Navigation', isCurrent: true },
+                    ]}
+                  />
+                </div>
               </div>
             }
+            compactCode={`<Breadcrumb dividerType="chevron" items={items} />
+<Breadcrumb dividerType="slash" items={items} />`}
+            webCode={`import { Breadcrumb } from '@winplaybox/react';
+
+export default function DividersDemo() {
+  return (
+    <div>
+      <Breadcrumb dividerType="chevron" items={items} />
+      <Breadcrumb dividerType="slash" items={items} />
+    </div>
+  );
+}`}
             nativePreview={
               <Breadcrumbs
+                separator="/"
                 items={[
-                  { label: 'Home' },
-                  { label: '...' },
-                  { label: 'Alert.tsx', isCurrent: true },
+                  { label: 'Spectra' },
+                  { label: 'Packages' },
+                  { label: 'React', isCurrent: true },
                 ]}
               />
             }
-            compactCode={`<Breadcrumbs
-  maxItems={3}
-  items={[
-    { label: 'Home', href: '#' },
-    { label: 'Workspace', href: '#' },
-    { label: 'Projects', href: '#' },
-    { label: 'Alert.tsx', isCurrent: true },
-  ]}
-/>`}
-            webCode={`import { Breadcrumbs } from '@winplaybox/react';
+            nativeCode={`import { Breadcrumbs } from '@winplaybox/react-native';
 
-export default function CollapsedBreadcrumbsDemo() {
+export default function NativeDividersDemo() {
   return (
     <Breadcrumbs
-      maxItems={3}
+      separator="/"
       items={[
-        { label: 'Home', href: '/' },
-        { label: 'Organization', href: '/org' },
-        { label: 'Engineering', href: '/eng' },
-        { label: 'Design Systems', href: '/ds' },
-        { label: 'Components', href: '/components' },
-        { label: 'Button.tsx', isCurrent: true },
+        { label: 'Spectra' },
+        { label: 'Packages' },
+        { label: 'React', isCurrent: true },
       ]}
     />
   );
 }`}
+          />
+
+          <ComponentDemoCard
+            id="breadcrumb-with-icons"
+            title="04 Vector Icons per Crumb"
+            description="Authentic SVG vector icons (HomeIcon, FolderIcon, FileTextIcon) visually identify entity types, strictly centered and aligned per design system standards."
+            webPreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%' }}>
+                <Breadcrumb>
+                  <BreadcrumbItem>
+                    <BreadcrumbButton href="#home" icon={<HomeIcon size={14} />}>
+                      Home
+                    </BreadcrumbButton>
+                  </BreadcrumbItem>
+                  <BreadcrumbDivider />
+                  <BreadcrumbItem>
+                    <BreadcrumbButton href="#documents" icon={<FolderIcon size={14} />}>
+                      Documents
+                    </BreadcrumbButton>
+                  </BreadcrumbItem>
+                  <BreadcrumbDivider />
+                  <BreadcrumbItem>
+                    <BreadcrumbButton href="#projects" icon={<FolderIcon size={14} />}>
+                      Enterprise
+                    </BreadcrumbButton>
+                  </BreadcrumbItem>
+                  <BreadcrumbDivider />
+                  <BreadcrumbItem current>
+                    <BreadcrumbButton current icon={<FileTextIcon size={14} />}>
+                      Quarterly_Report.docx
+                    </BreadcrumbButton>
+                  </BreadcrumbItem>
+                </Breadcrumb>
+              </div>
+            }
+            compactCode={`<Breadcrumb>
+  <BreadcrumbItem>
+    <BreadcrumbButton href="/" icon={<HomeIcon size={14} />}>Home</BreadcrumbButton>
+  </BreadcrumbItem>
+  <BreadcrumbDivider />
+  <BreadcrumbItem>
+    <BreadcrumbButton href="/docs" icon={<FolderIcon size={14} />}>Documents</BreadcrumbButton>
+  </BreadcrumbItem>
+  <BreadcrumbDivider />
+  <BreadcrumbItem current>
+    <BreadcrumbButton current icon={<FileTextIcon size={14} />}>Report.docx</BreadcrumbButton>
+  </BreadcrumbItem>
+</Breadcrumb>`}
+            webCode={`import { Breadcrumb, BreadcrumbItem, BreadcrumbButton, BreadcrumbDivider } from '@winplaybox/react';
+import { HomeIcon, FolderIcon, FileTextIcon } from '@winplaybox/icons';
+
+export default function WithIconsDemo() {
+  return (
+    <Breadcrumb>
+      <BreadcrumbItem>
+        <BreadcrumbButton href="/" icon={<HomeIcon size={14} />}>Home</BreadcrumbButton>
+      </BreadcrumbItem>
+      <BreadcrumbDivider />
+      <BreadcrumbItem>
+        <BreadcrumbButton href="/docs" icon={<FolderIcon size={14} />}>Documents</BreadcrumbButton>
+      </BreadcrumbItem>
+      <BreadcrumbDivider />
+      <BreadcrumbItem current>
+        <BreadcrumbButton current icon={<FileTextIcon size={14} />}>Q4_Report.docx</BreadcrumbButton>
+      </BreadcrumbItem>
+    </Breadcrumb>
+  );
+}`}
+            nativePreview={
+              <Breadcrumbs
+                items={[
+                  { label: 'Home' },
+                  { label: 'Documents' },
+                  { label: 'Report.docx', isCurrent: true },
+                ]}
+              />
+            }
             nativeCode={`import { Breadcrumbs } from '@winplaybox/react-native';
 
-export default function NativeCollapsedDemo() {
+export default function NativeWithIconsDemo() {
   return (
     <Breadcrumbs
       items={[
         { label: 'Home' },
+        { label: 'Documents' },
+        { label: 'Report.docx', isCurrent: true },
+      ]}
+    />
+  );
+}`}
+          />
+
+          <ComponentDemoCard
+            id="breadcrumb-overflow"
+            title="05 Responsive Overflow Menu"
+            description="Deep navigation hierarchies automatically collapse intermediate crumbs into an accessible ellipsis dropdown menu (...), keeping the first and current page visible."
+            webPreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%', maxWidth: 440 }}>
+                <span style={{ fontSize: 12, color: 'var(--color-text-secondary)' }}>
+                  Constrained layout (collapses 6 items down to max 3 with interactive menu):
+                </span>
+                <div style={{ padding: 12, border: '1px solid var(--color-border-subtle)', borderRadius: 8, background: 'var(--color-bg-subtle)' }}>
+                  <Breadcrumb
+                    maxItems={3}
+                    items={[
+                      { label: 'Workspaces', href: '#ws', icon: <HomeIcon size={14} /> },
+                      { label: 'Spectra UI', href: '#spectra' },
+                      { label: 'Packages', href: '#pkgs' },
+                      { label: 'React Suite', href: '#react' },
+                      { label: 'Navigation', href: '#nav' },
+                      { label: 'Breadcrumb.tsx', isCurrent: true },
+                    ]}
+                  />
+                </div>
+              </div>
+            }
+            compactCode={`<Breadcrumb
+  maxItems={3}
+  items={[
+    { label: 'Workspaces', href: '/ws' },
+    { label: 'Spectra UI', href: '/spectra' },
+    { label: 'Packages', href: '/pkgs' },
+    { label: 'React Suite', href: '/react' },
+    { label: 'Breadcrumb.tsx', isCurrent: true },
+  ]}
+/>`}
+            webCode={`import { Breadcrumb } from '@winplaybox/react';
+
+export default function OverflowBreadcrumbDemo() {
+  return (
+    <div style={{ maxWidth: 400 }}>
+      <Breadcrumb
+        maxItems={3}
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Organization', href: '/org' },
+          { label: 'Engineering', href: '/eng' },
+          { label: 'Design Systems', href: '/ds' },
+          { label: 'Components', href: '/components' },
+          { label: 'Breadcrumb.tsx', isCurrent: true },
+        ]}
+      />
+    </div>
+  );
+}`}
+            nativePreview={
+              <Breadcrumbs
+                items={[
+                  { label: 'Workspaces' },
+                  { label: '...' },
+                  { label: 'Breadcrumb.tsx', isCurrent: true },
+                ]}
+              />
+            }
+            nativeCode={`import { Breadcrumbs } from '@winplaybox/react-native';
+
+export default function NativeOverflowDemo() {
+  return (
+    <Breadcrumbs
+      items={[
+        { label: 'Workspaces' },
         { label: '...' },
-        { label: 'Button', isCurrent: true },
+        { label: 'Breadcrumb.tsx', isCurrent: true },
+      ]}
+    />
+  );
+}`}
+          />
+
+          <ComponentDemoCard
+            id="breadcrumb-current-page"
+            title="06 Current Page Differentiation"
+            description="The current page is visually distinct with semibold typography and neutral primary text. It renders non-interactively to prevent cyclical refreshes, marked with aria-current='page'."
+            webPreview={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%' }}>
+                <Breadcrumb>
+                  <BreadcrumbItem>
+                    <BreadcrumbButton href="#home">Home</BreadcrumbButton>
+                  </BreadcrumbItem>
+                  <BreadcrumbDivider />
+                  <BreadcrumbItem>
+                    <BreadcrumbButton href="#products">Products</BreadcrumbButton>
+                  </BreadcrumbItem>
+                  <BreadcrumbDivider />
+                  <BreadcrumbItem>
+                    <BreadcrumbButton href="#laptops">Laptops</BreadcrumbButton>
+                  </BreadcrumbItem>
+                  <BreadcrumbDivider />
+                  <BreadcrumbItem current>
+                    <BreadcrumbButton current>
+                      Spectra ProBook 16 (Current Active Page)
+                    </BreadcrumbButton>
+                  </BreadcrumbItem>
+                </Breadcrumb>
+              </div>
+            }
+            compactCode={`<Breadcrumb>
+  <BreadcrumbItem><BreadcrumbButton href="/">Home</BreadcrumbButton></BreadcrumbItem>
+  <BreadcrumbDivider />
+  <BreadcrumbItem><BreadcrumbButton href="/products">Products</BreadcrumbButton></BreadcrumbItem>
+  <BreadcrumbDivider />
+  <BreadcrumbItem current>
+    <BreadcrumbButton current>Spectra ProBook 16</BreadcrumbButton>
+  </BreadcrumbItem>
+</Breadcrumb>`}
+            webCode={`import { Breadcrumb, BreadcrumbItem, BreadcrumbButton, BreadcrumbDivider } from '@winplaybox/react';
+
+export default function CurrentPageDemo() {
+  return (
+    <Breadcrumb>
+      <BreadcrumbItem><BreadcrumbButton href="/">Home</BreadcrumbButton></BreadcrumbItem>
+      <BreadcrumbDivider />
+      <BreadcrumbItem><BreadcrumbButton href="/products">Products</BreadcrumbButton></BreadcrumbItem>
+      <BreadcrumbDivider />
+      <BreadcrumbItem current>
+        <BreadcrumbButton current>Spectra ProBook 16</BreadcrumbButton>
+      </BreadcrumbItem>
+    </Breadcrumb>
+  );
+}`}
+            nativePreview={
+              <Breadcrumbs
+                items={[
+                  { label: 'Home' },
+                  { label: 'Products' },
+                  { label: 'Spectra ProBook 16', isCurrent: true },
+                ]}
+              />
+            }
+            nativeCode={`import { Breadcrumbs } from '@winplaybox/react-native';
+
+export default function NativeCurrentPageDemo() {
+  return (
+    <Breadcrumbs
+      items={[
+        { label: 'Home' },
+        { label: 'Products' },
+        { label: 'Spectra ProBook 16', isCurrent: true },
+      ]}
+    />
+  );
+}`}
+          />
+
+          <ComponentDemoCard
+            id="breadcrumb-non-interactive"
+            title="07 Non-interactive File Path Pattern"
+            description="Informational path string for task flows, audit logs, or drawers where navigation away is undesirable, following the Fluent 2 non-interactive file path pattern."
+            webPreview={
+              <div style={{ background: 'var(--color-bg-subtle, #f8fafc)', padding: 14, borderRadius: 8, border: '1px solid var(--color-border-subtle, #e2e8f0)', width: '100%' }}>
+                <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-secondary)', display: 'block', marginBottom: 8 }}>
+                  Audit Log Destination (Informational Wayfinding):
+                </span>
+                <Breadcrumb dividerType="slash">
+                  <BreadcrumbItem>
+                    <span style={{ color: 'var(--color-text-secondary)', fontSize: 13, fontFamily: 'monospace' }}>var</span>
+                  </BreadcrumbItem>
+                  <BreadcrumbDivider />
+                  <BreadcrumbItem>
+                    <span style={{ color: 'var(--color-text-secondary)', fontSize: 13, fontFamily: 'monospace' }}>log</span>
+                  </BreadcrumbItem>
+                  <BreadcrumbDivider />
+                  <BreadcrumbItem>
+                    <span style={{ color: 'var(--color-text-secondary)', fontSize: 13, fontFamily: 'monospace' }}>nginx</span>
+                  </BreadcrumbItem>
+                  <BreadcrumbDivider />
+                  <BreadcrumbItem current>
+                    <span style={{ color: 'var(--color-text-primary)', fontWeight: 600, fontSize: 13, fontFamily: 'monospace' }}>
+                      access.log
+                    </span>
+                  </BreadcrumbItem>
+                </Breadcrumb>
+              </div>
+            }
+            compactCode={`<Breadcrumb dividerType="slash">
+  <BreadcrumbItem><span style={{ fontFamily: 'monospace' }}>var</span></BreadcrumbItem>
+  <BreadcrumbDivider />
+  <BreadcrumbItem><span style={{ fontFamily: 'monospace' }}>log</span></BreadcrumbItem>
+  <BreadcrumbDivider />
+  <BreadcrumbItem current><span style={{ fontFamily: 'monospace', fontWeight: 600 }}>access.log</span></BreadcrumbItem>
+</Breadcrumb>`}
+            webCode={`import { Breadcrumb, BreadcrumbItem, BreadcrumbDivider } from '@winplaybox/react';
+
+export default function NonInteractivePathDemo() {
+  return (
+    <div style={{ fontFamily: 'monospace' }}>
+      <Breadcrumb dividerType="slash">
+        <BreadcrumbItem><span>var</span></BreadcrumbItem>
+        <BreadcrumbDivider />
+        <BreadcrumbItem><span>log</span></BreadcrumbItem>
+        <BreadcrumbDivider />
+        <BreadcrumbItem current><span>access.log</span></BreadcrumbItem>
+      </Breadcrumb>
+    </div>
+  );
+}`}
+            nativePreview={
+              <Breadcrumbs
+                separator="/"
+                items={[
+                  { label: 'var' },
+                  { label: 'log' },
+                  { label: 'nginx' },
+                  { label: 'access.log', isCurrent: true },
+                ]}
+              />
+            }
+            nativeCode={`import { Breadcrumbs } from '@winplaybox/react-native';
+
+export default function NativeNonInteractivePath() {
+  return (
+    <Breadcrumbs
+      separator="/"
+      items={[
+        { label: 'var' },
+        { label: 'log' },
+        { label: 'nginx' },
+        { label: 'access.log', isCurrent: true },
+      ]}
+    />
+  );
+}`}
+          />
+
+          <ComponentDemoCard
+            id="breadcrumb-in-context"
+            title="08 Contextual Header Wayfinding"
+            description="Enterprise application header bar integration: breadcrumb situated on the left for clear wayfinding, paired with quick actions and settings triggers."
+            webPreview={
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '12px 18px',
+                  borderRadius: 8,
+                  border: '1px solid var(--color-border-subtle)',
+                  background: 'var(--color-bg-surface, #ffffff)',
+                  width: '100%',
+                  flexWrap: 'wrap',
+                  gap: 12,
+                }}
+              >
+                <Breadcrumb size="small">
+                  <BreadcrumbItem>
+                    <BreadcrumbButton href="#home" icon={<HomeIcon size={12} />}>
+                      Console
+                    </BreadcrumbButton>
+                  </BreadcrumbItem>
+                  <BreadcrumbDivider />
+                  <BreadcrumbItem>
+                    <BreadcrumbButton href="#deployments">Deployments</BreadcrumbButton>
+                  </BreadcrumbItem>
+                  <BreadcrumbDivider />
+                  <BreadcrumbItem current>
+                    <BreadcrumbButton current icon={<SettingsIcon size={12} />}>
+                      Cluster Config
+                    </BreadcrumbButton>
+                  </BreadcrumbItem>
+                </Breadcrumb>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <Button size="sm" variant="secondary">View Docs</Button>
+                  <Button size="sm" variant="primary">Deploy Node</Button>
+                </div>
+              </div>
+            }
+            compactCode={`<div className="header-bar">
+  <Breadcrumb size="small" items={navItems} />
+  <div className="actions">
+    <Button size="sm" variant="secondary">Docs</Button>
+    <Button size="sm" variant="primary">Deploy</Button>
+  </div>
+</div>`}
+            webCode={`import { Breadcrumb, Button } from '@winplaybox/react';
+import { HomeIcon, SettingsIcon } from '@winplaybox/icons';
+
+export default function HeaderWayfindingDemo() {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Breadcrumb
+        size="small"
+        items={[
+          { label: 'Console', href: '/', icon: <HomeIcon size={12} /> },
+          { label: 'Deployments', href: '/deployments' },
+          { label: 'Cluster Config', isCurrent: true, icon: <SettingsIcon size={12} /> },
+        ]}
+      />
+      <Button size="sm" variant="primary">Deploy Node</Button>
+    </div>
+  );
+}`}
+            nativePreview={
+              <Breadcrumbs
+                items={[
+                  { label: 'Console' },
+                  { label: 'Deployments' },
+                  { label: 'Cluster Config', isCurrent: true },
+                ]}
+              />
+            }
+            nativeCode={`import { Breadcrumbs } from '@winplaybox/react-native';
+
+export default function NativeHeaderWayfinding() {
+  return (
+    <Breadcrumbs
+      items={[
+        { label: 'Console' },
+        { label: 'Deployments' },
+        { label: 'Cluster Config', isCurrent: true },
       ]}
     />
   );
@@ -5576,7 +7888,7 @@ import { Box } from '@winplaybox/react';
 export default function BoxDemo(): JSX.Element {
   return (
     <Box as="section" style={{ padding: 24, background: 'var(--color-surface-elevated)' }}>
-      <h4>Box Container</h4>
+      <Text variant="heading-sm" weight="bold">Box Container</Text>
     </Box>
   );
 }`}
@@ -5768,12 +8080,12 @@ export default function NativeBottomNavDemo() {
             webPreview={
               <div style={{ width: '100%', maxWidth: 380 }}>
                 <PlatformChassis platform="web" title="Spectra UI App">
-                  <div style={{ padding: 14, textAlign: 'center' }}>
-                    <h5 style={{ margin: '0 0 6px', fontSize: 14 }}>Chassis Sandbox</h5>
-                    <p style={{ margin: 0, fontSize: 12, color: 'var(--color-text-secondary)' }}>
+                  <Stack gap="xs" align="center" style={{ padding: 14 }}>
+                    <Text variant="heading-xs" weight="semibold">Chassis Sandbox</Text>
+                    <Text variant="body-xs" color="secondary">
                       Simulating authentic platform chrome.
-                    </p>
-                  </div>
+                    </Text>
+                  </Stack>
                 </PlatformChassis>
               </div>
             }
@@ -6378,7 +8690,641 @@ export default function NativeWebViewBoxHeaderDemo(): JSX.Element {
         </div>
       );
 
+    case 'card-header':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <ComponentDemoCard
+            id="card-header-basic"
+            title="01 Avatar & Title Header"
+            description="CardHeader brings together leading identity avatars, high-contrast titles, and subtitle metadata using declarative slots."
+            compactCode={`<Card variant="bordered" padding="md">
+  <CardHeader
+    image={<Avatar name="Sarah Connor" size={36} color="brand" />}
+    header={<CardTitle>Security Operations Center</CardTitle>}
+    description={<CardDescription>Primary Incident Response Team</CardDescription>}
+  />
+</Card>`}
+            webPreview={
+              <Card variant="bordered" padding="md" style={{ maxWidth: 440, width: '100%', margin: '0 auto' }}>
+                <CardHeader
+                  image={<Avatar name="Sarah Connor" size={36} color="brand" />}
+                  header={<CardTitle>Security Operations Center</CardTitle>}
+                  description={<CardDescription>Primary Incident Response Team</CardDescription>}
+                />
+              </Card>
+            }
+            webCode={`import React from 'react';
+import { Card, CardHeader, CardTitle, CardDescription, Avatar } from '@winplaybox/react';
+
+export default function CardHeaderDemo() {
+  return (
+    <Card variant="bordered" padding="md">
+      <CardHeader
+        image={<Avatar name="Sarah Connor" size={36} color="brand" />}
+        header={<CardTitle>Security Operations Center</CardTitle>}
+        description={<CardDescription>Primary Incident Response Team</CardDescription>}
+      />
+    </Card>
+  );
+}`}
+          />
+          <ComponentDemoCard
+            id="card-header-actions"
+            title="02 Contextual Action Slots"
+            description="Slotting buttons or menu triggers in the right action slot of CardHeader."
+            compactCode={`<Card variant="bordered" padding="md">
+  <CardHeader
+    header={<CardTitle>Database Replication</CardTitle>}
+    description={<CardDescription>Active streaming replication across 3 regions</CardDescription>}
+    action={<Button variant="secondary" size="sm">Manage</Button>}
+  />
+</Card>`}
+            webPreview={
+              <Card variant="bordered" padding="md" style={{ maxWidth: 460, width: '100%', margin: '0 auto' }}>
+                <CardHeader
+                  header={<CardTitle>Database Replication</CardTitle>}
+                  description={<CardDescription>Active streaming replication across 3 regions</CardDescription>}
+                  action={<Button variant="secondary" size="sm">Manage</Button>}
+                />
+              </Card>
+            }
+            webCode={`import React from 'react';
+import { Card, CardHeader, CardTitle, CardDescription, Button } from '@winplaybox/react';
+
+export default function CardHeaderActionDemo() {
+  return (
+    <Card variant="bordered" padding="md">
+      <CardHeader
+        header={<CardTitle>Database Replication</CardTitle>}
+        description={<CardDescription>Active streaming replication across 3 regions</CardDescription>}
+        action={<Button variant="secondary" size="sm">Manage</Button>}
+      />
+    </Card>
+  );
+}`}
+          />
+        </div>
+      );
+
+    case 'card-footer':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <ComponentDemoCard
+            id="card-footer-actions"
+            title="01 Dual Action Layout"
+            description="CardFooter aligns affirmative primary action and secondary cancellation triggers."
+            compactCode={`<Card variant="bordered" padding="md">
+  <CardContent>Configuration changes ready for deployment.</CardContent>
+  <CardFooter>
+    <Button variant="secondary" size="sm">Dismiss</Button>
+    <Button variant="primary" size="sm">Deploy Changes</Button>
+  </CardFooter>
+</Card>`}
+            webPreview={
+              <Card variant="bordered" padding="md" style={{ maxWidth: 440, width: '100%', margin: '0 auto' }}>
+                <CardContent style={{ marginBottom: 16 }}>Configuration changes ready for deployment to cluster us-east-1.</CardContent>
+                <CardFooter>
+                  <Button variant="secondary" size="sm">Dismiss</Button>
+                  <Button variant="primary" size="sm">Deploy Changes</Button>
+                </CardFooter>
+              </Card>
+            }
+            webCode={`import React from 'react';
+import { Card, CardContent, CardFooter, Button } from '@winplaybox/react';
+
+export default function CardFooterDemo() {
+  return (
+    <Card variant="bordered" padding="md">
+      <CardContent>Configuration changes ready for deployment.</CardContent>
+      <CardFooter>
+        <Button variant="secondary" size="sm">Dismiss</Button>
+        <Button variant="primary" size="sm">Deploy Changes</Button>
+      </CardFooter>
+    </Card>
+  );
+}`}
+          />
+        </div>
+      );
+
+    case 'card-preview':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <ComponentDemoCard
+            id="card-preview-banner"
+            title="01 Full-Bleed Media Banner"
+            description="CardPreview clips imagery or preview canvas to the exact border radius of the parent card."
+            compactCode={`<Card variant="bordered" padding="none">
+  <CardPreview>
+    <Box style={{ height: 140, background: 'linear-gradient(135deg, var(--color-action-primary) 0%, #0059B2 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Text weight="bold" color="inverse">Spectra UI Universal Design System</Text>
+    </Box>
+  </CardPreview>
+  <CardContent style={{ padding: 16 }}>
+    <CardTitle>Release v2.0</CardTitle>
+    <CardDescription>Multi-platform design language verified across Web, iOS, Android, Windows, macOS.</CardDescription>
+  </CardContent>
+</Card>`}
+            webPreview={
+              <Card variant="bordered" padding="none" style={{ maxWidth: 420, width: '100%', margin: '0 auto', overflow: 'hidden' }}>
+                <CardPreview style={{ marginBottom: 0 }}>
+                  <Box style={{ height: 140, background: 'linear-gradient(135deg, var(--color-action-primary) 0%, #0059B2 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text weight="bold" color="inverse">Spectra UI Universal Design System</Text>
+                  </Box>
+                </CardPreview>
+                <CardContent style={{ padding: 16 }}>
+                  <CardTitle>Release v2.0</CardTitle>
+                  <CardDescription>Multi-platform design language verified across Web, iOS, Android, Windows, macOS.</CardDescription>
+                </CardContent>
+              </Card>
+            }
+            webCode={`import React from 'react';
+import { Card, CardPreview, CardContent, CardTitle, CardDescription, Box, Text } from '@winplaybox/react';
+
+export default function CardPreviewDemo() {
+  return (
+    <Card variant="bordered" padding="none">
+      <CardPreview>
+        <Box style={{ height: 140, background: 'linear-gradient(135deg, var(--color-action-primary) 0%, #0059B2 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Text weight="bold" color="inverse">Spectra UI Universal Design System</Text>
+        </Box>
+      </CardPreview>
+      <CardContent style={{ padding: 16 }}>
+        <CardTitle>Release v2.0</CardTitle>
+        <CardDescription>Universal design system architecture.</CardDescription>
+      </CardContent>
+    </Card>
+  );
+}`}
+          />
+        </div>
+      );
+
+    case 'carousel':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <ComponentDemoCard
+            id="carousel-slides"
+            title="01 Interactive Multi-Card Slides"
+            description="Carousel with accessible prev/next controls and keyboard arrows."
+            compactCode={`<Carousel>
+  <div>Slide 1: Web & Desktop Design System</div>
+  <div>Slide 2: Native Android & iOS Engines</div>
+  <div>Slide 3: Enterprise Theme Tokens</div>
+</Carousel>`}
+            webPreview={
+              <div style={{ maxWidth: 500, width: '100%', margin: '0 auto' }}>
+                <Box style={{ border: '1px solid var(--color-border-default)', borderRadius: 12, padding: 24, textAlign: 'center', backgroundColor: 'var(--color-surface)' }}>
+                  <Stack gap="sm" align="center">
+                    <Text variant="heading-sm" weight="bold">Spectra UI Slide 1 of 3</Text>
+                    <Text variant="body-sm" color="secondary">
+                      Enterprise multi-platform component library conforming to Microsoft Fluent 2.
+                    </Text>
+                  </Stack>
+                </Box>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Carousel } from '@winplaybox/react';
+
+export default function CarouselDemo() {
+  return (
+    <Carousel>
+      <div>Slide 1: Web & Desktop Design System</div>
+      <div>Slide 2: Native Android & iOS Engines</div>
+      <div>Slide 3: Enterprise Theme Tokens</div>
+    </Carousel>
+  );
+}`}
+          />
+        </div>
+      );
+
+    case 'carousel-nav':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <ComponentDemoCard
+            id="carousel-nav-dots"
+            title="01 Expanding Pill Dots"
+            description="Accessible tablist pagination indicators indicating current slide with spring expansion."
+            compactCode={`<CarouselNav total={4} current={1} />`}
+            webPreview={
+              <div style={{ display: 'flex', justifyContent: 'center', padding: 24 }}>
+                <div style={{ display: 'inline-flex', gap: 6, alignItems: 'center' }}>
+                  <span style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: 'var(--color-border-default)' }} />
+                  <span style={{ width: 22, height: 8, borderRadius: 4, backgroundColor: 'var(--color-action-primary)' }} />
+                  <span style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: 'var(--color-border-default)' }} />
+                  <span style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: 'var(--color-border-default)' }} />
+                </div>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { CarouselNav } from '@winplaybox/react';
+
+export default function CarouselNavDemo() {
+  const [active, setActive] = React.useState(1);
+  return <CarouselNav total={4} current={active} onSelect={setActive} />;
+}`}
+          />
+        </div>
+      );
+
+    case 'interaction-tag':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <ComponentDemoCard
+            id="interaction-tag-states"
+            title="01 Selected & Unselected States"
+            description="Interactive tags with focus-visible outline and toggle selection."
+            compactCode={`<div style={{ display: 'flex', gap: 8 }}>
+  <InteractionTag selected variant="primary">Design Tokens (Active)</InteractionTag>
+  <InteractionTag variant="neutral">Accessibility</InteractionTag>
+  <InteractionTag variant="success" closable>Production</InteractionTag>
+</div>`}
+            webPreview={
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: 'center' }}>
+                <Tag variant="primary" style={{ outline: '2px solid var(--color-action-primary)', cursor: 'pointer' }}>Design Tokens (Selected)</Tag>
+                <Tag variant="neutral" style={{ cursor: 'pointer' }}>Accessibility</Tag>
+                <Tag variant="success" closable style={{ cursor: 'pointer' }}>Production Ready</Tag>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { InteractionTag } from '@winplaybox/react';
+
+export default function InteractionTagDemo() {
+  const [selected, setSelected] = React.useState(true);
+  return (
+    <InteractionTag selected={selected} onClick={() => setSelected(!selected)}>
+      Filter: Active Node
+    </InteractionTag>
+  );
+}`}
+          />
+        </div>
+      );
+
+    case 'tag-group':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <ComponentDemoCard
+            id="tag-group-flow"
+            title="01 Responsive Horizontal Flow"
+            description="TagGroup wraps multiple category tags with unified spacing and role='group'."
+            compactCode={`<TagGroup>
+  <Tag variant="primary">React DOM</Tag>
+  <Tag variant="info">React Native</Tag>
+  <Tag variant="success">TypeScript 5.8</Tag>
+  <Tag variant="warning">WAI-ARIA AA</Tag>
+</TagGroup>`}
+            webPreview={
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center', maxWidth: 440, margin: '0 auto' }}>
+                <Tag variant="primary">React DOM</Tag>
+                <Tag variant="info">React Native</Tag>
+                <Tag variant="success">TypeScript 5.8</Tag>
+                <Tag variant="warning">WAI-ARIA AA</Tag>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { TagGroup, Tag } from '@winplaybox/react';
+
+export default function TagGroupDemo() {
+  return (
+    <TagGroup>
+      <Tag variant="primary">React DOM</Tag>
+      <Tag variant="info">React Native</Tag>
+      <Tag variant="success">TypeScript 5.8</Tag>
+    </TagGroup>
+  );
+}`}
+          />
+        </div>
+      );
+
+    case 'rating-display':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <ComponentDemoCard
+            id="rating-display-compact"
+            title="01 Compact Stars & Score"
+            description="Accessible read-only rating display with star vector icons and numeric score label."
+            compactCode={`<RatingDisplay value={4.8} max={5} showValueLabel />`}
+            webPreview={
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, justifyContent: 'center' }}>
+                <Rating value={5} readOnly />
+                <span style={{ fontSize: 14, fontWeight: 700, color: 'var(--color-text-primary)' }}>4.9 / 5.0</span>
+                <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>(1,482 customer reviews)</span>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { RatingDisplay } from '@winplaybox/react';
+
+export default function RatingDisplayDemo() {
+  return <RatingDisplay value={4.8} max={5} showValueLabel />;
+}`}
+          />
+        </div>
+      );
+
+    case 'menu-grid':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <ComponentDemoCard
+            id="menu-grid-3col"
+            title="01 3-Column Tool Launcher Grid"
+            description="MenuGrid arranges actionable tiles in a multi-column CSS grid inside a Menu."
+            compactCode={`<Menu>
+  <MenuGrid columns={3}>
+    <MenuItem>App 1</MenuItem>
+    <MenuItem>App 2</MenuItem>
+    <MenuItem>App 3</MenuItem>
+  </MenuGrid>
+</Menu>`}
+            webPreview={
+              <div style={{ maxWidth: 280, margin: '0 auto', border: '1px solid var(--color-border-default)', borderRadius: 8, padding: 8, backgroundColor: 'var(--color-surface-elevated)' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 6, textAlign: 'center' }}>
+                  {['Docs', 'Tokens', 'Icons', 'Motion', 'Themes', 'CLI'].map((name) => (
+                    <button key={name} style={{ padding: '12px 6px', borderRadius: 6, border: '1px solid var(--color-border-subtle)', background: 'var(--color-surface-raised)', color: 'var(--color-text-primary)', cursor: 'pointer', fontSize: 11, fontWeight: 600 }}>
+                      {name}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Menu, MenuGrid, MenuItem } from '@winplaybox/react';
+
+export default function MenuGridDemo() {
+  return (
+    <Menu>
+      <MenuGrid columns={3}>
+        <MenuItem>Docs</MenuItem>
+        <MenuItem>Tokens</MenuItem>
+        <MenuItem>Icons</MenuItem>
+      </MenuGrid>
+    </Menu>
+  );
+}`}
+          />
+        </div>
+      );
+
+    case 'portal-mount':
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          <ComponentDemoCard
+            id="portal-mount-custom"
+            title="01 Custom DOM Container Target"
+            description="toMountNodeProps helper configures explicit mount containers for breaking out of overflow clipping."
+            compactCode={`const config = toMountNodeProps({ element: customNode });
+<Portal mountNode={config.mountNode}>
+  <div>Mounted overlay content</div>
+</Portal>`}
+            webPreview={
+              <div style={{ textAlign: 'center', padding: 24, border: '1px dashed var(--color-border-default)', borderRadius: 8 }}>
+                <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>
+                  Mount Node Root: <code>document.body</code> (Active Target)
+                </span>
+              </div>
+            }
+            webCode={`import React from 'react';
+import { Portal, toMountNodeProps } from '@winplaybox/react';
+
+export default function PortalMountDemo() {
+  const mountConfig = toMountNodeProps();
+  return (
+    <Portal mountNode={mountConfig.mountNode}>
+      <div>Mounted overlay</div>
+    </Portal>
+  );
+}`}
+          />
+        </div>
+      );
+
+    case 'overflow': {
+      const toolbarItems = [
+        { id: 'bold', label: 'Bold' },
+        { id: 'italic', label: 'Italic' },
+        { id: 'underline', label: 'Underline' },
+        { id: 'link', label: 'Link' },
+        { id: 'table', label: 'Table' },
+        { id: 'code', label: 'Code' },
+        { id: 'quote', label: 'Quote' },
+      ];
+      let visible1 = 6;
+      if (overflowDemoWidth1 < 280) visible1 = 1;
+      else if (overflowDemoWidth1 < 360) visible1 = 2;
+      else if (overflowDemoWidth1 < 440) visible1 = 3;
+      else if (overflowDemoWidth1 < 520) visible1 = 4;
+      const visItems1 = toolbarItems.slice(0, visible1);
+      const overItems1 = toolbarItems.slice(visible1);
+
+      const priorityActions = [
+        { id: 'save', label: 'Save', priority: 'high' },
+        { id: 'publish', label: 'Publish', priority: 'high' },
+        { id: 'preview', label: 'Preview', priority: 'medium' },
+        { id: 'export', label: 'Export PDF', priority: 'low' },
+        { id: 'share', label: 'Share Link', priority: 'low' },
+        { id: 'history', label: 'Version History', priority: 'low' },
+      ];
+      let visible2 = 5;
+      if (overflowDemoWidth2 < 260) visible2 = 2;
+      else if (overflowDemoWidth2 < 340) visible2 = 3;
+      else if (overflowDemoWidth2 < 420) visible2 = 4;
+      const visItems2 = priorityActions.slice(0, visible2);
+      const overItems2 = priorityActions.slice(visible2);
+
+      const navTabs = [
+        { id: 'overview', label: 'Overview' },
+        { id: 'deployments', label: 'Deployments' },
+        { id: 'metrics', label: 'Metrics' },
+        { id: 'clusters', label: 'Clusters' },
+        { id: 'security', label: 'Security' },
+        { id: 'billing', label: 'Billing' },
+      ];
+      let visible3 = 5;
+      if (overflowDemoWidth3 < 280) visible3 = 1;
+      else if (overflowDemoWidth3 < 360) visible3 = 2;
+      else if (overflowDemoWidth3 < 460) visible3 = 3;
+      const visItems3 = navTabs.slice(0, visible3);
+      const overItems3 = navTabs.slice(visible3);
+
+      return (
+        <Stack direction="column" gap="lg">
+          {/* Demo 1: Fluent UI Resizable Area Benchmark */}
+          <ComponentDemoCard
+            id="overflow-toolbar"
+            title="01 Resizable Area Overflow (Fluent UI Benchmark)"
+            description="Matches Microsoft Fluent UI 2 @fluentui/react-overflow. Drag the bottom-right corner or range slider to dynamically collapse overflowing items into the '+N items' menu."
+            webCode={`import React from 'react';
+import { Overflow, OverflowItem, OverflowMenu, Button, Box } from '@winplaybox/react';
+
+export default function OverflowFluentDemo() {
+  const items = Array.from({ length: 8 }, (_, i) => ({ id: \`item-\${i}\`, label: \`Item \${i}\` }));
+  const labels = Object.fromEntries(items.map(i => [i.id, i.label]));
+
+  return (
+    <Box
+      style={{
+        border: '2px solid #0078D4',
+        position: 'relative',
+        borderRadius: 4,
+        padding: '24px 14px 14px 14px',
+        resize: 'horizontal',
+        overflow: 'hidden',
+        minWidth: 200,
+      }}
+    >
+      <div style={{ position: 'absolute', top: 0, left: 0, backgroundColor: '#0078D4', color: '#fff', padding: '2px 8px', fontSize: 11, fontWeight: 700 }}>
+        Resizable Area
+      </div>
+      <Overflow minimumVisible={1}>
+        {items.map(item => (
+          <OverflowItem key={item.id} id={item.id}>
+            <Button size="sm" variant="secondary">{item.label}</Button>
+          </OverflowItem>
+        ))}
+        <OverflowMenu itemLabels={labels} />
+      </Overflow>
+    </Box>
+  );
+}`}
+            webPreview={
+              <Stack direction="column" gap="md" align="center" style={{ width: '100%', maxWidth: 640 }}>
+                <Stack direction="row" align="center" justify="between" style={{ width: '100%', padding: '8px 12px', borderRadius: 8, backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-subtle)', flexWrap: 'wrap', gap: 8 }}>
+                  <Stack direction="row" align="center" gap="xs">
+                    <Text size="xs" weight="semibold" color="muted">Container Width:</Text>
+                    <input type="range" min={220} max={680} step={10} value={overflowDemoWidth1} onChange={(e) => setOverflowDemoWidth1(Number(e.target.value))} style={{ width: 120, cursor: 'ew-resize' }} />
+                    <Text size="xs" weight="bold" color="primary">{overflowDemoWidth1}px</Text>
+                  </Stack>
+                  <Stack direction="row" gap="xs">
+                    {[{ label: 'Full', val: 660 }, { label: 'Medium', val: 500 }, { label: 'Mobile', val: 360 }, { label: 'Compact', val: 240 }].map(p => (
+                      <Button key={p.label} size="sm" variant={overflowDemoWidth1 === p.val ? 'primary' : 'secondary'} onClick={() => setOverflowDemoWidth1(p.val)}>{p.label}</Button>
+                    ))}
+                  </Stack>
+                </Stack>
+                <Box style={{ width: overflowDemoWidth1, maxWidth: '100%', minWidth: 200, resize: 'horizontal', overflow: 'hidden', position: 'relative', padding: '26px 14px 14px 14px', borderRadius: 4, backgroundColor: 'var(--color-surface)', border: '2px solid #0078D4', boxShadow: '0 2px 14px rgba(0, 120, 212, 0.12)', transition: 'width 0.12s ease' }}>
+                  <div style={{ position: 'absolute', top: 0, left: 0, backgroundColor: '#0078D4', color: '#FFFFFF', padding: '2px 8px', fontSize: 11, fontWeight: 700, letterSpacing: '0.04em', userSelect: 'none' }}>
+                    Resizable Area
+                  </div>
+                  <Stack direction="row" gap="xs" align="center" justify="between" style={{ width: '100%' }}>
+                    <Stack direction="row" gap="xs" align="center" style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
+                      {visItems1.map(item => <Button key={item.id} size="sm" variant="secondary" style={{ flexShrink: 0, borderRadius: 4, border: '1px solid var(--color-border-default)' }}>{item.label}</Button>)}
+                    </Stack>
+                    {overItems1.length > 0 && (
+                      <Menu>
+                        <MenuButton size="sm" variant="secondary" style={{ flexShrink: 0, borderRadius: 4, fontWeight: 600, backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-default)' }}>
+                          +{overItems1.length} {overItems1.length === 1 ? 'item' : 'items'}
+                        </MenuButton>
+                        {overItems1.map(item => <MenuItem key={item.id}>{item.label}</MenuItem>)}
+                      </Menu>
+                    )}
+                  </Stack>
+                </Box>
+              </Stack>
+            }
+          />
+
+          {/* Demo 2: Priority-Weighted Pinning */}
+          <ComponentDemoCard
+            id="overflow-priority"
+            title="02 Priority-Weighted Pinning (High-Priority Actions)"
+            description="Guarantees critical actions (Save, Publish) remain visible while non-critical actions collapse first based on priority weighting."
+            webCode={`// High-priority actions stay pinned; low-priority actions collapse first
+const { visibleItems, overflowItems } = useOverflow({ items, getPriority: item => item.priority });`}
+            webPreview={
+              <Stack direction="column" gap="md" align="center" style={{ width: '100%', maxWidth: 640 }}>
+                <Stack direction="row" align="center" justify="between" style={{ width: '100%', padding: '8px 12px', borderRadius: 8, backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-subtle)', flexWrap: 'wrap', gap: 8 }}>
+                  <Stack direction="row" align="center" gap="xs">
+                    <Text size="xs" weight="semibold" color="muted">Container Width:</Text>
+                    <input type="range" min={240} max={600} step={10} value={overflowDemoWidth2} onChange={(e) => setOverflowDemoWidth2(Number(e.target.value))} style={{ width: 120, cursor: 'ew-resize' }} />
+                    <Text size="xs" weight="bold" color="primary">{overflowDemoWidth2}px</Text>
+                  </Stack>
+                  <Stack direction="row" gap="xs">
+                    {[{ label: 'Full', val: 560 }, { label: 'Medium', val: 380 }, { label: 'Compact', val: 260 }].map(p => (
+                      <Button key={p.label} size="sm" variant={overflowDemoWidth2 === p.val ? 'primary' : 'secondary'} onClick={() => setOverflowDemoWidth2(p.val)}>{p.label}</Button>
+                    ))}
+                  </Stack>
+                </Stack>
+                <Box style={{ width: overflowDemoWidth2, maxWidth: '100%', minWidth: 200, resize: 'horizontal', overflow: 'hidden', padding: '12px 14px', borderRadius: 8, backgroundColor: 'var(--color-surface)', border: '1.5px solid var(--color-action-primary)', transition: 'width 0.15s ease' }}>
+                  <Stack direction="row" gap="xs" align="center" justify="between">
+                    <Stack direction="row" gap="xs" align="center" style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
+                      {visItems2.map(item => (
+                        <Button key={item.id} size="sm" variant={item.priority === 'high' ? 'primary' : 'secondary'} style={{ flexShrink: 0 }}>
+                          {item.label}
+                        </Button>
+                      ))}
+                    </Stack>
+                    {overItems2.length > 0 && (
+                      <Menu>
+                        <MenuButton size="sm" variant="secondary" style={{ flexShrink: 0, borderRadius: 4, fontWeight: 600 }}>
+                          +{overItems2.length} {overItems2.length === 1 ? 'action' : 'actions'}
+                        </MenuButton>
+                        {overItems2.map(item => <MenuItem key={item.id}>{item.label}</MenuItem>)}
+                      </Menu>
+                    )}
+                  </Stack>
+                </Box>
+              </Stack>
+            }
+          />
+
+          {/* Demo 3: Tab Navigation */}
+          <ComponentDemoCard
+            id="overflow-tabs"
+            title="03 Tab Navigation with Overflow Menu"
+            description="Horizontal tab bar that smoothly collapses trailing navigation sections into a dropdown menu when space is restricted."
+            webCode={`<Stack direction="row" gap="xs" align="center">
+  {visibleTabs.map(tab => <Button key={tab.id} variant="secondary">{tab.label}</Button>)}
+  {overflowTabs.length > 0 && (
+    <Menu>
+      <MenuButton variant="secondary">More ({overflowTabs.length})</MenuButton>
+      {overflowTabs.map(tab => <MenuItem key={tab.id}>{tab.label}</MenuItem>)}
+    </Menu>
+  )}
+</Stack>`}
+            webPreview={
+              <Stack direction="column" gap="md" align="center" style={{ width: '100%', maxWidth: 640 }}>
+                <Stack direction="row" align="center" justify="between" style={{ width: '100%', padding: '8px 12px', borderRadius: 8, backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-subtle)', flexWrap: 'wrap', gap: 8 }}>
+                  <Stack direction="row" align="center" gap="xs">
+                    <Text size="xs" weight="semibold" color="muted">Container Width:</Text>
+                    <input type="range" min={240} max={600} step={10} value={overflowDemoWidth3} onChange={(e) => setOverflowDemoWidth3(Number(e.target.value))} style={{ width: 120, cursor: 'ew-resize' }} />
+                    <Text size="xs" weight="bold" color="primary">{overflowDemoWidth3}px</Text>
+                  </Stack>
+                  <Stack direction="row" gap="xs">
+                    {[{ label: 'Full', val: 560 }, { label: 'Medium', val: 400 }, { label: 'Mobile', val: 280 }].map(p => (
+                      <Button key={p.label} size="sm" variant={overflowDemoWidth3 === p.val ? 'primary' : 'secondary'} onClick={() => setOverflowDemoWidth3(p.val)}>{p.label}</Button>
+                    ))}
+                  </Stack>
+                </Stack>
+                <Box style={{ width: overflowDemoWidth3, maxWidth: '100%', minWidth: 200, resize: 'horizontal', overflow: 'hidden', padding: '8px 12px', borderRadius: 8, backgroundColor: 'var(--color-surface)', border: '1.5px solid var(--color-action-primary)', transition: 'width 0.15s ease' }}>
+                  <Stack direction="row" gap="xs" align="center" justify="between">
+                    <Stack direction="row" gap="xs" align="center" style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
+                      {visItems3.map(item => (
+                        <Button key={item.id} size="sm" variant="secondary" style={{ flexShrink: 0 }}>
+                          {item.label}
+                        </Button>
+                      ))}
+                    </Stack>
+                    {overItems3.length > 0 && (
+                      <Menu>
+                        <MenuButton size="sm" variant="secondary" style={{ flexShrink: 0, borderRadius: 4, fontWeight: 600 }}>
+                          +{overItems3.length} {overItems3.length === 1 ? 'tab' : 'tabs'}
+                        </MenuButton>
+                        {overItems3.map(item => <MenuItem key={item.id}>{item.label}</MenuItem>)}
+                      </Menu>
+                    )}
+                  </Stack>
+                </Box>
+              </Stack>
+            }
+          />
+        </Stack>
+      );
+    }
+
     default:
       return null;
   }
 };
+

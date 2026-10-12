@@ -1,6 +1,6 @@
 // packages/react/src/components/actions/SplitButton.tsx
 import React, { useState, useRef, useEffect, forwardRef, ReactNode } from 'react';
-import { Button, ButtonVariant, ButtonSize } from './Button';
+import { Button, ButtonVariant, ButtonAppearance, ButtonShape, ButtonSize } from './Button';
 import { ChevronDownIcon } from '@winplaybox/icons';
 
 export interface SplitButtonOption {
@@ -12,7 +12,12 @@ export interface SplitButtonOption {
 
 export interface SplitButtonProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'onClick'> {
   children?: ReactNode;
+  /** Fluent 2 appearance variant */
+  appearance?: ButtonAppearance;
+  /** Classic variant prop */
   variant?: ButtonVariant;
+  /** Shape silhouette */
+  shape?: ButtonShape;
   size?: ButtonSize;
   disabled?: boolean;
   isLoading?: boolean;
@@ -29,7 +34,9 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
   (
     {
       children,
+      appearance,
       variant = 'primary',
+      shape,
       size = 'md',
       disabled = false,
       isLoading = false,
@@ -102,7 +109,9 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
       >
         {/* Primary Action Button */}
         <Button
+          appearance={appearance}
           variant={variant}
+          shape={shape}
           size={size}
           disabled={disabled}
           isLoading={isLoading}
@@ -110,7 +119,7 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
           style={{
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
-            borderRight: (variant === 'primary' || variant === 'danger')
+            borderRight: (variant === 'primary' || variant === 'danger' || appearance === 'primary')
               ? '1px solid rgba(255, 255, 255, 0.3)'
               : '1px solid var(--color-border-default)',
           }}
@@ -120,28 +129,38 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
 
         {/* Dropdown Menu Trigger Button */}
         <Button
+          appearance={appearance}
           variant={variant}
+          shape={shape}
           size={size}
           disabled={disabled || isLoading}
           onClick={handleToggle}
           aria-haspopup="menu"
           aria-expanded={isOpen}
           aria-label={ariaLabelDropdown}
+          icon={
+            <ChevronDownIcon
+              size={size === 'sm' ? 14 : size === 'lg' ? 18 : 16}
+              style={{
+                display: 'block',
+                verticalAlign: 'middle',
+                transform: isOpen ? 'rotate(180deg)' : 'none',
+                transition: 'transform 0.15s ease',
+              }}
+            />
+          }
           style={{
             borderTopLeftRadius: 0,
             borderBottomLeftRadius: 0,
-            paddingLeft: size === 'sm' ? 6 : size === 'lg' ? 12 : 8,
-            paddingRight: size === 'sm' ? 6 : size === 'lg' ? 12 : 8,
+            borderLeft: 'none',
+            paddingLeft: size === 'sm' ? 6 : size === 'lg' ? 10 : 8,
+            paddingRight: size === 'sm' ? 6 : size === 'lg' ? 10 : 8,
+            minWidth: size === 'sm' ? 24 : size === 'lg' ? 36 : 30,
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
-        >
-          <ChevronDownIcon
-            size={size === 'sm' ? 14 : size === 'lg' ? 18 : 16}
-            style={{
-              transform: isOpen ? 'rotate(180deg)' : 'none',
-              transition: 'transform 0.15s ease',
-            }}
-          />
-        </Button>
+        />
 
         {/* Flyout Options Menu */}
         {isOpen && options.length > 0 && (
@@ -184,15 +203,19 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
                   fontSize: size === 'sm' ? 12 : 13,
                   cursor: opt.disabled ? 'not-allowed' : 'pointer',
                   textAlign: 'left',
-                  transition: 'background-color 0.12s ease',
+                  transition: 'background-color 0.12s ease, color 0.12s ease',
                 }}
                 onMouseEnter={(e) => {
                   if (!opt.disabled) {
-                    e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface-hover, rgba(128, 128, 128, 0.12))';
+                    e.currentTarget.style.color = 'var(--color-text-primary)';
                   }
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = opt.disabled
+                    ? 'var(--color-text-muted)'
+                    : 'var(--color-text-primary)';
                 }}
               >
                 {opt.icon && <span style={{ flexShrink: 0 }}>{opt.icon}</span>}

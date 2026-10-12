@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Card, Badge } from '@winplaybox/react';
+import { Card, Badge, Text } from '@winplaybox/react';
 import { ExternalLinkIcon, CheckIcon, SmartphoneIcon, WindowsIcon } from '@winplaybox/icons';
 import { Platform, PLATFORMS, getComponentPlatformData } from '../../data/platformData';
 import { openInExpoSnack, openInReactNativeSandbox } from '../../utils/sandbox';
+import { PlatformIcon } from './PlatformIcon';
 
 interface PlatformChassisViewerProps {
   platform: 'ios' | 'android' | 'windows' | 'macos';
@@ -586,17 +587,17 @@ export const PlatformChassisViewer: React.FC<PlatformChassisViewerProps> = ({
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontSize: 24 }}>{meta.icon}</span>
+          <PlatformIcon platform={platform} size={24} />
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <h3 style={{ margin: 0, fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+              <Text as="h3" variant="heading" style={{ margin: 0, fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
                 {meta.name} Simulator
-              </h3>
+              </Text>
               <Badge variant="primary">{meta.badge}</Badge>
             </div>
-            <p style={{ margin: '2px 0 0 0', fontSize: 13, color: 'var(--color-text-secondary)' }}>
+            <Text as="p" style={{ margin: '2px 0 0 0', fontSize: 13, color: 'var(--color-text-secondary)' }}>
               {meta.touchStandard} · {meta.accessibilityStandard}
-            </p>
+            </Text>
           </div>
         </div>
 
@@ -759,12 +760,12 @@ export const PlatformChassisViewer: React.FC<PlatformChassisViewerProps> = ({
             boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
           }}
         >
-          <h3 style={{ margin: '0 0 8px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+          <Text as="h3" variant="heading" style={{ margin: '0 0 8px 0', fontSize: 17, fontWeight: 700, color: 'var(--color-text-primary)' }}>
             {meta.name} Idiomatic Properties & Props
-          </h3>
-          <p style={{ margin: '0 0 16px 0', fontSize: 13, color: 'var(--color-text-secondary)' }}>
+          </Text>
+          <Text as="p" style={{ margin: '0 0 16px 0', fontSize: 13, color: 'var(--color-text-secondary)' }}>
             These properties conform strictly to {meta.name} conventions and are completely isolated from DOM attributes.
-          </p>
+          </Text>
 
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13, textAlign: 'left' }}>

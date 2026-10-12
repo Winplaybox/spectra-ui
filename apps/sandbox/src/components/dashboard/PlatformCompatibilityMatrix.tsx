@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Badge } from '@winplaybox/react';
+import { Card, Badge, Text } from '@winplaybox/react';
 import { CheckIcon, ExternalLinkIcon, InfoIcon } from '@winplaybox/icons';
 import { PLATFORMS, Platform } from '../../data/platformData';
 import { usePlatform } from '../../context/PlatformContext';
@@ -55,9 +55,9 @@ export const PlatformCompatibilityMatrix: React.FC<PlatformCompatibilityMatrixPr
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
             <InfoIcon size={18} color="var(--color-action-primary)" />
-            <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+            <Text as="h3" variant="heading" style={{ margin: 0, fontSize: 18, fontWeight: 700, color: 'var(--color-text-primary)' }}>
               Real-Time Universal Compatibility & Support Matrix
-            </h3>
+            </Text>
             <span
               style={{
                 fontSize: 11,
@@ -72,9 +72,9 @@ export const PlatformCompatibilityMatrix: React.FC<PlatformCompatibilityMatrixPr
               5 Platforms Certified
             </span>
           </div>
-          <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)' }}>
+          <Text as="p" style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)' }}>
             Real-time multi-platform runtime requirements, minimum operating system baselines, touch standards, and accessibility mappings for <strong>{componentName}</strong>.
-          </p>
+          </Text>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

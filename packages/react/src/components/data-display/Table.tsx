@@ -90,7 +90,7 @@ export const TableRow = forwardRef<HTMLTableRowElement, React.ComponentPropsWith
         transition: 'background-color 0.12s ease',
         ...style,
       }}
-      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)')}
+      onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface-hover, rgba(128, 128, 128, 0.08))')}
       onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
       {...rest}
     >

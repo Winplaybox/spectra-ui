@@ -1,6 +1,5 @@
-// packages/react/src/components/navigation/Pagination.tsx
 import React, { forwardRef } from 'react';
-import { ChevronDownIcon } from '@winplaybox/icons';
+import { ChevronLeftIcon, ChevronRightIcon } from '@winplaybox/icons';
 
 export interface PaginationProps extends Omit<React.ComponentPropsWithoutRef<'nav'>, 'onChange'> {
   page?: number;
@@ -86,7 +85,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
             opacity: disabled || currentPage <= 1 ? 0.4 : 1,
           }}
         >
-          <ChevronDownIcon size={14} style={{ transform: 'rotate(90deg)' }} />
+          <ChevronLeftIcon size={14} style={{ display: 'block', verticalAlign: 'middle' }} />
         </button>
 
         {/* Page buttons */}
@@ -141,7 +140,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               }}
               onMouseEnter={(e) => {
                 if (!isSelected && !disabled) {
-                  e.currentTarget.style.backgroundColor = 'var(--color-surface-raised)';
+                  e.currentTarget.style.backgroundColor = 'var(--color-surface-hover, rgba(128, 128, 128, 0.12))';
                 }
               }}
               onMouseLeave={(e) => {
@@ -175,7 +174,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
             opacity: disabled || currentPage >= count ? 0.4 : 1,
           }}
         >
-          <ChevronDownIcon size={14} style={{ transform: 'rotate(-90deg)' }} />
+          <ChevronRightIcon size={14} style={{ display: 'block', verticalAlign: 'middle' }} />
         </button>
       </nav>
     );

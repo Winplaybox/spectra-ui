@@ -213,6 +213,171 @@ Spectra UI **IS** "One semantic design language implemented through platform-cor
 ### 42. Final Agent Behavior
 Act as a Principal Design System Architect. Inspect the existing repository before modifying it. Reuse existing architecture where correct. Refactor architecture when it prevents platform correctness. Do not create fake compatibility. Do not mark unverified capabilities as supported. Do not generate incomplete code. Leave the repository in a more maintainable state than you found it.
 
+### 43. SPECTRA UI — CAPABILITY AND RECIPE ENFORCEMENT
+
+1. **Component support is NOT binary**
+   Never model support as `component → platform → true/false`.
+   Support must be resolved at:
+   `component → platform → variant → size → state → recipe → prop → behavior → hook → accessibility capability`
+   A component can be supported on a platform while individual variants, recipes, props, behaviors, or hooks are unsupported.
+
+2. **Unsupported capabilities MUST disappear**
+   If a capability is unsupported for the selected platform:
+   DO NOT: render it, list it as an available recipe, list it as an available variant, expose its controls, generate its code, expose it through MCP, or show it in the normal platform component catalog.
+   Do not show disabled unsupported functionality merely to communicate that it exists.
+   Unsupported information belongs only in the dedicated Platform Support / Architecture view.
+
+3. **Platform filtering happens BEFORE rendering**
+   The documentation and playground must resolve `selectedPlatform + capabilityRegistry` BEFORE building the component navigation, recipe navigation, controls, demos, or code examples. The UI must never render a demo and then discover that it is unsupported.
+
+4. **Every component requires multiple examples**
+   A mature component is incomplete if it only has one example.
+   Every component must document realistic production use cases covering: basic usage, every supported visual variant, every supported size, important states, validation, disabled, readonly, loading, error, success, accessibility, composition, slots, common form integration, and common real-world recipes.
+   Use MUI and Fluent UI documentation depth as inspiration.
+
+5. **Separate Variants, States and Recipes**
+   - **Variant**: Visual or structural configuration (e.g. `outlined`, `filled`, `standard`).
+   - **State**: Interaction/runtime state (e.g. `default`, `hover`, `focus`, `pressed`, `disabled`, `readonly`, `loading`, `error`, `success`).
+   - **Recipe**: A real-world usage pattern (e.g. `search field`, `password field`, `login form`, `email field`, `multiline message`, `currency input`).
+   Never use a recipe as a replacement for a variant. Never use a variant as a replacement for a state.
+
+6. **Platform-specific recipes**
+   Recipes must be registered per platform. Only verified recipes appear on each platform.
+
+7. **Platform-specific UX is intentional**
+   Do not force Web visual or interaction behavior onto React Native. Do not force React Native behavior onto Web.
+   Rendering, spacing where required, focus, keyboard, touch, pointer, gestures, accessibility, menus, dialogs, navigation, and input behavior differ by platform. Platform correctness has priority over pixel-perfect parity.
+
+8. **Expo / React Native is a first-class target**
+   When validating Android or iOS, DO NOT use the Web implementation as the visual reference. The reference must be the approved native implementation for that platform.
+
+9. **Component catalog filtering**
+   When a user selects Web, Android, iOS, Windows, or macOS, show only components with verified support for that platform. The same rule applies to hooks, utilities, recipes, variants, patterns, and examples.
+
+10. **Component platform selector**
+    On an individual component page, show only platforms that have at least one verified implementation. Never display disabled or unsupported platform pills on normal component pages.
+
+11. **Hook filtering**
+    Hooks use the same capability system. Do not expose browser-specific hooks (`useHover`, `useMediaQuery`, `useElementSize`) to native developers.
+
+12. **AI / MCP filtering**
+    MCP must receive the selected platform (e.g. `getComponent({ component: "TextInput", platform: "ios" })`). The result must contain only supported variants, recipes, props, hooks, behaviors, and platform best practices.
+
+13. **AI generation rule**
+    Before generating code: identify platform, resolve capability registry, resolve component, resolve supported variant, resolve supported recipe, resolve supported props, resolve supported hooks, resolve platform best practices, and generate platform-specific implementation. If unsupported, DO NOT invent an implementation; return the closest supported platform-native alternative.
+
+14. **Definition of complete documentation**
+    A component documentation page is incomplete when: it has only one demo, variants are undocumented, important states are undocumented, recipes are missing, validation is missing, accessibility is missing, platform differences are missing, supported capabilities are not filtered, code examples do not execute, or playground controls don't work.
+
+15. **Definition of complete platform support**
+    A component is verified for a platform only when: implementation exists, examples work, recipes work, supported states work, accessibility works, interaction works, visual regression passes, tests pass, MCP returns correct platform metadata, and documentation renders only supported functionality.
+
+16. **Primary quality principle**
+    Spectra UI must never optimize for "Make Web, Android, iOS, Windows and macOS look identical."
+    Instead optimize for "Make Web, Android, iOS, Windows and macOS feel like Spectra while behaving correctly according to their platform."
+
+---
+
+## Spectra UI — Global Platform Context Architecture
+
+### 1. Non-Negotiable Documentation Rule
+Spectra UI documentation MUST use a **global platform context**.
+Do NOT display Web, Android, iOS, Windows, and macOS as platform badges on every component page.
+Do NOT build a generic multi-platform component page and then expose platform differences inside that page.
+The user MUST select a platform from the global documentation sidebar/platform selector first (`[ [icon] Android v ]`).
+Once a platform is selected, that platform becomes the global context for the entire documentation application.
+
+### 2. Global Platform Context Coverage
+The selected platform MUST control:
+- Sidebar navigation
+- Component catalog
+- Primitive catalog
+- Hooks
+- Functions & utilities
+- Component pages
+- Variants & sizes
+- States
+- Props
+- Recipes & examples
+- Playground controls
+- Generated code
+- Accessibility guidance
+- Best practices & validation
+- Device Lab & live preview
+- MCP results
+- AI-generated code
+
+No section of normal developer documentation may silently fall back to a generic multi-platform view.
+
+### 3. Platform-First Sidebar
+The sidebar MUST be generated from the selected platform. Unsupported components, hooks, functions, variants, recipes, and capabilities MUST NOT appear in the normal sidebar for the selected platform. Do not show disabled or crossed-out items.
+
+### 4. Platform is Not a Component Badge
+Never use `TextInput [Web] [Android] [iOS] [Windows] [macOS]` badges to switch or display platforms on a component page. The page is already platform-specific because platform is global documentation context. If showing "Available on:", only show buttons for platforms with verified support.
+
+### 5. Platform-Specific Resolution
+All documentation data MUST be resolved using `platform`:
+- `getComponents(platform)`
+- `getComponent(component, platform)`
+- `getVariants(component, platform)`
+- `getSizes(component, platform)`
+- `getStates(component, platform)`
+- `getRecipes(component, platform)`
+- `getProps(component, platform)`
+- `getHooks(platform)`
+- `getFunctions(platform)`
+- `getUtilities(platform)`
+- `getAccessibility(component, platform)`
+- `getBestPractices(component, platform)`
+- `getPlayground(component, platform)`
+
+### 6. Platform Support Matrix Page
+A separate architecture page (`/cross-platform` or `/architecture/platform-support`) MAY expose the complete cross-platform matrix across all 5 platforms. This matrix is for architecture, governance, and maintainers, and MUST NOT replace the global platform documentation model.
+
+---
+
+## 44. SPECTRA UI — 4-LAYER ARCHITECTURE & VERIFIED PLATFORM IMPLEMENTATION MANDATE
+
+### 1. Stop Treating "Native" as an Implementation or Platform
+- "Native" is NOT a platform. Product platforms are: **Web**, **Android**, **iOS**, **Windows**, **macOS**.
+- React Native is an implementation technology; Android and iOS are product platforms with distinct interaction models, keyboard conventions, accessibility systems, and touch targets.
+- Never name, label, or export user-facing components as `NativeTextInput`, `NativeButton`, or render `Native <Component>` demo mockups. The component is simply `TextInput`, `Button`, `Select`, etc., resolved under the active product platform.
+
+### 2. The 4-Layer Architecture
+1. **Layer 1 — Semantic Component Contract**:
+   Universal component definition (`TextInput`, `Button`, `Checkbox`, `Dialog`, `Select`, `Tabs`, `Tooltip`) defining semantic meaning, accessibility roles, and core behavior.
+2. **Layer 2 — Platform Contract**:
+   Capability contracts per product platform (`Web`, `Android`, `iOS`, `Windows`, `macOS`), declaring verified variants, sizes, states, recipes, props, interactions, and accessibility.
+3. **Layer 3 — Verified Actual Implementation**:
+   Real UI + real platform-correct behavior:
+   - Web: `@winplaybox/react` (HTML input semantics, CSS states, DOM events, Web keyboard/focus)
+   - Android: Android implementation in `@winplaybox/react-native` (Android touch targets 48dp min, Android keyboard types, ripple/elevation, TalkBack)
+   - iOS: iOS implementation in `@winplaybox/react-native` (Apple HIG 44pt touch targets, Dynamic Type, iOS keyboard/clear mode, VoiceOver)
+   - Windows & macOS: Native platform adapters (desktop density, pointer hover, context menus, keyboard navigation)
+   *Every implementation must be genuine and functional—never a fake wrapper, placeholder, or superficial mockup.*
+4. **Layer 4 — Progressive Documentation & Playground**:
+   Platform -> Verified Implementation -> Capabilities -> Progressive Examples -> Functional Playground.
+
+### 3. Dual Status Gates (Implementation vs Documentation)
+Every component on every platform must declare:
+- `implementationStatus`: `'planned' | 'experimental' | 'partial' | 'stable' | 'deprecated' | 'unsupported'`
+- `documentationStatus`: `'missing' | 'basic' | 'complete' | 'verified'`
+
+**Rule of Catalog Inclusion**:
+A component may ONLY appear in the active platform's normal production catalog when:
+`implementationStatus === 'stable' AND documentationStatus === 'verified'`
+
+If Android/iOS/Windows/macOS renders a generic "Native <Component>" placeholder instead of a functional, platform-correct Spectra component, that is an **implementation failure**—not acceptable multi-platform support. Incomplete or experimental components must remain outside the production catalog until they pass the verification gate.
+
+### 4. Fluent & MUI Benchmarks for Component Decomposition
+- **Do not stuff every input type into `TextInput`**: Separate distinct component contracts:
+  `Inputs`: `TextInput`, `TextArea`, `SearchInput`, `Select`, `Combobox`, `Autocomplete`, `NumberInput`, `PasswordInput`.
+- **Decomposition underneath `TextInput`**:
+  `TextInput ├── TextInputBase ├── Field ├── Label ├── HelperText ├── ValidationMessage ├── InputAffix └── platform adapter`.
+- **MUI Progressive Disclosure**:
+  Documentation must not stop at a single preview. Progressive examples must systematically teach real-world usage:
+  Overview -> Basic -> Outlined -> Filled -> Helper Text -> Error -> Disabled -> Leading Icon -> Trailing Action -> Multiline -> Keyboard Types -> Form Integration -> Validation -> Accessibility -> Best Practices -> Platform API.
+
 ---
 
 ## Response Format
@@ -222,3 +387,4 @@ Act as a Principal Design System Architect. Inspect the existing repository befo
 4. Definition-of-Done checklist with pass/fail
 5. Risks / platform limitations (only if any)
 Be brief in prose, comprehensive in output.
+

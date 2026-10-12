@@ -110,3 +110,33 @@ export const Rating = forwardRef<HTMLDivElement, RatingProps>(
 );
 
 Rating.displayName = 'Rating';
+
+export interface RatingDisplayProps extends Omit<RatingProps, 'onChange'> {
+  showValueLabel?: boolean;
+}
+
+export const RatingDisplay = forwardRef<HTMLDivElement, RatingDisplayProps>(
+  ({ value = 0, max = 5, showValueLabel = true, style, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 8,
+          ...style,
+        }}
+        {...props}
+      >
+        <Rating value={value} max={max} readOnly />
+        {showValueLabel && (
+          <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--color-text-secondary)' }}>
+            {value.toFixed(1)} / {max}
+          </span>
+        )}
+      </div>
+    );
+  }
+);
+RatingDisplay.displayName = 'RatingDisplay';
+

@@ -52,6 +52,7 @@ export const ChevronDownIcon: React.FC<IconProps> = ({
   size = 16,
   color = 'currentColor',
   className,
+  style,
   ...props
 }) => (
   <svg
@@ -64,6 +65,7 @@ export const ChevronDownIcon: React.FC<IconProps> = ({
     strokeLinecap="round"
     strokeLinejoin="round"
     className={className}
+    style={{ display: 'block', verticalAlign: 'middle', flexShrink: 0, ...style }}
     aria-hidden="true"
     {...props}
   >
@@ -75,6 +77,7 @@ export const ChevronUpIcon: React.FC<IconProps> = ({
   size = 16,
   color = 'currentColor',
   className,
+  style,
   ...props
 }) => (
   <svg
@@ -87,6 +90,7 @@ export const ChevronUpIcon: React.FC<IconProps> = ({
     strokeLinecap="round"
     strokeLinejoin="round"
     className={className}
+    style={{ display: 'block', verticalAlign: 'middle', flexShrink: 0, ...style }}
     aria-hidden="true"
     {...props}
   >
@@ -98,6 +102,7 @@ export const ChevronRightIcon: React.FC<IconProps> = ({
   size = 16,
   color = 'currentColor',
   className,
+  style,
   ...props
 }) => (
   <svg
@@ -110,6 +115,7 @@ export const ChevronRightIcon: React.FC<IconProps> = ({
     strokeLinecap="round"
     strokeLinejoin="round"
     className={className}
+    style={{ display: 'block', verticalAlign: 'middle', flexShrink: 0, ...style }}
     aria-hidden="true"
     {...props}
   >
@@ -121,6 +127,7 @@ export const ChevronLeftIcon: React.FC<IconProps> = ({
   size = 16,
   color = 'currentColor',
   className,
+  style,
   ...props
 }) => (
   <svg
@@ -133,6 +140,7 @@ export const ChevronLeftIcon: React.FC<IconProps> = ({
     strokeLinecap="round"
     strokeLinejoin="round"
     className={className}
+    style={{ display: 'block', verticalAlign: 'middle', flexShrink: 0, ...style }}
     aria-hidden="true"
     {...props}
   >
@@ -1038,6 +1046,79 @@ export const AlgoliaLogo: React.FC<AlgoliaLogoProps> = ({
       fill={color}
       d="M249.83,0C113.3,0,2,110.09,.03,246.16c-2,138.19,110.12,252.7,248.33,253.5,42.68,.25,83.79-10.19,120.3-30.03,3.56-1.93,4.11-6.83,1.08-9.51l-23.38-20.72c-4.75-4.21-11.51-5.4-17.36-2.92-25.48,10.84-53.17,16.38-81.71,16.03-111.68-1.37-201.91-94.29-200.13-205.96,1.76-110.26,92-199.41,202.67-199.41h202.69V407.41l-115-102.18c-3.72-3.31-9.42-2.66-12.42,1.31-18.46,24.44-48.53,39.64-81.93,37.34-46.33-3.2-83.87-40.5-87.34-86.81-4.15-55.24,39.63-101.52,94-101.52,49.18,0,89.68,37.85,93.91,85.95,.38,4.28,2.31,8.27,5.52,11.12l29.95,26.55c3.4,3.01,8.79,1.17,9.63-3.3,2.16-11.55,2.92-23.58,2.07-35.92-4.82-70.34-61.8-126.93-132.17-131.26-80.68-4.97-148.13,58.14-150.27,137.25-2.09,77.1,61.08,143.56,138.19,145.26,32.19,.71,62.03-9.41,86.14-26.95l150.26,133.2c6.44,5.71,16.61,1.14,16.61-7.47V9.48C499.66,4.25,495.42,0,490.18,0H249.83Z"
     />
+  </svg>
+);
+
+export const HomeIcon: React.FC<IconProps> = ({
+  size = 16,
+  color = 'currentColor',
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke={color}
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+    {...props}
+  >
+    <path d="M2 6.5L8 2l6 4.5v7a1 1 0 01-1 1H3a1 1 0 01-1-1v-7z" />
+    <path d="M6 14.5V9h4v5.5" />
+  </svg>
+);
+
+export const FolderIcon: React.FC<IconProps> = ({
+  size = 16,
+  color = 'currentColor',
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke={color}
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+    {...props}
+  >
+    <path d="M1.5 3.5a1 1 0 011-1h3.5l1.5 2h6.5a1 1 0 011 1v7a1 1 0 01-1 1h-11a1 1 0 01-1-1v-9z" />
+  </svg>
+);
+
+export const FileTextIcon: React.FC<IconProps> = ({
+  size = 16,
+  color = 'currentColor',
+  className,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke={color}
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    aria-hidden="true"
+    {...props}
+  >
+    <path d="M9.5 1.5H3.5a1 1 0 00-1 1v11a1 1 0 001 1h9a1 1 0 001-1V5.5L9.5 1.5z" />
+    <polyline points="9.5 1.5 9.5 5.5 13.5 5.5" />
+    <line x1="5.5" y1="8.5" x2="10.5" y2="8.5" />
+    <line x1="5.5" y1="11.5" x2="8.5" y2="11.5" />
   </svg>
 );
 

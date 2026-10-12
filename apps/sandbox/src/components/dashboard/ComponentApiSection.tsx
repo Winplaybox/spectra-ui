@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Tabs, TabList, Tab } from '@winplaybox/react';
+import { Card, Tabs, TabList, Tab, Text } from '@winplaybox/react';
 import { CopyIcon, CheckIcon, CodeIcon, PaletteIcon, CubeIcon, SmartphoneIcon } from '@winplaybox/icons';
 import { COMPONENT_API_DATA, ComponentApiReference } from '../../data/apiReferenceData';
 
@@ -62,7 +62,9 @@ export const ComponentApiSection: React.FC<ComponentApiSectionProps> = ({ compon
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, margin: '0 0 8px 0' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <h2
+            <Text
+              as="h2"
+              variant="heading"
               style={{
                 fontSize: 26,
                 fontWeight: 800,
@@ -72,7 +74,7 @@ export const ComponentApiSection: React.FC<ComponentApiSectionProps> = ({ compon
               }}
             >
               {apiData.componentName} API
-            </h2>
+            </Text>
             <a href="#api" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 18 }} title="Direct link to API">#</a>
           </div>
           <button

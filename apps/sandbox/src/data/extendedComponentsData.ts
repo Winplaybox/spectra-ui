@@ -2041,4 +2041,1218 @@ export function CustomCopy({ text }) {
 }`,
     },
   },
+
+  'menu-button': {
+    id: 'menu-button',
+    name: 'MenuButton',
+    category: 'Inputs',
+    description: 'MenuButton pairs a primary button label with a dropdown chevron indicator, toggling an accessible contextual options menu (Fluent 2 Web pattern).',
+    guidelines: 'Use MenuButton when an action button opens a list of choices rather than executing immediately. Keep the chevron aligned with the label text.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/',
+    waiPattern: 'Menu Button Pattern',
+    dos: [
+      'Assign aria-haspopup="menu" and aria-expanded to the button container.',
+      'Allow opening with ArrowDown, Enter, or Space keys.',
+      'Close menu and restore focus to button on Escape or outside click.',
+    ],
+    donts: [
+      'Do not confuse with SplitButton: MenuButton only opens a menu on click, it does not have a separate execute segment.',
+      'Never omit accessible labels on menu options.',
+    ],
+    anatomy: [
+      { name: 'Trigger Button', role: 'Accessible button with aria-haspopup="menu" and dynamic aria-expanded.' },
+      { name: 'Chevron Indicator', role: 'Rotating vector chevron reflecting open/closed state.' },
+      { name: 'Flyout Menu', role: 'Anchored dropdown container with role="menu" and role="menuitem" options.' },
+    ],
+    keyboard: [
+      { key: 'Enter / Space / ArrowDown', description: 'Opens the flyout menu and moves focus inside.' },
+      { key: 'Escape', description: 'Closes open menu and restores focus to the trigger button.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'ease-out',
+      description: 'Chevron rotates 180 degrees smoothly while menu popover fades in.',
+    },
+    props: [
+      { name: 'menuItems', type: 'MenuButtonItem[]', defaultValue: '[]', description: 'Array of clickable menu choices.' },
+      { name: 'menuIcon', type: 'ReactNode', defaultValue: '<ChevronDownIcon />', description: 'Custom trailing chevron icon.' },
+      { name: 'appearance', type: 'ButtonAppearance', defaultValue: "'secondary'", description: 'Visual appearance variant.' },
+      { name: 'isOpen', type: 'boolean', defaultValue: 'undefined', description: 'Controlled open state.' },
+      { name: 'onOpenChange', type: '(open: boolean) => void', defaultValue: 'undefined', description: 'Fired when open state toggles.' },
+    ],
+    nativeProps: [
+      { name: 'options', type: 'string[]', defaultValue: '[]', description: 'Native action sheet options.' },
+      { name: 'onSelect', type: '(index: number) => void', defaultValue: 'undefined', description: 'Selection callback.' },
+    ],
+    headlessHook: {
+      name: 'useDisclosure',
+      description: 'Controls popover open and close state with escape key support.',
+      code: `import { useDisclosure } from '@winplaybox/primitives';
+
+export function CustomMenuButton() {
+  const { isOpen, onToggle } = useDisclosure();
+  return <button aria-expanded={isOpen} onClick={onToggle}>Menu</button>;
+}`,
+    },
+  },
+
+  'toggle-button': {
+    id: 'toggle-button',
+    name: 'ToggleButton',
+    category: 'Inputs',
+    description: 'ToggleButton is a two-state action button with aria-pressed semantics that stays visually engaged when active (Fluent 2 Web pattern).',
+    guidelines: 'Use ToggleButton for persistent binary states like Mute, Pin, Favorite, or Underline formatting. Do not use for immediate single-click actions.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/button/',
+    waiPattern: 'Toggle Button Pattern',
+    dos: [
+      'Always reflect checked state via aria-pressed="true" or "false".',
+      'Provide clear active visual feedback (elevated contrast or brand background).',
+      'Support keyboard activation with Space and Enter.',
+    ],
+    donts: [
+      'Do not use ToggleButton for form checkboxes that require submit forms—use Checkbox.',
+      'Never change the button text between states unless the meaning is ambiguous.',
+    ],
+    anatomy: [
+      { name: 'Toggle Root', role: 'Semantic button with dynamic aria-pressed="true|false".' },
+      { name: 'Icon Slot', role: 'Optional vector icon reflecting bookmark, pin, or formatting.' },
+      { name: 'Label Slot', role: 'Consistent action label text.' },
+    ],
+    keyboard: [
+      { key: 'Enter / Space', description: 'Toggles between pressed (active) and unpressed states.' },
+      { key: 'Tab', description: 'Moves focus to the toggle button.' },
+    ],
+    motion: {
+      duration: '--motion-instant (80ms)',
+      easing: 'ease-out',
+      description: 'Instant background transition and subtle inset shadow when toggled on.',
+    },
+    props: [
+      { name: 'checked', type: 'boolean', defaultValue: 'undefined', description: 'Controlled pressed state.' },
+      { name: 'defaultChecked', type: 'boolean', defaultValue: 'false', description: 'Uncontrolled initial state.' },
+      { name: 'onToggle', type: '(checked: boolean) => void', defaultValue: 'undefined', description: 'Callback fired on toggle change.' },
+      { name: 'appearance', type: 'ButtonAppearance', defaultValue: "'secondary'", description: 'Visual appearance variant.' },
+    ],
+    nativeProps: [
+      { name: 'checked', type: 'boolean', defaultValue: 'false', description: 'Native pressed state.' },
+      { name: 'onToggle', type: '(checked: boolean) => void', defaultValue: 'undefined', description: 'Native toggle callback.' },
+    ],
+    headlessHook: {
+      name: 'useControllableState',
+      description: 'Manages controlled vs uncontrolled checked state.',
+      code: `import { useControllableState } from '@winplaybox/primitives';
+
+export function CustomToggle({ checked, defaultChecked, onToggle }) {
+  const [val, setVal] = useControllableState({ value: checked, defaultValue: defaultChecked, onChange: onToggle });
+  return <button aria-pressed={val} onClick={() => setVal(!val)}>Toggle</button>;
+}`,
+    },
+  },
+
+  field: {
+    id: 'field',
+    name: 'Field',
+    category: 'Inputs',
+    description: 'Field pairs form inputs with an accessible label, validation messages, and optional helper text, guaranteeing correct ARIA associations (aria-describedby, aria-errormessage, aria-required).',
+    guidelines: 'Always wrap inputs in a Field to provide structured context, required indicators, and real-time validation error messaging without manual ID mapping.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/',
+    waiPattern: 'Form Landmark & Description Pattern',
+    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-field--docs',
+    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8911-3195&p=f&t=oAeyUpJadWLPjABz-0',
+    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/field/usage',
+    dos: [
+      'Use Field to keep labels and validation messages programmatically linked to inputs.',
+      'Provide clear, actionable error messages describing how to resolve invalid input.',
+      'Set required on the Field to render an accessible asterisk and announce aria-required="true".',
+    ],
+    donts: [
+      'Do not rely solely on border color to communicate error states—always include a visible message.',
+      'Never duplicate label IDs across multiple fields on the same page.',
+    ],
+    anatomy: [
+      { name: 'Field Container', role: 'Wrapper establishing vertical stack layout and ARIA scope.' },
+      { name: 'Label', role: 'Accessible label text with optional required asterisk indicator.' },
+      { name: 'Control Slot', role: 'Child input element (TextInput, Select, Slider, etc.).' },
+      { name: 'Helper / Error Text', role: 'Status message with role="alert" when invalid.' },
+    ],
+    keyboard: [
+      { key: 'Tab', description: 'Moves focus into the child input control.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0.33, 1, 0.68, 1)',
+      description: 'Validation messages fade and slide vertically into place.',
+    },
+    props: [
+      { name: 'label', type: 'ReactNode', defaultValue: 'undefined', description: 'Label text or node.' },
+      { name: 'validationState', type: "'error' | 'success' | 'warning' | 'none'", defaultValue: "'none'", description: 'Current validation status.' },
+      { name: 'validationMessage', type: 'ReactNode', defaultValue: 'undefined', description: 'Error or helper message.' },
+      { name: 'hint', type: 'ReactNode', defaultValue: 'undefined', description: 'Optional helper text.' },
+      { name: 'required', type: 'boolean', defaultValue: 'false', description: 'Marks input as mandatory.' },
+    ],
+    nativeProps: [
+      { name: 'label', type: 'string', defaultValue: "''", description: 'Native label string.' },
+      { name: 'error', type: 'string', defaultValue: 'undefined', description: 'Native error text.' },
+    ],
+    headlessHook: {
+      name: 'useField',
+      description: 'Generates correlated IDs for label, input, and description elements.',
+      code: `import { useField } from '@winplaybox/primitives';\n\nexport function CustomField({ label, children }) {\n  const { labelProps, inputProps, descriptionProps } = useField();\n  return <div><label {...labelProps}>{label}</label>{children}</div>;\n}`,
+    },
+  },
+
+  'info-label': {
+    id: 'info-label',
+    name: 'InfoLabel',
+    category: 'Inputs',
+    description: 'InfoLabel pairs a form field label with an authentic vector info icon button that triggers an accessible tooltip or popover explaining complex fields or legal guidelines.',
+    guidelines: 'Use InfoLabel when form inputs require supplementary context without cluttering the main layout. Ensure the info trigger is accessible via keyboard.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/',
+    waiPattern: 'Tooltip & Disclosure Pattern',
+    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-infolabel--docs',
+    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8911-3196&p=f&t=oAeyUpJadWLPjABz-0',
+    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/infolabel/usage',
+    dos: [
+      'Use InfoLabel for optional clarifying explanations, terminology definitions, or format rules.',
+      'Ensure the info trigger button has an accessible aria-label (e.g. aria-label="More information").',
+    ],
+    donts: [
+      'Do not place critical instructions exclusively in the info popover (some users will not click it).',
+      'Never omit keyboard focusability on the info button trigger.',
+    ],
+    anatomy: [
+      { name: 'Label Text', role: 'Primary form field label.' },
+      { name: 'Info Button', role: 'Accessible trigger with vector Info icon opening tooltip/popover.' },
+      { name: 'Popover Content', role: 'Explanatory card anchored to the info trigger.' },
+    ],
+    keyboard: [
+      { key: 'Tab', description: 'Focuses the info button trigger.' },
+      { key: 'Enter / Space', description: 'Opens the info popover.' },
+      { key: 'Escape', description: 'Closes the info popover and returns focus to trigger.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0, 0, 0.2, 1)',
+      description: 'Info card scales and fades into position with spring transition.',
+    },
+    props: [
+      { name: 'info', type: 'ReactNode', defaultValue: 'undefined', description: 'Content rendered inside the info popover.' },
+      { name: 'children', type: 'ReactNode', defaultValue: 'undefined', description: 'Label text node.' },
+    ],
+    nativeProps: [
+      { name: 'info', type: 'string', defaultValue: "''", description: 'Native info modal text.' },
+    ],
+    headlessHook: {
+      name: 'useTooltip',
+      description: 'Manages popover disclosure state and keyboard dismissal.',
+      code: `import { useTooltip } from '@winplaybox/primitives';\n\nexport function CustomInfoLabel() { return <span>Label <button>?</button></span>; }`,
+    },
+  },
+
+  label: {
+    id: 'label',
+    name: 'Label',
+    category: 'Inputs',
+    description: 'Label gives a name to an associated form control or input. It enforces required asterisks, disabled opacity, and sizing scales.',
+    guidelines: 'Always connect labels to inputs using htmlFor or nesting. Never use placeholder text as a substitute for a visible label.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/',
+    waiPattern: 'Accessible Names and Descriptions',
+    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-label--docs',
+    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-5&p=f&t=oAeyUpJadWLPjABz-0',
+    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/label/usage',
+    dos: [
+      'Provide concise, descriptive labels for every interactive input.',
+      'Include a visible asterisk (*) when a field is required.',
+    ],
+    donts: [
+      'Never hide labels visually unless an accessible aria-label is provided on the control.',
+    ],
+    anatomy: [
+      { name: 'Label (<label>)', role: 'Accessible HTML label linked via htmlFor.' },
+      { name: 'Asterisk', role: 'Semantic indicator with aria-hidden="true".' },
+    ],
+    keyboard: [
+      { key: 'Click', description: 'Clicking the label transfers keyboard focus to the input.' },
+    ],
+    motion: {
+      duration: '--motion-instant (0ms)',
+      easing: 'linear',
+      description: 'Static typography element without motion.',
+    },
+    props: [
+      { name: 'required', type: 'boolean', defaultValue: 'false', description: 'Shows required asterisk.' },
+      { name: 'size', type: "'small' | 'medium' | 'large'", defaultValue: "'medium'", description: 'Typography scale.' },
+      { name: 'disabled', type: 'boolean', defaultValue: 'false', description: 'Applies muted text color.' },
+    ],
+    nativeProps: [
+      { name: 'children', type: 'string', defaultValue: "''", description: 'Native Text label.' },
+    ],
+    headlessHook: {
+      name: 'useLabel',
+      description: 'Links label element to target input ID.',
+      code: `export function CustomLabel() { return <label>Name</label>; }`,
+    },
+  },
+
+  persona: {
+    id: 'persona',
+    name: 'Persona',
+    category: 'Data Display',
+    description: 'Persona visualizes people or agents by presenting their avatar, online presence badge, primary display name, secondary role, and tertiary activity status.',
+    guidelines: 'Use Persona in profile cards, comment threads, assignment pickers, and contact lists where identity context is essential.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/',
+    waiPattern: 'Persona & Identity Presentation',
+    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-persona--docs',
+    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-10&p=f&t=oAeyUpJadWLPjABz-0',
+    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/persona/usage',
+    dos: [
+      'Always provide both avatar and name to guarantee accessibility when images fail to load.',
+      'Use PresenceBadge to communicate real-time availability (Available, Busy, Away, Offline).',
+    ],
+    donts: [
+      'Do not truncate primary names when space is available.',
+    ],
+    anatomy: [
+      { name: 'Avatar', role: 'User graphic or authentic initials badge.' },
+      { name: 'Presence Badge', role: 'Vector status badge (green, red, yellow).' },
+      { name: 'Primary Text', role: 'Display name rendered in Inter SemiBold.' },
+      { name: 'Secondary Text', role: 'Job title or department in muted text.' },
+    ],
+    keyboard: [
+      { key: 'Tab', description: 'Focuses persona when interactive (in contact lists).' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0, 0, 0.2, 1)',
+      description: 'Presence badge pulses on status transition.',
+    },
+    props: [
+      { name: 'name', type: 'string', defaultValue: "''", description: 'Full user name.' },
+      { name: 'secondaryText', type: 'string', defaultValue: "''", description: 'Title or role.' },
+      { name: 'presence', type: "'available' | 'busy' | 'away' | 'dnd' | 'offline'", defaultValue: "'available'", description: 'Status state.' },
+      { name: 'size', type: 'number', defaultValue: '40', description: 'Avatar pixel dimension.' },
+    ],
+    nativeProps: [
+      { name: 'name', type: 'string', defaultValue: "''", description: 'Native name string.' },
+    ],
+    headlessHook: {
+      name: 'usePersona',
+      description: 'Extracts initials and accessibility descriptions.',
+      code: `export function CustomPersona() { return <div>Avatar + Name</div>; }`,
+    },
+  },
+
+  'search-box': {
+    id: 'search-box',
+    name: 'SearchBox',
+    category: 'Inputs',
+    description: 'SearchBox provides an input optimized for finding content, equipped with a leading search icon, clear button, and keyboard shortcuts.',
+    guidelines: 'Include an accessible clear button that appears when text is typed. Support Escape key to clear search queries.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/searchbox/',
+    waiPattern: 'Searchbox Pattern',
+    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-searchbox--docs',
+    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8995-7&p=f&t=oAeyUpJadWLPjABz-0',
+    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/searchbox/usage',
+    dos: [
+      'Provide a leading magnifying glass vector icon establishing immediate recognition.',
+      'Show an accessible clear button when input value is not empty.',
+    ],
+    donts: [
+      'Never trigger destructive searches on every keystroke without debouncing.',
+    ],
+    anatomy: [
+      { name: 'Search Icon', role: 'Authentic vector search glyph with aria-hidden="true".' },
+      { name: 'Input (<input type="search">)', role: 'HTML search input with native search semantics.' },
+      { name: 'Clear Button', role: 'Accessible dismiss button with aria-label="Clear search".' },
+    ],
+    keyboard: [
+      { key: 'Enter', description: 'Submits or executes the search query.' },
+      { key: 'Escape', description: 'Clears active search text.' },
+    ],
+    motion: {
+      duration: '--motion-fast (120ms)',
+      easing: 'ease-out',
+      description: 'Clear button fades into view when text is entered.',
+    },
+    props: [
+      { name: 'placeholder', type: 'string', defaultValue: "'Search...'", description: 'Input placeholder.' },
+      { name: 'value', type: 'string', defaultValue: 'undefined', description: 'Controlled search text.' },
+      { name: 'onChange', type: '(e: any) => void', defaultValue: 'undefined', description: 'Change callback.' },
+    ],
+    nativeProps: [
+      { name: 'placeholder', type: 'string', defaultValue: "'Search...'", description: 'Native placeholder.' },
+    ],
+    headlessHook: {
+      name: 'useSearchBox',
+      description: 'Manages clear button disclosure and query state.',
+      code: `export function CustomSearch() { return <input type="search" />; }`,
+    },
+  },
+
+  'spin-button': {
+    id: 'spin-button',
+    name: 'Spin Button',
+    category: 'Inputs',
+    description: 'SpinButton (NumberField) lets people adjust numeric values in incremental steps using step buttons or keyboard Up/Down arrow keys.',
+    guidelines: 'Always define reasonable min, max, and step increments. Support direct typing as well as increment/decrement buttons.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/',
+    waiPattern: 'Spinbutton Pattern',
+    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-spinbutton--docs',
+    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-16&p=f&t=oAeyUpJadWLPjABz-0',
+    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/spin/usage',
+    dos: [
+      'Support Up/Down arrow keys and PageUp/PageDown for larger step leaps.',
+      'Announce aria-valuenow, aria-valuemin, and aria-valuemax to assistive technology.',
+    ],
+    donts: [
+      'Do not allow values outside min/max range unless explicitly configured.',
+    ],
+    anatomy: [
+      { name: 'Numeric Input', role: 'Input element with role="spinbutton".' },
+      { name: 'Increment Button', role: 'Button increasing value by step.' },
+      { name: 'Decrement Button', role: 'Button decreasing value by step.' },
+    ],
+    keyboard: [
+      { key: 'ArrowUp / ArrowDown', description: 'Increments or decrements value by step.' },
+      { key: 'PageUp / PageDown', description: 'Increments or decrements by large step (e.g. 10).' },
+    ],
+    motion: {
+      duration: '--motion-fast (100ms)',
+      easing: 'ease-out',
+      description: 'Chevron buttons display tactile press feedback.',
+    },
+    props: [
+      { name: 'value', type: 'number', defaultValue: '0', description: 'Current numeric value.' },
+      { name: 'min', type: 'number', defaultValue: '0', description: 'Minimum allowed value.' },
+      { name: 'max', type: 'number', defaultValue: '100', description: 'Maximum allowed value.' },
+      { name: 'step', type: 'number', defaultValue: '1', description: 'Increment step size.' },
+    ],
+    nativeProps: [
+      { name: 'value', type: 'number', defaultValue: '0', description: 'Native numeric value.' },
+    ],
+    headlessHook: {
+      name: 'useSpinButton',
+      description: 'Implements keyboard arrow increments and bounds clamping.',
+      code: `export function CustomSpin() { return <input type="number" />; }`,
+    },
+  },
+
+  'status-indicator': {
+    id: 'status-indicator',
+    name: 'Status Indicator',
+    category: 'Data Display',
+    description: 'StatusIndicator provides an authentic vector status beacon or live pulsing dot communicating availability (Available, Busy, Away, DND, Offline, Live).',
+    guidelines: 'Use subtle animations for live processes (LiveIndicator); avoid flashing or strobe effects for accessibility.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/status/',
+    waiPattern: 'Status Live Region Pattern',
+    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8995-8&p=f&t=oAeyUpJadWLPjABz-0',
+    dos: [
+      'Pair color indicators with text labels or accessible tooltips.',
+      'Respect useReducedMotion by disabling pulse animations when active.',
+    ],
+    donts: [
+      'Do not rely solely on color to differentiate statuses.',
+    ],
+    anatomy: [
+      { name: 'Beacon Dot', role: 'Vector circle with status color and optional pulse ring.' },
+      { name: 'Status Label', role: 'Descriptive text describing state.' },
+    ],
+    keyboard: [],
+    motion: {
+      duration: '--motion-slow (1200ms)',
+      easing: 'ease-in-out',
+      description: 'Smooth harmonic breathing pulse for live state.',
+    },
+    props: [
+      { name: 'status', type: "'available' | 'busy' | 'away' | 'offline' | 'live'", defaultValue: "'available'", description: 'Status state.' },
+      { name: 'pulse', type: 'boolean', defaultValue: 'false', description: 'Enables gentle animated pulse.' },
+    ],
+    nativeProps: [
+      { name: 'status', type: 'string', defaultValue: "'available'", description: 'Native status.' },
+    ],
+    headlessHook: {
+      name: 'useStatusIndicator',
+      description: 'Maps status tokens to accessible labels.',
+      code: `export function CustomStatus() { return <span>● Live</span>; }`,
+    },
+  },
+
+  'swatch-picker': {
+    id: 'swatch-picker',
+    name: 'Swatch Picker',
+    category: 'Inputs',
+    description: 'SwatchPicker displays a grid of curated color swatches for choosing themes, tags, and palette values with keyboard navigation.',
+    guidelines: 'Provide accessible color names via aria-label on every swatch (e.g. aria-label="Dark Slate Blue").',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/grid/',
+    waiPattern: 'Grid & Swatch Navigation',
+    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-swatchpicker--docs',
+    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8995-9&p=f&t=oAeyUpJadWLPjABz-0',
+    dos: [
+      'Provide clear checkmark indicators over selected swatches.',
+      'Allow 2D keyboard arrow navigation across swatch rows and columns.',
+    ],
+    donts: [
+      'Never omit accessible names on color swatches.',
+    ],
+    anatomy: [
+      { name: 'Grid Container', role: 'Role="grid" holding color items.' },
+      { name: 'Swatch Cell', role: 'Role="gridcell" with color fill and focus ring.' },
+    ],
+    keyboard: [
+      { key: 'Arrow Keys', description: 'Moves focus 2D between swatches.' },
+      { key: 'Enter / Space', description: 'Selects active swatch color.' },
+    ],
+    motion: {
+      duration: '--motion-fast (120ms)',
+      easing: 'ease-out',
+      description: 'Selected checkmark scales into view.',
+    },
+    props: [
+      { name: 'colors', type: 'string[]', defaultValue: '[]', description: 'Array of hex color codes.' },
+      { name: 'selectedColor', type: 'string', defaultValue: 'undefined', description: 'Active color.' },
+      { name: 'onSelect', type: '(color: string) => void', defaultValue: 'undefined', description: 'Selection callback.' },
+    ],
+    nativeProps: [
+      { name: 'colors', type: 'string[]', defaultValue: '[]', description: 'Native color array.' },
+    ],
+    headlessHook: {
+      name: 'useSwatchPicker',
+      description: 'Implements 2D arrow grid navigation and selection.',
+      code: `export function CustomSwatch() { return <div>Grid of swatches</div>; }`,
+    },
+  },
+
+  'tag-picker': {
+    id: 'tag-picker',
+    name: 'TagPicker',
+    category: 'Inputs',
+    description: 'TagPicker combines an autocomplete combobox with a tokenized Tag collection, allowing users to search, add, and remove tags dynamically.',
+    guidelines: 'Support Backspace key to remove the last selected tag when input is empty. Ensure suggestions are announced.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/combobox/',
+    waiPattern: 'Combobox with Multiple Selection',
+    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-tagpicker--docs',
+    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8995-10&p=f&t=oAeyUpJadWLPjABz-0',
+    dos: [
+      'Allow users to type search queries and select suggested tags with Enter.',
+      'Provide an X button on each tag pill with accessible dismissal label.',
+    ],
+    donts: [
+      'Do not trap keyboard focus inside tag list without ability to jump to input.',
+    ],
+    anatomy: [
+      { name: 'Container', role: 'Input wrapper holding selected tags and text field.' },
+      { name: 'Tag Pills', role: 'Rendered removable tag components.' },
+      { name: 'Search Input', role: 'Combobox input triggering suggestions dropdown.' },
+      { name: 'Suggestions Menu', role: 'Listbox with filtered options.' },
+    ],
+    keyboard: [
+      { key: 'Backspace', description: 'When search input is empty: removes the preceding tag.' },
+      { key: 'ArrowDown', description: 'Opens suggestions menu and navigates options.' },
+      { key: 'Enter', description: 'Selects focused option and converts it to a tag.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0, 0, 0.2, 1)',
+      description: 'Tags expand smoothly into place when added.',
+    },
+    props: [
+      { name: 'selectedTags', type: 'string[]', defaultValue: '[]', description: 'Current selected tags.' },
+      { name: 'onTagsChange', type: '(tags: string[]) => void', defaultValue: 'undefined', description: 'Change callback.' },
+    ],
+    nativeProps: [
+      { name: 'tags', type: 'string[]', defaultValue: '[]', description: 'Native tag collection.' },
+    ],
+    headlessHook: {
+      name: 'useTagPicker',
+      description: 'Manages tag selection, keyboard removal, and filtering.',
+      code: `export function CustomTagPicker() { return <div>Tags + Input</div>; }`,
+    },
+  },
+
+  'teaching-popover': {
+    id: 'teaching-popover',
+    name: 'Teaching Popover',
+    category: 'Feedback',
+    description: 'TeachingPopover guides users through new features, multi-step onboarding tours, and critical updates with high-contrast callouts and step indicators.',
+    guidelines: 'Keep onboarding steps brief (1-3 steps maximum). Always provide an explicit "Dismiss" or "Skip" button.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/',
+    waiPattern: 'Accessible Tour Dialog Pattern',
+    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-teachingpopover--docs',
+    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8995-11&p=f&t=oAeyUpJadWLPjABz-0',
+    dos: [
+      'Focus the primary action or close button when popover opens.',
+      'Include a step counter (e.g. "Step 1 of 3") for multi-step tours.',
+    ],
+    donts: [
+      'Never trigger multiple teaching popovers simultaneously.',
+    ],
+    anatomy: [
+      { name: 'Anchor Beacon', role: 'Highlighted target element.' },
+      { name: 'Popover Card', role: 'Dialog container anchored with pointer arrow.' },
+      { name: 'Header & Title', role: 'Feature title and close button.' },
+      { name: 'Action Bar', role: 'Next, Back, and Finish buttons.' },
+    ],
+    keyboard: [
+      { key: 'Escape', description: 'Dismisses teaching popover.' },
+      { key: 'Enter / Space', description: 'Advances to next step.' },
+    ],
+    motion: {
+      duration: '--motion-normal (250ms)',
+      easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+      description: 'Spring elevation entrance with subtle target beacon ripple.',
+    },
+    props: [
+      { name: 'isOpen', type: 'boolean', defaultValue: 'false', description: 'Controlled open state.' },
+      { name: 'title', type: 'string', defaultValue: "''", description: 'Popover headline.' },
+      { name: 'step', type: 'number', defaultValue: '1', description: 'Active step index.' },
+      { name: 'totalSteps', type: 'number', defaultValue: '1', description: 'Total tour steps.' },
+    ],
+    nativeProps: [
+      { name: 'title', type: 'string', defaultValue: "''", description: 'Native tour title.' },
+    ],
+    headlessHook: {
+      name: 'useTeachingPopover',
+      description: 'Manages step state and escape key dismissal.',
+      code: `export function CustomTour() { return <div>Tour step</div>; }`,
+    },
+  },
+
+  toolbar: {
+    id: 'toolbar',
+    name: 'Toolbar',
+    category: 'Navigation',
+    description: 'Toolbar organizes a collection of related commands and controls (buttons, toggles, dropdowns) into a unified container with roving tabindex.',
+    guidelines: 'Use Left/Right arrow keys for roving keyboard navigation. Ensure individual items have a single Tab stop per toolbar.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/',
+    waiPattern: 'Toolbar Pattern',
+    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-toolbar--docs',
+    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-24&p=f&t=oAeyUpJadWLPjABz-0',
+    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/toolbar/usage',
+    dos: [
+      'Group related controls with vertical dividers.',
+      'Use roving tabindex so users can tab past the toolbar with a single keystroke.',
+    ],
+    donts: [
+      'Do not overload toolbars with unrelated navigation links.',
+    ],
+    anatomy: [
+      { name: 'Toolbar (<div role="toolbar">)', role: 'Container with role="toolbar" and aria-label.' },
+      { name: 'Control Items', role: 'Buttons, toggles, and dropdowns participating in roving focus.' },
+      { name: 'Dividers', role: 'Visual vertical delimiters with aria-hidden="true".' },
+    ],
+    keyboard: [
+      { key: 'Left / Right Arrow', description: 'Roves focus between toolbar controls.' },
+      { key: 'Home / End', description: 'Jumps focus to first or last toolbar control.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'ease-out',
+      description: 'Focus ring animates smoothly between adjacent toolbar items.',
+    },
+    props: [
+      { name: 'orientation', type: "'horizontal' | 'vertical'", defaultValue: "'horizontal'", description: 'Toolbar layout axis.' },
+      { name: 'size', type: "'small' | 'medium' | 'large'", defaultValue: "'medium'", description: 'Density scale.' },
+    ],
+    nativeProps: [
+      { name: 'orientation', type: "'horizontal' | 'vertical'", defaultValue: "'horizontal'", description: 'Native axis.' },
+    ],
+    headlessHook: {
+      name: 'useToolbar',
+      description: 'Implements roving tabindex and arrow key navigation.',
+      code: `import { useToolbar } from '@winplaybox/primitives';\n\nexport function CustomToolbar() { return <div role="toolbar">Controls</div>; }`,
+    },
+  },
+
+  overflow: {
+    id: 'overflow',
+    name: 'Overflow',
+    category: 'Navigation',
+    description: 'Overflow utility automatically detects when items exceed available container width and moves overflowing controls into a dropdown menu.',
+    guidelines: 'Prioritize essential controls to remain visible; secondary controls collapse into the overflow menu.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/',
+    waiPattern: 'Responsive Overflow Menu',
+    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-overflow--docs',
+    dos: [
+      'Preserve high-priority actions by assigning high overflow priority.',
+      'Provide an accessible "More items" trigger button with chevron icon.',
+    ],
+    donts: [
+      'Never drop items invisibly without providing an overflow menu trigger.',
+    ],
+    anatomy: [
+      { name: 'Visible Container', role: 'Flex container rendering non-overflowed items.' },
+      { name: 'Overflow Trigger', role: 'Button (...) revealing collapsed items in a menu.' },
+    ],
+    keyboard: [
+      { key: 'Tab', description: 'Navigates through visible items to the overflow button.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'ease-out',
+      description: 'Items transition smoothly into the overflow dropdown menu.',
+    },
+    props: [
+      { name: 'minimumVisible', type: 'number', defaultValue: '1', description: 'Minimum items guaranteed to remain visible.' },
+    ],
+    nativeProps: [
+      { name: 'minimumVisible', type: 'number', defaultValue: '1', description: 'Native minimum count.' },
+    ],
+    headlessHook: {
+      name: 'useOverflow',
+      description: 'Calculates element widths and visible vs overflow partition.',
+      code: `export function CustomOverflow() { return <div>Items + More</div>; }`,
+    },
+  },
+
+  image: {
+    id: 'image',
+    name: 'Image',
+    category: 'Data Display',
+    description: 'Image renders responsive graphics with built-in lazy loading, aspect ratio preservation, fallback skeletons, and error handling.',
+    guidelines: 'Always provide meaningful alt text; for decorative images use alt="" and aria-hidden="true".',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/',
+    waiPattern: 'Accessible Graphic & Media',
+    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-image--docs',
+    dos: [
+      'Use lazy loading (loading="lazy") to optimize initial page performance.',
+      'Specify width, height, or aspectRatio to avoid Cumulative Layout Shift (CLS).',
+    ],
+    donts: [
+      'Never omit the alt attribute on user-facing informative images.',
+    ],
+    anatomy: [
+      { name: 'Image (<img>)', role: 'HTML image element with responsive srcSet.' },
+      { name: 'Fallback Skeleton', role: 'Animated placeholder shown while loading.' },
+    ],
+    keyboard: [],
+    motion: {
+      duration: '--motion-normal (300ms)',
+      easing: 'ease-out',
+      description: 'Image fades smoothly in once loaded.',
+    },
+    props: [
+      { name: 'src', type: 'string', defaultValue: "''", description: 'Image asset URL.' },
+      { name: 'alt', type: 'string', defaultValue: "''", description: 'Accessible alternative text.' },
+      { name: 'aspectRatio', type: 'string', defaultValue: 'undefined', description: 'CSS aspect-ratio.' },
+      { name: 'fit', type: "'cover' | 'contain' | 'fill' | 'none'", defaultValue: "'cover'", description: 'Object fit mode.' },
+    ],
+    nativeProps: [
+      { name: 'source', type: 'any', defaultValue: 'undefined', description: 'Native image source.' },
+    ],
+    headlessHook: {
+      name: 'useImageLoaded',
+      description: 'Detects image load complete state and errors.',
+      code: `export function CustomImage() { return <img alt="" />; }`,
+    },
+  },
+
+  portal: {
+    id: 'portal',
+    name: 'Portal',
+    category: 'Surfaces',
+    description: 'Portal renders children into a DOM node outside the current hierarchy, preventing CSS overflow: hidden clipping issues for dialogs and tooltips.',
+    guidelines: 'Ensure focus management and keyboard tab ordering remain logical when portaling outside DOM tree.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/',
+    waiPattern: 'DOM Isolation Pattern',
+    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-portal-portal--docs',
+    dos: [
+      'Use Portal for floating tooltips, menus, and modal dialogs to bypass overflow clipping.',
+      'Mount directly into document.body or a dedicated high-level #portal-root.',
+    ],
+    donts: [
+      'Do not portal inline content that needs to flow within normal layout documents.',
+    ],
+    anatomy: [
+      { name: 'Mount Target', role: 'DOM node receiving portaled children elements.' },
+    ],
+    keyboard: [],
+    motion: {
+      duration: '--motion-instant (0ms)',
+      easing: 'linear',
+      description: 'Instant DOM mounting without inherent animation.',
+    },
+    props: [
+      { name: 'mountNode', type: 'HTMLElement', defaultValue: 'document.body', description: 'Target DOM container.' },
+      { name: 'children', type: 'ReactNode', defaultValue: 'undefined', description: 'Portaled elements.' },
+    ],
+    nativeProps: [
+      { name: 'children', type: 'ReactNode', defaultValue: 'undefined', description: 'Native portal children.' },
+    ],
+    headlessHook: {
+      name: 'usePortal',
+      description: 'Creates and cleans up dynamic portal mount DOM nodes.',
+      code: `import { createPortal } from 'react-dom';\nexport function CustomPortal({ children }) { return createPortal(children, document.body); }`,
+    },
+  },
+
+  'time-picker': {
+    id: 'time-picker',
+    name: 'Time Picker',
+    category: 'Inputs',
+    description: 'TimePicker enables people to select hours, minutes, and AM/PM meridiem using dropdown listboxes or keyboard spin navigation.',
+    guidelines: 'Support 12-hour and 24-hour time formats based on user locale preferences.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/combobox/',
+    waiPattern: 'Time Selection Combobox',
+    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/compat-components-timepicker--docs',
+    dos: [
+      'Allow users to type times directly or pick from incremented dropdown options.',
+      'Highlight current time or default suggested hour.',
+    ],
+    donts: [
+      'Do not force 12-hour AM/PM formatting in locales where 24-hour time is standard.',
+    ],
+    anatomy: [
+      { name: 'Time Input', role: 'Accessible input with clock vector icon.' },
+      { name: 'Dropdown Menu', role: 'Listbox displaying time increments (e.g. 15 or 30 min).' },
+    ],
+    keyboard: [
+      { key: 'ArrowDown', description: 'Opens time listbox.' },
+      { key: 'Enter', description: 'Selects focused time option.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0, 0, 0.2, 1)',
+      description: 'Time dropdown slides open smoothly.',
+    },
+    props: [
+      { name: 'value', type: 'Date | string', defaultValue: 'undefined', description: 'Selected time.' },
+      { name: 'format', type: "'12h' | '24h'", defaultValue: "'12h'", description: 'Hour display format.' },
+      { name: 'stepMinutes', type: 'number', defaultValue: '30', description: 'Time increment in minutes.' },
+    ],
+    nativeProps: [
+      { name: 'value', type: 'Date', defaultValue: 'undefined', description: 'Native time object.' },
+    ],
+    headlessHook: {
+      name: 'useTimePicker',
+      description: 'Generates time intervals and handles locale formatting.',
+      code: `export function CustomTimePicker() { return <input type="time" />; }`,
+    },
+  },
+
+  'card-header': {
+    id: 'card-header',
+    name: 'Card Header',
+    category: 'Surfaces',
+    description: 'CardHeader defines the top structural anchor of a Card container, providing visual hierarchy with title, description, avatar, and contextual action slots.',
+    guidelines: 'Always place CardHeader at the top of a Card. Use CardTitle for the primary headline and CardDescription for supporting context.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/card/',
+    waiPattern: 'Card Landmark Pattern',
+    dos: [
+      'Include concise title and description to communicate content purpose.',
+      'Use leading avatar or icon to establish entity identity.',
+      'Keep header actions to a maximum of one or two icon buttons.',
+    ],
+    donts: [
+      'Do not place long paragraphs inside CardHeader—use CardContent instead.',
+      'Do not repeat header titles in card body.',
+    ],
+    anatomy: [
+      { name: 'Header Container (<CardHeader>)', role: 'Flex container aligning title, description, and action slot.' },
+      { name: 'Title (<CardTitle>)', role: 'Semantic headline heading element.' },
+      { name: 'Description (<CardDescription>)', role: 'Supporting metadata description text.' },
+    ],
+    keyboard: [
+      { key: 'Tab', description: 'Navigates through focusable header actions.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0, 0, 0.2, 1)',
+      description: 'Header layout remains stable without jarring layout shifts.',
+    },
+    props: [
+      { name: 'children', type: 'ReactNode', defaultValue: 'undefined', description: 'Header content including Title and Description.' },
+      { name: 'className', type: 'string', defaultValue: "''", description: 'Custom CSS class.' },
+    ],
+    nativeProps: [
+      { name: 'title', type: 'string', defaultValue: "''", description: 'Native header title.' },
+    ],
+    headlessHook: {
+      name: 'useCardHeader',
+      description: 'Calculates header layout and ARIA attributes.',
+      code: `export function useCardHeader() { return { role: 'heading' }; }`,
+    },
+  },
+
+  'card-footer': {
+    id: 'card-footer',
+    name: 'Card Footer',
+    category: 'Surfaces',
+    description: 'CardFooter anchors the bottom edge of a Card container, housing primary and secondary actions, status metadata, and timestamp stamps.',
+    guidelines: 'Keep affirmative actions aligned to the right or expanded across full width depending on card layout.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/card/',
+    waiPattern: 'Card Landmark Pattern',
+    dos: [
+      'Align primary action to the right in desktop layouts.',
+      'Use secondary or outline button variants for non-primary actions.',
+      'Maintain consistent padding with Card body.',
+    ],
+    donts: [
+      'Do not place primary content or form inputs inside CardFooter.',
+      'Do not overcrowd with more than two buttons.',
+    ],
+    anatomy: [
+      { name: 'Footer Container (<CardFooter>)', role: 'Flex container aligning actions and metadata.' },
+      { name: 'Action Slot', role: 'Container for primary and secondary action buttons.' },
+    ],
+    keyboard: [
+      { key: 'Tab', description: 'Navigates sequentially through footer action buttons.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0, 0, 0.2, 1)',
+      description: 'Footer buttons respond to hover and active transitions.',
+    },
+    props: [
+      { name: 'children', type: 'ReactNode', defaultValue: 'undefined', description: 'Action buttons or metadata.' },
+      { name: 'className', type: 'string', defaultValue: "''", description: 'Custom CSS class.' },
+    ],
+    nativeProps: [
+      { name: 'children', type: 'ReactNode', defaultValue: 'undefined', description: 'Native footer content.' },
+    ],
+    headlessHook: {
+      name: 'useCardFooter',
+      description: 'Calculates action layout for Card bottom area.',
+      code: `export function useCardFooter() { return { role: 'contentinfo' }; }`,
+    },
+  },
+
+  'card-preview': {
+    id: 'card-preview',
+    name: 'Card Preview',
+    category: 'Surfaces',
+    description: 'CardPreview provides a dedicated media container for visual banners, screenshots, or interactive previews inside a Card.',
+    guidelines: 'Place CardPreview above or below CardHeader according to visual design hierarchy.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/card/',
+    waiPattern: 'Card Pattern',
+    dos: [
+      'Ensure media inside CardPreview has appropriate aspect ratio.',
+      'Provide accessible alt text for preview images.',
+    ],
+    donts: [
+      'Do not render text-heavy content inside CardPreview without proper contrast.',
+    ],
+    anatomy: [
+      { name: 'Preview Wrapper (<CardPreview>)', role: 'Clipped container with rounded corners.' },
+    ],
+    keyboard: [
+      { key: 'Tab', description: 'Focuses interactive preview media if clickable.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0, 0, 0.2, 1)',
+      description: 'Smooth image zoom or overlay fade on card hover.',
+    },
+    props: [
+      { name: 'children', type: 'ReactNode', defaultValue: 'undefined', description: 'Image, video, or preview banner.' },
+      { name: 'className', type: 'string', defaultValue: "''", description: 'Custom CSS class.' },
+    ],
+    nativeProps: [
+      { name: 'children', type: 'ReactNode', defaultValue: 'undefined', description: 'Native preview media.' },
+    ],
+    headlessHook: {
+      name: 'useCardPreview',
+      description: 'Calculates aspect ratio and media clipping.',
+      code: `export function useCardPreview() { return { overflow: 'hidden' }; }`,
+    },
+  },
+
+  carousel: {
+    id: 'carousel',
+    name: 'Carousel',
+    category: 'Data Display',
+    description: 'Carousel displays a sequential set of interactive slides or cards with previous/next controls, keyboard navigation, and pagination indicators.',
+    guidelines: 'Use Carousel for high-impact visual banners, onboarding steps, or featured product spotlights.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/carousel/',
+    waiPattern: 'Carousel Pattern',
+    dos: [
+      'Provide clear previous/next buttons and pause on hover for autoplaying carousels.',
+      'Ensure screen readers announce active slide index.',
+    ],
+    donts: [
+      'Do not auto-advance slides without allowing users to pause.',
+      'Never hide essential navigation controls.',
+    ],
+    anatomy: [
+      { name: 'Carousel Root (<Carousel>)', role: 'Accessible region container with aria-roledescription="carousel".' },
+      { name: 'Slide Stage', role: 'Viewport displaying active slide.' },
+      { name: 'Navigation Controls', role: 'Previous and Next trigger buttons.' },
+      { name: 'Pagination Indicator (<CarouselNav>)', role: 'Tablist of slide dots.' },
+    ],
+    keyboard: [
+      { key: 'ArrowLeft / ArrowRight', description: 'Navigates to previous/next slide.' },
+      { key: 'Tab', description: 'Navigates through slide interactive contents.' },
+    ],
+    motion: {
+      duration: '--motion-normal (250ms)',
+      easing: 'cubic-bezier(0.33, 1, 0.68, 1)',
+      description: 'Smooth slide translation transition.',
+    },
+    props: [
+      { name: 'children', type: 'ReactNode', defaultValue: 'undefined', description: 'Slide elements.' },
+      { name: 'autoPlay', type: 'boolean', defaultValue: 'false', description: 'Enables automatic slide advance.' },
+      { name: 'interval', type: 'number', defaultValue: '5000', description: 'Advance delay in milliseconds.' },
+    ],
+    nativeProps: [
+      { name: 'children', type: 'ReactNode', defaultValue: 'undefined', description: 'Native slide elements.' },
+    ],
+    headlessHook: {
+      name: 'useCarousel',
+      description: 'Manages active slide index, timer, and pagination.',
+      code: `export function useCarousel({ total = 1 }) { const [index, setIndex] = React.useState(0); return { index, setIndex }; }`,
+    },
+  },
+
+  'carousel-nav': {
+    id: 'carousel-nav',
+    name: 'Carousel Nav',
+    category: 'Data Display',
+    description: 'CarouselNav provides interactive pagination indicator dots or progress bars for navigating and tracking carousel slide positions.',
+    guidelines: 'Place CarouselNav centrally below or overlaid at the bottom of the carousel view.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/carousel/',
+    waiPattern: 'Carousel Navigation Pattern',
+    dos: [
+      'Provide high-contrast active indicator distinguishing current slide.',
+      'Ensure indicator touch targets meet platform minimums.',
+    ],
+    donts: [
+      'Do not rely solely on color to indicate the active slide dot.',
+    ],
+    anatomy: [
+      { name: 'Tablist Container', role: 'role="tablist" containing indicator tabs.' },
+      { name: 'Slide Indicator Tab', role: 'role="tab" for each slide.' },
+    ],
+    keyboard: [
+      { key: 'ArrowLeft / ArrowRight', description: 'Focuses adjacent slide indicator.' },
+      { key: 'Enter / Space', description: 'Selects focused slide indicator.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0, 0, 0.2, 1)',
+      description: 'Active dot expands smoothly with spring transition.',
+    },
+    props: [
+      { name: 'total', type: 'number', defaultValue: '0', description: 'Total number of slides.' },
+      { name: 'current', type: 'number', defaultValue: '0', description: 'Zero-based index of active slide.' },
+      { name: 'onSelect', type: '(index: number) => void', defaultValue: 'undefined', description: 'Slide selection callback.' },
+    ],
+    nativeProps: [
+      { name: 'total', type: 'number', defaultValue: '0', description: 'Native slide count.' },
+      { name: 'current', type: 'number', defaultValue: '0', description: 'Native active index.' },
+    ],
+    headlessHook: {
+      name: 'useCarouselNav',
+      description: 'Handles indicator tablist roles and keyboard map.',
+      code: `export function useCarouselNav() { return { role: 'tablist' }; }`,
+    },
+  },
+
+  'interaction-tag': {
+    id: 'interaction-tag',
+    name: 'Interaction Tag',
+    category: 'Data Display',
+    description: 'InteractionTag provides a clickable, selectable tag with active focus states, selection outline, and optional dismiss action.',
+    guidelines: 'Use InteractionTag for filter selectors, interactive topic tags, and dismissible chips.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/button/',
+    waiPattern: 'Interactive Tag / Toggle Pattern',
+    dos: [
+      'Show clear selection state when tag is active in filter mode.',
+      'Provide accessible aria-label on dismiss button.',
+    ],
+    donts: [
+      'Do not use tiny touch targets—maintain minimum 44pt/48dp on mobile.',
+    ],
+    anatomy: [
+      { name: 'Tag Container', role: 'Focusable span or button.' },
+      { name: 'Label', role: 'Tag text.' },
+      { name: 'Close Button', role: 'Optional dismiss trigger.' },
+    ],
+    keyboard: [
+      { key: 'Enter / Space', description: 'Toggles tag selection state.' },
+      { key: 'Delete / Backspace', description: 'Dismisses tag if closable.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0, 0, 0.2, 1)',
+      description: 'Border and background transition on selection.',
+    },
+    props: [
+      { name: 'selected', type: 'boolean', defaultValue: 'false', description: 'Selected active filter state.' },
+      { name: 'variant', type: "'neutral' | 'primary' | 'success' | 'warning' | 'danger'", defaultValue: "'neutral'", description: 'Color palette.' },
+      { name: 'closable', type: 'boolean', defaultValue: 'false', description: 'Displays remove button.' },
+    ],
+    nativeProps: [
+      { name: 'selected', type: 'boolean', defaultValue: 'false', description: 'Native selection flag.' },
+    ],
+    headlessHook: {
+      name: 'useInteractionTag',
+      description: 'Handles selection toggle and dismissal callbacks.',
+      code: `export function useInteractionTag() { return { role: 'button' }; }`,
+    },
+  },
+
+  'tag-group': {
+    id: 'tag-group',
+    name: 'Tag Group',
+    category: 'Data Display',
+    description: 'TagGroup arranges related Tags or InteractionTags into a coherent, responsive horizontal flow with unified spacing and role="group".',
+    guidelines: 'Use TagGroup to wrap multiple category tags, search facets, or selected filter pills.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/',
+    waiPattern: 'Tag Group Pattern',
+    dos: [
+      'Wrap related tags in TagGroup to ensure proper flex wrapping.',
+      'Provide aria-label describing the tag collection purpose.',
+    ],
+    donts: [
+      'Do not mix unrelated action buttons inside a TagGroup.',
+    ],
+    anatomy: [
+      { name: 'Group Container (<TagGroup>)', role: 'role="group" container with flex-wrap.' },
+    ],
+    keyboard: [
+      { key: 'Tab', description: 'Navigates sequentially through interactive tags in group.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0, 0, 0.2, 1)',
+      description: 'Items reflow smoothly on window resize.',
+    },
+    props: [
+      { name: 'children', type: 'ReactNode', defaultValue: 'undefined', description: 'Tag components.' },
+      { name: 'className', type: 'string', defaultValue: "''", description: 'Custom CSS class.' },
+    ],
+    nativeProps: [
+      { name: 'children', type: 'ReactNode', defaultValue: 'undefined', description: 'Native tag elements.' },
+    ],
+    headlessHook: {
+      name: 'useTagGroup',
+      description: 'Manages tag group role and selection set.',
+      code: `export function useTagGroup() { return { role: 'group' }; }`,
+    },
+  },
+
+  'rating-display': {
+    id: 'rating-display',
+    name: 'Rating Display',
+    category: 'Inputs',
+    description: 'RatingDisplay renders an accessible, read-only star rating metric with numeric score representation and screen-reader announcements.',
+    guidelines: 'Use RatingDisplay on customer reviews, product summaries, and performance evaluation metrics.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/meter/',
+    waiPattern: 'Meter / Rating Pattern',
+    dos: [
+      'Always display the numeric value label alongside stars for precision.',
+      'Provide descriptive aria-label announcing total stars and score.',
+    ],
+    donts: [
+      'Do not use RatingDisplay where user input is expected—use Rating instead.',
+    ],
+    anatomy: [
+      { name: 'Display Container (<RatingDisplay>)', role: 'role="img" container with aria-label.' },
+      { name: 'Star Icons', role: 'Vector SVG stars filled according to score.' },
+      { name: 'Score Label', role: 'Text showing score (e.g. 4.8 / 5.0).' },
+    ],
+    keyboard: [
+      { key: 'Tab', description: 'Bypasses non-interactive rating display in tab order.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0, 0, 0.2, 1)',
+      description: 'Static presentation without distraction.',
+    },
+    props: [
+      { name: 'value', type: 'number', defaultValue: '0', description: 'Rating score value.' },
+      { name: 'max', type: 'number', defaultValue: '5', description: 'Maximum rating scale.' },
+      { name: 'showValueLabel', type: 'boolean', defaultValue: 'true', description: 'Displays numeric score label.' },
+    ],
+    nativeProps: [
+      { name: 'value', type: 'number', defaultValue: '0', description: 'Native rating score.' },
+    ],
+    headlessHook: {
+      name: 'useRatingDisplay',
+      description: 'Calculates fractional star fills and accessible announcements.',
+      code: `export function useRatingDisplay({ value = 0, max = 5 }) { return { ariaLabel: \`\${value} of \${max} stars\` }; }`,
+    },
+  },
+
+  'menu-grid': {
+    id: 'menu-grid',
+    name: 'Menu Grid',
+    category: 'Navigation',
+    description: 'MenuGrid arranges actionable menu choices, palette swatches, or application launcher tiles in an accessible multi-column grid inside a Menu.',
+    guidelines: 'Use MenuGrid for color selection flyouts, app launcher tiles, or icon selection grids.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/grid/',
+    waiPattern: 'Grid Menu Pattern',
+    dos: [
+      'Use 2 to 4 columns for balanced desktop and flyout proportions.',
+      'Ensure grid items have distinct labels and hover feedback.',
+    ],
+    donts: [
+      'Do not overload with more than 16 items in a single flyout menu.',
+    ],
+    anatomy: [
+      { name: 'Grid Container (<MenuGrid>)', role: 'role="menu" container with CSS grid layout.' },
+      { name: 'Grid Items', role: 'Actionable menu tiles.' },
+    ],
+    keyboard: [
+      { key: 'Arrow Keys', description: 'Navigates 2D grid of menu choices.' },
+      { key: 'Enter / Space', description: 'Activates selected grid item.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0, 0, 0.2, 1)',
+      description: 'Menu tile hover elevation transition.',
+    },
+    props: [
+      { name: 'columns', type: 'number', defaultValue: '3', description: 'Number of grid columns.' },
+      { name: 'children', type: 'ReactNode', defaultValue: 'undefined', description: 'Menu items or swatch buttons.' },
+    ],
+    nativeProps: [
+      { name: 'columns', type: 'number', defaultValue: '3', description: 'Native grid column count.' },
+    ],
+    headlessHook: {
+      name: 'useMenuGrid',
+      description: 'Provides 2D arrow navigation across grid items.',
+      code: `export function useMenuGrid() { return { role: 'menu' }; }`,
+    },
+  },
+
+  'portal-mount': {
+    id: 'portal-mount',
+    name: 'Portal Mount',
+    category: 'Surfaces',
+    description: 'PortalMount and toMountNodeProps provide configuration helpers for targeting specific DOM containers for overlay rendering.',
+    guidelines: 'Use PortalMount when tooltips, dialogs, or dropdowns must break out of clipping parent overflow containers.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/',
+    waiPattern: 'Portal Mounting Landmark Pattern',
+    dos: [
+      'Mount overlays into a dedicated root container outside main scroll view.',
+      'Clean up mount nodes when components unmount.',
+    ],
+    donts: [
+      'Do not mount modals into hidden or aria-hidden ancestor containers.',
+    ],
+    anatomy: [
+      { name: 'Portal Target', role: 'DOM element attached to body or dedicated root.' },
+    ],
+    keyboard: [
+      { key: 'Escape', description: 'Closes mounted overlay and returns focus.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0, 0, 0.2, 1)',
+      description: 'Overlay fades in smoothly upon mounting.',
+    },
+    props: [
+      { name: 'element', type: 'HTMLElement | null', defaultValue: 'document.body', description: 'Target DOM element container.' },
+    ],
+    nativeProps: [
+      { name: 'element', type: 'unknown', defaultValue: 'undefined', description: 'Native overlay container.' },
+    ],
+    headlessHook: {
+      name: 'usePortalMount',
+      description: 'Resolves valid DOM mount node safely across SSR.',
+      code: `export function usePortalMount() { return typeof document !== 'undefined' ? document.body : null; }`,
+    },
+  },
 };
+
+

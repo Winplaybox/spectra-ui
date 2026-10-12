@@ -34,56 +34,70 @@ export interface ComponentMetadata {
     description: string;
     code: string;
   };
+  storybookUrl?: string;
+  figmaUrl?: string;
+  fluentUsageUrl?: string;
 }
 
 const CORE_COMPONENTS_DATA: Record<string, ComponentMetadata> = {
   button: {
     id: 'button',
     name: 'Button',
-    category: 'Actions',
-    description: 'Buttons allow users to trigger actions or events, such as submitting a form, opening a dialog, canceling an operation, or performing a deletion.',
-    guidelines: 'Use primary buttons for the single main call-to-action on a screen. Use secondary or tertiary buttons for complementary actions. Use danger buttons with confirmation for destructive operations.',
+    category: 'Inputs',
+    description: 'Buttons express what action will occur when the user interacts with them. Conforming to Microsoft Fluent 2 Web design patterns, the Button suite provides five distinct visual appearances (Primary, Secondary, Outline, Subtle, Transparent), discrete sizing scales, shape geometries, and composite action button extensions (CompoundButton, MenuButton, SplitButton, ToggleButton).',
+    guidelines: 'Follow the single-primary rule: reserve the Primary appearance for the single most important action per view or dialog. Place affirmative/primary actions according to platform convention (right side in Web dialogs, next to cancel). Never wrap button label text across multiple lines—if secondary explanation is necessary, use a CompoundButton.',
     waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/button/',
-    waiPattern: 'Button pattern',
+    waiPattern: 'Button Pattern (WAI-ARIA 1.2)',
     dos: [
-      'Use action-oriented verbs for button labels (e.g. "Save Changes", "Create Account", "Delete").',
-      'Reserve the Primary variant for the single most important action per view.',
-      'Show an inline loading spinner when performing asynchronous actions to prevent double-submissions.',
+      'Use action-oriented verbs for labels (e.g. "Save", "Submit", "Delete", "Deploy", "Export").',
+      'Reserve the Primary filled appearance for the solitary main call-to-action on a screen.',
+      'Use disabledFocusable to keep disabled buttons in keyboard tab order while announcing aria-disabled="true" to assistive technology.',
+      'Use an authentic vector SVG icon to enhance recognition, ensuring icon-only buttons provide an explicit aria-label.',
+      'Expand buttons to full-width block layout inside mobile viewports and bottom sheets.',
     ],
     donts: [
-      'Do not use multiple primary buttons on the same screen (competes for user attention).',
-      'Never remove focus-visible outlines (violates WCAG 2.4.7 Focus Visible).',
-      'Do not use vague labels like "OK" or "Click Here".',
+      'Never place multiple primary buttons in the same container or card (causes visual competition and choice paralysis).',
+      'Never wrap button label text onto multiple lines; use CompoundButton if descriptive subtext is needed.',
+      'Do not use generic emoji characters for button icons—always use authentic SVG vector icons from @winplaybox/icons.',
+      'Never remove keyboard focus-visible outlines without providing an accessible alternative double-ring.',
+      'Do not use Buttons for primary URL navigation where a link element (<a>) is semantically expected.',
     ],
     anatomy: [
-      { name: 'Root (<button>)', role: 'Native semantic button with role="button" and focus management.' },
-      { name: 'Leading Icon', role: 'Optional 16px vector icon establishing visual context before text.' },
-      { name: 'Label Text', role: 'Action text rendered in Inter Medium typography.' },
-      { name: 'Loading Spinner', role: 'Accessible animated indicator replacing or accompanying the icon.' },
+      { name: 'Root (<button>)', role: 'Accessible HTML button with native role="button" and dual focus-visible ring.' },
+      { name: 'Leading Icon Slot', role: 'Optional authentic vector SVG icon establishing immediate visual context.' },
+      { name: 'Label Text', role: 'Action text rendered in single-line typography with no line breaks.' },
+      { name: 'Trailing Icon / Chevron', role: 'Optional trailing icon or dropdown chevron indicator.' },
+      { name: 'Loading Spinner', role: 'Accessible animated indicator replacing or preceding text with aria-busy="true".' },
     ],
     keyboard: [
-      { key: 'Enter / Space', description: 'Triggers the button onClick action.' },
-      { key: 'Tab', description: 'Moves focus to the button.' },
+      { key: 'Enter / Space', description: 'Triggers the button onClick action callback.' },
+      { key: 'Tab', description: 'Moves focus to the button in sequential document order.' },
+      { key: 'ArrowDown', description: 'On MenuButton or SplitButton chevron: opens the flyout options menu.' },
+      { key: 'Escape', description: 'Closes any open flyout menu and returns focus to the button trigger.' },
     ],
     motion: {
-      duration: '--motion-instant (50ms)',
-      easing: 'ease-out',
-      description: 'Background color shifts and active scale states execute instantly with zero perceived lag.',
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0.33, 1, 0.68, 1)',
+      description: 'Background and border transitions execute with responsive Fluent 2 curves and instant hover feedback.',
     },
     props: [
-      { name: 'variant', type: "'primary' | 'secondary' | 'tertiary' | 'danger'", defaultValue: "'primary'", description: 'Visual appearance and semantic emphasis.' },
-      { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Size of the button affecting padding and font size.' },
-      { name: 'isLoading', type: 'boolean', defaultValue: 'false', description: 'Displays a loading spinner and disables interaction.' },
+      { name: 'appearance', type: "'primary' | 'secondary' | 'outline' | 'subtle' | 'transparent'", defaultValue: "'secondary'", description: 'Fluent 2 visual appearance hierarchy.' },
+      { name: 'variant', type: "'primary' | 'secondary' | 'tertiary' | 'danger'", defaultValue: "'primary'", description: 'Classic appearance prop for backward compatibility.' },
+      { name: 'size', type: "'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large'", defaultValue: "'md'", description: 'Density scale: small (24px), medium (32px), large (40px).' },
+      { name: 'shape', type: "'rounded' | 'circular' | 'square'", defaultValue: "'rounded'", description: 'Corner geometry: rounded (6px), circular (pill), square (0px).' },
       { name: 'disabled', type: 'boolean', defaultValue: 'false', description: 'Disables user interaction and applies muted opacity.' },
-      { name: 'icon', type: 'ReactNode', defaultValue: 'undefined', description: 'Leading or trailing icon element.' },
-      { name: 'iconPosition', type: "'left' | 'right'", defaultValue: "'left'", description: 'Position of the icon relative to button text.' },
+      { name: 'disabledFocusable', type: 'boolean', defaultValue: 'false', description: 'Keeps button focusable for screen readers while suppressing action (WCAG 2.1 AA).' },
+      { name: 'isLoading', type: 'boolean', defaultValue: 'false', description: 'Displays an animated spinner and sets aria-busy="true".' },
+      { name: 'fullWidth', type: 'boolean', defaultValue: 'false', description: 'Expands the button across the full parent container width.' },
+      { name: 'icon', type: 'ReactNode', defaultValue: 'undefined', description: 'Authentic vector SVG icon from @winplaybox/icons.' },
+      { name: 'iconPosition', type: "'left' | 'right'", defaultValue: "'left'", description: 'Placement of icon relative to label text.' },
     ],
     nativeProps: [
       { name: 'onPress', type: '(event: GestureResponderEvent) => void', defaultValue: 'undefined', description: 'Native touch event callback.' },
       { name: 'variant', type: "'filled' | 'tinted' | 'outline' | 'plain'", defaultValue: "'filled'", description: 'Native styling variant.' },
-      { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Native button sizing dimensions.' },
+      { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Native button sizing dimensions (44pt/48dp target).' },
       { name: 'isLoading', type: 'boolean', defaultValue: 'false', description: 'Shows native ActivityIndicator.' },
-      { name: 'hitSlop', type: 'Insets', defaultValue: '{ top: 8, bottom: 8, left: 8, right: 8 }', description: 'Expands touch target to meet 44pt Apple HIG.' },
+      { name: 'hitSlop', type: 'Insets', defaultValue: '{ top: 8, bottom: 8, left: 8, right: 8 }', description: 'Expands touch target to meet 44pt Apple HIG and 48dp Android guidelines.' },
     ],
     headlessHook: {
       name: 'useButtonProps',
@@ -367,64 +381,69 @@ export function CustomSwitch({ checked, onChange }) {
     id: 'accordion',
     name: 'Accordion',
     category: 'Data Display',
-    description: 'An accordion groups sections of related content that can be opened and closed. Accordions decrease cognitive load by letting people choose which sections of content they see, like questions in an FAQ.',
-    guidelines: 'Use accordions when content is secondary or when progressive disclosure helps organize extensive text or FAQ answers. Never hide critical information required for the primary user task.',
+    description: 'An accordion groups sections of related content that can be opened and closed to reduce cognitive load.',
+    guidelines: 'Use accordions to organize dense content like FAQs, product specs, or settings groups. Keep headers brief and descriptive. Never place information required to complete a primary task inside an accordion.',
     waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/accordion/',
-    waiPattern: 'Accordion pattern',
+    waiPattern: 'Accordion Pattern (Sections with Expand/Collapse Buttons)',
     dos: [
-      'Use short, descriptive headers that clearly indicate what information lies inside each panel.',
-      'Allow users to scan headers quickly without needing to open every section.',
-      'Persist the state of the active panel in local storage or URL query parameters when helpful.',
+      'Keep header titles concise, descriptive, and scannable without ending periods.',
+      'Use sentence-style capitalization for header titles.',
+      'Ensure keyboard users can navigate headers using Arrow Up/Down and Home/End.',
+      'Use collapsible=true when users should be allowed to close all panels.',
+      'Maintain consistent expand icon placement (start or end) throughout an interface.',
     ],
     donts: [
-      'Do not hide critical form fields or primary checkout actions inside collapsed accordion panels.',
-      'Avoid nesting an accordion inside another accordion (causes deep cognitive disorientation).',
-      'Do not use accordions for single-sentence content that does not benefit from collapsing.',
+      'Do not place critical information required to complete a primary task inside collapsed panels.',
+      'Never cross-reference content across different collapsed panels.',
+      'Avoid nesting an accordion inside another accordion.',
+      'Do not use multiple contrasting icon placements in the same view.',
     ],
     anatomy: [
-      { name: 'Root (<Accordion>)', role: 'Container establishing context and managing multiple or single expansion mode.' },
-      { name: 'Item (<AccordionItem>)', role: 'Wrapper grouping a single header and its associated panel.' },
-      { name: 'Header (<AccordionHeader>)', role: 'Accessible button with aria-expanded and keyboard arrow/enter handlers.' },
-      { name: 'Chevron Indicator', role: 'Visual 2D arrow icon rotating 90deg on expansion.' },
-      { name: 'Panel (<AccordionPanel>)', role: 'Collapsible container with role="region" linked via aria-labelledby.' },
+      { name: 'Accordion Root (<div>)', role: 'Root container managing expansion state and keyboard roving.' },
+      { name: 'AccordionItem (<div>)', role: 'Individual section container binding header and panel by unique value.' },
+      { name: 'AccordionHeader (<button>)', role: 'Interactive focusable button inside semantic heading with aria-expanded and aria-controls.' },
+      { name: 'Expand Icon (<span>)', role: 'Chevron indicator rotating upon expansion (start or end position).' },
+      { name: 'AccordionPanel (<div>)', role: 'Collapsible content region with role="region" and aria-labelledby.' },
     ],
     keyboard: [
-      { key: 'Enter / Space', description: 'When focus is on the header, toggles the associated panel between expanded and collapsed.' },
-      { key: 'Tab', description: 'Moves focus to the next interactive element in the tab order (next header or panel content).' },
-      { key: 'Shift + Tab', description: 'Moves focus to the previous interactive element.' },
-      { key: 'Arrow Down', description: 'Moves focus to the next accordion header.' },
-      { key: 'Arrow Up', description: 'Moves focus to the previous accordion header.' },
-      { key: 'Home / End', description: 'Jumps focus directly to the first or last accordion header.' },
+      { key: 'Enter / Space', description: 'Toggles expansion state of the focused accordion panel.' },
+      { key: 'Down Arrow', description: 'Moves focus to the next accordion header.' },
+      { key: 'Up Arrow', description: 'Moves focus to the previous accordion header.' },
+      { key: 'Home', description: 'Moves focus to the first accordion header.' },
+      { key: 'End', description: 'Moves focus to the last accordion header.' },
     ],
     motion: {
-      duration: '--motion-subtle (150ms)',
-      easing: 'cubic-bezier(0, 0, 0.2, 1)',
-      description: 'The chevron smoothly rotates 90 degrees and the panel expands smoothly with zero layout jank.',
+      duration: '--motion-subtle (150ms - 200ms)',
+      easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      description: 'Smooth chevron rotation (0deg to 90deg or 180deg) and panel fade-in disclosure.',
     },
     props: [
       { name: 'multiple', type: 'boolean', defaultValue: 'false', description: 'Allows multiple accordion panels to be expanded simultaneously.' },
-      { name: 'value', type: 'string | string[]', defaultValue: 'undefined', description: 'Controlled expanded value(s).' },
-      { name: 'defaultValue', type: 'string | string[]', defaultValue: '[]', description: 'Initially expanded value(s).' },
-      { name: 'onChange', type: '(val: string | string[]) => void', defaultValue: 'undefined', description: 'Callback invoked when expansion state changes.' },
+      { name: 'collapsible', type: 'boolean', defaultValue: 'true', description: 'Allows all panels to be closed when clicked.' },
+      { name: 'size', type: "'small' | 'medium' | 'large' | 'extra-large'", defaultValue: "'medium'", description: 'Sizing scale across header padding, chevron, and typography.' },
+      { name: 'expandIconPosition', type: "'start' | 'end'", defaultValue: "'start'", description: 'Position of the expand chevron: start (leading) or end (trailing).' },
+      { name: 'openItems', type: 'string[]', defaultValue: 'undefined', description: 'Controlled array of expanded item values.' },
+      { name: 'defaultOpenItems', type: 'string[]', defaultValue: '[]', description: 'Initial uncontrolled array of expanded item values.' },
+      { name: 'onToggle', type: '(event, data) => void', defaultValue: 'undefined', description: 'Callback triggered when any item expands or collapses.' },
+      { name: 'navigation', type: "'linear' | 'cycle' | 'none'", defaultValue: "'linear'", description: 'Keyboard arrow navigation mode across headers.' },
     ],
     nativeProps: [
-      { name: 'multiple', type: 'boolean', defaultValue: 'false', description: 'Allows multiple items to expand simultaneously.' },
-      { name: 'accessibilityRole', type: "'button'", defaultValue: "'button'", description: 'Header accessibility role.' },
-      { name: 'accessibilityState', type: '{ expanded: boolean }', defaultValue: '{ expanded }', description: 'Announces expanded state to VoiceOver/TalkBack.' },
+      { name: 'multiple', type: 'boolean', defaultValue: 'false', description: 'Allows multiple accordion panels to be expanded simultaneously.' },
+      { name: 'collapsible', type: 'boolean', defaultValue: 'true', description: 'Allows all panels to be closed.' },
+      { name: 'openItems', type: 'string[]', defaultValue: 'undefined', description: 'Controlled array of expanded item values.' },
+      { name: 'onToggle', type: '(event, data) => void', defaultValue: 'undefined', description: 'Callback triggered when an item expands or collapses.' },
     ],
     headlessHook: {
-      name: 'useDisclosure',
-      description: 'Manages open/closed states with automatic ID linking between trigger and panel.',
-      code: `import { useDisclosure } from '@winplaybox/primitives';
+      name: 'useControllableState',
+      description: 'Headless state synchronization managing controlled vs uncontrolled openItems state with optimal re-render isolation.',
+      code: `import { useControllableState } from '@winplaybox/primitives';
 
-export function CustomAccordionItem({ title, children }) {
-  const { isOpen, toggle, getTriggerProps, getPanelProps } = useDisclosure();
-  return (
-    <div>
-      <button {...getTriggerProps()}>{title}</button>
-      {isOpen && <div {...getPanelProps()}>{children}</div>}
-    </div>
-  );
+export function useAccordionState({ openItems, defaultOpenItems, multiple, collapsible }) {
+  const [expanded, setExpanded] = useControllableState({
+    value: openItems,
+    defaultValue: defaultOpenItems || [],
+  });
+  return { expanded, setExpanded };
 }`,
     },
   },
@@ -433,48 +452,122 @@ export function CustomAccordionItem({ title, children }) {
     id: 'avatar',
     name: 'Avatar',
     category: 'Data Display',
-    description: 'Avatars represent users or entities with an image, initials, or fallback icon, often paired with real-time status presence indicators.',
-    guidelines: 'Always provide alt text or user name so screen readers can identify the user entity.',
+    description: 'An avatar represents a person, entity, or team using an image, initials, or fallback vector icon, enriched with real-time status presence indicators and active halos.',
+    guidelines: 'Use circular avatars for individual humans, and square avatars for groups, spaces, or automated bots. Always supply the person or entity full name so screen readers announce identity and presence accurately.',
     waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/img/',
-    waiPattern: 'Image pattern',
+    waiPattern: 'Image with Accessible Status Announcement (role="img")',
     dos: [
-      'Provide fallback initials or an icon if the image fails to load or is loading.',
-      'Show presence indicators (online, away, busy) with high contrast borders.',
+      'Provide full entity names so fallback initials and screen reader announcements generate accurately.',
+      'Use colorful="colorful" for rapid visual scanning across collaborator lists, tables, and comment threads.',
+      'Pair presence indicators with accessible status text for screen reader users.',
+      'Use AvatarGroup for rosters with automatic overflow counts.',
     ],
     donts: [
-      'Do not use low-resolution images that appear pixelated or blurry.',
+      'Do not rely solely on color to communicate critical status (always support aria-label and tooltips).',
+      'Never omit alt or name attributes on non-decorative avatars.',
+      'Avoid mixing square and circular shapes inconsistently in the same list.',
     ],
     anatomy: [
-      { name: 'Container', role: 'Rounded or circular wrapper with 2D border.' },
-      { name: 'Image / Initials', role: 'Visual representation of the user.' },
-      { name: 'Status Badge', role: 'Presence indicator dot in bottom-right corner.' },
+      { name: 'Avatar Root (<div>)', role: 'Outer container with role="img", aria-label, active halo, and size dimensions.' },
+      { name: 'Inner Wrapper (<div>)', role: 'Clipped circular or rounded square backdrop holding background colors or image.' },
+      { name: 'Image (<img>)', role: 'User portrait photo with automatic onerror fallback.' },
+      { name: 'Initials (<span>)', role: 'Deterministic 1-2 character monogram derived from name.' },
+      { name: 'Presence Badge (<span>)', role: 'Activity indicator dot with high-contrast border and out-of-office modifier.' },
+      { name: 'Active Halo Ring', role: 'Outset border ring indicating speaking in audio call or live room status.' },
     ],
     keyboard: [
-      { key: 'N/A', description: 'Avatars are non-interactive data displays unless wrapped in a link or button.' },
+      { key: 'Tab', description: 'Moves focus to avatar when wrapped in an interactive button or link.' },
+      { key: 'Enter / Space', description: 'Activates quick profile card or navigation when wrapped interactively.' },
     ],
     motion: {
-      duration: '--motion-instant (50ms)',
-      easing: 'ease-out',
-      description: 'Presence indicator status transitions seamlessly.',
+      duration: '--motion-subtle (150ms - 200ms)',
+      easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      description: 'Presence indicator badge transitions and active speaker halo scale smoothly without flicker.',
     },
     props: [
-      { name: 'src', type: 'string', defaultValue: 'undefined', description: 'URL of the avatar image.' },
-      { name: 'name', type: 'string', defaultValue: 'undefined', description: 'Full name used to extract initials fallback.' },
-      { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", defaultValue: "'md'", description: 'Size of the avatar.' },
-      { name: 'shape', type: "'circle' | 'square'", defaultValue: "'circle'", description: 'Border radius shape.' },
-      { name: 'status', type: "'online' | 'offline' | 'busy' | 'away'", defaultValue: 'undefined', description: 'Presence indicator dot.' },
+      { name: 'name', type: 'string', defaultValue: 'undefined', description: 'Full name used to extract initials fallback and colorful palette.' },
+      { name: 'src', type: 'string', defaultValue: 'undefined', description: 'URL of the profile portrait image.' },
+      { name: 'size', type: '16 | 20 | 24 | 28 | 32 | 36 | 40 | 48 | 56 | 64 | 72 | 96 | 120 | 128 | "xs" | "sm" | "md" | "lg" | "xl"', defaultValue: '40', description: 'Discrete dimension scale in pixels or standard named aliases.' },
+      { name: 'shape', type: "'circular' | 'circle' | 'square'", defaultValue: "'circular'", description: 'Visual silhouette: circular for people, square for bots and spaces.' },
+      { name: 'color', type: "'neutral' | 'brand' | 'colorful' | AvatarNamedColor", defaultValue: "'neutral'", description: 'Color theme for initials: neutral, brand, or deterministic colorful palette.' },
+      { name: 'status', type: "'available' | 'online' | 'busy' | 'away' | 'dnd' | 'out-of-office' | 'offline'", defaultValue: 'undefined', description: 'Real-time presence activity indicator badge.' },
+      { name: 'outOfOffice', type: 'boolean', defaultValue: 'false', description: 'Modifies presence badge with purple out-of-office halo.' },
+      { name: 'active', type: "'active' | 'inactive' | 'unset'", defaultValue: "'unset'", description: 'Active halo ring indicating speaking or live state.' },
+      { name: 'activeAppearance', type: "'ring' | 'ring-shadow' | 'shadow'", defaultValue: "'ring'", description: 'Visual appearance of active halo.' },
+      { name: 'initials', type: 'string', defaultValue: 'undefined', description: 'Explicit initials string override.' },
+      { name: 'icon', type: 'ReactNode', defaultValue: 'undefined', description: 'Custom fallback vector icon.' },
+      { name: 'badge', type: 'ReactNode', defaultValue: 'undefined', description: 'Custom status or notification badge slot.' },
     ],
     nativeProps: [
-      { name: 'src', type: 'string', defaultValue: 'undefined', description: 'Image URI source.' },
       { name: 'name', type: 'string', defaultValue: 'undefined', description: 'User name for initials.' },
+      { name: 'src', type: 'string', defaultValue: 'undefined', description: 'Image URI source.' },
       { name: 'size', type: "'xs' | 'sm' | 'md' | 'lg' | 'xl'", defaultValue: "'md'", description: 'Native sizing scale.' },
+      { name: 'shape', type: "'circular' | 'square'", defaultValue: "'circular'", description: 'Native shape silhouette.' },
     ],
     headlessHook: {
       name: 'getInitials',
-      description: 'Helper algorithm extracting clean 2-letter uppercase initials from full names.',
+      description: 'Algorithm extracting clean 2-letter uppercase initials from full names.',
       code: `import { getInitials } from '@winplaybox/primitives';
 
-const initials = getInitials('Alexander Hamilton'); // 'AH'`,
+const initials = getInitials('Josef Müller-Brockmann'); // 'JM'`,
+    },
+  },
+
+  badge: {
+    id: 'badge',
+    name: 'Badge',
+    category: 'Data Display',
+    description: 'A badge communicates a status, category, count, or description associated with an element or context. They use short text, semantic color, and authentic vector icons for quick recognition.',
+    guidelines: 'Use filled badges for primary or urgent status indicators. Use tint or outline badges for secondary metadata. Keep labels short (1-2 words). Never use emoji characters.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/',
+    waiPattern: 'Status / Notification Indicator (role="status" or aria-label)',
+    dos: [
+      'Keep badge text concise (1-2 words or short numeric values) for quick scanning.',
+      'Use CounterBadge with overflowCount (e.g. 99+) to prevent visual overflow in tight headers.',
+      'Provide an aria-label on standalone dot badges so screen readers announce their meaning.',
+      'Pair presence status badges with accessible names (e.g. "Available", "Away", "Do Not Disturb").',
+    ],
+    donts: [
+      'Do not use badges as primary clickable buttons (use Button, Chip, or Tag for clickable actions).',
+      'Never use emoji characters inside badges (always use authentic SVG vector icons).',
+      'Avoid placing multiple conflicting badges adjacent to the same element.',
+    ],
+    anatomy: [
+      { name: 'Badge Root (<span>)', role: 'Outer inline-flex container with clipping and geometry.' },
+      { name: 'Dot Indicator (<span>)', role: 'Optional 6px circular dot indicator prefix.' },
+      { name: 'Vector Icon Slot (<span>)', role: 'Leading or trailing authentic vector icon.' },
+      { name: 'Label Content', role: 'Concise text label, status text, or numeric count.' },
+    ],
+    keyboard: [
+      { key: 'Tab', description: 'Badges are non-interactive by default; receive focus only when wrapped in an interactive control.' },
+    ],
+    motion: {
+      duration: '--motion-subtle (150ms)',
+      easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      description: 'Color transitions and count updates cross-fade smoothly without layout shifting.',
+    },
+    props: [
+      { name: 'appearance', type: "'filled' | 'ghost' | 'outline' | 'tint'", defaultValue: "'filled'", description: 'Visual appearance styling.' },
+      { name: 'color', type: "'brand' | 'danger' | 'important' | 'informative' | 'severe' | 'subtle' | 'success' | 'warning'", defaultValue: "'brand'", description: 'Semantic palette color.' },
+      { name: 'shape', type: "'rounded' | 'circular' | 'square'", defaultValue: "'rounded'", description: 'Shape silhouette: rounded rect, pill/circle, or square.' },
+      { name: 'size', type: "'tiny' | 'extra-small' | 'small' | 'medium' | 'large' | 'extra-large'", defaultValue: "'medium'", description: 'Discrete sizing scale from 6px dot to 32px badge.' },
+      { name: 'icon', type: 'ReactNode', defaultValue: 'undefined', description: 'Authentic vector icon slot.' },
+      { name: 'iconPosition', type: "'before' | 'after'", defaultValue: "'before'", description: 'Position of vector icon relative to children.' },
+      { name: 'dot', type: 'boolean', defaultValue: 'false', description: 'Display standalone dot or dot prefix.' },
+    ],
+    nativeProps: [
+      { name: 'variant', type: "'filled' | 'outline'", defaultValue: "'filled'", description: 'Native visual style.' },
+      { name: 'color', type: 'string', defaultValue: "'brand'", description: 'Native palette color.' },
+    ],
+    headlessHook: {
+      name: 'useTheme',
+      description: 'Provides theme tokens for badge color schemes and border radii.',
+      code: `import { useTheme } from '@winplaybox/primitives';
+
+export function CustomBadge({ label }) {
+  const { colorScheme } = useTheme();
+  return <span className={colorScheme}>{label}</span>;
+}`,
     },
   },
 
@@ -523,55 +616,6 @@ const initials = getInitials('Alexander Hamilton'); // 'AH'`,
 export function CustomList() {
   const { activeIndex, onKeyDown } = useKeyboardNavigation({ count: 5 });
   return <ul onKeyDown={onKeyDown}>...</ul>;
-}`,
-    },
-  },
-
-  badge: {
-    id: 'badge',
-    name: 'Badge',
-    category: 'Feedback',
-    description: 'Badges are small status descriptors used to highlight item metadata, counts, tags, or system state alerts.',
-    guidelines: 'Use badges to inform users of status (e.g. "Active", "Pending", "Failed") or counts (e.g. "+5").',
-    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/status/',
-    waiPattern: 'Status pattern',
-    dos: [
-      'Use semantic variants (success for active, warning for pending, error for failed).',
-      'Keep badge text short (1-2 words maximum).',
-    ],
-    donts: [
-      'Do not use interactive clickable actions inside badges; use a Button or Chip instead.',
-    ],
-    anatomy: [
-      { name: 'Badge Pill', role: 'Compact container with 2D border and semantic colors.' },
-      { name: 'Status Dot', role: 'Optional 6px circular presence dot.' },
-      { name: 'Label', role: 'Short status text.' },
-    ],
-    keyboard: [
-      { key: 'N/A', description: 'Badges are non-interactive visual indicators.' },
-    ],
-    motion: {
-      duration: '--motion-instant (50ms)',
-      easing: 'ease-out',
-      description: 'Color updates apply smoothly upon state changes.',
-    },
-    props: [
-      { name: 'variant', type: "'default' | 'primary' | 'success' | 'warning' | 'error' | 'info'", defaultValue: "'default'", description: 'Semantic color theme.' },
-      { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Size of the badge pill.' },
-      { name: 'dot', type: 'boolean', defaultValue: 'false', description: 'Displays an active status dot on the left.' },
-    ],
-    nativeProps: [
-      { name: 'variant', type: "'default' | 'primary' | 'success' | 'warning' | 'error' | 'info'", defaultValue: "'default'", description: 'Semantic theme.' },
-      { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Native size scale.' },
-    ],
-    headlessHook: {
-      name: 'useTheme',
-      description: 'Provides active colorScheme and design tokens to render badges matching system palette.',
-      code: `import { useTheme } from '@winplaybox/primitives';
-
-export function CustomBadge({ text }) {
-  const { colorScheme } = useTheme();
-  return <span data-theme={colorScheme}>{text}</span>;
 }`,
     },
   },
@@ -1043,56 +1087,148 @@ export function CustomChip({ label, onClick }) {
     },
   },
 
+  breadcrumb: {
+    id: 'breadcrumb',
+    name: 'Breadcrumb',
+    category: 'Navigation',
+    description: 'A breadcrumb helps people understand and move through the hierarchy of a complex site or app. It lists at least two location names, usually links, separated by dividers, supporting interactive buttons, truncation, and overflow menus.',
+    guidelines: 'Use breadcrumbs as secondary wayfinding for hierarchical applications with 2 or more levels deep. Place breadcrumbs between 30% and 50% of overall surface width to accommodate 400% zoom. Intermediate levels collapse into an overflow dropdown menu (...) when width is constrained, preserving root and active page visibility.',
+    waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/',
+    waiPattern: 'Breadcrumb Pattern',
+    dos: [
+      'Use breadcrumbs to indicate hierarchical depth of two or more levels in complex apps.',
+      'Wrap breadcrumbs in a <nav aria-label="Breadcrumb"> landmark containing an ordered list (<ol>).',
+      'Add aria-current="page" to the final non-interactive crumb representing the active location.',
+      'Collapse intermediate crumbs into an overflow dropdown menu when space is constrained.',
+      'Provide tooltips on hover and keyboard focus whenever breadcrumb item labels are truncated.',
+    ],
+    donts: [
+      'Do not use breadcrumbs for flat site structures or linear multi-step wizards (use Stepper instead).',
+      'Never use breadcrumbs to display browser session history; breadcrumbs reflect site hierarchy, not browsing history.',
+      'Never use emoji characters in breadcrumbs; always use authentic SVG vector icons from @winplaybox/icons.',
+      'Do not make the active current page item a clickable navigation link.',
+    ],
+    anatomy: [
+      { name: 'Nav Landmark (<nav>)', role: 'Accessible container with aria-label="Breadcrumb" establishing page wayfinding.' },
+      { name: 'Ordered List (<ol>)', role: 'Structural element communicating hierarchical depth and position to assistive tech.' },
+      { name: 'BreadcrumbItem (<li>)', role: 'List item wrapper for each hierarchy level with role="listitem".' },
+      { name: 'BreadcrumbButton', role: 'Interactive trigger or link with rounded subtle hover fill and focus ring.' },
+      { name: 'BreadcrumbDivider', role: 'Visual delimiter (chevron arrow or slash) with aria-hidden="true".' },
+      { name: 'Leading Icon', role: 'Authentic vector icon slot (Home, Folder, File) providing instant category recognition.' },
+      { name: 'Overflow Trigger', role: 'Menu button (...) with aria-haspopup="menu" revealing collapsed intermediate crumbs.' },
+      { name: 'Current Page Item', role: 'Active page indicator with semibold weight, primary text, and aria-current="page".' },
+    ],
+    keyboard: [
+      { key: 'Tab', description: 'Moves focus sequentially forward through interactive ancestor links and overflow triggers.' },
+      { key: 'Shift + Tab', description: 'Moves focus backward through breadcrumb items.' },
+      { key: 'Enter / Space', description: 'Activates the focused crumb link or opens the overflow dropdown menu.' },
+      { key: 'Escape', description: 'Closes an open overflow dropdown menu and returns focus to the overflow trigger.' },
+    ],
+    motion: {
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      description: 'Subtle background color transitions on hover/focus and smooth scale entrance for the overflow popup menu.',
+    },
+    props: [
+      { name: 'size', type: "'small' | 'medium' | 'large'", defaultValue: "'medium'", description: 'Visual sizing scale affecting typography (12/14/16px) and icon dimensions.' },
+      { name: 'appearance', type: "'subtle' | 'transparent'", defaultValue: "'subtle'", description: 'Button appearance variant (subtle hover highlight vs transparent).' },
+      { name: 'dividerType', type: "'chevron' | 'slash'", defaultValue: "'chevron'", description: 'Delimiter style between breadcrumb segments.' },
+      { name: 'items', type: 'BreadcrumbItemData[]', defaultValue: 'undefined', description: 'Array of breadcrumb items for declarative data-driven rendering.' },
+      { name: 'maxItems', type: 'number', defaultValue: 'undefined', description: 'Maximum visible items before collapsing intermediate levels into an overflow menu.' },
+      { name: 'overflowIndex', type: 'number', defaultValue: '1', description: 'Starting index for overflow collapse, preserving the root item.' },
+      { name: 'overflowAriaLabel', type: 'string', defaultValue: "'Show more breadcrumb items'", description: 'Accessible label for the overflow button.' },
+      { name: 'divider', type: 'ReactNode', defaultValue: 'undefined', description: 'Custom separator element rendered between crumbs.' },
+    ],
+    nativeProps: [
+      { name: 'items', type: 'BreadcrumbItem[]', defaultValue: '[]', description: 'Array of native breadcrumb items.' },
+      { name: 'separator', type: 'string', defaultValue: "'/'", description: 'Native delimiter string.' },
+      { name: 'size', type: "'sm' | 'md'", defaultValue: "'md'", description: 'Native layout padding scale.' },
+    ],
+    headlessHook: {
+      name: 'useBreadcrumbProps',
+      description: 'Generates accessible ARIA landmarks, current item tracking, and overflow collapse state.',
+      code: `import { useBreadcrumbProps } from '@winplaybox/primitives';
+
+export function CustomBreadcrumb({ items, maxItems }) {
+  const { visibleItems, overflowItems, getNavProps } = useBreadcrumbProps({ items, maxItems });
+  return (
+    <nav {...getNavProps()}>
+      <ol>{/* items */}</ol>
+    </nav>
+  );
+}`,
+    },
+  },
+
   breadcrumbs: {
     id: 'breadcrumbs',
     name: 'Breadcrumbs',
     category: 'Navigation',
-    description: 'A hierarchical navigation trail displaying the user current position within an application hierarchy and enabling one-click navigation up levels.',
-    guidelines: 'Place breadcrumbs at the top of the main content area, below the header. The final item represents the current page and should not be a link.',
+    description: 'A breadcrumb helps people understand and move through the hierarchy of a complex site or app. It lists at least two location names, usually links, separated by dividers, supporting interactive buttons, truncation, and overflow menus.',
+    guidelines: 'Use breadcrumbs as secondary wayfinding for hierarchical applications with 2 or more levels deep. Place breadcrumbs between 30% and 50% of overall surface width to accommodate 400% zoom. Intermediate levels collapse into an overflow dropdown menu (...) when width is constrained, preserving root and active page visibility.',
     waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/',
-    waiPattern: 'Breadcrumb pattern',
+    waiPattern: 'Breadcrumb Pattern',
     dos: [
-      'Use a <nav aria-label="Breadcrumbs"> element with an ordered list (<ol>).',
-      'Set aria-current="page" on the current location item.',
-      'Use consistent separators like "/" or chevron icons.',
+      'Use breadcrumbs to indicate hierarchical depth of two or more levels in complex apps.',
+      'Wrap breadcrumbs in a <nav aria-label="Breadcrumb"> landmark containing an ordered list (<ol>).',
+      'Add aria-current="page" to the final non-interactive crumb representing the active location.',
+      'Collapse intermediate crumbs into an overflow dropdown menu when space is constrained.',
+      'Provide tooltips on hover and keyboard focus whenever breadcrumb item labels are truncated.',
     ],
     donts: [
-      'Do not include the current page as an active clickable link.',
-      'Do not replace top-level navigation with breadcrumbs.',
+      'Do not use breadcrumbs for flat site structures or linear multi-step wizards (use Stepper instead).',
+      'Never use breadcrumbs to display browser session history; breadcrumbs reflect site hierarchy, not browsing history.',
+      'Never use emoji characters in breadcrumbs; always use authentic SVG vector icons from @winplaybox/icons.',
+      'Do not make the active current page item a clickable navigation link.',
     ],
     anatomy: [
-      { name: 'Nav Container', role: 'Semantic <nav> element with aria-label="Breadcrumbs".' },
-      { name: 'List (<ol>)', role: 'Ordered list of navigation steps.' },
-      { name: 'Link / Item', role: 'Clickable anchor or text for ancestor levels.' },
-      { name: 'Separator', role: 'Aria-hidden delimiter separating consecutive crumbs.' },
-      { name: 'Current Item', role: 'Span with aria-current="page".' },
+      { name: 'Nav Landmark (<nav>)', role: 'Accessible container with aria-label="Breadcrumb" establishing page wayfinding.' },
+      { name: 'Ordered List (<ol>)', role: 'Structural element communicating hierarchical depth and position to assistive tech.' },
+      { name: 'BreadcrumbItem (<li>)', role: 'List item wrapper for each hierarchy level with role="listitem".' },
+      { name: 'BreadcrumbButton', role: 'Interactive trigger or link with rounded subtle hover fill and focus ring.' },
+      { name: 'BreadcrumbDivider', role: 'Visual delimiter (chevron arrow or slash) with aria-hidden="true".' },
+      { name: 'Leading Icon', role: 'Authentic vector icon slot (Home, Folder, File) providing instant category recognition.' },
+      { name: 'Overflow Trigger', role: 'Menu button (...) with aria-haspopup="menu" revealing collapsed intermediate crumbs.' },
+      { name: 'Current Page Item', role: 'Active page indicator with semibold weight, primary text, and aria-current="page".' },
     ],
     keyboard: [
-      { key: 'Tab', description: 'Cycles forward through ancestor links in sequential order.' },
-      { key: 'Enter', description: 'Navigates to the focused ancestor level.' },
+      { key: 'Tab', description: 'Moves focus sequentially forward through interactive ancestor links and overflow triggers.' },
+      { key: 'Shift + Tab', description: 'Moves focus backward through breadcrumb items.' },
+      { key: 'Enter / Space', description: 'Activates the focused crumb link or opens the overflow dropdown menu.' },
+      { key: 'Escape', description: 'Closes an open overflow dropdown menu and returns focus to the overflow trigger.' },
     ],
     motion: {
-      duration: 'none',
-      easing: 'none',
-      description: 'Static semantic navigation trail.',
+      duration: '--motion-fast (150ms)',
+      easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      description: 'Subtle background color transitions on hover/focus and smooth scale entrance for the overflow popup menu.',
     },
     props: [
-      { name: 'items', type: 'BreadcrumbItem[]', defaultValue: '[]', description: 'Array of items with label, href, onClick, isCurrent.' },
-      { name: 'separator', type: 'ReactNode', defaultValue: "'/'", description: 'Custom delimiter element between crumbs.' },
-      { name: 'maxItems', type: 'number', defaultValue: '8', description: 'Maximum visible crumbs before truncating with ellipsis.' },
+      { name: 'size', type: "'small' | 'medium' | 'large'", defaultValue: "'medium'", description: 'Visual sizing scale affecting typography (12/14/16px) and icon dimensions.' },
+      { name: 'appearance', type: "'subtle' | 'transparent'", defaultValue: "'subtle'", description: 'Button appearance variant (subtle hover highlight vs transparent).' },
+      { name: 'dividerType', type: "'chevron' | 'slash'", defaultValue: "'chevron'", description: 'Delimiter style between breadcrumb segments.' },
+      { name: 'items', type: 'BreadcrumbItemData[]', defaultValue: 'undefined', description: 'Array of breadcrumb items for declarative data-driven rendering.' },
+      { name: 'maxItems', type: 'number', defaultValue: 'undefined', description: 'Maximum visible items before collapsing intermediate levels into an overflow menu.' },
+      { name: 'overflowIndex', type: 'number', defaultValue: '1', description: 'Starting index for overflow collapse, preserving the root item.' },
+      { name: 'overflowAriaLabel', type: 'string', defaultValue: "'Show more breadcrumb items'", description: 'Accessible label for the overflow button.' },
+      { name: 'divider', type: 'ReactNode', defaultValue: 'undefined', description: 'Custom separator element rendered between crumbs.' },
     ],
     nativeProps: [
-      { name: 'items', type: 'NativeBreadcrumbItem[]', defaultValue: '[]', description: 'Array of native breadcrumb items.' },
-      { name: 'separator', type: 'string', defaultValue: "'/'", description: 'Native separator string.' },
+      { name: 'items', type: 'BreadcrumbItem[]', defaultValue: '[]', description: 'Array of native breadcrumb items.' },
+      { name: 'separator', type: 'string', defaultValue: "'/'", description: 'Native delimiter string.' },
+      { name: 'size', type: "'sm' | 'md'", defaultValue: "'md'", description: 'Native layout padding scale.' },
     ],
     headlessHook: {
-      name: 'useTheme',
-      description: 'Provides theme styling tokens for breadcrumb links and separators.',
-      code: `import { useTheme } from '@winplaybox/primitives';
+      name: 'useBreadcrumbProps',
+      description: 'Generates accessible ARIA landmarks, current item tracking, and overflow collapse state.',
+      code: `import { useBreadcrumbProps } from '@winplaybox/primitives';
 
-export function CustomBreadcrumbs({ items }) {
-  const { colorScheme } = useTheme();
-  return <nav aria-label="Breadcrumb" className={colorScheme}>{/* items */}</nav>;
+export function CustomBreadcrumbs({ items, maxItems }) {
+  const { visibleItems, overflowItems, getNavProps } = useBreadcrumbProps({ items, maxItems });
+  return (
+    <nav {...getNavProps()}>
+      <ol>{/* items */}</ol>
+    </nav>
+  );
 }`,
     },
   },

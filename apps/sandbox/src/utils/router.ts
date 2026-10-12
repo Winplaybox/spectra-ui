@@ -1,7 +1,7 @@
 // Deep Linking URL Router for Spectra UI Documentation Dashboard
 // Spectra UI canonical and shareable URL routing patterns
 
-export type RouteType = 'overview' | 'installation' | 'cross-platform' | 'tokens' | 'components' | 'hooks' | 'icons';
+export type RouteType = 'overview' | 'installation' | 'cross-platform' | 'tokens' | 'components' | 'hooks' | 'icons' | 'motion' | 'utilities' | 'guides';
 
 export interface RouteState {
   type: RouteType;
@@ -72,6 +72,21 @@ export function parsePath(rawPath: string): RouteState {
     return { type: 'icons', id: 'catalog', path: '/icons', anchor };
   }
 
+  if (segments[0] === 'motion') {
+    const motionId = segments[1];
+    return { type: 'motion', id: motionId, path: motionId ? `/motion/${motionId}` : '/motion', anchor };
+  }
+
+  if (segments[0] === 'utilities') {
+    const utilId = segments[1];
+    return { type: 'utilities', id: utilId, path: utilId ? `/utilities/${utilId}` : '/utilities', anchor };
+  }
+
+  if (segments[0] === 'guides') {
+    const guideId = segments[1];
+    return { type: 'guides', id: guideId, path: guideId ? `/guides/${guideId}` : '/guides', anchor };
+  }
+
   // Fallback to overview
   return { type: 'overview', path: '/overview', anchor };
 }
@@ -107,17 +122,20 @@ export function navigate(toPath: string, replace = false) {
   if (typeof window === 'undefined') return;
 
   const nextRoute = parsePath(toPath);
-  const currentCanonical = nextRoute.path;
+  const targetUrl = nextRoute.anchor ? `${nextRoute.path}#${nextRoute.anchor}` : nextRoute.path;
 
   // Use pushState or replaceState with both history URL and hash compatibility
   if (replace) {
-    window.history.replaceState(null, '', currentCanonical);
+    window.history.replaceState(null, '', targetUrl);
   } else {
-    window.history.pushState(null, '', currentCanonical);
+    window.history.pushState(null, '', targetUrl);
   }
 
   listeners.forEach((fn) => fn(nextRoute));
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (!nextRoute.anchor) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }
 
 // Global popstate & hashchange listener

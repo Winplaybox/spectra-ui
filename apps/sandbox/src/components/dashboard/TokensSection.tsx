@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, Button, Badge } from '@winplaybox/react';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, Button, Badge, Text } from '@winplaybox/react';
 import { CheckIcon, CopyIcon, ExternalLinkIcon } from '@winplaybox/icons';
 
 interface TokensSectionProps {
@@ -360,9 +360,9 @@ export const TokensSection: React.FC<TokensSectionProps> = ({ tokenId = 'colors'
           {/* Light vs Dark Comparison Table */}
           <Card variant="bordered" style={{ backgroundColor: 'var(--color-surface)', boxShadow: '0 4px 16px rgba(0,0,0,0.06)', overflow: 'hidden' }}>
             <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-raised)' }}>
-              <h3 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+              <Text as="h3" variant="heading" style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
                 Side-by-Side Light vs. Dark Mode Mappings
-              </h3>
+              </Text>
             </div>
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
@@ -601,9 +601,9 @@ export const TokensSection: React.FC<TokensSectionProps> = ({ tokenId = 'colors'
           {/* Scale Table */}
           <Card variant="bordered" style={{ backgroundColor: 'var(--color-surface)', boxShadow: '0 4px 16px rgba(0,0,0,0.06)', overflow: 'hidden' }}>
             <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-raised)' }}>
-              <h3 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+              <Text as="h3" variant="heading" style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
                 Standard Typography Ramp Specifications
-              </h3>
+              </Text>
             </div>
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
@@ -734,9 +734,9 @@ export const TokensSection: React.FC<TokensSectionProps> = ({ tokenId = 'colors'
           {/* Spacing Ruler Table */}
           <Card variant="bordered" style={{ backgroundColor: 'var(--color-surface)', boxShadow: '0 4px 16px rgba(0,0,0,0.06)', overflow: 'hidden' }}>
             <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-raised)' }}>
-              <h3 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+              <Text as="h3" variant="heading" style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
                 4px Modular Spacing Tokens & Visual Ruler
-              </h3>
+              </Text>
             </div>
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
@@ -903,9 +903,9 @@ export const TokensSection: React.FC<TokensSectionProps> = ({ tokenId = 'colors'
           {/* Radii Table */}
           <Card variant="bordered" style={{ backgroundColor: 'var(--color-surface)', boxShadow: '0 4px 16px rgba(0,0,0,0.06)', overflow: 'hidden' }}>
             <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-raised)' }}>
-              <h3 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+              <Text as="h3" variant="heading" style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
                 Corner Radii Token Specifications
-              </h3>
+              </Text>
             </div>
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
@@ -1031,9 +1031,9 @@ export const TokensSection: React.FC<TokensSectionProps> = ({ tokenId = 'colors'
           {/* Elevation Table */}
           <Card variant="bordered" style={{ backgroundColor: 'var(--color-surface)', boxShadow: '0 4px 16px rgba(0,0,0,0.06)', overflow: 'hidden' }}>
             <div style={{ padding: '18px 24px', borderBottom: '1px solid var(--color-border-default)', backgroundColor: 'var(--color-surface-raised)' }}>
-              <h3 style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
+              <Text as="h3" variant="heading" style={{ fontSize: 18, fontWeight: 700, margin: 0, color: 'var(--color-text-primary)' }}>
                 Elevation Specifications (Light Mode vs. Dark Mode)
-              </h3>
+              </Text>
             </div>
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>

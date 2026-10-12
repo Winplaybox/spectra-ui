@@ -1,5 +1,5 @@
 import React from 'react';
-import { useColorScheme, useRTL } from '@winplaybox/react';
+import { useColorScheme, useRTL, Text } from '@winplaybox/react';
 import { CloseIcon, SettingsIcon, CheckIcon, ExternalLinkIcon, SunIcon, MoonIcon, MonitorIcon } from '@winplaybox/icons';
 import { useVersion } from '../../context/VersionContext';
 
@@ -74,9 +74,9 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <SettingsIcon size={18} color="var(--color-action-primary)" />
-            <h2 style={{ margin: 0, fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+            <Text as="h2" variant="heading" style={{ margin: 0, fontSize: 16, fontWeight: 700, color: 'var(--color-text-primary)' }}>
               Settings & Preferences
-            </h2>
+            </Text>
           </div>
           <button
             onClick={onClose}
