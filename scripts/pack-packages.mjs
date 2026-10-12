@@ -1,4 +1,4 @@
-﻿import fs from 'node:fs';
+import fs from 'node:fs';
 import path from 'node:path';
 import { execSync } from 'node:child_process';
 
@@ -17,6 +17,15 @@ if (!fs.existsSync(outDir)) {
 }
 
 console.log('Packaging all Spectra UI packages according to release standards...\n');
+
+try {
+  console.log('[MCP] Compiling MCP Server registry from source code before packing...');
+  execSync('node packages/mcp/scripts/build-data.mjs', { stdio: 'inherit' });
+  console.log('');
+} catch (err) {
+  console.error('[ERROR] Failed to compile MCP server data registry:', err.message);
+  process.exit(1);
+}
 
 const results = [];
 

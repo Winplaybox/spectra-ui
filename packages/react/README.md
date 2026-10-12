@@ -3,6 +3,7 @@
 > Production-ready, enterprise React component library for the **Spectra UI** design system by **Winplaybox**.
 
 [![npm version](https://img.shields.io/npm/v/@winplaybox/react.svg?style=flat-square&color=0969da)](https://www.npmjs.com/package/@winplaybox/react)
+[![npm weekly downloads](https://img.shields.io/npm/dw/@winplaybox/react.svg?style=flat-square&color=2ea44f&label=weekly%20downloads)](https://www.npmjs.com/package/@winplaybox/react)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178c6.svg?style=flat-square)](https://www.typescriptlang.org/)
 [![Repository](https://img.shields.io/badge/GitHub-Winplaybox%2Fspectra--ui-181717.svg?style=flat-square)](https://github.com/Winplaybox/spectra-ui)
@@ -11,20 +12,20 @@
 
 ## Overview
 
-`@winplaybox/react` provides 58 enterprise-grade React components built with type safety, zero-runtime CSS (via Vanilla Extract), and rigorous WAI-ARIA / WCAG 2.1 AA accessibility. Benchmarked against Google Material UI (MUI v5/v6), Microsoft Fluent UI 2 (v9), and Apple Human Interface Guidelines (HIG), it offers a cohesive and resilient foundation for mission-critical web applications.
+`@winplaybox/react` provides 62 enterprise-grade React components built with type safety, zero-runtime CSS (via Vanilla Extract), and rigorous WAI-ARIA / WCAG 2.1 AA accessibility. Benchmarked against Google Material UI (MUI v5/v6), Microsoft Fluent UI 2 (v9), and Apple Human Interface Guidelines (HIG), it offers a cohesive and resilient foundation for mission-critical web applications.
 
 ---
 
 ## Spectra UI Ecosystem
 
-| Package | Purpose | NPM Link |
-| :--- | :--- | :--- |
-| **`@winplaybox/react`** | Core web component library | [npmjs.com/package/@winplaybox/react](https://www.npmjs.com/package/@winplaybox/react) |
-| **`@winplaybox/tokens`** | Multi-tier design tokens (CSS, TS, JSON) | [npmjs.com/package/@winplaybox/tokens](https://www.npmjs.com/package/@winplaybox/tokens) |
-| **`@winplaybox/icons`** | 14,200+ vector SVG icons (multi-shade) | [npmjs.com/package/@winplaybox/icons](https://www.npmjs.com/package/@winplaybox/icons) |
-| **`@winplaybox/primitives`** | 25 Headless hooks and behavioral state primitives | [npmjs.com/package/@winplaybox/primitives](https://www.npmjs.com/package/@winplaybox/primitives) |
-| **`@winplaybox/react-native`** | Mobile components for iOS and Android | [npmjs.com/package/@winplaybox/react-native](https://www.npmjs.com/package/@winplaybox/react-native) |
-| **`@winplaybox/mcp`** | Model Context Protocol server for AI coding assistants | [npmjs.com/package/@winplaybox/mcp](https://www.npmjs.com/package/@winplaybox/mcp) |
+| Package | Purpose | Version | Weekly Downloads |
+| :--- | :--- | :---: | :---: |
+| **`@winplaybox/react`** | Core web component library | [![npm](https://img.shields.io/npm/v/@winplaybox/react?style=flat-square&color=0969da)](https://www.npmjs.com/package/@winplaybox/react) | [![downloads](https://img.shields.io/npm/dw/@winplaybox/react?style=flat-square&color=2ea44f)](https://www.npmjs.com/package/@winplaybox/react) |
+| **`@winplaybox/tokens`** | Multi-tier design tokens (CSS, TS, JSON) | [![npm](https://img.shields.io/npm/v/@winplaybox/tokens?style=flat-square&color=0969da)](https://www.npmjs.com/package/@winplaybox/tokens) | [![downloads](https://img.shields.io/npm/dw/@winplaybox/tokens?style=flat-square&color=2ea44f)](https://www.npmjs.com/package/@winplaybox/tokens) |
+| **`@winplaybox/icons`** | 14,200+ vector SVG icons (multi-shade) | [![npm](https://img.shields.io/npm/v/@winplaybox/icons?style=flat-square&color=0969da)](https://www.npmjs.com/package/@winplaybox/icons) | [![downloads](https://img.shields.io/npm/dw/@winplaybox/icons?style=flat-square&color=2ea44f)](https://www.npmjs.com/package/@winplaybox/icons) |
+| **`@winplaybox/primitives`** | 25 Headless hooks and behavioral state primitives | [![npm](https://img.shields.io/npm/v/@winplaybox/primitives?style=flat-square&color=0969da)](https://www.npmjs.com/package/@winplaybox/primitives) | [![downloads](https://img.shields.io/npm/dw/@winplaybox/primitives?style=flat-square&color=2ea44f)](https://www.npmjs.com/package/@winplaybox/primitives) |
+| **`@winplaybox/react-native`** | Mobile components for iOS and Android | [![npm](https://img.shields.io/npm/v/@winplaybox/react-native?style=flat-square&color=0969da)](https://www.npmjs.com/package/@winplaybox/react-native) | [![downloads](https://img.shields.io/npm/dw/@winplaybox/react-native?style=flat-square&color=2ea44f)](https://www.npmjs.com/package/@winplaybox/react-native) |
+| **`@winplaybox/mcp`** | Model Context Protocol server for AI coding assistants | [![npm](https://img.shields.io/npm/v/@winplaybox/mcp?style=flat-square&color=0969da)](https://www.npmjs.com/package/@winplaybox/mcp) | [![downloads](https://img.shields.io/npm/dw/@winplaybox/mcp?style=flat-square&color=2ea44f)](https://www.npmjs.com/package/@winplaybox/mcp) |
 
 ---
 

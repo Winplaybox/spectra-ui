@@ -13,6 +13,15 @@ const PACKAGES = [
 
 console.log('[CHECK] Checking @winplaybox packages for npm release readiness...\n');
 
+try {
+  console.log('[MCP] Automatically building and synchronizing MCP registry from source code...');
+  execSync('node packages/mcp/scripts/build-data.mjs', { stdio: 'inherit' });
+  console.log('');
+} catch (err) {
+  console.error('[ERROR] Failed to compile MCP server data registry:', err.message);
+  process.exit(1);
+}
+
 let hasErrors = false;
 
 for (const pkgRel of PACKAGES) {

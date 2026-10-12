@@ -33,6 +33,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
       - run: pnpm test:a11y
+      - run: pnpm run check:mcp
 
   build:
     runs-on: ubuntu-latest
@@ -46,6 +47,8 @@ jobs:
           node-version: '22'
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
+      - run: pnpm run build:tokens
+      - run: pnpm run build:mcp
       - run: pnpm build
 
   validate-tokens:
