@@ -13,7 +13,7 @@
 export interface Component7Pillars {
   storybookUrl: string;
   figmaUrl?: string;
-  fluentUsageUrl?: string;
+  specUrl?: string;
   types: {
     overview: string;
     items: Array<{ name: string; description: string; badge?: string }>;
@@ -77,11 +77,10 @@ export function normalizeComponentId(id: string): string {
 
 export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   button: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-button-button--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8911-3188&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/button/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
-      overview: 'Conforming to Microsoft Fluent 2 Web design standards, Button provides five visual appearances, three shape geometries, and three density scales.',
+      overview: 'Conforming to Spectra UI Web design standards, Button provides five visual appearances, three shape geometries, and three density scales.',
       items: [
         { name: 'Primary', description: 'Solid high-emphasis brand background. Use exclusively for the solitary primary call-to-action on a screen.', badge: 'Filled' },
         { name: 'Secondary', description: 'Subtle neutral surface with border. The default appearance for routine, non-destructive actions.', badge: 'Neutral' },
@@ -148,9 +147,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   drawer: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-drawer--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8911-3193&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/drawer/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Drawers provide slide-out side panels anchoring auxiliary navigation, filters, inspector views, and form workflows.',
       items: [
@@ -201,9 +199,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   select: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-dropdown--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8911-3194&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/dropdown/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Select and Dropdown components allow users to choose one or more options from a collapsible list.',
       items: [
@@ -252,9 +249,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   field: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-field--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8911-3195&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/field/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Field provides the semantic container wrapping form inputs with Label, InfoLabel, validation messages, and hint text.',
       items: [
@@ -301,9 +297,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   'info-label': {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-infolabel--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8911-3196&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/infolabel/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'InfoLabel pairs a standard form label with an interactive info icon trigger that launches an explanatory popover on hover/click.',
       items: [
@@ -347,9 +342,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   'text-input': {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-input--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-4&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/input/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Inputs let people enter and edit single-line or multi-line text with built-in validation states.',
       items: [
@@ -398,9 +392,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   label: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-label--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-5&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/label/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Label provides readable, accessible captions associating with input fields and checkboxes.',
       items: [
@@ -445,9 +438,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   link: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-link--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-6&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/link/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Links navigate users to other pages, external destinations, or trigger in-page anchor jumps.',
       items: [
@@ -493,9 +485,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   list: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-list--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8995-4&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/list/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'List and ListView present structured collections of items, options, or complex records.',
       items: [
@@ -541,9 +532,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   menu: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-menu-menu--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-7&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/menu/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Menus present a list of common commands, navigation links, and settings in a floating popover.',
       items: [
@@ -590,9 +580,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   alert: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-messagebar--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-8&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/messagebar/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Alert and MessageBar display prominent feedback messages, system warnings, and error summaries.',
       items: [
@@ -639,7 +628,7 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   calendar: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/compat-components-calendar--docs',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
     types: {
       overview: 'Calendar displays a month grid allowing users to view, select, and inspect dates.',
       items: [
@@ -684,9 +673,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   'bottom-nav': {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-nav--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8995-5&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/nav/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Nav and BottomNav provide primary multi-destination navigation for mobile and desktop screens.',
       items: [
@@ -730,9 +718,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   persona: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-persona--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-10&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/persona/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Persona combines an Avatar with primary display name, job title, and presence badge status.',
       items: [
@@ -775,9 +762,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   popover: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-popover--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-11&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/popover/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Popover presents contextual floating cards containing text, controls, or action buttons.',
       items: [
@@ -821,9 +807,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   'progress-bar': {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-progressbar--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-12&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/progressbar/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'ProgressBar visualizes task progression from 0% to 100% or continuous background activity.',
       items: [
@@ -868,9 +853,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   'radio-group': {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-radiogroup--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-13&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/radiogroup/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'RadioGroup presents a set of mutually exclusive options where only one option can be selected at a time.',
       items: [
@@ -915,9 +899,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   rating: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-rating--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8995-6&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/rating/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Rating allows people to view and submit feedback scores using authentic star vectors.',
       items: [
@@ -961,9 +944,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   'search-box': {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-searchbox--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8995-7&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/searchbox/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'SearchBox provides specialized search inputs with leading magnifying glass icon and clear button.',
       items: [
@@ -1007,9 +989,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   skeleton: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-skeleton--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-14&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/skeleton/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Skeleton provides animated placeholder blocks simulating content shapes while loading.',
       items: [
@@ -1054,9 +1035,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   slider: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-slider--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-15&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/slider/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Slider allows users to choose a value or range along a continuous or stepped bar.',
       items: [
@@ -1102,9 +1082,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   'spin-button': {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-spinbutton--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-16&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/spin/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'SpinButton (NumberField) lets users increment or decrement a numeric value with stepper buttons.',
       items: [
@@ -1149,9 +1128,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   spinner: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-spinner--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-17&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/spinner/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Spinner displays an animated circular ring indicating an active loading process.',
       items: [
@@ -1197,9 +1175,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   switch: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-switch--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-18&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/switch/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Switch toggles the state of a single setting on or off with immediate effect.',
       items: [
@@ -1242,8 +1219,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   'status-indicator': {
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8995-8&p=f&t=oAeyUpJadWLPjABz-0',
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-badge--docs',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
     types: {
       overview: 'StatusIndicator visualizes online presence, service health, and operational readiness.',
       items: [
@@ -1289,8 +1266,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   'color-picker': {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-swatchpicker--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8995-9&p=f&t=oAeyUpJadWLPjABz-0',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'ColorPicker and SwatchPicker allow people to select color swatches or define custom hexadecimal values.',
       items: [
@@ -1333,9 +1310,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   tabs: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-tablist--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-19&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/tablist/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Tabs and TabList organize content across multiple panels, displaying one panel at a time.',
       items: [
@@ -1381,8 +1357,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   tag: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-tag-tag--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-20&p=f&t=oAeyUpJadWLPjABz-0',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Tags categorize items, display metadata attributes, or represent removable selections.',
       items: [
@@ -1427,8 +1403,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   'tag-picker': {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-tagpicker--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8995-10&p=f&t=oAeyUpJadWLPjABz-0',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'TagPicker combines an input field with interactive suggestions to select and manage multi-tag sets.',
       items: [
@@ -1470,8 +1446,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   'teaching-popover': {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-teachingpopover--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8995-11&p=f&t=oAeyUpJadWLPjABz-0',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'TeachingPopover guides users through new features, product onboarding steps, and tutorials.',
       items: [
@@ -1514,9 +1490,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   textarea: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-textarea--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-21&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/textarea/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Textarea provides multi-line text input for comments, release notes, descriptions, and messages.',
       items: [
@@ -1560,9 +1535,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   toast: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-toast--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-22&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/toast/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Toast displays transient notification cards that slide in at the viewport corner and auto-dismiss.',
       items: [
@@ -1606,9 +1580,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   toolbar: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-toolbar--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-24&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/toolbar/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Toolbar groups formatting actions, command buttons, toggle groups, and overflow menus.',
       items: [
@@ -1651,9 +1624,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   tooltip: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-tooltip--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-25&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/tooltip/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'Tooltip displays a brief descriptive text label when hovering or focusing an interactive control.',
       items: [
@@ -1696,9 +1668,8 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   'tree-view': {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-tree--docs',
-    figmaUrl: 'https://www.figma.com/design/cTyqG9EaIViUnh0ND5UyvR/Microsoft-Fluent-2-Web--Community-?node-id=8934-23&p=f&t=oAeyUpJadWLPjABz-0',
-    fluentUsageUrl: 'https://fluent2.microsoft.design/components/web/react/core/tree/usage',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
+    figmaUrl: 'https://github.com/Winplaybox/spectra-ui',
     types: {
       overview: 'TreeView represents hierarchical data structures like folder systems and nested taxonomies.',
       items: [
@@ -1743,7 +1714,7 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   overflow: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-overflow--docs',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
     types: {
       overview: 'Overflow dynamically monitors container width and shifts overflowing items into a secondary menu.',
       items: [
@@ -1785,7 +1756,7 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   image: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-image--docs',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
     types: {
       overview: 'Image displays optimized raster and vector graphics with shape masking and fallback states.',
       items: [
@@ -1829,7 +1800,7 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   portal: {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/components-portal-portal--docs',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
     types: {
       overview: 'Portal mounts children elements to a separate DOM container outside current hierarchy.',
       items: [
@@ -1870,7 +1841,7 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   'time-picker': {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/compat-components-timepicker--docs',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
     types: {
       overview: 'TimePicker lets users select or input specific hours and minutes from an interval list.',
       items: [
@@ -1913,7 +1884,7 @@ export const COMPONENT_RESOURCES_MAP: Record<string, Component7Pillars> = {
   },
 
   'date-picker': {
-    storybookUrl: 'https://storybooks.fluentui.dev/react/?path=/docs/compat-components-datepicker--docs',
+    storybookUrl: 'https://github.com/Winplaybox/spectra-ui/tree/main/packages/react',
     types: {
       overview: 'DatePicker pairs an input field with an interactive calendar popover for reliable date selection.',
       items: [
@@ -1974,12 +1945,14 @@ export function getComponentFigmaUrl(componentId: string): string | undefined {
 }
 
 /**
- * Universal Fluent 2 Official Usage Resolver
+ * Universal Spectra UI Official Specification Resolver
  */
-export function getComponentFluentUsageUrl(componentId: string): string | undefined {
+export function getComponentSpecUrl(componentId: string): string {
   const norm = normalizeComponentId(componentId);
-  return COMPONENT_RESOURCES_MAP[norm]?.fluentUsageUrl;
+  return `https://spectra-ui.winplaybox.in/components/${norm}`;
 }
+
+
 
 /**
  * Universal 7 Pillars Data Resolver
@@ -1997,7 +1970,7 @@ export function getComponent7Pillars(componentId: string, meta?: any): Component
   const compDesc = meta?.description || `${compName} is a high-performance cross-platform component in the Spectra UI design system.`;
   const storybookUrl = getComponentStorybookUrl(componentId);
   const figmaUrl = getComponentFigmaUrl(componentId);
-  const fluentUsageUrl = getComponentFluentUsageUrl(componentId);
+  const specUrl = getComponentSpecUrl(componentId);
 
   // Extract anatomy
   const anatomyParts = meta?.anatomy && Array.isArray(meta.anatomy) && meta.anatomy.length > 0
@@ -2024,7 +1997,7 @@ export function getComponent7Pillars(componentId: string, meta?: any): Component
   return {
     storybookUrl,
     figmaUrl,
-    fluentUsageUrl,
+    specUrl,
     types: {
       overview: `Conforming to enterprise design standards, ${compName} provides consistent appearances, responsive sizing scales, and cross-platform behavior.`,
       items: [

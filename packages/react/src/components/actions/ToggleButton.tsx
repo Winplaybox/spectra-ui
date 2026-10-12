@@ -14,7 +14,7 @@ export interface ToggleButtonProps extends ButtonProps {
 
 /**
  * ToggleButton - Two-state action button with aria-pressed semantics,
- * conforming to Fluent 2 Web specifications.
+ * conforming to Spectra UI specifications.
  */
 export const ToggleButton = forwardRef<HTMLButtonElement, ToggleButtonProps>(
   (

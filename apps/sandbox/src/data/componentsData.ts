@@ -36,7 +36,6 @@ export interface ComponentMetadata {
   };
   storybookUrl?: string;
   figmaUrl?: string;
-  fluentUsageUrl?: string;
 }
 
 const CORE_COMPONENTS_DATA: Record<string, ComponentMetadata> = {
@@ -44,7 +43,7 @@ const CORE_COMPONENTS_DATA: Record<string, ComponentMetadata> = {
     id: 'button',
     name: 'Button',
     category: 'Inputs',
-    description: 'Buttons express what action will occur when the user interacts with them. Conforming to Microsoft Fluent 2 Web design patterns, the Button suite provides five distinct visual appearances (Primary, Secondary, Outline, Subtle, Transparent), discrete sizing scales, shape geometries, and composite action button extensions (CompoundButton, MenuButton, SplitButton, ToggleButton).',
+    description: 'Buttons express what action will occur when the user interacts with them. The Spectra Button suite provides five distinct visual appearances (Primary, Secondary, Outline, Subtle, Transparent), discrete sizing scales, shape geometries, and composite action button extensions (CompoundButton, MenuButton, SplitButton, ToggleButton).',
     guidelines: 'Follow the single-primary rule: reserve the Primary appearance for the single most important action per view or dialog. Place affirmative/primary actions according to platform convention (right side in Web dialogs, next to cancel). Never wrap button label text across multiple lines—if secondary explanation is necessary, use a CompoundButton.',
     waiUrl: 'https://www.w3.org/WAI/ARIA/apg/patterns/button/',
     waiPattern: 'Button Pattern (WAI-ARIA 1.2)',
@@ -78,10 +77,10 @@ const CORE_COMPONENTS_DATA: Record<string, ComponentMetadata> = {
     motion: {
       duration: '--motion-fast (150ms)',
       easing: 'cubic-bezier(0.33, 1, 0.68, 1)',
-      description: 'Background and border transitions execute with responsive Fluent 2 curves and instant hover feedback.',
+      description: 'Background and border transitions execute with responsive Spectra curves and instant hover feedback.',
     },
     props: [
-      { name: 'appearance', type: "'primary' | 'secondary' | 'outline' | 'subtle' | 'transparent'", defaultValue: "'secondary'", description: 'Fluent 2 visual appearance hierarchy.' },
+      { name: 'appearance', type: "'primary' | 'secondary' | 'outline' | 'subtle' | 'transparent'", defaultValue: "'secondary'", description: 'Spectra visual appearance hierarchy.' },
       { name: 'variant', type: "'primary' | 'secondary' | 'tertiary' | 'danger'", defaultValue: "'primary'", description: 'Classic appearance prop for backward compatibility.' },
       { name: 'size', type: "'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large'", defaultValue: "'md'", description: 'Density scale: small (24px), medium (32px), large (40px).' },
       { name: 'shape', type: "'rounded' | 'circular' | 'square'", defaultValue: "'rounded'", description: 'Corner geometry: rounded (6px), circular (pill), square (0px).' },

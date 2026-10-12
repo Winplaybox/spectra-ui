@@ -4,7 +4,7 @@ import { ButtonAppearance, ButtonVariant, ButtonShape, ButtonSize } from './Butt
 
 export interface CompoundButtonProps extends Omit<React.ComponentPropsWithoutRef<'button'>, 'size'> {
   children: ReactNode;
-  /** Fluent 2 secondary text placed below primary label */
+  /** Secondary subtitle placed below primary label */
   secondaryContent?: ReactNode;
   /** Backward-compatible subtitle alias */
   subtitle?: ReactNode;
@@ -28,7 +28,7 @@ export interface CompoundButtonProps extends Omit<React.ComponentPropsWithoutRef
 
 /**
  * CompoundButton - High-prominence action button pairing a headline with explanatory secondary text.
- * Engineered for call-to-action cards, setup wizards, and multi-line decision points (Fluent 2 Web pattern).
+ * Engineered for call-to-action cards, setup wizards, and multi-line decision points (Spectra UI Web pattern).
  */
 export const CompoundButton = forwardRef<HTMLButtonElement, CompoundButtonProps>(
   (

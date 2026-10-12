@@ -85,7 +85,7 @@ export const MotionSection: React.FC<MotionSectionProps> = ({ motionId }) => {
       <Box style={{ padding: '20px 24px', borderBottom: '1px solid var(--color-border-subtle)', backgroundColor: 'var(--color-surface-raised)' }}>
         <Stack direction="row" align="center" justify="between" wrap gap="md">
           <Stack direction="row" align="center" gap="sm">
-            <Badge variant="primary">Fluent 2 Motion</Badge>
+            <Badge variant="primary">Spectra Motion</Badge>
             <Text as="h2" variant="heading" size="md" weight="bold">
               Kinetic Curve & Timing Sandbox
             </Text>

@@ -5,7 +5,7 @@ export const buttonCapability: ComponentCapability = {
   name: 'Button',
   displayName: 'Button',
   category: 'Inputs',
-  description: 'Primary interactive trigger adhering to Fluent 2 Web specifications, supporting five distinct visual appearances, discrete sizing scales, shape silhouettes, and composite action variants.',
+  description: 'Primary interactive trigger adhering to Spectra UI specifications, supporting five distinct visual appearances, discrete sizing scales, shape silhouettes, and composite action variants.',
   slots: [
     { name: 'leading-icon', description: 'Vector icon displayed before button label', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
     { name: 'trailing-icon', description: 'Vector icon displayed after button label', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },

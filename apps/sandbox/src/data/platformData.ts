@@ -71,11 +71,11 @@ export const PLATFORMS: Record<Platform, PlatformMetadata> = {
     nativeLanguage: 'Kotlin / Jetpack Compose',
     minOsVersion: 'Android 8.0 Oreo (API Level 26+), Target SDK 34+',
     minFrameworkVersion: 'React Native 0.72+ / Expo SDK 50+',
-    touchStandard: 'Material Design Guidelines 48×48 dp minimum touch target',
+    touchStandard: 'Android 48×48 dp minimum touch target',
     accessibilityStandard: 'Android AccessibilityNodeInfo & TalkBack',
     motionEngine: 'React Native Reanimated 3 / Jetpack Compose Animation',
-    description: 'Hardware ripple effects, Material surface elevation shadows, edge-to-edge system navigation, and back-handler integration.',
-    themeCapabilities: ['Material 3 Dynamic Surface', 'Night Mode (UiModeManager)', 'Hardware Acceleration', 'TalkBack Hints'],
+    description: 'Hardware ripple effects, Android surface elevation shadows, edge-to-edge system navigation, and back-handler integration.',
+    themeCapabilities: ['Android Dynamic Surface', 'Night Mode (UiModeManager)', 'Hardware Acceleration', 'TalkBack Hints'],
   },
   windows: {
     id: 'windows',
@@ -215,8 +215,8 @@ struct IOS${comp}View: View {
       platform: 'android',
       status: 'supported',
       version: 'v0.1.0 (API 26+)',
-      notes: 'Material ripple effects, hardware elevation shadows, 48dp touch targets, and TalkBack semantics.',
-      touchStandard: '48×48 dp minimum (Material Design)',
+      notes: 'Android ripple effects, hardware elevation shadows, 48dp touch targets, and TalkBack semantics.',
+      touchStandard: '48×48 dp minimum (Android Native)',
       primarySnippet: `// Android React Native Implementation
 import React from 'react';
 import { ${comp} } from '@winplaybox/react-native';

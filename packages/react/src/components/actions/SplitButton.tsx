@@ -12,7 +12,7 @@ export interface SplitButtonOption {
 
 export interface SplitButtonProps extends Omit<React.ComponentPropsWithoutRef<'div'>, 'onClick'> {
   children?: ReactNode;
-  /** Fluent 2 appearance variant */
+  /** Spectra appearance variant */
   appearance?: ButtonAppearance;
   /** Classic variant prop */
   variant?: ButtonVariant;

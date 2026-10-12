@@ -62,9 +62,9 @@ export const IOSLoginScreen = () => {
 };`,
     },
     android: {
-      title: 'Google Android Implementation (Material 3 & React Native)',
+      title: 'Google Android Implementation (Android Native & React Native)',
       pkg: '@winplaybox/react-native',
-      code: `// Google Android React Native Implementation (Material 48dp Target)
+      code: `// Google Android React Native Implementation (Android 48dp Target)
 import React from 'react';
 import { Button, TextInput, Stack, Card } from '@winplaybox/react-native';
 import { CheckIcon } from '@winplaybox/icons';

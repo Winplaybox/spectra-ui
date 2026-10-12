@@ -82,7 +82,7 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
     primitivesImport: "import { useButtonProps } from '@winplaybox/primitives';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
-      { name: 'appearance', type: "'primary' | 'secondary' | 'outline' | 'subtle' | 'transparent'", defaultValue: "'secondary'", description: 'Fluent 2 visual appearance hierarchy.' },
+      { name: 'appearance', type: "'primary' | 'secondary' | 'outline' | 'subtle' | 'transparent'", defaultValue: "'secondary'", description: 'Spectra UI visual appearance hierarchy.' },
       { name: 'variant', type: "'primary' | 'secondary' | 'tertiary' | 'danger'", defaultValue: "'primary'", description: 'Visual appearance and semantic hierarchy of the button.' },
       { name: 'shape', type: "'rounded' | 'circular' | 'square'", defaultValue: "'rounded'", description: 'Corner silhouette: rounded (6px), circular (pill), or square (0px).' },
       { name: 'size', type: "'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large'", defaultValue: "'md'", description: 'Sizing scale: small (24px), medium (32px), large (40px).' },
@@ -178,10 +178,10 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
     importStatement: "import { CompoundButton } from '@winplaybox/react';",
     subpathImport: "import CompoundButton from '@winplaybox/react/CompoundButton';",
     nativeImport: "import { Button } from '@winplaybox/react-native';",
-    description: 'High-prominence action button pairing a headline with explanatory secondary text (Fluent 2 Web pattern).',
+    description: 'High-prominence action button pairing a headline with explanatory secondary text (Spectra UI Web pattern).',
     props: [
       { name: 'children', type: 'React.ReactNode', defaultValue: 'undefined', required: true, description: 'Primary action title/headline.' },
-      { name: 'secondaryContent', type: 'React.ReactNode', defaultValue: 'undefined', description: 'Fluent 2 secondary subtitle placed below primary label.' },
+      { name: 'secondaryContent', type: 'React.ReactNode', defaultValue: 'undefined', description: 'Spectra UI secondary subtitle placed below primary label.' },
       { name: 'appearance', type: "'primary' | 'secondary' | 'outline' | 'subtle' | 'transparent'", defaultValue: "'secondary'", description: 'Visual appearance hierarchy.' },
       { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Sizing scale: small (24px), medium (32px), large (40px).' },
       { name: 'shape', type: "'rounded' | 'circular' | 'square'", defaultValue: "'rounded'", description: 'Corner geometry.' },
@@ -211,11 +211,11 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
     importStatement: "import { MenuButton } from '@winplaybox/react';",
     subpathImport: "import MenuButton from '@winplaybox/react/MenuButton';",
     nativeImport: "import { Button } from '@winplaybox/react-native';",
-    description: 'Action button paired with a dropdown chevron indicator that displays a contextual flyout menu (Fluent 2 Web pattern).',
+    description: 'Action button paired with a dropdown chevron indicator that displays a contextual flyout menu (Spectra UI Web pattern).',
     props: [
       { name: 'children', type: 'React.ReactNode', defaultValue: 'undefined', required: true, description: 'Action label text.' },
       { name: 'menuItems', type: 'MenuButtonItem[]', defaultValue: '[]', description: 'Array of menu items with label, icon, and onClick.' },
-      { name: 'appearance', type: "'primary' | 'secondary' | 'outline' | 'subtle' | 'transparent'", defaultValue: "'secondary'", description: 'Fluent 2 appearance tier.' },
+      { name: 'appearance', type: "'primary' | 'secondary' | 'outline' | 'subtle' | 'transparent'", defaultValue: "'secondary'", description: 'Spectra UI appearance tier.' },
       { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Density scale.' },
       { name: 'disabled', type: 'boolean', defaultValue: 'false', description: 'Disables interaction.' },
       { name: 'disabledFocusable', type: 'boolean', defaultValue: 'false', description: 'Keeps button in keyboard tab order while disabled.' },
@@ -265,7 +265,7 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
     importStatement: "import { ToggleButton } from '@winplaybox/react';",
     subpathImport: "import ToggleButton from '@winplaybox/react/ToggleButton';",
     nativeImport: "import { Button } from '@winplaybox/react-native';",
-    description: 'Two-state action button with aria-pressed semantics conforming to Fluent 2 Web specifications.',
+    description: 'Two-state action button with aria-pressed semantics conforming to Spectra UI specifications.',
     props: [
       { name: 'children', type: 'React.ReactNode', defaultValue: 'undefined', required: true, description: 'Button label text.' },
       { name: 'checked', type: 'boolean', defaultValue: 'undefined', description: 'Controlled pressed state.' },
@@ -745,7 +745,7 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
     importStatement: "import { Label } from '@winplaybox/react';",
     subpathImport: "import Label from '@winplaybox/react/Label';",
     nativeImport: "import { Text } from 'react-native';",
-    description: 'Foundational form control label conforming to Microsoft Fluent 2 Web specifications with WAI-ARIA and required marker semantics.',
+    description: 'Foundational form control label conforming to Spectra UI specifications with WAI-ARIA and required marker semantics.',
     props: [
       { name: 'htmlFor', type: 'string', defaultValue: 'undefined', description: 'Associated form control identifier.' },
       { name: 'required', type: 'boolean', defaultValue: 'false', description: 'Whether the field is required; renders an accessible required asterisk.' },

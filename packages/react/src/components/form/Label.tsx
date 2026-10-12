@@ -15,7 +15,7 @@ export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> 
    */
   required?: boolean;
   /**
-   * Size scale conforming to Fluent 2 typography tokens.
+   * Size scale conforming to Spectra UI typography tokens.
    * @default 'medium'
    */
   size?: LabelSize;
@@ -45,7 +45,7 @@ const sizeFontMap: Record<string, string> = {
 };
 
 /**
- * Label — Foundational form control label conforming to Microsoft Fluent 2 Web specifications.
+ * Label — Foundational form control label conforming to Spectra UI specifications.
  * Ensures strict WAI-ARIA accessibility, tokenized typography, and accessible required markers.
  */
 export const Label = forwardRef<HTMLLabelElement, LabelProps>(

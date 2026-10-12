@@ -314,7 +314,7 @@ export const SIDEBAR_NAVIGATION: NavSection[] = [
 ];
 
 /**
- * Master Motion Navigation Group (Fluent 2 Motion Introduction & Atoms)
+ * Master Motion Navigation Group (Spectra Motion Specification & Atoms)
  */
 export const MOTION_NAVIGATION_GROUP: NavSection = {
   id: 'motion-section',

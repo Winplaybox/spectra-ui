@@ -28,7 +28,7 @@ export interface MenuButtonProps extends ButtonProps {
 
 /**
  * MenuButton - Action button paired with a dropdown chevron indicator that
- * displays a contextual flyout menu, conforming to Fluent 2 Web specifications.
+ * displays a contextual flyout menu, conforming to Spectra UI specifications.
  */
 export const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(
   (

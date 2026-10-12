@@ -6,7 +6,7 @@ export const tableCapability: ComponentCapability = {
   name: 'Table',
   displayName: 'Adaptive Table',
   category: 'Data Display',
-  description: 'Enterprise adaptive tabular data presenter: Fluent 2 DataGrid on Web, Material 3 Data Table on Android, and Inset Grouped Table on iOS.',
+  description: 'Enterprise adaptive tabular data presenter: Responsive DataGrid on Web, Adaptive Mobile Table on Android, and Inset Grouped Table on iOS.',
   slots: [
     { name: 'columns', description: 'Table column configurations and cell formatters', platforms: ['web', 'android', 'ios', 'windows', 'macos'] },
     { name: 'header', description: 'Table header and sort indicators', platforms: ['web', 'android', 'windows', 'macos'] },

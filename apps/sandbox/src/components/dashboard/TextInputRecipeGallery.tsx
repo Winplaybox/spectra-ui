@@ -19,7 +19,7 @@ import { getRecipes } from '@winplaybox/platform-capabilities';
 /**
  * TextInputRecipeGallery
  *
- * Implements the deep MUI / Fluent UI benchmark recipe gallery for Spectra TextInput.
+ * Implements the production recipe gallery for Spectra TextInput.
  * Every recipe is strictly filtered by the active platform capability registry.
  * Recipes supported on the active platform render interactive previews and copyable code.
  */
@@ -204,7 +204,7 @@ export default function NativeOutlinedExample(): JSX.Element {
         <ComponentDemoCard
           id="input-filled"
           title="03 Filled Variant"
-          description="Subtle tinted background with high contrast bottom line emphasis, popular in Material Design and mobile touch forms."
+          description="Subtle tinted background with high contrast bottom line emphasis, popular in mobile touch and data density forms."
           compactCode={`<TextInput variant="filled" label="Project Code" value={value} onChange={(e) => setValue(e.target.value)} />`}
           webPreview={
             <div style={{ maxWidth: 420, width: '100%' }}>

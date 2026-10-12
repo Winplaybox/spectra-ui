@@ -444,7 +444,7 @@ export const TokensSection: React.FC<TokensSectionProps> = ({ tokenId = 'colors'
             <CardHeader>
               <CardTitle>Extended Swiss Flat UI Palettes (50–900 Ramps)</CardTitle>
               <CardDescription>
-                Curated harmonic palettes inspired by Swiss poster modernism and Material UI density scales. Click any swatch to copy hex code.
+                Curated harmonic palettes inspired by Swiss poster modernism and ergonomic density scales. Click any swatch to copy hex code.
               </CardDescription>
             </CardHeader>
             <CardContent>

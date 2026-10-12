@@ -542,11 +542,11 @@ export const ComponentVariantsShowcase: React.FC<ComponentVariantsShowcaseProps>
     case 'button':
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
-          {/* Demo 1: Fluent 2 Visual Appearances */}
+          {/* Demo 1: Visual Appearances */}
           <ComponentDemoCard
             id="button-appearances"
-            title="01 Visual Appearances (Fluent 2 Hierarchy)"
-            description="Conforming to Microsoft Fluent 2 Web design language, Spectra provides five discrete appearance tiers: Primary (brand emphasized call-to-action), Secondary (standard neutral baseline), Outline (transparent canvas with subtle border), Subtle (minimalist text action with hover highlight), and Transparent (borderless accent trigger)."
+            title="01 Visual Appearances (Spectra Appearance Hierarchy)"
+            description="Spectra provides five discrete appearance tiers: Primary (brand emphasized call-to-action), Secondary (standard neutral baseline), Outline (transparent canvas with subtle border), Subtle (minimalist text action with hover highlight), and Transparent (borderless accent trigger)."
             compactCode={`<Button appearance="primary">Primary Action</Button>
 <Button appearance="secondary">Secondary Action</Button>
 <Button appearance="outline">Outline Action</Button>
@@ -652,7 +652,7 @@ export default function NativeButtonSizesDemo(): JSX.Element {
           <ComponentDemoCard
             id="button-shapes"
             title="03 Silhouettes & Geometries (Rounded, Circular, Square)"
-            description="Fluent 2 supports three shape geometries: Rounded (default 6px border radius), Circular (full pill radius or circle), and Square (0px radius for strict docked boundaries)."
+            description="Spectra Button supports three shape geometries: Rounded (default 6px border radius), Circular (full pill radius or circle), and Square (0px radius for strict docked boundaries)."
             compactCode={`<Button appearance="secondary" shape="rounded">Rounded (6px)</Button>
 <Button appearance="secondary" shape="circular">Circular (Pill)</Button>
 <Button appearance="secondary" shape="square">Square (0px)</Button>
@@ -766,7 +766,7 @@ export default function NativeButtonIconsDemo(): JSX.Element {
           <ComponentDemoCard
             id="button-compound"
             title="05 CompoundButton (Headline + Subtitle Context)"
-            description="Fluent 2 CompoundButton features a bold primary headline action paired with a descriptive secondary subtitle. Essential for high-stakes onboarding, tier selection, and configuration choices where buttons must not wrap single-line labels."
+            description="Spectra CompoundButton features a bold primary headline action paired with a descriptive secondary subtitle. Essential for high-stakes onboarding, tier selection, and configuration choices where buttons must not wrap single-line labels."
             compactCode={`<CompoundButton
   appearance="primary"
   icon={<SparklesIcon size={20} />}
@@ -1285,7 +1285,7 @@ export default function NativeCompoundButtonDemo(): JSX.Element {
           <ComponentDemoCard
             id="compound-appearances"
             title="02 Visual Appearances"
-            description="CompoundButton supports Fluent 2 appearances: Primary, Secondary, Outline, and Subtle."
+            description="CompoundButton supports Spectra appearances: Primary, Secondary, Outline, and Subtle."
             compactCode={`<CompoundButton appearance="outline" secondaryContent="Review deployment parameters">Deploy Staging</CompoundButton>`}
             webPreview={
               <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
@@ -1409,7 +1409,7 @@ export default function MenuButtonDemo(): JSX.Element {
           <ComponentDemoCard
             id="menu-button-appearances"
             title="02 Visual Appearances (Primary, Secondary, Outline)"
-            description="Apply Fluent 2 appearance tiers to menu buttons according to surrounding interface hierarchy."
+            description="Apply Spectra appearance tiers to menu buttons according to surrounding interface hierarchy."
             compactCode={`<MenuButton appearance="primary" menuItems={[{ id: '1', label: 'Option 1' }]}>Primary Menu</MenuButton>
 <MenuButton appearance="outline" menuItems={[{ id: '1', label: 'Option 1' }]}>Outline Menu</MenuButton>`}
             webPreview={
@@ -1607,7 +1607,7 @@ export default function ToggleButtonDemo(): JSX.Element {
           <ComponentDemoCard
             id="toggle-button-appearances"
             title="02 Visual Appearances (Primary, Secondary, Subtle)"
-            description="Supports Fluent 2 appearances with distinct active pressed background and border contrast."
+            description="Supports Spectra appearances with distinct active pressed background and border contrast."
             compactCode={`<ToggleButton appearance="primary" checked={true}>Primary Toggle</ToggleButton>
 <ToggleButton appearance="subtle" checked={true}>Subtle Toggle</ToggleButton>`}
             webPreview={
@@ -6875,7 +6875,7 @@ export default function NativeCurrentPageDemo() {
           <ComponentDemoCard
             id="breadcrumb-non-interactive"
             title="07 Non-interactive File Path Pattern"
-            description="Informational path string for task flows, audit logs, or drawers where navigation away is undesirable, following the Fluent 2 non-interactive file path pattern."
+            description="Informational path string for task flows, audit logs, or drawers where navigation away is undesirable, following the non-interactive file path pattern."
             webPreview={
               <div style={{ background: 'var(--color-bg-subtle, #f8fafc)', padding: 14, borderRadius: 8, border: '1px solid var(--color-border-subtle, #e2e8f0)', width: '100%' }}>
                 <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--color-text-secondary)', display: 'block', marginBottom: 8 }}>
@@ -8878,7 +8878,7 @@ export default function CardPreviewDemo() {
                   <Stack gap="sm" align="center">
                     <Text variant="heading-sm" weight="bold">Spectra UI Slide 1 of 3</Text>
                     <Text variant="body-sm" color="secondary">
-                      Enterprise multi-platform component library conforming to Microsoft Fluent 2.
+                      Enterprise multi-platform component library powered by Spectra design tokens.
                     </Text>
                   </Stack>
                 </Box>
@@ -9151,15 +9151,15 @@ export default function PortalMountDemo() {
 
       return (
         <Stack direction="column" gap="lg">
-          {/* Demo 1: Fluent UI Resizable Area Benchmark */}
+          {/* Demo 1: Resizable Area Overflow */}
           <ComponentDemoCard
             id="overflow-toolbar"
-            title="01 Resizable Area Overflow (Fluent UI Benchmark)"
-            description="Matches Microsoft Fluent UI 2 @fluentui/react-overflow. Drag the bottom-right corner or range slider to dynamically collapse overflowing items into the '+N items' menu."
+            title="01 Resizable Area Overflow"
+            description="High-performance responsive container overflow. Drag the bottom-right corner or range slider to dynamically collapse overflowing items into the '+N items' menu."
             webCode={`import React from 'react';
 import { Overflow, OverflowItem, OverflowMenu, Button, Box } from '@winplaybox/react';
 
-export default function OverflowFluentDemo() {
+export default function OverflowDemo() {
   const items = Array.from({ length: 8 }, (_, i) => ({ id: \`item-\${i}\`, label: \`Item \${i}\` }));
   const labels = Object.fromEntries(items.map(i => [i.id, i.label]));
 

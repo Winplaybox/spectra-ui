@@ -35,22 +35,22 @@ interface SidebarProps {
   onCloseMobile: () => void;
 }
 
-export interface FluentComponentNode {
+export interface SpectraComponentNode {
   id: string;
   name: string;
   path: string;
   isFolder?: boolean;
   badge?: string;
   badgeColor?: 'primary' | 'success' | 'warning' | 'neutral';
-  children?: FluentComponentNode[];
+  children?: SpectraComponentNode[];
 }
 
 /**
- * Microsoft Fluent 2 Master Components Hierarchy (Sorted Strictly A-Z)
+ * Spectra UI Master Components Hierarchy (Sorted Strictly A-Z)
  * Component families with variants/sub-components are organized as folders.
  * Standalone components are leaf items rendered with the document icon.
  */
-export const FLUENT_COMPONENTS_TREE: FluentComponentNode[] = [
+export const SPECTRA_COMPONENTS_TREE: SpectraComponentNode[] = [
   { id: 'accordion', name: 'Accordion', path: '/components/accordion' },
   { id: 'alert', name: 'Alert', path: '/components/alert' },
   { id: 'app-bar', name: 'AppBar', path: '/components/app-bar' },
@@ -255,7 +255,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  // View mode toggle for Components section: 'tree' (A-Z with folders) vs 'categories' (MUI grouping)
+  // View mode toggle for Components section: 'tree' (A-Z with folders) vs 'categories' (Category grouping)
   const [componentViewMode, setComponentViewMode] = useState<'tree' | 'categories'>('tree');
 
   // Track open/collapsed state of main top-level sections (Benchmark Screenshot)
@@ -322,7 +322,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   useEffect(() => {
     if (currentRoute.type === 'components' && currentRoute.id) {
       const activeId = currentRoute.id;
-      for (const node of FLUENT_COMPONENTS_TREE) {
+      for (const node of SPECTRA_COMPONENTS_TREE) {
         if (node.isFolder && node.children) {
           const hasChild = node.children.some(
             (c) => c.id === activeId || c.path.includes(activeId)
@@ -395,7 +395,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   // Filter component tree strictly for the active platform
   const platformFilteredTree = useMemo(() => {
-    return FLUENT_COMPONENTS_TREE.map((node) => {
+    return SPECTRA_COMPONENTS_TREE.map((node) => {
       if (node.isFolder && node.children) {
         const filteredChildren = node.children.filter((c) =>
           isPlatformSupported(c.id, currentPlatform)
@@ -437,7 +437,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         }
         return null;
       })
-      .filter((n): n is FluentComponentNode => n !== null);
+      .filter((n): n is SpectraComponentNode => n !== null);
   }, [platformFilteredTree, searchQuery]);
 
   // Filtered categories for category view mode
@@ -447,7 +447,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   const isRouteActive = (path: string) => currentRoute.path === path;
 
-  const isComponentNodeActive = (node: FluentComponentNode) => {
+  const isComponentNodeActive = (node: SpectraComponentNode) => {
     if (currentRoute.type !== 'components') return false;
     if (node.path === currentRoute.path) return true;
     if (node.id === currentRoute.id) return true;
@@ -459,7 +459,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     return false;
   };
 
-  const isFolderActive = (node: FluentComponentNode) => {
+  const isFolderActive = (node: SpectraComponentNode) => {
     if (currentRoute.type !== 'components' || !node.children) return false;
     return node.children.some((c) => isComponentNodeActive(c));
   };
@@ -557,7 +557,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   fontWeight: 500,
                 }}
               >
-                Fluent 2 Engine
+                Design System
               </div>
             </div>
           </a>
@@ -903,7 +903,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             )}
           </div>
 
-          {/* SECTION 2: COMPONENTS (Fluent 2 Architecture) */}
+          {/* SECTION 2: COMPONENTS (Spectra UI Architecture) */}
           <div>
             <div
               style={{
@@ -979,7 +979,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             {expandedSections.components && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 1 }}>
                 {componentViewMode === 'tree' ? (
-                  /* Mode A: Fluent 2 A-Z Tree with Folders & Document Icons */
+                  /* Mode A: A-Z Tree with Folders & Document Icons */
                   displayedComponentTree.map((node) => {
                     if (node.isFolder && node.children) {
                       const isFolderOpen = expandedFolders[node.id] ?? false;
@@ -1735,7 +1735,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <span>Template store</span>
           </a>
 
-          {/* DIVIDER & EXTERNAL REFERENCE 1: FLUENT SYSTEM ICONS */}
+          {/* DIVIDER & EXTERNAL REFERENCE 1: SPECTRA SYSTEM ICONS */}
           <div style={{ height: 1, backgroundColor: 'var(--color-border-subtle)', margin: '8px 4px 6px 4px' }} />
 
           <a
@@ -1764,7 +1764,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <ChevronRightIcon size={11} color="var(--color-text-muted)" />
-              <span>Fluent System Icons</span>
+              <span>Spectra System Icons</span>
             </div>
             <GlobeIcon size={14} color="var(--color-text-muted)" />
           </a>

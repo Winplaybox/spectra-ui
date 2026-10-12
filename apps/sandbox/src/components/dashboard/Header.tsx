@@ -180,9 +180,9 @@ export const Header: React.FC<HeaderProps> = ({
           </nav>
         </div>
 
-        {/* Global Controls: Microsoft Fluent 2 CommandBar */}
+        {/* Global Controls */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          {/* Fluent 2 SearchBox trigger (Ctrl+K) */}
+          {/* Global Search trigger (Ctrl+K) */}
           <button
             onClick={onOpenSearch}
             title="Search documentation (Ctrl+K)"

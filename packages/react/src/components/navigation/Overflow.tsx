@@ -58,7 +58,6 @@ export interface OverflowProps extends React.HTMLAttributes<HTMLDivElement> {
 /**
  * Overflow - Responsive container that automatically detects when items exceed
  * available width and transitions overflowing items into an overflow menu.
- * Benchmarked directly against Microsoft Fluent UI 2 (@fluentui/react-overflow).
  */
 export const Overflow = forwardRef<HTMLDivElement, OverflowProps>(
   ({ minimumVisible = 0, padding = 8, children, className, style, ...rest }, ref) => {

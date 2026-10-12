@@ -35,7 +35,7 @@ export const button = style({
   },
 });
 
-// Fluent 2 & Spectra Visual Appearances
+// Spectra Visual Appearances
 export const primary = style({
   backgroundColor: 'var(--color-action-primary, #0078d4)',
   color: 'var(--color-text-on-action, #ffffff)',

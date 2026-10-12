@@ -147,11 +147,10 @@ import { NativeSponsorAd } from './NativeSponsorAd';
 import {
   getComponentStorybookUrl,
   getComponentFigmaUrl,
-  getComponentFluentUsageUrl,
   getComponent7Pillars,
 } from '../../data/componentResources';
 
-// Dynamic Component Resource Pill Icons (Fluent 2 & Benchmark - Authentic Vectors, Zero Emojis)
+// Dynamic Component Resource Pill Icons (Spectra UI Specification - Authentic Vectors, Zero Emojis)
 const StorybookPillIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, display: 'block', ...style }}>
     <path
@@ -198,14 +197,6 @@ const PackagePillIcon: React.FC<{ size?: number; style?: React.CSSProperties }> 
   </svg>
 );
 
-const FluentLogoIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 20, style }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0, display: 'block', ...style }}>
-    <rect x="2" y="2" width="9" height="9" rx="2" fill="#0078D4" />
-    <rect x="13" y="2" width="9" height="9" rx="2" fill="#2B88D8" />
-    <rect x="2" y="13" width="9" height="9" rx="2" fill="#005A9E" />
-    <rect x="13" y="13" width="9" height="9" rx="2" fill="#0078D4" />
-  </svg>
-);
 
 const GitHubPillIcon: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 14, style }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0, display: 'block', color: 'var(--color-text-secondary)', ...style }}>
@@ -449,7 +440,6 @@ export const ComponentDocPage: React.FC<ComponentDocPageProps> = ({ componentId 
   const pillarsData = getComponent7Pillars(meta.id, meta);
   const storybookUrl = getComponentStorybookUrl(meta.id);
   const figmaUrl = getComponentFigmaUrl(meta.id);
-  const fluentUsageUrl = getComponentFluentUsageUrl(meta.id);
 
   // Documentation Page Feedback & Edit State
   const [feedbackFormOpen, setFeedbackFormOpen] = useState(false);
@@ -4950,7 +4940,7 @@ export const Native${meta.name}Demo = () => {
               </Stack>
             </Stack>
 
-            {/* Fluent UI Resizable Area Container (Image 4 Benchmark) */}
+            {/* Resizable Area Container */}
             <Box
               style={{
                 width: overflowSandboxWidth,
@@ -5230,7 +5220,7 @@ export const Native${meta.name}Demo = () => {
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%' }}>
             <TextInput
-              label={currentPlatform === 'android' ? 'Search (Material 3 · 48dp)' : 'Search (Apple HIG · 44pt)'}
+              label={currentPlatform === 'android' ? 'Search (Android · 48dp)' : 'Search (iOS · 44pt)'}
               placeholder="Search stories, documents..."
               leftIcon={<SearchIcon size={16} />}
               description={currentPlatform === 'android' ? 'Elevation shadow and TalkBack accessibility' : 'Dynamic Type scale and VoiceOver traits'}
@@ -6156,7 +6146,7 @@ export const Native${meta.name}Demo = () => {
             </div>
           </div>
 
-          {/* 2. Fluent UI Component Props Reference (Rendered immediately after Basic component before variants showcase) */}
+          {/* 2. Spectra Component Props Reference (Rendered immediately after Basic component before variants showcase) */}
           <ComponentApiSection componentId={meta.id} />
 
           {/* 3. Variants Showcase (Rendered directly without redundant banner) */}
@@ -6171,7 +6161,7 @@ export const Native${meta.name}Demo = () => {
               3. Layout: 4px grid spacing tokens, responsive density, inline vs full-width block expansion, anatomy & motion.
               4. Content: Action-oriented verbs, single-line labeling, capitalization rules, and Dos & Don'ts.
               5. Accessibility: WCAG 2.1 AA compliance, WAI-ARIA APG patterns, double-ring focus visible indicators, and keyboard navigation.
-              6. Resources: Direct Storybook interactive canvas URLs, Figma Community design specs, Fluent 2 usage, and WAI-ARIA patterns.
+              6. Resources: Direct Storybook interactive canvas URLs, Spectra Figma design specs, and WAI-ARIA patterns.
               7. Quick Guides: Production code recipes, tree-shakeable imports, and minimizing bundle size.
               ========================================================================= */}
 
@@ -6208,7 +6198,7 @@ export const Native${meta.name}Demo = () => {
                       border: '1px solid rgba(0, 127, 255, 0.2)',
                     }}
                   >
-                    Fluent 2 Specification
+                    Spectra UI Specification
                   </span>
                 </div>
                 <button
@@ -7607,7 +7597,7 @@ export const Native${meta.name}Demo = () => {
                   Google Android Recipes & Interactive Variations
                 </Text>
                 <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>
-                  Material 3 48dp Touch Targets · Kotlin & React Native
+                  Android 48dp Touch Targets · Kotlin & React Native
                 </span>
               </div>
             </Card>
@@ -8509,21 +8499,8 @@ export const Native${meta.name}Demo = () => {
               >
                 6. Quick Guides
               </a>
-
-              {/* Section: API Reference */}
-              <a
-                href="#api"
-                onClick={(e) => scrollToSection(e, 'api')}
-                style={{
-                  display: 'block',
-                  padding: '6px 0 6px 14px',
-                  marginLeft: -1,
-                  borderLeft: (activeSection === 'api' || activeSection === 'props') ? '2px solid var(--color-action-primary)' : '2px solid transparent',
-                  color: (activeSection === 'api' || activeSection === 'props') ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
-                  fontWeight: (activeSection === 'api' || activeSection === 'props') ? 600 : 400,
-                  textDecoration: 'none',
-                  fontSize: 13,
-                  transition: 'all 0.12s ease',
+            </>
+          )}
         </nav>
 
         {/* Developer Dynamic Native Sponsor Ad Unit (Content Sidebar) */}

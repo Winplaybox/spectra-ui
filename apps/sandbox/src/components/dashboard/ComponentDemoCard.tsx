@@ -346,7 +346,7 @@ export const ComponentDemoCard: React.FC<ComponentDemoCardProps> = ({
         transition: 'box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
       }}
     >
-      {/* Header Bar: Fluent 2 CardHeader */}
+      {/* Header Bar */}
       <div
         style={{
           padding: '14px 20px',

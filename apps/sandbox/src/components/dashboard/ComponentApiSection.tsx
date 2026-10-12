@@ -8,7 +8,7 @@ interface ComponentApiSectionProps {
 }
 
 /**
- * Microsoft Fluent UI Benchmark Component API Section
+ * Spectra UI Component API Reference
  * Dedicated, in-depth Props Reference documenting the primary component
  * plus all child, wrapper, and subcomponents that make up the component family.
  */
@@ -81,7 +81,7 @@ export const ComponentApiSection: React.FC<ComponentApiSectionProps> = ({ compon
 
   return (
     <div id="api" style={{ display: 'flex', flexDirection: 'column', gap: 20, scrollMarginTop: 80 }}>
-      {/* Header Card (Fluent UI Style) */}
+      {/* Header Card */}
       <Card
         variant="bordered"
         style={{
@@ -167,7 +167,7 @@ export const ComponentApiSection: React.FC<ComponentApiSectionProps> = ({ compon
         </p>
       </Card>
 
-      {/* Main Props Card with Fluent UI Subcomponent Selector */}
+      {/* Main Props Card with Subcomponent Selector */}
       <Card
         variant="bordered"
         style={{
@@ -177,7 +177,7 @@ export const ComponentApiSection: React.FC<ComponentApiSectionProps> = ({ compon
           boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
         }}
       >
-        {/* Subcomponent Switcher Toolbar (Fluent UI Benchmark) */}
+        {/* Subcomponent Switcher Toolbar */}
         {allSubcomponents.length > 1 && (
           <div
             style={{
@@ -327,7 +327,7 @@ export const ComponentApiSection: React.FC<ComponentApiSectionProps> = ({ compon
           </div>
         </div>
 
-        {/* Props Table (Exact Fluent UI Layout) */}
+        {/* Props Table */}
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
             <thead>

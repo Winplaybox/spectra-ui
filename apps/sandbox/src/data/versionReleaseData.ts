@@ -136,3 +136,5 @@ export function getComponentGitHubUrl(
   const subpath = COMPONENT_FOLDER_MAP[componentId] || `components/${componentId}.tsx`;
   return `https://github.com/Winplaybox/spectra-ui/blob/${targetVersion}/packages/${pkg}/src/components/${subpath}`;
 }
+
+export const ALL_RELEASES = RELEASES_DATA;

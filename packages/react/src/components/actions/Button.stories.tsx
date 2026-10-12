@@ -39,7 +39,7 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Fluent 2 Appearances
+// Spectra Appearances
 export const Primary: Story = {
   args: { appearance: 'primary' },
 };

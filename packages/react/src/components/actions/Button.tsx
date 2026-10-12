@@ -9,7 +9,7 @@ export type ButtonSize = 'sm' | 'md' | 'lg' | 'small' | 'medium' | 'large';
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
   children?: ReactNode;
-  /** Fluent 2 appearance variant */
+  /** Spectra appearance variant */
   appearance?: ButtonAppearance;
   /** Classic variant prop for backward compatibility */
   variant?: ButtonVariant;
@@ -34,7 +34,7 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<'button'> {
 }
 
 /**
- * Button - Action component conforming to Fluent 2 Web specifications
+ * Button - Action component conforming to Spectra UI specifications
  * and WCAG 2.1 AA dual focus standards.
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(

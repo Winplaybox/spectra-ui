@@ -124,7 +124,7 @@ export const App: React.FC = () => {
         intensity={ambientIntensity !== 'off' ? ambientIntensity : 'balanced'}
       />
 
-      {/* Mobile Drawer Scrim Backdrop (Microsoft Fluent 2 NavDrawer Pattern) */}
+      {/* Mobile Drawer Scrim Backdrop */}
       {isMobileSidebarOpen && (
         <div
           onClick={() => setIsMobileSidebarOpen(false)}

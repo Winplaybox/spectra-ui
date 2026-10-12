@@ -21,7 +21,7 @@ describe('Button', () => {
     expect(screen.getByRole('button')).toHaveClass('secondary');
   });
 
-  it('supports appearance prop (Fluent 2)', () => {
+  it('supports appearance prop (Spectra)', () => {
     const { rerender } = render(<Button appearance="outline">Outline</Button>);
     expect(screen.getByRole('button')).toHaveClass('outline');
 
@@ -32,7 +32,7 @@ describe('Button', () => {
     expect(screen.getByRole('button')).toHaveClass('transparent');
   });
 
-  it('supports shape prop (Fluent 2)', () => {
+  it('supports shape prop (Spectra)', () => {
     const { rerender } = render(<Button shape="circular">Circular</Button>);
     expect(screen.getByRole('button')).toHaveClass('circular');
 

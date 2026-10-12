@@ -274,7 +274,7 @@ export const PlatformChassisViewer: React.FC<PlatformChassisViewerProps> = ({
               </div>
             </div>
 
-            {/* Android Top App Bar (Material Design) */}
+            {/* Android Top App Bar */}
             <div
               style={{
                 padding: '12px 20px',
@@ -334,7 +334,7 @@ export const PlatformChassisViewer: React.FC<PlatformChassisViewerProps> = ({
                     color: '#34A853',
                   }}
                 >
-                  Material 48×48 dp
+                  Android 48×48 dp
                 </div>
               )}
 

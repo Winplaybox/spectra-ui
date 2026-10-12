@@ -12,7 +12,7 @@ import {
   InfoIcon,
 } from '@winplaybox/icons';
 import { navigate } from '../../utils/router';
-import { CURRENT_VERSION, ALL_RELEASES } from '../../data/versionReleaseData';
+import { CURRENT_VERSION, ALL_RELEASES, VersionRelease } from '../../data/versionReleaseData';
 
 interface GettingStartedSectionProps {
   topicId: string;
@@ -296,7 +296,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
             Release History & Changelog
           </Text>
           <Stack direction="column" gap="md">
-            {ALL_RELEASES.map((rel) => (
+            {ALL_RELEASES.map((rel: VersionRelease) => (
               <div key={rel.version} style={{ padding: '14px 18px', borderRadius: 8, backgroundColor: 'var(--color-surface-raised)', border: '1px solid var(--color-border-subtle)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

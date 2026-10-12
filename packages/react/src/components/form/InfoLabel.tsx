@@ -34,7 +34,7 @@ const iconSizeMap: Record<string, number> = {
 };
 
 /**
- * InfoLabel — High-level form control label conforming to Microsoft Fluent 2 Web specifications.
+ * InfoLabel — High-level form control label conforming to Spectra UI specifications.
  * Pairs standard Label typography and required indicators with an authentic vector info trigger
  * launching an accessible contextual tooltip.
  */

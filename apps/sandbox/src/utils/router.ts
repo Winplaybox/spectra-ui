@@ -54,7 +54,7 @@ export function parsePath(rawPath: string): RouteState {
     return { type: 'installation', path: '/installation', anchor };
   }
 
-  // Getting Started screens (matching Material UI benchmark screenshot)
+  // Getting Started dedicated screens
   const gettingStartedTopics = [
     'usage',
     'mcp',

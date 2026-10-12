@@ -55,7 +55,7 @@ export const MobileSimulator: React.FC<MobileSimulatorProps> = ({
             <span>Mobile Native Simulator ({componentName})</span>
           </Text>
           <Text as="p" style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)' }}>
-            Pre-rendered React Native ergonomics optimized for Apple Human Interface & Google Material 3.
+            Pre-rendered React Native ergonomics optimized for iOS HIG (44pt) and Android Native (48dp).
           </Text>
         </div>
 
@@ -248,7 +248,7 @@ export const MobileSimulator: React.FC<MobileSimulatorProps> = ({
                   color: 'var(--color-action-primary)',
                 }}
               >
-                {deviceOS === 'ios' ? 'Apple HIG 44×44pt' : 'Material 48×48dp'}
+                {deviceOS === 'ios' ? 'iOS 44×44pt' : 'Android 48×48dp'}
               </div>
             )}
 
@@ -412,7 +412,7 @@ export const MobileSimulator: React.FC<MobileSimulatorProps> = ({
           >
             <strong style={{ fontSize: 14, color: 'var(--color-text-primary)' }}>Touch Target Ergonomics</strong>
             <p style={{ margin: '6px 0 0 0', fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-              All interactive native components enforce minimum 44×44 pt (Apple HIG) and 48×48 dp (Google Material) hit areas via <code>hitSlop</code> padding.
+              All interactive native components enforce minimum 44×44 pt (iOS) and 48×48 dp (Android) hit areas via <code>hitSlop</code> padding.
             </p>
           </div>
 
