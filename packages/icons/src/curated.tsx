@@ -1122,3 +1122,30 @@ export const FileTextIcon: React.FC<IconProps> = ({
   </svg>
 );
 
+export const GlobeIcon: React.FC<IconProps> = ({
+  size = 16,
+  color = 'currentColor',
+  className,
+  style,
+  ...props
+}) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke={color}
+    strokeWidth="1.2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+    style={{ display: 'block', verticalAlign: 'middle', flexShrink: 0, ...style }}
+    aria-hidden="true"
+    {...props}
+  >
+    <circle cx="8" cy="8" r="6.5" />
+    <line x1="1.5" y1="8" x2="14.5" y2="8" />
+    <path d="M8 1.5C9.8 3.5 10.8 5.7 10.8 8C10.8 10.3 9.8 12.5 8 14.5C6.2 12.5 5.2 10.3 5.2 8C5.2 5.7 6.2 3.5 8 1.5Z" />
+  </svg>
+);
+
