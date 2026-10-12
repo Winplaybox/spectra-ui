@@ -1,21 +1,77 @@
-import React, { useState } from 'react';
-import { Card, Tabs, TabList, Tab, Text } from '@winplaybox/react';
-import { CopyIcon, CheckIcon, CodeIcon, PaletteIcon, CubeIcon, SmartphoneIcon } from '@winplaybox/icons';
-import { COMPONENT_API_DATA, ComponentApiReference } from '../../data/apiReferenceData';
+import React, { useState, useMemo } from 'react';
+import { Card, Text, Badge } from '@winplaybox/react';
+import { CopyIcon, CheckIcon, CodeIcon, SearchIcon, CloseIcon } from '@winplaybox/icons';
+import { COMPONENT_API_DATA, ComponentApiReference, PropApiItem } from '../../data/apiReferenceData';
 
 interface ComponentApiSectionProps {
   componentId: string;
 }
 
+/**
+ * Microsoft Fluent UI Benchmark Component API Section
+ * Dedicated, in-depth Props Reference documenting the primary component
+ * plus all child, wrapper, and subcomponents that make up the component family.
+ */
 export const ComponentApiSection: React.FC<ComponentApiSectionProps> = ({ componentId }) => {
-  const [activeTab, setActiveTab] = useState<'props' | 'css' | 'tokens' | 'native'>('props');
-  const [copiedImport, setCopiedImport] = useState(false);
-
   const apiData: ComponentApiReference | undefined = COMPONENT_API_DATA[componentId];
+  const [selectedSubcomponent, setSelectedSubcomponent] = useState<string>('root');
+  const [propsSearch, setPropsSearch] = useState<string>('');
+  const [copiedType, setCopiedType] = useState<string | null>(null);
+  const [copiedImport, setCopiedImport] = useState(false);
 
   if (!apiData) {
     return null;
   }
+
+  // Component families and their subcomponents
+  const allSubcomponents = useMemo(() => {
+    const list: Array<{ name: string; description: string; props: PropApiItem[] }> = [
+      {
+        name: apiData.componentName,
+        description: apiData.description,
+        props: apiData.props,
+      },
+    ];
+
+    if (apiData.subcomponents && apiData.subcomponents.length > 0) {
+      apiData.subcomponents.forEach((sub) => {
+        list.push({
+          name: sub.name,
+          description: sub.description,
+          props: sub.props,
+        });
+      });
+    }
+
+    return list;
+  }, [apiData]);
+
+  // Active target component/subcomponent
+  const activeComponent = useMemo(() => {
+    if (selectedSubcomponent === 'root') {
+      return allSubcomponents[0];
+    }
+    return allSubcomponents.find((c) => c.name === selectedSubcomponent) || allSubcomponents[0];
+  }, [allSubcomponents, selectedSubcomponent]);
+
+  // Filtered props list
+  const filteredProps = useMemo(() => {
+    if (!propsSearch.trim()) return activeComponent.props;
+    const q = propsSearch.toLowerCase().trim();
+    return activeComponent.props.filter(
+      (p) =>
+        p.name.toLowerCase().includes(q) ||
+        p.type.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q) ||
+        p.defaultValue.toLowerCase().includes(q)
+    );
+  }, [activeComponent, propsSearch]);
+
+  const handleCopyType = (typeStr: string) => {
+    navigator.clipboard.writeText(typeStr);
+    setCopiedType(typeStr);
+    setTimeout(() => setCopiedType(null), 1800);
+  };
 
   const handleCopyImport = () => {
     navigator.clipboard.writeText(apiData.importStatement);
@@ -24,8 +80,8 @@ export const ComponentApiSection: React.FC<ComponentApiSectionProps> = ({ compon
   };
 
   return (
-    <div id="api" style={{ display: 'flex', flexDirection: 'column', gap: 24, scrollMarginTop: 80 }}>
-      {/* Header Card (Solid elevated surface - eliminates breathing dots bleed-through) */}
+    <div id="api" style={{ display: 'flex', flexDirection: 'column', gap: 20, scrollMarginTop: 80 }}>
+      {/* Header Card (Fluent UI Style) */}
       <Card
         variant="bordered"
         style={{
@@ -35,480 +91,376 @@ export const ComponentApiSection: React.FC<ComponentApiSectionProps> = ({ compon
           borderRadius: 14,
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
-          <span
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 5,
-              padding: '3px 10px',
-              borderRadius: 20,
-              backgroundColor: 'rgba(56, 189, 248, 0.12)',
-              color: '#38BDF8',
-              fontSize: 12,
-              fontWeight: 700,
-              letterSpacing: '0.04em',
-              textTransform: 'uppercase',
-            }}
-          >
-            <CodeIcon size={13} />
-            API Reference
-          </span>
-          <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>·</span>
-          <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', fontFamily: 'monospace' }}>
-            {apiData.componentName}
-          </span>
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, margin: '0 0 8px 0' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <Text
-              as="h2"
-              variant="heading"
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, marginBottom: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <span
               style={{
-                fontSize: 26,
-                fontWeight: 800,
-                margin: 0,
-                color: 'var(--color-text-primary)',
-                letterSpacing: '-0.02em',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 5,
+                padding: '3px 10px',
+                borderRadius: 20,
+                backgroundColor: 'rgba(0, 120, 212, 0.12)',
+                color: '#0078D4',
+                fontSize: 12,
+                fontWeight: 700,
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
               }}
             >
-              {apiData.componentName} API
-            </Text>
-            <a href="#api" style={{ color: 'var(--color-text-muted)', textDecoration: 'none', fontSize: 18 }} title="Direct link to API">#</a>
+              <CodeIcon size={13} />
+              API Reference
+            </span>
+            <span style={{ fontSize: 13, color: 'var(--color-text-muted)' }}>·</span>
+            <span style={{ fontSize: 13, color: 'var(--color-text-secondary)', fontFamily: 'monospace', fontWeight: 600 }}>
+              {apiData.componentName}
+            </span>
           </div>
+
           <button
-            type="button"
-            onClick={() => window.dispatchEvent(new CustomEvent('spectra:section-feedback', { detail: `${apiData.componentName} API Reference` }))}
-            title={`Give feedback on the ${apiData.componentName} API Reference`}
-            aria-label={`Give feedback on ${apiData.componentName} API`}
+            onClick={handleCopyImport}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              width: 28,
-              height: 28,
+              gap: 6,
+              padding: '5px 12px',
               borderRadius: 6,
-              border: '1px solid var(--color-border-subtle)',
-              backgroundColor: 'var(--color-surface)',
-              color: 'var(--color-text-muted)',
+              border: '1px solid var(--color-border-default)',
+              backgroundColor: 'var(--color-surface-raised)',
+              color: copiedImport ? '#10B981' : 'var(--color-text-secondary)',
               cursor: 'pointer',
-              transition: 'all 0.12s ease',
+              fontSize: 12,
+              fontWeight: 600,
+              fontFamily: "'JetBrains Mono', Consolas, monospace",
+              transition: 'all 0.15s ease',
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = 'var(--color-action-primary)';
-              e.currentTarget.style.borderColor = 'var(--color-action-primary)';
-              e.currentTarget.style.backgroundColor = 'rgba(0, 127, 255, 0.08)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = 'var(--color-text-muted)';
-              e.currentTarget.style.borderColor = 'var(--color-border-subtle)';
-              e.currentTarget.style.backgroundColor = 'var(--color-surface)';
-            }}
+            title="Copy package import statement"
           >
-            <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-              <line x1="12" y1="8" x2="12" y2="14" />
-              <line x1="9" y1="11" x2="15" y2="11" />
-            </svg>
+            {copiedImport ? <CheckIcon size={12} color="#10B981" /> : <CopyIcon size={12} />}
+            <span>{copiedImport ? 'Import Copied!' : apiData.importStatement}</span>
           </button>
         </div>
+
+        <Text
+          as="h2"
+          variant="heading"
+          style={{
+            fontSize: 24,
+            fontWeight: 800,
+            margin: '0 0 6px 0',
+            color: 'var(--color-text-primary)',
+            letterSpacing: '-0.02em',
+          }}
+        >
+          {apiData.componentName} Component Props
+        </Text>
         <p
           style={{
-            fontSize: 14,
+            fontSize: 13.5,
             color: 'var(--color-text-secondary)',
             margin: 0,
-            lineHeight: 1.6,
-            maxWidth: 780,
+            lineHeight: 1.55,
+            maxWidth: 820,
           }}
         >
           {apiData.description}
         </p>
       </Card>
 
-      {/* 1. Module Import Box */}
+      {/* Main Props Card with Fluent UI Subcomponent Selector */}
       <Card
         variant="bordered"
         style={{
           backgroundColor: 'var(--color-surface)',
-          borderRadius: 12,
-          overflow: 'hidden',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.04)',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '10px 16px',
-            backgroundColor: 'var(--color-surface-raised)',
-            borderBottom: '1px solid var(--color-border-subtle)',
-            fontSize: 12,
-            fontWeight: 600,
-            color: 'var(--color-text-secondary)',
-          }}
-        >
-          <span>Import & Module Name</span>
-          <button
-            onClick={handleCopyImport}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: copiedImport ? '#4ADE80' : 'var(--color-text-secondary)',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 5,
-              cursor: 'pointer',
-              fontSize: 12,
-              fontWeight: 600,
-              padding: 0,
-            }}
-          >
-            {copiedImport ? <CheckIcon size={13} /> : <CopyIcon size={13} />}
-            <span>{copiedImport ? 'Copied Import!' : 'Copy Import'}</span>
-          </button>
-        </div>
-
-        <div style={{ padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div
-            style={{
-              backgroundColor: '#0F172A',
-              color: '#F8FAFC',
-              borderRadius: 8,
-              padding: '12px 16px',
-              fontFamily: "'JetBrains Mono', Consolas, monospace",
-              fontSize: 13,
-              lineHeight: 1.6,
-              overflowX: 'auto',
-            }}
-          >
-            <div>
-              <span style={{ color: '#38BDF8' }}>import</span> {'{ '}
-              <span style={{ color: '#4ADE80', fontWeight: 600 }}>{apiData.exportName}</span>
-              {' }'} <span style={{ color: '#38BDF8' }}>from</span>{' '}
-              <span style={{ color: '#F472B6' }}>'@winplaybox/react'</span>;
-            </div>
-            <div style={{ color: '#64748B', margin: '4px 0' }}>{'// or via direct subpath export'}</div>
-            <div>
-              <span style={{ color: '#38BDF8' }}>import</span>{' '}
-              <span style={{ color: '#4ADE80', fontWeight: 600 }}>{apiData.exportName}</span>{' '}
-              <span style={{ color: '#38BDF8' }}>from</span>{' '}
-              <span style={{ color: '#F472B6' }}>'@winplaybox/react/{apiData.exportName}'</span>;
-            </div>
-          </div>
-
-          <p style={{ margin: 0, fontSize: 13, color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-            The component name <code style={{ color: 'var(--color-action-primary)', fontWeight: 600 }}>Spectra{apiData.componentName}</code> can be used for providing default props or style overrides via theme configuration.
-          </p>
-        </div>
-      </Card>
-
-      {/* 2. Interactive Navigation Tabs for API Reference */}
-      <Card
-        variant="bordered"
-        style={{
-          backgroundColor: 'var(--color-surface)',
-          borderRadius: 12,
+          borderRadius: 14,
           overflow: 'hidden',
           boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
         }}
       >
-        {/* Tab Buttons Toolbar */}
+        {/* Subcomponent Switcher Toolbar (Fluent UI Benchmark) */}
+        {allSubcomponents.length > 1 && (
+          <div
+            style={{
+              padding: '12px 20px',
+              backgroundColor: 'var(--color-surface-raised)',
+              borderBottom: '1px solid var(--color-border-default)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: 12,
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+              <span
+                style={{
+                  fontSize: 11,
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.06em',
+                  color: 'var(--color-text-muted)',
+                  marginRight: 4,
+                }}
+              >
+                Component:
+              </span>
+              {allSubcomponents.map((sub, idx) => {
+                const isSelected =
+                  (selectedSubcomponent === 'root' && idx === 0) ||
+                  selectedSubcomponent === sub.name;
+                return (
+                  <button
+                    key={sub.name}
+                    onClick={() => {
+                      setSelectedSubcomponent(idx === 0 ? 'root' : sub.name);
+                      setPropsSearch('');
+                    }}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 6,
+                      padding: '5px 12px',
+                      borderRadius: 6,
+                      border: isSelected ? '1.5px solid #0078D4' : '1px solid var(--color-border-default)',
+                      backgroundColor: isSelected ? 'rgba(0, 120, 212, 0.1)' : 'var(--color-surface)',
+                      color: isSelected ? '#0078D4' : 'var(--color-text-primary)',
+                      cursor: 'pointer',
+                      fontSize: 12.5,
+                      fontWeight: isSelected ? 700 : 500,
+                      fontFamily: "'JetBrains Mono', Consolas, monospace",
+                      transition: 'all 0.12s ease',
+                    }}
+                  >
+                    <span>{sub.name}</span>
+                    <span
+                      style={{
+                        fontSize: 10,
+                        padding: '1px 5px',
+                        borderRadius: 10,
+                        backgroundColor: isSelected ? '#0078D4' : 'var(--color-surface-sunken)',
+                        color: isSelected ? '#FFFFFF' : 'var(--color-text-muted)',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {sub.props.length}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Props Filter Bar & Active Subcomponent Summary */}
         <div
           style={{
-            padding: '10px 16px',
+            padding: '12px 20px',
+            borderBottom: '1px solid var(--color-border-subtle)',
             backgroundColor: 'var(--color-surface-raised)',
-            borderBottom: '1px solid var(--color-border-default)',
-            overflowX: 'auto',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: 12,
           }}
         >
-          <Tabs variant="pills" size="sm" value={activeTab} onChange={(val) => setActiveTab(val as 'props' | 'css' | 'tokens' | 'native')}>
-            <TabList style={{ gap: 6 }}>
-              <Tab value="props" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                <CodeIcon size={14} />
-                <span>Props</span>
-                <span
-                  style={{
-                    fontSize: 11,
-                    padding: '1px 6px',
-                    borderRadius: 10,
-                    backgroundColor: activeTab === 'props' ? 'rgba(56, 189, 248, 0.15)' : 'var(--color-surface-sunken)',
-                    color: activeTab === 'props' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
-                  }}
-                >
-                  {apiData.props.length}
-                </span>
-              </Tab>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+              {activeComponent.name} Props ({filteredProps.length} of {activeComponent.props.length})
+            </span>
+            <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>
+              — {activeComponent.description}
+            </span>
+          </div>
 
-              <Tab value="css" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                <PaletteIcon size={14} />
-                <span>CSS Classes</span>
-                <span
-                  style={{
-                    fontSize: 11,
-                    padding: '1px 6px',
-                    borderRadius: 10,
-                    backgroundColor: activeTab === 'css' ? 'rgba(56, 189, 248, 0.15)' : 'var(--color-surface-sunken)',
-                    color: activeTab === 'css' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
-                  }}
-                >
-                  {apiData.cssClasses.length}
-                </span>
-              </Tab>
-
-              <Tab value="tokens" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                <CubeIcon size={14} />
-                <span>Design Tokens</span>
-                <span
-                  style={{
-                    fontSize: 11,
-                    padding: '1px 6px',
-                    borderRadius: 10,
-                    backgroundColor: activeTab === 'tokens' ? 'rgba(56, 189, 248, 0.15)' : 'var(--color-surface-sunken)',
-                    color: activeTab === 'tokens' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
-                  }}
-                >
-                  {apiData.cssVariables.length}
-                </span>
-              </Tab>
-
-              <Tab value="native" style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                <SmartphoneIcon size={14} />
-                <span>Mobile Native Props</span>
-                <span
-                  style={{
-                    fontSize: 11,
-                    padding: '1px 6px',
-                    borderRadius: 10,
-                    backgroundColor: activeTab === 'native' ? 'rgba(56, 189, 248, 0.15)' : 'var(--color-surface-sunken)',
-                    color: activeTab === 'native' ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
-                  }}
-                >
-                  {apiData.nativeProps.length}
-                </span>
-              </Tab>
-            </TabList>
-          </Tabs>
+          <div style={{ position: 'relative', width: 220 }}>
+            <SearchIcon
+              size={12}
+              style={{
+                position: 'absolute',
+                left: 8,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: 'var(--color-text-muted)',
+                pointerEvents: 'none',
+              }}
+            />
+            <input
+              type="text"
+              value={propsSearch}
+              onChange={(e) => setPropsSearch(e.target.value)}
+              placeholder="Filter props..."
+              style={{
+                width: '100%',
+                height: 28,
+                paddingLeft: 26,
+                paddingRight: propsSearch ? 22 : 8,
+                fontSize: 12,
+                borderRadius: 4,
+                border: '1px solid var(--color-border-default)',
+                backgroundColor: 'var(--color-surface)',
+                color: 'var(--color-text-primary)',
+                outline: 'none',
+              }}
+            />
+            {propsSearch && (
+              <button
+                onClick={() => setPropsSearch('')}
+                style={{
+                  position: 'absolute',
+                  right: 4,
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: 'var(--color-text-muted)',
+                  padding: 2,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+                title="Clear filter"
+              >
+                <CloseIcon size={10} />
+              </button>
+            )}
+          </div>
         </div>
 
-        {/* TAB 1: Props Table */}
-        {activeTab === 'props' && (
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
-              <thead>
-                <tr style={{ backgroundColor: 'var(--color-surface-raised)', borderBottom: '1px solid var(--color-border-default)' }}>
-                  <th style={{ padding: '12px 20px', fontWeight: 700, width: 180 }}>Name</th>
-                  <th style={{ padding: '12px 20px', fontWeight: 700, width: 280 }}>Type</th>
-                  <th style={{ padding: '12px 20px', fontWeight: 700, width: 140 }}>Default</th>
-                  <th style={{ padding: '12px 20px', fontWeight: 700 }}>Description</th>
+        {/* Props Table (Exact Fluent UI Layout) */}
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
+            <thead>
+              <tr style={{ backgroundColor: 'var(--color-surface-raised)', borderBottom: '1px solid var(--color-border-default)' }}>
+                <th style={{ padding: '12px 20px', fontWeight: 700, width: 200, color: 'var(--color-text-secondary)', fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  Property
+                </th>
+                <th style={{ padding: '12px 20px', fontWeight: 700, width: 280, color: 'var(--color-text-secondary)', fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  Type
+                </th>
+                <th style={{ padding: '12px 20px', fontWeight: 700, width: 140, color: 'var(--color-text-secondary)', fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  Default
+                </th>
+                <th style={{ padding: '12px 20px', fontWeight: 700, color: 'var(--color-text-secondary)', fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  Description
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredProps.length === 0 ? (
+                <tr>
+                  <td colSpan={4} style={{ padding: '36px 20px', textAlign: 'center', color: 'var(--color-text-muted)' }}>
+                    No props match &quot;{propsSearch}&quot;.
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {apiData.props.map((p, idx) => (
-                  <tr
-                    key={p.name}
-                    style={{
-                      backgroundColor: idx % 2 === 0 ? 'var(--color-surface)' : 'var(--color-surface-raised)',
-                      borderBottom: idx === apiData.props.length - 1 ? 'none' : '1px solid var(--color-border-subtle)',
-                    }}
-                  >
-                    <td style={{ padding: '14px 20px', verticalAlign: 'top' }}>
-                      <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                        <code style={{ fontFamily: "'JetBrains Mono', Consolas, monospace", fontWeight: 700, color: 'var(--color-action-primary)', fontSize: 13 }}>
-                          {p.name}
+              ) : (
+                filteredProps.map((p, idx) => {
+                  const isCopied = copiedType === p.type;
+                  return (
+                    <tr
+                      key={p.name}
+                      style={{
+                        backgroundColor: idx % 2 === 0 ? 'var(--color-surface)' : 'var(--color-surface-raised)',
+                        borderBottom: idx === filteredProps.length - 1 ? 'none' : '1px solid var(--color-border-subtle)',
+                        transition: 'background-color 0.1s ease',
+                      }}
+                    >
+                      {/* Prop Name */}
+                      <td style={{ padding: '14px 20px', verticalAlign: 'top' }}>
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                          <code
+                            style={{
+                              fontFamily: "'JetBrains Mono', Consolas, monospace",
+                              fontWeight: 700,
+                              color: '#0078D4',
+                              fontSize: 13,
+                            }}
+                          >
+                            {p.name}
+                          </code>
+                          {p.required && (
+                            <span
+                              style={{
+                                fontSize: 9.5,
+                                fontWeight: 700,
+                                textTransform: 'uppercase',
+                                padding: '1px 5px',
+                                borderRadius: 4,
+                                backgroundColor: 'rgba(239, 68, 68, 0.12)',
+                                color: '#EF4444',
+                                border: '1px solid rgba(239, 68, 68, 0.3)',
+                              }}
+                              title="Required property"
+                            >
+                              required
+                            </span>
+                          )}
+                        </div>
+                      </td>
+
+                      {/* Prop Type */}
+                      <td style={{ padding: '14px 20px', verticalAlign: 'top' }}>
+                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6 }}>
+                          <code
+                            style={{
+                              fontFamily: "'JetBrains Mono', Consolas, monospace",
+                              fontSize: 12,
+                              color: 'var(--color-text-primary)',
+                              backgroundColor: 'var(--color-surface-sunken)',
+                              padding: '2px 6px',
+                              borderRadius: 4,
+                              border: '1px solid var(--color-border-subtle)',
+                              wordBreak: 'break-word',
+                              lineHeight: 1.45,
+                              flex: 1,
+                            }}
+                          >
+                            {p.type}
+                          </code>
+                          <button
+                            onClick={() => handleCopyType(p.type)}
+                            style={{
+                              background: 'transparent',
+                              border: 'none',
+                              cursor: 'pointer',
+                              color: isCopied ? '#10B981' : 'var(--color-text-muted)',
+                              padding: 2,
+                              flexShrink: 0,
+                            }}
+                            title="Copy type definition"
+                          >
+                            {isCopied ? <CheckIcon size={12} color="#10B981" /> : <CopyIcon size={12} />}
+                          </button>
+                        </div>
+                      </td>
+
+                      {/* Default Value */}
+                      <td style={{ padding: '14px 20px', verticalAlign: 'top' }}>
+                        <code
+                          style={{
+                            fontFamily: "'JetBrains Mono', Consolas, monospace",
+                            fontSize: 12,
+                            color: p.defaultValue === 'undefined' ? 'var(--color-text-muted)' : 'var(--color-text-secondary)',
+                            backgroundColor: p.defaultValue === 'undefined' ? 'transparent' : 'var(--color-surface-sunken)',
+                            padding: p.defaultValue === 'undefined' ? 0 : '2px 6px',
+                            borderRadius: 4,
+                          }}
+                        >
+                          {p.defaultValue}
                         </code>
-                        {p.required && (
-                          <span style={{ color: '#EF4444', fontWeight: 800, fontSize: 14 }} title="Required prop">
-                            *
-                          </span>
-                        )}
-                      </div>
-                    </td>
-                    <td style={{ padding: '14px 20px', verticalAlign: 'top' }}>
-                      <code
-                        style={{
-                          fontFamily: "'JetBrains Mono', Consolas, monospace",
-                          fontSize: 12,
-                          color: '#E2E8F0',
-                          backgroundColor: '#0F172A',
-                          padding: '2px 7px',
-                          borderRadius: 4,
-                          display: 'inline-block',
-                          wordBreak: 'break-word',
-                          lineHeight: 1.4,
-                        }}
-                      >
-                        {p.type}
-                      </code>
-                    </td>
-                    <td style={{ padding: '14px 20px', verticalAlign: 'top', color: 'var(--color-text-muted)', fontFamily: 'monospace', fontSize: 12 }}>
-                      {p.defaultValue}
-                    </td>
-                    <td style={{ padding: '14px 20px', verticalAlign: 'top', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-                      {p.description}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+                      </td>
 
-        {/* TAB 2: CSS Classes Table */}
-        {activeTab === 'css' && (
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
-              <thead>
-                <tr style={{ backgroundColor: 'var(--color-surface-raised)', borderBottom: '1px solid var(--color-border-default)' }}>
-                  <th style={{ padding: '12px 20px', fontWeight: 700, width: 220 }}>Global Class</th>
-                  <th style={{ padding: '12px 20px', fontWeight: 700, width: 140 }}>Rule Name</th>
-                  <th style={{ padding: '12px 20px', fontWeight: 700 }}>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                {apiData.cssClasses.map((c, idx) => (
-                  <tr
-                    key={c.className}
-                    style={{
-                      backgroundColor: idx % 2 === 0 ? 'var(--color-surface)' : 'var(--color-surface-raised)',
-                      borderBottom: idx === apiData.cssClasses.length - 1 ? 'none' : '1px solid var(--color-border-subtle)',
-                    }}
-                  >
-                    <td style={{ padding: '14px 20px', verticalAlign: 'top' }}>
-                      <code style={{ fontFamily: "'JetBrains Mono', Consolas, monospace", fontWeight: 700, color: '#A855F7', fontSize: 13 }}>
-                        {c.className}
-                      </code>
-                    </td>
-                    <td style={{ padding: '14px 20px', verticalAlign: 'top' }}>
-                      <span
-                        style={{
-                          fontSize: 11,
-                          fontWeight: 600,
-                          padding: '2px 8px',
-                          borderRadius: 4,
-                          backgroundColor: 'var(--color-surface-sunken)',
-                          color: 'var(--color-text-secondary)',
-                          fontFamily: 'monospace',
-                        }}
-                      >
-                        {c.ruleName}
-                      </span>
-                    </td>
-                    <td style={{ padding: '14px 20px', verticalAlign: 'top', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-                      {c.description}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-
-        {/* TAB 3: Design Tokens (CSS Variables) Table */}
-        {activeTab === 'tokens' && (
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
-              <thead>
-                <tr style={{ backgroundColor: 'var(--color-surface-raised)', borderBottom: '1px solid var(--color-border-default)' }}>
-                  <th style={{ padding: '12px 20px', fontWeight: 700, width: 240 }}>CSS Variable</th>
-                  <th style={{ padding: '12px 20px', fontWeight: 700, width: 220 }}>Default Token</th>
-                  <th style={{ padding: '12px 20px', fontWeight: 700 }}>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                {apiData.cssVariables.map((t, idx) => (
-                  <tr
-                    key={t.variable}
-                    style={{
-                      backgroundColor: idx % 2 === 0 ? 'var(--color-surface)' : 'var(--color-surface-raised)',
-                      borderBottom: idx === apiData.cssVariables.length - 1 ? 'none' : '1px solid var(--color-border-subtle)',
-                    }}
-                  >
-                    <td style={{ padding: '14px 20px', verticalAlign: 'top' }}>
-                      <code style={{ fontFamily: "'JetBrains Mono', Consolas, monospace", fontWeight: 700, color: '#0EA5E9', fontSize: 13 }}>
-                        {t.variable}
-                      </code>
-                    </td>
-                    <td style={{ padding: '14px 20px', verticalAlign: 'top' }}>
-                      <code
-                        style={{
-                          fontFamily: "'JetBrains Mono', Consolas, monospace",
-                          fontSize: 12,
-                          color: 'var(--color-text-secondary)',
-                          backgroundColor: 'var(--color-surface-sunken)',
-                          padding: '2px 7px',
-                          borderRadius: 4,
-                        }}
-                      >
-                        {t.defaultToken}
-                      </code>
-                    </td>
-                    <td style={{ padding: '14px 20px', verticalAlign: 'top', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-                      {t.description}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-
-        {/* TAB 4: Mobile Native Props Table */}
-        {activeTab === 'native' && (
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: 13 }}>
-              <thead>
-                <tr style={{ backgroundColor: 'var(--color-surface-raised)', borderBottom: '1px solid var(--color-border-default)' }}>
-                  <th style={{ padding: '12px 20px', fontWeight: 700, width: 180 }}>Native Prop</th>
-                  <th style={{ padding: '12px 20px', fontWeight: 700, width: 260 }}>Native Type</th>
-                  <th style={{ padding: '12px 20px', fontWeight: 700, width: 140 }}>Default</th>
-                  <th style={{ padding: '12px 20px', fontWeight: 700 }}>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                {apiData.nativeProps.map((np, idx) => (
-                  <tr
-                    key={np.name}
-                    style={{
-                      backgroundColor: idx % 2 === 0 ? 'var(--color-surface)' : 'var(--color-surface-raised)',
-                      borderBottom: idx === apiData.nativeProps.length - 1 ? 'none' : '1px solid var(--color-border-subtle)',
-                    }}
-                  >
-                    <td style={{ padding: '14px 20px', verticalAlign: 'top' }}>
-                      <code style={{ fontFamily: "'JetBrains Mono', Consolas, monospace", fontWeight: 700, color: '#10B981', fontSize: 13 }}>
-                        {np.name}
-                      </code>
-                    </td>
-                    <td style={{ padding: '14px 20px', verticalAlign: 'top' }}>
-                      <code
-                        style={{
-                          fontFamily: "'JetBrains Mono', Consolas, monospace",
-                          fontSize: 12,
-                          color: '#E2E8F0',
-                          backgroundColor: '#0F172A',
-                          padding: '2px 7px',
-                          borderRadius: 4,
-                          display: 'inline-block',
-                          wordBreak: 'break-word',
-                          lineHeight: 1.4,
-                        }}
-                      >
-                        {np.type}
-                      </code>
-                    </td>
-                    <td style={{ padding: '14px 20px', verticalAlign: 'top', color: 'var(--color-text-muted)', fontFamily: 'monospace', fontSize: 12 }}>
-                      {np.defaultValue}
-                    </td>
-                    <td style={{ padding: '14px 20px', verticalAlign: 'top', color: 'var(--color-text-secondary)', lineHeight: 1.5 }}>
-                      {np.description}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+                      {/* Description */}
+                      <td style={{ padding: '14px 20px', verticalAlign: 'top', color: 'var(--color-text-primary)', lineHeight: 1.55 }}>
+                        {p.description}
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
       </Card>
     </div>
   );

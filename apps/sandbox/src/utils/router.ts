@@ -1,7 +1,18 @@
 // Deep Linking URL Router for Spectra UI Documentation Dashboard
 // Spectra UI canonical and shareable URL routing patterns
 
-export type RouteType = 'overview' | 'installation' | 'cross-platform' | 'tokens' | 'components' | 'hooks' | 'icons' | 'motion' | 'utilities' | 'guides';
+export type RouteType =
+  | 'overview'
+  | 'installation'
+  | 'getting-started'
+  | 'cross-platform'
+  | 'tokens'
+  | 'components'
+  | 'hooks'
+  | 'icons'
+  | 'motion'
+  | 'utilities'
+  | 'guides';
 
 export interface RouteState {
   type: RouteType;
@@ -43,7 +54,31 @@ export function parsePath(rawPath: string): RouteState {
     return { type: 'installation', path: '/installation', anchor };
   }
 
-  if (segments[0] === 'cross-platform') {
+  // Getting Started screens (matching Material UI benchmark screenshot)
+  const gettingStartedTopics = [
+    'usage',
+    'mcp',
+    'llms-txt',
+    'example-projects',
+    'templates',
+    'learn',
+    'design-resources',
+    'faqs',
+    'accessibility',
+    'support',
+    'versions',
+  ];
+
+  if (segments[0] === 'getting-started') {
+    const topic = segments[1] || 'usage';
+    return { type: 'getting-started', id: topic, path: `/getting-started/${topic}`, anchor };
+  }
+
+  if (gettingStartedTopics.includes(segments[0])) {
+    return { type: 'getting-started', id: segments[0], path: `/${segments[0]}`, anchor };
+  }
+
+  if (segments[0] === 'cross-platform' || segments[0] === 'supported-platforms') {
     return { type: 'cross-platform', path: '/cross-platform', anchor };
   }
 

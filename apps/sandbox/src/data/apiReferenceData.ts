@@ -6,6 +6,12 @@ export interface PropApiItem {
   description: string;
 }
 
+export interface SubcomponentApiItem {
+  name: string;
+  description: string;
+  props: PropApiItem[];
+}
+
 export interface CssClassItem {
   ruleName: string;
   className: string;
@@ -35,6 +41,7 @@ export interface ComponentApiReference {
   primitivesImport?: string;
   description: string;
   props: PropApiItem[];
+  subcomponents?: SubcomponentApiItem[];
   cssClasses: CssClassItem[];
   cssVariables: CssVariableItem[];
   nativeProps: NativePropItem[];
@@ -88,6 +95,52 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
       { name: 'onClick', type: '(event: React.MouseEvent<HTMLButtonElement>) => void', defaultValue: 'undefined', description: 'Callback fired when the button is clicked or activated via Space/Enter.' },
       { name: 'type', type: "'button' | 'submit' | 'reset'", defaultValue: "'button'", description: 'Native HTML button type attribute for form interactions.' },
       { name: 'children', type: 'React.ReactNode', defaultValue: 'undefined', required: true, description: 'Label text or child nodes to render inside the button.' },
+    ],
+    subcomponents: [
+      {
+        name: 'CompoundButton',
+        description: 'Button that includes both primary label text and a secondary descriptive subtitle.',
+        props: [
+          { name: 'secondaryContent', type: 'React.ReactNode', defaultValue: 'undefined', description: 'Descriptive subtitle rendered below main label.' },
+          { name: 'icon', type: 'React.ReactNode', defaultValue: 'undefined', description: 'Leading vector glyph.' },
+          { name: 'children', type: 'React.ReactNode', defaultValue: 'undefined', required: true, description: 'Primary action title text.' },
+          { name: 'disabled', type: 'boolean', defaultValue: 'false', description: 'Prevents user interaction.' },
+        ],
+      },
+      {
+        name: 'SplitButton',
+        description: 'Dual-action control with primary action button and secondary chevron dropdown trigger.',
+        props: [
+          { name: 'primaryAction', type: 'React.ReactNode', defaultValue: 'undefined', required: true, description: 'Main click action button.' },
+          { name: 'menuTrigger', type: 'React.ReactNode', defaultValue: 'undefined', required: true, description: 'Chevron dropdown menu trigger.' },
+          { name: 'size', type: "'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Unified size for both button segments.' },
+        ],
+      },
+      {
+        name: 'MenuButton',
+        description: 'Button with integrated chevron indicator designed to trigger a Menu popup.',
+        props: [
+          { name: 'menu', type: 'React.ReactNode', defaultValue: 'undefined', required: true, description: 'Menu list or popup to open.' },
+          { name: 'children', type: 'React.ReactNode', defaultValue: 'undefined', required: true, description: 'Button label.' },
+        ],
+      },
+      {
+        name: 'ToggleButton',
+        description: 'Two-state button that can be either on (checked) or off (unchecked).',
+        props: [
+          { name: 'checked', type: 'boolean', defaultValue: 'false', description: 'Whether button is currently selected.' },
+          { name: 'defaultChecked', type: 'boolean', defaultValue: 'false', description: 'Initial selection state in uncontrolled mode.' },
+          { name: 'onChange', type: '(checked: boolean) => void', defaultValue: 'undefined', description: 'Fired when selection toggles.' },
+        ],
+      },
+      {
+        name: 'ButtonGroup',
+        description: 'Container grouping multiple related buttons with unified borders.',
+        props: [
+          { name: 'children', type: 'React.ReactNode', defaultValue: 'undefined', required: true, description: 'Button elements to group.' },
+          { name: 'orientation', type: "'horizontal' | 'vertical'", defaultValue: "'horizontal'", description: 'Layout direction.' },
+        ],
+      },
     ],
     cssClasses: [
       { ruleName: 'root', className: '.spectra-button', description: 'Styles applied to the root <button> element.' },
@@ -456,6 +509,27 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
       { name: 'children', type: 'ReactNode', defaultValue: 'undefined', description: 'Badge text label or numeric count.' },
       { name: 'variant', type: "'default' | 'primary' | 'success' | 'warning' | 'error' | 'info'", defaultValue: 'undefined', description: 'Legacy variant alias for backwards compatibility.' },
     ],
+    subcomponents: [
+      {
+        name: 'CounterBadge',
+        description: 'Badge optimized for displaying numeric notification counts with overflow caps (e.g. 99+).',
+        props: [
+          { name: 'count', type: 'number', defaultValue: '0', required: true, description: 'Numeric value to render.' },
+          { name: 'overflowCount', type: 'number', defaultValue: '99', description: 'Maximum count before displaying overflow suffix like 99+.' },
+          { name: 'dot', type: 'boolean', defaultValue: 'false', description: 'Render as dot indicator when count > 0.' },
+          { name: 'showZero', type: 'boolean', defaultValue: 'false', description: 'Whether to show badge when count is 0.' },
+        ],
+      },
+      {
+        name: 'PresenceBadge',
+        description: 'Indicator badge reflecting real-time user status (available, busy, away, offline, dnd, out-of-office).',
+        props: [
+          { name: 'status', type: "'available' | 'busy' | 'away' | 'offline' | 'doNotDisturb' | 'outOfOffice'", defaultValue: "'available'", required: true, description: 'User presence status state.' },
+          { name: 'size', type: "'tiny' | 'extra-small' | 'small' | 'medium' | 'large'", defaultValue: "'medium'", description: 'Badge dimensions.' },
+          { name: 'outOfOffice', type: 'boolean', defaultValue: 'false', description: 'Renders hollow icon variant for out of office.' },
+        ],
+      },
+    ],
     cssClasses: [
       { ruleName: 'root', className: '.spectra-badge', description: 'Inline-flex badge container.' },
       { ruleName: 'icon', className: '.spectra-badge__icon', description: 'Vector icon slot container.' },
@@ -474,14 +548,67 @@ export const COMPONENT_API_DATA: Record<string, ComponentApiReference> = {
   card: {
     componentName: 'Card',
     exportName: 'Card',
-    importStatement: "import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@winplaybox/react';",
+    importStatement: "import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, CardPreview } from '@winplaybox/react';",
     subpathImport: "import Card from '@winplaybox/react/Card';",
     nativeImport: "import { Card } from '@winplaybox/react-native';",
     description: 'Learn about the props, CSS, and other APIs of this exported module.',
     props: [
       { name: 'variant', type: "'bordered' | 'elevated' | 'flat'", defaultValue: "'bordered'", description: 'Surface depth styling.' },
       { name: 'padding', type: "'none' | 'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Internal container padding.' },
+      { name: 'orientation', type: "'vertical' | 'horizontal'", defaultValue: "'vertical'", description: 'Layout axis direction for card contents.' },
       { name: 'children', type: 'React.ReactNode', defaultValue: 'undefined', description: 'Card content nodes.' },
+    ],
+    subcomponents: [
+      {
+        name: 'CardHeader',
+        description: 'Header container containing CardTitle, CardDescription, and optional action controls.',
+        props: [
+          { name: 'image', type: 'React.ReactNode', defaultValue: 'undefined', description: 'Leading avatar or icon slot.' },
+          { name: 'header', type: 'React.ReactNode', defaultValue: 'undefined', description: 'Card title or header element.' },
+          { name: 'description', type: 'React.ReactNode', defaultValue: 'undefined', description: 'Card subtitle or description.' },
+          { name: 'action', type: 'React.ReactNode', defaultValue: 'undefined', description: 'Action slot aligned to the right.' },
+          { name: 'children', type: 'React.ReactNode', defaultValue: 'undefined', description: 'Custom header content nodes.' },
+        ],
+      },
+      {
+        name: 'CardTitle',
+        description: 'Primary title heading element inside the CardHeader.',
+        props: [
+          { name: 'as', type: "'h1' | 'h2' | 'h3' | 'h4' | 'span'", defaultValue: "'h3'", description: 'Semantic HTML heading tag.' },
+          { name: 'children', type: 'React.ReactNode', defaultValue: 'undefined', required: true, description: 'Title text or elements.' },
+        ],
+      },
+      {
+        name: 'CardDescription',
+        description: 'Secondary supportive subtitle below CardTitle.',
+        props: [
+          { name: 'children', type: 'React.ReactNode', defaultValue: 'undefined', description: 'Description text nodes.' },
+        ],
+      },
+      {
+        name: 'CardContent',
+        description: 'Main body section containing core content.',
+        props: [
+          { name: 'children', type: 'React.ReactNode', defaultValue: 'undefined', required: true, description: 'Body content nodes.' },
+          { name: 'padding', type: "'none' | 'sm' | 'md' | 'lg'", defaultValue: "'md'", description: 'Content padding override.' },
+        ],
+      },
+      {
+        name: 'CardFooter',
+        description: 'Bottom actions toolbar for submission or secondary button controls.',
+        props: [
+          { name: 'children', type: 'React.ReactNode', defaultValue: 'undefined', description: 'Footer button controls.' },
+          { name: 'justify', type: "'start' | 'end' | 'between'", defaultValue: "'end'", description: 'Horizontal alignment of action items.' },
+        ],
+      },
+      {
+        name: 'CardPreview',
+        description: 'Full-bleed media container for cards displaying images, videos, or cover graphics.',
+        props: [
+          { name: 'children', type: 'React.ReactNode', defaultValue: 'undefined', required: true, description: 'Media image or video node.' },
+          { name: 'logo', type: 'React.ReactNode', defaultValue: 'undefined', description: 'Corner floating logo or badge.' },
+        ],
+      },
     ],
     cssClasses: [
       { ruleName: 'root', className: '.spectra-card', description: 'Outer card surface with border-radius and background.' },

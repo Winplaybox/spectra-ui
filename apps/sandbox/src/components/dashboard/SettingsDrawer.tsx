@@ -1,7 +1,8 @@
-import React from 'react';
-import { useColorScheme, useRTL, Text } from '@winplaybox/react';
-import { CloseIcon, SettingsIcon, CheckIcon, ExternalLinkIcon, SunIcon, MoonIcon, MonitorIcon } from '@winplaybox/icons';
+import React, { useState, useEffect } from 'react';
+import { useColorScheme, useRTL, Text, Switch, Badge, Card, Button } from '@winplaybox/react';
+import { CloseIcon, SettingsIcon, CheckIcon, ExternalLinkIcon, SunIcon, MoonIcon, MonitorIcon, ShieldIcon } from '@winplaybox/icons';
 import { useVersion } from '../../context/VersionContext';
+import { getSavedCookiePreferences, saveCookiePreferences } from './CookiePreferencesModal';
 
 interface SettingsDrawerProps {
   isOpen: boolean;
@@ -21,6 +22,32 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
   const { colorScheme, setColorScheme, mode, setMode } = useColorScheme();
   const { isRTL, toggleRTL } = useRTL();
   const { currentVersion, setCurrentVersion, releases } = useVersion();
+
+  // In-drawer Cookie & Telemetry state
+  const [cookieAnalytics, setCookieAnalytics] = useState(true);
+  const [cookiePersonalization, setCookiePersonalization] = useState(true);
+  const [cookieSavedSuccess, setCookieSavedSuccess] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      const existing = getSavedCookiePreferences();
+      if (existing) {
+        setCookieAnalytics(existing.analytics);
+        setCookiePersonalization(existing.personalization);
+      }
+    }
+  }, [isOpen]);
+
+  const handleSaveCookiePreferences = () => {
+    saveCookiePreferences({
+      strictlyNecessary: true,
+      analytics: cookieAnalytics,
+      personalization: cookiePersonalization,
+      savedAt: new Date().toISOString(),
+    });
+    setCookieSavedSuccess(true);
+    setTimeout(() => setCookieSavedSuccess(false), 2000);
+  };
 
   if (!isOpen) return null;
 
@@ -326,34 +353,114 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({
             </div>
           )}
 
-          {/* 5. Cookie & Telemetry Preferences */}
-          {onOpenCookieModal && (
-            <div style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: 20 }}>
-              <button
-                onClick={() => {
-                  onClose();
-                  onOpenCookieModal();
-                }}
+          {/* 5. In-Drawer Privacy & Cookie Preferences (Moved from sidebar) */}
+          <div style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: 20 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+              <label style={{ display: 'block', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--color-text-muted)' }}>
+                Privacy & Cookie Preferences
+              </label>
+              {cookieSavedSuccess && (
+                <span style={{ fontSize: 11, color: '#10B981', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                  <CheckIcon size={12} color="#10B981" />
+                  Saved!
+                </span>
+              )}
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {/* Strictly Necessary */}
+              <div
                 style={{
-                  width: '100%',
+                  padding: '10px 12px',
+                  borderRadius: 8,
+                  backgroundColor: 'var(--color-surface-raised)',
+                  border: '1px solid var(--color-border-default)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  padding: '10px 14px',
-                  borderRadius: 8,
-                  border: '1px solid var(--color-border-default)',
-                  backgroundColor: 'var(--color-surface-raised)',
-                  color: 'var(--color-text-primary)',
-                  cursor: 'pointer',
-                  fontSize: 13,
-                  fontWeight: 600,
+                  gap: 12,
                 }}
               >
-                <span>Privacy & Cookie Preferences</span>
-                <span style={{ fontSize: 12, color: 'var(--color-text-muted)' }}>Manage</span>
-              </button>
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <span style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                      Strictly Necessary
+                    </span>
+                    <Badge variant="primary" size="sm">Always Active</Badge>
+                  </div>
+                  <div style={{ fontSize: 11, color: 'var(--color-text-muted)', marginTop: 2 }}>
+                    Core session tokens, theme state & sandbox cache.
+                  </div>
+                </div>
+                <Switch checked={true} disabled readOnly label="" />
+              </div>
+
+              {/* Performance & Analytics */}
+              <div
+                style={{
+                  padding: '10px 12px',
+                  borderRadius: 8,
+                  backgroundColor: 'var(--color-surface-raised)',
+                  border: '1px solid var(--color-border-default)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: 12,
+                }}
+              >
+                <div>
+                  <span style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                    Performance Analytics
+                  </span>
+                  <div style={{ fontSize: 11, color: 'var(--color-text-muted)', marginTop: 2 }}>
+                    Anonymous compiler latency & component metric telemetry.
+                  </div>
+                </div>
+                <Switch
+                  checked={cookieAnalytics}
+                  onChange={(val) => setCookieAnalytics(val)}
+                  label=""
+                />
+              </div>
+
+              {/* Personalization & Sandbox */}
+              <div
+                style={{
+                  padding: '10px 12px',
+                  borderRadius: 8,
+                  backgroundColor: 'var(--color-surface-raised)',
+                  border: '1px solid var(--color-border-default)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: 12,
+                }}
+              >
+                <div>
+                  <span style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--color-text-primary)' }}>
+                    Personalization
+                  </span>
+                  <div style={{ fontSize: 11, color: 'var(--color-text-muted)', marginTop: 2 }}>
+                    Preserves playground code edits & preferred preview platform.
+                  </div>
+                </div>
+                <Switch
+                  checked={cookiePersonalization}
+                  onChange={(val) => setCookiePersonalization(val)}
+                  label=""
+                />
+              </div>
+
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={handleSaveCookiePreferences}
+                style={{ marginTop: 4, width: '100%' }}
+              >
+                {cookieSavedSuccess ? 'Preferences Saved!' : 'Save Cookie Settings'}
+              </Button>
             </div>
-          )}
+          </div>
 
           {/* External Links */}
           <div style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: 16 }}>

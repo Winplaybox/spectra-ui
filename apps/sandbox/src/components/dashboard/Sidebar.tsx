@@ -15,9 +15,6 @@ import { useVersion } from '../../context/VersionContext';
 import { usePlatform } from '../../context/PlatformContext';
 import { PlatformIcon } from './PlatformIcon';
 import { V010_NEW_COMPONENTS, V020_NEW_COMPONENTS } from '../../data/versionReleaseData';
-import { COMPONENT_VARIANTS_MAP } from './ComponentVariantsShowcase';
-import { NativeSponsorAd } from './NativeSponsorAd';
-import { CookiePreferencesModal } from './CookiePreferencesModal';
 import {
   COMPONENT_CATEGORIES,
   HOOK_CATEGORIES,
@@ -251,7 +248,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const { colorScheme } = useColorScheme();
   const { currentVersion } = useVersion();
   const { currentPlatform, setPlatform, metadata: platformMeta, allPlatforms } = usePlatform();
-  const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
   const [platformDropdownOpen, setPlatformDropdownOpen] = useState(false);
   const platformDropdownRef = useRef<HTMLDivElement>(null);
 
@@ -262,18 +258,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
   // View mode toggle for Components section: 'tree' (A-Z with folders) vs 'categories' (MUI grouping)
   const [componentViewMode, setComponentViewMode] = useState<'tree' | 'categories'>('tree');
 
-  // Track open/collapsed state of main top-level sections (Screenshot 1)
+  // Track open/collapsed state of main top-level sections (Benchmark Screenshot)
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
-    concepts: false,
-    theme: false,
+    'getting-started': true,
     components: true,
     'component-api': false,
-    motion: false,
-    utilities: false,
-    guides: false,
+    customization: false,
+    'how-to-guides': false,
+    integrations: false,
+    'experimental-apis': false,
+    migration: false,
+    'discover-more': false,
   });
 
-  // Track open/closed state of component family folders (Screenshot 2)
+  // Track open/closed state of component family folders
   const [expandedFolders, setExpandedFolders] = useState<Record<string, boolean>>({
     'badge-family': false,
     'button-family': false,
@@ -335,14 +333,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
           }
         }
       }
-    } else if (currentRoute.type === 'motion') {
-      setExpandedSections((prev) => ({ ...prev, motion: true }));
-    } else if (currentRoute.type === 'utilities') {
-      setExpandedSections((prev) => ({ ...prev, utilities: true }));
-    } else if (currentRoute.type === 'guides') {
-      setExpandedSections((prev) => ({ ...prev, guides: true }));
+    } else if (
+      currentRoute.type === 'getting-started' ||
+      currentRoute.type === 'overview' ||
+      currentRoute.type === 'installation'
+    ) {
+      setExpandedSections((prev) => ({ ...prev, 'getting-started': true }));
     } else if (currentRoute.type === 'tokens') {
-      setExpandedSections((prev) => ({ ...prev, theme: true }));
+      setExpandedSections((prev) => ({ ...prev, customization: true }));
+    } else if (currentRoute.type === 'guides') {
+      setExpandedSections((prev) => ({ ...prev, 'how-to-guides': true }));
+    } else if (
+      currentRoute.type === 'motion' ||
+      currentRoute.type === 'utilities' ||
+      currentRoute.type === 'hooks'
+    ) {
+      setExpandedSections((prev) => ({ ...prev, 'discover-more': true }));
     }
   }, [currentRoute]);
 
@@ -690,7 +696,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           )}
         </div>
 
-        {/* Realtime Instant Component Search Bar (Screenshot 1: Find components) */}
+        {/* Realtime Instant Component Search Bar ("Find components") */}
         <div style={{ padding: '8px 14px 6px 14px', flexShrink: 0 }}>
           <div
             style={{
@@ -780,7 +786,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
         </div>
 
-        {/* Scrollable Navigation Tree Area (Screenshots 1 & 2) */}
+        {/* Scrollable Navigation Tree Area */}
         <div
           style={{
             flex: 1,
@@ -795,10 +801,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
             scrollbarColor: colorScheme === 'dark' ? 'rgba(255, 255, 255, 0.18) transparent' : 'rgba(0, 0, 0, 0.18) transparent',
           }}
         >
-          {/* SECTION 1: CONCEPTS (Screenshot 1) */}
+          {/* SECTION 1: GETTING STARTED (Benchmark Screenshot) */}
           <div>
             <div
-              onClick={() => toggleSection('concepts')}
+              onClick={() => toggleSection('getting-started')}
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -817,20 +823,32 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <ChevronRightIcon
                 size={11}
                 style={{
-                  transform: expandedSections.concepts ? 'rotate(90deg)' : 'none',
+                  transform: expandedSections['getting-started'] ? 'rotate(90deg)' : 'none',
                   transition: 'transform 0.15s ease',
                   color: 'var(--color-text-muted)',
                   flexShrink: 0,
                 }}
               />
-              <span>Concepts</span>
+              <span>Getting started</span>
             </div>
-            {expandedSections.concepts && (
+            {expandedSections['getting-started'] && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 1 }}>
                 {[
                   { name: 'Overview', path: '/overview' },
-                  { name: 'Installation & Setup', path: '/installation' },
-                  { name: 'Multi-Platform Architecture', path: '/cross-platform' },
+                  { name: 'Installation', path: '/installation' },
+                  { name: 'Usage', path: '/usage' },
+                  { name: 'MCP', path: '/mcp', badge: 'NEW' },
+                  { name: 'llms.txt', path: '/llms-txt', badge: 'NEW' },
+                  { name: 'Example projects', path: '/example-projects' },
+                  { name: 'Templates', path: '/templates' },
+                  { name: 'Learn', path: '/learn' },
+                  { name: 'Design resources', path: '/design-resources' },
+                  { name: 'FAQs', path: '/faqs' },
+                  { name: 'Accessibility', path: '/accessibility' },
+                  { name: 'Supported components', path: '/components' },
+                  { name: 'Supported platforms', path: '/cross-platform' },
+                  { name: 'Support', path: '/support' },
+                  { name: 'Versions', path: '/versions' },
                 ].map((item) => {
                   const isActive = isRouteActive(item.path);
                   return (
@@ -841,7 +859,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       style={{
                         display: 'flex',
                         alignItems: 'center',
-                        gap: 8,
+                        justifyContent: 'space-between',
                         minHeight: 28,
                         padding: '4px 8px 4px 24px',
                         borderRadius: 4,
@@ -859,8 +877,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         if (!isActive) e.currentTarget.style.backgroundColor = 'transparent';
                       }}
                     >
-                      <FileTextIcon size={13} color={isActive ? '#FFFFFF' : 'var(--color-text-muted)'} />
-                      <span>{item.name}</span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <FileTextIcon size={13} color={isActive ? '#FFFFFF' : 'var(--color-text-muted)'} />
+                        <span>{item.name}</span>
+                      </div>
+                      {item.badge && (
+                        <span
+                          style={{
+                            fontSize: 8.5,
+                            fontWeight: 700,
+                            padding: '1px 5px',
+                            borderRadius: 10,
+                            backgroundColor: isActive ? 'rgba(255,255,255,0.25)' : 'rgba(16, 185, 129, 0.15)',
+                            color: isActive ? '#FFFFFF' : '#10B981',
+                            border: isActive ? 'none' : '1px solid rgba(16, 185, 129, 0.3)',
+                          }}
+                        >
+                          {item.badge}
+                        </span>
+                      )}
                     </a>
                   );
                 })}
@@ -868,81 +903,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             )}
           </div>
 
-          {/* SECTION 2: THEME & TOKENS (Screenshot 1) */}
-          <div>
-            <div
-              onClick={() => toggleSection('theme')}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-                padding: '6px 8px',
-                borderRadius: 4,
-                cursor: 'pointer',
-                fontWeight: 600,
-                fontSize: 13,
-                color: 'var(--color-text-primary)',
-                transition: 'background-color 0.1s ease',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colorScheme === 'dark' ? 'rgba(255,255,255,0.06)' : '#F3F4F6')}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
-            >
-              <ChevronRightIcon
-                size={11}
-                style={{
-                  transform: expandedSections.theme ? 'rotate(90deg)' : 'none',
-                  transition: 'transform 0.15s ease',
-                  color: 'var(--color-text-muted)',
-                  flexShrink: 0,
-                }}
-              />
-              <span>Theme</span>
-            </div>
-            {expandedSections.theme && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 1 }}>
-                {[
-                  { name: 'Colors & Swatches', path: '/tokens/colors' },
-                  { name: 'Typography Scale', path: '/tokens/typography' },
-                  { name: 'Spacing & 4px Grid', path: '/tokens/spacing' },
-                  { name: 'Shadows & Elevation', path: '/tokens/shadows' },
-                ].map((item) => {
-                  const isActive = isRouteActive(item.path);
-                  return (
-                    <a
-                      key={item.path}
-                      href={item.path}
-                      onClick={(e) => handleLinkClick(e, item.path)}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 8,
-                        minHeight: 28,
-                        padding: '4px 8px 4px 24px',
-                        borderRadius: 4,
-                        fontSize: 12.5,
-                        textDecoration: 'none',
-                        color: isActive ? '#FFFFFF' : 'var(--color-text-primary)',
-                        backgroundColor: isActive ? '#0078D4' : 'transparent',
-                        fontWeight: isActive ? 500 : 400,
-                        transition: 'background-color 0.1s ease',
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isActive) e.currentTarget.style.backgroundColor = colorScheme === 'dark' ? 'rgba(255,255,255,0.06)' : '#EBF3FC';
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isActive) e.currentTarget.style.backgroundColor = 'transparent';
-                      }}
-                    >
-                      <FileTextIcon size={13} color={isActive ? '#FFFFFF' : 'var(--color-text-muted)'} />
-                      <span>{item.name}</span>
-                    </a>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
-          {/* SECTION 3: COMPONENTS (Screenshots 1 & 2 - Exact Fluent 2 Architecture) */}
+          {/* SECTION 2: COMPONENTS (Fluent 2 Architecture) */}
           <div>
             <div
               style={{
@@ -1014,11 +975,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </button>
             </div>
 
-            {/* EXPANDED COMPONENTS LIST (Screenshot 2: Accordion, Avatar, Badge, Button, Input...) */}
+            {/* EXPANDED COMPONENTS LIST */}
             {expandedSections.components && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 1 }}>
                 {componentViewMode === 'tree' ? (
-                  /* Mode A: Fluent 2 A-Z Tree with Folders & Document Icons (Screenshot 2) */
+                  /* Mode A: Fluent 2 A-Z Tree with Folders & Document Icons */
                   displayedComponentTree.map((node) => {
                     if (node.isFolder && node.children) {
                       const isFolderOpen = expandedFolders[node.id] ?? false;
@@ -1026,7 +987,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
                       return (
                         <div key={node.id} style={{ display: 'flex', flexDirection: 'column' }}>
-                          {/* Folder Header Row (e.g. > 📁 Button) */}
+                          {/* Folder Header Row */}
                           <div
                             onClick={() => toggleFolder(node.id)}
                             style={{
@@ -1082,7 +1043,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                             </span>
                           </div>
 
-                          {/* Children under Folder (indented with Document icons) */}
+                          {/* Children under Folder */}
                           {isFolderOpen && (
                             <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                               {node.children.map((child) => {
@@ -1127,7 +1088,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       );
                     }
 
-                    // Leaf Standalone Component Row (e.g. 📄 Accordion, 📄 Input)
+                    // Leaf Standalone Component Row
                     const isNodeActive = isComponentNodeActive(node);
                     const isNew = V020_NEW_COMPONENTS.includes(node.id) || V010_NEW_COMPONENTS.includes(node.id);
 
@@ -1185,7 +1146,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     );
                   })
                 ) : (
-                  /* Mode B: Grouped Categories (Screenshot 4 & 5) */
+                  /* Mode B: Grouped Categories */
                   platformCategories.map((cat) => {
                     const isCatOpen = expandedCategories[cat.id] ?? true;
                     return (
@@ -1260,7 +1221,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             )}
           </div>
 
-          {/* SECTION 4: COMPONENT API (Screenshot 3 exact MUI API list) */}
+          {/* SECTION 3: COMPONENT API */}
           <div>
             <div
               onClick={() => toggleSection('component-api')}
@@ -1294,12 +1255,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <div style={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 1, maxHeight: 240, overflowY: 'auto' }}>
                 {displayedComponentTree.map((item) => {
                   const targetId = item.id.replace(/-family$/, '');
-                  const isApiActive = currentRoute.type === 'components' && currentRoute.id === targetId && currentHash === 'api-reference';
+                  const isApiActive = currentRoute.type === 'components' && currentRoute.id === targetId && currentHash === 'api';
                   return (
                     <a
                       key={item.id}
-                      href={`/components/${targetId}#api-reference`}
-                      onClick={(e) => handleAnchorClick(e, targetId, 'api-reference')}
+                      href={`/components/${targetId}#api`}
+                      onClick={(e) => handleAnchorClick(e, targetId, 'api')}
                       style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -1331,10 +1292,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
             )}
           </div>
 
-          {/* SECTION 5: MOTION (Screenshot 1) */}
+          {/* SECTION 4: CUSTOMIZATION (Benchmark Screenshot 4) */}
           <div>
             <div
-              onClick={() => toggleSection('motion')}
+              onClick={() => toggleSection('customization')}
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -1353,171 +1314,30 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <ChevronRightIcon
                 size={11}
                 style={{
-                  transform: expandedSections.motion ? 'rotate(90deg)' : 'none',
+                  transform: expandedSections.customization ? 'rotate(90deg)' : 'none',
                   transition: 'transform 0.15s ease',
                   color: 'var(--color-text-muted)',
                   flexShrink: 0,
                 }}
               />
-              <span>Motion</span>
+              <span>Customization</span>
             </div>
-            {expandedSections.motion && (
+            {expandedSections.customization && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 1 }}>
                 {[
-                  { name: 'Motion Overview', path: '/motion' },
-                  { name: 'Atoms & Durations', path: '/motion/atoms' },
-                  { name: 'Blur Transitions', path: '/motion/blur' },
-                  { name: 'Collapse & Expand', path: '/motion/collapse' },
-                  { name: 'Fade & Opacity', path: '/motion/fade' },
-                  { name: 'Scale & Elevation', path: '/motion/scale' },
-                  { name: 'Slide & Sheets', path: '/motion/slide' },
+                  { name: 'Default theme viewer', path: '/tokens/colors' },
+                  { name: 'Customizing the theme', path: '/guides/building-extensible-themes' },
+                  { name: 'Palette & Colors', path: '/tokens/colors' },
+                  { name: 'Typography Scale', path: '/tokens/typography' },
+                  { name: 'Spacing & 4px Grid', path: '/tokens/spacing' },
+                  { name: 'Shadows & Elevation', path: '/tokens/shadows' },
+                  { name: 'Container queries', path: '/guides/container-queries', badge: 'NEW' },
+                  { name: 'Focus visible', path: '/guides/focus-visible', badge: 'NEW' },
                 ].map((item) => {
                   const isActive = isRouteActive(item.path);
                   return (
                     <a
-                      key={item.path}
-                      href={item.path}
-                      onClick={(e) => handleLinkClick(e, item.path)}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 8,
-                        minHeight: 28,
-                        padding: '4px 8px 4px 24px',
-                        borderRadius: 4,
-                        fontSize: 12.5,
-                        textDecoration: 'none',
-                        color: isActive ? '#FFFFFF' : 'var(--color-text-primary)',
-                        backgroundColor: isActive ? '#0078D4' : 'transparent',
-                        fontWeight: isActive ? 500 : 400,
-                      }}
-                    >
-                      <FileTextIcon size={13} color={isActive ? '#FFFFFF' : 'var(--color-text-muted)'} />
-                      <span>{item.name}</span>
-                    </a>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
-          {/* SECTION 6: UTILITIES (Screenshot 1) */}
-          <div>
-            <div
-              onClick={() => toggleSection('utilities')}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-                padding: '6px 8px',
-                borderRadius: 4,
-                cursor: 'pointer',
-                fontWeight: 600,
-                fontSize: 13,
-                color: 'var(--color-text-primary)',
-                transition: 'background-color 0.1s ease',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colorScheme === 'dark' ? 'rgba(255,255,255,0.06)' : '#F3F4F6')}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
-            >
-              <ChevronRightIcon
-                size={11}
-                style={{
-                  transform: expandedSections.utilities ? 'rotate(90deg)' : 'none',
-                  transition: 'transform 0.15s ease',
-                  color: 'var(--color-text-muted)',
-                  flexShrink: 0,
-                }}
-              />
-              <span>Utilities</span>
-            </div>
-            {expandedSections.utilities && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 1 }}>
-                {[
-                  { name: 'createCSSRuleFromTheme', path: '/utilities/createCSSRuleFromTheme', isMono: true },
-                  { name: 'useSafeZoneArea', path: '/utilities/useSafeZoneArea', isMono: true },
-                  { name: 'useArrowNavigationGroup', path: '/utilities/useArrowNavigationGroup', isMono: true },
-                  { name: 'useFocusableGroup', path: '/utilities/useFocusableGroup', isMono: true },
-                  { name: 'AriaLiveAnnouncer', path: '/utilities/AriaLiveAnnouncer', isMono: true },
-                  { name: 'useAnnounce', path: '/utilities/useAnnounce', isMono: true },
-                ].map((item) => {
-                  const isActive = isRouteActive(item.path);
-                  return (
-                    <a
-                      key={item.path}
-                      href={item.path}
-                      onClick={(e) => handleLinkClick(e, item.path)}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 8,
-                        minHeight: 28,
-                        padding: '4px 8px 4px 24px',
-                        borderRadius: 4,
-                        fontSize: item.isMono ? 12 : 12.5,
-                        fontFamily: item.isMono ? 'var(--font-mono, monospace)' : 'inherit',
-                        textDecoration: 'none',
-                        color: isActive ? '#FFFFFF' : 'var(--color-text-primary)',
-                        backgroundColor: isActive ? '#0078D4' : 'transparent',
-                        fontWeight: isActive ? 500 : 400,
-                      }}
-                    >
-                      <FileTextIcon size={13} color={isActive ? '#FFFFFF' : 'var(--color-text-muted)'} />
-                      <span>{item.name}</span>
-                    </a>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
-          {/* SECTION 7: GUIDES & ARCHITECTURE (Screenshot 1: Migration Shims / Guides) */}
-          <div>
-            <div
-              onClick={() => toggleSection('guides')}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-                padding: '6px 8px',
-                borderRadius: 4,
-                cursor: 'pointer',
-                fontWeight: 600,
-                fontSize: 13,
-                color: 'var(--color-text-primary)',
-                transition: 'background-color 0.1s ease',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colorScheme === 'dark' ? 'rgba(255,255,255,0.06)' : '#F3F4F6')}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
-            >
-              <ChevronRightIcon
-                size={11}
-                style={{
-                  transform: expandedSections.guides ? 'rotate(90deg)' : 'none',
-                  transition: 'transform 0.15s ease',
-                  color: 'var(--color-text-muted)',
-                  flexShrink: 0,
-                }}
-              />
-              <span>Architecture & Guides</span>
-            </div>
-            {expandedSections.guides && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 1 }}>
-                {[
-                  { name: 'Responsive UI', path: '/guides/responsive-ui' },
-                  { name: 'Localization', path: '/guides/localization' },
-                  { name: 'Building Extensible Themes', path: '/guides/building-extensible-themes' },
-                  { name: 'Minimizing Bundle Size', path: '/guides/minimizing-bundle-size' },
-                  { name: 'Container Queries', path: '/guides/container-queries', badge: 'NEW' },
-                  { name: 'Density & Sizing', path: '/guides/density' },
-                  { name: 'Focus Visible', path: '/guides/focus-visible', badge: 'NEW' },
-                  { name: 'Dark Mode Baseline', path: '/guides/dark-mode' },
-                  { name: 'Right-to-Left (RTL)', path: '/guides/right-to-left' },
-                ].map((item) => {
-                  const isActive = isRouteActive(item.path);
-                  return (
-                    <a
-                      key={item.path}
+                      key={item.path + item.name}
                       href={item.path}
                       onClick={(e) => handleLinkClick(e, item.path)}
                       style={{
@@ -1547,7 +1367,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
                             borderRadius: 8,
                             backgroundColor: isActive ? 'rgba(255,255,255,0.25)' : 'rgba(16, 185, 129, 0.15)',
                             color: isActive ? '#FFFFFF' : '#10B981',
-                            border: isActive ? 'none' : '1px solid rgba(16, 185, 129, 0.3)',
                           }}
                         >
                           {item.badge}
@@ -1560,7 +1379,363 @@ export const Sidebar: React.FC<SidebarProps> = ({
             )}
           </div>
 
-          {/* DIVIDER & EXTERNAL REFERENCE 1: FLUENT SYSTEM ICONS (Screenshot 1) */}
+          {/* SECTION 5: HOW-TO GUIDES (Benchmark Screenshot 5) */}
+          <div>
+            <div
+              onClick={() => toggleSection('how-to-guides')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                padding: '6px 8px',
+                borderRadius: 4,
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: 13,
+                color: 'var(--color-text-primary)',
+                transition: 'background-color 0.1s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colorScheme === 'dark' ? 'rgba(255,255,255,0.06)' : '#F3F4F6')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+            >
+              <ChevronRightIcon
+                size={11}
+                style={{
+                  transform: expandedSections['how-to-guides'] ? 'rotate(90deg)' : 'none',
+                  transition: 'transform 0.15s ease',
+                  color: 'var(--color-text-muted)',
+                  flexShrink: 0,
+                }}
+              />
+              <span>How-to guides</span>
+            </div>
+            {expandedSections['how-to-guides'] && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 1 }}>
+                {[
+                  { name: 'Building extensible themes', path: '/guides/building-extensible-themes' },
+                  { name: 'Minimizing bundle size', path: '/guides/minimizing-bundle-size' },
+                  { name: 'Responsive UI', path: '/guides/responsive-ui' },
+                  { name: 'Localization & i18n', path: '/guides/localization' },
+                  { name: 'Density & Sizing', path: '/guides/density' },
+                  { name: 'Right-to-Left (RTL)', path: '/guides/right-to-left' },
+                ].map((item) => {
+                  const isActive = isRouteActive(item.path);
+                  return (
+                    <a
+                      key={item.path}
+                      href={item.path}
+                      onClick={(e) => handleLinkClick(e, item.path)}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 8,
+                        minHeight: 28,
+                        padding: '4px 8px 4px 24px',
+                        borderRadius: 4,
+                        fontSize: 12.5,
+                        textDecoration: 'none',
+                        color: isActive ? '#FFFFFF' : 'var(--color-text-primary)',
+                        backgroundColor: isActive ? '#0078D4' : 'transparent',
+                        fontWeight: isActive ? 500 : 400,
+                      }}
+                    >
+                      <FileTextIcon size={13} color={isActive ? '#FFFFFF' : 'var(--color-text-muted)'} />
+                      <span>{item.name}</span>
+                    </a>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* SECTION 6: INTEGRATIONS (Benchmark Screenshot 5) */}
+          <div>
+            <div
+              onClick={() => toggleSection('integrations')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                padding: '6px 8px',
+                borderRadius: 4,
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: 13,
+                color: 'var(--color-text-primary)',
+                transition: 'background-color 0.1s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colorScheme === 'dark' ? 'rgba(255,255,255,0.06)' : '#F3F4F6')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+            >
+              <ChevronRightIcon
+                size={11}
+                style={{
+                  transform: expandedSections.integrations ? 'rotate(90deg)' : 'none',
+                  transition: 'transform 0.15s ease',
+                  color: 'var(--color-text-muted)',
+                  flexShrink: 0,
+                }}
+              />
+              <span>Integrations</span>
+            </div>
+            {expandedSections.integrations && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 1 }}>
+                {[
+                  { name: 'Tailwind CSS v4 integration', path: '/usage#tailwind', badge: 'NEW' },
+                  { name: 'Next.js integration', path: '/usage#nextjs', badge: 'NEW' },
+                  { name: 'React Native Expo setup', path: '/usage#expo' },
+                  { name: 'Routing libraries (React Router)', path: '/usage#routing' },
+                ].map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.path}
+                    onClick={(e) => handleLinkClick(e, item.path)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      minHeight: 28,
+                      padding: '4px 8px 4px 24px',
+                      borderRadius: 4,
+                      fontSize: 12.5,
+                      textDecoration: 'none',
+                      color: 'var(--color-text-primary)',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+                      <FileTextIcon size={13} color="var(--color-text-muted)" />
+                      <span>{item.name}</span>
+                    </div>
+                    {item.badge && (
+                      <span
+                        style={{
+                          fontSize: 8.5,
+                          fontWeight: 700,
+                          padding: '1px 4px',
+                          borderRadius: 8,
+                          backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                          color: '#10B981',
+                        }}
+                      >
+                        {item.badge}
+                      </span>
+                    )}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* SECTION 7: EXPERIMENTAL APIS */}
+          <div>
+            <div
+              onClick={() => toggleSection('experimental-apis')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                padding: '6px 8px',
+                borderRadius: 4,
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: 13,
+                color: 'var(--color-text-primary)',
+                transition: 'background-color 0.1s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colorScheme === 'dark' ? 'rgba(255,255,255,0.06)' : '#F3F4F6')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+            >
+              <ChevronRightIcon
+                size={11}
+                style={{
+                  transform: expandedSections['experimental-apis'] ? 'rotate(90deg)' : 'none',
+                  transition: 'transform 0.15s ease',
+                  color: 'var(--color-text-muted)',
+                  flexShrink: 0,
+                }}
+              />
+              <span>Experimental APIs</span>
+            </div>
+            {expandedSections['experimental-apis'] && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 1 }}>
+                {[
+                  { name: 'Mobile Chassis Simulator', path: '/mobile-simulator' },
+                  { name: 'Live Multi-Platform Lab', path: '/cross-platform#device-lab' },
+                ].map((item) => (
+                  <a
+                    key={item.path}
+                    href={item.path}
+                    onClick={(e) => handleLinkClick(e, item.path)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      minHeight: 28,
+                      padding: '4px 8px 4px 24px',
+                      borderRadius: 4,
+                      fontSize: 12.5,
+                      textDecoration: 'none',
+                      color: isRouteActive(item.path) ? '#0078D4' : 'var(--color-text-primary)',
+                      fontWeight: isRouteActive(item.path) ? 600 : 400,
+                    }}
+                  >
+                    <FileTextIcon size={13} color="var(--color-text-muted)" />
+                    <span>{item.name}</span>
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* SECTION 8: MIGRATION */}
+          <div>
+            <div
+              onClick={() => toggleSection('migration')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                padding: '6px 8px',
+                borderRadius: 4,
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: 13,
+                color: 'var(--color-text-primary)',
+                transition: 'background-color 0.1s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colorScheme === 'dark' ? 'rgba(255,255,255,0.06)' : '#F3F4F6')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+            >
+              <ChevronRightIcon
+                size={11}
+                style={{
+                  transform: expandedSections.migration ? 'rotate(90deg)' : 'none',
+                  transition: 'transform 0.15s ease',
+                  color: 'var(--color-text-muted)',
+                  flexShrink: 0,
+                }}
+              />
+              <span>Migration</span>
+            </div>
+            {expandedSections.migration && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 1 }}>
+                {[
+                  { name: 'Upgrade to v0.2.0', path: '/versions#v0.2.0' },
+                  { name: 'Upgrade to v0.1.0', path: '/versions#v0.1.0' },
+                  { name: 'Migrating from legacy APIs', path: '/versions#deprecated' },
+                ].map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.path}
+                    onClick={(e) => handleLinkClick(e, item.path)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      minHeight: 28,
+                      padding: '4px 8px 4px 24px',
+                      borderRadius: 4,
+                      fontSize: 12.5,
+                      textDecoration: 'none',
+                      color: 'var(--color-text-primary)',
+                    }}
+                  >
+                    <FileTextIcon size={13} color="var(--color-text-muted)" />
+                    <span>{item.name}</span>
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* SECTION 9: DISCOVER MORE */}
+          <div>
+            <div
+              onClick={() => toggleSection('discover-more')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+                padding: '6px 8px',
+                borderRadius: 4,
+                cursor: 'pointer',
+                fontWeight: 600,
+                fontSize: 13,
+                color: 'var(--color-text-primary)',
+                transition: 'background-color 0.1s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colorScheme === 'dark' ? 'rgba(255,255,255,0.06)' : '#F3F4F6')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+            >
+              <ChevronRightIcon
+                size={11}
+                style={{
+                  transform: expandedSections['discover-more'] ? 'rotate(90deg)' : 'none',
+                  transition: 'transform 0.15s ease',
+                  color: 'var(--color-text-muted)',
+                  flexShrink: 0,
+                }}
+              />
+              <span>Discover more</span>
+            </div>
+            {expandedSections['discover-more'] && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 1, marginTop: 1 }}>
+                {[
+                  { name: 'Motion Engine Primitives', path: '/motion' },
+                  { name: 'Utilities & Announcers', path: '/utilities' },
+                  { name: 'State & Overlay Hooks', path: '/hooks' },
+                  { name: '14,255 Vector Icons', path: '/icons' },
+                ].map((item) => (
+                  <a
+                    key={item.path}
+                    href={item.path}
+                    onClick={(e) => handleLinkClick(e, item.path)}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      minHeight: 28,
+                      padding: '4px 8px 4px 24px',
+                      borderRadius: 4,
+                      fontSize: 12.5,
+                      textDecoration: 'none',
+                      color: isRouteActive(item.path) ? '#FFFFFF' : 'var(--color-text-primary)',
+                      backgroundColor: isRouteActive(item.path) ? '#0078D4' : 'transparent',
+                    }}
+                  >
+                    <FileTextIcon size={13} color={isRouteActive(item.path) ? '#FFFFFF' : 'var(--color-text-muted)'} />
+                    <span>{item.name}</span>
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* SECTION 10: TEMPLATE STORE */}
+          <a
+            href="/templates"
+            onClick={(e) => handleLinkClick(e, '/templates')}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              minHeight: 30,
+              padding: '6px 8px',
+              borderRadius: 4,
+              fontSize: 13,
+              fontWeight: 600,
+              textDecoration: 'none',
+              color: isRouteActive('/templates') ? '#0078D4' : 'var(--color-text-primary)',
+              transition: 'background-color 0.1s ease',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = colorScheme === 'dark' ? 'rgba(255,255,255,0.06)' : '#F3F4F6')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+          >
+            <FolderIcon size={14} color="#0078D4" />
+            <span>Template store</span>
+          </a>
+
+          {/* DIVIDER & EXTERNAL REFERENCE 1: FLUENT SYSTEM ICONS */}
           <div style={{ height: 1, backgroundColor: 'var(--color-border-subtle)', margin: '8px 4px 6px 4px' }} />
 
           <a
@@ -1594,12 +1769,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <GlobeIcon size={14} color="var(--color-text-muted)" />
           </a>
 
-          {/* DIVIDER & EXTERNAL REFERENCE 2: DEVICE LAB & CHASSIS (Screenshot 1) */}
+          {/* DIVIDER & EXTERNAL REFERENCE 2: DEVICE LAB & CHASSIS */}
           <div style={{ height: 1, backgroundColor: 'var(--color-border-subtle)', margin: '4px 4px 6px 4px' }} />
 
           <a
-            href="/mobile-simulator"
-            onClick={(e) => handleLinkClick(e, '/mobile-simulator')}
+            href="/cross-platform"
+            onClick={(e) => handleLinkClick(e, '/cross-platform')}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -1610,15 +1785,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
               fontSize: 13,
               fontWeight: 600,
               textDecoration: 'none',
-              color: currentRoute.path === '/mobile-simulator' ? '#0078D4' : 'var(--color-text-primary)',
-              backgroundColor: currentRoute.path === '/mobile-simulator' ? (colorScheme === 'dark' ? 'rgba(0,120,212,0.12)' : '#EBF3FC') : 'transparent',
+              color: currentRoute.path === '/cross-platform' ? '#0078D4' : 'var(--color-text-primary)',
+              backgroundColor: currentRoute.path === '/cross-platform' ? (colorScheme === 'dark' ? 'rgba(0,120,212,0.12)' : '#EBF3FC') : 'transparent',
               transition: 'background-color 0.1s ease',
             }}
             onMouseEnter={(e) => {
-              if (currentRoute.path !== '/mobile-simulator') e.currentTarget.style.backgroundColor = colorScheme === 'dark' ? 'rgba(255,255,255,0.06)' : '#F3F4F6';
+              if (currentRoute.path !== '/cross-platform') e.currentTarget.style.backgroundColor = colorScheme === 'dark' ? 'rgba(255,255,255,0.06)' : '#F3F4F6';
             }}
             onMouseLeave={(e) => {
-              if (currentRoute.path !== '/mobile-simulator') e.currentTarget.style.backgroundColor = 'transparent';
+              if (currentRoute.path !== '/cross-platform') e.currentTarget.style.backgroundColor = 'transparent';
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -1628,7 +1803,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <GlobeIcon size={14} color="var(--color-text-muted)" />
           </a>
 
-          {/* DIVIDER & EXTERNAL REFERENCE 3: REPOSITORY & PACKAGES (Screenshot 1) */}
+          {/* DIVIDER & EXTERNAL REFERENCE 3: REPOSITORY & PACKAGES */}
           <div style={{ height: 1, backgroundColor: 'var(--color-border-subtle)', margin: '4px 4px 6px 4px' }} />
 
           <a
@@ -1659,12 +1834,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </a>
         </div>
 
-        {/* Developer Native Sponsor Ad Placement */}
-        <div style={{ padding: '6px 12px', borderTop: '1px solid var(--color-border-subtle)', flexShrink: 0 }}>
-          <NativeSponsorAd initialFormat="classic" publisherTheme="devtools" allowFormatSwitch={false} />
-        </div>
-
-        {/* Footer info with Cookie Preferences */}
+        {/* Pure Clean Footer row - No Ad, No Modal Trigger (Moved to Settings Drawer) */}
         <div
           style={{
             padding: '8px 14px',
@@ -1677,26 +1847,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
             flexShrink: 0,
           }}
         >
-          <button
-            onClick={() => setIsCookieModalOpen(true)}
+          <a
+            href="https://github.com/Winplaybox/spectra-ui"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
-              background: 'transparent',
-              border: 'none',
               color: 'var(--color-text-secondary)',
-              cursor: 'pointer',
-              padding: 0,
+              textDecoration: 'none',
               fontSize: 11,
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 4,
-              transition: 'color 0.12s ease',
+              fontWeight: 500,
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#0078D4')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-secondary)')}
-            title="Manage privacy and cookie settings"
           >
-            <span>Cookie Preferences</span>
-          </button>
+            Winplaybox/spectra-ui
+          </a>
 
           <span
             style={{
@@ -1713,12 +1876,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </span>
         </div>
       </aside>
-
-      {/* Privacy & Cookie Preferences Modal */}
-      <CookiePreferencesModal
-        isOpen={isCookieModalOpen}
-        onClose={() => setIsCookieModalOpen(false)}
-      />
     </>
   );
 };

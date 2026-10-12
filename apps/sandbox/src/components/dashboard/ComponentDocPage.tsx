@@ -6156,7 +6156,10 @@ export const Native${meta.name}Demo = () => {
             </div>
           </div>
 
-          {/* 2. Variants Showcase (Rendered directly without redundant banner) */}
+          {/* 2. Fluent UI Component Props Reference (Rendered immediately after Basic component before variants showcase) */}
+          <ComponentApiSection componentId={meta.id} />
+
+          {/* 3. Variants Showcase (Rendered directly without redundant banner) */}
           <div id="usage-variants" style={{ display: 'flex', flexDirection: 'column', gap: 20, scrollMarginTop: 80 }}>
             <ComponentVariantsShowcase componentId={meta.id} />
           </div>
@@ -7538,9 +7541,6 @@ export const Native${meta.name}Demo = () => {
             </Card>
           </div>
 
-          {/* Comprehensive API Reference: Props, CSS Classes, Design Tokens, Native Mobile API */}
-          <ComponentApiSection componentId={meta.id} />
-          <ComponentApiSection componentId={meta.id} />
         </>
       )}
 
@@ -8170,6 +8170,33 @@ export const Native${meta.name}Demo = () => {
             {platformMode === 'web' ? `Basic ${meta.name}` : `${platformMeta.name} Simulator`}
           </a>
 
+          {/* Section: Component Props API (Right after Basic Component before variants) */}
+          {platformMode === 'web' && (
+            <a
+              href="#api"
+              onClick={(e) => scrollToSection(e, 'api')}
+              style={{
+                display: 'block',
+                padding: '6px 0 6px 14px',
+                marginLeft: -1,
+                borderLeft: activeSection === 'api' ? '2px solid var(--color-action-primary)' : '2px solid transparent',
+                color: activeSection === 'api' ? 'var(--color-action-primary)' : 'var(--color-text-secondary)',
+                fontWeight: activeSection === 'api' ? 600 : 400,
+                textDecoration: 'none',
+                fontSize: 13,
+                transition: 'all 0.12s ease',
+              }}
+              onMouseEnter={(e) => {
+                if (activeSection !== 'api') e.currentTarget.style.color = 'var(--color-text-primary)';
+              }}
+              onMouseLeave={(e) => {
+                if (activeSection !== 'api') e.currentTarget.style.color = 'var(--color-text-secondary)';
+              }}
+            >
+              Props & API Reference
+            </a>
+          )}
+
           {/* Section: Usage & Variants */}
           <a
             href="#usage-variants"
@@ -8497,24 +8524,16 @@ export const Native${meta.name}Demo = () => {
                   textDecoration: 'none',
                   fontSize: 13,
                   transition: 'all 0.12s ease',
-                }}
-                onMouseEnter={(e) => {
-                  if (activeSection !== 'api' && activeSection !== 'props') e.currentTarget.style.color = 'var(--color-text-primary)';
-                }}
-                onMouseLeave={(e) => {
-                  if (activeSection !== 'api' && activeSection !== 'props') e.currentTarget.style.color = 'var(--color-text-secondary)';
-                }}
-              >
-                API Reference (Props & CSS)
-              </a>
-            </>
-          )}
-
         </nav>
 
-      {/* Developer Native Sponsor Ad Unit */}
-      <NativeSponsorAd publisherTheme="docs" style={{ width: '100%' }} />
+        {/* Developer Dynamic Native Sponsor Ad Unit (Content Sidebar) */}
+        <NativeSponsorAd
+          componentId={meta.id}
+          componentCategory={meta.category}
+          publisherTheme="docs"
+          style={{ width: '100%' }}
+        />
+      </div>
     </div>
-  </div>
   );
 };

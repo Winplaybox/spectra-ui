@@ -9,6 +9,7 @@ import { TokensSection } from './components/dashboard/TokensSection';
 import { MotionSection } from './components/dashboard/MotionSection';
 import { UtilitiesSection } from './components/dashboard/UtilitiesSection';
 import { GuidesSection } from './components/dashboard/GuidesSection';
+import { GettingStartedSection } from './components/dashboard/GettingStartedSection';
 import { ComponentsSection } from './components/dashboard/ComponentsSection';
 import { HooksSection } from './components/dashboard/HooksSection';
 import { SearchPalette } from './components/dashboard/SearchPalette';
@@ -271,6 +272,10 @@ export const App: React.FC = () => {
 
           {currentRoute.type === 'installation' && (
             <InstallationSection />
+          )}
+
+          {currentRoute.type === 'getting-started' && (
+            <GettingStartedSection topicId={currentRoute.id || 'usage'} />
           )}
 
           {currentRoute.type === 'cross-platform' && (

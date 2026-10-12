@@ -1,391 +1,258 @@
-import React, { useState } from 'react';
-import { Card, Button, Text, Stack } from '@winplaybox/react';
+import React, { useState, useMemo } from 'react';
+import { Card, Badge, Button, Text, Stack } from '@winplaybox/react';
 import { ExternalLinkIcon, SparklesIcon, CloseIcon } from '@winplaybox/icons';
 
-export type AdFormat = 'cover' | 'responsive' | 'classic';
-export type PublisherTheme = 'docs' | 'devtools' | 'editorial';
-
 interface NativeSponsorAdProps {
-  initialFormat?: AdFormat;
-  publisherTheme?: PublisherTheme;
-  allowFormatSwitch?: boolean;
+  componentId?: string;
+  componentCategory?: string;
+  publisherTheme?: 'docs' | 'devtools' | 'editorial';
   style?: React.CSSProperties;
   className?: string;
 }
 
+interface AdContent {
+  badge: string;
+  badgeVariant: 'primary' | 'success' | 'warning' | 'info';
+  title: string;
+  description: string;
+  actionText: string;
+  url: string;
+  iconBg: string;
+}
+
+/**
+ * Spectra UI Dynamic Native Sponsor Ad Unit
+ * Displays a single, elegant native card ad dynamically tailored
+ * to the active component context, strictly reusing Spectra UI design system primitives.
+ */
 export const NativeSponsorAd: React.FC<NativeSponsorAdProps> = ({
-  initialFormat = 'classic',
-  publisherTheme = 'docs',
-  allowFormatSwitch = true,
+  componentId = '',
+  componentCategory = '',
   style,
   className,
 }) => {
-  const [format, setFormat] = useState<AdFormat>(initialFormat);
   const [isDismissed, setIsDismissed] = useState(false);
+
+  // Dynamically resolve ad content tailored to the active component or category
+  const adContent: AdContent = useMemo(() => {
+    const id = componentId.toLowerCase();
+    const cat = componentCategory.toLowerCase();
+
+    // 1. Form & Inputs category
+    if (
+      cat.includes('form') ||
+      cat.includes('input') ||
+      ['text-input', 'input', 'checkbox', 'radio', 'switch', 'select', 'combobox', 'autocomplete', 'slider', 'field'].includes(id)
+    ) {
+      return {
+        badge: 'ENTERPRISE FORMS',
+        badgeVariant: 'primary',
+        title: 'Spectra Form Engine & Validation',
+        description:
+          'Type-safe forms with real-time Zod validation, accessible error announcements, and zero-re-render affixes.',
+        actionText: 'Explore Forms',
+        url: 'https://github.com/Winplaybox/spectra-ui',
+        iconBg: 'linear-gradient(135deg, #0078D4, #00B7C3)',
+      };
+    }
+
+    // 2. Data Display & Grids
+    if (
+      cat.includes('data') ||
+      ['data-grid', 'table', 'list', 'card', 'avatar', 'badge'].includes(id)
+    ) {
+      return {
+        badge: 'VIRTUALIZED GRID',
+        badgeVariant: 'success',
+        title: '60fps Virtualized DataGrid Pro',
+        description:
+          'Sub-millisecond render cycles over 500k rows with column pinning, multi-sort, and Excel spreadsheet export.',
+        actionText: 'Inspect DataGrid',
+        url: 'https://github.com/Winplaybox/spectra-ui',
+        iconBg: 'linear-gradient(135deg, #10B981, #059669)',
+      };
+    }
+
+    // 3. Overlays & Dialogs
+    if (
+      cat.includes('overlay') ||
+      cat.includes('feedback') ||
+      ['dialog', 'drawer', 'tooltip', 'popover', 'modal', 'alert', 'toast', 'message-bar'].includes(id)
+    ) {
+      return {
+        badge: 'ACCESSIBLE OVERLAYS',
+        badgeVariant: 'warning',
+        title: 'APG Focus Trap & Modal Layers',
+        description:
+          'WAI-ARIA APG compliant modal layers with nested scroll lock, escape dismissal, and automatic focus restoration.',
+        actionText: 'View APG Patterns',
+        url: 'https://github.com/Winplaybox/spectra-ui',
+        iconBg: 'linear-gradient(135deg, #F59E0B, #D97706)',
+      };
+    }
+
+    // 4. Navigation
+    if (
+      cat.includes('nav') ||
+      ['tabs', 'breadcrumb', 'menu', 'nav', 'pagination', 'stepper'].includes(id)
+    ) {
+      return {
+        badge: 'NAVIGATION ENGINE',
+        badgeVariant: 'info',
+        title: 'Roving Tabindex & Keyboard Navigation',
+        description:
+          'Robust directional keyboard navigation with automatic ARIA orientation, nested submenus, and screen reader labels.',
+        actionText: 'Learn Navigation',
+        url: 'https://github.com/Winplaybox/spectra-ui',
+        iconBg: 'linear-gradient(135deg, #6366F1, #4F46E5)',
+      };
+    }
+
+    // Default: Core Multi-Platform Ecosystem
+    return {
+      badge: 'SPECTRA ECOSYSTEM',
+      badgeVariant: 'primary',
+      title: 'Spectra Multi-Platform Native Engine',
+      description:
+        'Unified design tokens, Web + React Native parity, and 14,255 on-demand vector icons for enterprise applications.',
+      actionText: 'Get Started Free',
+      url: 'https://github.com/Winplaybox/spectra-ui',
+      iconBg: 'linear-gradient(135deg, #0078D4, #38BDF8)',
+    };
+  }, [componentId, componentCategory]);
 
   if (isDismissed) {
     return null;
   }
 
-  // Theme-specific colors
-  const themeColors = {
-    docs: {
-      accent: '#007FFF',
-      badgeBg: 'rgba(0, 127, 255, 0.12)',
-      badgeBorder: 'rgba(0, 127, 255, 0.3)',
-      tagText: 'DOCS SPONSOR',
-    },
-    devtools: {
-      accent: '#10B981',
-      badgeBg: 'rgba(16, 185, 129, 0.12)',
-      badgeBorder: 'rgba(16, 185, 129, 0.3)',
-      tagText: 'DEV TOOLS PARTNER',
-    },
-    editorial: {
-      accent: '#8B5CF6',
-      badgeBg: 'rgba(139, 92, 246, 0.12)',
-      badgeBorder: 'rgba(139, 92, 246, 0.3)',
-      tagText: 'FEATURED EDITORIAL',
-    },
-  }[publisherTheme];
-
   return (
-    <div
+    <Card
+      variant="bordered"
+      className={className}
       style={{
+        padding: '14px 16px',
+        backgroundColor: 'var(--color-surface)',
+        borderRadius: 12,
+        boxShadow: '0 4px 14px rgba(0, 0, 0, 0.05)',
+        position: 'relative',
         display: 'flex',
         flexDirection: 'column',
-        gap: 8,
+        gap: 12,
         ...style,
       }}
-      className={className}
     >
-      {/* Optional Format Switcher */}
-      {allowFormatSwitch && (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            fontSize: 10,
-            color: 'var(--color-text-muted)',
-            padding: '0 2px',
-          }}
-        >
-          <span style={{ fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-            Ad Format:
-          </span>
-          <div style={{ display: 'flex', gap: 4 }}>
-            {(['classic', 'responsive', 'cover'] as AdFormat[]).map((fmt) => (
-              <button
-                key={fmt}
-                onClick={() => setFormat(fmt)}
-                style={{
-                  background: format === fmt ? 'var(--color-surface-raised)' : 'transparent',
-                  border: '1px solid',
-                  borderColor: format === fmt ? 'var(--color-action-primary)' : 'transparent',
-                  color: format === fmt ? 'var(--color-action-primary)' : 'var(--color-text-muted)',
-                  borderRadius: 4,
-                  padding: '2px 6px',
-                  cursor: 'pointer',
-                  fontSize: 10,
-                  fontWeight: 600,
-                  textTransform: 'capitalize',
-                  transition: 'all 0.1s ease',
-                }}
-              >
-                {fmt}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* 1. CLASSIC FORMAT: Fit naturally & perform quietly */}
-      {format === 'classic' && (
-        <Card
-          variant="bordered"
-          style={{
-            padding: '12px 14px',
-            backgroundColor: 'var(--color-surface)',
-            borderRadius: 10,
-            boxShadow: '0 2px 10px rgba(0,0,0,0.04)',
-            position: 'relative',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 10,
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div
-                style={{
-                  width: 28,
-                  height: 28,
-                  borderRadius: 6,
-                  background: 'linear-gradient(135deg, #007FFF, #38BDF8)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#FFFFFF',
-                  fontWeight: 800,
-                  fontSize: 13,
-                  boxShadow: '0 2px 8px rgba(0,127,255,0.3)',
-                }}
-              >
-                S
-              </div>
-              <span
-                style={{
-                  fontSize: 9,
-                  fontWeight: 700,
-                  padding: '1px 6px',
-                  borderRadius: 4,
-                  backgroundColor: themeColors.badgeBg,
-                  color: themeColors.accent,
-                  border: `1px solid ${themeColors.badgeBorder}`,
-                  letterSpacing: '0.04em',
-                }}
-              >
-                {themeColors.tagText}
-              </span>
-            </div>
-
-            <button
-              onClick={() => setIsDismissed(true)}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: 'var(--color-text-muted)',
-                cursor: 'pointer',
-                padding: 2,
-                display: 'flex',
-                alignItems: 'center',
-              }}
-              title="Dismiss ad"
-            >
-              <CloseIcon size={12} />
-            </button>
-          </div>
-
-          <a
-            href="https://github.com/Winplaybox/spectra-ui"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              textDecoration: 'none',
-              color: 'inherit',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 4,
-            }}
-          >
-            <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--color-text-primary)' }}>
-              Fit naturally & perform quietly
-            </div>
-            <p
-              style={{
-                fontSize: 11.5,
-                lineHeight: 1.5,
-                color: 'var(--color-text-secondary)',
-                margin: 0,
-              }}
-            >
-              Publishers style this ad to match their site, so readers engage with it like content,
-              not advertising.
-            </p>
-          </a>
-
+      {/* Top Header Row with Badge & Dismiss */}
+      <Stack direction="row" align="center" justify="between">
+        <Stack direction="row" align="center" gap="xs">
           <div
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              fontSize: 10,
-              color: 'var(--color-text-muted)',
-              borderTop: '1px solid var(--color-border-subtle)',
-              paddingTop: 6,
-            }}
-          >
-            <span>ADS VIA SPECTRA NETWORK</span>
-            <ExternalLinkIcon size={10} />
-          </div>
-        </Card>
-      )}
-
-      {/* 2. RESPONSIVE FORMAT: Attract attention & inspire interaction */}
-      {format === 'responsive' && (
-        <Card
-          variant="bordered"
-          style={{
-            padding: '14px 16px',
-            backgroundColor: 'var(--color-surface)',
-            borderRadius: 12,
-            boxShadow: '0 4px 14px rgba(0,0,0,0.06)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 14,
-            flexWrap: 'wrap',
-          }}
-        >
-          <div
-            style={{
-              width: 52,
-              height: 52,
-              borderRadius: 10,
-              background: 'linear-gradient(135deg, #0EA5E9, #2563EB)',
+              width: 24,
+              height: 24,
+              borderRadius: 6,
+              background: adContent.iconBg,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#FFFFFF',
+              boxShadow: '0 2px 6px rgba(0, 120, 212, 0.25)',
               flexShrink: 0,
-              boxShadow: '0 4px 12px rgba(14, 165, 233, 0.3)',
             }}
           >
-            <SparklesIcon size={26} />
+            <SparklesIcon size={13} />
           </div>
+          <Badge variant={adContent.badgeVariant} size="sm">
+            {adContent.badge}
+          </Badge>
+        </Stack>
 
-          <div style={{ flex: 1, minWidth: 160, display: 'flex', flexDirection: 'column', gap: 4 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <span
-                style={{
-                  fontSize: 9,
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  padding: '1px 5px',
-                  borderRadius: 4,
-                  backgroundColor: themeColors.badgeBg,
-                  color: themeColors.accent,
-                }}
-              >
-                RESPONSIVE
-              </span>
-              <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--color-text-primary)' }}>
-                Attract attention & inspire interaction
-              </span>
-            </div>
-            <p
-              style={{
-                fontSize: 11.5,
-                lineHeight: 1.45,
-                color: 'var(--color-text-secondary)',
-                margin: 0,
-              }}
-            >
-              A polished native ad that adapts to any site width. Your brand image paired with concise
-              copy, styled and consistent across every publisher.
-            </p>
-          </div>
-
-          <Button
-            variant="primary"
-            size="sm"
-            onClick={() => window.open('https://github.com/Winplaybox/spectra-ui', '_blank')}
-            style={{ height: 28, fontSize: 11, padding: '0 12px', whiteSpace: 'nowrap' }}
-          >
-            Learn More →
-          </Button>
-        </Card>
-      )}
-
-      {/* 3. COVER FORMAT: Tell a story & drive engagement */}
-      {format === 'cover' && (
-        <div
+        <button
+          onClick={() => setIsDismissed(true)}
           style={{
-            position: 'relative',
-            borderRadius: 14,
-            overflow: 'hidden',
-            background: 'linear-gradient(145deg, #0B1120 0%, #0369A1 60%, #1E3A8A 100%)',
-            color: '#FFFFFF',
-            padding: '20px 22px',
-            boxShadow: '0 8px 24px rgba(3, 105, 161, 0.25)',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
+            background: 'transparent',
+            border: 'none',
+            color: 'var(--color-text-muted)',
+            cursor: 'pointer',
+            padding: 2,
             display: 'flex',
-            flexDirection: 'column',
-            gap: 12,
+            alignItems: 'center',
+            borderRadius: 4,
+          }}
+          title="Dismiss ad"
+          aria-label="Dismiss sponsor"
+        >
+          <CloseIcon size={12} />
+        </button>
+      </Stack>
+
+      {/* Dynamic Copy Link */}
+      <a
+        href={adContent.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          textDecoration: 'none',
+          color: 'inherit',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 6,
+        }}
+      >
+        <Text
+          as="h4"
+          variant="heading"
+          style={{
+            margin: 0,
+            fontSize: 13,
+            fontWeight: 700,
+            color: 'var(--color-text-primary)',
+            lineHeight: 1.3,
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <span
-              style={{
-                fontSize: 10,
-                fontWeight: 800,
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-                padding: '2px 8px',
-                borderRadius: 20,
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                color: '#FFFFFF',
-                backdropFilter: 'blur(4px)',
-              }}
-            >
-              COVER EXPERIENCE · {themeColors.tagText}
-            </span>
+          {adContent.title}
+        </Text>
+        <Text
+          as="p"
+          style={{
+            margin: 0,
+            fontSize: 11.5,
+            color: 'var(--color-text-secondary)',
+            lineHeight: 1.45,
+          }}
+        >
+          {adContent.description}
+        </Text>
+      </a>
 
-            <button
-              onClick={() => setIsDismissed(true)}
-              style={{
-                background: 'rgba(0, 0, 0, 0.2)',
-                border: 'none',
-                color: '#FFFFFF',
-                cursor: 'pointer',
-                padding: 4,
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-              title="Dismiss ad"
-            >
-              <CloseIcon size={12} />
-            </button>
-          </div>
+      {/* Bottom Action Footer */}
+      <Stack direction="row" align="center" justify="between" style={{ borderTop: '1px solid var(--color-border-subtle)', paddingTop: 8 }}>
+        <span
+          style={{
+            fontSize: 9.5,
+            fontWeight: 600,
+            color: 'var(--color-text-muted)',
+            letterSpacing: '0.04em',
+          }}
+        >
+          SPONSOR
+        </span>
 
-          <Stack direction="column" gap="xs">
-            <Text
-              style={{
-                fontSize: 16,
-                fontWeight: 800,
-                letterSpacing: '-0.01em',
-                color: '#FFFFFF',
-              }}
-            >
-              Tell a story & drive engagement
-            </Text>
-            <Text
-              style={{
-                fontSize: 12,
-                lineHeight: 1.5,
-                color: 'rgba(255, 255, 255, 0.9)',
-              }}
-            >
-              Cover is a high-impact native ad with rich visuals, your brand’s story, and a clear
-              call-to-action. Viewers interact with the creative, not just glance past it.
-            </Text>
-          </Stack>
-
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 4 }}>
-            <button
-              onClick={() => window.open('https://github.com/Winplaybox/spectra-ui', '_blank')}
-              style={{
-                padding: '6px 14px',
-                borderRadius: 6,
-                backgroundColor: '#FFFFFF',
-                color: '#0369A1',
-                border: 'none',
-                fontWeight: 700,
-                fontSize: 12,
-                cursor: 'pointer',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                transition: 'transform 0.12s ease',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-1px)')}
-              onMouseLeave={(e) => (e.currentTarget.style.transform = 'none')}
-            >
-              Interact with Creative →
-            </button>
-            <span style={{ fontSize: 10, color: 'rgba(255, 255, 255, 0.7)' }}>SPONSORED BY SPECTRA</span>
-          </div>
-        </div>
-      )}
-    </div>
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={() => window.open(adContent.url, '_blank')}
+          style={{
+            height: 24,
+            fontSize: 11,
+            padding: '0 8px',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 4,
+          }}
+        >
+          <span>{adContent.actionText}</span>
+          <ExternalLinkIcon size={10} />
+        </Button>
+      </Stack>
+    </Card>
   );
 };
