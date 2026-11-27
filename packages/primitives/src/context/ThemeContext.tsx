@@ -1,8 +1,8 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from "react";
 
-export type ColorScheme = 'light' | 'dark';
-export type ThemeMode = 'light' | 'dark' | 'system';
-export type StylePack = 'minimal' | 'base';
+export type ColorScheme = "light" | "dark";
+export type ThemeMode = "light" | "dark" | "system";
+export type StylePack = "minimal" | "base";
 
 export interface ThemeContextValue {
   pack: StylePack;
@@ -17,7 +17,9 @@ export interface ThemeContextValue {
   setIsRTL: (isRTL: boolean) => void;
 }
 
-export const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextValue | undefined>(
+  undefined,
+);
 
 export interface ThemeProviderProps {
   children: React.ReactNode;
@@ -29,20 +31,26 @@ export interface ThemeProviderProps {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
-  defaultPack = 'minimal',
-  defaultColorScheme: _defaultColorScheme = 'light',
-  defaultMode = 'system',
+  defaultPack = "minimal",
+  defaultColorScheme: _defaultColorScheme = "light",
+  defaultMode = "system",
   defaultRTL = false,
 }) => {
   const [pack, setPack] = useState<StylePack>(defaultPack);
 
   const [mode, setModeState] = useState<ThemeMode>(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       try {
-        const savedMode = window.localStorage?.getItem('spectra-theme-mode') as ThemeMode;
-        if (savedMode && ['light', 'dark', 'system'].includes(savedMode)) return savedMode;
-        const savedScheme = window.localStorage?.getItem('spectra-color-scheme') as ColorScheme;
-        if (savedScheme && ['light', 'dark'].includes(savedScheme)) return savedScheme;
+        const savedMode = window.localStorage?.getItem(
+          "spectra-theme-mode",
+        ) as ThemeMode;
+        if (savedMode && ["light", "dark", "system"].includes(savedMode))
+          return savedMode;
+        const savedScheme = window.localStorage?.getItem(
+          "spectra-color-scheme",
+        ) as ColorScheme;
+        if (savedScheme && ["light", "dark"].includes(savedScheme))
+          return savedScheme;
       } catch {
         // Ignore storage errors in restricted test environments
       }
@@ -51,30 +59,34 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   });
 
   const getSystemScheme = (): ColorScheme => {
-    if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      return "dark";
     }
-    return 'light';
+    return "light";
   };
 
   const [colorScheme, setColorSchemeState] = useState<ColorScheme>(() => {
-    if (mode === 'system') return getSystemScheme();
+    if (mode === "system") return getSystemScheme();
     return mode;
   });
 
   // Listen to OS system color scheme changes when in 'system' mode
   useEffect(() => {
-    if (typeof window === 'undefined' || !window.matchMedia) return;
+    if (typeof window === "undefined" || !window.matchMedia) return;
 
-    if (mode === 'system') {
+    if (mode === "system") {
       setColorSchemeState(getSystemScheme());
       try {
-        const media = window.matchMedia('(prefers-color-scheme: dark)');
+        const media = window.matchMedia("(prefers-color-scheme: dark)");
         const handler = (e: MediaQueryListEvent) => {
-          setColorSchemeState(e.matches ? 'dark' : 'light');
+          setColorSchemeState(e.matches ? "dark" : "light");
         };
-        media.addEventListener?.('change', handler);
-        return () => media.removeEventListener?.('change', handler);
+        media.addEventListener?.("change", handler);
+        return () => media.removeEventListener?.("change", handler);
       } catch {
         // Ignore
       }
@@ -85,14 +97,14 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 
   const setMode = (newMode: ThemeMode) => {
     setModeState(newMode);
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       try {
-        window.localStorage?.setItem('spectra-theme-mode', newMode);
+        window.localStorage?.setItem("spectra-theme-mode", newMode);
       } catch {
         // Ignore
       }
     }
-    if (newMode === 'system') {
+    if (newMode === "system") {
       setColorSchemeState(getSystemScheme());
     } else {
       setColorSchemeState(newMode);
@@ -107,37 +119,41 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   const [isReducedMotion, setIsReducedMotion] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined' || !window.matchMedia) return;
+    if (typeof window === "undefined" || !window.matchMedia) return;
     try {
-      const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const media = window.matchMedia("(prefers-reduced-motion: reduce)");
       setIsReducedMotion(media?.matches ?? false);
-      const listener = (e: MediaQueryListEvent) => setIsReducedMotion(e.matches);
-      media?.addEventListener?.('change', listener);
-      return () => media?.removeEventListener?.('change', listener);
+      const listener = (e: MediaQueryListEvent) =>
+        setIsReducedMotion(e.matches);
+      media?.addEventListener?.("change", listener);
+      return () => media?.removeEventListener?.("change", listener);
     } catch {
       // Ignore
     }
   }, []);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
+    if (
+      typeof window !== "undefined" &&
+      typeof window.localStorage !== "undefined"
+    ) {
       try {
-        window.localStorage?.setItem('spectra-color-scheme', colorScheme);
+        window.localStorage?.setItem("spectra-color-scheme", colorScheme);
       } catch {
         // Ignore
       }
     }
 
     // Set dataset on root element for CSS variables (Web browser environments only)
-    if (typeof document !== 'undefined' && document.documentElement) {
+    if (typeof document !== "undefined" && document.documentElement) {
       const root = document.documentElement;
-      root.setAttribute('data-pack', pack);
-      root.setAttribute('data-mode', colorScheme);
-      root.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+      root.setAttribute("data-pack", pack);
+      root.setAttribute("data-mode", colorScheme);
+      root.setAttribute("dir", isRTL ? "rtl" : "ltr");
     }
   }, [pack, colorScheme, isRTL]);
 
-  const isDark = colorScheme === 'dark';
+  const isDark = colorScheme === "dark";
 
   const value: ThemeContextValue = {
     pack,
@@ -152,5 +168,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     setIsRTL,
   };
 
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  );
 };

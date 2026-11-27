@@ -66,8 +66,12 @@
     },
     "fontFamily": {
       "semantic": {
-        "body": { "value": "'Instrument Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" },
-        "display": { "value": "'Bricolage Grotesque', 'Instrument Sans', system-ui, sans-serif" }
+        "body": {
+          "value": "'Instrument Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+        },
+        "display": {
+          "value": "'Bricolage Grotesque', 'Instrument Sans', system-ui, sans-serif"
+        }
       }
     },
     "lineHeight": {
@@ -154,7 +158,9 @@
     "elevation": {
       "semantic": {
         "none": { "value": "none" },
-        "raised": { "value": "0 1px 2px rgba(0,0,0,.05), 0 4px 14px -6px rgba(0,0,0,.10)" },
+        "raised": {
+          "value": "0 1px 2px rgba(0,0,0,.05), 0 4px 14px -6px rgba(0,0,0,.10)"
+        },
         "overlay": { "value": "0 12px 32px -12px rgba(0,0,0,.22)" }
       }
     },

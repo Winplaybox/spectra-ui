@@ -3,9 +3,16 @@
 All notable changes to the **Spectra UI** monorepo are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Features & Architecture
+
+- **OVD Base Theme**: Added an opt-in light and dark `base` pack sourced from anydownloader, with scoped web styles and the `getNativeTheme(mode, 'base')` API for Expo and React Native. Existing apps continue to use `minimal` by default.
+
 ## [0.2.0] - 2026-10-06
 
 ### Features & Architecture
+
 - **Universal Cross-Platform Components (<ListView>, <DatePicker>, <WebViewBox>)**:
   - Implemented `<ListView>` across Web (`@winplaybox/react`) and Native (`@winplaybox/react-native`) with token border dividers, theme-synchronized pull-to-refresh (`RefreshControl` on Native, accessible status indicator on Web), and empty state fallbacks.
   - Implemented `<DatePicker>` across Web and Native: native Android dialog (`DateTimePickerAndroid`), iOS bottom modal sheet, Web calendar popover with `<Calendar>`, and authentic vector `CalendarIcon` adhering strictly to the Zero Emoji Policy.
@@ -28,6 +35,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [0.1.0] - Initial Release
 
 ### Features & Architecture
+
 - **20 Multi-Platform Components**:
   - **Actions & Navigation**: `Button`, `Breadcrumbs`, `Tabs` (with Underline and Pills variants).
   - **Inputs & Form**: `TextInput`, `Select`, `Checkbox`, `Radio`, `Switch`.
