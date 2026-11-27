@@ -28,6 +28,7 @@
   },
   "scripts": {
     "build": "node scripts/build-tokens.mjs",
+    "test": "node --test scripts/test-packs.mjs",
     "test:contract": "node scripts/validate-tokens.mjs"
   },
   "keywords": [

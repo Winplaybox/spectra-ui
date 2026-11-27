@@ -80,6 +80,31 @@ import tokensJson from '@winplaybox/tokens/json';
 console.log(tokensJson.color.action.primary.value);
 ```
 
+### 4. OVD base theme (Web and Expo)
+
+The opt-in `base` pack comes from [anydownloader's OVD theme](https://github.com/Winplaybox/anydownloader/blob/main/src/index.css). Existing apps keep `minimal`. On web, load `@winplaybox/tokens/css` and use `<SpectraProvider defaultPack="base">`, or set both `data-pack="base"` and `data-mode="light"` (or `"dark"`) on the themed element. For raw token strings, use `getTokens('dark', 'base')`.
+
+In Expo, install `@winplaybox/tokens` and use React Native's color scheme to select the mode. No CSS or Spectra provider is needed:
+
+```tsx
+import { getNativeTheme } from '@winplaybox/tokens';
+import { Text, View, useColorScheme } from 'react-native';
+
+export function Screen() {
+  const theme = getNativeTheme(useColorScheme() === 'dark' ? 'dark' : 'light', 'base');
+
+  return (
+    <View style={{ backgroundColor: theme.colors.canvas, padding: theme.spacing.padding.md }}>
+      <View style={{ backgroundColor: theme.colors.surface, borderRadius: theme.radii.md }}>
+        <Text style={{ ...theme.typography.paragraph, color: theme.colors.text }}>Home</Text>
+      </View>
+    </View>
+  );
+}
+```
+
+Register Instrument Sans and Bricolage Grotesque with [Expo Font](https://docs.expo.dev/versions/latest/sdk/font/) under the family names returned by `theme.typography`, including the weights your app uses. Omit `fontFamily` until fonts are available to use the system font. Use `theme.shadows.raised.boxShadow` (or `overlay.boxShadow`) on supported React Native New Architecture targets, or spread the separate `ios`/`android` style for a fallback. Motion durations are in milliseconds; honor the device's reduced-motion preference. Existing Spectra React Native components still use `minimal`; apply the returned values to your own styles.
+
 ---
 
 ## Token Architecture

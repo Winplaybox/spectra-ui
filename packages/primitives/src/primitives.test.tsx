@@ -113,6 +113,24 @@ describe('@winplaybox/primitives hooks', () => {
     expect(result.current.isRTL).toBe(true);
   });
 
+  it('sets the base pack and mode on the document when opted in', () => {
+    const wrapper = ({ children }: { children: React.ReactNode }) => (
+      <ThemeProvider defaultPack="base">{children}</ThemeProvider>
+    );
+    const { result } = renderHook(() => useTheme(), { wrapper });
+
+    expect(result.current.pack).toBe('base');
+    expect(document.documentElement.getAttribute('data-pack')).toBe('base');
+    act(() => {
+      result.current.setColorScheme('light');
+    });
+    expect(document.documentElement.getAttribute('data-mode')).toBe('light');
+    act(() => {
+      result.current.setPack('minimal');
+    });
+    expect(document.documentElement.getAttribute('data-pack')).toBe('minimal');
+  });
+
   it('Clipboard and useClipboard provide universal copy, paste, and status feedback', async () => {
     let mockStorage = '';
     const adapter = {

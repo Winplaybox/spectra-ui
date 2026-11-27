@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 
 export type ColorScheme = 'light' | 'dark';
 export type ThemeMode = 'light' | 'dark' | 'system';
-export type StylePack = 'minimal';
+export type StylePack = 'minimal' | 'base';
 
 export interface ThemeContextValue {
   pack: StylePack;
