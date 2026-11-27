@@ -1,0 +1,23 @@
+[
+  "color.semantic.canvas",
+  "color.semantic.accent",
+  "color.semantic.accent-background",
+  "fontFamily.semantic.body",
+  "fontFamily.semantic.display",
+  "lineHeight.semantic.display",
+  "lineHeight.semantic.heading",
+  "lineHeight.semantic.subheading",
+  "lineHeight.semantic.paragraph",
+  "lineHeight.semantic.label",
+  "lineHeight.semantic.caption",
+  "fontWeight.semantic.display",
+  "fontWeight.semantic.heading",
+  "fontWeight.semantic.subheading",
+  "fontWeight.semantic.paragraph",
+  "fontWeight.semantic.label",
+  "fontWeight.semantic.caption",
+  "letterSpacing.semantic.display",
+  "letterSpacing.semantic.heading",
+  "motion.semantic.sheet",
+  "focus.semantic.ring"
+]

@@ -1,59 +1,52 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import {
+  baseContract,
+  baseOverrides,
+  minimalPack,
+  modes,
+  modeSources,
+  semantic,
+  tokenValues,
+} from "./token-sources.mjs";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const tokensSrc = path.resolve(__dirname, '../src');
+const semanticKeys = Object.keys(tokenValues(semantic));
+const baseKeys = [...semanticKeys, ...baseContract];
+const errors = [];
 
-function readJson(relPath) {
-  const fullPath = path.join(tokensSrc, relPath);
-  return JSON.parse(fs.readFileSync(fullPath, 'utf8'));
-}
-
-const semantic = readJson('semantic/semantic.tokens.json');
-const minimalPack = readJson('packs/minimal.pack.json');
-const lightMode = readJson('modes/light.mode.json');
-const darkMode = readJson('modes/dark.mode.json');
-
-function extractKeys(obj, prefix = '') {
-  let keys = [];
-  for (const [key, value] of Object.entries(obj)) {
-    const currentPath = prefix ? `${prefix}.${key}` : key;
-    if (value && typeof value === 'object' && !('value' in value)) {
-      keys.push(...extractKeys(value, currentPath));
-    } else if (value && typeof value === 'object' && 'value' in value) {
-      keys.push(currentPath);
+function checkKeys(label, expectedKeys, values) {
+  const expected = new Set(expectedKeys);
+  for (const key of expected) {
+    if (!Object.hasOwn(values, key))
+      errors.push(`[${label}] Missing token: ${key}`);
+  }
+  for (const key of Object.keys(values)) {
+    if (!expected.has(key)) errors.push(`[${label}] Unexpected token: ${key}`);
+    if (typeof values[key] !== "string" || !values[key].trim()) {
+      errors.push(`[${label}] Invalid value for token: ${key}`);
     }
   }
-  return keys;
 }
 
-const semanticKeys = extractKeys(semantic);
-const minimalKeys = new Set(extractKeys(minimalPack));
-const lightKeys = new Set(extractKeys(lightMode));
-const darkKeys = new Set(extractKeys(darkMode));
-
-console.log(`🔍 Validating Token Contract: checking ${semanticKeys.length} semantic tokens...`);
-
-let errors = [];
-
-for (const key of semanticKeys) {
-  if (!minimalKeys.has(key)) {
-    errors.push(`[Minimal Pack] Missing token: ${key}`);
-  }
-  if (!lightKeys.has(key)) {
-    errors.push(`[Light Mode] Missing token: ${key}`);
-  }
-  if (!darkKeys.has(key)) {
-    errors.push(`[Dark Mode] Missing token: ${key}`);
-  }
+checkKeys("Minimal Pack", semanticKeys, tokenValues(minimalPack));
+for (const mode of modes) {
+  checkKeys(
+    `Minimal ${mode} mode`,
+    semanticKeys,
+    tokenValues(modeSources[mode]),
+  );
+  checkKeys(`Base ${mode} mode`, baseKeys, baseOverrides(mode));
 }
 
+console.log(
+  `🔍 Validating Token Contract: checking ${semanticKeys.length} minimal and ${baseKeys.length} base tokens per mode...`,
+);
 if (errors.length > 0) {
-  console.error(`❌ Token contract validation FAILED with ${errors.length} error(s):`);
-  errors.forEach((err) => console.error(`   - ${err}`));
-  process.exit(1);
+  console.error(
+    `❌ Token contract validation FAILED with ${errors.length} error(s):`,
+  );
+  errors.forEach((error) => console.error(`   - ${error}`));
+  process.exitCode = 1;
+} else {
+  console.log(
+    "✅ Token contract PASSED: exact semantic keys for minimal and base in both modes.",
+  );
 }
-
-console.log(`✅ Token contract PASSED: 100% 1:1 match across semantic schema, minimal pack, and light/dark modes.`);

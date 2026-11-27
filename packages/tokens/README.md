@@ -17,14 +17,14 @@
 
 ## Spectra UI Ecosystem
 
-| Package | Purpose | NPM Link |
-| :--- | :--- | :--- |
-| **`@winplaybox/react`** | Core web component library | [npmjs.com/package/@winplaybox/react](https://www.npmjs.com/package/@winplaybox/react) |
-| **`@winplaybox/tokens`** | Multi-tier design tokens (CSS, TS, JSON) | [npmjs.com/package/@winplaybox/tokens](https://www.npmjs.com/package/@winplaybox/tokens) |
-| **`@winplaybox/icons`** | 14,200+ vector SVG icons (multi-shade) | [npmjs.com/package/@winplaybox/icons](https://www.npmjs.com/package/@winplaybox/icons) |
-| **`@winplaybox/primitives`** | 25 Headless hooks and behavioral state primitives | [npmjs.com/package/@winplaybox/primitives](https://www.npmjs.com/package/@winplaybox/primitives) |
-| **`@winplaybox/react-native`** | Mobile components for iOS and Android | [npmjs.com/package/@winplaybox/react-native](https://www.npmjs.com/package/@winplaybox/react-native) |
-| **`@winplaybox/mcp`** | Model Context Protocol server for AI coding assistants | [npmjs.com/package/@winplaybox/mcp](https://www.npmjs.com/package/@winplaybox/mcp) |
+| Package                        | Purpose                                                | NPM Link                                                                                             |
+| :----------------------------- | :----------------------------------------------------- | :--------------------------------------------------------------------------------------------------- |
+| **`@winplaybox/react`**        | Core web component library                             | [npmjs.com/package/@winplaybox/react](https://www.npmjs.com/package/@winplaybox/react)               |
+| **`@winplaybox/tokens`**       | Multi-tier design tokens (CSS, TS, JSON)               | [npmjs.com/package/@winplaybox/tokens](https://www.npmjs.com/package/@winplaybox/tokens)             |
+| **`@winplaybox/icons`**        | 14,200+ vector SVG icons (multi-shade)                 | [npmjs.com/package/@winplaybox/icons](https://www.npmjs.com/package/@winplaybox/icons)               |
+| **`@winplaybox/primitives`**   | 25 Headless hooks and behavioral state primitives      | [npmjs.com/package/@winplaybox/primitives](https://www.npmjs.com/package/@winplaybox/primitives)     |
+| **`@winplaybox/react-native`** | Mobile components for iOS and Android                  | [npmjs.com/package/@winplaybox/react-native](https://www.npmjs.com/package/@winplaybox/react-native) |
+| **`@winplaybox/mcp`**          | Model Context Protocol server for AI coding assistants | [npmjs.com/package/@winplaybox/mcp](https://www.npmjs.com/package/@winplaybox/mcp)                   |
 
 ---
 
@@ -50,7 +50,7 @@ yarn add @winplaybox/tokens
 Import the compiled tokens stylesheet into your application root:
 
 ```css
-@import '@winplaybox/tokens/tokens.css';
+@import "@winplaybox/tokens/tokens.css";
 
 .my-card {
   background-color: var(--color-background-surface);
@@ -65,7 +65,7 @@ Import the compiled tokens stylesheet into your application root:
 ### 2. In TypeScript / JavaScript
 
 ```typescript
-import { tokens } from '@winplaybox/tokens';
+import { tokens } from "@winplaybox/tokens";
 
 const primaryColor = tokens.color.action.primary;
 const baseSpacing = tokens.spacing.medium;
@@ -75,10 +75,52 @@ const defaultRadius = tokens.radius.medium;
 ### 3. In JSON / Style Dictionary
 
 ```typescript
-import tokensJson from '@winplaybox/tokens/json';
+import tokensJson from "@winplaybox/tokens/json";
 
 console.log(tokensJson.color.action.primary.value);
 ```
+
+### 4. OVD base theme (Web and Expo)
+
+The opt-in `base` pack comes from [anydownloader's OVD theme](https://github.com/Winplaybox/anydownloader/blob/main/src/index.css). Existing apps keep `minimal`. On web, load `@winplaybox/tokens/css` and use `<SpectraProvider defaultPack="base">`, or set both `data-pack="base"` and `data-mode="light"` (or `"dark"`) on the themed element. For raw token strings, use `getTokens('dark', 'base')`.
+
+In Expo, install `@winplaybox/tokens` and use React Native's color scheme to select the mode. No CSS or Spectra provider is needed:
+
+```tsx
+import { getNativeTheme } from "@winplaybox/tokens";
+import { Text, View, useColorScheme } from "react-native";
+
+export function Screen() {
+  const theme = getNativeTheme(
+    useColorScheme() === "dark" ? "dark" : "light",
+    "base",
+  );
+
+  return (
+    <View
+      style={{
+        backgroundColor: theme.colors.canvas,
+        padding: theme.spacing.padding.md,
+      }}
+    >
+      <View
+        style={{
+          backgroundColor: theme.colors.surface,
+          borderRadius: theme.radii.md,
+        }}
+      >
+        <Text
+          style={{ ...theme.typography.paragraph, color: theme.colors.text }}
+        >
+          Home
+        </Text>
+      </View>
+    </View>
+  );
+}
+```
+
+Register Instrument Sans and Bricolage Grotesque with [Expo Font](https://docs.expo.dev/versions/latest/sdk/font/) under the family names returned by `theme.typography`, including the weights your app uses. Omit `fontFamily` until fonts are available to use the system font. Use `theme.shadows.raised.boxShadow` (or `overlay.boxShadow`) on supported React Native New Architecture targets, or spread the separate `ios`/`android` style for a fallback. Motion durations are in milliseconds; honor the device's reduced-motion preference. Existing Spectra React Native components still use `minimal`; apply the returned values to your own styles.
 
 ---
 

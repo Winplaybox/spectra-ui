@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import { renderHook, act } from '@testing-library/react';
-import React from 'react';
+import { describe, it, expect } from "vitest";
+import { renderHook, act } from "@testing-library/react";
+import React from "react";
 import {
   useDisclosure,
   useId,
@@ -9,11 +9,13 @@ import {
   useTheme,
   useRTL,
   useErrorBoundary,
-} from './index';
+} from "./index";
 
-describe('@winplaybox/primitives hooks', () => {
-  it('useDisclosure handles open, close, and toggle transitions', () => {
-    const { result } = renderHook(() => useDisclosure({ defaultIsOpen: false }));
+describe("@winplaybox/primitives hooks", () => {
+  it("useDisclosure handles open, close, and toggle transitions", () => {
+    const { result } = renderHook(() =>
+      useDisclosure({ defaultIsOpen: false }),
+    );
 
     expect(result.current.isOpen).toBe(false);
 
@@ -33,50 +35,50 @@ describe('@winplaybox/primitives hooks', () => {
     expect(result.current.isOpen).toBe(true);
   });
 
-  it('useId generates unique id with custom prefix', () => {
-    const { result: id1 } = renderHook(() => useId('spectra-field'));
-    const { result: id2 } = renderHook(() => useId('spectra-field'));
+  it("useId generates unique id with custom prefix", () => {
+    const { result: id1 } = renderHook(() => useId("spectra-field"));
+    const { result: id2 } = renderHook(() => useId("spectra-field"));
 
     expect(id1.current).toMatch(/^spectra-field-/);
     expect(id2.current).toMatch(/^spectra-field-/);
     expect(id1.current).not.toBe(id2.current);
   });
 
-  it('useControllableState works in uncontrolled mode with default value', () => {
+  it("useControllableState works in uncontrolled mode with default value", () => {
     const { result } = renderHook(() =>
-      useControllableState({ defaultValue: 'initial' })
+      useControllableState({ defaultValue: "initial" }),
     );
 
-    expect(result.current[0]).toBe('initial');
+    expect(result.current[0]).toBe("initial");
 
     act(() => {
-      result.current[1]('updated');
+      result.current[1]("updated");
     });
 
-    expect(result.current[0]).toBe('updated');
+    expect(result.current[0]).toBe("updated");
   });
 
-  it('useControllableState works in controlled mode and invokes onChange', () => {
-    let changedValue = '';
+  it("useControllableState works in controlled mode and invokes onChange", () => {
+    let changedValue = "";
     const { result } = renderHook(() =>
       useControllableState({
-        value: 'controlled',
+        value: "controlled",
         onChange: (v) => {
           changedValue = v;
         },
-      })
+      }),
     );
 
-    expect(result.current[0]).toBe('controlled');
+    expect(result.current[0]).toBe("controlled");
 
     act(() => {
-      result.current[1]('new-value');
+      result.current[1]("new-value");
     });
 
-    expect(changedValue).toBe('new-value');
+    expect(changedValue).toBe("new-value");
   });
 
-  it('ThemeProvider and useTheme provide theme context and update state', () => {
+  it("ThemeProvider and useTheme provide theme context and update state", () => {
     const wrapper = ({ children }: { children: React.ReactNode }) => (
       <ThemeProvider defaultPack="minimal" defaultColorScheme="light">
         {children}
@@ -85,19 +87,19 @@ describe('@winplaybox/primitives hooks', () => {
 
     const { result } = renderHook(() => useTheme(), { wrapper });
 
-    expect(result.current.pack).toBe('minimal');
-    expect(result.current.colorScheme).toBe('light');
+    expect(result.current.pack).toBe("minimal");
+    expect(result.current.colorScheme).toBe("light");
     expect(result.current.isDark).toBe(false);
 
     act(() => {
-      result.current.setColorScheme('dark');
+      result.current.setColorScheme("dark");
     });
 
-    expect(result.current.colorScheme).toBe('dark');
+    expect(result.current.colorScheme).toBe("dark");
     expect(result.current.isDark).toBe(true);
   });
 
-  it('useRTL provides RTL state and updates document direction', () => {
+  it("useRTL provides RTL state and updates document direction", () => {
     const wrapper = ({ children }: { children: React.ReactNode }) => (
       <ThemeProvider defaultRTL={false}>{children}</ThemeProvider>
     );
@@ -113,8 +115,26 @@ describe('@winplaybox/primitives hooks', () => {
     expect(result.current.isRTL).toBe(true);
   });
 
-  it('Clipboard and useClipboard provide universal copy, paste, and status feedback', async () => {
-    let mockStorage = '';
+  it("sets the base pack and mode on the document when opted in", () => {
+    const wrapper = ({ children }: { children: React.ReactNode }) => (
+      <ThemeProvider defaultPack="base">{children}</ThemeProvider>
+    );
+    const { result } = renderHook(() => useTheme(), { wrapper });
+
+    expect(result.current.pack).toBe("base");
+    expect(document.documentElement.getAttribute("data-pack")).toBe("base");
+    act(() => {
+      result.current.setColorScheme("light");
+    });
+    expect(document.documentElement.getAttribute("data-mode")).toBe("light");
+    act(() => {
+      result.current.setPack("minimal");
+    });
+    expect(document.documentElement.getAttribute("data-pack")).toBe("minimal");
+  });
+
+  it("Clipboard and useClipboard provide universal copy, paste, and status feedback", async () => {
+    let mockStorage = "";
     const adapter = {
       setString: (text: string) => {
         mockStorage = text;
@@ -125,34 +145,37 @@ describe('@winplaybox/primitives hooks', () => {
       isSupported: () => true,
     };
 
-    const { setClipboardAdapter, Clipboard, useClipboard } = await import('./index');
+    const { setClipboardAdapter, Clipboard, useClipboard } =
+      await import("./index");
     setClipboardAdapter(adapter);
 
     expect(Clipboard.isSupported()).toBe(true);
 
-    const { result } = renderHook(() => useClipboard({ defaultValue: 'initial' }));
+    const { result } = renderHook(() =>
+      useClipboard({ defaultValue: "initial" }),
+    );
 
-    expect(result.current.value).toBe('initial');
+    expect(result.current.value).toBe("initial");
     expect(result.current.hasCopied).toBe(false);
     expect(result.current.copied).toBe(false);
 
     let success = false;
     await act(async () => {
-      success = await result.current.copy('Hello Spectra!');
+      success = await result.current.copy("Hello Spectra!");
     });
 
     expect(success).toBe(true);
     expect(result.current.hasCopied).toBe(true);
     expect(result.current.copied).toBe(true);
-    expect(result.current.value).toBe('Hello Spectra!');
-    expect(mockStorage).toBe('Hello Spectra!');
+    expect(result.current.value).toBe("Hello Spectra!");
+    expect(mockStorage).toBe("Hello Spectra!");
 
     // Test paste
-    let pastedText = '';
+    let pastedText = "";
     await act(async () => {
       pastedText = await result.current.paste();
     });
-    expect(pastedText).toBe('Hello Spectra!');
+    expect(pastedText).toBe("Hello Spectra!");
 
     // Test reset
     act(() => {
@@ -163,10 +186,9 @@ describe('@winplaybox/primitives hooks', () => {
     setClipboardAdapter(null);
   });
 
-  it('useErrorBoundary provides showBoundary and resetBoundary interfaces', () => {
+  it("useErrorBoundary provides showBoundary and resetBoundary interfaces", () => {
     const { result } = renderHook(() => useErrorBoundary());
-    expect(typeof result.current.showBoundary).toBe('function');
-    expect(typeof result.current.resetBoundary).toBe('function');
+    expect(typeof result.current.showBoundary).toBe("function");
+    expect(typeof result.current.resetBoundary).toBe("function");
   });
 });
-
